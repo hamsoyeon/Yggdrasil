@@ -10,11 +10,7 @@ public class ChangeMesh : MonoBehaviour {
     public GameObject _Mesh04;
 
 
-    public void Start()
-    {
-        Mesh01();
-    }
-
+    
     public void Mesh01()
     {
 
