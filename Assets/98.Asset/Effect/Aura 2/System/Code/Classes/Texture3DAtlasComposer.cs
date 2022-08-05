@@ -1,4 +1,4 @@
-﻿
+
 /***************************************************************************
 *                                                                          *
 *  Copyright (c) Raphaël Ernaelsten (@RaphErnaelsten)                      *
@@ -44,7 +44,7 @@ namespace Aura2API
         /// <summary>
         /// Event raised when the composed texture has been generated
         /// </summary>
-        public event Action OnTextureUpdated;
+        public event System.Action OnTextureUpdated;
         #endregion
 
         #region Properties

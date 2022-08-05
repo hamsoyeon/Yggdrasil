@@ -1,4 +1,4 @@
-﻿
+
 /***************************************************************************
 *                                                                          *
 *  Copyright (c) Raphaël Ernaelsten (@RaphErnaelsten)                      *
@@ -197,7 +197,7 @@ namespace Aura2API
         {
             get
             {
-                return Event.current.alt;
+                return UnityEngine.Event.current.alt;
             }
         }
         #endregion

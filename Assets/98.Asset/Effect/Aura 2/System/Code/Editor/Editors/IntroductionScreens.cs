@@ -1,4 +1,4 @@
-﻿
+
 /***************************************************************************
 *                                                                          *
 *  Copyright (c) Raphaël Ernaelsten (@RaphErnaelsten)                      *
@@ -44,7 +44,7 @@ namespace Aura2API
         /// <summary>
         /// The scene view event
         /// </summary>
-        private static Event _sceneViewEvent;
+        private static UnityEngine.Event _sceneViewEvent;
         /// <summary>
         /// The size of the screens
         /// </summary>
@@ -142,7 +142,7 @@ namespace Aura2API
                     Initialize(sceneView);
                 }
 
-                _sceneViewEvent = Event.current;
+                _sceneViewEvent = UnityEngine.Event.current;
 
                 if (_sceneViewEvent.type == EventType.Layout)
                 {

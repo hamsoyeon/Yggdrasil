@@ -41,7 +41,7 @@ namespace UnityEditor.PostProcessing
 
         #endregion
 
-        public static bool Header(string title, SerializedProperty group, Action resetAction)
+        public static bool Header(string title, SerializedProperty group, System.Action resetAction)
         {
             var rect = GUILayoutUtility.GetRect(16f, 22f, FxStyles.header);
             GUI.Box(rect, title, FxStyles.header);
@@ -49,7 +49,7 @@ namespace UnityEditor.PostProcessing
             var display = group == null || group.isExpanded;
 
             var foldoutRect = new Rect(rect.x + 4f, rect.y + 2f, 13f, 13f);
-            var e = Event.current;
+            var e = UnityEngine.Event.current;
 
             var popupRect = new Rect(rect.x + rect.width - FxStyles.paneOptionsIcon.width - 5f, rect.y + FxStyles.paneOptionsIcon.height / 2f + 1f, FxStyles.paneOptionsIcon.width, FxStyles.paneOptionsIcon.height);
             GUI.DrawTexture(popupRect, FxStyles.paneOptionsIcon);
@@ -87,7 +87,7 @@ namespace UnityEditor.PostProcessing
             return display;
         }
 
-        public static bool Header(string title, SerializedProperty group, SerializedProperty enabledField, Action resetAction)
+        public static bool Header(string title, SerializedProperty group, SerializedProperty enabledField, System.Action resetAction)
         {
             var field = ReflectionUtils.GetFieldInfoFromPath(enabledField.serializedObject.targetObject, enabledField.propertyPath);
             object parent = null;
@@ -107,7 +107,7 @@ namespace UnityEditor.PostProcessing
             GUI.Box(rect, title, FxStyles.header);
 
             var toggleRect = new Rect(rect.x + 4f, rect.y + 4f, 13f, 13f);
-            var e = Event.current;
+            var e = UnityEngine.Event.current;
 
             var popupRect = new Rect(rect.x + rect.width - FxStyles.paneOptionsIcon.width - 5f, rect.y + FxStyles.paneOptionsIcon.height / 2f + 1f, FxStyles.paneOptionsIcon.width, FxStyles.paneOptionsIcon.height);
             GUI.DrawTexture(popupRect, FxStyles.paneOptionsIcon);

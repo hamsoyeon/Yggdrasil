@@ -229,7 +229,7 @@ namespace UnityEditor.PostProcessing
 
         public bool OnGUI(Rect rect)
         {
-            if (Event.current.type == EventType.Repaint)
+            if (UnityEngine.Event.current.type == EventType.Repaint)
                 m_Dirty = false;
 
             GUI.BeginClip(rect);
@@ -360,7 +360,7 @@ namespace UnityEditor.PostProcessing
             for (int k = 0; k < length; k++)
             {
                 bool isCurrentlySelectedKeyframe = k == m_SelectedKeyframeIndex;
-                var e = Event.current;
+                var e = UnityEngine.Event.current;
 
                 var pos = CurveToCanvas(keys[k]);
                 var hitRect = new Rect(pos.x - 8f, pos.y - 8f, 16f, 16f);
@@ -496,7 +496,7 @@ namespace UnityEditor.PostProcessing
 
         void OnGeneralUI(Rect rect)
         {
-            var e = Event.current;
+            var e = UnityEngine.Event.current;
 
             // Selection
             if (e.type == EventType.MouseDown)
@@ -698,7 +698,7 @@ namespace UnityEditor.PostProcessing
 
         void EditMoveKeyframe(AnimationCurve curve, Keyframe[] keys, int keyframeIndex)
         {
-            var key = CanvasToCurve(Event.current.mousePosition);
+            var key = CanvasToCurve(UnityEngine.Event.current.mousePosition);
             float inTgt = keys[keyframeIndex].inTangent;
             float outTgt = keys[keyframeIndex].outTangent;
             SetKeyframe(curve, keyframeIndex, new Keyframe(key.x, key.y, inTgt, outTgt));
@@ -706,7 +706,7 @@ namespace UnityEditor.PostProcessing
 
         void EditMoveTangent(AnimationCurve curve, Keyframe[] keys, int keyframeIndex, Tangent targetTangent, bool linkTangents)
         {
-            var pos = CanvasToCurve(Event.current.mousePosition);
+            var pos = CanvasToCurve(UnityEngine.Event.current.mousePosition);
 
             float time = keys[keyframeIndex].time;
             float value = keys[keyframeIndex].value;

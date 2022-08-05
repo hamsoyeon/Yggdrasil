@@ -152,7 +152,7 @@ namespace UnityEditor.PostProcessing
             serializedObject.Update();
 
             // Handles undo/redo events first (before they get used by the editors' widgets)
-            var e = Event.current;
+            var e = UnityEngine.Event.current;
             if (e.type == EventType.ValidateCommand && e.commandName == "UndoRedoPerformed")
             {
                 foreach (var editor in m_CustomEditors)

@@ -170,7 +170,7 @@ namespace Aura2API
                 {
                     if(CheckIfTexture3D(property))
                     {
-                        if(Event.current.type == EventType.Layout)
+                        if(UnityEngine.Event.current.type == EventType.Layout)
                         {
                             return;
                         }
@@ -184,7 +184,7 @@ namespace Aura2API
                         drawArea.x += position.width * 0.5f - drawArea.width * 0.5f;
 
                         _cameraAngle = PreviewRenderUtilityHelpers.DragToAngles(_cameraAngle, drawArea);
-                        if(Event.current.type == EventType.Repaint)
+                        if(UnityEngine.Event.current.type == EventType.Repaint)
                         {
                             GUI.Box(drawArea, ((Texture3D)property.objectReferenceValue).RenderTexture3DPreview(drawArea, _cameraAngle, 6.5f /*TODO : Find distance with fov and boundingsphere, when non uniform size will be supported*/, _samplingIterations, _density));
                         }

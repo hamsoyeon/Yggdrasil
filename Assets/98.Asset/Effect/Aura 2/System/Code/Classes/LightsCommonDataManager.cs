@@ -1,4 +1,4 @@
-﻿
+
 /***************************************************************************
 *                                                                          *
 *  Copyright (c) Raphaël Ernaelsten (@RaphErnaelsten)                      *
@@ -332,7 +332,7 @@ namespace Aura2API
         /// <summary>
         /// Event raised when the number of shadow cascades changes
         /// </summary>
-        public event Action OnCascadesCountChanged;
+        public event System.Action OnCascadesCountChanged;
         /// <summary>
         /// Event raised when a spot light is being registred
         /// </summary>

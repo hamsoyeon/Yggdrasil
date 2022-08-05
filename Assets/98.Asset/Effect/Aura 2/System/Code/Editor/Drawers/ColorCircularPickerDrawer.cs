@@ -1,4 +1,4 @@
-﻿
+
 /***************************************************************************
 *                                                                          *
 *  Copyright (c) Raphaël Ernaelsten (@RaphErnaelsten)                      *
@@ -107,7 +107,7 @@ namespace Aura2API
         {
             if(property.propertyType == SerializedPropertyType.Color)
             {
-                if(Event.current.type == EventType.Layout)
+                if(UnityEngine.Event.current.type == EventType.Layout)
                 {
                     return;
                 }
@@ -164,7 +164,7 @@ namespace Aura2API
 
                 property.colorValue = Color.HSVToRGB(hsv.x, hsv.y, hsv.z);
 
-                if(Event.current.type == EventType.Repaint)
+                if(UnityEngine.Event.current.type == EventType.Repaint)
                 {
                     Vector2 thumbPos = Vector2.zero;
                     float theta = hsv.x * (Mathf.PI * 2f);
@@ -232,7 +232,7 @@ namespace Aura2API
         /// <returns></returns>
         private Vector3 GetInput(Rect bounds, Vector3 hsv, float radius)
         {
-            Event e = Event.current;
+            UnityEngine.Event e = UnityEngine.Event.current;
             int id = GUIUtility.GetControlID("ColorCircularPickerDrawer".GetHashCode(), FocusType.Passive, bounds);
 
             Vector2 mousePos = e.mousePosition;

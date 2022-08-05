@@ -1,4 +1,4 @@
-﻿
+
 /***************************************************************************
 *                                                                          *
 *  Copyright (c) Raphaël Ernaelsten (@RaphErnaelsten)                      *
@@ -649,7 +649,7 @@ namespace Aura2API
         /// <param name="text">The text of the label</param>
         /// <param name="color">The color of the label</param>
         /// <param name="style">The style to draw the label with</param>
-        public static void DrawLabelNextToMouse(Event currentEvent, string text, Color color, Vector2 pixelsOffset, GUIStyle style = null)
+        public static void DrawLabelNextToMouse(UnityEngine.Event currentEvent, string text, Color color, Vector2 pixelsOffset, GUIStyle style = null)
         {
             DrawLabel(currentEvent.mousePosition + pixelsOffset, text, color, style);
         }

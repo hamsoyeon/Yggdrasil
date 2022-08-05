@@ -51,7 +51,7 @@ namespace UnityEditor.PostProcessing
 
         void OnWheelGUI(Rect position, int size, SerializedProperty property)
         {
-            if (Event.current.type == EventType.Layout)
+            if (UnityEngine.Event.current.type == EventType.Layout)
                 return;
 
             var value = property.colorValue;
@@ -73,7 +73,7 @@ namespace UnityEditor.PostProcessing
             Vector3 hsv;
             Color.RGBToHSV(value, out hsv.x, out hsv.y, out hsv.z);
 
-            if (Event.current.type == EventType.Repaint)
+            if (UnityEngine.Event.current.type == EventType.Repaint)
             {
                 float scale = EditorGUIUtility.pixelsPerPoint;
 
@@ -183,7 +183,7 @@ namespace UnityEditor.PostProcessing
 
         Vector3 GetInput(Rect bounds, Vector3 hsv, float radius)
         {
-            var e = Event.current;
+            var e = UnityEngine.Event.current;
             var id = GUIUtility.GetControlID(k_ThumbHash, FocusType.Passive, bounds);
 
             var mousePos = e.mousePosition;

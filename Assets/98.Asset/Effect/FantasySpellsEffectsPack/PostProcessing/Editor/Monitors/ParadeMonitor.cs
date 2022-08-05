@@ -63,7 +63,7 @@ namespace UnityEditor.PostProcessing
 
         public override void OnMonitorGUI(Rect r)
         {
-            if (Event.current.type == EventType.Repaint)
+            if (UnityEngine.Event.current.type == EventType.Repaint)
             {
                 // If m_MonitorAreaRect isn't set the preview was just opened so refresh the render to get the waveform data
                 if (Mathf.Approximately(m_MonitorAreaRect.width, 0) && Mathf.Approximately(m_MonitorAreaRect.height, 0))

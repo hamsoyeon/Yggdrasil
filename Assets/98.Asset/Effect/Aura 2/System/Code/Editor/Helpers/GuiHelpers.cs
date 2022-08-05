@@ -1,4 +1,4 @@
-﻿
+
 /***************************************************************************
 *                                                                          *
 *  Copyright (c) Raphaël Ernaelsten (@RaphErnaelsten)                      *
@@ -541,7 +541,7 @@ namespace Aura2API
 
             if(EditorGUI.EndChangeCheck())
             {
-                Event e = Event.current;
+                UnityEngine.Event e = UnityEngine.Event.current;
                 if(e.control)
                 {
                     minimumTmp = minimumTmp.Snap(0.125f);
@@ -597,7 +597,7 @@ namespace Aura2API
             tmp = EditorGUILayout.Slider(tmp, minimumValue, maximumValue, GUILayout.MinWidth(5));
             if (EditorGUI.EndChangeCheck())
             {
-                Event e = Event.current;
+                UnityEngine.Event e = UnityEngine.Event.current;
                 if (e.control)
                 {
                     tmp = tmp.Snap(0.125f);
@@ -671,7 +671,7 @@ namespace Aura2API
         /// <param name="message">The message to display in the helpbox</param>
         public static void DrawContextualHelpBox(string message)
         {
-            if(Event.current.alt && Event.current.control)
+            if(UnityEngine.Event.current.alt && UnityEngine.Event.current.control)
             {
                 DrawHelpBox(message, HelpBoxType.Question);
             }

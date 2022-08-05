@@ -116,7 +116,7 @@ namespace Aura2API
         {
             _cameraAngle = PreviewRenderUtilityHelpers.DragToAngles(_cameraAngle, rect);
 
-            if(Event.current.type == EventType.Repaint)
+            if(UnityEngine.Event.current.type == EventType.Repaint)
             {
                 GUI.DrawTexture(rect, ((Texture3D)serializedObject.targetObject).RenderTexture3DPreview(rect, _cameraAngle, 6.5f /*TODO : Find distance with fov and boundingsphere, when non uniform size will be supported*/, _samplingIterations, _density), ScaleMode.StretchToFill, true);
             }

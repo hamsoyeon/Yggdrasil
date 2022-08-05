@@ -1,4 +1,4 @@
-﻿
+
 /***************************************************************************
 *                                                                          *
 *  Copyright (c) Raphaël Ernaelsten (@RaphErnaelsten)                      *
@@ -97,7 +97,7 @@ namespace Aura2API
         /// <summary>
         /// Event raised when the frustum quality preset has been changed
         /// </summary>
-        public event Action OnFrustumQualityChanged;
+        public event System.Action OnFrustumQualityChanged;
         #endregion
 
         #region Functions

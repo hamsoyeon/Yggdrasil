@@ -212,7 +212,7 @@ namespace UnityEditor.PostProcessing
             DoGUIFor("Grading Curves", DoCurvesGUI);
         }
 
-        void DoGUIFor(string title, Action func)
+        void DoGUIFor(string title, System.Action func)
         {
             EditorGUILayout.LabelField(title, EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
@@ -457,7 +457,7 @@ namespace UnityEditor.PostProcessing
         {
             var rect = GUILayoutUtility.GetRect(EditorGUIHelper.GetContent(name), EditorStyles.toolbarButton);
 
-            var e = Event.current;
+            var e = UnityEngine.Event.current;
             rightClicked = (e.type == EventType.MouseUp && rect.Contains(e.mousePosition) && e.button == 1);
 
             return GUI.Toggle(rect, value, name, EditorStyles.toolbarButton);
@@ -562,7 +562,7 @@ namespace UnityEditor.PostProcessing
                 var rect = GUILayoutUtility.GetAspectRect(2f);
                 var innerRect = settings.padding.Remove(rect);
 
-                if (Event.current.type == EventType.Repaint)
+                if (UnityEngine.Event.current.type == EventType.Repaint)
                 {
                     // Background
                     EditorGUI.DrawRect(rect, new Color(0.15f, 0.15f, 0.15f, 1f));
@@ -614,7 +614,7 @@ namespace UnityEditor.PostProcessing
                     GUI.changed = true;
                 }
 
-                if (Event.current.type == EventType.Repaint)
+                if (UnityEngine.Event.current.type == EventType.Repaint)
                 {
                     // Borders
                     Handles.color = Color.black;

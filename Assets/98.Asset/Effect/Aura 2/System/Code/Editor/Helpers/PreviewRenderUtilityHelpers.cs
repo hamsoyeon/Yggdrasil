@@ -1,4 +1,4 @@
-﻿
+
 /***************************************************************************
 *                                                                          *
 *  Copyright (c) Raphaël Ernaelsten (@RaphErnaelsten)                      *
@@ -79,7 +79,7 @@ namespace Aura2API
         public static Vector2 DragToAngles(Vector2 angles, Rect position)
         {
             int controlId = GUIUtility.GetControlID("DragToAngles".GetHashCode(), FocusType.Passive);
-            Event current = Event.current;
+            UnityEngine.Event current = UnityEngine.Event.current;
             switch(current.GetTypeForControl(controlId))
             {
                 case EventType.MouseDown :

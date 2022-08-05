@@ -109,7 +109,7 @@ namespace Aura2API
         /// <summary>
         /// The current scene view event
         /// </summary>
-        private static Event _sceneViewEvent;
+        private static UnityEngine.Event _sceneViewEvent;
         /// <summary>
         /// Duration after notifications will be removed
         /// </summary>
@@ -414,7 +414,7 @@ namespace Aura2API
         /// <param name="sceneView">The current update scene view</param>
         private static void OnSceneViewGUI(SceneView sceneView)
         {
-            _sceneViewEvent = Event.current;
+            _sceneViewEvent = UnityEngine.Event.current;
             _currentSceneView = sceneView;
             
             _deltaTime = Time.realtimeSinceStartup - _timestamp;
@@ -1147,7 +1147,7 @@ namespace Aura2API
         /// </summary>
         /// <param name="sceneView">The current scene view</param>
         /// <param name="sceneViewEvent">The current scene view event</param>
-        private static void CreateCamera(SceneView sceneView, Event sceneViewEvent)
+        private static void CreateCamera(SceneView sceneView, UnityEngine.Event sceneViewEvent)
         {
             if (!sceneViewEvent.alt && LeftClick)
             {
@@ -1208,7 +1208,7 @@ namespace Aura2API
         /// </summary>
         /// <param name="sceneView">The current scene view</param>
         /// <param name="sceneViewEvent">The current scene view event</param>
-        private static void CreateLight(SceneView sceneView, Event sceneViewEvent)
+        private static void CreateLight(SceneView sceneView, UnityEngine.Event sceneViewEvent)
         {
             if (!sceneViewEvent.alt && LeftClick)
             {
@@ -1279,7 +1279,7 @@ namespace Aura2API
         /// </summary>
         /// <param name="sceneView">The current scene view</param>
         /// <param name="sceneViewEvent">The current scene view event</param>
-        private static void CreateDirectionalLight(SceneView sceneView, Event sceneViewEvent)
+        private static void CreateDirectionalLight(SceneView sceneView, UnityEngine.Event sceneViewEvent)
         {
             if (_clickCount == 0)
             {
@@ -1314,7 +1314,7 @@ namespace Aura2API
         /// </summary>
         /// <param name="sceneView">The current scene view</param>
         /// <param name="sceneViewEvent">The current scene view event</param>
-        private static void CreateSpotLight(SceneView sceneView, Event sceneViewEvent)
+        private static void CreateSpotLight(SceneView sceneView, UnityEngine.Event sceneViewEvent)
         {
             if (_clickCount == 0)
             {
@@ -1366,7 +1366,7 @@ namespace Aura2API
         /// </summary>
         /// <param name="sceneView">The current scene view</param>
         /// <param name="sceneViewEvent">The current scene view event</param>
-        private static void CreatePointLight(SceneView sceneView, Event sceneViewEvent)
+        private static void CreatePointLight(SceneView sceneView, UnityEngine.Event sceneViewEvent)
         {
             if (_clickCount == 0)
             {
@@ -1416,7 +1416,7 @@ namespace Aura2API
         /// </summary>
         /// <param name="sceneView">The current scene view</param>
         /// <param name="sceneViewEvent">The current scene view event</param>
-        private static void CreateVolume(SceneView sceneView, Event sceneViewEvent)
+        private static void CreateVolume(SceneView sceneView, UnityEngine.Event sceneViewEvent)
         {
             if (!sceneViewEvent.alt && LeftClick)
             {
@@ -1539,7 +1539,7 @@ namespace Aura2API
         /// </summary>
         /// <param name="sceneView">The current scene view</param>
         /// <param name="sceneViewEvent">The current scene view event</param>
-        private static void CreateGlobalVolume(SceneView sceneView, Event sceneViewEvent)
+        private static void CreateGlobalVolume(SceneView sceneView, UnityEngine.Event sceneViewEvent)
         {
             if (_clickCount == 0)
             {
@@ -1569,7 +1569,7 @@ namespace Aura2API
         /// </summary>
         /// <param name="sceneView">The current scene view</param>
         /// <param name="sceneViewEvent">The current scene view event</param>
-        private static void CreateLayerVolume(SceneView sceneView, Event sceneViewEvent)
+        private static void CreateLayerVolume(SceneView sceneView, UnityEngine.Event sceneViewEvent)
         {
             if (_clickCount == 0)
             {
@@ -1620,7 +1620,7 @@ namespace Aura2API
         /// </summary>
         /// <param name="sceneView">The current scene view</param>
         /// <param name="sceneViewEvent">The current scene view event</param>
-        private static void CreateBoxVolume(SceneView sceneView, Event sceneViewEvent)
+        private static void CreateBoxVolume(SceneView sceneView, UnityEngine.Event sceneViewEvent)
         {
             if (_clickCount == 0)
             {
@@ -1719,7 +1719,7 @@ namespace Aura2API
         /// </summary>
         /// <param name="sceneView">The current scene view</param>
         /// <param name="sceneViewEvent">The current scene view event</param>
-        private static void CreateSphereVolume(SceneView sceneView, Event sceneViewEvent)
+        private static void CreateSphereVolume(SceneView sceneView, UnityEngine.Event sceneViewEvent)
         {
             if (_clickCount == 0)
             {
@@ -1811,7 +1811,7 @@ namespace Aura2API
         /// </summary>
         /// <param name="sceneView">The current scene view</param>
         /// <param name="sceneViewEvent">The current scene view event</param>
-        private static void CreateCylinderVolume(SceneView sceneView, Event sceneViewEvent)
+        private static void CreateCylinderVolume(SceneView sceneView, UnityEngine.Event sceneViewEvent)
         {
             CreateSphereVolume(sceneView, sceneViewEvent); // The very same creation process except that the created volume is of type Cylinder
         }
@@ -1821,7 +1821,7 @@ namespace Aura2API
         /// </summary>
         /// <param name="sceneView">The current scene view</param>
         /// <param name="sceneViewEvent">The current scene view event</param>
-        private static void CreateConeVolume(SceneView sceneView, Event sceneViewEvent)
+        private static void CreateConeVolume(SceneView sceneView, UnityEngine.Event sceneViewEvent)
         {
             if (_clickCount == 0)
             {
@@ -2007,7 +2007,7 @@ namespace Aura2API
         /// </summary>
         /// <param name="sceneView">The current scene view</param>
         /// <param name="sceneViewEvent">The current scene view event</param>
-        private static void SetFirstPoint(SceneView sceneView, Event sceneViewEvent)
+        private static void SetFirstPoint(SceneView sceneView, UnityEngine.Event sceneViewEvent)
         {
             if (TargetOnScene(sceneView, sceneViewEvent, ref _clickPositionA, ref _clickNormal))
             {
@@ -2045,7 +2045,7 @@ namespace Aura2API
         /// <param name="targetPosition">The output scene position under the mouse</param>
         /// <param name="targetNormal">The output scene normal under the mouse</param>
         /// <returns>False if fails to target scene under the mouse</returns>
-        private static bool TargetOnScene(SceneView sceneView, Event sceneViewEvent, ref Vector3 targetPosition, ref Vector3 targetNormal)
+        private static bool TargetOnScene(SceneView sceneView, UnityEngine.Event sceneViewEvent, ref Vector3 targetPosition, ref Vector3 targetNormal)
         {
             Ray ray = HandleUtility.GUIPointToWorldRay(sceneViewEvent.mousePosition);
             RaycastHit hit = new RaycastHit();
@@ -2065,7 +2065,7 @@ namespace Aura2API
         /// <param name="sceneViewEvent">The current scene view event</param>
         /// <param name="targetPosition">The output position under the mouse</param>
         /// <returns></returns>
-        private static bool TargetOnPlane(Event sceneViewEvent, Plane plane, ref Vector3 targetPosition)
+        private static bool TargetOnPlane(UnityEngine.Event sceneViewEvent, Plane plane, ref Vector3 targetPosition)
         {
             Ray ray = HandleUtility.GUIPointToWorldRay(sceneViewEvent.mousePosition);
             float distance;
