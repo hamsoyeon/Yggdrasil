@@ -17,9 +17,14 @@ public class BossFSM : MonoBehaviour
     //private bool actionCheck=false;
     private bool spCheck = false;
 
-    private float currentBossStamina;
-    private float bossStaminaSave;
+    
+    private float currentBossStamina;    
+    private float bossStaminaSave;    
     private float maxStamina;
+
+    public float perStamina;
+
+    public GameObject hudDamageText;
 
     private int BossRandomSkill = 0;
 
@@ -29,18 +34,29 @@ public class BossFSM : MonoBehaviour
         maxStamina = DataTableManager.Instance.GetDataTable<BossStat_TableExcelLoader>().DataList[0].MaxStamina;
     }
 
+    void StateHit(int damage)
+    {
+        GameObject hudText = Instantiate(hudDamageText);
+        hudText.GetComponent<DamageTxt>().damage = damage;
+    }
+
     // Update is called once per frame
     void Update()
     {
         time += Time.deltaTime;
-
+        
         if (time > 1.0f)
         {
-
+            
             currentBossStamina += DataTableManager.Instance.GetDataTable<BossStat_TableExcelLoader>().DataList[0].Speed;
-
             Debug.Log($"턴미터 회복{maxStamina}/{currentBossStamina}");
-
+            #region 히트판정 임시코드
+            perStamina = currentBossStamina / maxStamina;
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                StateHit(50);                   //매개변수 = 데미지
+            }
+            #endregion
 
             if (currentBossStamina > maxStamina)
             {
@@ -48,6 +64,7 @@ public class BossFSM : MonoBehaviour
 
                 int BossSkillIndex = DataTableManager.Instance.GetDataTable<BossStat_TableExcelLoader>().DataList[0].Skill1;
                 this.gameObject.GetComponent<BossSkill>().BossSkillAction(BossSkillIndex);
+
 
                 //BossRandomSkill = Random.Range(1, 4);
 
