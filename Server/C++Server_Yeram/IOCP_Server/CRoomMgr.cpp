@@ -24,7 +24,7 @@ void CRoomMgr::Destroy()
 
 void CRoomMgr::Init()
 {
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 7; i++)
 	{
 		TCHAR roomname[BUFSIZE];
 		ZeroMemory(roomname, BUFSIZE);
@@ -53,7 +53,7 @@ void CRoomMgr::AddRoom(CSession* _host)
 	byte data[BUFSIZE];
 	ZeroMemory(data, BUFSIZE);
 	_host->UnPacking(data);
-	//room ´Ğ³×ÀÓ,ÆĞ½º¿öµå unpack 
+	//room ë‹‰ë„¤ì„,íŒ¨ìŠ¤ì›Œë“œ unpack 
 	UnPacking(data, room_name, room_pw);
 
 	if (m_rooms[m_max_page].size() >= m_page_room_count)
@@ -96,14 +96,14 @@ void CRoomMgr::RemoveRoom(unsigned int _id)
 //	CProtocolMgr::GetInst()->AddDetailProtocol(&protocol, (unsigned long)CLobbyMgr::DETAILPROTOCOL::RoomlistUpdate);
 //	CProtocolMgr::GetInst()->AddDetailProtocol(&protocol, (unsigned long)CLobbyMgr::DETAILPROTOCOL::AllRoom);
 //
-//	// ¹æ ¸®½ºÆ®(¹æ¹øÈ£ = ID, ¹æ ÀÌ¸§, ¸ğµåÁ¤º¸, ¹æ Âü¿© ÀÎ¿ø¼ö, ¹æÀÎ¿øÁ¦ÇÑ)
+//	// ë°© ë¦¬ìŠ¤íŠ¸(ë°©ë²ˆí˜¸ = ID, ë°© ì´ë¦„, ëª¨ë“œì •ë³´, ë°© ì°¸ì—¬ ì¸ì›ìˆ˜, ë°©ì¸ì›ì œí•œ)
 //	// structsize = uint + uint + str + uint + uint + uint = 20+32 = 52byte
 //	// datasize = uint + structsize*n; = 4+ 52*n 
 //	// packetsize= uint + uint + ulong + datasize ; = 12+datasize;
-//	// °íÁ¤°ª = 16
-//	// °¡º¯°ª = 52*n
-//	// ¹öÆÛÅ©±â = 4096
-//	// ÇÑ¹ø¿¡ º¸³¾ ¼ö ÀÖ´Â ¹æ Á¤º¸ °¹¼ö´Â 78.4615.... ÀÎµ¥ ¾ÈÀüÇÏ°Ô 77 Á¤µµ·Î Àâ±â.
+//	// ê³ ì •ê°’ = 16
+//	// ê°€ë³€ê°’ = 52*n
+//	// ë²„í¼í¬ê¸° = 4096
+//	// í•œë²ˆì— ë³´ë‚¼ ìˆ˜ ìˆëŠ” ë°© ì •ë³´ ê°¯ìˆ˜ëŠ” 78.4615.... ì¸ë° ì•ˆì „í•˜ê²Œ 77 ì •ë„ë¡œ ì¡ê¸°.
 //
 //	int forcount = 0;
 //	int remainder = 0;
@@ -206,7 +206,7 @@ void CRoomMgr::Packing(unsigned long _protocol, bool result, int page, list<t_Ro
 	int size = 0;
 	int strsize = 0;
 	int forsize = _rooms.size();
-	//c# Àº bool ÀÌ 4byteÀÓ.
+	//c# ì€ bool ì´ 4byteì„.
 	memcpy(ptr, &result, sizeof(bool));
 	ptr += sizeof(bool);
 	size += sizeof(bool);
@@ -220,14 +220,14 @@ void CRoomMgr::Packing(unsigned long _protocol, bool result, int page, list<t_Ro
 		size += sizeof(int);
 		for (t_RoomInfo* room : _rooms)
 		{
-			//¹æ¹øÈ£
+			//ë°©ë²ˆí˜¸
 			memcpy(ptr, &room->id, sizeof(int));
 			ptr += sizeof(int);
 			size += sizeof(int);
 			memcpy(ptr, &room->type, sizeof(ENetObjectType));
 			ptr += sizeof(ENetObjectType);
 			size += sizeof(ENetObjectType);
-			//¹æÀÌ¸§
+			//ë°©ì´ë¦„
 			strsize = _tcslen(room->name) * CODESIZE;
 			memcpy(ptr, &strsize, sizeof(int));
 			ptr += sizeof(int);
@@ -235,7 +235,7 @@ void CRoomMgr::Packing(unsigned long _protocol, bool result, int page, list<t_Ro
 			memcpy(ptr, room->name, strsize);
 			ptr += strsize;
 			size += strsize;
-			//¹æ ºñ¹ø
+			//ë°© ë¹„ë²ˆ
 			/*strsize = _tcslen(room->password) * CODESIZE;
 			memcpy(ptr, &strsize, sizeof(int));
 			ptr += sizeof(int);
@@ -243,16 +243,16 @@ void CRoomMgr::Packing(unsigned long _protocol, bool result, int page, list<t_Ro
 			memcpy(ptr, room->password, strsize);
 			ptr += strsize;
 			size += strsize;*/
-			//¹æ¸ğµå
+			//ë°©ëª¨ë“œ
 			memcpy(ptr, &room->mode, sizeof(int));
 			ptr += sizeof(int);
 			size += sizeof(int);
 			int enter_count = room->sessions.size();
-			//¹æÀÎ¿ø
+			//ë°©ì¸ì›
 			memcpy(ptr, &enter_count, sizeof(int));
 			ptr += sizeof(int);
 			size += sizeof(int);
-			//Á¦ÇÑÀÎ¿ø
+			//ì œí•œì¸ì›
 			memcpy(ptr, &m_enter_limit, sizeof(int));
 			ptr += sizeof(int);
 			size += sizeof(int);

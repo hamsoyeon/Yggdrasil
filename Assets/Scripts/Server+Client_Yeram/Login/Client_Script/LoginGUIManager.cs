@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using EWindowType = MenuGUIManager.EWindowType;
 public class LoginGUIManager : Singleton_Ver2.Singleton<LoginGUIManager>
 {
 
     [SerializeField]
-    InputField[] m_input_id;
+    TMP_InputField[] m_input_id;
     [SerializeField]
-    InputField[] m_input_pw;
+    TMP_InputField[] m_input_pw;
     [SerializeField]
-    InputField m_input_nick;
+    TMP_InputField m_input_nick;
 
     #region button click event
     public void OnClick_Exit(bool _flag)
@@ -20,11 +21,11 @@ public class LoginGUIManager : Singleton_Ver2.Singleton<LoginGUIManager>
     }
     public void OnClick_OK(bool _flag)
     {
-        if (_flag)//·Î±×ÀÎ
+        if (_flag)//ë¡œê·¸ì¸
         {
             LoginManager.Instance.LoginProcess(GetInfo(_flag));
         }
-        else//È¸¿ø°¡ÀÔ
+        else//íšŒì›ê°€ì…
         {
             LoginManager.Instance.JoinProcess(GetInfo(_flag));
         }

@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine;
+using TMPro;
 
 public class TabUIChange : MonoBehaviour
 {
     //EventSystem system;
-    public InputField FocusInput;                                       //인풋필드 오브젝트
-    public InputField NextInput;                                       //인풋필드 오브젝트
-    public InputField PreInput;                                       //인풋필드 오브젝트
-    private InputField temp;
+    public TMP_InputField FocusInput;                                       //인풋필드 오브젝트
+    public TMP_InputField NextInput;                                       //인풋필드 오브젝트
+    public TMP_InputField PreInput;                                       //인풋필드 오브젝트
+    private TMP_InputField temp;
     public Button OkButton;                                             //확인버튼 오브젝트
     public Button BackButton;                                           //뒤로가기버튼 오브젝트
 
     // Start is called before the first frame update
     void Start()
     {
-        
         Init();
     }
 
@@ -33,7 +33,7 @@ public class TabUIChange : MonoBehaviour
         SetInputFocus(FocusInput);
         //FirstInput.Select();                                            //처음은 ID입력
     }
-    public void SetInputFocus(InputField _input_obj)
+    public void SetInputFocus(TMP_InputField _input_obj)
     {
         _input_obj.Select();
     }
