@@ -82,8 +82,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\user\Desktop\Yggdrasil\C++Server_Yeram\IOCP_Server\include</IncludePath>
-    <LibraryPath>C:\Program Files\MySQL\MySQL Server 8.0\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\include</IncludePath>
+    <LibraryPath>C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

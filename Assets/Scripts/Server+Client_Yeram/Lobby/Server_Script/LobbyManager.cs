@@ -17,7 +17,7 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
     public enum EDetailProtocol
     {
         None = -1,
-        //========»óÀ§=========
+        //========ìƒìœ„=========
         LobbyEnter = 1,
         LobbyResult = 2,
         CreateRoom = 4,
@@ -26,9 +26,9 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
         ChatRecv = 32,
         RoomlistUpdate = 64,
         RoomlistResult = 128,
-        //========ÇÏÀ§=========
-        NoticeMsg = 256,//°øÁö ¸Ş¼¼Áö (¿î¿µÀÚ°¡ Àü¼Û)
-        AllMsg = 512,//ÀüÃ¼ ¸Ş¼¼Áö (ÀÏ¹İ À¯ÀúµéÀÌ »ç¿ë)
+        //========í•˜ìœ„=========
+        NoticeMsg = 256,//ê³µì§€ ë©”ì„¸ì§€ (ìš´ì˜ìê°€ ì „ì†¡)
+        AllMsg = 512,//ì „ì²´ ë©”ì„¸ì§€ (ì¼ë°˜ ìœ ì €ë“¤ì´ ì‚¬ìš©)
         AllRoom = 1024,
         PageRoom = 2048,
         Max
@@ -152,7 +152,7 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
     public void LobbyResult(Net.RecvPacket _recvpacket, Net.Protocol _protocol)
     {
 #if UNITY_EDITOR
-        Debug.Log("·Îºñ ÀÔÀå");
+        Debug.Log("ë¡œë¹„ ì…ì¥");
 #endif
         
     }
@@ -165,7 +165,7 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
         if(result)
         {
 #if UNITY_EDITOR
-            Debug.Log("¹æ¸¸µé±â ¼º°ø!");
+            Debug.Log("ë°©ë§Œë“¤ê¸° ì„±ê³µ!");
 #endif
             MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, false);
             MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, true);
@@ -183,7 +183,7 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
             _recvpacket.Read(out text);
             LobbyGUIManager.Instance.UpdateChat(text);
         }
-        else // Ã¤ÆÃ º¸³»±â ½ÇÆĞÇÑ °æ¿ì ex) °ø¹é Àü¼Û
+        else // ì±„íŒ… ë³´ë‚´ê¸° ì‹¤íŒ¨í•œ ê²½ìš° ex) ê³µë°± ì „ì†¡
         {
 
         }
@@ -191,26 +191,26 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
     public void RoomlistResult(Net.RecvPacket _recvpacket, Net.Protocol _protocol)
     {
         EDetailProtocol pre_protocol = (EDetailProtocol)_protocol.GetProtocol(EProtocolType.Pre_D);
-        //¾È¾µµí
+        //ì•ˆì“¸ë“¯
         int datasize = 0;
         bool result = false;
 
         switch (pre_protocol)
         {
-            //¸ğµç ¹æÁ¤º¸ ·Îµù ±Ùµ¥ ÇÊ¿ä¾øÀ»µí.
+            //ëª¨ë“  ë°©ì •ë³´ ë¡œë”© ê·¼ë° í•„ìš”ì—†ì„ë“¯.
             case EDetailProtocol.AllRoom:
                 break;
-            //ÇöÀç ÆäÀÌÁöÀÇ ¹æ¸¸ ·Îµù.
+            //í˜„ì¬ í˜ì´ì§€ì˜ ë°©ë§Œ ë¡œë”©.
             case EDetailProtocol.PageRoom:
-                //³ªÁß¿¡ µ¥ÀÌÅÍ »çÀÌÁî ´Ù »©µµ·Ï Â¥±â ¾È¾²´Âµ¥ ÇöÀç ±¸Á¶°¡ ÀÌ·¸°Ô Â¥¿© ÀÖ¾î¼­ 
-                //¾îÂ¿¼ö ¾øÀÌ ÇÑ¹ø »Ì¾ÆÁà¾ßÇÔ.
+                //ë‚˜ì¤‘ì— ë°ì´í„° ì‚¬ì´ì¦ˆ ë‹¤ ë¹¼ë„ë¡ ì§œê¸° ì•ˆì“°ëŠ”ë° í˜„ì¬ êµ¬ì¡°ê°€ ì´ë ‡ê²Œ ì§œì—¬ ìˆì–´ì„œ 
+                //ì–´ì©”ìˆ˜ ì—†ì´ í•œë²ˆ ë½‘ì•„ì¤˜ì•¼í•¨.
                 _recvpacket.Read(out datasize);
                 _recvpacket.Read(out result);
                 if(result)
                 {
                     _recvpacket.Read(out m_curpage);
                     _recvpacket.ReadSerialize(out m_rooms);
-
+                    Debug.Log(m_rooms.Count);
                     for (int i = 0; i < m_rooms.Count; i++)
                     {
                         var room = m_rooms[i];
@@ -219,7 +219,7 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
                 }
                 else
                 {
-                    //ÆäÀÌÁö ÀÌµ¿ ½ÇÆĞ.
+                    //í˜ì´ì§€ ì´ë™ ì‹¤íŒ¨.
                 }
                 
                 break;

@@ -36,7 +36,9 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     Transform m_Content;
     [SerializeField]
     GameObject m_TextPrefeb;
-
+    [SerializeField]
+    GameObject lobbyPanel;
+    [SerializeField]
     TMP_InputField m_input_chat;
     #endregion
     [SerializeField]
@@ -68,7 +70,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
                                                     .GetComponentsInChildren<TMP_InputField>();
         m_input_createname = inputs[0];
         m_input_pw = inputs[1];
-
+        
         Transform ChatParent = m_canvas.transform.GetChild("Chatting");
         m_input_chat = ChatParent.GetComponentInChildren<TMP_InputField>();
     }
@@ -108,7 +110,18 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     #region page update func
     public void RoomInfoSetting(int _btn_index, int _id, string _title, int _mode, int _enter_count, int _enter_limit)
     {
+        
         m_room_btns[_btn_index].GetComponent<RoomInfoBtn>().ChageInfo(_id, _title, _mode, _enter_count, _enter_limit);
+
+        for(int i = 0; i < m_rooms_count; i++)
+        {
+            m_room_btns[i].gameObject.SetActive(false);
+        }
+        for(int i = 0; i <= _btn_index; i++)
+        {
+            m_room_btns[i].gameObject.SetActive(true);
+        }
+
     }
     #endregion
     #region chat update func
@@ -121,6 +134,15 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     }
     public void UpdateChat(string _text)
     {
+        if (m_input_chat.text.Equals(""))
+        {
+            return;
+        }
+        if (lobbyPanel.activeSelf == false && m_Content.GetComponentInChildren<TextMeshProUGUI>() != null)
+        {
+            Debug.Log("DeleteChat");
+            Destroy(m_Content.GetComponent<TextMeshProUGUI>());
+        }
         GameObject clone = Instantiate(m_TextPrefeb, m_Content);
         clone.GetComponent<TextMeshProUGUI>().text =_text;
         m_input_chat.text = "";
@@ -130,13 +152,13 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
             m_input_chat.ActivateInputField();
         }
     }
-    private void RearTimeRepit()
+    /*private void RearTimeRepit()
     {
         if(Input.GetKeyDown(KeyCode.Return)&&m_input_chat.isFocused==false)
         {
             m_input_chat.ActivateInputField();
         }
-    }
+    }*/
     #endregion
 
     private void Update()
