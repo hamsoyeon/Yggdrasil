@@ -9,9 +9,11 @@ public class TabUIChange : MonoBehaviour
 {
     //EventSystem system;
     public TMP_InputField FocusInput;                                       //인풋필드 오브젝트
-    public TMP_InputField NextInput;                                       //인풋필드 오브젝트
+
+    /*public TMP_InputField NextInput;                                       //인풋필드 오브젝트
     public TMP_InputField PreInput;                                       //인풋필드 오브젝트
-    private TMP_InputField temp;
+    private TMP_InputField temp;*/
+
     public Button OkButton;                                             //확인버튼 오브젝트
     public Button BackButton;                                           //뒤로가기버튼 오브젝트
 
@@ -47,42 +49,55 @@ public class TabUIChange : MonoBehaviour
     }
     public void InputKeyboard()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && Input.GetKey(KeyCode.LeftShift))                             //LEFTShift + Tab하면 위에항목으로 이동
+        if (Input.GetKeyDown(KeyCode.Tab))                             
         {
-            if(PreInput != null)
+            if (!Input.GetKey(KeyCode.LeftShift))            //Tab하면 아래항목으로 이동
             {
-                temp = FocusInput;
-                FocusInput = PreInput;
-                PreInput = NextInput;
-                NextInput = temp;
-                SetInputFocus(FocusInput);
-            }
-            
 
-            /*Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnUp();
-            if (next != null)
+                FocusInput = FocusInput.navigation.selectOnDown as TMP_InputField;
+                SetInputFocus(FocusInput);
+
+                /*if (NextInput != null)
+                {
+
+                    temp = FocusInput;
+                    FocusInput = NextInput;
+                    NextInput = PreInput;
+                    PreInput = temp;
+                    SetInputFocus(FocusInput);
+                }*/
+
+                /*Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
+                if (next != null)
+                {
+                    next.Select();
+                }*/
+
+            }
+            else                                              //LEFTShift + Tab하면 위에항목으로 이동
             {
-                next.Select();
-            }*/
+                FocusInput = FocusInput.navigation.selectOnUp as TMP_InputField;
+                SetInputFocus(FocusInput);
+                /*if (PreInput != null)
+                {
+                    temp = FocusInput;
+                    FocusInput = PreInput;
+                    PreInput = NextInput;
+                    NextInput = temp;
+                    SetInputFocus(FocusInput);
+                }*/
+
+
+                /*Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnUp();
+                if (next != null)
+                {
+                    next.Select();
+                }*/
+
+            }
 
         }
-        else if (Input.GetKeyDown(KeyCode.Tab))                                                           //Tab 하면 아래항목으로 이동
-        {
-            if(NextInput != null)
-            {
-                temp = FocusInput;
-                FocusInput = NextInput;
-                NextInput = PreInput;
-                PreInput = temp;
-                SetInputFocus(FocusInput);
-            }
-
-            /*Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
-            if (next != null)
-            {
-                next.Select();
-            }*/
-        }
+        
         else if (Input.GetKeyDown(KeyCode.Return))                                                        //Enter 하면 로그인 버튼 클릭
         {
             // 엔터키를 치면 로그인 (제출) 버튼을 클릭

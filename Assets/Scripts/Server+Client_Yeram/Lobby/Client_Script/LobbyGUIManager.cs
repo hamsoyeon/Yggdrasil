@@ -80,6 +80,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     {
         MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Menu, true);
         MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, false);
+        ClearChat();
     }
     public void OnClick_NextPage()
     {
@@ -138,11 +139,6 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
         {
             return;
         }
-        if (lobbyPanel.activeSelf == false && m_Content.GetComponentInChildren<TextMeshProUGUI>() != null)
-        {
-            Debug.Log("DeleteChat");
-            Destroy(m_Content.GetComponent<TextMeshProUGUI>());
-        }
         GameObject clone = Instantiate(m_TextPrefeb, m_Content);
         clone.GetComponent<TextMeshProUGUI>().text =_text;
         m_input_chat.text = "";
@@ -150,6 +146,16 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
         if(m_input_chat.isFocused==false)
         {
             m_input_chat.ActivateInputField();
+        }
+    }
+
+    public void ClearChat()
+    {
+        Debug.Log("DeleteChat");
+        int childCount = m_Content.childCount;
+        for(int i = 0; i < childCount; ++i)
+        {
+            GameObject.DestroyImmediate(m_Content.GetChild(0).gameObject);
         }
     }
     /*private void RearTimeRepit()
