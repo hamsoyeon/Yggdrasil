@@ -23,6 +23,8 @@ ExportedObj/
 *.pdb
 *.opendb
 *.VC.db
+*.vcxproj
+define.h
 
 # Unity3D generated meta files
 *.pidb.meta
