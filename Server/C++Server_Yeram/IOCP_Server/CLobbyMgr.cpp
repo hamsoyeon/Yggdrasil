@@ -73,6 +73,7 @@ void CLobbyMgr::Destroy()
 
 void CLobbyMgr::Init()
 {
+    
 }
 
 void CLobbyMgr::End()
@@ -122,14 +123,14 @@ void CLobbyMgr::LobbyProcess(CSession* _session)
 
 void CLobbyMgr::EnterRoomProcess(CSession* _session)
 {
-	//¹æÀÔÀå °¡´É ¿©ºÎ Ã¼Å© 
-	//¹æÀÔÀå °¡´É½Ã state roomÀ¸·Î º¯°æ.
-	//Àü¼Û ÇÁ·ÎÅäÄİ room , enterroomresult
+	//ë°©ì…ì¥ ê°€ëŠ¥ ì—¬ë¶€ ì²´í¬ 
+	//ë°©ì…ì¥ ê°€ëŠ¥ì‹œ state roomìœ¼ë¡œ ë³€ê²½.
+	//ì „ì†¡ í”„ë¡œí† ì½œ room , enterroomresult
 }
 
 void CLobbyMgr::BackPageProcess(CSession* _session)
 {
-	//state ->login º¯°æ 
+	//state ->login ë³€ê²½ 
 	unsigned long protocol = 0;
 	_session->UnPacking(protocol);
 	unsigned long subprotocol = CProtocolMgr::GetInst()->GetSubProtocol(protocol);
@@ -150,8 +151,8 @@ void CLobbyMgr::BackPageProcess(CSession* _session)
 void CLobbyMgr::CreateRoomFunc(CSession* _session)
 {
 	CLockGuard<CLock> lock(m_lock);
-	//¹æ»ı¼º °¡´É ¿©ºÎ Ã¼Å© (½ÇÆĞÀÇ °æ¿ì°¡ »ı°¢ÀÌ ¾È³²)
-	//¹æ »ı¼º °á°ú Àü¼Û
+	//ë°©ìƒì„± ê°€ëŠ¥ ì—¬ë¶€ ì²´í¬ (ì‹¤íŒ¨ì˜ ê²½ìš°ê°€ ìƒê°ì´ ì•ˆë‚¨)
+	//ë°© ìƒì„± ê²°ê³¼ ì „ì†¡
 	bool result = true;
 	if (result)
 	{

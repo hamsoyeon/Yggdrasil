@@ -9,6 +9,7 @@ public:
 	virtual void End();
 
 	static DWORD WorkThread(LPVOID _iocp);
+    virtual void SendInit(void* _session)=0;
 	virtual BOOL Send(void* _session) = 0;
 	virtual BOOL Recv(void* _session) = 0;
 	virtual int DisConnect(OVERLAP_EX* _overlap) = 0;
@@ -17,7 +18,7 @@ public:
 	virtual void SizeCheck_And_Recv(void* _session, int _combytes) = 0;
 	virtual void SizeCheck_And_Send(void* _session, int _combytes) = 0;
 	void PostDisConnect(void* _ptr);
-	virtual bool GetQueueErrorCheck(int _retval, int _cb_t, OVERLAP_EX* _overlapex); // iocp¿¡¼­¸¸ ¾²´Â ÇÔ¼ö
+	virtual bool GetQueueErrorCheck(int _retval, int _cb_t, OVERLAP_EX* _overlapex); // iocpì—ì„œë§Œ ì“°ëŠ” í•¨ìˆ˜
 
 protected:
 	HANDLE m_hcp;

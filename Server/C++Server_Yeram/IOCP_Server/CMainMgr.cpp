@@ -88,6 +88,10 @@ void CMainMgr::End()
 	
 	WSACleanup();
 }
+void CMainMgr::SendInit(void* _session)
+{
+    CRoomMgr::GetInst()->SendInit(reinterpret_cast<CSession*>(_session));
+}
 CMainMgr* CMainMgr::GetInst()
 {
 	return m_instance;
@@ -120,7 +124,7 @@ void CMainMgr::Destroy()
 	CRoomMgr::Destroy();
 }
 
-void CMainMgr::SizeCheck_And_Recv(void* _session, int _combytes) // ÀÌ¸§À» ÇÏ´Â ±â´ÉÀ» ÀüºÎ ¸í½ÃÀûÀ¸·Î ¸¸µç´Ù.
+void CMainMgr::SizeCheck_And_Recv(void* _session, int _combytes) // ì´ë¦„ì„ í•˜ëŠ” ê¸°ëŠ¥ì„ ì „ë¶€ ëª…ì‹œì ìœ¼ë¡œ ë§Œë“ ë‹¤.
 {
 	CSession* session = reinterpret_cast<CSession*>(_session);
 	SOC sizecheck = session->CompRecv(_combytes);
@@ -191,7 +195,7 @@ int CMainMgr::DisConnect(OVERLAP_EX* _overlap)
 	OVERLAP_EX* overlap = reinterpret_cast<OVERLAP_EX*>(_overlap);
 	CSession* session = reinterpret_cast<CSession*> (overlap->session);
 	overlap->session = nullptr;
-	// Å¬¶óÀÌ¾ğÆ® ³ª°¨Ã³¸®
+	// í´ë¼ì´ì–¸íŠ¸ ë‚˜ê°ì²˜ë¦¬
 	CSessionMgr::GetInst()->RemoveSession(session);
 	C_SetCtrlHandler::GetInst()->End();
 	return 0;
@@ -203,6 +207,6 @@ void* CMainMgr::GetQueueAccept(ULONG_PTR _com_key, OVERLAP_EX* _overlap)
 	SOCKET session_sock = static_cast<SOCKET>(_com_key);
 	CreateIoCompletionPort(reinterpret_cast<HANDLE>(session_sock), m_hcp, session_sock, 0);
 	CSession* session = CSessionMgr::GetInst()->AddSession(session_sock);
-	// ¿©±â¼­ session recv¸¦ È£Ãâ
+	// ì—¬ê¸°ì„œ session recvë¥¼ í˜¸ì¶œ
 	return session;
 }

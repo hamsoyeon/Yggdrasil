@@ -42,6 +42,17 @@ void CRoomMgr::End()
 
 }
 
+void CRoomMgr::SendInit(CSession* _session)
+{
+    CLockGuard<CLock> lock(m_lock);
+    unsigned long protocol = 0;
+
+    CProtocolMgr::GetInst()->AddMainProtocol(&protocol, static_cast<unsigned long>(MAINPROTOCOL::LOBBY));
+    CProtocolMgr::GetInst()->AddSubProtocol(&protocol, static_cast<unsigned long>(CLobbyMgr::SUBPROTOCOL::Init));
+ 
+    Packing(protocol,m_page_room_count, _session);
+}
+
 
 void CRoomMgr::AddRoom(CSession* _host)
 {
@@ -187,6 +198,19 @@ CRoomMgr::~CRoomMgr()
 	delete m_lock;
 }
 
+void CRoomMgr::Packing(unsigned long _protocol, int _roomcount, CSession* _session)
+{
+    byte _buf[BUFSIZE];
+    ZeroMemory(_buf, BUFSIZE);
+    byte* ptr = _buf;
+    int size = 0;
+    
+    memcpy(_buf, &_roomcount, sizeof(int));
+    size += sizeof(int);
+
+    _session->Packing(_protocol, _buf, size);
+}
+
 void CRoomMgr::Packing(unsigned long _protocol, t_RoomInfo* _room, CSession* _session)
 {
 	byte _buf[BUFSIZE];
@@ -194,6 +218,7 @@ void CRoomMgr::Packing(unsigned long _protocol, t_RoomInfo* _room, CSession* _se
 	byte* ptr = _buf;
 	int size = 0;
 
+    //구현 안해놨음.
 
 	_session->Packing(_protocol, _buf, size);
 }
