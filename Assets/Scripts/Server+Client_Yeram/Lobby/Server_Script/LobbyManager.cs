@@ -42,7 +42,7 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
     {
         get => m_curpage;
     }
-  
+
     #region send func
     public void LobbyEnterProcess(bool _multi)
     {
@@ -82,17 +82,17 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
     {
 
     }
-    public void CreateRoomProcess(string _title,string _pw)
+    public void CreateRoomProcess(string _title, string _pw)
     {
         Net.Protocol protocol = new Net.Protocol();
         protocol.SetProtocol((int)EMainProtocol.LOBBY, EProtocolType.Main);
-        protocol.SetProtocol((int)ESubProtocol.Multi,EProtocolType.Sub);
+        protocol.SetProtocol((int)ESubProtocol.Multi, EProtocolType.Sub);
         protocol.SetProtocol((int)EDetailProtocol.CreateRoom, EProtocolType.Detail);
 
         Net.SendPacket sendpacket = new Net.SendPacket();
         sendpacket.__Initialize();
         int size = sendpacket.Write(_title);
-        size+=sendpacket.Write(_pw);
+        size += sendpacket.Write(_pw);
         sendpacket.WriteProtocol(protocol.GetProtocol());
         sendpacket.WriteTotalSize(size);
         Net.NetWorkManager.Instance.Send(sendpacket);
@@ -108,6 +108,18 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
         Net.SendPacket sendpacket = new Net.SendPacket();
         sendpacket.__Initialize();
         int size = sendpacket.Write(_text);
+        sendpacket.WriteProtocol(protocol.GetProtocol());
+        sendpacket.WriteTotalSize(size);
+        Net.NetWorkManager.Instance.Send(sendpacket);
+    }
+    public void EnterRoomProcess(uint _roomid)
+    {
+        Net.Protocol protocol = new Net.Protocol();
+        protocol.SetProtocol((int)EMainProtocol.ROOM, EProtocolType.Main);
+
+        Net.SendPacket sendpacket = new Net.SendPacket();
+        sendpacket.__Initialize();
+        int size= sendpacket.Write(_roomid);
         sendpacket.WriteProtocol(protocol.GetProtocol());
         sendpacket.WriteTotalSize(size);
         Net.NetWorkManager.Instance.Send(sendpacket);
@@ -230,7 +242,7 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
                     for (int i = 0; i < m_rooms.Count; i++)
                     {
                         var room = m_rooms[i];
-                        LobbyGUIManager.Instance.RoomInfoSetting(i, (int)room.GetID, room.GetTitle, room.GetGameMode, room.GetCurCount, room.GetMaxEnterCount);
+                        LobbyGUIManager.Instance.RoomInfoSetting(i, room);
                     }
                 }
                 else

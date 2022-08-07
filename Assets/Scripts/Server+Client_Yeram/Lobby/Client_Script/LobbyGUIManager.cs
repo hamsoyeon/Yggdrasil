@@ -83,10 +83,16 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     }
     #endregion
     #region button click event
-    public void OnClick_BeforMenu()
+    public void OnClick_BeforeMenu()
     {
         MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Menu, true);
         MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, false);
+        ClearChat();
+    }
+    public void OnClick_BeforeLobby()
+    {
+        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, true);
+        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, false);
         ClearChat();
     }
     public void OnClick_NextPage()
@@ -114,12 +120,20 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     {
         LobbyManager.Instance.ChattingProcess(m_input_chat.text);
     }
+    public void OnClick_Room(uint _roomid)
+    {
+        //방 정보 전송 후 방 room 입장.
+        LobbyManager.Instance.EnterRoomProcess(_roomid);
+
+        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, false);
+        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, true);
+    }
     #endregion
     #region page update func
-    public void RoomInfoSetting(int _btn_index, int _id, string _title, int _mode, int _enter_count, int _enter_limit)
+    public void RoomInfoSetting(int _btn_index,RoomOutInfo _room_info)
     {
         
-        m_room_btns[_btn_index].GetComponent<RoomInfoBtn>().ChageInfo(_id, _title, _mode, _enter_count, _enter_limit);
+        m_room_btns[_btn_index].GetComponent<RoomInfoBtn>().ChageInfo(_room_info);
 
         for(int i = 0; i < m_rooms_count; i++)
         {
@@ -173,7 +187,6 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
         }
     }*/
     #endregion
-
     private void Update()
     {
         EnterEventFocuse_Chat();

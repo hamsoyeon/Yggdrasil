@@ -10,19 +10,20 @@ public class RoomInfoBtn : MonoBehaviour
     private TMP_Text m_enterinfo;
     private Image m_image;
     private Button m_btn;
+    RoomOutInfo m_roominfo;
 
-    public void ChageInfo(int _id, string _title,int mode,int _enter_count, int _enter_limit)
+
+    public void ChageInfo(RoomOutInfo _room_info)
     {
+        m_roominfo = _room_info;
         //mode -> image chage
-        m_roomindex.text = _id.ToString();
-        m_title.text = _title;
-        m_enterinfo.text = _enter_count.ToString() + "/" + _enter_limit.ToString();
+        m_roomindex.text = m_roominfo.GetID.ToString();
+        m_title.text = m_roominfo.GetTitle;
+        m_enterinfo.text = m_roominfo.GetCurCount.ToString() + "/" + m_roominfo.GetMaxEnterCount.ToString();
     }
     public void OnClick_RoomBtn()
     {
-        //방 정보 전송 후 방 room 입장.
-        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, false);
-        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, true);
+        LobbyGUIManager.Instance.OnClick_Room(m_roominfo.GetID);
     }
     private void Start()
     {
