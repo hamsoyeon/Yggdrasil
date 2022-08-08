@@ -71,6 +71,16 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
         protocol.SetProtocol((uint)ESubProtocol.Single, EProtocolType.Sub);
         return protocol;
     }
+    public void LobbyLeaveProcess()
+    {
+        Net.Protocol protocol = new Net.Protocol();
+        protocol.SetProtocol((uint)EMainProtocol.LOGIN,EProtocolType.Main);
+        protocol.SetProtocol((uint)ESubProtocol.BackPage, EProtocolType.Sub);
+        Net.SendPacket sendpacket = new Net.SendPacket();
+        sendpacket.__Initialize();
+        sendpacket.WriteProtocol(protocol.GetProtocol());
+        Net.NetWorkManager.Instance.Send(sendpacket);
+    }
     public void PageReqProcess(bool _next)
     {
         if (_next)

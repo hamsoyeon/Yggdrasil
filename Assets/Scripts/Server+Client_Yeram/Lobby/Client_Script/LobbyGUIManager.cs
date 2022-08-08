@@ -87,6 +87,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     {
         MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Menu, true);
         MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, false);
+        LobbyManager.Instance.LobbyLeaveProcess();
         ClearChat();
     }
     public void OnClick_BeforeLobby()
