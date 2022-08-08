@@ -50,7 +50,8 @@ public :
 	void PageRoomFunc(CSession* _session);
 	void ChattingFunc(CSession* _session);
 
-	void AddLobbySession(CSession* _session);
+	void AddSession(CSession* _session);
+    void RemoveSession(CSession* _session);
 private:
 	CLobbyMgr();
 	~CLobbyMgr();

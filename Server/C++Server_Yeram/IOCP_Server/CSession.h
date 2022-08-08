@@ -80,7 +80,11 @@ public:
 	}
 
 	CState* GetState() { return m_curstate; }
-	CState* GetLoginState() { return m_loginstate; }
+	CState* GetLoginState() 
+    { 
+        m_loginstate->Init();
+        return m_loginstate; 
+    }
 	CState* GetLobbyState() { return m_lobbystate; }
 	CState* GetRoomState() { return m_roomstate; }
 	void SetState(CState* _state)

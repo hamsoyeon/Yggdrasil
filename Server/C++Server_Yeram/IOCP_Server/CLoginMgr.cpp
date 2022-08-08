@@ -47,21 +47,21 @@ void CLoginMgr::Init()
 
 void CLoginMgr::End()
 {
-	//·Î±×ÀÎ Á¤º¸ ¸ğµÎ ·Î±×¾Æ¿ô ½ÃÅ°±â.
+	//ë¡œê·¸ì¸ ì •ë³´ ëª¨ë‘ ë¡œê·¸ì•„ì›ƒ ì‹œí‚¤ê¸°.
 	m_loginlist.clear();
 	m_joinlist.clear();
 	delete m_lock;
 }
 
 
-/* ¸Ş´º ·Î±×ÀÎ¹öÆ° È¸¿ø°¡ÀÔ¹öÆ° */
+/* ë©”ë‰´ ë¡œê·¸ì¸ë²„íŠ¼ íšŒì›ê°€ì…ë²„íŠ¼ */
 void CLoginMgr::LoginProcess(CSession* _ptr)
 {
 	unsigned long protocol = 0;
 	unsigned long subprotocol = 0;
 
-	//1. Å¬¶ó¿¡¼­ ·Î±×ÀÎ Á¤º¸ ¹Ş¾Æ¿È.
-	//2. ¹Ş¾Æ¿Â Á¤º¸ UnPackPacket
+	//1. í´ë¼ì—ì„œ ë¡œê·¸ì¸ ì •ë³´ ë°›ì•„ì˜´.
+	//2. ë°›ì•„ì˜¨ ì •ë³´ UnPackPacket
 	_ptr->UnPacking(protocol);
 	subprotocol = CProtocolMgr::GetInst()->GetSubProtocol(protocol);
 	switch ((SUBPROTOCOL)subprotocol)
@@ -99,35 +99,35 @@ void CLoginMgr::LoginFunc(CSession* _ptr)
 	_ptr->UnPacking(buf);
 	UnPacking(buf, ID, PW);
 	ZeroMemory(buf, BUFSIZE);
-	//3. ¹Ş¾Æ¿Â Á¤º¸·Î ·Î±×ÀÎ °¡´É ¿©ºÎ Ã¼Å©
-	if (LoginCheck(ID, PW, NICK))//·Î±×ÀÎ ¼º°ø
+	//3. ë°›ì•„ì˜¨ ì •ë³´ë¡œ ë¡œê·¸ì¸ ê°€ëŠ¥ ì—¬ë¶€ ì²´í¬
+	if (LoginCheck(ID, PW, NICK))//ë¡œê·¸ì¸ ì„±ê³µ
 	{
 		_ptr->SetUserInfo(ID, PW, NICK, true);
 		m_loginlist.push_back(_ptr->GetUserInfo());
-		_stprintf(msg, _T("%s´ÔÀÌ ·Î±×ÀÎ ¼º°ø! È¯¿µÇÕ´Ï´Ù!"), NICK);
+		_stprintf(msg, _T("%së‹˜ì´ ë¡œê·¸ì¸ ì„±ê³µ! í™˜ì˜í•©ë‹ˆë‹¤!"), NICK);
 		result = true;
 #ifdef _DEBUG
-		CLogMgr::GetInst()->WriteLog(_T("µ¥ÀÌÅÍ: ·Î±×ÀÎ ¼º°ø! %s, %s, %s\n"), ID, PW, NICK);
+		CLogMgr::GetInst()->WriteLog(_T("ë°ì´í„°: ë¡œê·¸ì¸ ì„±ê³µ! %s, %s, %s\n"), ID, PW, NICK);
 #endif	
 	}
-	else//·Î±×ÀÎ ½ÇÆĞ
+	else//ë¡œê·¸ì¸ ì‹¤íŒ¨
 	{
 #ifdef _DEBUG
-		CLogMgr::GetInst()->WriteLog(_T("µ¥ÀÌÅÍ: ·Î±×ÀÎ ½ÇÆĞ! %s, %s, %s\n"), ID, PW, NICK);
+		CLogMgr::GetInst()->WriteLog(_T("ë°ì´í„°: ë¡œê·¸ì¸ ì‹¤íŒ¨! %s, %s, %s\n"), ID, PW, NICK);
 #endif	
-		_tcscpy(msg, _T("·Î±×ÀÎ ½ÇÆĞ!"));
+		_tcscpy(msg, _T("ë¡œê·¸ì¸ ì‹¤íŒ¨!"));
 	}
 	CProtocolMgr::GetInst()->AddMainProtocol(&protocol, (unsigned long)MAINPROTOCOL::LOGIN);
 	CProtocolMgr::GetInst()->AddSubProtocol(&protocol, (unsigned long)SUBPROTOCOL::LoginResult);
-	//4. ·Î±×ÀÎ ¼º°ø ¿©ºÎ¸¦ ÆĞÅ· sendlist°¡ º¸³»°í ÀÖ´Â ÁßÀÎ µ¥ÀÌÅÍ°¡ ¾ø´Ù¸é ¹Ù·Î Å¬¶ó¿¡ Àü¼Û.
+	//4. ë¡œê·¸ì¸ ì„±ê³µ ì—¬ë¶€ë¥¼ íŒ¨í‚¹ sendlistê°€ ë³´ë‚´ê³  ìˆëŠ” ì¤‘ì¸ ë°ì´í„°ê°€ ì—†ë‹¤ë©´ ë°”ë¡œ í´ë¼ì— ì „ì†¡.
 	Packing(protocol, result, msg, _ptr);
 
 }
 void CLoginMgr::JoinFunc(CSession* _ptr)
 {
 	CLockGuard<CLock> lock(m_lock);
-	//1. Å¬¶ó°¡ º¸³½ È¸¿ø°¡ÀÔ Á¤º¸¸¦ ¹ŞÀ¸¸é, 
-	//2. µî·ÏµÈ Á¤º¸ÀÎÁö È®ÀÎÇÏ¿© °á°ú¿¡ µû¶ó packetÀ» Á¶¸³ÇÏ¿© SendÇÑ´Ù.
+	//1. í´ë¼ê°€ ë³´ë‚¸ íšŒì›ê°€ì… ì •ë³´ë¥¼ ë°›ìœ¼ë©´, 
+	//2. ë“±ë¡ëœ ì •ë³´ì¸ì§€ í™•ì¸í•˜ì—¬ ê²°ê³¼ì— ë”°ë¼ packetì„ ì¡°ë¦½í•˜ì—¬ Sendí•œë‹¤.
 
 	TCHAR ID[BUFSIZE], PW[BUFSIZE], NICK[BUFSIZE], msg[BUFSIZE];
 	byte buf[BUFSIZE], sendbuf[BUFSIZE];
@@ -149,35 +149,35 @@ void CLoginMgr::JoinFunc(CSession* _ptr)
 
 	UnPacking(buf, ID, PW, NICK);
 	ZeroMemory(buf, BUFSIZE);
-	if (joinCheck(msg, ID, NICK)) // È¸¿ø°¡ÀÔ ¼º°ø
+	if (joinCheck(msg, ID, NICK)) // íšŒì›ê°€ì… ì„±ê³µ
 	{
 		t_UserInfo* user = new t_UserInfo(ID, PW, NICK);
 		m_joinlist.push_back(user);
 		CDBMgr::GetInst()->InsertJointbl(user);
-		_stprintf(msg, _T("%s´Ô È¸¿ø°¡ÀÔ¿¡ ¼º°øÇÏ¿´½À´Ï´Ù!"), NICK);
+		_stprintf(msg, _T("%së‹˜ íšŒì›ê°€ì…ì— ì„±ê³µí•˜ì˜€ìŠµë‹ˆë‹¤!"), NICK);
 		ZeroMemory(temp, BUFSIZE);
 		result = true;
 #ifdef _DEBUG
-		CLogMgr::GetInst()->FileWriteLog(_T("µ¥ÀÌÅÍ: È¸¿ø°¡ÀÔ ¼º°ø! %s, %s, %s\n"), ID, PW, NICK);
-		CLogMgr::GetInst()->WriteLog(_T("µ¥ÀÌÅÍ: ·Î±×ÀÎ ¼º°ø! %s, %s, %s\n"), ID, PW, NICK);
+		CLogMgr::GetInst()->FileWriteLog(_T("ë°ì´í„°: íšŒì›ê°€ì… ì„±ê³µ! %s, %s, %s\n"), ID, PW, NICK);
+		CLogMgr::GetInst()->WriteLog(_T("ë°ì´í„°: ë¡œê·¸ì¸ ì„±ê³µ! %s, %s, %s\n"), ID, PW, NICK);
 		printf("\n=====\n");
 		CLogMgr::GetInst()->FileReadLogAll();
-		//CLogMgr::GetInst()->WriteLog("µ¥ÀÌÅÍ: È¸¿ø°¡ÀÔ ¼º°ø! %s, %s, %s\n", ID, PW, NICK);
+		//CLogMgr::GetInst()->WriteLog("ë°ì´í„°: íšŒì›ê°€ì… ì„±ê³µ! %s, %s, %s\n", ID, PW, NICK);
 		TCHAR temp2[BUFSIZE];
 		ZeroMemory(temp2, BUFSIZE);
-		_stprintf(temp2, _T("µ¥ÀÌÅÍ: È¸¿ø°¡ÀÔ ¼º°ø! %s, %s, %s\n"), ID, PW, NICK);
+		_stprintf(temp2, _T("ë°ì´í„°: íšŒì›ê°€ì… ì„±ê³µ! %s, %s, %s\n"), ID, PW, NICK);
 		CDBMgr::GetInst()->InsertJoinLog(temp2);
 #else
-		_stprintf(temp, _T("È¸¿ø°¡ÀÔ ¼º°ø %s, %s , %s\n"), ID, PW, NICK);
+		_stprintf(temp, _T("íšŒì›ê°€ì… ì„±ê³µ %s, %s , %s\n"), ID, PW, NICK);
 		CDBMgr::GetInst()->InsertJoinLog(temp);
 #endif	
 	}
-	else // È¸¿ø°¡ÀÔ ½ÇÆĞ
+	else // íšŒì›ê°€ì… ì‹¤íŒ¨
 	{
 #ifdef _DEBUG
-		CLogMgr::GetInst()->WriteLog(_T("µ¥ÀÌÅÍ: È¸¿ø°¡ÀÔ ½ÇÆĞ! %s, %s, %s\n"), ID, PW, NICK);
+		CLogMgr::GetInst()->WriteLog(_T("ë°ì´í„°: íšŒì›ê°€ì… ì‹¤íŒ¨! %s, %s, %s\n"), ID, PW, NICK);
 #endif	
-		_tcscpy(msg, _T("È¸¿ø°¡ÀÔ ½ÇÆĞ!"));
+		_tcscpy(msg, _T("íšŒì›ê°€ì… ì‹¤íŒ¨!"));
 	}
 
 
@@ -200,7 +200,7 @@ void CLoginMgr::LogOutFunc(CSession* _ptr)
 
 	CProtocolMgr::GetInst()->AddMainProtocol(&protocol, static_cast<unsigned long>(MAINPROTOCOL::LOGIN));
 	CProtocolMgr::GetInst()->AddSubProtocol(&protocol, static_cast<unsigned long>(SUBPROTOCOL::LogoutResult));
-	Packing(protocol, _T("·Î±×¾Æ¿ô¿¡ ¼º°øÇÏ¿´½À´Ï´Ù!"), _ptr);
+	Packing(protocol, _T("ë¡œê·¸ì•„ì›ƒì— ì„±ê³µí•˜ì˜€ìŠµë‹ˆë‹¤!"), _ptr);
 }
 
 void CLoginMgr::EnterLobbyProcess(CSession* _ptr)
@@ -216,15 +216,15 @@ void CLoginMgr::EnterLobbyProcess(CSession* _ptr)
 	switch (static_cast<CLobbyMgr::SUBPROTOCOL>(subprotocol))
 	{
 	case CLobbyMgr::SUBPROTOCOL::Multi:
-		//Å¬¶óÀÇ state¸¦ º¯°æÇÏ±â À§ÇØ ·Îºñ ÀÔÀå °á°úºÎÅÍ Àü¼ÛÇÑ´Ù.
+		//í´ë¼ì˜ stateë¥¼ ë³€ê²½í•˜ê¸° ìœ„í•´ ë¡œë¹„ ì…ì¥ ê²°ê³¼ë¶€í„° ì „ì†¡í•œë‹¤.
 		CProtocolMgr::GetInst()->AddSubProtocol(&protocol, static_cast<unsigned long>(CLobbyMgr::SUBPROTOCOL::Multi));
 		CProtocolMgr::GetInst()->AddMainProtocol(&protocol, static_cast<unsigned long>(MAINPROTOCOL::LOBBY));
 		CProtocolMgr::GetInst()->AddDetailProtocol(&protocol, static_cast<unsigned long>(CLobbyMgr::DETAILPROTOCOL::LobbyResult));
 		_ptr->Packing(protocol, nullptr, 0);
-		// ¹æ ¸®½ºÆ® Á¤º¸ º¸³½´Ù.
+		// ë°© ë¦¬ìŠ¤íŠ¸ ì •ë³´ ë³´ë‚¸ë‹¤.
 		CRoomMgr::GetInst()->SendRoom(0, _ptr);
-		//·Îºñ¿¡ µé¾î¿ÍÀÖ´Â À¯Àú ¸®½ºÆ®¿¡ À¯ÀúÁ¤º¸ Ãß°¡ÇÑ´Ù.
-		CLobbyMgr::GetInst()->AddLobbySession(_ptr);
+		//ë¡œë¹„ì— ë“¤ì–´ì™€ìˆëŠ” ìœ ì € ë¦¬ìŠ¤íŠ¸ì— ìœ ì €ì •ë³´ ì¶”ê°€í•œë‹¤.
+		CLobbyMgr::GetInst()->AddSession(_ptr);
 		break;
 	case CLobbyMgr::SUBPROTOCOL::Single:
 		CProtocolMgr::GetInst()->AddSubProtocol(&protocol, static_cast<unsigned long>(CLobbyMgr::SUBPROTOCOL::Single));
@@ -237,7 +237,7 @@ void CLoginMgr::EnterLobbyProcess(CSession* _ptr)
 
 BOOL CLoginMgr::LoginCheck(TCHAR* _id, TCHAR* _pw, TCHAR* _nick)
 {
-	//1.È¸¿øÁ¤º¸¿Í ÀÏÄ¡ÇÏ´Â Áö Ã¼Å©
+	//1.íšŒì›ì •ë³´ì™€ ì¼ì¹˜í•˜ëŠ” ì§€ ì²´í¬
 	if (m_joinlist.size() > 0)
 	{
 		for (t_UserInfo* userinfo : m_joinlist)
@@ -249,15 +249,15 @@ BOOL CLoginMgr::LoginCheck(TCHAR* _id, TCHAR* _pw, TCHAR* _nick)
 					_tcscpy(_nick, userinfo->nickname);
 					return true;
 				}
-				//2.·Î±×ÀÎÁßÀÎ list¿Í ÀÏÄ¡ÇÏÁö ¾Ê´ÂÁö Ã¼Å©
+				//2.ë¡œê·¸ì¸ì¤‘ì¸ listì™€ ì¼ì¹˜í•˜ì§€ ì•ŠëŠ”ì§€ ì²´í¬
 				for (t_UserInfo* loginfo : m_loginlist)
 				{
-					//ÀÌ¹Ì ·Î±×ÀÎ ÁßÀÎ °æ¿ì
+					//ì´ë¯¸ ë¡œê·¸ì¸ ì¤‘ì¸ ê²½ìš°
 					if (!memcmp(loginfo, userinfo, sizeof(t_UserInfo)))
 					{
 						return false;
 					}
-					else//·Î±×ÀÎ ¼º°ø
+					else//ë¡œê·¸ì¸ ì„±ê³µ
 					{
 						_tcscpy(_nick, userinfo->nickname);
 						return true;
@@ -274,16 +274,16 @@ BOOL CLoginMgr::joinCheck(TCHAR* _msg, TCHAR* _id, TCHAR* _nick)
 {
 	for (t_UserInfo* tuserinfo : m_joinlist)
 	{
-		// µî·ÏµÈ ID¸¦ Ã£Àº °æ¿ì
+		// ë“±ë¡ëœ IDë¥¼ ì°¾ì€ ê²½ìš°
 		if (!_tcscmp(tuserinfo->id, _id))
 		{
-			_tcscpy(_msg, _T("ÀÌ¹Ì µî·ÏµÈ IDÀÔ´Ï´Ù.\n"));
+			_tcscpy(_msg, _T("ì´ë¯¸ ë“±ë¡ëœ IDì…ë‹ˆë‹¤.\n"));
 			return false;
 		}
-		// µî·ÏµÈ NICKÀ» Ã£Àº °æ¿ì
+		// ë“±ë¡ëœ NICKì„ ì°¾ì€ ê²½ìš°
 		if (!_tcscmp(tuserinfo->nickname, _nick))
 		{
-			_tcscpy(_msg, _T("ÀÌ¹Ì Á¸ÀçÇÏ´Â NICKNAMEÀÔ´Ï´Ù.\n"));
+			_tcscpy(_msg, _T("ì´ë¯¸ ì¡´ì¬í•˜ëŠ” NICKNAMEì…ë‹ˆë‹¤.\n"));
 			return false;
 		}
 	}

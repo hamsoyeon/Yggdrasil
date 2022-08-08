@@ -197,6 +197,10 @@ int CMainMgr::DisConnect(OVERLAP_EX* _overlap)
 	overlap->session = nullptr;
 	// 클라이언트 나감처리
 	CSessionMgr::GetInst()->RemoveSession(session);
+    if (typeid(session->GetState()) == typeid(CLobbyState))
+    {
+        CLobbyMgr::GetInst()->RemoveSession(session);
+    }
 	C_SetCtrlHandler::GetInst()->End();
 	return 0;
 }
