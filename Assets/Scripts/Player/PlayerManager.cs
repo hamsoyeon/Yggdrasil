@@ -11,11 +11,15 @@ public class PlayerManager : MonoBehaviour
 
 	//스탯
 	public Yggdrasil.CharacterStats p_Status;
+    [SerializeField]
+    private float p_MaxHp;
+    [SerializeField]
+    private float p_CurHp;
 
-	
+    public float p_PerHp;
 
-	//스킬
-	private ISkill skill;
+    //스킬
+    private ISkill skill;
 	private SkillManager M_skillMgr;
 
 
@@ -107,17 +111,21 @@ public class PlayerManager : MonoBehaviour
 		transform.Translate(new Vector3(h, 0, v) * p_Status.MoveSpeed * Time.deltaTime);
 	}
 	
+    private void PlayerHp_Per()
+    {
+        p_PerHp = p_CurHp / p_MaxHp;
+    }
 
 	// Start is called before the first frame update
 	void Start()
     {
 		p_Object = this.gameObject;
 		p_Status = new Yggdrasil.CharacterStats();
+        p_MaxHp = p_Status.HP;
+        p_CurHp = p_MaxHp;
 
-		
-
-		//캐릭터 초기셋팅
-		p_Status.MoveSpeed = 8f; //기본스피드
+        //캐릭터 초기셋팅
+        p_Status.MoveSpeed = 8f; //기본스피드
 
 		skillType_num = 0;
 		skill = SkillFactory.SkillTypeSet(SkillType.Attack);
@@ -144,11 +152,6 @@ public class PlayerManager : MonoBehaviour
         //    Debug.Log(element.StageName);
         //}
 
-        
-        
-        
-
-
 
     }
 
@@ -161,7 +164,9 @@ public class PlayerManager : MonoBehaviour
 		//키보드 입력 체크 함수.
 		InputCheck();
 
+        //플레이어 체력 퍼센트
+        PlayerHp_Per();
 
-		
-	}
+
+    }
 }

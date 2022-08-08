@@ -90,12 +90,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
         LobbyManager.Instance.LobbyLeaveProcess();
         ClearChat();
     }
-    public void OnClick_BeforeLobby()
-    {
-        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, true);
-        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, false);
-        ClearChat();
-    }
+    
     public void OnClick_NextPage()
     {
         LobbyManager.Instance.PageReqProcess(true);

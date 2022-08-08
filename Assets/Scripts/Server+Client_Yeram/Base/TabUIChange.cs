@@ -8,11 +8,8 @@ using TMPro;
 public class TabUIChange : MonoBehaviour
 {
     //EventSystem system;
+    TMP_InputField[] allChildren;
     public TMP_InputField FocusInput;                                       //인풋필드 오브젝트
-
-    /*public TMP_InputField NextInput;                                       //인풋필드 오브젝트
-    public TMP_InputField PreInput;                                       //인풋필드 오브젝트
-    private TMP_InputField temp;*/
 
     public Button OkButton;                                             //확인버튼 오브젝트
     public Button BackButton;                                           //뒤로가기버튼 오브젝트
@@ -31,9 +28,8 @@ public class TabUIChange : MonoBehaviour
 
     public void Init()
     {
-        //system = EventSystem.current;
-        SetInputFocus(FocusInput);
-        //FirstInput.Select();                                            //처음은 ID입력
+        allChildren = GetComponentsInChildren<TMP_InputField>();
+        SetInputFocus(FocusInput);                  //처음은 ID입력
     }
     public void SetInputFocus(TMP_InputField _input_obj)
     {
@@ -53,49 +49,14 @@ public class TabUIChange : MonoBehaviour
         {
             if (!Input.GetKey(KeyCode.LeftShift))            //Tab하면 아래항목으로 이동
             {
-
                 FocusInput = FocusInput.navigation.selectOnDown as TMP_InputField;
                 SetInputFocus(FocusInput);
-
-                /*if (NextInput != null)
-                {
-
-                    temp = FocusInput;
-                    FocusInput = NextInput;
-                    NextInput = PreInput;
-                    PreInput = temp;
-                    SetInputFocus(FocusInput);
-                }*/
-
-                /*Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
-                if (next != null)
-                {
-                    next.Select();
-                }*/
-
             }
             else                                              //LEFTShift + Tab하면 위에항목으로 이동
             {
                 FocusInput = FocusInput.navigation.selectOnUp as TMP_InputField;
-                SetInputFocus(FocusInput);
-                /*if (PreInput != null)
-                {
-                    temp = FocusInput;
-                    FocusInput = PreInput;
-                    PreInput = NextInput;
-                    NextInput = temp;
-                    SetInputFocus(FocusInput);
-                }*/
-
-
-                /*Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnUp();
-                if (next != null)
-                {
-                    next.Select();
-                }*/
-
+                SetInputFocus(FocusInput);                
             }
-
         }
         
         else if (Input.GetKeyDown(KeyCode.Return))                                                        //Enter 하면 로그인 버튼 클릭
@@ -104,7 +65,7 @@ public class TabUIChange : MonoBehaviour
             OkButton.onClick.Invoke();
             Debug.Log("OKButton pressed!");
         }
-        else if (Input.GetKeyDown(KeyCode.Backspace))
+        else if (Input.GetKeyDown(KeyCode.Escape))
         {
             BackButton.onClick.Invoke();
             Debug.Log("BackButton pressed!");
