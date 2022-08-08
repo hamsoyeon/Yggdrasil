@@ -43,7 +43,7 @@ void CMainMgr::Run()
 		}
 
 		PostQueueAccept(clientsock);
-	
+
 	}
 
 }
@@ -64,12 +64,12 @@ void CMainMgr::Init()
 	C_SetCtrlHandler::GetInst()->Init();
 	CLobbyMgr::GetInst()->Init();
 	CRoomMgr::GetInst()->Init();
-	
+
 	// ++
 }
 void CMainMgr::End()
 {
-	
+
 	CLoginMgr::GetInst()->End();
 	CLogMgr::GetInst()->FileWriteLog(_T("end1\n"));
 	CLobbyMgr::GetInst()->End();
@@ -79,18 +79,18 @@ void CMainMgr::End()
 	CLogMgr::GetInst()->FileWriteLog(_T("end3\n"));
 	CDBMgr::GetInst()->End();
 	CLogMgr::GetInst()->FileWriteLog(_T("end4\n"));
-	
+
 	C_SetCtrlHandler::GetInst()->End();
 	CLogMgr::GetInst()->FileWriteLog(_T("end5\n"));
-	
+
 	CLogMgr::GetInst()->End();
 	//CLogMgr::GetInst()->FileWriteLog(_T("end6\n"));
-	
+
 	WSACleanup();
 }
 void CMainMgr::SendInit(void* _session)
 {
-    CRoomMgr::GetInst()->SendInit(reinterpret_cast<CSession*>(_session));
+	CRoomMgr::GetInst()->SendInit(reinterpret_cast<CSession*>(_session));
 }
 CMainMgr* CMainMgr::GetInst()
 {
@@ -124,7 +124,7 @@ void CMainMgr::Destroy()
 	CRoomMgr::Destroy();
 }
 
-void CMainMgr::SizeCheck_And_Recv(void* _session, int _combytes) // ì´ë¦„ì„ í•˜ëŠ” ê¸°ëŠ¥ì„ ì „ë¶€ ëª…ì‹œì ìœ¼ë¡œ ë§Œë“ ë‹¤.
+void CMainMgr::SizeCheck_And_Recv(void* _session, int _combytes) // ÀÌ¸§À» ÇÏ´Â ±â´ÉÀ» ÀüºÎ ¸í½ÃÀûÀ¸·Î ¸¸µç´Ù.
 {
 	CSession* session = reinterpret_cast<CSession*>(_session);
 	SOC sizecheck = session->CompRecv(_combytes);
@@ -195,14 +195,28 @@ int CMainMgr::DisConnect(OVERLAP_EX* _overlap)
 	OVERLAP_EX* overlap = reinterpret_cast<OVERLAP_EX*>(_overlap);
 	CSession* session = reinterpret_cast<CSession*> (overlap->session);
 	overlap->session = nullptr;
-	// í´ë¼ì´ì–¸íŠ¸ ë‚˜ê°ì²˜ë¦¬
-	CSessionMgr::GetInst()->RemoveSession(session);
-   
-    if (typeid(dynamic_cast<CLobbyState*>(session->GetState()))==typeid(CLobbyState*))
+
+	t_UserInfo* userinfo = session->GetUserInfo();
+	//·Î±×ÀÎÁßÀÌ¸é ·Î±×¾Æ¿ô Ã³¸®
+	if (userinfo->is_login)
+	{
+		CLoginMgr::GetInst()->RemoveLogingInfo(userinfo);
+	}
+    CState* state = session->GetState();
+    if (dynamic_cast<CLobbyState*>(state) != nullptr)
     {
         CLobbyMgr::GetInst()->RemoveSession(session);
     }
+	/*printf("%s ,%s\n", typeid(dynamic_cast<CLobbyState*>(state)).name(), typeid(CLobbyState*).name());
+	if (typeid(dynamic_cast<CLobbyState*>(state))== typeid(CLobbyState*))
+	{
+		CLobbyMgr::GetInst()->RemoveSession(session);
+	}
+    */
 	C_SetCtrlHandler::GetInst()->End();
+
+	// Å¬¶óÀÌ¾ğÆ® ³ª°¨Ã³¸®
+	CSessionMgr::GetInst()->RemoveSession(session);
 	return 0;
 }
 
@@ -212,6 +226,6 @@ void* CMainMgr::GetQueueAccept(ULONG_PTR _com_key, OVERLAP_EX* _overlap)
 	SOCKET session_sock = static_cast<SOCKET>(_com_key);
 	CreateIoCompletionPort(reinterpret_cast<HANDLE>(session_sock), m_hcp, session_sock, 0);
 	CSession* session = CSessionMgr::GetInst()->AddSession(session_sock);
-	// ì—¬ê¸°ì„œ session recvë¥¼ í˜¸ì¶œ
+	// ¿©±â¼­ session recv¸¦ È£Ãâ
 	return session;
 }

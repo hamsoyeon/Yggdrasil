@@ -1,7 +1,7 @@
 #pragma once
 #include "CSession.h"
-
-class CLock;
+#include "CLockGuard.h"
+#include "CLock.h"
 
 class CLoginMgr
 {
@@ -63,12 +63,24 @@ public:
 
 	void SetJoinlist(list<t_UserInfo*> _list) 
 	{ 
+        CLockGuard<CLock> lock(m_lock);
 		for (t_UserInfo* item : _list)
 		{
 			m_joinlist.push_back(item);
 		}
 	}
-
+    void RemoveLogingInfo(t_UserInfo* _userinfo)
+    {
+        CLockGuard<CLock> lock(m_lock);
+        for (auto item : m_loginlist)
+        {
+            if (!memcmp(item, _userinfo, sizeof(t_UserInfo)))
+            {
+                m_loginlist.remove(item);
+                break;
+            }
+        }
+    }
 private:
 	CLock* m_lock;
 	list<t_UserInfo*> m_loginlist;
