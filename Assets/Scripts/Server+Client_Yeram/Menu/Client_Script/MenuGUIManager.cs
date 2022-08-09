@@ -31,6 +31,8 @@ public class MenuGUIManager:Singleton_Ver2.Singleton<MenuGUIManager>
     GameObject m_window_lobby;
     [SerializeField]
     GameObject m_window_room;
+    [SerializeField]
+    GameObject m_window_option;
     #endregion
 
     #region button object
@@ -133,7 +135,12 @@ public class MenuGUIManager:Singleton_Ver2.Singleton<MenuGUIManager>
     public void OnClick_Option()
     {
         m_window_menu.SetActive(false);
-        //
+        m_window_option.SetActive(true);
+    }
+    public void OnClick_ExitOptin()
+    {
+        m_window_menu.SetActive(true);
+        m_window_option.SetActive(false);
     }
     public void OnClick_Logout()
     {
