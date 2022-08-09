@@ -23,10 +23,15 @@ public class LoginGUIManager : Singleton_Ver2.Singleton<LoginGUIManager>
     {
         if (_flag)//로그인
         {
+            m_input_id[0].text = "";
+            m_input_pw[0].text = "";
             LoginManager.Instance.LoginProcess(GetInfo(_flag));
         }
         else//회원가입
         {
+            m_input_id[1].text = "";
+            m_input_pw[1].text = "";
+            m_input_nick.text = "";
             LoginManager.Instance.JoinProcess(GetInfo(_flag));
         }
 
