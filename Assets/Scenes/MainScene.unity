@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -435,7 +435,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1259448267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 70, y: 0, z: -52}
+  m_LocalPosition: {x: 75, y: 0, z: -52}
   m_LocalScale: {x: 24, y: 10, z: 18}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1022,11 +1022,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b83b897b81bb7c4db35b9b74fdeee45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dieTime: 0
-  V_BossCamera: {fileID: 0}
+  perStamina: 0
   hudDamageText: {fileID: 1483570841231961235, guid: 790df30a09482fe4fbe52151b3e5de8e, type: 3}
-  hudPos: {fileID: 1572429886}
-  bossState: 0
 --- !u!65 &1909760083
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1139,6 +1136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3994b352e36f73447af3d1a756eb2fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  p_MaxHp: 0
+  p_CurHp: 0
+  p_PerHp: 0
   SkillType_txt: {fileID: 0}
 --- !u!136 &1945487914
 CapsuleCollider:
