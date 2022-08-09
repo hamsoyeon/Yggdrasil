@@ -89,6 +89,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
         MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, false);
         LobbyManager.Instance.LobbyLeaveProcess();
         ClearChat();
+        ClearInputField();
     }
     
     public void OnClick_NextPage()
@@ -107,6 +108,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     {
         LobbyManager.Instance.CreateRoomProcess(m_input_createname.text, m_input_pw.text);
         m_window_createroom.SetActive(false);
+        ClearInputField();
     }
     public void OnClick_CreateRoomCancle()
     {
@@ -118,11 +120,13 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     }
     public void OnClick_Room(uint _roomid)
     {
+        ClearInputField();
         //방 정보 전송 후 방 room 입장.
         LobbyManager.Instance.EnterRoomProcess(_roomid);
 
         MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, false);
         MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, true);
+
     }
     #endregion
     #region page update func
@@ -164,6 +168,10 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
         {
             m_input_chat.ActivateInputField();
         }
+    }
+    public void ClearInputField()
+    {
+        m_input_chat.text = "";
     }
 
     public void ClearChat()
