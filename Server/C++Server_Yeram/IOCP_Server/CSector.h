@@ -1,8 +1,11 @@
 #pragma once
+class GameObject;
 class CSector
 {
-
+public:
+    CSector(float length);
 private:
+    list<GameObject*> m_objects;
 	//List<CPlayer> m_playerlist
 	//List<CMonster> m_monsterlist
 	//CBoss*         m_boss
