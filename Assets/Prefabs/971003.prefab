@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8908429505089736808
+--- !u!1 &1414611007454604279
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8369522793884564998}
+  - component: {fileID: 2028353744215590297}
   m_Layer: 0
   m_Name: 971003
   m_TagString: Untagged
@@ -16,28 +16,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8369522793884564998
+--- !u!4 &2028353744215590297
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8908429505089736808}
+  m_GameObject: {fileID: 1414611007454604279}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 581917789388101306}
+  - {fileID: 6923105190312586533}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &581917789387966498
+--- !u!1001 &6923105190312195005
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 8369522793884564998}
+    m_TransformParent: {fileID: 2028353744215590297}
     m_Modifications:
     - target: {fileID: 165106, guid: 1eb1e002f1cdf74439efaeed1b937b62, type: 3}
       propertyPath: m_Name
@@ -117,8 +117,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1eb1e002f1cdf74439efaeed1b937b62, type: 3}
---- !u!4 &581917789388101306 stripped
+--- !u!4 &6923105190312586533 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 401048, guid: 1eb1e002f1cdf74439efaeed1b937b62, type: 3}
-  m_PrefabInstance: {fileID: 581917789387966498}
+  m_PrefabInstance: {fileID: 6923105190312195005}
   m_PrefabAsset: {fileID: 0}

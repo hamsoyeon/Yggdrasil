@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7679446060923644137
+--- !u!1 &2936914294960198544
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2522077930459712868}
+  - component: {fileID: 7012356403802781213}
   m_Layer: 0
   m_Name: 912006
   m_TagString: Untagged
@@ -16,28 +16,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2522077930459712868
+--- !u!4 &7012356403802781213
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7679446060923644137}
+  m_GameObject: {fileID: 2936914294960198544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7111358430763815118}
+  - {fileID: 2368966711905282999}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &7111358430764261846
+--- !u!1001 &2368966711904836271
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2522077930459712868}
+    m_TransformParent: {fileID: 7012356403802781213}
     m_Modifications:
     - target: {fileID: 199524, guid: 8c19efc451bd6c649939699c3c9227ce, type: 3}
       propertyPath: m_Name
@@ -105,8 +105,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c19efc451bd6c649939699c3c9227ce, type: 3}
---- !u!4 &7111358430763815118 stripped
+--- !u!4 &2368966711905282999 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 454936, guid: 8c19efc451bd6c649939699c3c9227ce, type: 3}
-  m_PrefabInstance: {fileID: 7111358430764261846}
+  m_PrefabInstance: {fileID: 2368966711904836271}
   m_PrefabAsset: {fileID: 0}
