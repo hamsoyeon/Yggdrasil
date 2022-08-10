@@ -7,6 +7,7 @@ public class FollowCam : MonoBehaviour
 
 
 	public GameObject Target;
+    [SerializeField]
 	private Vector3 camOffset;
 
     // Start is called before the first frame update
@@ -20,6 +21,6 @@ public class FollowCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		transform.position = Target.transform.position + camOffset;
+        transform.position = Target.transform.position+camOffset;
     }
 }
