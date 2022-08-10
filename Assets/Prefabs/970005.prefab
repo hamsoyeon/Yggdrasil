@@ -103,6 +103,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 198455759587554942, guid: 7c1ff086b5a3f544e95e27d7cb0721ac, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 199314844180213576, guid: 7c1ff086b5a3f544e95e27d7cb0721ac, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
