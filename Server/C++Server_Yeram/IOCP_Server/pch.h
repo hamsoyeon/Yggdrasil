@@ -34,7 +34,7 @@ using std::map;
 //#include "CLockGuard_Static.h"
 
 
-#define new new( _NORMAL_BLOCK, __FILE__,__LINE__)
+//#define new new( _NORMAL_BLOCK, __FILE__,__LINE__)
 #define BUFSIZE 4096
 
 

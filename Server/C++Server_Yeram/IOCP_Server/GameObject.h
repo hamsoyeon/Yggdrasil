@@ -1,31 +1,5 @@
 #pragma once
-struct Vector3
-{
-    Vector3()
-    {
-        x = 0;
-        y = 0;
-        z = 0;
-    }
-    Vector3(float _x, float _y, float _z)
-    {
-        x = _x;
-        y = _y;
-        z = _z;
-    }
-    float x;
-    float y;
-    float z;
-};
-enum class E_GameObject
-{
-    None = 1,
-    Player,
-    Boss,
-    Spirit,
-    Monster,
-    Max
-};
+
 class GameObject
 {
 public:
@@ -50,11 +24,11 @@ public:
     }
     E_GameObject GetType()
     {
-        return m_objtype;
+        return m_obj_type;
     }
     void SetType(E_GameObject _type)
     {
-        m_objtype = _type;
+        m_obj_type = _type;
     }
     virtual ~GameObject()
     {
