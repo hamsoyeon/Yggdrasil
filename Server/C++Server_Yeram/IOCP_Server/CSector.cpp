@@ -64,15 +64,25 @@ const Vector3 CSector::GetDistance()
     return m_distance;
 }
 
+const Vector3 CSector::GetSenter()
+{
+    return m_senter_pos;
+}
+
 BOOL CSector::IsInSector(const Vector3 _obj_pos)
 {
     if (_obj_pos.x >= m_senter_pos.x - m_distance.x && _obj_pos.x <= m_senter_pos.x + m_distance.x
-        && _obj_pos.z >= m_senter_pos.z + m_distance.z && _obj_pos.z <= m_senter_pos.z - m_distance.z)
+        && _obj_pos.z <= m_senter_pos.z + m_distance.z && _obj_pos.z >= m_senter_pos.z - m_distance.z)
     {
         return true;
     }
     
     return false;
+}
+
+void CSector::SetViewSector(CSector* _node)
+{
+    m_view_sectorlist.push_back(_node);
 }
 
 int QuadNode::Child_Size()

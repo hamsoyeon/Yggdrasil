@@ -4,7 +4,7 @@
 #include "CLoginState.h"
 #include "CLobbyState.h"
 #include "CRoomState.h"
-
+#include "CSector.h"
 
 
 class CLock;
@@ -78,7 +78,10 @@ public:
 		_tcscpy(m_userinfo->nickname, _nick);
 		m_userinfo->is_login = _flag;
 	}
-
+    void SetSector(QuadNode* _nodesector)
+    {
+        m_sector = _nodesector;
+    }
 	CState* GetState() { return m_curstate; }
 	CState* GetLoginState() 
     { 
@@ -98,7 +101,7 @@ private:
 	CLoginState* m_loginstate;
 	CLobbyState* m_lobbystate;
 	CRoomState* m_roomstate;
-
+    QuadNode* m_sector;
 	friend class CState;
 	//int substate;
 };

@@ -21,11 +21,12 @@ public:
     void SendInit(CSession* _session);
     void CreateQuadTree();
     void SetChildren(QuadNode* _parent,Vector3 _senterpos,Vector3 _distance,int _curdepth);
+    void SetViewNode(QuadNode* _parent, int _curdepth);
     void AddObjectNode(QuadNode* _parent,GameObject* obj,int _curdepth);
     void RemoveObjectNode(QuadNode* _parent,GameObject* obj, int _curdepth);
-    QuadNode* SerchNode(Vector3 _pos);
+    QuadNode** SerchNode(QuadNode* _parent,Vector3 _pos,int _curdepth);
     //플레이어 샌드패킷
-    //void PlayerSendPacket(CSession* ,Protocol,moveflag)
+    void PlayerSendPacket(CSession* _session, unsigned long _protocol, bool moveflag);
     //void checksector()
     //몬스터 샌드패킷
     //void MonsterSendPacket(CSession*,CMonster*, Protocol,moveflag)
@@ -50,7 +51,7 @@ private:
     int m_sector_count; //현재 몇개의 섹터로 나뉜지 총 섹터 갯수
     const int* m_squared_value; // 몇등분 할 것인지. m_depth만큼 곱할것임. ex  squared=2 depth=2 => 4 가로세로 4등분. 
     const int* m_depth; //= 1;           // tree의 깊이
-
+    const int* m_eyesight;
 
     const float* m_h_distance;
     const float* m_v_distance;

@@ -6,14 +6,15 @@ class CSector
 protected:
     CSector();
     CSector(Vector3 _senter_pos,Vector3 _distance);
-    //virtual 안해준 이유는 자식에서 sector로 업캐스팅해서 안 쓸것이기 때문. 
-    ~CSector();
+    
+    virtual ~CSector();
 public:
     void AddObject(GameObject* _object);      // 오브젝트 등록
     void SetArea(Vector3 _senter_pos);
     const Vector3 GetDistance();
+    const Vector3 GetSenter();
     BOOL IsInSector(const Vector3 _obj_pos); // 오브젝트가 노드안에 있는지 체크
-    
+    void SetViewSector(CSector* _node);
 private:
     list<GameObject*> m_objects;
     list<CSector*> m_view_sectorlist;
@@ -26,7 +27,7 @@ class QuadNode : public CSector
 public:
     QuadNode();
     QuadNode(Vector3 _senter_pos, Vector3 _distance);
-    ~QuadNode();
+    virtual ~QuadNode();
     void AddChildren(QuadNode* _child_node);// 자식노드 등록  
     QuadNode* GetChildNode(int index);              // 자식노드 가져오기
 
