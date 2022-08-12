@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AnimationTest : MonoBehaviour
 {
+    //모델이 자기자신인 경우
     Animator anim;
 
     private void Awake()
