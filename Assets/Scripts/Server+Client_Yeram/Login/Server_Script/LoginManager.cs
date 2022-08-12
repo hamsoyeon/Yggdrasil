@@ -96,13 +96,13 @@ public class LoginManager : Singleton_Ver2.Singleton<LoginManager>
                 break;
         }
     }
-    //packet ±¸Á¶  allsize/packetno/protocol/datasize/data(bool=1byte,string)
+    //packet êµ¬ì¡°  allsize/packetno/protocol/datasize/data(bool=1byte,string)
     private void LoginResult(Net.RecvPacket _recvPacket, Net.Protocol _protocol)
     {
         byte result = 0;
         string msg;
         int datasize = 0;
-        _recvPacket.Read(out datasize); /*¿©±â¼­´Â ¾È¾¸*/
+        _recvPacket.Read(out datasize); /*ì—¬ê¸°ì„œëŠ” ì•ˆì”€*/
         _recvPacket.Read(out result);
         _recvPacket.Read(out msg);
 #if UNITY_EDITOR
@@ -111,11 +111,11 @@ public class LoginManager : Singleton_Ver2.Singleton<LoginManager>
         switch ((Result)Convert.ToInt32(result))
         {
             case Result.Fail:
-                //·Î±×ÀÎ ½ÇÆĞ½Ã ÀÓ½Ã·Î ÀúÀåÇØµĞ ·Î±×ÀÎ Á¤º¸ Áö¿ì±â.
+                //ë¡œê·¸ì¸ ì‹¤íŒ¨ì‹œ ì„ì‹œë¡œ ì €ì¥í•´ë‘” ë¡œê·¸ì¸ ì •ë³´ ì§€ìš°ê¸°.
                 m_curinfo.Clear();
                 break;
             case Result.Suc:
-                //¼º°øÇßÀ»¶§ ui°¡ ÇØ¾ßÇÒÀÏ ÇØ´ç uimanager È£ÃâÇØ¼­ ÇÏ±â.
+                //ì„±ê³µí–ˆì„ë•Œ uiê°€ í•´ì•¼í• ì¼ í•´ë‹¹ uimanager í˜¸ì¶œí•´ì„œ í•˜ê¸°.
                 LoginGUIManager.Instance.OnClick_Exit(true);
                 MenuGUIManager.Instance.MenuChange(MenuGUIManager.EMenuModeType.Menu);
                 break;
@@ -127,7 +127,7 @@ public class LoginManager : Singleton_Ver2.Singleton<LoginManager>
         byte result = 0;
         string msg;
         int datasize = 0;
-        _recvPacket.Read(out datasize); /*¿©±â¼­´Â ¾È¾¸*/
+        _recvPacket.Read(out datasize); /*ì—¬ê¸°ì„œëŠ” ì•ˆì”€*/
         _recvPacket.Read(out result);
         _recvPacket.Read(out msg);
 #if UNITY_EDITOR
@@ -138,7 +138,7 @@ public class LoginManager : Singleton_Ver2.Singleton<LoginManager>
             case Result.Fail:
                 break;
             case Result.Suc:
-                //¼º°øÇßÀ»¶§ ui°¡ ÇØ¾ßÇÒÀÏ ÇØ´ç uimanager È£ÃâÇØ¼­ ÇÏ±â.
+                //ì„±ê³µí–ˆì„ë•Œ uiê°€ í•´ì•¼í• ì¼ í•´ë‹¹ uimanager í˜¸ì¶œí•´ì„œ í•˜ê¸°.
                 break;
         }
         LoginGUIManager.Instance.OnClick_Exit(false);
@@ -147,7 +147,7 @@ public class LoginManager : Singleton_Ver2.Singleton<LoginManager>
     {
         string msg;
         int datasize = 0;
-        _recvPacket.Read(out datasize); /*¿©±â¼­´Â ¾È¾¸*/
+        _recvPacket.Read(out datasize); /*ì—¬ê¸°ì„œëŠ” ì•ˆì”€*/
         _recvPacket.Read(out msg);
 #if UNITY_EDITOR
         Debug.Log(msg);
@@ -157,4 +157,8 @@ public class LoginManager : Singleton_Ver2.Singleton<LoginManager>
 
     #endregion
 
+    private void Start()
+    {
+       
+    }
 }

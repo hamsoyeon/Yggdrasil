@@ -149,13 +149,13 @@ public class MenuGUIManager:Singleton_Ver2.Singleton<MenuGUIManager>
     }
     #endregion
     
-    private void __Initialize()
+    private void _Initialize()
     {
         MouseManager.Instance.MouseEvent_Register(MOUSE_TYPE.LEFTDOWN_BTN, TAG_TYPE.MenuStart, OnClick_Start);
         MenuObjectActive(false);
     }
     private void Start()
     {
-        __Initialize();  
+        _Initialize();  
     }
 }

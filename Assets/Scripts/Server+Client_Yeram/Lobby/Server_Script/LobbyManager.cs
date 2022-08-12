@@ -274,12 +274,12 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
     }
     #endregion
 
-    private void _Initialize()
+    public void _Initialize()
     {
         InitRequest();
     }
     private void Start()
     {
-        _Initialize();
+       
     }
 }

@@ -10,43 +10,11 @@ public class SectorManager : Singleton_Ver2.Singleton<SectorManager>
     [SerializeField]
     LineRenderer m_line_prefeb;
 
-    //private const float m_distance = 15.5f;
-
-    //private List<LineRenderer> m_lines;
-
-    //void Start()
-    //{
-    //    m_start_x = -45;
-    //    m_end_x = 195;
-    //    m_start_z = 38;
-    //    m_end_z = -142;
-
-    //    float startpos = m_start_x;
-    //    //vertical
-    //    for (int i = 0; i < 8 * 2; i++)
-    //    {
-    //        LineRenderer item = GameObject.Instantiate<LineRenderer>(m_line_prefeb, m_parent);
-    //        item.SetPosition(0, new Vector3(startpos, m_pos_y, m_start_z));
-    //        item.SetPosition(1, new Vector3(startpos, m_pos_y, m_end_z));
-    //        startpos += m_distance;
-    //    }
-    //    startpos = m_start_z;
-    //    //horizontal
-    //    for (int i = 0; i < 6 * 2; i++)
-    //    {
-    //        LineRenderer item = GameObject.Instantiate<LineRenderer>(m_line_prefeb, m_parent);
-    //        item.SetPosition(0, new Vector3(m_start_x, m_pos_y, startpos));
-    //        item.SetPosition(1, new Vector3(m_end_x, m_pos_y, startpos));
-    //        startpos -= m_distance;
-    //    }
-
-    //}
-
     private  float m_h_distance;
     private  float m_v_distance;
     private List<LineRenderer> m_lines;
 
-    private void _Initialize()
+    public void _Initialize()
     {
         InitRequest();
     }
@@ -97,7 +65,7 @@ public class SectorManager : Singleton_Ver2.Singleton<SectorManager>
     #endregion
     void Start()
     {
-        _Initialize();
+       
     }
 
     
