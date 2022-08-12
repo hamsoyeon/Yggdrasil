@@ -1,15 +1,35 @@
 #pragma once
 class GameObject;
 
+class CSector
+{
+protected:
+    CSector();
+    CSector(Vector3 _senter_pos,Vector3 _distance);
+    //virtual 안해준 이유는 자식에서 sector로 업캐스팅해서 안 쓸것이기 때문. 
+    ~CSector();
+public:
+    void AddObject(GameObject* _object);      // 오브젝트 등록
+    void SetArea(Vector3 _senter_pos);
+    const Vector3 GetDistance();
+    BOOL IsInSector(const Vector3 _obj_pos); // 오브젝트가 노드안에 있는지 체크
+    
+private:
+    list<GameObject*> m_objects;
+    list<CSector*> m_view_sectorlist;
+
+    Vector3 m_senter_pos;         // 노드의 중심 위치
+    Vector3 m_distance;           // 밑변/2 
+};
 class QuadNode : public CSector
 {
 public:
     QuadNode();
-    QuadNode(Vector3 _senter_pos,Vector3 _distance);
+    QuadNode(Vector3 _senter_pos, Vector3 _distance);
     ~QuadNode();
     void AddChildren(QuadNode* _child_node);// 자식노드 등록  
     QuadNode* GetChildNode(int index);              // 자식노드 가져오기
-    
+
 
     void SetParent(QuadNode* _parent_node);// 부모노드 설정
     QuadNode* GetParent();                 // 부모노드 가져오기
@@ -26,23 +46,3 @@ private:
     const float m_limit_depth = 4;// 트리의 최대 깊이  
     E_NodeType m_type;
 };
-class CSector
-{
-protected:
-    CSector();
-    CSector(Vector3 _senter_pos,Vector3 _distance);
-    //virtual 안해준 이유는 자식에서 sector로 업캐스팅해서 안 쓸것이기 때문. 
-    ~CSector();
-public:
-    void AddObject(GameObject* _object);      // 오브젝트 등록
-    void SetArea(Vector3 _senter_pos);
-    BOOL IsInSector(const Vector3 _obj_pos); // 오브젝트가 노드안에 있는지 체크
-  
-private:
-    list<GameObject*> m_objects;
-    list<CSector*> m_view_sectorlist;
-
-    Vector3 m_senter_pos;         // 노드의 중심 위치
-    Vector3 m_distance;           // 밑변/2 
-};
-

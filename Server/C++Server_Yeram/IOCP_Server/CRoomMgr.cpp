@@ -47,7 +47,7 @@ void CRoomMgr::SendInit(CSession* _session)
     CLockGuard<CLock> lock(m_lock);
     unsigned long protocol = 0;
 
-    CProtocolMgr::GetInst()->AddMainProtocol(&protocol, static_cast<unsigned long>(MAINPROTOCOL::LOBBY));
+    CProtocolMgr::GetInst()->AddMainProtocol(&protocol, static_cast<unsigned long>(MAINPROTOCOL::INIT));
     CProtocolMgr::GetInst()->AddSubProtocol(&protocol, static_cast<unsigned long>(CLobbyMgr::SUBPROTOCOL::Init));
  
     Packing(protocol,m_page_room_count, _session);
