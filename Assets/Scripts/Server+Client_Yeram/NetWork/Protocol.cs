@@ -31,10 +31,12 @@ namespace Net
         public enum EMainProtocol
         {
             NONE,
+            INIT,
             LOGIN,
             LOBBY,
             ROOM,
             GAME,
+            TEST,
             MAX
         }
         public Protocol()

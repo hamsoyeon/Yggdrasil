@@ -19,7 +19,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     private Button m_room_btn_prefeb;
     [ReadOnly]
     private List<Button> m_room_btns;
-    private int m_rooms_count;
+    private int m_rooms_count; // 한 페이지당 생성 가능한 방 수.
     #endregion
     #region page button object
     Button m_next_btn;

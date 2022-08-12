@@ -101,7 +101,7 @@ namespace Net
                 m_client.Close();
         }
         #region send
-        //Å¥¿¡¼­ µ¥ÀÌÅÍ¸¦ »Ì¾Æ¼­ Àü¼ÛÇÑ´Ù.
+        //íì—ì„œ ë°ì´í„°ë¥¼ ë½‘ì•„ì„œ ì „ì†¡í•œë‹¤.
         public void SendQueueProcess()
         {
             if (m_send_queue.Count > 0)
@@ -110,7 +110,7 @@ namespace Net
                 Send(sendbuf);
             }
         }
-        //Å¥¿¡ º¸³¾ ÆĞÅ¶À» ³Ö´Â´Ù.
+        //íì— ë³´ë‚¼ íŒ¨í‚·ì„ ë„£ëŠ”ë‹¤.
         public void SendReq(SendPacket _sendpacket)
         {
             m_send_queue.Enqueue(_sendpacket);
