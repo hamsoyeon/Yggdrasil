@@ -9,7 +9,6 @@ public:
 	virtual void End();
 
 	static DWORD WorkThread(LPVOID _iocp);
-    virtual void SendInit(void* _session)=0;
 	virtual BOOL Send(void* _session) = 0;
 	virtual BOOL Recv(void* _session) = 0;
 	virtual int DisConnect(OVERLAP_EX* _overlap) = 0;

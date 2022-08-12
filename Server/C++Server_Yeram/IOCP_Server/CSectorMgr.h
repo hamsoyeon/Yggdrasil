@@ -4,7 +4,7 @@
 
 class CSector;
 class GameObject;
-
+class CSession;
 class CSectorMgr
 {
 public:
@@ -18,7 +18,8 @@ private:
 public:
     void Init();
     void End();
-    QuadNode* CreateQuadTree();
+    void SendInit(CSession* _session);
+    void CreateQuadTree();
     void SetChildren(QuadNode* _parent,Vector3 _senterpos,Vector3 _distance,int _curdepth);
     void AddObjectNode(QuadNode* _parent,GameObject* obj,int _curdepth);
     void RemoveObjectNode(QuadNode* _parent,GameObject* obj, int _curdepth);
@@ -30,6 +31,8 @@ public:
     //void MonsterSendPacket(CSession*,CMonster*, Protocol,moveflag)
     //아이템 샌드패킷
     //void ItemSendPacket(CSession*,Protocol,_onoff_flag)
+public:
+    void Packing(unsigned long _protocol,Vector3 _startpos,Vector3 _endpos, float _h_distance,float _v_distance,int _sectorcount, CSession* _session);
 private:
     list<CSector*> m_sectorlist;
     Vector3* m_start_position;

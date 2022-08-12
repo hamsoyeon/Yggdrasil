@@ -44,6 +44,15 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
     }
 
     #region send func
+    private void InitRequest()
+    {
+        Net.Protocol protocol=new Net.Protocol();
+        protocol.SetProtocol((uint)EMainProtocol.INIT, EProtocolType.Main);
+        Net.SendPacket sendpacket = new Net.SendPacket();
+        sendpacket.__Initialize();
+        sendpacket.WriteProtocol(protocol.GetProtocol());
+        Net.NetWorkManager.Instance.Send(sendpacket);
+    }
     public void LobbyEnterProcess(bool _multi)
     {
         Net.Protocol protocol;
@@ -264,4 +273,13 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
         }
     }
     #endregion
+
+    private void _Initialize()
+    {
+        InitRequest();
+    }
+    private void Start()
+    {
+        _Initialize();
+    }
 }

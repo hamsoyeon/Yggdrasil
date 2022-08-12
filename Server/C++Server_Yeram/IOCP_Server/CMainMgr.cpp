@@ -10,7 +10,7 @@
 #include "CProtocolMgr.h"
 #include "CLobbyMgr.h"
 #include "CRoomMgr.h"
-
+#include "CSectorMgr.h"
 CMainMgr* CMainMgr::m_instance = nullptr;
 
 CMainMgr::CMainMgr()
@@ -64,7 +64,7 @@ void CMainMgr::Init()
 	C_SetCtrlHandler::GetInst()->Init();
 	CLobbyMgr::GetInst()->Init();
 	CRoomMgr::GetInst()->Init();
-
+    CSectorMgr::GetInst()->Init();
 	// ++
 }
 void CMainMgr::End()
@@ -85,13 +85,10 @@ void CMainMgr::End()
 
 	CLogMgr::GetInst()->End();
 	//CLogMgr::GetInst()->FileWriteLog(_T("end6\n"));
-
+    CSectorMgr::GetInst()->End();
 	WSACleanup();
 }
-void CMainMgr::SendInit(void* _session)
-{
-	CRoomMgr::GetInst()->SendInit(reinterpret_cast<CSession*>(_session));
-}
+
 CMainMgr* CMainMgr::GetInst()
 {
 	return m_instance;
@@ -109,6 +106,7 @@ void CMainMgr::Create()
 	CProtocolMgr::Create();
 	CLobbyMgr::Create();
 	CRoomMgr::Create();
+    CSectorMgr::Create();
 }
 
 void CMainMgr::Destroy()
@@ -122,9 +120,10 @@ void CMainMgr::Destroy()
 	CProtocolMgr::Destroy();
 	CLobbyMgr::Destroy();
 	CRoomMgr::Destroy();
+    CSectorMgr::Destory();
 }
 
-void CMainMgr::SizeCheck_And_Recv(void* _session, int _combytes) // ÀÌ¸§À» ÇÏ´Â ±â´ÉÀ» ÀüºÎ ¸í½ÃÀûÀ¸·Î ¸¸µç´Ù.
+void CMainMgr::SizeCheck_And_Recv(void* _session, int _combytes) // ì´ë¦„ì„ í•˜ëŠ” ê¸°ëŠ¥ì„ ì „ë¶€ ëª…ì‹œì ìœ¼ë¡œ ë§Œë“ ë‹¤.
 {
 	CSession* session = reinterpret_cast<CSession*>(_session);
 	SOC sizecheck = session->CompRecv(_combytes);
@@ -197,7 +196,7 @@ int CMainMgr::DisConnect(OVERLAP_EX* _overlap)
 	overlap->session = nullptr;
 
 	t_UserInfo* userinfo = session->GetUserInfo();
-	//·Î±×ÀÎÁßÀÌ¸é ·Î±×¾Æ¿ô Ã³¸®
+	//ë¡œê·¸ì¸ì¤‘ì´ë©´ ë¡œê·¸ì•„ì›ƒ ì²˜ë¦¬
 	if (userinfo->is_login)
 	{
 		CLoginMgr::GetInst()->RemoveLogingInfo(userinfo);
@@ -215,7 +214,7 @@ int CMainMgr::DisConnect(OVERLAP_EX* _overlap)
     */
 	C_SetCtrlHandler::GetInst()->End();
 
-	// Å¬¶óÀÌ¾ğÆ® ³ª°¨Ã³¸®
+	// í´ë¼ì´ì–¸íŠ¸ ë‚˜ê°ì²˜ë¦¬
 	CSessionMgr::GetInst()->RemoveSession(session);
 	return 0;
 }
@@ -226,6 +225,6 @@ void* CMainMgr::GetQueueAccept(ULONG_PTR _com_key, OVERLAP_EX* _overlap)
 	SOCKET session_sock = static_cast<SOCKET>(_com_key);
 	CreateIoCompletionPort(reinterpret_cast<HANDLE>(session_sock), m_hcp, session_sock, 0);
 	CSession* session = CSessionMgr::GetInst()->AddSession(session_sock);
-	// ¿©±â¼­ session recv¸¦ È£Ãâ
+	// ì—¬ê¸°ì„œ session recvë¥¼ í˜¸ì¶œ
 	return session;
 }

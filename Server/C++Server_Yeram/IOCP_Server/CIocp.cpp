@@ -25,7 +25,6 @@ DWORD CIocp::WorkThread(LPVOID _iocp)
 		{
 		case IO_TYPE::ACCEPT:
 			session = ciocp->GetQueueAccept(clientsock, overlap_ptr);
-            ciocp->SendInit(session);
 			ciocp->Recv(session);
 			break;
 		case IO_TYPE::RECV:

@@ -50,6 +50,20 @@ CSector::CSector(Vector3 _senter_pos,Vector3 _distance)
     m_distance = _distance;
 }
 
+CSector::~CSector()
+{
+}
+
+void CSector::AddObject(GameObject* _object)
+{
+    m_objects.push_back(_object);
+}
+
+const Vector3 CSector::GetDistance()
+{
+    return m_distance;
+}
+
 BOOL CSector::IsInSector(const Vector3 _obj_pos)
 {
     if (_obj_pos.x >= m_senter_pos.x - m_distance.x && _obj_pos.x <= m_senter_pos.x + m_distance.x
