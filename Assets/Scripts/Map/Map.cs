@@ -88,10 +88,15 @@ public class Map : MonoBehaviour
     public GameObject[,] mapIndicatorArray;
 
     //트리거의 정보를 포함할 배열 선언
-    [HideInInspector]
-    public TriggerInfo[] ownTriggerArray;
-    [HideInInspector]
-    public TriggerInfo[,] mapGridTriggerArray;
+    //TriggerInfo를 지워서 에러남.
+    //[HideInInspector]
+   //public TriggerInfo[] ownTriggerArray;
+    //[HideInInspector]
+   // public TriggerInfo[,] mapGridTriggerArray;
+
+
+
+
 
     //생성된 육각형들의 부모가 될 빈 게임 오브젝트
     private GameObject indicatorContainer;
@@ -108,7 +113,7 @@ public class Map : MonoBehaviour
         triggerContainer.name = "TriggerContainer";
 
         mapIndicatorArray = new GameObject[hexMapSizeX, hexMapSizeZ];
-        mapGridTriggerArray = new TriggerInfo[hexMapSizeX, hexMapSizeZ];
+        //mapGridTriggerArray = new TriggerInfo[hexMapSizeX, hexMapSizeZ];
 
         //iterate map grid position
         for (int x = 0; x < hexMapSizeX; x++)
@@ -137,7 +142,7 @@ public class Map : MonoBehaviour
                 trigger.transform.position = mapGridPositions[x, z];
 
                 //store triggerinfo
-                mapGridTriggerArray[x, z] = trigger.GetComponent<TriggerInfo>();
+               // mapGridTriggerArray[x, z] = trigger.GetComponent<TriggerInfo>();
             }
         }
 
@@ -176,17 +181,17 @@ public class Map : MonoBehaviour
     }
 
     //트리거의 그리드 타입을 통해서 무슨 타일인지 찾는 함수
-    public GameObject GetIndicatorFromTriggerInfo(TriggerInfo triggerinfo)
-    {
-        GameObject triggerGo = null;
+    //public GameObject GetIndicatorFromTriggerInfo(TriggerInfo triggerinfo)
+    //{
+    //    GameObject triggerGo = null;
 
-        if (triggerinfo.gridType == GRIDTYPE_HEXA_MAP)
-        {
-            triggerGo = mapIndicatorArray[triggerinfo.gridX, triggerinfo.gridZ];
-        }
+    //    if (triggerinfo.gridType == GRIDTYPE_HEXA_MAP)
+    //    {
+    //        triggerGo = mapIndicatorArray[triggerinfo.gridX, triggerinfo.gridZ];
+    //    }
 
-        return triggerGo;
-    }
+    //    return triggerGo;
+    //}
 
     //스피어콜라이더를 생성하는 함수
     private GameObject CreateSphereTrigger(int type, int x, int z)
@@ -204,10 +209,10 @@ public class Map : MonoBehaviour
         collider.isTrigger = true;
 
         //트리거의 정보를 트리거 인포에 저장
-        TriggerInfo trigerInfo = trigger.AddComponent<TriggerInfo>();
-        trigerInfo.gridType = type;
-        trigerInfo.gridX = x;
-        trigerInfo.gridZ = z;
+       // TriggerInfo trigerInfo = trigger.AddComponent<TriggerInfo>();
+        //trigerInfo.gridType = type;
+       // trigerInfo.gridX = x;
+        //trigerInfo.gridZ = z;
 
         trigger.layer = LayerMask.NameToLayer("Triggers");
 

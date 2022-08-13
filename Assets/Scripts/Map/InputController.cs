@@ -5,7 +5,7 @@ using UnityEngine;
 public class InputController : MonoBehaviour
 {
     //게임 컨트롤러
-    public GamePlayController gamePlayContoroller;
+    //public GamePlayController gamePlayContoroller;
 
     //트리거의 정보를 가져와야 하니 맵스크립트를 가져온다.
     public Map map;
@@ -21,7 +21,7 @@ public class InputController : MonoBehaviour
 
     //트리거 인포를 통하여서 찾을 수 있게 한다.
     [HideInInspector]
-    public TriggerInfo triggerInfo = null;
+   // public TriggerInfo triggerInfo = null;
 
     void Start()
     {
@@ -31,7 +31,7 @@ public class InputController : MonoBehaviour
 
     void Update()
     {
-        triggerInfo = null;
+       // triggerInfo = null;
 
         //맵으로 접근을 하여서 매 프레임마다 색상 초기화
         map.resetIndicators();
@@ -45,19 +45,19 @@ public class InputController : MonoBehaviour
         if(Physics.Raycast(ray, out hit, 100f, triggerLayer, QueryTriggerInteraction.Collide))
         {
             //레이에 맞은 오브젝트의 트리거 인포의 정보를 저장
-            triggerInfo = hit.collider.gameObject.GetComponent<TriggerInfo>();
+          //  triggerInfo = hit.collider.gameObject.GetComponent<TriggerInfo>();
 
-            if (triggerInfo != null)
-            {
-                //GetIndicatorFromTriggerInfo 함수를 통해서 오브젝트의 정보를 저장
-                GameObject indicator = map.GetIndicatorFromTriggerInfo(triggerInfo);
+            //if (triggerInfo != null)
+            //{
+            //    //GetIndicatorFromTriggerInfo 함수를 통해서 오브젝트의 정보를 저장
+            //    GameObject indicator = map.GetIndicatorFromTriggerInfo(triggerInfo);
 
-                // 오브젝트의 색상을 활성화
-                indicator.GetComponent<MeshRenderer>().material.color = map.indicatorActiveColor;
-            }
-            else
-                //색상을 초기화
-                map.resetIndicators();
+            //    // 오브젝트의 색상을 활성화
+            //    indicator.GetComponent<MeshRenderer>().material.color = map.indicatorActiveColor;
+            //}
+            //else
+            //    //색상을 초기화
+            //    map.resetIndicators();
         }
 
         if(Input.GetMouseButtonDown(0))

@@ -9,10 +9,16 @@ public class StageManager : MonoBehaviour
     //추가 전체 맵 정보
     public struct MapInfo
     {
+        public GameObject MapObject;
+        public GameObject BossEffectObject;
+        public bool Spirit;
+        public GameObject SpiritEffectObject;
         public Map_TableExcel MapData;     //맵에 엑셀 데이터
         public Vector3 MapPos;             //맵에 위치
         public int row;
         public int column;
+        public bool BossEffect;
+        public bool SpiritEffect;
     }
 
     //private GameObject BossObj;
@@ -33,10 +39,9 @@ public class StageManager : MonoBehaviour
     public int m_BossColumn;
 
     public MapInfo[,] m_MapInfo;
-
-    public Map map;
-
-    private GameObject BossObj;
+    public TestMap map;
+    public int mapX;
+    public int mapZ;
 
 
     public void SetPlayerRowAndCoulmn(int row, int coulmn)
@@ -61,45 +66,7 @@ public class StageManager : MonoBehaviour
 
             m_MapInfo = new MapInfo[5, 6];
 
-           
-            map = GameObject.Find("MapManager").GetComponent<Map>();
-
-            BossObj = GameObject.Find("Boss");
-
-            int x = 0;
-            int z = 0;
-            //각 맵 정보에 데이터 넣어주기.
-            foreach (var item in DataTableManager.Instance.GetDataTable<Map_TableExcelLoader>().DataList)
-            {
-                MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData = item;
-                MainManager.Instance.GetStageManager().m_MapInfo[z, x].row = z;       //가로
-                MainManager.Instance.GetStageManager().m_MapInfo[z, x].column = x;    //세로
-
-                //if (MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData.BossSummon != 0)
-                //{
-                //	BossObj.transform.position = mapGridPositions[z, x] + new Vector3(0, 2.3f, 0);
-                //	MainManager.Instance.GetStageManager().m_BossRow = z;
-                //	MainManager.Instance.GetStageManager().m_BossColumn = x;
-                //}
-
-
-                if (MainManager.Instance.xp == x && MainManager.Instance.zp == z)
-                {
-                    BossObj.transform.position = map.mapGridPositions[z, x] + new Vector3(0, 2.3f, 0);
-                    MainManager.Instance.GetStageManager().m_BossRow = z;
-                    MainManager.Instance.GetStageManager().m_BossColumn = x;
-                }
-
-                x++;
-                if (x == MainManager.Instance.hexMapSizeX)
-                {
-                    z++;
-                    x = 0;
-                }
-            }
-
-
-            
+            map = GameObject.Find("MapManager").GetComponent<TestMap>();
 
             //디버그용
             //foreach(var item in map_info[1])
@@ -117,11 +84,6 @@ public class StageManager : MonoBehaviour
     void Start()
     {
 
-
-
-        //디버그 확인용
-        //Debug.Log(m_MapInfo[1, 1].MapData.No);
-        //Debug.Log(m_MapInfo[1, 1].MapData.BossSummon);
     }
 
     // Update is called once per frame

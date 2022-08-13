@@ -303,7 +303,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1050678126}
-  - component: {fileID: 1050678125}
   m_Layer: 0
   m_Name: MapManager
   m_TagString: Untagged
@@ -311,24 +310,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1050678125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1050678124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fccd55fdc27914046936bd3ba894df27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapStartPosition: {fileID: 1050678126}
-  hexaIndicator: {fileID: 4717883552673209890, guid: e4e6c443ced53c448aa3f4c193bc48b1, type: 3}
-  indicatorDefaultColor: {r: 0, g: 0.5010276, b: 1, a: 0}
-  indicatorActiveColor: {r: 1, g: 0, b: 0, a: 0}
-  ownIndicatorArray: []
-  ownTriggerArray: []
 --- !u!4 &1050678126
 Transform:
   m_ObjectHideFlags: 0
@@ -540,6 +521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1945487912}
+  camOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1572429885
 GameObject:
   m_ObjectHideFlags: 0
