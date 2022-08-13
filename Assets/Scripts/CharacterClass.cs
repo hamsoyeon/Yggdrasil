@@ -9,13 +9,13 @@ public class CharacterClass : MonoBehaviour
 {
 
 	public enum Character {  SPIRIT=1, BOSS, MOB }
-	//´ÙÁß»ó¼ÓÀ» ¹Ş±â Èûµçµ¥ MonobehaviorÀ» ¹Ş°íÀÖ´Â ¿ÀºêÁ§Æ®¿¡ ¾î¶»°Ô ÇØ´ç Å¬·¡½º¸¦ »ó¼ÓÇÏ´Â°¡?
-	//ÇØ´ç cs¸¦ ºÙÀÌ°í getComponent·Î °¡Á®¿Â´Ù.
-	public BossSkill_TableExcel m_BossSkillData;             //º¸½º ½ºÅ³¿¡ °üÇÑ µ¥ÀÌÅÍ
-	public BossStat_TableExcel m_BossStatData;           //º¸½º ½ºÅİ¿¡ °üÇÑ µ¥ÀÌÅÍ 
-	public CharStat_TableExcel m_CharacterStat;          //ÇÃ·¹ÀÌ¾î ½ºÅİ¿¡ °üÇÑ µ¥ÀÌÅÍ 
-	public Spirit_TableExcel m_SpiritData;               //ÇÃ·¹ÀÌ¾î°¡ ¼ÒÈ¯ÇÏ´Â Á¤·É¿¡ °üÇÑ µ¥ÀÌÅÍ
-	public SpiritSkill_TableExcel m_SpiritSkillData;         //¼ÒÈ¯µÈ Á¤·ÉÀÌ »ç¿ëÇÏ´Â ½ºÅ³¿¡ °üÇÑ µ¥ÀÌÅÍ	
+	//ë‹¤ì¤‘ìƒì†ì„ ë°›ê¸° í˜ë“ ë° Monobehaviorì„ ë°›ê³ ìˆëŠ” ì˜¤ë¸Œì íŠ¸ì— ì–´ë–»ê²Œ í•´ë‹¹ í´ë˜ìŠ¤ë¥¼ ìƒì†í•˜ëŠ”ê°€?
+	//í•´ë‹¹ csë¥¼ ë¶™ì´ê³  getComponentë¡œ ê°€ì ¸ì˜¨ë‹¤.
+	public BossSkill_TableExcel m_BossSkillData;             //ë³´ìŠ¤ ìŠ¤í‚¬ì— ê´€í•œ ë°ì´í„°
+	public BossStat_TableExcel m_BossStatData;           //ë³´ìŠ¤ ìŠ¤í…Ÿì— ê´€í•œ ë°ì´í„° 
+	public CharStat_TableExcel m_CharacterStat;          //í”Œë ˆì´ì–´ ìŠ¤í…Ÿì— ê´€í•œ ë°ì´í„° 
+	public Spirit_TableExcel m_SpiritData;               //í”Œë ˆì´ì–´ê°€ ì†Œí™˜í•˜ëŠ” ì •ë ¹ì— ê´€í•œ ë°ì´í„°
+	public SpiritSkill_TableExcel m_SpiritSkillData;         //ì†Œí™˜ëœ ì •ë ¹ì´ ì‚¬ìš©í•˜ëŠ” ìŠ¤í‚¬ì— ê´€í•œ ë°ì´í„°	
 	public SkillManager m_SkillMgr;
 
 	public CharacterClass()
@@ -42,8 +42,8 @@ public class CharacterClass : MonoBehaviour
 
 
 
-	//°øÅëÀ¸·Î »ç¿ëµÉ ÇÔ¼ö¸¦ ³ª¿­ÇØ º¸ÀÚ(ÀÌµ¿,½ºÅ³)
-	//ÀÌµ¿
+	//ê³µí†µìœ¼ë¡œ ì‚¬ìš©ë  í•¨ìˆ˜ë¥¼ ë‚˜ì—´í•´ ë³´ì(ì´ë™,ìŠ¤í‚¬)
+	//ì´ë™
 	public void move()
 	{
 

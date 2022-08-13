@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// ½ºÅ³Àº °øÅëµÈ °³³ä -> 
+// ìŠ¤í‚¬ì€ ê³µí†µëœ ê°œë… -> 
 
 public class SpiritSkill : MonoBehaviour
 { 
@@ -11,7 +11,7 @@ public class SpiritSkill : MonoBehaviour
 
 	private StageManager m_StageMgr;
 
-	public void SkillUse(SpiritSkill_TableExcel skillInfo,GameObject Spirit)  //ºñÅ¸ÀÏÇü
+	public void SkillUse(SpiritSkill_TableExcel skillInfo,GameObject Spirit)  //ë¹„íƒ€ì¼í˜•
 	{
 
 		GameObject tempSpirit = Spirit;
@@ -21,16 +21,16 @@ public class SpiritSkill : MonoBehaviour
 		//GameObject tempSkillEffect = Instantiate(EffectPrefab);
 		switch (skillInfo.SpiritSkillIndex)
 		{
-			case 10100:  //µ¶±¸¸§
+			case 10100:  //ë…êµ¬ë¦„
 				StartCoroutine(PoisonCloud(skillInfo, tempSpirit));
 				break;
-			case 10300:  //¹«Àû
+			case 10300:  //ë¬´ì 
 				StartCoroutine(Invincibility(skillInfo, tempSpirit));
 				break;
-			case 10400:  //½Å¼ºÁö´ë
+			case 10400:  //ì‹ ì„±ì§€ëŒ€
 				StartCoroutine(Sanctity(skillInfo, tempSpirit));
 				break;
-			case 10500:  //Èú
+			case 10500:  //í
 				StartCoroutine(Heal(skillInfo, tempSpirit));
 				break;
 
@@ -38,7 +38,7 @@ public class SpiritSkill : MonoBehaviour
 
 	}
 
-	public void SkillUse(SpiritSkill_TableExcel skillInfo,int row, int column)  //Å¸ÀÏÇü
+	public void SkillUse(SpiritSkill_TableExcel skillInfo,int row, int column)  //íƒ€ì¼í˜•
 	{
 		//GameObject tempSkillEffect = Instantiate(EffectPrefab);
 		StartCoroutine(SkillWideAction(skillInfo, row, column));
@@ -57,14 +57,14 @@ public class SpiritSkill : MonoBehaviour
 
 		while (true)
 		{
-			//Áö¼Ó½Ã°£ Ã¼Å©
+			//ì§€ì†ì‹œê°„ ì²´í¬
 			spirit_time += Time.deltaTime;
 			buff_Time += Time.deltaTime;
 
-			//Á¤·É Áö¼Ó½Ã°£ÀÌ °æ°ú½Ã 
+			//ì •ë ¹ ì§€ì†ì‹œê°„ì´ ê²½ê³¼ì‹œ 
 			if (spirit_time >= skill.LifeTime)
 			{
-				//Á¤·É ÆÄ±«ÈÄ ÄÚ·çÆ¾ Á¾·á
+				//ì •ë ¹ íŒŒê´´í›„ ì½”ë£¨í‹´ ì¢…ë£Œ
 				Object.Destroy(tempEffect);
 				yield break;
 			}
@@ -74,12 +74,12 @@ public class SpiritSkill : MonoBehaviour
 				buff_Time = 0f;
 
 
-				colls = Physics.OverlapSphere(spirit.transform.position, skill.Range, 1 << 8);  //9¹øÂ° ·¹ÀÌ¾î = Enemy
+				colls = Physics.OverlapSphere(spirit.transform.position, skill.Range, 1 << 8);  //9ë²ˆì§¸ ë ˆì´ì–´ = Enemy
 				foreach (var rangeCollider in colls)
 				{
-					//ÇÃ·¹ÀÌ¾î È¸º¹½ÃÅ°´Â ÄÚµå.
+					//í”Œë ˆì´ì–´ íšŒë³µì‹œí‚¤ëŠ” ì½”ë“œ.
 
-					Debug.Log("ÇÃ·¹ÀÌ¾î È¸º¹Áß");
+					Debug.Log("í”Œë ˆì´ì–´ íšŒë³µì¤‘");
 				}
 
 			}
@@ -102,19 +102,19 @@ public class SpiritSkill : MonoBehaviour
 
 		while(true)
 		{
-			//Áö¼Ó½Ã°£ Ã¼Å©
+			//ì§€ì†ì‹œê°„ ì²´í¬
 			spirit_time += Time.deltaTime;
 
-			//Á¤·É Áö¼Ó½Ã°£ÀÌ °æ°ú½Ã 
+			//ì •ë ¹ ì§€ì†ì‹œê°„ì´ ê²½ê³¼ì‹œ 
 			if (spirit_time >= skill.LifeTime)
 			{
-				//Á¤·É ÆÄ±«ÈÄ ÄÚ·çÆ¾ Á¾·á
+				//ì •ë ¹ íŒŒê´´í›„ ì½”ë£¨í‹´ ì¢…ë£Œ
 				Object.Destroy(tempEffect);
 				yield break;
 			}
 
 
-			colls = Physics.OverlapSphere(spirit.transform.position, skill.Range, 1 << 9);  //9¹øÂ° ·¹ÀÌ¾î = Enemy
+			colls = Physics.OverlapSphere(spirit.transform.position, skill.Range, 1 << 9);  //9ë²ˆì§¸ ë ˆì´ì–´ = Enemy
 
 			if(colls != null)
 			{
@@ -122,18 +122,18 @@ public class SpiritSkill : MonoBehaviour
 				{
 
 					Debug.Log(rangeCollider);
-					//¹Ğ¸®´Â ¹°Ã¼¿Í ¹Ğ¸®´Â ¸¶Áö¸· Á¡°úÀÇ °Å¸®(Èû)À» ±¸ÇÏ°í
+					//ë°€ë¦¬ëŠ” ë¬¼ì²´ì™€ ë°€ë¦¬ëŠ” ë§ˆì§€ë§‰ ì ê³¼ì˜ ê±°ë¦¬(í˜)ì„ êµ¬í•˜ê³ 
 
-					//Á¤·É°ú ¹Ğ¸®´Â ¹°Ã¼»çÀÌÀÇ ¹æÇâÀ» ±¸ÇØ¼­
+					//ì •ë ¹ê³¼ ë°€ë¦¬ëŠ” ë¬¼ì²´ì‚¬ì´ì˜ ë°©í–¥ì„ êµ¬í•´ì„œ
 					var heading = rangeCollider.transform.position - spirit.transform.position;
 					heading.y = 0f;
 					heading *= skill.Range;
 
-					//º¸½º°¡ ¾Æ´Ï¶ó¸é
+					//ë³´ìŠ¤ê°€ ì•„ë‹ˆë¼ë©´
 					if (rangeCollider.gameObject.name != "Boss")
 					{
 						rangeCollider.gameObject.transform.position = Vector3.MoveTowards(rangeCollider.gameObject.transform.position, heading, 5f);
-						Debug.Log($"{rangeCollider.ToString()}À» ¹üÀ§ ³»¿¡¼­ ¹Ğ¾î³À´Ï´Ù.");
+						Debug.Log($"{rangeCollider.ToString()}ì„ ë²”ìœ„ ë‚´ì—ì„œ ë°€ì–´ëƒ…ë‹ˆë‹¤.");
 					}
 				}
 			}
@@ -158,15 +158,15 @@ public class SpiritSkill : MonoBehaviour
 		Collider[] colls = null;
 
 		colls = Physics.OverlapSphere(spirit.transform.position, skill.Range, 1 << 8);  
-		//8¹øÂ° ·¹ÀÌ¾î = Player
-		//¹«Àû¹öÇÁ 
+		//8ë²ˆì§¸ ë ˆì´ì–´ = Player
+		//ë¬´ì ë²„í”„ 
 
 
 		yield return new WaitForSeconds(skill.LifeTime);
 
-		//¹«Àû ¹öÇÁ ÇØÁ¦ ÄÚµå
+		//ë¬´ì  ë²„í”„ í•´ì œ ì½”ë“œ
 
-		//Á¤·É ÆÄ±«ÈÄ ÄÚ·çÆ¾ Á¾·á
+		//ì •ë ¹ íŒŒê´´í›„ ì½”ë£¨í‹´ ì¢…ë£Œ
 		Object.Destroy(tempEffect);
 		yield break;
 
@@ -195,14 +195,14 @@ public class SpiritSkill : MonoBehaviour
 
 		while (true)
 		{
-			//Áö¼Ó½Ã°£ Ã¼Å©
+			//ì§€ì†ì‹œê°„ ì²´í¬
 			spirit_time += Time.deltaTime;
 			attack_time += Time.deltaTime;
 
-			//Á¤·É Áö¼Ó½Ã°£ÀÌ °æ°ú½Ã 
+			//ì •ë ¹ ì§€ì†ì‹œê°„ì´ ê²½ê³¼ì‹œ 
 			if (spirit_time >= skill.LifeTime)
 			{
-				//Á¤·É ÆÄ±«ÈÄ ÄÚ·çÆ¾ Á¾·á
+				//ì •ë ¹ íŒŒê´´í›„ ì½”ë£¨í‹´ ì¢…ë£Œ
 
 				if(nearEnemy != null)
 				{
@@ -217,7 +217,7 @@ public class SpiritSkill : MonoBehaviour
 
 			if (attack_time > skill.DoT)
 			{
-				//µµÆ® ½Ã°£ÀÌ Áö³ª¸é µ¥¹ÌÁö ÆÇÁ¤.
+				//ë„íŠ¸ ì‹œê°„ì´ ì§€ë‚˜ë©´ ë°ë¯¸ì§€ íŒì •.
 			}
 
 			yield return null;
@@ -232,19 +232,19 @@ public class SpiritSkill : MonoBehaviour
 		int Column = column;
 
 
-		Debug.Log("¿ÍÀÌµå ½ºÅ³ ½ÇÇà");
+		Debug.Log("ì™€ì´ë“œ ìŠ¤í‚¬ ì‹¤í–‰");
 		float range = skillInfo.Range - 1.0f;
 		float xRange = skillInfo.Range + range;
 
-		//º¸½º ½ºÅ³¹üÀ§¸¦ Ç¥½ÃÇØ ÁÖ´Â ºÎºĞ.
-		if (range > 0)  //range´Â -1À»ÇÑ°ª ¹üÀ§°¡ 2ºÎÅÍ ¿©±â µé¾î¿Â´Ù. ¹üÀ§°¡ 1ÀÏ°æ¿ì´Â ÇØ´ç Å¸ÀÏ¿¡ °è»êÇÏ¸é µÈ´Ù.
+		//ë³´ìŠ¤ ìŠ¤í‚¬ë²”ìœ„ë¥¼ í‘œì‹œí•´ ì£¼ëŠ” ë¶€ë¶„.
+		if (range > 0)  //rangeëŠ” -1ì„í•œê°’ ë²”ìœ„ê°€ 2ë¶€í„° ì—¬ê¸° ë“¤ì–´ì˜¨ë‹¤. ë²”ìœ„ê°€ 1ì¼ê²½ìš°ëŠ” í•´ë‹¹ íƒ€ì¼ì— ê³„ì‚°í•˜ë©´ ëœë‹¤.
 		{
 			int saveRow = Row;
 			int saveColumn = 0;
 
-			int checkRow_P;   //º¸½º ±âÁØ ¾Æ·¡ÂÊ¿¡ ÀÖ´Â Column°ª
-			int checkRow_M;   //º¸½º ±âÁØ À§ÂÊ¿¡ ÀÖ´Â Column°ª
-			int checkColumn;  //ÇöÀç »öÀ» ¹Ù²Ü Å¸ÀÏÀÇ Column°ª
+			int checkRow_P;   //ë³´ìŠ¤ ê¸°ì¤€ ì•„ë˜ìª½ì— ìˆëŠ” Columnê°’
+			int checkRow_M;   //ë³´ìŠ¤ ê¸°ì¤€ ìœ„ìª½ì— ìˆëŠ” Columnê°’
+			int checkColumn;  //í˜„ì¬ ìƒ‰ì„ ë°”ê¿€ íƒ€ì¼ì˜ Columnê°’
 
 			for (float i = 0; i < skillInfo.Range; i += 1.0f)
 			{
@@ -253,13 +253,13 @@ public class SpiritSkill : MonoBehaviour
 				checkRow_M = Row - (int)i;
 
 
-				if (checkRow_P % 2 == 0) //024(135¶óÀÎ)
+				if (checkRow_P % 2 == 0) //024(135ë¼ì¸)
 					saveColumn++;
 
 				for (float j = 0; j < xRange; j += 1.0f)
 				{
 
-					if (i != 0) //º¸½º°¡ ÀÖ´Â ¶óÀÎÀÇ +-1¶óÀÎ¾¿ ±×¸².
+					if (i != 0) //ë³´ìŠ¤ê°€ ìˆëŠ” ë¼ì¸ì˜ +-1ë¼ì¸ì”© ê·¸ë¦¼.
 					{
 
 						checkColumn = saveColumn + (int)j;
@@ -284,13 +284,13 @@ public class SpiritSkill : MonoBehaviour
 						}
 
 					}
-					else  //º¸½º°¡ ÀÖ´Â ¶óÀÎÀ» Âß±×¸².
+					else  //ë³´ìŠ¤ê°€ ìˆëŠ” ë¼ì¸ì„ ì­‰ê·¸ë¦¼.
 					{
 
 						checkColumn = Column - (int)range + (int)j;
 
 						if (j == 0)
-							saveColumn = checkColumn;   //º¸½º¶óÀÎ¿¡¼­ Ã¹¹øÂ° Å¸ÀÏ »öº¯È¯À§Ä¡ ÀúÀå.
+							saveColumn = checkColumn;   //ë³´ìŠ¤ë¼ì¸ì—ì„œ ì²«ë²ˆì§¸ íƒ€ì¼ ìƒ‰ë³€í™˜ìœ„ì¹˜ ì €ì¥.
 
 						if (checkColumn < 0 || checkColumn > 5)
 							continue;
@@ -306,14 +306,14 @@ public class SpiritSkill : MonoBehaviour
 				xRange -= 1.0f;
 			}
 		}
-		else  //range°¡ 0ÀÌÇÏ¸é »ç°Å¸®°¡ 1 ÀÚ±âÀÚ½ÅÀÇ Å¸ÀÏ¸¸ ÇØ´ç
+		else  //rangeê°€ 0ì´í•˜ë©´ ì‚¬ê±°ë¦¬ê°€ 1 ìê¸°ìì‹ ì˜ íƒ€ì¼ë§Œ í•´ë‹¹
 		{
 			m_StageMgr.m_MapInfo[Row, Column].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
 			m_StageMgr.m_MapInfo[Row, Column].SpiritEffect = true;
 			
 		}
 
-		//°æ°í½Ã°£(¸ğµç½ºÅ³ 0.5fÃÊ·Î °íÁ¤)ÀÌ  °æ°úÇÏ¸é »¡°£»öÀ» ´Ù½Ã ¿ø·¡»ö±ò·Î µ¹¸°ÈÄ ±× ¹üÀ§¿¡ ÀÌÆåÆ® ÃâÇöÇÏ°í µ¥¹ÌÁö ·ÎÁ÷ Ã³¸®.
+		//ê²½ê³ ì‹œê°„(ëª¨ë“ ìŠ¤í‚¬ 0.5fì´ˆë¡œ ê³ ì •)ì´  ê²½ê³¼í•˜ë©´ ë¹¨ê°„ìƒ‰ì„ ë‹¤ì‹œ ì›ë˜ìƒ‰ê¹”ë¡œ ëŒë¦°í›„ ê·¸ ë²”ìœ„ì— ì´í™íŠ¸ ì¶œí˜„í•˜ê³  ë°ë¯¸ì§€ ë¡œì§ ì²˜ë¦¬.
 		yield return new WaitForSeconds(2f);
 
 		for (int i = 0; i < m_StageMgr.mapZ; i++)
@@ -331,9 +331,9 @@ public class SpiritSkill : MonoBehaviour
 			}
 		}
 
-		Debug.Log("ÀÌÆåÆ® ¼ÒÈ¯");
-		//ÀÌÂÊ ¿¡¼­ µ¥¹ÌÁö Ã³¸®.
-		yield return new WaitForSeconds(skillInfo.LifeTime);  //»ıÁ¸½Ã°£ÀÌ Áö³ª¸é ÀÌÆåÆ® Áö¿ì±â
+		Debug.Log("ì´í™íŠ¸ ì†Œí™˜");
+		//ì´ìª½ ì—ì„œ ë°ë¯¸ì§€ ì²˜ë¦¬.
+		yield return new WaitForSeconds(skillInfo.LifeTime);  //ìƒì¡´ì‹œê°„ì´ ì§€ë‚˜ë©´ ì´í™íŠ¸ ì§€ìš°ê¸°
 
 		for (int i = 0; i < m_StageMgr.mapZ; i++)
 		{
@@ -349,9 +349,9 @@ public class SpiritSkill : MonoBehaviour
 		}
 
 
-		Debug.Log("¿ÍÀÌµå ½ºÅ³ Á¾·á");
+		Debug.Log("ì™€ì´ë“œ ìŠ¤í‚¬ ì¢…ë£Œ");
 
-		//¿¬°è½ºÅ³ÀÖ´ÂÁö È®ÀÎÈÄ ´Ù½Ã ½ºÅ³½ÇÇà.
+		//ì—°ê³„ìŠ¤í‚¬ìˆëŠ”ì§€ í™•ì¸í›„ ë‹¤ì‹œ ìŠ¤í‚¬ì‹¤í–‰.
 		if (skillInfo.SkillAdded != 0)
 		{
 
@@ -367,21 +367,21 @@ public class SpiritSkill : MonoBehaviour
 		float near = 0f;
 		GameObject nearEnemy = null;
 
-		//¹üÀ§ ³»ÀÇ ÀûÀ» Ã£´Â´Ù.
-		Collider[] colls = Physics.OverlapSphere(findStartObject.transform.position, distance, 1 << 8);  //8¹øÂ° ·¹ÀÌ¾î = Player
+		//ë²”ìœ„ ë‚´ì˜ ì ì„ ì°¾ëŠ”ë‹¤.
+		Collider[] colls = Physics.OverlapSphere(findStartObject.transform.position, distance, 1 << 8);  //8ë²ˆì§¸ ë ˆì´ì–´ = Player
 		if (colls.Length == 0)
 		{
-			Debug.Log("¹üÀ§¿¡ ÇÃ·¹ÀÌ¾î°¡ ¾ø½À´Ï´Ù.");
+			Debug.Log("ë²”ìœ„ì— í”Œë ˆì´ì–´ê°€ ì—†ìŠµë‹ˆë‹¤.");
 			DestroyObject(findStartObject);
 			return null;
 		}
 		else
 		{
-			//ÀûÀÌ ÀÖ´Ù¸é ±× Àûµé Áß¿¡
+			//ì ì´ ìˆë‹¤ë©´ ê·¸ ì ë“¤ ì¤‘ì—
 			for (int i = 0; i < colls.Length; i++)
 			{
 
-				//Á¤·É°úÀÇ °Å¸®¸¦ °è»êÈÄ
+				//ì •ë ¹ê³¼ì˜ ê±°ë¦¬ë¥¼ ê³„ì‚°í›„
 				Dist = Vector3.Distance(findStartObject.transform.position, colls[i].transform.position);
 
 				if (i == 0)
@@ -390,7 +390,7 @@ public class SpiritSkill : MonoBehaviour
 					nearEnemy = colls[i].gameObject;
 				}
 
-				//±× °Å¸®°¡ ÀÛ´Ù¸é °Å¸®¸¦ ÀúÀåÇÏ°í ÇØ´ç ¿ÀºêÁ§Æ®¸¦ ÀúÀå
+				//ê·¸ ê±°ë¦¬ê°€ ì‘ë‹¤ë©´ ê±°ë¦¬ë¥¼ ì €ì¥í•˜ê³  í•´ë‹¹ ì˜¤ë¸Œì íŠ¸ë¥¼ ì €ì¥
 				if (Dist < near)
 				{
 					near = Dist;
@@ -409,21 +409,21 @@ public class SpiritSkill : MonoBehaviour
 		float near = 0f;
 		GameObject nearEnemy = null;
 
-		//¹üÀ§ ³»ÀÇ ÀûÀ» Ã£´Â´Ù.
-		Collider[] colls = Physics.OverlapSphere(findStartObject.transform.position, distance, 1 << 9);  //9¹øÂ° ·¹ÀÌ¾î = Enemy
+		//ë²”ìœ„ ë‚´ì˜ ì ì„ ì°¾ëŠ”ë‹¤.
+		Collider[] colls = Physics.OverlapSphere(findStartObject.transform.position, distance, 1 << 9);  //9ë²ˆì§¸ ë ˆì´ì–´ = Enemy
 
 
 		if (colls.Length == 0)
 		{
-			Debug.Log("¹üÀ§¿¡ ÀûÀÌ ¾ø½À´Ï´Ù.");
+			Debug.Log("ë²”ìœ„ì— ì ì´ ì—†ìŠµë‹ˆë‹¤.");
 			return null;
 		}
 		else
 		{
-			//ÀûÀÌ ÀÖ´Ù¸é ±× Àûµé Áß¿¡
+			//ì ì´ ìˆë‹¤ë©´ ê·¸ ì ë“¤ ì¤‘ì—
 			for (int i = 0; i < colls.Length; i++)
 			{
-				//º¸½º°¡ ÀÖÀ»°æ¿ì º¸½º·Î °íÁ¤
+				//ë³´ìŠ¤ê°€ ìˆì„ê²½ìš° ë³´ìŠ¤ë¡œ ê³ ì •
 				if(colls[i].gameObject.name == "Boss")
 				{
 					nearEnemy = colls[i].gameObject;
@@ -433,7 +433,7 @@ public class SpiritSkill : MonoBehaviour
 				
 
 
-				//Á¤·É°úÀÇ °Å¸®¸¦ °è»êÈÄ
+				//ì •ë ¹ê³¼ì˜ ê±°ë¦¬ë¥¼ ê³„ì‚°í›„
 				Dist = Vector3.Distance(findStartObject.transform.position, colls[i].transform.position);
 
 				if (i == 0)
@@ -442,7 +442,7 @@ public class SpiritSkill : MonoBehaviour
 					nearEnemy = colls[i].gameObject;
 				}
 
-				//±× °Å¸®°¡ ÀÛ´Ù¸é °Å¸®¸¦ ÀúÀåÇÏ°í ÇØ´ç ¿ÀºêÁ§Æ®¸¦ ÀúÀå
+				//ê·¸ ê±°ë¦¬ê°€ ì‘ë‹¤ë©´ ê±°ë¦¬ë¥¼ ì €ì¥í•˜ê³  í•´ë‹¹ ì˜¤ë¸Œì íŠ¸ë¥¼ ì €ì¥
 				if (Dist < near)
 				{
 					near = Dist;
