@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a29c32050407c49a704cf7a86bb72b, type: 3}
+  m_Name: Spirit_TableLoader
+  m_EditorClassIdentifier: 
+  filepath: Assets\00.Data\Txt\Spirit_Table.txt
+  DataList:
+  - No: 1
+    Name_KR: "\uD0C0\uC77C \uC18C\uD658"
+    Name_EN: Fix_Soul
+    Code: 100100
+    SpritClass: 1
+    SpiritType: 1
+    Atk: 100
+    Atk_Speed: 1
+    Move_Speed: 0
+    Duration: 30
+    CoolTime: 40
+    Skill1Code: 0
+    Prefab: 0
+  - No: 2
+    Name_KR: "\uBE44\uD0C0\uC77C \uACE0\uC815"
+    Name_EN: Summon_Soul
+    Code: 100200
+    SpritClass: 2
+    SpiritType: 2
+    Atk: 120
+    Atk_Speed: 1
+    Move_Speed: 0
+    Duration: 30
+    CoolTime: 40
+    Skill1Code: 0
+    Prefab: 0
+  - No: 3
+    Name_KR: "\uBE44\uD0C0\uC77C \uC774\uB3D9"
+    Name_EN: Summon_Soul
+    Code: 100300
+    SpritClass: 3
+    SpiritType: 3
+    Atk: 120
+    Atk_Speed: 1
+    Move_Speed: 1
+    Duration: 30
+    CoolTime: 40
+    Skill1Code: 0
+    Prefab: 0
+  - No: 4
+    Name_KR: "\uD0C0\uC77C \uC18C\uD658"
+    Name_EN: Fix_Soul
+    Code: 100400
+    SpritClass: 1
+    SpiritType: 1
+    Atk: 100
+    Atk_Speed: 1
+    Move_Speed: 0
+    Duration: 30
+    CoolTime: 40
+    Skill1Code: 0
+    Prefab: 0
+  - No: 5
+    Name_KR: "\uBE44\uD0C0\uC77C \uACE0\uC815"
+    Name_EN: Summon_Soul
+    Code: 100500
+    SpritClass: 2
+    SpiritType: 2
+    Atk: 120
+    Atk_Speed: 1
+    Move_Speed: 0
+    Duration: 30
+    CoolTime: 40
+    Skill1Code: 0
+    Prefab: 0
+  - No: 6
+    Name_KR: "\uBE44\uD0C0\uC77C \uC774\uB3D9"
+    Name_EN: Summon_Soul
+    Code: 100600
+    SpritClass: 3
+    SpiritType: 3
+    Atk: 120
+    Atk_Speed: 1
+    Move_Speed: 1
+    Duration: 30
+    CoolTime: 40
+    Skill1Code: 0
+    Prefab: 0

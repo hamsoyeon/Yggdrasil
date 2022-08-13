@@ -2,22 +2,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct SpritSkillTableExcel
+public struct SpiritSkill_TableExcel
 {
+	public int No;
 	public string Name_KR;
 	public string Name_EN;
-	public int SpritSkillIndex;
-	public int Target;
+	public int SpiritSkillIndex;
 	public float Power;
-	public float SkillRange;
+	public float Range;
+	public float CoolTime;
 	public int SkillType;
 	public float BulletSpeed;
 	public float TargetNum;
 	public float LifeTime;
 	public float DoT;
-	public int Shapeform;
-	public float Cshape1;
-	public float Cshape2;
 	public int SkillAdded;
 	public int BuffAdded;
 	public int LunchPrefb;
@@ -29,34 +27,32 @@ public struct SpritSkillTableExcel
 
 /*====================================*/
 
-[CreateAssetMenu(fileName="SpritSkillTableLoader", menuName= "Scriptable Object/SpritSkillTableLoader")]
-public class SpritSkillTableExcelLoader :ScriptableObject
+[CreateAssetMenu(fileName="SpiritSkill_TableLoader", menuName= "Scriptable Object/SpiritSkill_TableLoader")]
+public class SpiritSkill_TableExcelLoader :ScriptableObject
 {
-	[SerializeField] string filepath =@"Assets\00.Data\Txt\SpritSkillTable.txt";
-	public List<SpritSkillTableExcel> DataList;
+	[SerializeField] string filepath =@"Assets\00.Data\Txt\SpiritSkill_Table.txt";
+	public List<SpiritSkill_TableExcel> DataList;
 
-	private SpritSkillTableExcel Read(string line)
+	private SpiritSkill_TableExcel Read(string line)
 	{
 		line = line.TrimStart('\n');
 
-		SpritSkillTableExcel data = new SpritSkillTableExcel();
+		SpiritSkill_TableExcel data = new SpiritSkill_TableExcel();
 		int idx =0;
 		string[] strs= line.Split('`');
 
+		data.No = int.Parse(strs[idx++]);
 		data.Name_KR = strs[idx++];
 		data.Name_EN = strs[idx++];
-		data.SpritSkillIndex = int.Parse(strs[idx++]);
-		data.Target = int.Parse(strs[idx++]);
+		data.SpiritSkillIndex = int.Parse(strs[idx++]);
 		data.Power = float.Parse(strs[idx++]);
-		data.SkillRange = float.Parse(strs[idx++]);
+		data.Range = float.Parse(strs[idx++]);
+		data.CoolTime = float.Parse(strs[idx++]);
 		data.SkillType = int.Parse(strs[idx++]);
 		data.BulletSpeed = float.Parse(strs[idx++]);
 		data.TargetNum = float.Parse(strs[idx++]);
 		data.LifeTime = float.Parse(strs[idx++]);
 		data.DoT = float.Parse(strs[idx++]);
-		data.Shapeform = int.Parse(strs[idx++]);
-		data.Cshape1 = float.Parse(strs[idx++]);
-		data.Cshape2 = float.Parse(strs[idx++]);
 		data.SkillAdded = int.Parse(strs[idx++]);
 		data.BuffAdded = int.Parse(strs[idx++]);
 		data.LunchPrefb = int.Parse(strs[idx++]);
@@ -68,7 +64,7 @@ public class SpritSkillTableExcelLoader :ScriptableObject
 	[ContextMenu("파일 읽기")]
 	public void ReadAllFile()
 	{
-		DataList=new List<SpritSkillTableExcel>();
+		DataList=new List<SpiritSkill_TableExcel>();
 
 		string currentpath = System.IO.Directory.GetCurrentDirectory();
 		string allText = System.IO.File.ReadAllText(System.IO.Path.Combine(currentpath,filepath));
@@ -78,7 +74,7 @@ public class SpritSkillTableExcelLoader :ScriptableObject
 		{
 			if(item.Length<2)
 				continue;
-			SpritSkillTableExcel data = Read(item);
+			SpiritSkill_TableExcel data = Read(item);
 			DataList.Add(data);
 		}
 	}
