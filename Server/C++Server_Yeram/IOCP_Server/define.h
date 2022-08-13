@@ -34,12 +34,14 @@ enum class E_GameObject
 };
 enum class E_NodeType
 {
-    None = 1,
+    Left,
     LeftUp,
-    RightUp,
     LeftDown,
+    Right,
+    RightUp,
     RightDown,
-    Max
+    Up,
+    Down,
 };
 struct Vector3
 {

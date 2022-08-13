@@ -47,7 +47,8 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     [SerializeField]
     Canvas m_canvas;
 
-   
+
+
 
     #region Initialize
     public void __Initialize(int _btncount)
@@ -77,7 +78,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
                                                     .GetComponentsInChildren<TMP_InputField>();
         m_input_createname = inputs[0];
         m_input_pw = inputs[1];
-        
+
         Transform ChatParent = m_canvas.transform.GetChild("Chatting");
         m_input_chat = ChatParent.GetComponentInChildren<TMP_InputField>();
     }
@@ -91,7 +92,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
         ClearChat();
         ClearInputField();
     }
-    
+
     public void OnClick_NextPage()
     {
         LobbyManager.Instance.PageReqProcess(true);
@@ -107,6 +108,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     public void OnClick_CreateRoomOK()
     {
         LobbyManager.Instance.CreateRoomProcess(m_input_createname.text, m_input_pw.text);
+        RoomGUIManager.Instance.is_Leader = true;
         m_window_createroom.SetActive(false);
         ClearInputField();
     }
@@ -130,16 +132,16 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     }
     #endregion
     #region page update func
-    public void RoomInfoSetting(int _btn_index,RoomOutInfo _room_info)
+    public void RoomInfoSetting(int _btn_index, RoomOutInfo _room_info)
     {
-        
+
         m_room_btns[_btn_index].GetComponent<RoomInfoBtn>().ChageInfo(_room_info);
 
-        for(int i = 0; i < m_rooms_count; i++)
+        for (int i = 0; i < m_rooms_count; i++)
         {
             m_room_btns[i].gameObject.SetActive(false);
         }
-        for(int i = 0; i <= _btn_index; i++)
+        for (int i = 0; i <= _btn_index; i++)
         {
             m_room_btns[i].gameObject.SetActive(true);
         }
@@ -161,10 +163,10 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
             return;
         }
         GameObject clone = Instantiate(m_TextPrefeb, m_Content);
-        clone.GetComponent<TextMeshProUGUI>().text =_text;
+        clone.GetComponent<TextMeshProUGUI>().text = _text;
         m_input_chat.text = "";
 
-        if(m_input_chat.isFocused==false)
+        if (m_input_chat.isFocused == false)
         {
             m_input_chat.ActivateInputField();
         }
@@ -178,7 +180,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     {
         Debug.Log("DeleteChat");
         int childCount = m_Content.childCount;
-        for(int i = 0; i < childCount; ++i)
+        for (int i = 0; i < childCount; ++i)
         {
             GameObject.DestroyImmediate(m_Content.GetChild(0).gameObject);
         }
