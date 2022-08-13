@@ -11,18 +11,30 @@ public class ColiderChk : MonoBehaviour
     public int m_row;
     public int m_coulmn;
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        //플레이어로 변경.
-        if(other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("오브젝트들어옴");
+
+            Debug.Log($"Player (row:{m_row} / coulmn:{m_coulmn})");
 
             MainManager.Instance.GetStageManager().SetPlayerRowAndCoulmn(m_row, m_coulmn);
             coliderchk = true;
-            mat.color = new Color(1, 0, 0);
+            //mat.color = new Color(1, 0, 0);
+
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            coliderchk = false;
+            //mat.color = new Color(1, 1, 1);
+        }
+    }
+
+
 
     void Start()
     {
@@ -32,6 +44,6 @@ public class ColiderChk : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 }

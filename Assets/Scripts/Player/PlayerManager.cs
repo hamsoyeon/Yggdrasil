@@ -6,143 +6,76 @@ using Yggdrasil.PlayerSkillSet;
 
 public class PlayerManager : MonoBehaviour
 {
-	//플레이어 오브젝트
-	public static GameObject p_Object;
-
-	//스탯
-	public Yggdrasil.CharacterStats p_Status;
-    [SerializeField]
-    private float p_MaxHp;
-    [SerializeField]
-    private float p_CurHp;
-
-    public float p_PerHp;
-
-    //스킬
-    private ISkill skill;
-	private SkillManager M_skillMgr;
-
-
-	public Text SkillType_txt;
-	private int skillType_num;
-	// 이벤트 관련
-	//private TempCodes.TempMessageSystem eSystem;
-	//private MoveEvent me;
-	//private Handler player;
+    //플레이어 오브젝트
+    public static GameObject p_Object;
 
 
 
-	private void InputCheck()
-	{
+    //스킬 
+    public Spirit m_Spirit;
+    //public SpiritSkill m_SpiritSkill;
 
-		if (Input.GetKeyDown(KeyCode.Tab))
-		{
-			
-			skillType_num++;
-			skillType_num %= 3;
+    private CharStat_TableExcel m_CurrentCharStat;
+    private const int m_CurrentIndex = 10002;  //임시로 사용하는 값(플레이어가 메뉴 모드에서 선택한 index값을 참고해서 솔로모드인지 멀티모드인지 판별)
 
-			var type_num = (SkillType)skillType_num;
+    public CharacterClass PlayerClass;
 
-			switch (type_num)
-			{
-				case SkillType.Attack:
-					skill = SkillFactory.SkillTypeSet(type_num);
-					SkillType_txt.text = "Attack";
-					break;
-				case SkillType.Defense:
-					skill = SkillFactory.SkillTypeSet(type_num);
-					SkillType_txt.text = "Defense";
-					break;
-				case SkillType.Support:
-					skill = SkillFactory.SkillTypeSet(type_num);
-					SkillType_txt.text = "Support";
-					break;
-			}
-
-		}
-
-
-		if (Input.GetKeyDown(KeyCode.Alpha1))
-		{
-			//스킬을 사용할수 있는지 1차 점검(마나,쿨타임 등 체크)
-
-
-			//1차점검에서 통과되면 스킬발동
-			if(M_skillMgr.SkillCheck())
-			{
-				skill.SkillAction(AbilityType.Damage);
-				Debug.Log("1");
-			}
-			
-		}
-
-		if (Input.GetKeyDown(KeyCode.Alpha2))
-		{
-			//스킬을 사용할수 있는지 1차 점검(마나,쿨타임 등 체크)
-			if (M_skillMgr.SkillCheck())
-			{
-				skill.SkillAction(AbilityType.Distance);
-				Debug.Log("2");
-			}
-			
-		}
-
-		if (Input.GetKeyDown(KeyCode.Alpha3))
-		{
-			//스킬을 사용할수 있는지 1차 점검(마나,쿨타임 등 체크)
-			if (M_skillMgr.SkillCheck())
-			{
-				skill.SkillAction(AbilityType.Speed);
-				Debug.Log("3");
-			}
-			
-		}
-
-
-	}
-
-
-
-	private void Move()
-	{
-		float h = Input.GetAxis("Horizontal");
-		float v = Input.GetAxis("Vertical");
-
-		transform.Translate(new Vector3(h, 0, v) * p_Status.MoveSpeed * Time.deltaTime);
-	}
-	
-    private void PlayerHp_Per()
+    private void InputCheck()
     {
-        p_PerHp = p_CurHp / p_MaxHp;
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill2);
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill3);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill4);
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill5);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill6);
+        }
+
     }
 
-	// Start is called before the first frame update
-	void Start()
+
+
+    private void Move()
     {
-		p_Object = this.gameObject;
-		p_Status = new Yggdrasil.CharacterStats();
-        p_MaxHp = p_Status.HP;
-        p_CurHp = p_MaxHp;
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
 
-        //캐릭터 초기셋팅
-        p_Status.MoveSpeed = 8f; //기본스피드
-
-		skillType_num = 0;
-		skill = SkillFactory.SkillTypeSet(SkillType.Attack);
-		M_skillMgr = new SkillManager();
+        transform.Translate(new Vector3(h, 0, v) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+    }
 
 
-        //데이터 리스트 확인용(디버깅용)
-        //foreach (var element in DataTableManager.Instance.GetDataList())
-        //{
-        //    if(element == null)
-        //    {
-        //        break;
-        //    }
 
-        //    Debug.Log(element.name);
-        //}
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        p_Object = this.gameObject;
+        m_Spirit = this.GetComponent<Spirit>();
+        //m_SpiritSkill = this.GetComponent<SpiritSkill>();
+
+        PlayerClass = this.gameObject.GetComponent<CharacterClass>();
 
         // DataManager라는 Object의 List에 해당 데이터를 넣어주면 찾아서 사용가능.(디버깅용)
         // Use ExcelReader
@@ -153,20 +86,35 @@ public class PlayerManager : MonoBehaviour
         //}
 
 
+
+        foreach (var item in DataTableManager.Instance.GetDataTable<CharStat_TableExcelLoader>().DataList)
+        {
+            if (item.CharIndex == m_CurrentIndex)
+            {
+                PlayerClass.m_CharacterStat = item; //현재 캐릭터 정보를 찾아낸다(나중가서는 로비창에서 선택한 데이터를 비교해서 캐릭터 선택해주기)
+                break;
+            }
+        }
+
+
+        Damage();
+
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-		//이동
-		Move();
+        //이동
+        Move();
 
-		//키보드 입력 체크 함수.
-		InputCheck();
+        //키보드 입력 체크 함수.
+        InputCheck();
 
-        //플레이어 체력 퍼센트
-        PlayerHp_Per();
+    }
 
 
+    public void Damage()
+    {
+        Debug.Log("현재 플레이어의 체력:" + PlayerClass.m_CharacterStat.HP);
     }
 }

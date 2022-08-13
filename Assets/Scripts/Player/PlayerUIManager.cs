@@ -19,6 +19,6 @@ public class PlayerUIManager : MonoBehaviour
     void Update()
     {
 
-        hpBar.value = playerManager.p_PerHp;
+        //hpBar.value = playerManager.p_PerHp;
     }
 }

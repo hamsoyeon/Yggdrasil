@@ -23,7 +23,7 @@ public class BossStamina : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        perStamina = bossFsm.perStamina;
+        //perStamina = bossFsm.perStamina;
         HandleStamina();
     }
 

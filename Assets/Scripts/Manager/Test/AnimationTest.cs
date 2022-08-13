@@ -22,7 +22,7 @@ public class AnimationTest : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            AnimationManager.GetInstance().PlayAnimation(anim,"Die");
+            AnimationManager.GetInstance().PlayAnimation(anim,"Die",0.1f);
         }
     }
 }

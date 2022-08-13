@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 17524569}
+  - component: {fileID: 17524570}
   m_Layer: 0
   m_Name: MainManager
   m_TagString: Untagged
@@ -154,6 +155,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &17524570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17524568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 134264c85e75ff5478645e35c2f12ac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xp: 0
+  zp: 0
+  hexMapSizeX: 6
+  hexMapSizeZ: 5
 --- !u!1 &400118255
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +320,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1050678126}
-  - component: {fileID: 1050678125}
+  - component: {fileID: 1050678127}
   m_Layer: 0
   m_Name: MapManager
   m_TagString: Untagged
@@ -311,24 +328,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1050678125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1050678124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fccd55fdc27914046936bd3ba894df27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapStartPosition: {fileID: 1050678126}
-  hexaIndicator: {fileID: 4717883552673209890, guid: e4e6c443ced53c448aa3f4c193bc48b1, type: 3}
-  indicatorDefaultColor: {r: 0, g: 0.5010276, b: 1, a: 0}
-  indicatorActiveColor: {r: 1, g: 0, b: 0, a: 0}
-  ownIndicatorArray: []
-  ownTriggerArray: []
 --- !u!4 &1050678126
 Transform:
   m_ObjectHideFlags: 0
@@ -344,6 +343,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1050678127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050678124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3363e3bf31c1f3f41ac6fdf904855f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapStartPosition: {fileID: 1050678126}
+  hexaIndicator: {fileID: 4717883552673209890, guid: e4e6c443ced53c448aa3f4c193bc48b1, type: 3}
+  indicatorDefaultColor: {r: 0, g: 0.5019608, b: 1, a: 0}
+  indicatorActiveColor: {r: 1, g: 0, b: 0, a: 0}
+  XPush: 10
+  ZPush: 10
+  xp: 3
+  zp: 2
+  ownIndicatorArray: []
 --- !u!1 &1259448267
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,6 +560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1945487912}
+  camOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1572429885
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,7 +988,7 @@ GameObject:
   - component: {fileID: 1909760083}
   - component: {fileID: 1909760082}
   - component: {fileID: 1909760081}
-  - component: {fileID: 1909760080}
+  - component: {fileID: 1909760087}
   m_Layer: 9
   m_Name: Boss
   m_TagString: Untagged
@@ -975,19 +996,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1909760080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1909760079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6724d348d70ab7a42a3359198a899d25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_endSkill: 0
 --- !u!114 &1909760081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1010,6 +1018,33 @@ MonoBehaviour:
   angleRange: 60
   distance: 5
   isCollision: 0
+  m_CurrentBossSkill:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    BossIndex: 0
+    TargetType: 0
+    Power: 0
+    CoolTime: 0
+    SkillDistance: 0
+    SkillRange: 0
+    SkillType: 0
+    UseStat: 0
+    Direction1: 0
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    PlaceShift: 0
+    LifeTime: 0
+    DoT: 0
+    SkillAdded: 0
+    BuffAdded: 0
+    SkillAnimation: 0
+    LunchPrefb: 0
+    FirePrefb: 0
+    DamPrefb: 0
 --- !u!114 &1909760082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1022,8 +1057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b83b897b81bb7c4db35b9b74fdeee45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perStamina: 0
-  hudDamageText: {fileID: 1483570841231961235, guid: 790df30a09482fe4fbe52151b3e5de8e, type: 3}
+  behavior: 0
 --- !u!65 &1909760083
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1104,6 +1138,114 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!114 &1909760087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909760079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64136c781e8bd2743a5da9d287c90e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BossSkillData:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    BossIndex: 0
+    TargetType: 0
+    Power: 0
+    CoolTime: 0
+    SkillDistance: 0
+    SkillRange: 0
+    SkillType: 0
+    UseStat: 0
+    Direction1: 0
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    PlaceShift: 0
+    LifeTime: 0
+    DoT: 0
+    SkillAdded: 0
+    BuffAdded: 0
+    SkillAnimation: 0
+    LunchPrefb: 0
+    FirePrefb: 0
+    DamPrefb: 0
+  m_BossStatData:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    BossIndex: 0
+    Atk: 0
+    HP: 0
+    Def: 0
+    SRange: 0
+    CRange: 0
+    FRange: 0
+    MaxStamina: 0
+    Speed: 0
+    MoveStUsed: 0
+    Skill1: 0
+    Skill2: 0
+    Skill3: 0
+    Skill4: 0
+  m_CharacterStat:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    CharIndex: 0
+    position: 0
+    Atk: 0
+    Def: 0
+    HP: 0
+    MoveSpeed: 0
+    Skill1: 0
+    Skill2: 0
+    Skill3: 0
+    Skill4: 0
+    Skill5: 0
+    Skill6: 0
+    Item1: 0
+    Item2: 0
+    Sight: 0
+  m_SpiritData:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    Code: 0
+    SpritClass: 0
+    SpiritType: 0
+    Atk: 0
+    Atk_Speed: 0
+    Move_Speed: 0
+    Duration: 0
+    CoolTime: 0
+    Skill1Code: 0
+    Prefab: 0
+  m_SpiritSkillData:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    SpiritSkillIndex: 0
+    Power: 0
+    Range: 0
+    CoolTime: 0
+    SkillType: 0
+    BulletSpeed: 0
+    TargetNum: 0
+    LifeTime: 0
+    DoT: 0
+    SkillAdded: 0
+    BuffAdded: 0
+    LunchPrefb: 0
+    FirePrefb: 0
+    DamPrefb: 0
 --- !u!1 &1945487912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,6 +1259,10 @@ GameObject:
   - component: {fileID: 1945487915}
   - component: {fileID: 1945487914}
   - component: {fileID: 1945487913}
+  - component: {fileID: 1945487921}
+  - component: {fileID: 1945487920}
+  - component: {fileID: 1945487919}
+  - component: {fileID: 1945487918}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -1136,10 +1282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3994b352e36f73447af3d1a756eb2fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p_MaxHp: 0
-  p_CurHp: 0
-  p_PerHp: 0
-  SkillType_txt: {fileID: 0}
+  m_Spirit: {fileID: 0}
+  PlayerClass: {fileID: 0}
 --- !u!136 &1945487914
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1219,3 +1363,155 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1945487918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945487912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7833f78949b9c241b16e04f63b610f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EffectPrefab: {fileID: 4423216814221172199, guid: 635677975fba4e44998e86f6600e8505, type: 3}
+--- !u!114 &1945487919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945487912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a5f5c89386e3c4e801ea38366c2100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpiritPrefab: {fileID: 8714650831079917817, guid: 6baee00fcd7f98c4c90766e948237f86, type: 3}
+  m_SpiritSkill: {fileID: 0}
+  m_SpiritClass: {fileID: 0}
+--- !u!54 &1945487920
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945487912}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1945487921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945487912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64136c781e8bd2743a5da9d287c90e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BossSkillData:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    BossIndex: 0
+    TargetType: 0
+    Power: 0
+    CoolTime: 0
+    SkillDistance: 0
+    SkillRange: 0
+    SkillType: 0
+    UseStat: 0
+    Direction1: 0
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    PlaceShift: 0
+    LifeTime: 0
+    DoT: 0
+    SkillAdded: 0
+    BuffAdded: 0
+    SkillAnimation: 0
+    LunchPrefb: 0
+    FirePrefb: 0
+    DamPrefb: 0
+  m_BossStatData:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    BossIndex: 0
+    Atk: 0
+    HP: 0
+    Def: 0
+    SRange: 0
+    CRange: 0
+    FRange: 0
+    MaxStamina: 0
+    Speed: 0
+    MoveStUsed: 0
+    Skill1: 0
+    Skill2: 0
+    Skill3: 0
+    Skill4: 0
+  m_CharacterStat:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    CharIndex: 0
+    position: 0
+    Atk: 0
+    Def: 0
+    HP: 0
+    MoveSpeed: 0
+    Skill1: 0
+    Skill2: 0
+    Skill3: 0
+    Skill4: 0
+    Skill5: 0
+    Skill6: 0
+    Item1: 0
+    Item2: 0
+    Sight: 0
+  m_SpiritData:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    Code: 0
+    SpritClass: 0
+    SpiritType: 0
+    Atk: 0
+    Atk_Speed: 0
+    Move_Speed: 0
+    Duration: 0
+    CoolTime: 0
+    Skill1Code: 0
+    Prefab: 0
+  m_SpiritSkillData:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    SpiritSkillIndex: 0
+    Power: 0
+    Range: 0
+    CoolTime: 0
+    SkillType: 0
+    BulletSpeed: 0
+    TargetNum: 0
+    LifeTime: 0
+    DoT: 0
+    SkillAdded: 0
+    BuffAdded: 0
+    LunchPrefb: 0
+    FirePrefb: 0
+    DamPrefb: 0
