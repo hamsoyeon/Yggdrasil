@@ -24,7 +24,7 @@ public:
     void SetViewNode(QuadNode* _parent, int _curdepth);
     void AddObjectNode(QuadNode* _parent,GameObject* obj,int _curdepth);
     void RemoveObjectNode(QuadNode* _parent,GameObject* obj, int _curdepth);
-    QuadNode** SerchNode(QuadNode* _parent,Vector3 _pos,int _curdepth);
+    QuadNode** SerchNode(QuadNode* _parent,Vector3 _pos,int _curdepth,E_NodeType _postype);
     //플레이어 샌드패킷
     void PlayerSendPacket(CSession* _session, unsigned long _protocol, bool moveflag);
     //void checksector()

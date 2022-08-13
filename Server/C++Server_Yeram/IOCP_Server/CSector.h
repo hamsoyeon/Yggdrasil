@@ -13,12 +13,15 @@ public:
     void SetArea(Vector3 _senter_pos);
     const Vector3 GetDistance();
     const Vector3 GetSenter();
-    BOOL IsInSector(const Vector3 _obj_pos); // 오브젝트가 노드안에 있는지 체크
+    const Vector3 GetStartPos();
+    BOOL IsInSector_Direction(const Vector3 _obj_pos,E_NodeType _type); 
+    BOOL IsInSector(const Vector3 _obj_pos);// 오브젝트가 노드안에 있는지 체크
     void SetViewSector(CSector* _node);
 private:
     list<GameObject*> m_objects;
     list<CSector*> m_view_sectorlist;
 
+    Vector3 m_start_pos;
     Vector3 m_senter_pos;         // 노드의 중심 위치
     Vector3 m_distance;           // 밑변/2 
 };

@@ -72,9 +72,10 @@ void CSectorMgr::SendInit(CSession* _session)
 
 void CSectorMgr::CreateQuadTree()
 {
-    Vector3 distance((*m_h_mapsize), 0, (*m_v_mapsize) );
-    Vector3 senter_pos(m_start_position->x+distance.x , m_default_y, m_start_position->z-distance.z );
-
+    Vector3 distance((*m_h_mapsize), 0, (*m_v_mapsize));
+    Vector3 senter_pos(m_start_position->x+(distance.x/2) , m_default_y, m_start_position->z-(distance.z/2) );
+    distance.x /= 2;
+    distance.z /= 2;
     root = new QuadNode(Vector3(), distance);
 
     SetChildren(root, senter_pos, distance, 0);
@@ -127,7 +128,7 @@ void CSectorMgr::SetViewNode(QuadNode* _parent, int _curdepth)
 {
     if (*m_depth == _curdepth)
     {
-        Vector3 senter = _parent->GetSenter();
+        Vector3 start = _parent->GetStartPos();
         Vector3 distance = _parent->GetDistance();
 
         Vector3 position;
@@ -136,45 +137,48 @@ void CSectorMgr::SetViewNode(QuadNode* _parent, int _curdepth)
         //시야의 최대치는 8이다.
         for (int i = 0; i < *m_eyesight; i++)
         {
-            switch (i)
+            switch (static_cast<E_NodeType>(i))
             {
-            case 0:
+            case E_NodeType::Left:
                 //left node
-                position.x = senter.x - distance.x;
-                position.y = senter.y;
-                position.z = senter.z;
+                position.x = start.x - distance.x*2;
+                position.y = start.y;
+                position.z = start.z;
                 break;
-            case 1:
+            case E_NodeType::LeftUp:
                 //left up node
-                position.z = senter.z + distance.z;
+                position.z = start.z + distance.z*2;
                 break;
-            case 2:
+            case E_NodeType::LeftDown:
                 //left down node
-                position.z = senter.z - distance.z;
+                position.z = start.z - distance.z*2;
                 break;
-            case 3:
+            case E_NodeType::Right:
                 //right node
-                position.x = senter.x + distance.x;
+                position.x = start.x + distance.x*2;
+                position.y = start.y;
+                position.z = start.z;
                 break;
-            case 4:
+            case E_NodeType::RightUp:
                 //right up node
-                position.z = senter.z + distance.z;
+                position.z = start.z + distance.z*2;
                 break;
-            case 5:
+            case E_NodeType::RightDown:
                 //right down node
-                position.z = senter.z - distance.z;
+                position.z = start.z - distance.z*2;
                 break;
-            case 6:
+            case E_NodeType::Up:
                 //senter up
-                position.x = senter.x;
-                position.z = senter.z + distance.z;
+                position.x = start.x;
+                position.y = start.y;
+                position.z = start.z + distance.z*2;
                 break;
-            case 7:
+            case E_NodeType::Down:
                 //senter down
-                position.z = senter.z - distance.z;
+                position.z = start.z - distance.z*2;
                 break;
             }
-            viewnode = SerchNode(root, position, 0);
+            viewnode = SerchNode(root, position, 0,static_cast<E_NodeType>(i));
             if (viewnode == nullptr)
                 continue;
             else 
@@ -239,13 +243,19 @@ void CSectorMgr::RemoveObjectNode(QuadNode* _parent, GameObject* _obj, int _curd
     }
 }
 
-QuadNode** CSectorMgr::SerchNode(QuadNode* _parent, Vector3 _pos, int _curdepth)
+QuadNode** CSectorMgr::SerchNode(QuadNode* _parent, Vector3 _pos, int _curdepth,E_NodeType _type)
 {
     if (*m_depth == _curdepth)
     {
-        if (_parent->IsInSector(_pos))
+        if (m_start_position->x <= _pos.x && m_end_position->x >= _pos.x
+            && m_start_position->z >= _pos.z && m_end_position->z <= _pos.z)
+
         {
-            return &_parent;
+            //if (_parent->IsInSector_Direction(_pos, _type))
+            //{
+
+                return &_parent;
+            //}
         }
         return nullptr;
     }
@@ -260,10 +270,11 @@ QuadNode** CSectorMgr::SerchNode(QuadNode* _parent, Vector3 _pos, int _curdepth)
             return nullptr;
         }
         if (child->IsInSector(_pos))
-        item = SerchNode(child, _pos, _curdepth+1);
+        item = SerchNode(child, _pos, _curdepth+1,_type);
         if (item != nullptr)
             return item;
     }
+    return nullptr;
 }
 
 void CSectorMgr::PlayerSendPacket(CSession* _session, unsigned long _protocol, bool moveflag)

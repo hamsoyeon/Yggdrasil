@@ -5,9 +5,9 @@ QuadNode::QuadNode()
 {
 }
 
-QuadNode::QuadNode(Vector3 _senter_pos,Vector3 _distance):CSector(_senter_pos,_distance)
+QuadNode::QuadNode(Vector3 _senter_pos, Vector3 _distance) :CSector(_senter_pos, _distance)
 {
-    
+
 }
 
 QuadNode::~QuadNode()
@@ -40,14 +40,22 @@ QuadNode* QuadNode::GetChildNode(int index)
     return nullptr;
 }
 
+QuadNode* QuadNode::GetParent()
+{
+    return m_parent;
+}
+
 CSector::CSector()
 {
 }
 
-CSector::CSector(Vector3 _senter_pos,Vector3 _distance)
+CSector::CSector(Vector3 _senter_pos, Vector3 _distance)
 {
     m_senter_pos = _senter_pos;
     m_distance = _distance;
+    m_start_pos.x = _senter_pos.x - _distance.x;
+    m_start_pos.y = _senter_pos.y;
+    m_start_pos.z = _senter_pos.z + _distance.z;
 }
 
 CSector::~CSector()
@@ -69,14 +77,67 @@ const Vector3 CSector::GetSenter()
     return m_senter_pos;
 }
 
+const Vector3 CSector::GetStartPos()
+{
+    return m_start_pos;
+}
 BOOL CSector::IsInSector(const Vector3 _obj_pos)
 {
-    if (_obj_pos.x >= m_senter_pos.x - m_distance.x && _obj_pos.x <= m_senter_pos.x + m_distance.x
-        && _obj_pos.z <= m_senter_pos.z + m_distance.z && _obj_pos.z >= m_senter_pos.z - m_distance.z)
+    if(_obj_pos.x>=m_start_pos.x&&_obj_pos.x<=m_start_pos.x+m_distance.x
+        &&_obj_pos.z<=m_start_pos.z&&_obj_pos.z>=m_start_pos.z-m_distance.z)
     {
         return true;
     }
-    
+    return false;
+}
+BOOL CSector::IsInSector_Direction(const Vector3 _obj_pos, E_NodeType _type)
+{
+    switch (_type)
+    {
+    case E_NodeType::Left:
+        if (_obj_pos.x >= m_start_pos.x - m_distance.x * 2 && _obj_pos.x < m_start_pos.x
+            && _obj_pos.z <= m_start_pos.z && _obj_pos.z > m_start_pos.z - m_distance.z * 2)
+        {
+            return true;
+        }
+        break;
+    case E_NodeType::LeftUp:
+        if (_obj_pos.x >= m_start_pos.x - m_distance.x * 2 && _obj_pos.x < m_start_pos.x
+            && _obj_pos.z <= m_start_pos.z + m_distance.z * 2 && _obj_pos.z > m_start_pos.z)
+        {
+            return true;
+        }
+        break;
+    case E_NodeType::LeftDown:
+        if (_obj_pos.x >= m_start_pos.x - m_distance.x * 2 && _obj_pos.x < m_start_pos.x
+            && _obj_pos.z <= m_start_pos.z - m_distance.z * 2 && _obj_pos.z > m_start_pos.z - m_distance.z * 4)
+        {
+            return true;
+        }
+        break;
+    case E_NodeType::Right:
+        if (_obj_pos.x >= m_start_pos.x && _obj_pos.x < m_start_pos.x + m_distance.x * 2
+            && _obj_pos.z <= m_start_pos.z && _obj_pos.z > m_start_pos.z - m_distance.z * 2)
+        {
+            return true;
+        }
+        break;
+    case E_NodeType::RightUp:
+        if (_obj_pos.x >= m_start_pos.x + m_distance.x * 2 && _obj_pos.x < m_start_pos.x + m_distance.x * 4
+            && _obj_pos.z <= m_start_pos.z +m_distance.z*2 && _obj_pos.z > m_start_pos.z )
+        {
+            return true;
+        }
+        break;
+    case E_NodeType::RightDown:
+        if (_obj_pos.x >= m_start_pos.x + m_distance.x * 2 && _obj_pos.x < m_start_pos.x + m_distance.x * 4
+            && _obj_pos.z <= m_start_pos.z - m_distance.z * 2 && _obj_pos.z > m_start_pos.z - m_distance.z * 4)
+        {
+            return true;
+        }
+        break;
+    }
+
     return false;
 }
 
