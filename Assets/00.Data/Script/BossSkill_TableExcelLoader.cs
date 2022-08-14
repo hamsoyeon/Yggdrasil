@@ -30,6 +30,7 @@ public struct BossSkill_TableExcel
 	public float SkillDelay;
 	public int DelayPrefb;
 	public int LunchPrefb;
+	public int FieldPrefb;
 	public int FirePrefb;
 	public int DamPrefb;
 }
@@ -78,6 +79,7 @@ public class BossSkill_TableExcelLoader :ScriptableObject
 		data.SkillDelay = float.Parse(strs[idx++]);
 		data.DelayPrefb = int.Parse(strs[idx++]);
 		data.LunchPrefb = int.Parse(strs[idx++]);
+		data.FieldPrefb = int.Parse(strs[idx++]);
 		data.FirePrefb = int.Parse(strs[idx++]);
 		data.DamPrefb = int.Parse(strs[idx++]);
 
