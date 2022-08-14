@@ -89,7 +89,7 @@ public class PlayerManager : MonoBehaviour
 
         foreach (var item in DataTableManager.Instance.GetDataTable<CharStat_TableExcelLoader>().DataList)
         {
-            if (item.CharIndex == m_CurrentIndex)
+            if (item.CharStatIndex == m_CurrentIndex)
             {
                 PlayerClass.m_CharacterStat = item; //현재 캐릭터 정보를 찾아낸다(나중가서는 로비창에서 선택한 데이터를 비교해서 캐릭터 선택해주기)
                 break;

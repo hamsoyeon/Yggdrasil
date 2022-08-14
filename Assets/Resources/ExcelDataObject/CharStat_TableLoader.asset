@@ -17,7 +17,7 @@ MonoBehaviour:
   - No: 1
     Name_KR: "\uBA40\uD2F0"
     Name_EN: You
-    CharIndex: 10001
+    CharStatIndex: 10001
     position: 1
     Atk: 5
     Def: 10
@@ -32,10 +32,11 @@ MonoBehaviour:
     Item1: 0
     Item2: 0
     Sight: 50
+    Prefeb: 0
   - No: 2
     Name_KR: "\uAE30\uBCF8"
     Name_EN: Me
-    CharIndex: 10002
+    CharStatIndex: 10002
     position: 4
     Atk: 5
     Def: 15
@@ -50,3 +51,4 @@ MonoBehaviour:
     Item1: 0
     Item2: 0
     Sight: 50
+    Prefeb: 0

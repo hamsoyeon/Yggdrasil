@@ -4,8 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public struct Map_TableExcel
 {
-	public int No;
-	public int Index;
+	public int MapTableIndex;
 	public string StageName;
 	public int StgConcept;
 	public int StgHorz;
@@ -34,8 +33,7 @@ public class Map_TableExcelLoader :ScriptableObject
 		int idx =0;
 		string[] strs= line.Split('`');
 
-		data.No = int.Parse(strs[idx++]);
-		data.Index = int.Parse(strs[idx++]);
+		data.MapTableIndex = int.Parse(strs[idx++]);
 		data.StageName = strs[idx++];
 		data.StgConcept = int.Parse(strs[idx++]);
 		data.StgHorz = int.Parse(strs[idx++]);
