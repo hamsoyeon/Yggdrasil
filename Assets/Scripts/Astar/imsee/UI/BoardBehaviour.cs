@@ -242,8 +242,6 @@ public class BoardBehaviour : MonoBehaviour
 
                 tb.SetMaterial();
 
-                Debug.Log(MainManager.Instance.GetStageManager().m_MapInfo[x, y].MapPos);
-                Debug.Log($"{MainManager.Instance.GetStageManager().m_MapInfo[x, y].row}/{MainManager.Instance.GetStageManager().m_MapInfo[x, y].column}");
                 cnt++;
             }
         }

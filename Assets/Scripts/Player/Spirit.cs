@@ -77,12 +77,16 @@ public class Spirit : MonoBehaviour
 	IEnumerator TileSpirit(Spirit_TableExcel spiritInfo,SpiritSkill_TableExcel skillInfo,int Row,int Column)
 	{
 
-		//정령을 소환한다.(코루틴으로 정령을 소환)
-		GameObject tempSpirit = Instantiate(SpiritPrefab);
+        //정령을 소환한다.(코루틴으로 정령을 소환)
 
-		//스킬실행
-		//PlayerManager.Instance.m_SpiritSkill.SkillUse(skillInfo, Row, Column);
-		//m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, m_PlayerRow, m_PlayerColumn);
+
+        //GameObject tempSpirit = Instantiate(SpiritPrefab);
+        GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
+
+
+        //스킬실행
+        //PlayerManager.Instance.m_SpiritSkill.SkillUse(skillInfo, Row, Column);
+        //m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, m_PlayerRow, m_PlayerColumn);
 
         m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, tempSpirit);
 
@@ -125,7 +129,7 @@ public class Spirit : MonoBehaviour
 	IEnumerator NonTileSpiritByNotMove(Spirit_TableExcel spiritInfo, SpiritSkill_TableExcel skillInfo)
 	{
 		//정령을 소환한다.(코루틴으로 정령을 소환)
-		GameObject tempSpirit = Instantiate(SpiritPrefab);
+		GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
 
 		tempSpirit.transform.position = this.gameObject.transform.position + new Vector3(0,0,-7f);
 		//PlayerManager.Instance.m_SpiritSkill.SkillUse(skillInfo, tempSpirit);
@@ -162,7 +166,7 @@ public class Spirit : MonoBehaviour
 	IEnumerator NonTileSpiritByMove(Spirit_TableExcel spiritInfo, SpiritSkill_TableExcel skillInfo)
 	{
 		//정령을 소환한다.(코루틴으로 정령을 소환)
-		GameObject tempSpirit = Instantiate(SpiritPrefab);
+		GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
 		tempSpirit.transform.position = this.gameObject.transform.position + new Vector3(0, 0, -7f);
 		m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, tempSpirit);
 		//PlayerManager.Instance.m_SpiritSkill.SkillUse(skillInfo, tempSpirit);

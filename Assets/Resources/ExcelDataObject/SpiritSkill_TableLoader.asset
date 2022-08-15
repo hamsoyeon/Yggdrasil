@@ -30,7 +30,7 @@ MonoBehaviour:
     Cshape2: 2
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970006
+    LunchPrefb: 970007
     FirePrefb: 0
     DamPrefb: 912001
   - Name_KR: "\uB3C5\uAD6C\uB984"
@@ -38,7 +38,7 @@ MonoBehaviour:
     SpritSkillIndex: 170002
     Target: 2
     Power: 30
-    SkillRange: 10
+    SkillRange: 20
     SkillType: 1
     BulletSpeed: 1
     TargetNum: 10
@@ -68,7 +68,7 @@ MonoBehaviour:
     Cshape2: 8
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970015
+    LunchPrefb: 970005
     FirePrefb: 0
     DamPrefb: 912007
   - Name_KR: "\uC811\uADFC\uBD88\uAC00"
@@ -87,7 +87,7 @@ MonoBehaviour:
     Cshape2: 0
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970014
+    LunchPrefb: 970017
     FirePrefb: 0
     DamPrefb: 0
   - Name_KR: "\uD790"
@@ -106,7 +106,7 @@ MonoBehaviour:
     Cshape2: 0
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970011
+    LunchPrefb: 970004
     FirePrefb: 0
     DamPrefb: 912009
   - Name_KR: "\uC774\uC18D \uC99D\uAC00"
@@ -125,6 +125,6 @@ MonoBehaviour:
     Cshape2: 0
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970012
+    LunchPrefb: 970003
     FirePrefb: 0
     DamPrefb: 912008
