@@ -209,12 +209,12 @@ public class BoardBehaviour : MonoBehaviour
     private void CreateBoard()
     {
         cnt = 0;
-        _game = new Game(Width, Height);
-        _gameBoard = new GameObject[Width, Height];   // 6 5
+        _game = new Game(Height, Width);
+        _gameBoard = new GameObject[Height, Width];   // 5 6
 
-        for (var x = 0; x < Width; x++)
+        for (var x = 0; x < Height; x++)
         {
-            for (var y = 0; y < Height; y++)
+            for (var y = 0; y < Width; y++)
             {
                 //var tile = (GameObject)Instantiate(Tile);
                 var tile = Instantiate(TileAsset.m_prefab[index[cnt]].TileObj);
@@ -223,15 +223,15 @@ public class BoardBehaviour : MonoBehaviour
 
                 var tileTransform = tile.transform;
 
-                tileTransform.position = GetWorldCoordinates(x, y, 0);
+                tileTransform.position = GetWorldCoordinates(y, x, 0);
 
-                MainManager.Instance.GetStageManager().m_MapInfo[y, x].MapPos = tileTransform.position;
-                MainManager.Instance.GetStageManager().m_MapInfo[y, x].MapObject = tile;
-                MainManager.Instance.GetStageManager().m_MapInfo[y, x].row = y;
-                MainManager.Instance.GetStageManager().m_MapInfo[y, x].column = x;
+                MainManager.Instance.GetStageManager().m_MapInfo[x, y].MapPos = tileTransform.position;
+                MainManager.Instance.GetStageManager().m_MapInfo[x, y].MapObject = tile;
+                MainManager.Instance.GetStageManager().m_MapInfo[x, y].row = x;
+                MainManager.Instance.GetStageManager().m_MapInfo[x, y].column = y;
 
-                tile.GetComponent<ColiderChk>().m_row = y;
-                tile.GetComponent<ColiderChk>().m_coulmn = x;
+                tile.GetComponent<ColiderChk>().m_row = x;
+                tile.GetComponent<ColiderChk>().m_coulmn = y;
 
 
                 var cylinder = tileTransform.Find("Cylinder");
@@ -242,8 +242,8 @@ public class BoardBehaviour : MonoBehaviour
 
                 tb.SetMaterial();
 
-                Debug.Log(MainManager.Instance.GetStageManager().m_MapInfo[y, x].MapPos);
-                Debug.Log($"{MainManager.Instance.GetStageManager().m_MapInfo[y, x].row}/{MainManager.Instance.GetStageManager().m_MapInfo[y, x].column}");
+                Debug.Log(MainManager.Instance.GetStageManager().m_MapInfo[x, y].MapPos);
+                Debug.Log($"{MainManager.Instance.GetStageManager().m_MapInfo[x, y].row}/{MainManager.Instance.GetStageManager().m_MapInfo[x, y].column}");
                 cnt++;
             }
         }
