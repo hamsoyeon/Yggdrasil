@@ -27,7 +27,7 @@ public class BoardBehaviour : MonoBehaviour
     List<GameObject> _path;
 
     GamePiece _selectedPiece;
-    GameObject _torus;
+    //GameObject _torus;
 
 
 	void Start ()
@@ -86,7 +86,7 @@ public class BoardBehaviour : MonoBehaviour
 
     void OnPieceSelected(PieceBehaviour pieceBehaviour)
     {
-        Destroy(_torus);
+        //Destroy(_torus);
 
         _selectedPiece = pieceBehaviour == null || _selectedPiece == pieceBehaviour.Piece ? null : pieceBehaviour.Piece;
 
@@ -216,7 +216,9 @@ public class BoardBehaviour : MonoBehaviour
 
         //데이터 컨테이너에 모든곳에서 사용이 가능하게 만들어놓은것 -> linq
         //열거자
-        var start = _game.AllTiles.Single(o => o.X == sp.Location.X && o.Y == sp.Location.Y); //linq
+
+        //SpacialObject -> 분석
+        var start = _game.AllTiles.Single(o => o.X == sp.Location.X && o.Y == sp.Location.Y); // 
         var destination = _game.AllTiles.Single(o => o.X == dp.Location.X && o.Y == dp.Location.Y);
 
         Func<Tile, Tile, double> distance = (node1, node2) => 1;
