@@ -14,7 +14,6 @@ public class BoardBehaviour : MonoBehaviour
 {
     public GameObject BossPiece;
     public GameObject PlayerPiece;
-	public GameObject Tile;
     public GameObject Line;
 
     public TileAsset TileAsset;
@@ -28,17 +27,23 @@ public class BoardBehaviour : MonoBehaviour
 
     List<GameObject> _path;
 
-    private GameObject BossObj;
-    private GameObject PlayerObj;
-
-<<<<<<< HEAD
     int cnt;
 
     List<int> index;
+    Vector3 BossPos;
+
+    private GameObject BossGameObject;
+    private GameObject PlayerGameObject;
+
 
     void Start ()
 	{
+        int x = 0;
+        int z = 0;
+
         index = new List<int>();
+
+        //각 맵 정보에 데이터 넣어주기.
         foreach (var item in DataTableManager.Instance.GetDataTable<Map_TableExcelLoader>().DataList)
         {
             if (item.TilePrefeb.ToString() == TileAsset.m_prefab[0].TileObj.name)
@@ -61,27 +66,10 @@ public class BoardBehaviour : MonoBehaviour
             {
                 index.Add(4);
             }
-        }
 
-        CreateBoard();
-=======
-    Vector3 BossPos;
-
-    private GameObject BossObj;
-    private GameObject PlayerObj;
-
-
-    void Start ()
-	{
-        int x = 0;
-        int z = 0;
-        //각 맵 정보에 데이터 넣어주기.
-        foreach (var item in DataTableManager.Instance.GetDataTable<Map_TableExcelLoader>().DataList)
-        {
             MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData = item;
             MainManager.Instance.GetStageManager().m_MapInfo[z, x].row = z;       //가로
             MainManager.Instance.GetStageManager().m_MapInfo[z, x].column = x;    //세로
->>>>>>> f05500c369f0e74403bd488fff9ed0c1b60d4714
 
             MainManager.Instance.GetStageManager().m_MapInfo[z, x].BossEffect = false;
 
@@ -184,77 +172,38 @@ public class BoardBehaviour : MonoBehaviour
     private GameObject CreateBossPiece(GamePiece piece)
 
     {
-<<<<<<< HEAD
-        BossObj = new GameObject();
-        BossObj.name = "Boss";
+        BossGameObject = new GameObject();
+        BossGameObject.name = "Boss";
 
-=======
-
-        BossObj = new GameObject();
-
-        BossObj.name = "Boss";
-
-
-
->>>>>>> f05500c369f0e74403bd488fff9ed0c1b60d4714
         var visualPiece = (GameObject)Instantiate(BossPiece);
 
         visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, .7f);
-        visualPiece.transform.parent = BossObj.transform;
-
-        visualPiece.transform.parent = BossObj.transform;
-
-
+        visualPiece.transform.parent = BossGameObject.transform;
 
         var pb = (PieceBehaviour)visualPiece.GetComponent("PieceBehaviour");
 
-
-
         pb.Piece = piece;
 
-
-
         return visualPiece;
-
     }
 
 
 
     private GameObject CreatePlayerPiece(GamePiece piece)
-
     {
-<<<<<<< HEAD
-        PlayerObj = new GameObject();
-        PlayerObj.name = "Player";
+        PlayerGameObject= new GameObject();
+        PlayerGameObject.name = "Player";
 
-=======
-
-        PlayerObj = new GameObject();
-
-        PlayerObj.name = "Player";
-
-
-
->>>>>>> f05500c369f0e74403bd488fff9ed0c1b60d4714
         var visualPiece = (GameObject)Instantiate(PlayerPiece);
 
         visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, .7f);
-        visualPiece.transform.parent = PlayerObj.transform;
-
-        visualPiece.transform.parent = PlayerObj.transform;
-
-
+        visualPiece.transform.parent = PlayerGameObject.transform;
 
         var pb = (PieceBehaviour)visualPiece.GetComponent("PieceBehaviour");
 
-
-
         pb.Piece = piece;
 
-
-
         return visualPiece;
-
     }
 
     private void CreateBoard()
@@ -285,7 +234,6 @@ public class BoardBehaviour : MonoBehaviour
                 tile.GetComponent<ColiderChk>().m_coulmn = x;
 
 
-
                 var cylinder = tileTransform.Find("Cylinder");
 
                 var tb = (TileBehaviour)cylinder.GetComponent("TileBehaviour");
@@ -294,13 +242,9 @@ public class BoardBehaviour : MonoBehaviour
 
                 tb.SetMaterial();
 
-<<<<<<< HEAD
                 Debug.Log(MainManager.Instance.GetStageManager().m_MapInfo[y, x].MapPos);
                 Debug.Log($"{MainManager.Instance.GetStageManager().m_MapInfo[y, x].row}/{MainManager.Instance.GetStageManager().m_MapInfo[y, x].column}");
                 cnt++;
-=======
-
->>>>>>> f05500c369f0e74403bd488fff9ed0c1b60d4714
             }
         }
     }
