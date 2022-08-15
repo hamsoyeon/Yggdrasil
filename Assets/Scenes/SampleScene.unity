@@ -914,7 +914,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270089956}
-  m_LocalRotation: {x: 0.09374312, y: 0.000000029671089, z: -0.000000002793763, w: 0.99559647}
+  m_LocalRotation: {x: 0.09374312, y: -0.000000029671089, z: 0.000000002793763, w: 0.99559647}
   m_LocalPosition: {x: 0, y: 3.2000003, z: -23.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -935,6 +935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1384001890}
+  camOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &270089961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1488,7 +1489,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -210}
+  m_AnchoredPosition: {x: 0, y: -515}
   m_SizeDelta: {x: 180, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &607693389
@@ -1723,8 +1724,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 401.8587, y: -33}
-  m_SizeDelta: {x: -803.7174, y: -382.69}
+  m_AnchoredPosition: {x: 932.7474, y: -327.74374}
+  m_SizeDelta: {x: -1865.4948, y: -972.1774}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &757314401
 MonoBehaviour:
@@ -2458,8 +2459,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 351.78748, y: -191.34607}
-  m_SizeDelta: {x: -703.575, y: -382.6921}
+  m_AnchoredPosition: {x: 882.6201, y: -487.98044}
+  m_SizeDelta: {x: -1765.2402, y: -975.9609}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &879765958
 MonoBehaviour:
@@ -3034,7 +3035,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7759336, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3050,7 +3051,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142287158}
-  m_LocalRotation: {x: 0.27194107, y: -0.000000016557943, z: 0.000000004679122, w: 0.96231395}
+  m_LocalRotation: {x: 0.27194107, y: 0.00000001655794, z: -0.0000000046791215, w: 0.96231395}
   m_LocalPosition: {x: 0, y: 6.56, z: -3.6799917}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3231,7 +3232,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: 0}
+  m_AnchoredPosition: {x: 0.00024414062, y: 0}
   m_SizeDelta: {x: 379.39, y: 415.812}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1220216920
@@ -3424,10 +3425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3994b352e36f73447af3d1a756eb2fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p_MaxHp: 0
-  p_CurHp: 0
-  p_PerHp: 0
-  SkillType_txt: {fileID: 848338147}
+  m_Spirit: {fileID: 0}
+  PlayerClass: {fileID: 0}
 --- !u!1 &1402851142
 GameObject:
   m_ObjectHideFlags: 0
@@ -3986,7 +3985,6 @@ MonoBehaviour:
   indicatorDefaultColor: {r: 0, g: 0.7202115, b: 1, a: 0}
   indicatorActiveColor: {r: 1, g: 0, b: 0, a: 0}
   ownIndicatorArray: []
-  ownTriggerArray: []
 --- !u!1 &1670081592
 GameObject:
   m_ObjectHideFlags: 0
@@ -4878,8 +4876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b83b897b81bb7c4db35b9b74fdeee45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perStamina: 0
-  hudDamageText: {fileID: 1483570841231961235, guid: 790df30a09482fe4fbe52151b3e5de8e, type: 3}
+  behavior: 0
 --- !u!114 &1902855047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4902,6 +4899,36 @@ MonoBehaviour:
   angleRange: 60
   distance: 5
   isCollision: 0
+  m_CurrentBossSkill:
+    Name_KR: 
+    Name_EN: 
+    BossSkillIndex: 0
+    TargetType: 0
+    Target: 0
+    Power: 0
+    CoolTime: 0
+    SkillDistance: 0
+    SkillRange: 0
+    SkillType: 0
+    UseStat: 0
+    Direction1: 0
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 0
+    DoT: 0
+    SkillAdded: 0
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 0
+    DelayPrefb: 0
+    LunchPrefb: 0
+    FieldPrefb: 0
+    FirePrefb: 0
+    DamPrefb: 0
 --- !u!114 &1902855048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5226,7 +5253,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7759336, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5242,7 +5269,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954500603}
-  m_LocalRotation: {x: 0.09374312, y: 0.000000029671089, z: -0.000000002793763, w: 0.99559647}
+  m_LocalRotation: {x: 0.09374312, y: -0.000000029671089, z: 0.000000002793763, w: 0.99559647}
   m_LocalPosition: {x: 0, y: 3.2000003, z: -23.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
