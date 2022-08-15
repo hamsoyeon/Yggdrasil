@@ -39,7 +39,9 @@ public class DamageCheck : MonoBehaviour
 							Debug.Log("적 이펙트 충돌");
 
 							EnemyClass = cols[i].GetComponent<CharacterClass>();
-							PlayerClass = GameObject.Find("Player").GetComponent<CharacterClass>();
+							//PlayerClass = GameObject.Find("Player").GetComponent<CharacterClass>();
+                            PlayerClass = GameObject.Find("Player").transform.GetChild(0).GetComponent<CharacterClass>();
+
 
 							if(cols[i].tag =="Boss")
 							{
@@ -49,7 +51,7 @@ public class DamageCheck : MonoBehaviour
 								if (minDamage <= 0)
 									minDamage = 1;
 
-								resultDamage = minDamage * (int)GameObject.Find("Player").GetComponent<PlayerManager>().m_Spirit.m_SpiritClass.m_SpiritSkillData.Power;
+								resultDamage = minDamage * (int)GameObject.Find("Player").transform.GetChild(0).GetComponent<PlayerManager>().m_Spirit.m_SpiritClass.m_SpiritSkillData.Power;
 
 
 								EnemyClass.m_BossStatData.HP -= resultDamage;
@@ -57,9 +59,6 @@ public class DamageCheck : MonoBehaviour
 								cols[i].GetComponent<BossFSM>().Damage();
 							}
 							
-
-						
-
 						}
 
 						break;
@@ -69,7 +68,7 @@ public class DamageCheck : MonoBehaviour
 						{
 							Debug.Log("플레이어 이펙트 충돌");
 							PlayerClass = cols[i].GetComponent<CharacterClass>();
-							EnemyClass = GameObject.Find("Boss").GetComponent<CharacterClass>();
+							EnemyClass = GameObject.Find("Boss").transform.GetChild(0).GetComponent<CharacterClass>();
 
 
 							minDamage = (int)EnemyClass.m_BossStatData.Atk - (int)PlayerClass.m_CharacterStat.Def;
@@ -120,7 +119,8 @@ public class DamageCheck : MonoBehaviour
 								Debug.Log("적 이펙트 충돌");
 
 								EnemyClass = cols[i].GetComponent<CharacterClass>();
-								PlayerClass = GameObject.Find("Player").GetComponent<CharacterClass>();
+								PlayerClass = GameObject.Find("Player").transform.GetChild(0).GetComponent<CharacterClass>();
+                               //PlayerClass = GameObject.FindGameObjectsWithTag("player").
 
 								if (cols[i].tag == "Boss")
 								{
@@ -130,7 +130,7 @@ public class DamageCheck : MonoBehaviour
 									if (minDamage <= 0)
 										minDamage = 1;
 
-									resultDamage = minDamage * (int)GameObject.Find("Player").GetComponent<PlayerManager>().m_Spirit.m_SpiritClass.m_SpiritSkillData.Power;
+									resultDamage = minDamage * (int)GameObject.Find("Player").transform.GetChild(0).GetComponent<PlayerManager>().m_Spirit.m_SpiritClass.m_SpiritSkillData.Power;
 
 
 									EnemyClass.m_BossStatData.HP -= resultDamage;
@@ -144,7 +144,7 @@ public class DamageCheck : MonoBehaviour
 							{
 								Debug.Log("플레이어 이펙트 충돌");
 								PlayerClass = cols[i].GetComponent<CharacterClass>();
-								EnemyClass = GameObject.Find("Boss").GetComponent<CharacterClass>();
+								EnemyClass = GameObject.Find("Boss").transform.GetChild(0).GetComponent<CharacterClass>();
 
 
 								minDamage = (int)EnemyClass.m_BossStatData.Atk - (int)PlayerClass.m_CharacterStat.Def;

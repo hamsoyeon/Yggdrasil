@@ -11,16 +11,16 @@ GameObject:
   - component: {fileID: 242977479076845729}
   - component: {fileID: 242977479076845728}
   - component: {fileID: 242977479076845735}
-  - component: {fileID: 242977479076845734}
   - component: {fileID: 242977479076845733}
   - component: {fileID: 242977479076845757}
   - component: {fileID: 242977479076845756}
   - component: {fileID: 242977479076845731}
   - component: {fileID: 242977479076845730}
   - component: {fileID: 5738515171472660628}
+  - component: {fileID: -8311454150568158415}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,20 +90,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &242977479076845734
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 242977479076845732}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &242977479076845733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,11 +117,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BossSkillData:
-    No: 0
     Name_KR: 
     Name_EN: 
-    BossIndex: 0
+    BossSkillIndex: 0
     TargetType: 0
+    Target: 0
     Power: 0
     CoolTime: 0
     SkillDistance: 0
@@ -148,20 +134,22 @@ MonoBehaviour:
     Direction4: 0
     Direction5: 0
     Direction6: 0
-    PlaceShift: 0
+    "\uC815\uB839": 0
     LifeTime: 0
     DoT: 0
     SkillAdded: 0
     BuffAdded: 0
     SkillAnimation: 0
+    SkillDelay: 0
+    DelayPrefb: 0
     LunchPrefb: 0
+    FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
   m_BossStatData:
-    No: 0
     Name_KR: 
     Name_EN: 
-    BossIndex: 0
+    BossStatIndex: 0
     Atk: 0
     HP: 0
     Def: 0
@@ -175,11 +163,12 @@ MonoBehaviour:
     Skill2: 0
     Skill3: 0
     Skill4: 0
+    Prefeb: 0
   m_CharacterStat:
     No: 0
     Name_KR: 
     Name_EN: 
-    CharIndex: 0
+    CharStatIndex: 0
     position: 0
     Atk: 0
     Def: 0
@@ -194,33 +183,39 @@ MonoBehaviour:
     Item1: 0
     Item2: 0
     Sight: 0
+    Prefeb: 0
   m_SpiritData:
     No: 0
     Name_KR: 
     Name_EN: 
-    Code: 0
+    SpritTableIndex: 0
     SpritClass: 0
     SpiritType: 0
     Atk: 0
     Atk_Speed: 0
     Move_Speed: 0
+    Crit_rate: 0
+    Crit_Dmg: 0
+    ChaceTarget: 0
     Duration: 0
     CoolTime: 0
     Skill1Code: 0
     Prefab: 0
   m_SpiritSkillData:
-    No: 0
     Name_KR: 
     Name_EN: 
-    SpiritSkillIndex: 0
+    SpritSkillIndex: 0
+    Target: 0
     Power: 0
-    Range: 0
-    CoolTime: 0
+    SkillRange: 0
     SkillType: 0
     BulletSpeed: 0
     TargetNum: 0
     LifeTime: 0
     DoT: 0
+    Shapeform: 0
+    Cshape1: 0
+    Cshape2: 0
     SkillAdded: 0
     BuffAdded: 0
     LunchPrefb: 0
@@ -282,3 +277,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3aaee7c22307d94aa4128dddc5147c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &-8311454150568158415
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242977479076845732}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

@@ -29,12 +29,56 @@ public class BoardBehaviour : MonoBehaviour
     GamePiece _selectedPiece;
     GameObject _torus;
 
+    Vector3 BossPos;
 
-	void Start ()
+    private GameObject BossObj;
+    private GameObject PlayerObj;
+
+
+    void Start ()
 	{
-        CreateBoard();
+        int x = 0;
+        int z = 0;
+        //각 맵 정보에 데이터 넣어주기.
+        foreach (var item in DataTableManager.Instance.GetDataTable<Map_TableExcelLoader>().DataList)
+        {
+            MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData = item;
+            MainManager.Instance.GetStageManager().m_MapInfo[z, x].row = z;       //가로
+            MainManager.Instance.GetStageManager().m_MapInfo[z, x].column = x;    //세로
 
+            MainManager.Instance.GetStageManager().m_MapInfo[z, x].BossEffect = false;
+
+
+            //if (MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData.BossSummon != 0)
+            //{
+            //	BossObj.transform.position = mapGridPositions[z, x] + new Vector3(0, 2.3f, 0);
+            //	MainManager.Instance.GetStageManager().m_BossRow = z;
+            //	MainManager.Instance.GetStageManager().m_BossColumn = x;
+            //}
+
+            //디버그용
+            if (item.BossSummon != 0)
+            {
+
+                MainManager.Instance.GetStageManager().m_BossRow = z;
+                MainManager.Instance.GetStageManager().m_BossColumn = x;
+            }
+            x++;
+            if (x == Width)
+            {
+                z++;
+                x = 0;
+            }
+        }
+
+        MainManager.Instance.GetStageManager().mapX = Width;
+        MainManager.Instance.GetStageManager().mapZ = Height;
+
+        CreateBoard();
         CreatePieces();
+
+
+       
 
         transform.position = new Vector3(Width / 2.0f * Spacing - (Spacing / 2), -(Width + Height) / 2 - 5, Height / 2.0f * Spacing - (Spacing / 2));
         OnGameStateChanged();
@@ -137,27 +181,65 @@ public class BoardBehaviour : MonoBehaviour
     //    return visualPiece;
     //}
     private GameObject CreateBossPiece(GamePiece piece)
+
     {
+
+        BossObj = new GameObject();
+
+        BossObj.name = "Boss";
+
+
+
         var visualPiece = (GameObject)Instantiate(BossPiece);
+
         visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, .7f);
+
+        visualPiece.transform.parent = BossObj.transform;
+
+
 
         var pb = (PieceBehaviour)visualPiece.GetComponent("PieceBehaviour");
 
+
+
         pb.Piece = piece;
 
+
+
         return visualPiece;
+
     }
 
+
+
     private GameObject CreatePlayerPiece(GamePiece piece)
+
     {
+
+        PlayerObj = new GameObject();
+
+        PlayerObj.name = "Player";
+
+
+
         var visualPiece = (GameObject)Instantiate(PlayerPiece);
+
         visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, .7f);
+
+        visualPiece.transform.parent = PlayerObj.transform;
+
+
 
         var pb = (PieceBehaviour)visualPiece.GetComponent("PieceBehaviour");
 
+
+
         pb.Piece = piece;
 
+
+
         return visualPiece;
+
     }
 
     private void CreateBoard()
@@ -182,6 +264,9 @@ public class BoardBehaviour : MonoBehaviour
                 MainManager.Instance.GetStageManager().m_MapInfo[y, x].row = y;
                 MainManager.Instance.GetStageManager().m_MapInfo[y, x].column = x;
 
+                tile.GetComponent<ColiderChk>().m_row = y;
+                tile.GetComponent<ColiderChk>().m_coulmn = x;
+
 
 
                 var cylinder = tileTransform.Find("Cylinder");
@@ -192,8 +277,7 @@ public class BoardBehaviour : MonoBehaviour
 
                 tb.SetMaterial();
 
-                Debug.Log(MainManager.Instance.GetStageManager().m_MapInfo[y, x].MapPos);
-                Debug.Log($"{MainManager.Instance.GetStageManager().m_MapInfo[y, x].row}/{MainManager.Instance.GetStageManager().m_MapInfo[y, x].column}");
+
             }
         }
 

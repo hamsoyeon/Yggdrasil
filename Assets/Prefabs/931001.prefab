@@ -54,7 +54,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2705163367310006504}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
@@ -62,7 +62,7 @@ Transform:
   - {fileID: 7787634695659459376}
   m_Father: {fileID: 3096257877481538909}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3399125117243460871
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,9 +165,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3096257877481538909}
+  - component: {fileID: -3532871818076272269}
+  - component: {fileID: -5200336458214227060}
+  - component: {fileID: 2427279729168433314}
+  - component: {fileID: -5016034091275603396}
+  - component: {fileID: 8498075457909129811}
   m_Layer: 0
   m_Name: 931001
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,7 +184,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6863022358648512248}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -190,7 +195,216 @@ Transform:
   - {fileID: 6431600720351866547}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!65 &-3532871818076272269
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863022358648512248}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 18, z: 20.66}
+  m_Center: {x: 0, y: 10, z: 3}
+--- !u!114 &-5200336458214227060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863022358648512248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b83b897b81bb7c4db35b9b74fdeee45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behavior: 0
+--- !u!114 &2427279729168433314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863022358648512248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa67e10618bbcbd4d9767dcba8aa3ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 242977479076845732, guid: 3de11b3bc1b2444448357b2ddd0b9130, type: 3}
+  EnemyPrefebs:
+  - {fileID: 0}
+  - {fileID: 0}
+  TestSkillPrefab: {fileID: 7548329720797303464, guid: 60fdf67d68015ac41bf555921580c7df, type: 3}
+  Skill1: {fileID: 0}
+  Skill2: {fileID: 0}
+  Skill3: {fileID: 0}
+  Skill4: {fileID: 0}
+  angleRange: 60
+  distance: 5
+  isCollision: 0
+  m_CurrentBossSkill:
+    Name_KR: 
+    Name_EN: 
+    BossSkillIndex: 0
+    TargetType: 0
+    Target: 0
+    Power: 0
+    CoolTime: 0
+    SkillDistance: 0
+    SkillRange: 0
+    SkillType: 0
+    UseStat: 0
+    Direction1: 0
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 0
+    DoT: 0
+    SkillAdded: 0
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 0
+    DelayPrefb: 0
+    LunchPrefb: 0
+    FieldPrefb: 0
+    FirePrefb: 0
+    DamPrefb: 0
+--- !u!114 &-5016034091275603396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863022358648512248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64136c781e8bd2743a5da9d287c90e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BossSkillData:
+    Name_KR: 
+    Name_EN: 
+    BossSkillIndex: 0
+    TargetType: 0
+    Target: 0
+    Power: 0
+    CoolTime: 0
+    SkillDistance: 0
+    SkillRange: 0
+    SkillType: 0
+    UseStat: 0
+    Direction1: 0
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 0
+    DoT: 0
+    SkillAdded: 0
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 0
+    DelayPrefb: 0
+    LunchPrefb: 0
+    FieldPrefb: 0
+    FirePrefb: 0
+    DamPrefb: 0
+  m_BossStatData:
+    Name_KR: 
+    Name_EN: 
+    BossStatIndex: 0
+    Atk: 0
+    HP: 0
+    Def: 0
+    SRange: 0
+    CRange: 0
+    FRange: 0
+    MaxStamina: 0
+    Speed: 0
+    MoveStUsed: 0
+    Skill1: 0
+    Skill2: 0
+    Skill3: 0
+    Skill4: 0
+    Prefeb: 0
+  m_CharacterStat:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    CharStatIndex: 0
+    position: 0
+    Atk: 0
+    Def: 0
+    HP: 0
+    MoveSpeed: 0
+    Skill1: 0
+    Skill2: 0
+    Skill3: 0
+    Skill4: 0
+    Skill5: 0
+    Skill6: 0
+    Item1: 0
+    Item2: 0
+    Sight: 0
+    Prefeb: 0
+  m_SpiritData:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    SpritTableIndex: 0
+    SpritClass: 0
+    SpiritType: 0
+    Atk: 0
+    Atk_Speed: 0
+    Move_Speed: 0
+    Crit_rate: 0
+    Crit_Dmg: 0
+    ChaceTarget: 0
+    Duration: 0
+    CoolTime: 0
+    Skill1Code: 0
+    Prefab: 0
+  m_SpiritSkillData:
+    Name_KR: 
+    Name_EN: 
+    SpritSkillIndex: 0
+    Target: 0
+    Power: 0
+    SkillRange: 0
+    SkillType: 0
+    BulletSpeed: 0
+    TargetNum: 0
+    LifeTime: 0
+    DoT: 0
+    Shapeform: 0
+    Cshape1: 0
+    Cshape2: 0
+    SkillAdded: 0
+    BuffAdded: 0
+    LunchPrefb: 0
+    FirePrefb: 0
+    DamPrefb: 0
+--- !u!114 &8498075457909129811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863022358648512248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3aaee7c22307d94aa4128dddc5147c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7790459581089955566
 PrefabInstance:
   m_ObjectHideFlags: 0

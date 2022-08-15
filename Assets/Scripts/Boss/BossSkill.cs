@@ -33,10 +33,16 @@ public class BossSkill : MonoBehaviour
     public enum BossSkillType { WIDE = 1, TARGET, LINE, DIFFUSION, SUMMONS }
 
     public GameObject target;
+
+    public GameObject LineSkillTarget;
+
     public GameObject[] EnemyPrefebs = new GameObject[2];
-    public GameObject Laser_Effect;
-    public GameObject Lightning_Effect;
-    public GameObject Thunderbolt_Effect;
+
+    public GameObject TestSkillPrefab;
+    public GameObject Skill1;
+    public GameObject Skill2;
+    public GameObject Skill3;
+    public GameObject Skill4;
 
     private Animator boss_anim;
     private string currentState;
@@ -114,6 +120,11 @@ public class BossSkill : MonoBehaviour
         //플레이어의 위치와 보스의 배열 위치를 알아낸다.
         m_PlayerRow = MainManager.Instance.GetStageManager().m_PlayerRow;
         m_PlayerColumn = MainManager.Instance.GetStageManager().m_PlayerCoulmn;
+
+        Debug.Log($"현재 플레이어 위치: {m_PlayerRow}/{m_PlayerColumn}");
+
+
+
         m_BossRow = MainManager.Instance.GetStageManager().m_BossRow;
         m_BossColumn = MainManager.Instance.GetStageManager().m_BossColumn;
 
@@ -193,7 +204,7 @@ public class BossSkill : MonoBehaviour
                 checkRow_M = Row - (int)i;
 
 
-                if (checkRow_P % 2 == 0) //024(135라인)
+                if (checkRow_P % 2 == 1) //024(135라인)
                     saveColumn++;
 
                 for (float j = 0; j < xRange; j += 1.0f)
@@ -265,7 +276,7 @@ public class BossSkill : MonoBehaviour
                 if (m_StageMgr.m_MapInfo[i, j].BossEffect)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.GetComponent<MeshRenderer>().material.color = Color.white;
-                    GameObject effect = Instantiate(Lightning_Effect);
+                    GameObject effect = Instantiate(TestSkillPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
                     effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
@@ -355,7 +366,7 @@ public class BossSkill : MonoBehaviour
                 checkRow_P = m_PlayerRow + (int)i;
                 checkRow_M = m_PlayerRow - (int)i;
 
-                if (checkRow_P % 2 == 0) //024(135라인)
+                if (checkRow_P % 2 == 1) //024(135라인)
                     saveColumn++;
 
                 for (float j = 0; j < xRange; j += 1.0f)
@@ -429,7 +440,7 @@ public class BossSkill : MonoBehaviour
                 if (m_StageMgr.m_MapInfo[i, j].BossEffect)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.GetComponent<MeshRenderer>().material.color = Color.white;
-                    GameObject effect = Instantiate(Lightning_Effect); //이펙트 표시.
+                    GameObject effect = Instantiate(TestSkillPrefab); //이펙트 표시.
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
                     effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
@@ -492,6 +503,9 @@ public class BossSkill : MonoBehaviour
     IEnumerator SkillLineAction()
     {
 
+
+        LineSkillTarget = GameObject.Find("Player").transform.GetChild(0).gameObject;
+
         int Row = 0;
         int Column = 0;
 
@@ -510,10 +524,10 @@ public class BossSkill : MonoBehaviour
 
 
         float range = m_CurrentBossSkill.SkillRange - 1.0f;
-        float xRange = m_CurrentBossSkill.SkillRange + range;
+        //float xRange = m_CurrentBossSkill.SkillRange + range;
 
         //플레이어와의 각도를 구함. 
-        float tempAngle = CalculateAngle(this.gameObject.transform.position, target.transform.position);
+        float tempAngle = CalculateAngle(this.gameObject.transform.position, LineSkillTarget.transform.position);
         int checkIndex = 0;
 
 
@@ -549,12 +563,20 @@ public class BossSkill : MonoBehaviour
             checkIndex = 5;
         }
 
+       
+
         // 보스가 스킬을 사용할때 해당로 돌려준다음
         this.gameObject.transform.rotation = Quaternion.Euler(0, tempAngle, 0);
+
+
+        
+
 
         // 해당 각도를 시작으로 시계방향으로 타일 방향체크후 증감값 셋팅. 
         for (int i = 0; i < OriginArr.Length; i++)
         {
+
+           
             //Row
             if (i == 0 || i == 5)
             {
@@ -574,11 +596,11 @@ public class BossSkill : MonoBehaviour
             {
                 if (i == 0 || i == 2)
                 {
-                    OriginArr[i].column = Column;
+                    OriginArr[i].column = Column +1;
                 }
                 else if (i == 3 || i == 5)
                 {
-                    OriginArr[i].column = Column - 1;
+                    OriginArr[i].column = Column;
                 }
 
                 if (i == 1)
@@ -596,11 +618,11 @@ public class BossSkill : MonoBehaviour
 
                 if (i == 0 || i == 2)
                 {
-                    OriginArr[i].column = Column + 1;
+                    OriginArr[i].column = Column;
                 }
                 else if (i == 3 || i == 5)
                 {
-                    OriginArr[i].column = Column;
+                    OriginArr[i].column = Column -1;
                 }
 
                 if (i == 1)
@@ -614,7 +636,6 @@ public class BossSkill : MonoBehaviour
             }
 
         }
-
 
 
         List<ClockDirectionList> tempList = new List<ClockDirectionList>();
@@ -702,9 +723,9 @@ public class BossSkill : MonoBehaviour
                         if (tempCDLARR[j].row % 2 == 0) //135라인.
                         {
 
-                            if (tempCDLARR[j].check == 3 || tempCDLARR[j].check == 5)
+                            if (tempCDLARR[j].check == 0 || tempCDLARR[j].check == 2)
                             {
-                                checkColumn = tempCDLARR[j].column - 1;
+                                checkColumn = tempCDLARR[j].column + 1;
                                 tempCDLARR[j].column = checkColumn;
                             }
 
@@ -723,9 +744,9 @@ public class BossSkill : MonoBehaviour
                         }
                         else
                         {
-                            if (tempCDLARR[j].check == 0 || tempCDLARR[j].check == 2)
+                            if (tempCDLARR[j].check == 3 || tempCDLARR[j].check == 5)
                             {
-                                checkColumn = tempCDLARR[j].column + 1;
+                                checkColumn = tempCDLARR[j].column -1;
                                 tempCDLARR[j].column = checkColumn;
                             }
 
@@ -780,7 +801,7 @@ public class BossSkill : MonoBehaviour
                 if (m_StageMgr.m_MapInfo[i, j].BossEffect)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.GetComponent<MeshRenderer>().material.color = Color.white;
-                    GameObject effect = Instantiate(Lightning_Effect);
+                    GameObject effect = Instantiate(TestSkillPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
                     effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
@@ -871,7 +892,7 @@ public class BossSkill : MonoBehaviour
                 checkRow_P = Row + (int)i;
                 checkRow_M = Row - (int)i;
 
-                if (checkRow_P % 2 == 0) //024(135라인)
+                if (checkRow_P % 2 == 1) //024(135라인)
                     saveColumn_M++;
                 else
                     saveColumn_P--;
@@ -884,22 +905,44 @@ public class BossSkill : MonoBehaviour
                     {
                         if (saveColumn_M >= 0)
                         {
-                            //map.mapIndicatorArray[m_BossRow, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
-                            m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
-                            m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].BossEffect = true;
+                   ;
 
-                            m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
-                            m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].BossEffect = true;
+                            if (checkRow_M >= 0)
+                            {
+                                //map.mapIndicatorArray[m_BossRow, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
+                                m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                                m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].BossEffect = true;
+                            }
+
+                            if(checkRow_P < 6)
+                            {
+                                m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                                m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].BossEffect = true;
+                            }
+
+
                         }
 
                         if (saveColumn_P < 6)
                         {
-                            //map.mapIndicatorArray[m_BossRow, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
-                            m_StageMgr.m_MapInfo[checkRow_M, saveColumn_P].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
-                            m_StageMgr.m_MapInfo[checkRow_M, saveColumn_P].BossEffect = true;
+                       
 
-                            m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
-                            m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].BossEffect = true;
+                            if(checkRow_M >= 0)
+                            {
+                                //map.mapIndicatorArray[m_BossRow, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
+                                m_StageMgr.m_MapInfo[checkRow_M, saveColumn_P].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                                m_StageMgr.m_MapInfo[checkRow_M, saveColumn_P].BossEffect = true;
+                            }
+
+
+                            if(checkRow_P < 6)
+                            {
+                                m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                                m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].BossEffect = true;
+                            }
+
+
+                         
                         }
 
                     }
@@ -975,7 +1018,7 @@ public class BossSkill : MonoBehaviour
                 if (m_StageMgr.m_MapInfo[i, j].BossEffect)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.GetComponent<MeshRenderer>().material.color = Color.white;
-                    GameObject effect = Instantiate(Lightning_Effect);
+                    GameObject effect = Instantiate(TestSkillPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
                     effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
@@ -1065,7 +1108,7 @@ public class BossSkill : MonoBehaviour
         //플레이어가 있을경우
         if (colls.Length != 0)
         {
-            GameObject lightning = Instantiate(Lightning_Effect);
+            GameObject lightning = Instantiate(TestSkillPrefab);
             int rand = Random.Range(0, colls.Length);
             Vector3 targetPos = colls[rand].gameObject.transform.position;
 
@@ -1150,7 +1193,7 @@ public class BossSkill : MonoBehaviour
 
         for (int i = 0; i < bolt.Length; i++)
         {
-            bolt[i] = Instantiate(Thunderbolt_Effect);
+            bolt[i] = Instantiate(TestSkillPrefab);
 
             float randX = Random.Range(bossX - 10f, bossX + 10f);
             float randZ = Random.Range(bossZ - 10f, bossZ + 10f);
@@ -1212,7 +1255,7 @@ public class BossSkill : MonoBehaviour
     IEnumerator LaserFireAction(Vector3 playerPos, float endTime)
     {
 
-        GameObject laser = Instantiate(Laser_Effect);
+        GameObject laser = Instantiate(TestSkillPrefab);
         laser.transform.position = transform.position;
         laser.transform.LookAt(playerPos);
 
