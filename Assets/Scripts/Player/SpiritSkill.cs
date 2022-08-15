@@ -423,7 +423,7 @@ public class SpiritSkill : MonoBehaviour
 				buff_Time = 0f;
 
 
-				colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 8);  //9번째 레이어 = Enemy
+				colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 11);  //9번째 레이어 = Enemy
 				foreach (var rangeCollider in colls)
 				{
                     //플레이어 회복시키는 코드.

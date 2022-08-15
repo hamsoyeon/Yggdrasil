@@ -635,7 +635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BossPiece: {fileID: 6863022358648512248, guid: f1f412bf354cff3449eae9f0b69db625, type: 3}
-  PlayerPiece: {fileID: 242977479076845732, guid: f6f755b01dd206946b593198fa76f1c2, type: 3}
+  PlayerPiece: {fileID: 5212831495978784022, guid: 7c37257dadd0ab44eb7b5f34509ec6d0, type: 3}
   Line: {fileID: 8166077804748737062, guid: ebc1a9c7d75a2434297c84d1f0143127, type: 3}
   TileAsset: {fileID: 11400000, guid: 25682d25e46fb8d4fa58600f5c78ef11, type: 2}
   Width: 6
@@ -6779,11 +6779,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2031a6307b05b2a4997b29ec1a1f3285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_player: {fileID: 0}
-  maxHP: 0
-  currentHP: 0
-  m_hpBar: {fileID: 1721540470}
-  camera: {fileID: 0}
 --- !u!114 &1721540470
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace Model
 {
@@ -19,7 +20,7 @@ namespace Model
             Height = height;
 
             InitialiseGameBoard();
-            BlockOutTiles();
+            //BlockOutTiles();
 
             InitialiseGamePieces();
         }
@@ -61,11 +62,10 @@ namespace Model
         //이동 불가 타일을 실시간으로 변동점을 잡기 위한 
 
         //못가는 타일 설정
-        private void BlockOutTiles()
+        public void BlockOutTiles(int x, int y)
         {
-            GameBoard[2, 4].CanPass = false;
-            GameBoard[2, 2].CanPass = false;
-            GameBoard[3, 2].CanPass = false;
+            GameBoard[x, y].CanPass = false;
+            Debug.Log($"{GameBoard[x, y].CanPass}");
         }
 
         public IEnumerable<Tile> AllTiles
