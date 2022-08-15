@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     //플레이어 오브젝트
     public static GameObject p_Object;
 
-
+    FollowCam cam;
 
     //스킬 
     public Spirit m_Spirit;
@@ -57,12 +57,35 @@ public class PlayerManager : MonoBehaviour
 
 
 
-    private void Move()
+    public void Move()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        //방향키로 입력으로 변경
 
-        transform.Translate(new Vector3(h, 0, v) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+        //float h = Input.GetAxis("Horizontal");
+        //float v = Input.GetAxis("Vertical");
+
+        if(Input.GetKey(KeyCode.LeftArrow))
+        {
+            this.transform.Translate(new Vector3(-0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            cam.cam.transform.Translate(new Vector3(-0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            this.transform.Translate(new Vector3(0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            cam.cam.transform.Translate(new Vector3(0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            this.transform.Translate(new Vector3(0.0f, 0.0f, 0.8f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            cam.cam.transform.Translate(new Vector3(0.0f, 0.7f, 0.403f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            this.transform.Translate(new Vector3(0.0f, 0.0f, -0.8f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            cam.cam.transform.Translate(new Vector3(0.0f, -0.7f, -0.403f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+        }
+
+        //transform.Translate(new Vector3(h, 0, v) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
     }
 
 
@@ -71,6 +94,7 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cam = GetComponent<FollowCam>();
         p_Object = this.gameObject;
         m_Spirit = this.GetComponent<Spirit>();
         //m_SpiritSkill = this.GetComponent<SpiritSkill>();

@@ -219,6 +219,9 @@ public class BoardBehaviour : MonoBehaviour
                 //var tile = (GameObject)Instantiate(Tile);
                 var tile = Instantiate(TileAsset.m_prefab[index[cnt]].TileObj);
 
+                if (TileAsset.m_prefab[index[cnt]].TileObj.name == TileAsset.m_prefab[4].TileObj.name)
+                    _game.BlockOutTiles(x, y);
+
                 _gameBoard[x, y] = tile;
 
                 var tileTransform = tile.transform;
