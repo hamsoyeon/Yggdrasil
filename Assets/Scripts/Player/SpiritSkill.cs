@@ -19,7 +19,7 @@ public class SpiritSkill : MonoBehaviour
 		EffectPrefab.GetComponent<DamageCheck>().who = 1;
 
 		//GameObject tempSkillEffect = Instantiate(EffectPrefab);
-		switch (skillInfo.SpiritSkillIndex)
+		switch (skillInfo.SpritSkillIndex)
 		{
 			case 10100:  //독구름
 				StartCoroutine(PoisonCloud(skillInfo, tempSpirit));
@@ -74,7 +74,7 @@ public class SpiritSkill : MonoBehaviour
 				buff_Time = 0f;
 
 
-				colls = Physics.OverlapSphere(spirit.transform.position, skill.Range, 1 << 8);  //9번째 레이어 = Enemy
+				colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 8);  //9번째 레이어 = Enemy
 				foreach (var rangeCollider in colls)
 				{
 					//플레이어 회복시키는 코드.
@@ -114,7 +114,7 @@ public class SpiritSkill : MonoBehaviour
 			}
 
 
-			colls = Physics.OverlapSphere(spirit.transform.position, skill.Range, 1 << 9);  //9번째 레이어 = Enemy
+			colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 9);  //9번째 레이어 = Enemy
 
 			if(colls != null)
 			{
@@ -127,7 +127,7 @@ public class SpiritSkill : MonoBehaviour
 					//정령과 밀리는 물체사이의 방향을 구해서
 					var heading = rangeCollider.transform.position - spirit.transform.position;
 					heading.y = 0f;
-					heading *= skill.Range;
+					heading *= skill.SkillRange;
 
 					//보스가 아니라면
 					if (rangeCollider.gameObject.name != "Boss")
@@ -157,7 +157,7 @@ public class SpiritSkill : MonoBehaviour
 		//All 
 		Collider[] colls = null;
 
-		colls = Physics.OverlapSphere(spirit.transform.position, skill.Range, 1 << 8);  
+		colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 8);  
 		//8번째 레이어 = Player
 		//무적버프 
 
@@ -176,7 +176,7 @@ public class SpiritSkill : MonoBehaviour
 	IEnumerator PoisonCloud(SpiritSkill_TableExcel skill,GameObject spirit)
 	{
 		
-		GameObject nearEnemy = FindNearbyEnemy(spirit, skill.Range);
+		GameObject nearEnemy = FindNearbyEnemy(spirit, skill.SkillRange);
 		GameObject tempEffect = null;
 
 
@@ -233,8 +233,8 @@ public class SpiritSkill : MonoBehaviour
 
 
 		Debug.Log("와이드 스킬 실행");
-		float range = skillInfo.Range - 1.0f;
-		float xRange = skillInfo.Range + range;
+		float range = skillInfo.SkillRange - 1.0f;
+		float xRange = skillInfo.SkillRange + range;
 
 		//보스 스킬범위를 표시해 주는 부분.
 		if (range > 0)  //range는 -1을한값 범위가 2부터 여기 들어온다. 범위가 1일경우는 해당 타일에 계산하면 된다.
@@ -246,7 +246,7 @@ public class SpiritSkill : MonoBehaviour
 			int checkRow_M;   //보스 기준 위쪽에 있는 Column값
 			int checkColumn;  //현재 색을 바꿀 타일의 Column값
 
-			for (float i = 0; i < skillInfo.Range; i += 1.0f)
+			for (float i = 0; i < skillInfo.SkillRange; i += 1.0f)
 			{
 
 				checkRow_P = Row + (int)i;

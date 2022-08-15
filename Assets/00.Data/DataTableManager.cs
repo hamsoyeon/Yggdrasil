@@ -7,11 +7,13 @@ using UnityEngine.SceneManagement;
 public enum E_DataTableType
 {
     None = -1,
-    BossStat,
+    Boss,
     CharStat,
     SoulStat,
     Map,
     BossSkill,
+    Spirit,
+    SpiritSkill,
 
     Max
 }

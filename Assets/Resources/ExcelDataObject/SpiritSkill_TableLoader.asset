@@ -14,105 +14,117 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   filepath: Assets\00.Data\Txt\SpiritSkill_Table.txt
   DataList:
-  - No: 1
-    Name_KR: "\uB3C5\uAD6C\uB984\uC18C\uD658"
-    Name_EN: PoisonCloud
-    SpiritSkillIndex: 10100
-    Power: 30
-    Range: 5
-    CoolTime: 40
-    SkillType: 1
-    BulletSpeed: 0
-    TargetNum: 1
-    LifeTime: 5
-    DoT: 1
-    SkillAdded: 0
-    BuffAdded: 0
-    LunchPrefb: 0
-    FirePrefb: 0
-    DamPrefb: 0
-  - No: 2
-    Name_KR: "\uC5BC\uC74C\uD3ED\uBC1C"
-    Name_EN: IceExplosion
-    SpiritSkillIndex: 10200
+  - Name_KR: "\uC5BC\uC74C \uC7A5\uD310"
+    Name_EN: Ice_Spike
+    SpritSkillIndex: 170001
+    Target: 2
     Power: 40
-    Range: 2
-    CoolTime: 20
+    SkillRange: 0
     SkillType: 1
-    BulletSpeed: 0
-    TargetNum: 1
+    BulletSpeed: 1
+    TargetNum: 10
     LifeTime: 5
-    DoT: 1
+    DoT: 40
+    Shapeform: 2
+    Cshape1: 360
+    Cshape2: 2
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 0
+    LunchPrefb: 970008
     FirePrefb: 0
-    DamPrefb: 0
-  - No: 3
-    Name_KR: "\uBB34\uC801"
+    DamPrefb: 912001
+  - Name_KR: "\uB3C5\uAD6C\uB984"
+    Name_EN: Posion_Cloud
+    SpritSkillIndex: 170002
+    Target: 2
+    Power: 30
+    SkillRange: 0
+    SkillType: 1
+    BulletSpeed: 1
+    TargetNum: 10
+    LifeTime: 5
+    DoT: 30
+    Shapeform: 2
+    Cshape1: 360
+    Cshape2: 10
+    SkillAdded: 0
+    BuffAdded: 0
+    LunchPrefb: 912005
+    FirePrefb: 0
+    DamPrefb: 912002
+  - Name_KR: "\uBB34\uC801"
     Name_EN: Invincibility
-    SpiritSkillIndex: 10300
+    SpritSkillIndex: 170003
+    Target: 1
     Power: 0
-    Range: 8
-    CoolTime: 120
+    SkillRange: 0
     SkillType: 1
-    BulletSpeed: 0
-    TargetNum: 1
+    BulletSpeed: 1
+    TargetNum: 3
     LifeTime: 3
     DoT: 0
+    Shapeform: 2
+    Cshape1: 360
+    Cshape2: 8
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 0
+    LunchPrefb: 970015
     FirePrefb: 0
-    DamPrefb: 0
-  - No: 4
-    Name_KR: "\uC2E0\uC131"
-    Name_EN: Sanctity
-    SpiritSkillIndex: 10400
+    DamPrefb: 912007
+  - Name_KR: "\uC811\uADFC\uBD88\uAC00"
+    Name_EN: KeepAway
+    SpritSkillIndex: 170004
+    Target: 2
     Power: 0
-    Range: 5
-    CoolTime: 20
+    SkillRange: 5
     SkillType: 1
-    BulletSpeed: 0
-    TargetNum: 1
+    BulletSpeed: 1
+    TargetNum: 6
     LifeTime: 3
     DoT: 0
+    Shapeform: 2
+    Cshape1: 360
+    Cshape2: 0
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 0
+    LunchPrefb: 970014
     FirePrefb: 0
     DamPrefb: 0
-  - No: 5
-    Name_KR: "\uD68C\uBCF5"
+  - Name_KR: "\uD790"
     Name_EN: Heal
-    SpiritSkillIndex: 10500
-    Power: 5
-    Range: 5
-    CoolTime: 35
-    SkillType: 1
-    BulletSpeed: 0
-    TargetNum: 1
+    SpritSkillIndex: 170005
+    Target: 1
+    Power: 0
+    SkillRange: 1
+    SkillType: 2
+    BulletSpeed: 1
+    TargetNum: 3
     LifeTime: 5
     DoT: 0
+    Shapeform: 2
+    Cshape1: 360
+    Cshape2: 0
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 0
+    LunchPrefb: 970011
     FirePrefb: 0
-    DamPrefb: 0
-  - No: 6
-    Name_KR: "\uBE5B"
-    Name_EN: Light
-    SpiritSkillIndex: 10600
-    Power: 20
-    Range: 1
-    CoolTime: 20
-    SkillType: 1
-    BulletSpeed: 0
-    TargetNum: 1
+    DamPrefb: 912009
+  - Name_KR: "\uC774\uC18D \uC99D\uAC00"
+    Name_EN: Speedup
+    SpritSkillIndex: 170006
+    Target: 1
+    Power: 0
+    SkillRange: 1
+    SkillType: 2
+    BulletSpeed: 1
+    TargetNum: 3
     LifeTime: 10
     DoT: 0
+    Shapeform: 2
+    Cshape1: 360
+    Cshape2: 0
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 0
+    LunchPrefb: 970012
     FirePrefb: 0
-    DamPrefb: 0
+    DamPrefb: 912008

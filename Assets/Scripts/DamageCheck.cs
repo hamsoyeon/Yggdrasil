@@ -36,16 +36,16 @@ public class DamageCheck : MonoBehaviour
 					case 1: 
 						if(cols[i].tag =="Boss" || cols[i].tag == "Mob")
 						{
-							Debug.Log("Àû ÀÌÆåÆ® Ãæµ¹");
+							Debug.Log("ì  ì´í™íŠ¸ ì¶©ëŒ");
 
 							EnemyClass = cols[i].GetComponent<CharacterClass>();
 							PlayerClass = GameObject.Find("Player").GetComponent<CharacterClass>();
 
 							if(cols[i].tag =="Boss")
 							{
-								minDamage = PlayerClass.m_CharacterStat.Atk - (int)EnemyClass.m_BossStatData.Def;
+								minDamage = (int)PlayerClass.m_CharacterStat.Atk - (int)EnemyClass.m_BossStatData.Def;
 
-								//ÃÖ¼Ò µ¥¹ÌÁö º¸Á¤.
+								//ìµœì†Œ ë°ë¯¸ì§€ ë³´ì •.
 								if (minDamage <= 0)
 									minDamage = 1;
 
@@ -53,7 +53,7 @@ public class DamageCheck : MonoBehaviour
 
 
 								EnemyClass.m_BossStatData.HP -= resultDamage;
-								//ÇØ´ç ÇÃ·¹ÀÌ¾îÀÇ UI¿¡ Á¢±ÙÇØ¼­ µ¥¹ÌÁö Ç¥½Ã ¿ÜÀûÀ¸·Î ¶ç¾îÁÖ±â.
+								//í•´ë‹¹ í”Œë ˆì´ì–´ì˜ UIì— ì ‘ê·¼í•´ì„œ ë°ë¯¸ì§€ í‘œì‹œ ì™¸ì ìœ¼ë¡œ ë„ì–´ì£¼ê¸°.
 								cols[i].GetComponent<BossFSM>().Damage();
 							}
 							
@@ -67,21 +67,21 @@ public class DamageCheck : MonoBehaviour
 					case 2:
 						if (cols[i].tag == "Player")
 						{
-							Debug.Log("ÇÃ·¹ÀÌ¾î ÀÌÆåÆ® Ãæµ¹");
+							Debug.Log("í”Œë ˆì´ì–´ ì´í™íŠ¸ ì¶©ëŒ");
 							PlayerClass = cols[i].GetComponent<CharacterClass>();
 							EnemyClass = GameObject.Find("Boss").GetComponent<CharacterClass>();
 
 
-							minDamage = (int)EnemyClass.m_BossStatData.Atk - PlayerClass.m_CharacterStat.Def;
+							minDamage = (int)EnemyClass.m_BossStatData.Atk - (int)PlayerClass.m_CharacterStat.Def;
 
-							//ÃÖ¼Ò µ¥¹ÌÁö º¸Á¤.
+							//ìµœì†Œ ë°ë¯¸ì§€ ë³´ì •.
 							if (minDamage <= 0)
 								minDamage = 1;
 
 							resultDamage = minDamage * (int)EnemyClass.m_SkillMgr.m_BossSkill.m_CurrentBossSkill.Power;
 
 							PlayerClass.m_CharacterStat.HP -= resultDamage;
-							//ÇØ´ç ÇÃ·¹ÀÌ¾îÀÇ UI¿¡ Á¢±ÙÇØ¼­ µ¥¹ÌÁö Ç¥½Ã ¿ÜÀûÀ¸·Î ¶ç¾îÁÖ±â.
+							//í•´ë‹¹ í”Œë ˆì´ì–´ì˜ UIì— ì ‘ê·¼í•´ì„œ ë°ë¯¸ì§€ í‘œì‹œ ì™¸ì ìœ¼ë¡œ ë„ì–´ì£¼ê¸°.
 							cols[i].GetComponent<PlayerManager>().Damage();
 						}
 						break;
@@ -92,7 +92,7 @@ public class DamageCheck : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("¹üÀ§³» ¿ÀºêÁ§Æ® ¾øÀ½.");
+			Debug.Log("ë²”ìœ„ë‚´ ì˜¤ë¸Œì íŠ¸ ì—†ìŒ.");
 		}
 	}
 
@@ -117,16 +117,16 @@ public class DamageCheck : MonoBehaviour
 						case 1:
 							if (cols[i].tag == "Boss" || cols[i].tag == "Mob")
 							{
-								Debug.Log("Àû ÀÌÆåÆ® Ãæµ¹");
+								Debug.Log("ì  ì´í™íŠ¸ ì¶©ëŒ");
 
 								EnemyClass = cols[i].GetComponent<CharacterClass>();
 								PlayerClass = GameObject.Find("Player").GetComponent<CharacterClass>();
 
 								if (cols[i].tag == "Boss")
 								{
-									minDamage = PlayerClass.m_CharacterStat.Atk - (int)EnemyClass.m_BossStatData.Def;
+									minDamage = (int)PlayerClass.m_CharacterStat.Atk - (int)EnemyClass.m_BossStatData.Def;
 
-									//ÃÖ¼Ò µ¥¹ÌÁö º¸Á¤.
+									//ìµœì†Œ ë°ë¯¸ì§€ ë³´ì •.
 									if (minDamage <= 0)
 										minDamage = 1;
 
@@ -134,7 +134,7 @@ public class DamageCheck : MonoBehaviour
 
 
 									EnemyClass.m_BossStatData.HP -= resultDamage;
-									//ÇØ´ç ÇÃ·¹ÀÌ¾îÀÇ UI¿¡ Á¢±ÙÇØ¼­ µ¥¹ÌÁö Ç¥½Ã ¿ÜÀûÀ¸·Î ¶ç¾îÁÖ±â.
+									//í•´ë‹¹ í”Œë ˆì´ì–´ì˜ UIì— ì ‘ê·¼í•´ì„œ ë°ë¯¸ì§€ í‘œì‹œ ì™¸ì ìœ¼ë¡œ ë„ì–´ì£¼ê¸°.
 									cols[i].GetComponent<BossFSM>().Damage();
 								}
 							}
@@ -142,21 +142,21 @@ public class DamageCheck : MonoBehaviour
 						case 2:
 							if (cols[i].tag == "Player")
 							{
-								Debug.Log("ÇÃ·¹ÀÌ¾î ÀÌÆåÆ® Ãæµ¹");
+								Debug.Log("í”Œë ˆì´ì–´ ì´í™íŠ¸ ì¶©ëŒ");
 								PlayerClass = cols[i].GetComponent<CharacterClass>();
 								EnemyClass = GameObject.Find("Boss").GetComponent<CharacterClass>();
 
 
-								minDamage = (int)EnemyClass.m_BossStatData.Atk - PlayerClass.m_CharacterStat.Def;
+								minDamage = (int)EnemyClass.m_BossStatData.Atk - (int)PlayerClass.m_CharacterStat.Def;
 
-								//ÃÖ¼Ò µ¥¹ÌÁö º¸Á¤.
+								//ìµœì†Œ ë°ë¯¸ì§€ ë³´ì •.
 								if (minDamage <= 0)
 									minDamage = 1;
 
 								resultDamage = minDamage * (int)EnemyClass.m_SkillMgr.m_BossSkill.m_CurrentBossSkill.Power;
 
 								PlayerClass.m_CharacterStat.HP -= resultDamage;
-								//ÇØ´ç ÇÃ·¹ÀÌ¾îÀÇ UI¿¡ Á¢±ÙÇØ¼­ µ¥¹ÌÁö Ç¥½Ã ¿ÜÀûÀ¸·Î ¶ç¾îÁÖ±â.
+								//í•´ë‹¹ í”Œë ˆì´ì–´ì˜ UIì— ì ‘ê·¼í•´ì„œ ë°ë¯¸ì§€ í‘œì‹œ ì™¸ì ìœ¼ë¡œ ë„ì–´ì£¼ê¸°.
 								cols[i].GetComponent<PlayerManager>().Damage();
 							}
 							break;
@@ -168,7 +168,7 @@ public class DamageCheck : MonoBehaviour
 			}
 			else
 			{
-				Debug.Log("¹üÀ§³» ¿ÀºêÁ§Æ® ¾øÀ½.");
+				Debug.Log("ë²”ìœ„ë‚´ ì˜¤ë¸Œì íŠ¸ ì—†ìŒ.");
 			}
 			
 		}

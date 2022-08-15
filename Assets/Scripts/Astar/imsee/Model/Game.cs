@@ -36,7 +36,7 @@ namespace Model
 
         private void InitialiseGameBoard()
         {
-            GameBoard = new Tile[Width, Height];
+            GameBoard = new Tile[Width, Height];     // 6/5
 
             for (var x = 0; x < Width; x++)
             {

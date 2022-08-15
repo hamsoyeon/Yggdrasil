@@ -12,7 +12,7 @@ public class CharacterClass : MonoBehaviour
 	//다중상속을 받기 힘든데 Monobehavior을 받고있는 오브젝트에 어떻게 해당 클래스를 상속하는가?
 	//해당 cs를 붙이고 getComponent로 가져온다.
 	public BossSkill_TableExcel m_BossSkillData;             //보스 스킬에 관한 데이터
-	public BossStat_TableExcel m_BossStatData;           //보스 스텟에 관한 데이터 
+	public Boss_TableExcel m_BossStatData;           //보스 스텟에 관한 데이터 
 	public CharStat_TableExcel m_CharacterStat;          //플레이어 스텟에 관한 데이터 
 	public Spirit_TableExcel m_SpiritData;               //플레이어가 소환하는 정령에 관한 데이터
 	public SpiritSkill_TableExcel m_SpiritSkillData;         //소환된 정령이 사용하는 스킬에 관한 데이터	

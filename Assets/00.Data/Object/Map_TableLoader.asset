@@ -14,300 +14,270 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   filepath: Assets\00.Data\Txt\Map_Table.txt
   DataList:
-  - No: 1
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 1
     StgVert: 1
     TileType: 2
-    TilePrefeb: 901912
+    TilePrefeb: 962001
     BossSummon: 0
     BuffSummon: 0
-  - No: 2
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 2
     StgVert: 1
     TileType: 4
-    TilePrefeb: 901914
+    TilePrefeb: 964001
     BossSummon: 0
     BuffSummon: 301002
-  - No: 3
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 3
     StgVert: 1
     TileType: 0
     TilePrefeb: 0
     BossSummon: 0
     BuffSummon: 0
-  - No: 4
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 4
     StgVert: 1
     TileType: 0
     TilePrefeb: 0
     BossSummon: 0
     BuffSummon: 0
-  - No: 5
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 5
     StgVert: 1
     TileType: 2
-    TilePrefeb: 901912
+    TilePrefeb: 964001
     BossSummon: 0
     BuffSummon: 0
-  - No: 6
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 6
     StgVert: 1
     TileType: 1
-    TilePrefeb: 901911
+    TilePrefeb: 961001
     BossSummon: 0
     BuffSummon: 0
-  - No: 7
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 1
     StgVert: 2
     TileType: 1
-    TilePrefeb: 901911
+    TilePrefeb: 961001
     BossSummon: 0
     BuffSummon: 0
-  - No: 8
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 2
     StgVert: 2
     TileType: 3
-    TilePrefeb: 901913
-    BossSummon: 111001
+    TilePrefeb: 963001
+    BossSummon: 131001
     BuffSummon: 0
-  - No: 9
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 3
     StgVert: 2
     TileType: 1
-    TilePrefeb: 901911
+    TilePrefeb: 961001
     BossSummon: 0
     BuffSummon: 0
-  - No: 10
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 4
     StgVert: 2
     TileType: 1
-    TilePrefeb: 901911
+    TilePrefeb: 961001
     BossSummon: 0
     BuffSummon: 0
-  - No: 11
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 5
     StgVert: 2
     TileType: 4
-    TilePrefeb: 901914
+    TilePrefeb: 964001
     BossSummon: 0
     BuffSummon: 301002
-  - No: 12
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 6
     StgVert: 2
     TileType: 1
-    TilePrefeb: 901911
+    TilePrefeb: 961001
     BossSummon: 0
     BuffSummon: 0
-  - No: 13
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 1
     StgVert: 3
     TileType: 1
-    TilePrefeb: 901911
+    TilePrefeb: 961001
     BossSummon: 0
     BuffSummon: 0
-  - No: 14
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 2
     StgVert: 3
     TileType: 4
-    TilePrefeb: 901914
+    TilePrefeb: 964001
     BossSummon: 0
     BuffSummon: 301002
-  - No: 15
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 3
     StgVert: 3
     TileType: 2
-    TilePrefeb: 901912
+    TilePrefeb: 962001
     BossSummon: 0
     BuffSummon: 0
-  - No: 16
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 4
     StgVert: 3
     TileType: 1
-    TilePrefeb: 901911
+    TilePrefeb: 961001
     BossSummon: 0
     BuffSummon: 0
-  - No: 17
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 5
     StgVert: 3
     TileType: 2
-    TilePrefeb: 901912
+    TilePrefeb: 962001
     BossSummon: 0
     BuffSummon: 0
-  - No: 18
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 6
     StgVert: 3
     TileType: 1
-    TilePrefeb: 901911
+    TilePrefeb: 961001
     BossSummon: 0
     BuffSummon: 0
-  - No: 19
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 1
     StgVert: 4
     TileType: 0
     TilePrefeb: 0
     BossSummon: 0
     BuffSummon: 0
-  - No: 20
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 2
     StgVert: 4
     TileType: 1
-    TilePrefeb: 901911
+    TilePrefeb: 961001
     BossSummon: 0
     BuffSummon: 0
-  - No: 21
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 3
     StgVert: 4
     TileType: 0
     TilePrefeb: 0
     BossSummon: 0
     BuffSummon: 0
-  - No: 22
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 4
     StgVert: 4
     TileType: 0
     TilePrefeb: 0
     BossSummon: 0
     BuffSummon: 0
-  - No: 23
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 5
     StgVert: 4
     TileType: 1
-    TilePrefeb: 901911
+    TilePrefeb: 961001
     BossSummon: 0
     BuffSummon: 0
-  - No: 24
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 6
     StgVert: 4
     TileType: 0
     TilePrefeb: 0
     BossSummon: 0
     BuffSummon: 0
-  - No: 25
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 1
     StgVert: 5
     TileType: 2
-    TilePrefeb: 901912
+    TilePrefeb: 962001
     BossSummon: 0
     BuffSummon: 0
-  - No: 26
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 2
     StgVert: 5
     TileType: 4
-    TilePrefeb: 901914
+    TilePrefeb: 964001
     BossSummon: 0
     BuffSummon: 301002
-  - No: 27
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 3
     StgVert: 5
     TileType: 0
     TilePrefeb: 0
     BossSummon: 0
     BuffSummon: 0
-  - No: 28
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 4
     StgVert: 5
     TileType: 1
-    TilePrefeb: 901911
+    TilePrefeb: 961001
     BossSummon: 0
     BuffSummon: 0
-  - No: 29
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 5
     StgVert: 5
     TileType: 2
-    TilePrefeb: 901922
+    TilePrefeb: 962001
     BossSummon: 0
     BuffSummon: 0
-  - No: 30
-    Index: 301001
-    StageName: Volcano
-    StgConcept: 901901
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 6
     StgVert: 5
     TileType: 0

@@ -4,11 +4,11 @@ using UnityEngine;
 [System.Serializable]
 public struct BossSkill_TableExcel
 {
-	public int No;
 	public string Name_KR;
 	public string Name_EN;
-	public int BossIndex;
+	public int BossSkillIndex;
 	public int TargetType;
+	public int Target;
 	public float Power;
 	public float CoolTime;
 	public float SkillDistance;
@@ -21,13 +21,16 @@ public struct BossSkill_TableExcel
 	public bool Direction4;
 	public bool Direction5;
 	public bool Direction6;
-	public bool PlaceShift;
+	public bool 정령;
 	public float LifeTime;
 	public float DoT;
 	public int SkillAdded;
 	public int BuffAdded;
 	public int SkillAnimation;
+	public float SkillDelay;
+	public int DelayPrefb;
 	public int LunchPrefb;
+	public int FieldPrefb;
 	public int FirePrefb;
 	public int DamPrefb;
 }
@@ -50,11 +53,11 @@ public class BossSkill_TableExcelLoader :ScriptableObject
 		int idx =0;
 		string[] strs= line.Split('`');
 
-		data.No = int.Parse(strs[idx++]);
 		data.Name_KR = strs[idx++];
 		data.Name_EN = strs[idx++];
-		data.BossIndex = int.Parse(strs[idx++]);
+		data.BossSkillIndex = int.Parse(strs[idx++]);
 		data.TargetType = int.Parse(strs[idx++]);
+		data.Target = int.Parse(strs[idx++]);
 		data.Power = float.Parse(strs[idx++]);
 		data.CoolTime = float.Parse(strs[idx++]);
 		data.SkillDistance = float.Parse(strs[idx++]);
@@ -67,13 +70,16 @@ public class BossSkill_TableExcelLoader :ScriptableObject
 		data.Direction4 = bool.Parse(strs[idx++]);
 		data.Direction5 = bool.Parse(strs[idx++]);
 		data.Direction6 = bool.Parse(strs[idx++]);
-		data.PlaceShift = bool.Parse(strs[idx++]);
+		data.정령 = bool.Parse(strs[idx++]);
 		data.LifeTime = float.Parse(strs[idx++]);
 		data.DoT = float.Parse(strs[idx++]);
 		data.SkillAdded = int.Parse(strs[idx++]);
 		data.BuffAdded = int.Parse(strs[idx++]);
 		data.SkillAnimation = int.Parse(strs[idx++]);
+		data.SkillDelay = float.Parse(strs[idx++]);
+		data.DelayPrefb = int.Parse(strs[idx++]);
 		data.LunchPrefb = int.Parse(strs[idx++]);
+		data.FieldPrefb = int.Parse(strs[idx++]);
 		data.FirePrefb = int.Parse(strs[idx++]);
 		data.DamPrefb = int.Parse(strs[idx++]);
 

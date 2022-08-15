@@ -104,7 +104,7 @@ public class BossSkill : MonoBehaviour
 
         foreach (var item in DataTableManager.Instance.GetDataTable<BossSkill_TableExcelLoader>().DataList)
         {
-            if (item.BossIndex == skillIndex)
+            if (item.BossSkillIndex == skillIndex)
             {
                 m_CurrentBossSkill = item; //현재 스킬 정보를 찾아낸다.
                 break;

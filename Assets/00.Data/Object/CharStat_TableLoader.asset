@@ -12,3 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cfea364e7eb4c849ba751b08c9212fe, type: 3}
   m_Name: CharStat_TableLoader
   m_EditorClassIdentifier: 
+  filepath: Assets\00.Data\Txt\CharStat_Table.txt
+  DataList:
+  - No: 1
+    Name_KR: "\uBA40\uD2F0"
+    Name_EN: You
+    CharStatIndex: 10001
+    position: 1
+    Atk: 5
+    Def: 10
+    HP: 20
+    MoveSpeed: 10
+    Skill1: 100500
+    Skill2: 100200
+    Skill3: 100500
+    Skill4: 0
+    Skill5: 0
+    Skill6: 0
+    Item1: 0
+    Item2: 0
+    Sight: 50
+    Prefeb: 0
+  - No: 2
+    Name_KR: "\uAE30\uBCF8"
+    Name_EN: Me
+    CharStatIndex: 10002
+    position: 4
+    Atk: 5
+    Def: 15
+    HP: 20
+    MoveSpeed: 10
+    Skill1: 100500
+    Skill2: 100300
+    Skill3: 100600
+    Skill4: 100700
+    Skill5: 100900
+    Skill6: 100600
+    Item1: 0
+    Item2: 0
+    Sight: 50
+    Prefeb: 0

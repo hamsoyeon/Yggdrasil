@@ -6,7 +6,7 @@ using UnityEngine;
 public class BossFSM : MonoBehaviour
 {
     private int currentBossNumber;
-    private BossStat_TableExcel m_BossStat;
+    private Boss_TableExcel m_BossStat;
     //private BossStat_TableExcelLoader m_BossStat;
 
 
@@ -29,13 +29,13 @@ public class BossFSM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        maxStamina = DataTableManager.Instance.GetDataTable<BossStat_TableExcelLoader>().DataList[0].MaxStamina;
+        maxStamina = DataTableManager.Instance.GetDataTable<Boss_TableExcelLoader>().DataList[0].MaxStamina;
 
         m_BossClass = this.gameObject.GetComponent<CharacterClass>();
         m_CurrentBossSkill = this.gameObject.GetComponent<BossSkill>();
         currentBossNumber = 0;   //스테이지에서 해당 스테이지에 맞는 보스 정보를 가져와야됨 지금은 임시로 1로 설정
 
-        m_BossClass.m_BossStatData = DataTableManager.Instance.GetDataTable<BossStat_TableExcelLoader>().DataList[currentBossNumber];
+        m_BossClass.m_BossStatData = DataTableManager.Instance.GetDataTable<Boss_TableExcelLoader>().DataList[currentBossNumber];
         m_BossClass.m_SkillMgr.m_BossSkill = m_CurrentBossSkill;
 
         Debug.Log("현재 보스의 체력:" + m_BossClass.m_BossStatData.HP);
@@ -55,7 +55,7 @@ public class BossFSM : MonoBehaviour
         if (time > 1.0f && !behavior)
         {
 
-            currentBossStamina += DataTableManager.Instance.GetDataTable<BossStat_TableExcelLoader>().DataList[0].Speed;
+            currentBossStamina += DataTableManager.Instance.GetDataTable<Boss_TableExcelLoader>().DataList[0].Speed;
             Debug.Log($"턴미터 회복{maxStamina}/{currentBossStamina}");
 
 

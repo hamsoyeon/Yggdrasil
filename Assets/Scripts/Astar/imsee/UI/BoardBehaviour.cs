@@ -163,7 +163,7 @@ public class BoardBehaviour : MonoBehaviour
     private void CreateBoard()
     {
         _game = new Game(Width, Height);
-        _gameBoard = new GameObject[Width, Height];
+        _gameBoard = new GameObject[Width, Height];   // 6 5
 
         for (var x = 0; x < Width; x++)
         {
@@ -177,6 +177,13 @@ public class BoardBehaviour : MonoBehaviour
 
                 tileTransform.position = GetWorldCoordinates(x, y, -3f);
 
+                MainManager.Instance.GetStageManager().m_MapInfo[y, x].MapPos = tileTransform.position;
+                MainManager.Instance.GetStageManager().m_MapInfo[y, x].MapObject = tile;
+                MainManager.Instance.GetStageManager().m_MapInfo[y, x].row = y;
+                MainManager.Instance.GetStageManager().m_MapInfo[y, x].column = x;
+
+
+
                 var cylinder = tileTransform.Find("Cylinder");
 
                 var tb = (TileBehaviour)cylinder.GetComponent("TileBehaviour");
@@ -184,8 +191,18 @@ public class BoardBehaviour : MonoBehaviour
                 tb.Tile = _game.GameBoard[x, y];
 
                 tb.SetMaterial();
+
+                Debug.Log(MainManager.Instance.GetStageManager().m_MapInfo[y, x].MapPos);
+                Debug.Log($"{MainManager.Instance.GetStageManager().m_MapInfo[y, x].row}/{MainManager.Instance.GetStageManager().m_MapInfo[y, x].column}");
             }
         }
+
+
+
+
+
+
+
     }
 
     static Vector3 GetWorldCoordinates(int x, int y, float z)

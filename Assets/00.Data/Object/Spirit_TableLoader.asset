@@ -12,3 +12,101 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a29c32050407c49a704cf7a86bb72b, type: 3}
   m_Name: Spirit_TableLoader
   m_EditorClassIdentifier: 
+  filepath: Assets\00.Data\Txt\Spirit_Table.txt
+  DataList:
+  - No: 1
+    Name_KR: "\uC5BC\uC74C \uC815\uB839"
+    Name_EN: Ice_Spirit
+    SpritTableIndex: 121001
+    SpritClass: 3
+    SpiritType: 3
+    Atk: 0
+    Atk_Speed: 6
+    Move_Speed: 10
+    Crit_rate: 0.15
+    Crit_Dmg: 1.5
+    ChaceTarget: 2
+    Duration: 5
+    CoolTime: 20
+    Skill1Code: 170001
+    Prefab: 970006
+  - No: 2
+    Name_KR: "\uB3C5 \uC815\uB839"
+    Name_EN: Poison_Spirit
+    SpritTableIndex: 121002
+    SpritClass: 3
+    SpiritType: 2
+    Atk: 0
+    Atk_Speed: 6
+    Move_Speed: 10
+    Crit_rate: 0.15
+    Crit_Dmg: 1.5
+    ChaceTarget: 2
+    Duration: 5
+    CoolTime: 40
+    Skill1Code: 170002
+    Prefab: 970001
+  - No: 3
+    Name_KR: "\uBB34\uC801 \uC815\uB839"
+    Name_EN: Invincibility_Spirit
+    SpritTableIndex: 122001
+    SpritClass: 1
+    SpiritType: 2
+    Atk: 0
+    Atk_Speed: 4
+    Move_Speed: 10
+    Crit_rate: 0
+    Crit_Dmg: 0
+    ChaceTarget: 3
+    Duration: 3
+    CoolTime: 120
+    Skill1Code: 170003
+    Prefab: 970013
+  - No: 4
+    Name_KR: "\uC811\uADFC \uBD88\uAC00 \uC815\uB839"
+    Name_EN: KeepAway_Spirit
+    SpritTableIndex: 122002
+    SpritClass: 1
+    SpiritType: 1
+    Atk: 0
+    Atk_Speed: 4
+    Move_Speed: 0
+    Crit_rate: 0
+    Crit_Dmg: 0
+    ChaceTarget: 3
+    Duration: 3
+    CoolTime: 20
+    Skill1Code: 170004
+    Prefab: 970005
+  - No: 5
+    Name_KR: "\uD790 \uC815\uB839"
+    Name_EN: Heal_Spirit
+    SpritTableIndex: 123001
+    SpritClass: 2
+    SpiritType: 1
+    Atk: 0
+    Atk_Speed: 6
+    Move_Speed: 0
+    Crit_rate: 0
+    Crit_Dmg: 0
+    ChaceTarget: 4
+    Duration: 5
+    CoolTime: 35
+    Skill1Code: 170005
+    Prefab: 970004
+  - No: 6
+    Name_KR: "\uC774\uC18D \uC99D\uAC00 \uC815\uB839"
+    Name_EN: Speedup_Spirit
+    SpritTableIndex: 123002
+    SpritClass: 2
+    SpiritType: 1
+    Atk: 0
+    Atk_Speed: 11
+    Move_Speed: 0
+    Crit_rate: 0
+    Crit_Dmg: 0
+    ChaceTarget: 3
+    Duration: 10
+    CoolTime: 20
+    Skill1Code: 170006
+    Prefab: 970009

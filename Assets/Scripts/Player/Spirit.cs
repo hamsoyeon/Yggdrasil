@@ -22,20 +22,20 @@ public class Spirit : MonoBehaviour
 
 	public void SpiritSummon(int index)
 	{
-		//ÇöÀç ÇÃ·¹ÀÌ¾î°¡ »ç¿ëÇÏ´Â Á¤·ÉÀ» Ã£´Â´Ù.
+		//í˜„ì¬ í”Œë ˆì´ì–´ê°€ ì‚¬ìš©í•˜ëŠ” ì •ë ¹ì„ ì°¾ëŠ”ë‹¤.
 		foreach (var spirit in DataTableManager.Instance.GetDataTable<Spirit_TableExcelLoader>().DataList)
 		{
-			if (spirit.Code == index)
+			if (spirit.Skill1Code == index)
 			{
 				m_SpiritClass.m_SpiritData = spirit;
 				break;
 			}
 		}
 
-		//ÇöÀç Á¤·ÉÀÌ »ç¿ëÇÏ´Â ½ºÅ³À» Ã£´Â´Ù.
+		//í˜„ì¬ ì •ë ¹ì´ ì‚¬ìš©í•˜ëŠ” ìŠ¤í‚¬ì„ ì°¾ëŠ”ë‹¤.
 		foreach (var skill in DataTableManager.Instance.GetDataTable<SpiritSkill_TableExcelLoader>().DataList)
 		{
-			if (skill.SpiritSkillIndex == m_SpiritClass.m_SpiritData.Skill1Code)
+			if (skill.SpritSkillIndex == m_SpiritClass.m_SpiritData.Skill1Code)
 			{
 				m_SpiritClass.m_SpiritSkillData = skill;
 				break;
@@ -50,7 +50,7 @@ public class Spirit : MonoBehaviour
 				m_PlayerColumn = MainManager.Instance.GetStageManager().m_PlayerCoulmn;
 				if(MainManager.Instance.GetStageManager().m_MapInfo[m_PlayerRow, m_PlayerColumn].Spirit)
 				{
-					Debug.Log("ÇØ´ç Å¸ÀÏ¿¡´Â ÀÌ¹Ì Á¤·ÉÀÌ ¼ÒÈ¯µÇ¾î ÀÖ¾î¼­ Å¸ÀÏÇü Á¤·ÉÀ» ¼ÒÈ¯ÇÒ ¼ö ¾øÀ½.");
+					Debug.Log("í•´ë‹¹ íƒ€ì¼ì—ëŠ” ì´ë¯¸ ì •ë ¹ì´ ì†Œí™˜ë˜ì–´ ìˆì–´ì„œ íƒ€ì¼í˜• ì •ë ¹ì„ ì†Œí™˜í•  ìˆ˜ ì—†ìŒ.");
 				}
 				else
 				{
@@ -73,10 +73,10 @@ public class Spirit : MonoBehaviour
 	IEnumerator TileSpirit(Spirit_TableExcel spiritInfo,SpiritSkill_TableExcel skillInfo,int Row,int Column)
 	{
 
-		//Á¤·ÉÀ» ¼ÒÈ¯ÇÑ´Ù.(ÄÚ·çÆ¾À¸·Î Á¤·ÉÀ» ¼ÒÈ¯)
+		//ì •ë ¹ì„ ì†Œí™˜í•œë‹¤.(ì½”ë£¨í‹´ìœ¼ë¡œ ì •ë ¹ì„ ì†Œí™˜)
 		GameObject tempSpirit = Instantiate(SpiritPrefab);
 
-		//½ºÅ³½ÇÇà
+		//ìŠ¤í‚¬ì‹¤í–‰
 		//PlayerManager.Instance.m_SpiritSkill.SkillUse(skillInfo, Row, Column);
 		m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, m_PlayerRow, m_PlayerColumn);
 
@@ -92,14 +92,14 @@ public class Spirit : MonoBehaviour
 
 		while (true)
 		{
-			//Áö¼Ó½Ã°£ Ã¼Å©
+			//ì§€ì†ì‹œê°„ ì²´í¬
 			spirit_time += Time.deltaTime;
 			attack_time += Time.deltaTime;
 
-			//Á¤·É Áö¼Ó½Ã°£ÀÌ °æ°ú½Ã 
+			//ì •ë ¹ ì§€ì†ì‹œê°„ì´ ê²½ê³¼ì‹œ 
 			if (spirit_time >= spiritInfo.Duration)
 			{
-				//Á¤·É ÆÄ±«ÈÄ ÄÚ·çÆ¾ Á¾·á
+				//ì •ë ¹ íŒŒê´´í›„ ì½”ë£¨í‹´ ì¢…ë£Œ
 				Object.Destroy(tempSpirit);
 				MainManager.Instance.GetStageManager().m_MapInfo[Row, Column].Spirit = false;
 				yield break;
@@ -107,9 +107,9 @@ public class Spirit : MonoBehaviour
 
 			if(attack_time> spiritInfo.Atk_Speed)
 			{
-				//°ø°İ¼Óµµ¸¦ ³Ñ¾î¼­¸é ½ºÅ³À» ÇÑ¹ø´õ ¹ß»ı.
+				//ê³µê²©ì†ë„ë¥¼ ë„˜ì–´ì„œë©´ ìŠ¤í‚¬ì„ í•œë²ˆë” ë°œìƒ.
 				attack_time = 0f;
-				//½ºÅ³À» ¹ß»ıÇÏ´Â ÄÚµå -> Á¤·É¼ÒÈ¯ÇÏ°í ¹Ù·Î ½ºÅ³¹ß»ı ±× ÀÌÈÄ °ø°İ¼Óµµ¸¦ ³Ñ¾î¼­¸é ¹ßµ¿.
+				//ìŠ¤í‚¬ì„ ë°œìƒí•˜ëŠ” ì½”ë“œ -> ì •ë ¹ì†Œí™˜í•˜ê³  ë°”ë¡œ ìŠ¤í‚¬ë°œìƒ ê·¸ ì´í›„ ê³µê²©ì†ë„ë¥¼ ë„˜ì–´ì„œë©´ ë°œë™.
 				//m_SpiritSkill.SkillUse(skillInfo, Row, Column);
 			}
 
@@ -120,7 +120,7 @@ public class Spirit : MonoBehaviour
 
 	IEnumerator NonTileSpiritByNotMove(Spirit_TableExcel spiritInfo, SpiritSkill_TableExcel skillInfo)
 	{
-		//Á¤·ÉÀ» ¼ÒÈ¯ÇÑ´Ù.(ÄÚ·çÆ¾À¸·Î Á¤·ÉÀ» ¼ÒÈ¯)
+		//ì •ë ¹ì„ ì†Œí™˜í•œë‹¤.(ì½”ë£¨í‹´ìœ¼ë¡œ ì •ë ¹ì„ ì†Œí™˜)
 		GameObject tempSpirit = Instantiate(SpiritPrefab);
 
 		tempSpirit.transform.position = this.gameObject.transform.position + new Vector3(0,0,-7f);
@@ -132,23 +132,23 @@ public class Spirit : MonoBehaviour
 
 		while (true)
 		{
-			//Áö¼Ó½Ã°£ Ã¼Å©
+			//ì§€ì†ì‹œê°„ ì²´í¬
 			spirit_time += Time.deltaTime;
 			attack_time += Time.deltaTime;
 
-			//Á¤·É Áö¼Ó½Ã°£ÀÌ °æ°ú½Ã 
+			//ì •ë ¹ ì§€ì†ì‹œê°„ì´ ê²½ê³¼ì‹œ 
 			if (spirit_time >= spiritInfo.Duration)
 			{
-				//Á¤·É ÆÄ±«ÈÄ ÄÚ·çÆ¾ Á¾·á
+				//ì •ë ¹ íŒŒê´´í›„ ì½”ë£¨í‹´ ì¢…ë£Œ
 				Object.Destroy(tempSpirit);
 				yield break;
 			}
 
 			if (attack_time > spiritInfo.Atk_Speed)
 			{
-				//°ø°İ¼Óµµ¸¦ ³Ñ¾î¼­¸é ½ºÅ³À» ÇÑ¹ø´õ ¹ß»ı.
+				//ê³µê²©ì†ë„ë¥¼ ë„˜ì–´ì„œë©´ ìŠ¤í‚¬ì„ í•œë²ˆë” ë°œìƒ.
 				attack_time = 0f;
-				//½ºÅ³À» ¹ß»ıÇÏ´Â ÄÚµå -> Á¤·É¼ÒÈ¯ÇÏ°í ¹Ù·Î ½ºÅ³¹ß»ı ±× ÀÌÈÄ °ø°İ¼Óµµ¸¦ ³Ñ¾î¼­¸é ¹ßµ¿.
+				//ìŠ¤í‚¬ì„ ë°œìƒí•˜ëŠ” ì½”ë“œ -> ì •ë ¹ì†Œí™˜í•˜ê³  ë°”ë¡œ ìŠ¤í‚¬ë°œìƒ ê·¸ ì´í›„ ê³µê²©ì†ë„ë¥¼ ë„˜ì–´ì„œë©´ ë°œë™.
 			}
 			yield return null;
 		}
@@ -157,7 +157,7 @@ public class Spirit : MonoBehaviour
 
 	IEnumerator NonTileSpiritByMove(Spirit_TableExcel spiritInfo, SpiritSkill_TableExcel skillInfo)
 	{
-		//Á¤·ÉÀ» ¼ÒÈ¯ÇÑ´Ù.(ÄÚ·çÆ¾À¸·Î Á¤·ÉÀ» ¼ÒÈ¯)
+		//ì •ë ¹ì„ ì†Œí™˜í•œë‹¤.(ì½”ë£¨í‹´ìœ¼ë¡œ ì •ë ¹ì„ ì†Œí™˜)
 		GameObject tempSpirit = Instantiate(SpiritPrefab);
 		tempSpirit.transform.position = this.gameObject.transform.position + new Vector3(0, 0, -7f);
 		m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, tempSpirit);
@@ -169,23 +169,23 @@ public class Spirit : MonoBehaviour
 
 		while (true)
 		{
-			//Áö¼Ó½Ã°£ Ã¼Å©
+			//ì§€ì†ì‹œê°„ ì²´í¬
 			spirit_time += Time.deltaTime;
 			attack_time += Time.deltaTime;
 
-			//Á¤·É Áö¼Ó½Ã°£ÀÌ °æ°ú½Ã 
+			//ì •ë ¹ ì§€ì†ì‹œê°„ì´ ê²½ê³¼ì‹œ 
 			if (spirit_time >= spiritInfo.Duration)
 			{
-				//Á¤·É ÆÄ±«ÈÄ ÄÚ·çÆ¾ Á¾·á
+				//ì •ë ¹ íŒŒê´´í›„ ì½”ë£¨í‹´ ì¢…ë£Œ
 				Object.Destroy(tempSpirit);
 				yield break;
 			}
 
 			if (attack_time > spiritInfo.Atk_Speed)
 			{
-				//°ø°İ¼Óµµ¸¦ ³Ñ¾î¼­¸é ½ºÅ³À» ÇÑ¹ø´õ ¹ß»ı.
+				//ê³µê²©ì†ë„ë¥¼ ë„˜ì–´ì„œë©´ ìŠ¤í‚¬ì„ í•œë²ˆë” ë°œìƒ.
 				attack_time = 0f;
-				//½ºÅ³À» ¹ß»ıÇÏ´Â ÄÚµå -> Á¤·É¼ÒÈ¯ÇÏ°í ¹Ù·Î ½ºÅ³¹ß»ı ±× ÀÌÈÄ °ø°İ¼Óµµ¸¦ ³Ñ¾î¼­¸é ¹ßµ¿.
+				//ìŠ¤í‚¬ì„ ë°œìƒí•˜ëŠ” ì½”ë“œ -> ì •ë ¹ì†Œí™˜í•˜ê³  ë°”ë¡œ ìŠ¤í‚¬ë°œìƒ ê·¸ ì´í›„ ê³µê²©ì†ë„ë¥¼ ë„˜ì–´ì„œë©´ ë°œë™.
 			}
 
 
@@ -200,7 +200,7 @@ public class Spirit : MonoBehaviour
 
 	private void Start()
 	{
-		//ÀÓ½Ã ÇÁ¸®ÆÕÀ» °¡Á®¿È.
+		//ì„ì‹œ í”„ë¦¬íŒ¹ì„ ê°€ì ¸ì˜´.
 		//SpiritPrefab = Resources.Load("Prefabs/Spirit") as GameObject;
 
 		//m_SpiritSkill = PlayerManager.Instance.m_SpiritSkill;

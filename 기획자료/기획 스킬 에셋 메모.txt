@@ -1,0 +1,14 @@
+칼 관련 - 반원 베기
+Effect_11_DebilBladeSlash
+
+유저 머리 타겟팅
+Effect_20_ShotMark
+
+투사체
+Effect_22_CustomParts
+
+Effect_31_LightShield
+
+쫄몹
+
+Effect_55_AirStrikeHit 1

@@ -60,7 +60,9 @@ public class StageManager : MonoBehaviour
             for (int i = 0; i < 3; i++)
             {
                 int idx = i * 10;
-                list = DataTableManager.Instance.GetDataTable<Map_TableExcelLoader>().DataList.OrderBy(x => x.No).Skip(idx).Take(mapMaxCount).ToList();
+
+                //맵 데이터 끊을거 생각해줘야함
+                //list = DataTableManager.Instance.GetDataTable<Map_TableExcelLoader>().DataList.OrderBy(x => x.).Skip(idx).Take(mapMaxCount).ToList();
                 map_info.Add(i + 1, list);
             }
 
