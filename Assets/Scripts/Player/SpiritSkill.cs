@@ -107,14 +107,16 @@ public class SpiritSkill : MonoBehaviour
 
                         if (checkRow_P < 5)
                         {
-                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
+                            //m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
                             m_StageMgr.m_MapInfo[checkRow_P, checkColumn].SpiritEffect = true;
 
                         }
 
                         if (checkRow_M >= 0)
                         {
-                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
+                           // m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
                             m_StageMgr.m_MapInfo[checkRow_M, checkColumn].SpiritEffect = true;
 
                         }
@@ -131,7 +133,9 @@ public class SpiritSkill : MonoBehaviour
                         if (checkColumn < 0 || checkColumn > 5)
                             continue;
 
-                        m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+                        m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
+
+                        //m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
                         m_StageMgr.m_MapInfo[Row, checkColumn].SpiritEffect = true;
                     }
 
@@ -143,7 +147,8 @@ public class SpiritSkill : MonoBehaviour
         }
         else  //range가 0이하면 사거리가 1 자기자신의 타일만 해당
         {
-            m_StageMgr.m_MapInfo[Row, Column].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            m_StageMgr.m_MapInfo[Row, Column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
+            //m_StageMgr.m_MapInfo[Row, Column].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
             m_StageMgr.m_MapInfo[Row, Column].SpiritEffect = true;
 
         }
@@ -158,7 +163,7 @@ public class SpiritSkill : MonoBehaviour
 
                 if (m_StageMgr.m_MapInfo[i, j].SpiritEffect)
                 {
-                    m_StageMgr.m_MapInfo[i, j].MapObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                    m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                     GameObject effect = Instantiate(EffectPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     m_StageMgr.m_MapInfo[i, j].SpiritEffectObject = effect;
@@ -206,7 +211,6 @@ public class SpiritSkill : MonoBehaviour
 
            if(MainManager.Instance.GetStageManager().GetPlayerMapInfo().SpiritEffect)
            {
-                Debug.Log("asd");
                 //transform.Find("Player").transform.GetChild(0).GetComponent<CharacterClass>().m_CharacterStat.MoveSpeed = 20f;
 
                 speed = originspeed;
@@ -276,14 +280,14 @@ public class SpiritSkill : MonoBehaviour
 
                         if (checkRow_P < 5)
                         {
-                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
                             m_StageMgr.m_MapInfo[checkRow_P, checkColumn].SpiritEffect = true;
 
                         }
 
                         if (checkRow_M >= 0)
                         {
-                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
                             m_StageMgr.m_MapInfo[checkRow_M, checkColumn].SpiritEffect = true;
 
                         }
@@ -300,7 +304,7 @@ public class SpiritSkill : MonoBehaviour
                         if (checkColumn < 0 || checkColumn > 5)
                             continue;
 
-                        m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+                        m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
                         m_StageMgr.m_MapInfo[Row, checkColumn].SpiritEffect = true;
                     }
 
@@ -312,7 +316,7 @@ public class SpiritSkill : MonoBehaviour
         }
         else  //range가 0이하면 사거리가 1 자기자신의 타일만 해당
         {
-            m_StageMgr.m_MapInfo[Row, Column].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            m_StageMgr.m_MapInfo[Row, Column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
             m_StageMgr.m_MapInfo[Row, Column].SpiritEffect = true;
 
         }
@@ -327,7 +331,7 @@ public class SpiritSkill : MonoBehaviour
 
                 if (m_StageMgr.m_MapInfo[i, j].SpiritEffect)
                 {
-                    m_StageMgr.m_MapInfo[i, j].MapObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                    m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                     GameObject effect = Instantiate(EffectPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     m_StageMgr.m_MapInfo[i, j].SpiritEffectObject = effect;
@@ -413,6 +417,8 @@ public class SpiritSkill : MonoBehaviour
 				foreach (var rangeCollider in colls)
 				{
 					//플레이어 회복시키는 코드.
+
+                    //100씩 회복.
 
 					Debug.Log("플레이어 회복중");
 				}
@@ -557,140 +563,6 @@ public class SpiritSkill : MonoBehaviour
 
 	}
 
-
-	IEnumerator SkillWideAction(SpiritSkill_TableExcel skillInfo, int row, int column)
-	{
-		int Row = row;
-		int Column = column;
-
-
-		Debug.Log("와이드 스킬 실행");
-		float range = skillInfo.SkillRange - 1.0f;
-		float xRange = skillInfo.SkillRange + range;
-
-		//보스 스킬범위를 표시해 주는 부분.
-		if (range > 0)  //range는 -1을한값 범위가 2부터 여기 들어온다. 범위가 1일경우는 해당 타일에 계산하면 된다.
-		{
-			int saveRow = Row;
-			int saveColumn = 0;
-
-			int checkRow_P;   //보스 기준 아래쪽에 있는 Column값
-			int checkRow_M;   //보스 기준 위쪽에 있는 Column값
-			int checkColumn;  //현재 색을 바꿀 타일의 Column값
-
-			for (float i = 0; i < skillInfo.SkillRange; i += 1.0f)
-			{
-
-				checkRow_P = Row + (int)i;
-				checkRow_M = Row - (int)i;
-
-
-				if (checkRow_P % 2 == 1) //024(135라인)
-					saveColumn++;
-
-				for (float j = 0; j < xRange; j += 1.0f)
-				{
-
-					if (i != 0) //보스가 있는 라인의 +-1라인씩 그림.
-					{
-
-						checkColumn = saveColumn + (int)j;
-
-						if (checkColumn < 0 || checkColumn > 5)
-							continue;
-
-
-
-						if (checkRow_P < 5)
-						{
-							m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
-							m_StageMgr.m_MapInfo[checkRow_P, checkColumn].SpiritEffect = true;
-							
-						}
-
-						if (checkRow_M >= 0)
-						{
-							m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
-							m_StageMgr.m_MapInfo[checkRow_M, checkColumn].SpiritEffect = true;
-							
-						}
-
-					}
-					else  //보스가 있는 라인을 쭉그림.
-					{
-
-						checkColumn = Column - (int)range + (int)j;
-
-						if (j == 0)
-							saveColumn = checkColumn;   //보스라인에서 첫번째 타일 색변환위치 저장.
-
-						if (checkColumn < 0 || checkColumn > 5)
-							continue;
-
-						
-						m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
-						m_StageMgr.m_MapInfo[Row, checkColumn].SpiritEffect = true;
-					}
-
-
-				}
-
-				xRange -= 1.0f;
-			}
-		}
-		else  //range가 0이하면 사거리가 1 자기자신의 타일만 해당
-		{
-			m_StageMgr.m_MapInfo[Row, Column].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
-			m_StageMgr.m_MapInfo[Row, Column].SpiritEffect = true;
-			
-		}
-
-		//경고시간(모든스킬 0.5f초로 고정)이  경과하면 빨간색을 다시 원래색깔로 돌린후 그 범위에 이펙트 출현하고 데미지 로직 처리.
-		yield return new WaitForSeconds(2f);
-
-		for (int i = 0; i < m_StageMgr.mapZ; i++)
-		{
-			for (int j = 0; j < m_StageMgr.mapX; j++)
-			{
-
-				if (m_StageMgr.m_MapInfo[i, j].SpiritEffect)
-				{
-					m_StageMgr.m_MapInfo[i, j].MapObject.GetComponent<MeshRenderer>().material.color = Color.white;
-					GameObject effect = Instantiate(EffectPrefab);
-					effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
-					m_StageMgr.m_MapInfo[i, j].SpiritEffectObject = effect;
-				}
-			}
-		}
-
-		Debug.Log("이펙트 소환");
-		//이쪽 에서 데미지 처리.
-		yield return new WaitForSeconds(skillInfo.LifeTime);  //생존시간이 지나면 이펙트 지우기
-
-		for (int i = 0; i < m_StageMgr.mapZ; i++)
-		{
-			for (int j = 0; j < m_StageMgr.mapX; j++)
-			{
-
-				if (m_StageMgr.m_MapInfo[i, j].SpiritEffect)
-				{
-					m_StageMgr.m_MapInfo[i, j].SpiritEffect = false;
-					Object.Destroy(m_StageMgr.m_MapInfo[i, j].SpiritEffectObject);
-				}
-			}
-		}
-
-
-		Debug.Log("와이드 스킬 종료");
-
-		//연계스킬있는지 확인후 다시 스킬실행.
-		if (skillInfo.SkillAdded != 0)
-		{
-
-		}
-
-		yield break;
-	}
 
 
 	GameObject FindNearbyPlayer(GameObject findStartObject, float distance)

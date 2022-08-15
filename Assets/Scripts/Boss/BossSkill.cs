@@ -220,14 +220,14 @@ public class BossSkill : MonoBehaviour
 
                         if (checkRow_P < 5)
                         {
-                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                             m_StageMgr.m_MapInfo[checkRow_P, checkColumn].BossEffect = true;
                             //map.mapIndicatorArray[checkRow_P, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
                         }
 
                         if (checkRow_M >= 0)
                         {
-                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                             m_StageMgr.m_MapInfo[checkRow_M, checkColumn].BossEffect = true;
                             //map.mapIndicatorArray[checkRow_M, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
                         }
@@ -245,7 +245,7 @@ public class BossSkill : MonoBehaviour
                             continue;
 
                         //map.mapIndicatorArray[m_BossRow, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
-                        m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                        m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                         m_StageMgr.m_MapInfo[Row, checkColumn].BossEffect = true;
                     }
 
@@ -259,7 +259,7 @@ public class BossSkill : MonoBehaviour
         }
         else  //range가 0이하면 사거리가 1 자기자신의 타일만 해당
         {
-            m_StageMgr.m_MapInfo[Row, Column].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            m_StageMgr.m_MapInfo[Row, Column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
             m_StageMgr.m_MapInfo[Row, Column].BossEffect = true;
             //map.mapIndicatorArray[m_BossRow, m_BossColumn].GetComponent<MeshRenderer>().material.color = Color.red;
         }
@@ -275,7 +275,7 @@ public class BossSkill : MonoBehaviour
 
                 if (m_StageMgr.m_MapInfo[i, j].BossEffect)
                 {
-                    m_StageMgr.m_MapInfo[i, j].MapObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                    m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                     GameObject effect = Instantiate(TestSkillPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
@@ -384,14 +384,14 @@ public class BossSkill : MonoBehaviour
 
                         if (checkRow_P < 5)
                         {
-                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                             m_StageMgr.m_MapInfo[checkRow_P, checkColumn].BossEffect = true;
                             //map.mapIndicatorArray[checkRow_P, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
                         }
 
                         if (checkRow_M >= 0)
                         {
-                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                             m_StageMgr.m_MapInfo[checkRow_M, checkColumn].BossEffect = true;
                             //map.mapIndicatorArray[checkRow_M, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
                         }
@@ -409,7 +409,7 @@ public class BossSkill : MonoBehaviour
                             continue;
 
                         //map.mapIndicatorArray[m_BossRow, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
-                        m_StageMgr.m_MapInfo[m_PlayerRow, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                        m_StageMgr.m_MapInfo[m_PlayerRow, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                         m_StageMgr.m_MapInfo[m_PlayerRow, checkColumn].BossEffect = true;
                     }
 
@@ -423,7 +423,7 @@ public class BossSkill : MonoBehaviour
         }
         else  //range가 0이하면 사거리가 1 자기자신의 타일만 해당
         {
-            m_StageMgr.m_MapInfo[m_PlayerRow, m_PlayerColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            m_StageMgr.m_MapInfo[m_PlayerRow, m_PlayerColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
             m_StageMgr.m_MapInfo[m_PlayerRow, m_PlayerColumn].BossEffect = true;
             //map.mapIndicatorArray[m_BossRow, m_BossColumn].GetComponent<MeshRenderer>().material.color = Color.red;
         }
@@ -439,7 +439,7 @@ public class BossSkill : MonoBehaviour
             {
                 if (m_StageMgr.m_MapInfo[i, j].BossEffect)
                 {
-                    m_StageMgr.m_MapInfo[i, j].MapObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                    m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                     GameObject effect = Instantiate(TestSkillPrefab); //이펙트 표시.
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
@@ -696,7 +696,7 @@ public class BossSkill : MonoBehaviour
             if (i == 0)
             {
 
-                m_StageMgr.m_MapInfo[Row, Column].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                m_StageMgr.m_MapInfo[Row, Column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                 m_StageMgr.m_MapInfo[Row, Column].BossEffect = true;
 
 
@@ -706,7 +706,7 @@ public class BossSkill : MonoBehaviour
                     {
                         if ((tempCDLARR[j].column >= 0 && tempCDLARR[j].column < 6) && (tempCDLARR[j].row >= 0 && tempCDLARR[j].row < 5))
                         {
-                            m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                            m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                             m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].BossEffect = true;
                         }
                     }
@@ -778,7 +778,7 @@ public class BossSkill : MonoBehaviour
 
                         if ((tempCDLARR[j].column >= 0 && tempCDLARR[j].column < 6) && (tempCDLARR[j].row >= 0 && tempCDLARR[j].row < 5))
                         {
-                            m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                            m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                             m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].BossEffect = true;
                         }
 
@@ -800,7 +800,7 @@ public class BossSkill : MonoBehaviour
             {
                 if (m_StageMgr.m_MapInfo[i, j].BossEffect)
                 {
-                    m_StageMgr.m_MapInfo[i, j].MapObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                    m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                     GameObject effect = Instantiate(TestSkillPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
@@ -910,13 +910,13 @@ public class BossSkill : MonoBehaviour
                             if (checkRow_M >= 0)
                             {
                                 //map.mapIndicatorArray[m_BossRow, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
-                                m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                                m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                                 m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].BossEffect = true;
                             }
 
                             if(checkRow_P < 6)
                             {
-                                m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                                m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                                 m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].BossEffect = true;
                             }
 
@@ -930,14 +930,14 @@ public class BossSkill : MonoBehaviour
                             if(checkRow_M >= 0)
                             {
                                 //map.mapIndicatorArray[m_BossRow, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
-                                m_StageMgr.m_MapInfo[checkRow_M, saveColumn_P].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                                m_StageMgr.m_MapInfo[checkRow_M, saveColumn_P].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                                 m_StageMgr.m_MapInfo[checkRow_M, saveColumn_P].BossEffect = true;
                             }
 
 
                             if(checkRow_P < 6)
                             {
-                                m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                                m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                                 m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].BossEffect = true;
                             }
 
@@ -958,14 +958,14 @@ public class BossSkill : MonoBehaviour
 
                             if (checkRow_P < 5)
                             {
-                                m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                                m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                                 m_StageMgr.m_MapInfo[checkRow_P, checkColumn].BossEffect = true;
                                 //map.mapIndicatorArray[checkRow_P, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
                             }
 
                             if (checkRow_M >= 0)
                             {
-                                m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                                m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                                 m_StageMgr.m_MapInfo[checkRow_M, checkColumn].BossEffect = true;
                                 //map.mapIndicatorArray[checkRow_M, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
                             }
@@ -985,14 +985,14 @@ public class BossSkill : MonoBehaviour
                     if (Column_M >= 0)
                     {
                         //map.mapIndicatorArray[m_BossRow, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
-                        m_StageMgr.m_MapInfo[Row, Column_M].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                        m_StageMgr.m_MapInfo[Row, Column_M].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                         m_StageMgr.m_MapInfo[Row, Column_M].BossEffect = true;
                     }
 
                     if (Column_P < 6)
                     {
                         //map.mapIndicatorArray[m_BossRow, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
-                        m_StageMgr.m_MapInfo[Row, Column_P].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                        m_StageMgr.m_MapInfo[Row, Column_P].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                         m_StageMgr.m_MapInfo[Row, Column_P].BossEffect = true;
                     }
                 }
@@ -1001,7 +1001,7 @@ public class BossSkill : MonoBehaviour
         }
         else  //range가 0이하면 사거리가 1 자기자신의 타일만 해당
         {
-            m_StageMgr.m_MapInfo[Row, Column].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            m_StageMgr.m_MapInfo[Row, Column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
             m_StageMgr.m_MapInfo[Row, Column].BossEffect = true;
             //map.mapIndicatorArray[m_BossRow, m_BossColumn].GetComponent<MeshRenderer>().material.color = Color.red;
         }
@@ -1017,7 +1017,7 @@ public class BossSkill : MonoBehaviour
             {
                 if (m_StageMgr.m_MapInfo[i, j].BossEffect)
                 {
-                    m_StageMgr.m_MapInfo[i, j].MapObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                    m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                     GameObject effect = Instantiate(TestSkillPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
