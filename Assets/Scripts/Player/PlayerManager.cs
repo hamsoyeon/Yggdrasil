@@ -76,13 +76,13 @@ public class PlayerManager : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            this.transform.Translate(new Vector3(0.0f, 0.0f, 0.8f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            cam.cam.transform.Translate(new Vector3(0.0f, 0.7f, 0.403f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            this.transform.Translate(new Vector3(0.0f, 0.0f, 0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            cam.cam.transform.Translate(new Vector3(0.0f, 0.6f, 0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            this.transform.Translate(new Vector3(0.0f, 0.0f, -0.8f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            cam.cam.transform.Translate(new Vector3(0.0f, -0.7f, -0.403f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            this.transform.Translate(new Vector3(0.0f, 0.0f, -0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            cam.cam.transform.Translate(new Vector3(0.0f, -0.6f, -0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
         }
 
         //transform.Translate(new Vector3(h, 0, v) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
