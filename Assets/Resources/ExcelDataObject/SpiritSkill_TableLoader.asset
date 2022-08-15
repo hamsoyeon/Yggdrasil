@@ -19,18 +19,18 @@ MonoBehaviour:
     SpritSkillIndex: 170001
     Target: 2
     Power: 40
-    SkillRange: 0
+    SkillRange: 3
     SkillType: 1
     BulletSpeed: 1
     TargetNum: 10
     LifeTime: 5
-    DoT: 40
+    DoT: 1
     Shapeform: 2
     Cshape1: 360
     Cshape2: 2
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970008
+    LunchPrefb: 970006
     FirePrefb: 0
     DamPrefb: 912001
   - Name_KR: "\uB3C5\uAD6C\uB984"
@@ -38,18 +38,18 @@ MonoBehaviour:
     SpritSkillIndex: 170002
     Target: 2
     Power: 30
-    SkillRange: 0
+    SkillRange: 10
     SkillType: 1
     BulletSpeed: 1
     TargetNum: 10
-    LifeTime: 5
-    DoT: 30
+    LifeTime: 6
+    DoT: 1
     Shapeform: 2
     Cshape1: 360
     Cshape2: 10
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 912005
+    LunchPrefb: 970001
     FirePrefb: 0
     DamPrefb: 912002
   - Name_KR: "\uBB34\uC801"
@@ -57,7 +57,7 @@ MonoBehaviour:
     SpritSkillIndex: 170003
     Target: 1
     Power: 0
-    SkillRange: 0
+    SkillRange: 10
     SkillType: 1
     BulletSpeed: 1
     TargetNum: 3
@@ -76,7 +76,7 @@ MonoBehaviour:
     SpritSkillIndex: 170004
     Target: 2
     Power: 0
-    SkillRange: 5
+    SkillRange: 10
     SkillType: 1
     BulletSpeed: 1
     TargetNum: 6
@@ -95,12 +95,12 @@ MonoBehaviour:
     SpritSkillIndex: 170005
     Target: 1
     Power: 0
-    SkillRange: 1
+    SkillRange: 15
     SkillType: 2
     BulletSpeed: 1
     TargetNum: 3
     LifeTime: 5
-    DoT: 0
+    DoT: 0.5
     Shapeform: 2
     Cshape1: 360
     Cshape2: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
     SpritSkillIndex: 170006
     Target: 1
     Power: 0
-    SkillRange: 1
+    SkillRange: 3
     SkillType: 2
     BulletSpeed: 1
     TargetNum: 3

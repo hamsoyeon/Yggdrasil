@@ -39,9 +39,22 @@ public class StageManager : MonoBehaviour
     public int m_BossColumn;
 
     public MapInfo[,] m_MapInfo;
-    public TestMap map;
+
+
+    //public TestMap map;
     public int mapX;
     public int mapZ;
+
+
+    public MapInfo GetPlayerMapInfo()
+    {
+        return m_MapInfo[m_PlayerRow, m_PlayerCoulmn];
+    }
+
+    public MapInfo GetBossMapInfo()
+    {
+        return m_MapInfo[m_BossRow, m_BossColumn];
+    }
 
 
     public void SetPlayerRowAndCoulmn(int row, int coulmn)
@@ -68,7 +81,7 @@ public class StageManager : MonoBehaviour
 
             m_MapInfo = new MapInfo[5, 6];
 
-            map = GameObject.Find("MapManager").GetComponent<TestMap>();
+            //map = GameObject.Find("MapManager").GetComponent<TestMap>();
 
             //디버그용
             //foreach(var item in map_info[1])

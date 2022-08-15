@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92fd82bc27de63745b57d8aadce987d6, type: 3}
   m_Name: WoodTile
   m_EditorClassIdentifier: 
-  TileObj: {fileID: 0}
-  isWall: 0
+  TileObj: {fileID: 3188374378935707719, guid: 1650d43cad71e89479bee0f9d9ef77b5, type: 3}
+  isWall: 1
+  isBuffTile: 0

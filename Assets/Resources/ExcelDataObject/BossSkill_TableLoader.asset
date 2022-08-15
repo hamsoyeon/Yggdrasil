@@ -22,11 +22,11 @@ MonoBehaviour:
     Power: 50
     CoolTime: 10
     SkillDistance: 4
-    SkillRange: 4
+    SkillRange: 2
     SkillType: 3
     UseStat: 10
-    Direction1: 0
-    Direction2: 0
+    Direction1: 1
+    Direction2: 1
     Direction3: 0
     Direction4: 0
     Direction5: 0
@@ -40,6 +40,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 971009
+    FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 912004
   - Name_KR: "\uC911 \uD3ED\uBC1C"
@@ -50,12 +51,12 @@ MonoBehaviour:
     Power: 20
     CoolTime: 15
     SkillDistance: 2
-    SkillRange: 2
-    SkillType: 2
+    SkillRange: 3
+    SkillType: 3
     UseStat: 20
-    Direction1: 0
-    Direction2: 0
-    Direction3: 0
+    Direction1: 1
+    Direction2: 1
+    Direction3: 1
     Direction4: 0
     Direction5: 0
     Direction6: 0
@@ -68,6 +69,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 971009
+    FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 912004
   - Name_KR: "\uAC15 \uD3ED\uBC1C"
@@ -78,14 +80,14 @@ MonoBehaviour:
     Power: 40
     CoolTime: 20
     SkillDistance: 3
-    SkillRange: 3
-    SkillType: 4
+    SkillRange: 4
+    SkillType: 3
     UseStat: 30
-    Direction1: 0
-    Direction2: 0
-    Direction3: 0
-    Direction4: 0
-    Direction5: 0
+    Direction1: 1
+    Direction2: 1
+    Direction3: 1
+    Direction4: 1
+    Direction5: 1
     Direction6: 0
     "\uC815\uB839": 0
     LifeTime: 1
@@ -96,6 +98,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 971009
+    FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 912004
   - Name_KR: "\uB291\uB300 \uC18C\uD658"
@@ -106,15 +109,15 @@ MonoBehaviour:
     Power: 10
     CoolTime: 30
     SkillDistance: 3
-    SkillRange: 3
-    SkillType: 0
+    SkillRange: 5
+    SkillType: 3
     UseStat: 30
-    Direction1: 0
-    Direction2: 0
-    Direction3: 0
-    Direction4: 0
-    Direction5: 0
-    Direction6: 0
+    Direction1: 1
+    Direction2: 1
+    Direction3: 1
+    Direction4: 1
+    Direction5: 1
+    Direction6: 1
     "\uC815\uB839": 0
     LifeTime: 1
     DoT: 0
@@ -124,6 +127,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 0
+    FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
   - Name_KR: "\uC5F0\uACC41"
@@ -152,6 +156,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 971012
+    FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
   - Name_KR: "\uBC88\uAC1C"
@@ -180,6 +185,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 0
+    FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 912003
   - Name_KR: "\uD68C\uC624\uB9AC"
@@ -208,6 +214,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 0
+    FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 912001
   - Name_KR: "\uC5F0\uACC42"
@@ -236,6 +243,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 0
+    FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
   - Name_KR: "\uBE14\uB799\uD640"
@@ -264,6 +272,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 971013
+    FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 912003
   - Name_KR: "\uD68C\uC624\uB9AC"
@@ -292,6 +301,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 0
+    FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 912001
   - Name_KR: "\uD53C\uD3ED"
@@ -320,6 +330,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 0
+    FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 912006
   - Name_KR: "\uD53C\uD3ED2"
@@ -348,5 +359,6 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 0
+    FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 912006

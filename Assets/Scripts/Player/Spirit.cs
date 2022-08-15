@@ -25,7 +25,10 @@ public class Spirit : MonoBehaviour
 		//현재 플레이어가 사용하는 정령을 찾는다.
 		foreach (var spirit in DataTableManager.Instance.GetDataTable<Spirit_TableExcelLoader>().DataList)
 		{
-			if (spirit.Skill1Code == index)
+
+
+            
+			if (spirit.SpritTableIndex == index)
 			{
 				m_SpiritClass.m_SpiritData = spirit;
 				break;
@@ -42,8 +45,9 @@ public class Spirit : MonoBehaviour
 			}
 		}
 
+       
 
-		switch ((SpiritType)m_SpiritClass.m_SpiritData.SpiritType)
+        switch ((SpiritType)m_SpiritClass.m_SpiritData.SpiritType)
 		{
 			case SpiritType.Tile:
 				m_PlayerRow = MainManager.Instance.GetStageManager().m_PlayerRow;
@@ -78,18 +82,18 @@ public class Spirit : MonoBehaviour
 
 		//스킬실행
 		//PlayerManager.Instance.m_SpiritSkill.SkillUse(skillInfo, Row, Column);
-		m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, m_PlayerRow, m_PlayerColumn);
+		//m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, m_PlayerRow, m_PlayerColumn);
+
+        m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, tempSpirit);
 
 
-
-		float spirit_time = 0f;
+        float spirit_time = 0f;
 		float attack_time = 0f;
 
 		MainManager.Instance.GetStageManager().m_MapInfo[Row, Column].Spirit = true;
 		tempSpirit.transform.position = MainManager.Instance.GetStageManager().m_MapInfo[Row, Column].MapPos + new Vector3(0,5f,0);
-		
 
-
+       
 		while (true)
 		{
 			//지속시간 체크

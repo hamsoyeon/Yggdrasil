@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92fd82bc27de63745b57d8aadce987d6, type: 3}
   m_Name: NormarTile
   m_EditorClassIdentifier: 
-  TileObj: {fileID: 0}
+  TileObj: {fileID: 4297370990487588387, guid: e4e6c443ced53c448aa3f4c193bc48b1, type: 3}
   isWall: 0
+  isBuffTile: 0

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92fd82bc27de63745b57d8aadce987d6, type: 3}
   m_Name: PlayerSpawnTile
   m_EditorClassIdentifier: 
-  TileObj: {fileID: 0}
+  TileObj: {fileID: 1358214763940710919, guid: c6b1e5cf86b1ada45a87a78f1b83d0e4, type: 3}
   isWall: 0
+  isBuffTile: 0

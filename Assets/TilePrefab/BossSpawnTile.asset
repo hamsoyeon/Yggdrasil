@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92fd82bc27de63745b57d8aadce987d6, type: 3}
   m_Name: BossSpawnTile
   m_EditorClassIdentifier: 
-  TileObj: {fileID: 0}
+  TileObj: {fileID: 16087428090247743, guid: 5dffc9e0be32c664ca11e451ae547c8c, type: 3}
   isWall: 0
+  isBuffTile: 0

@@ -11,40 +11,375 @@ public class SpiritSkill : MonoBehaviour
 
 	private StageManager m_StageMgr;
 
+
+    private int Row;
+    private int Column;
+
 	public void SkillUse(SpiritSkill_TableExcel skillInfo,GameObject Spirit)  //비타일형
 	{
 
-		GameObject tempSpirit = Spirit;
+        Row = MainManager.instance.GetStageManager().m_PlayerRow;
+        Column = MainManager.instance.GetStageManager().m_PlayerCoulmn;
+
+
+
+        GameObject tempSpirit = Spirit;
 		EffectPrefab.GetComponent<DamageCheck>().Dot = skillInfo.DoT;
 		EffectPrefab.GetComponent<DamageCheck>().who = 1;
 
-		//GameObject tempSkillEffect = Instantiate(EffectPrefab);
+        //GameObject tempSkillEffect = Instantiate(EffectPrefab);
+
 		switch (skillInfo.SpritSkillIndex)
 		{
-			case 10100:  //독구름
-				StartCoroutine(PoisonCloud(skillInfo, tempSpirit));
-				break;
-			case 10300:  //무적
-				StartCoroutine(Invincibility(skillInfo, tempSpirit));
-				break;
-			case 10400:  //신성지대
-				StartCoroutine(Sanctity(skillInfo, tempSpirit));
-				break;
-			case 10500:  //힐
-				StartCoroutine(Heal(skillInfo, tempSpirit));
-				break;
+			case 170001:  //얼음장판
+                StartCoroutine(IceField(skillInfo, Row, Column));
+                break;
+			case 170002:  //독구름
+                StartCoroutine(PoisonCloud(skillInfo, tempSpirit));
+                break;
+			case 170003:  //무적
+                StartCoroutine(Invincibility(skillInfo, tempSpirit));
+                break;
+			case 170004:  //신성지대
+                StartCoroutine(Sanctity(skillInfo, tempSpirit));
+                break;
 
-		}
+            case 170005: //힐
+                StartCoroutine(Heal(skillInfo, tempSpirit));
+                break;
+
+            case 170006: //이속증가
+                StartCoroutine(SpeedField(skillInfo, Row,Column));
+                break;
+        }
 
 	}
 
-	public void SkillUse(SpiritSkill_TableExcel skillInfo,int row, int column)  //타일형
-	{
-		//GameObject tempSkillEffect = Instantiate(EffectPrefab);
-		StartCoroutine(SkillWideAction(skillInfo, row, column));
-		EffectPrefab.GetComponent<DamageCheck>().Dot = skillInfo.DoT;
-		EffectPrefab.GetComponent<DamageCheck>().who = 1;
-	}
+	//public void SkillUse(SpiritSkill_TableExcel skillInfo,int row, int column)  //타일형
+	//{
+	//	//GameObject tempSkillEffect = Instantiate(EffectPrefab);
+	//	StartCoroutine(SkillWideAction(skillInfo, row, column));
+	//	EffectPrefab.GetComponent<DamageCheck>().Dot = skillInfo.DoT;
+	//	EffectPrefab.GetComponent<DamageCheck>().who = 1;
+	//}
+
+    IEnumerator SpeedField(SpiritSkill_TableExcel skill, int row, int column)
+    {
+        int Row = row;
+        int Column = column;
+
+        float spirit_time = 0f;
+
+        Debug.Log("아이스 필드 실행");
+        float range = skill.SkillRange - 1.0f;
+        float xRange = skill.SkillRange + range;
+
+        //보스 스킬범위를 표시해 주는 부분.
+        if (range > 0)  //range는 -1을한값 범위가 2부터 여기 들어온다. 범위가 1일경우는 해당 타일에 계산하면 된다.
+        {
+            int saveRow = Row;
+            int saveColumn = 0;
+
+            int checkRow_P;   //보스 기준 아래쪽에 있는 Column값
+            int checkRow_M;   //보스 기준 위쪽에 있는 Column값
+            int checkColumn;  //현재 색을 바꿀 타일의 Column값
+
+            for (float i = 0; i < skill.SkillRange; i += 1.0f)
+            {
+
+                checkRow_P = Row + (int)i;
+                checkRow_M = Row - (int)i;
+
+
+                if (checkRow_P % 2 == 1) //024(135라인)
+                    saveColumn++;
+
+                for (float j = 0; j < xRange; j += 1.0f)
+                {
+
+                    if (i != 0) //보스가 있는 라인의 +-1라인씩 그림.
+                    {
+
+                        checkColumn = saveColumn + (int)j;
+
+                        if (checkColumn < 0 || checkColumn > 5)
+                            continue;
+
+                        if (checkRow_P < 5)
+                        {
+                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].SpiritEffect = true;
+
+                        }
+
+                        if (checkRow_M >= 0)
+                        {
+                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].SpiritEffect = true;
+
+                        }
+
+                    }
+                    else  //보스가 있는 라인을 쭉그림.
+                    {
+
+                        checkColumn = Column - (int)range + (int)j;
+
+                        if (j == 0)
+                            saveColumn = checkColumn;   //보스라인에서 첫번째 타일 색변환위치 저장.
+
+                        if (checkColumn < 0 || checkColumn > 5)
+                            continue;
+
+                        m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+                        m_StageMgr.m_MapInfo[Row, checkColumn].SpiritEffect = true;
+                    }
+
+
+                }
+
+                xRange -= 1.0f;
+            }
+        }
+        else  //range가 0이하면 사거리가 1 자기자신의 타일만 해당
+        {
+            m_StageMgr.m_MapInfo[Row, Column].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            m_StageMgr.m_MapInfo[Row, Column].SpiritEffect = true;
+
+        }
+
+        //경고시간(모든스킬 0.5f초로 고정)이  경과하면 파란색을 다시 원래색깔로 돌린후 그 범위에 이펙트 출현하고 데미지 로직 처리.
+        yield return new WaitForSeconds(2f);
+
+        for (int i = 0; i < m_StageMgr.mapZ; i++)
+        {
+            for (int j = 0; j < m_StageMgr.mapX; j++)
+            {
+
+                if (m_StageMgr.m_MapInfo[i, j].SpiritEffect)
+                {
+                    m_StageMgr.m_MapInfo[i, j].MapObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                    GameObject effect = Instantiate(EffectPrefab);
+                    effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
+                    m_StageMgr.m_MapInfo[i, j].SpiritEffectObject = effect;
+                }
+            }
+        }
+
+        float speed;
+        float originspeed = this.gameObject.GetComponent<CharacterClass>().m_CharacterStat.MoveSpeed;
+
+        while (true)
+        {
+            //지속시간 체크
+            spirit_time += Time.deltaTime;
+
+            //정령 지속시간이 경과시 
+            if (spirit_time >= skill.LifeTime)
+            {
+                //이펙트 파괴
+                for (int i = 0; i < m_StageMgr.mapZ; i++)
+                {
+                    for (int j = 0; j < m_StageMgr.mapX; j++)
+                    {
+
+                        if (m_StageMgr.m_MapInfo[i, j].SpiritEffect)
+                        {
+                            m_StageMgr.m_MapInfo[i, j].SpiritEffect = false;
+                            Object.Destroy(m_StageMgr.m_MapInfo[i, j].SpiritEffectObject);
+                        }
+                    }
+                }
+
+                this.gameObject.GetComponent<CharacterClass>().m_CharacterStat.MoveSpeed = originspeed;
+
+
+                //연계스킬있는지 확인후 다시 스킬실행.
+                if (skill.SkillAdded != 0)
+                {
+
+                }
+
+
+                yield break;
+            }
+
+           if(MainManager.Instance.GetStageManager().GetPlayerMapInfo().SpiritEffect)
+           {
+                Debug.Log("asd");
+                //transform.Find("Player").transform.GetChild(0).GetComponent<CharacterClass>().m_CharacterStat.MoveSpeed = 20f;
+
+                speed = originspeed;
+                speed *= 2f;
+
+
+                this.gameObject.GetComponent<CharacterClass>().m_CharacterStat.MoveSpeed = speed;
+
+           }
+           else
+           {
+                this.gameObject.GetComponent<CharacterClass>().m_CharacterStat.MoveSpeed = originspeed;
+           }
+
+           
+            
+           yield return null;
+        }
+
+
+       
+    }
+
+
+    IEnumerator IceField(SpiritSkill_TableExcel skill, int row, int column)
+    {
+        int Row = row;
+        int Column = column;
+
+        float spirit_time = 0f;
+        float buff_Time = 0f;
+
+        Debug.Log("아이스 필드 실행");
+        float range = skill.SkillRange - 1.0f;
+        float xRange = skill.SkillRange + range;
+
+        //보스 스킬범위를 표시해 주는 부분.
+        if (range > 0)  //range는 -1을한값 범위가 2부터 여기 들어온다. 범위가 1일경우는 해당 타일에 계산하면 된다.
+        {
+            int saveRow = Row;
+            int saveColumn = 0;
+
+            int checkRow_P;   //보스 기준 아래쪽에 있는 Column값
+            int checkRow_M;   //보스 기준 위쪽에 있는 Column값
+            int checkColumn;  //현재 색을 바꿀 타일의 Column값
+
+            for (float i = 0; i < skill.SkillRange; i += 1.0f)
+            {
+
+                checkRow_P = Row + (int)i;
+                checkRow_M = Row - (int)i;
+
+
+                if (checkRow_P % 2 == 1) //024(135라인)
+                    saveColumn++;
+
+                for (float j = 0; j < xRange; j += 1.0f)
+                {
+
+                    if (i != 0) //보스가 있는 라인의 +-1라인씩 그림.
+                    {
+
+                        checkColumn = saveColumn + (int)j;
+
+                        if (checkColumn < 0 || checkColumn > 5)
+                            continue;
+
+                        if (checkRow_P < 5)
+                        {
+                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].SpiritEffect = true;
+
+                        }
+
+                        if (checkRow_M >= 0)
+                        {
+                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].SpiritEffect = true;
+
+                        }
+
+                    }
+                    else  //보스가 있는 라인을 쭉그림.
+                    {
+
+                        checkColumn = Column - (int)range + (int)j;
+
+                        if (j == 0)
+                            saveColumn = checkColumn;   //보스라인에서 첫번째 타일 색변환위치 저장.
+
+                        if (checkColumn < 0 || checkColumn > 5)
+                            continue;
+
+                        m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+                        m_StageMgr.m_MapInfo[Row, checkColumn].SpiritEffect = true;
+                    }
+
+
+                }
+
+                xRange -= 1.0f;
+            }
+        }
+        else  //range가 0이하면 사거리가 1 자기자신의 타일만 해당
+        {
+            m_StageMgr.m_MapInfo[Row, Column].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            m_StageMgr.m_MapInfo[Row, Column].SpiritEffect = true;
+
+        }
+
+        //경고시간(모든스킬 0.5f초로 고정)이  경과하면 파란색을 다시 원래색깔로 돌린후 그 범위에 이펙트 출현하고 데미지 로직 처리.
+        yield return new WaitForSeconds(2f);
+
+        for (int i = 0; i < m_StageMgr.mapZ; i++)
+        {
+            for (int j = 0; j < m_StageMgr.mapX; j++)
+            {
+
+                if (m_StageMgr.m_MapInfo[i, j].SpiritEffect)
+                {
+                    m_StageMgr.m_MapInfo[i, j].MapObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                    GameObject effect = Instantiate(EffectPrefab);
+                    effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
+                    m_StageMgr.m_MapInfo[i, j].SpiritEffectObject = effect;
+                }
+            }
+        }
+
+        Debug.Log("이펙트 소환");
+
+
+
+        while(true)
+        {
+            //지속시간 체크
+            spirit_time += Time.deltaTime;
+
+            //정령 지속시간이 경과시 
+            if (spirit_time >= skill.LifeTime)
+            {
+                //이펙트 파괴
+                for (int i = 0; i < m_StageMgr.mapZ; i++)
+                {
+                    for (int j = 0; j < m_StageMgr.mapX; j++)
+                    {
+
+                        if (m_StageMgr.m_MapInfo[i, j].SpiritEffect)
+                        {
+                            m_StageMgr.m_MapInfo[i, j].SpiritEffect = false;
+                            Object.Destroy(m_StageMgr.m_MapInfo[i, j].SpiritEffectObject);
+                        }
+                    }
+                }
+
+                //연계스킬있는지 확인후 다시 스킬실행.
+                if (skill.SkillAdded != 0)
+                {
+
+                }
+
+
+                yield break;
+            }
+
+
+            yield return null;
+        }
+
+
+     
+
+    }
+
 
 	IEnumerator Heal(SpiritSkill_TableExcel skill, GameObject spirit)
 	{
@@ -184,9 +519,6 @@ public class SpiritSkill : MonoBehaviour
 		{
 			tempEffect = Instantiate(EffectPrefab);
 			tempEffect.transform.position = nearEnemy.transform.position + new Vector3(0, 5f, 0);
-
-
-
 		}
 
 
@@ -253,7 +585,7 @@ public class SpiritSkill : MonoBehaviour
 				checkRow_M = Row - (int)i;
 
 
-				if (checkRow_P % 2 == 0) //024(135라인)
+				if (checkRow_P % 2 == 1) //024(135라인)
 					saveColumn++;
 
 				for (float j = 0; j < xRange; j += 1.0f)
@@ -459,7 +791,8 @@ public class SpiritSkill : MonoBehaviour
 	{
 
 		m_StageMgr = MainManager.Instance.GetStageManager();
-	}
+
+    }
 
 
 }

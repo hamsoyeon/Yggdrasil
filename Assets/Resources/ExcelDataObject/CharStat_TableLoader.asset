@@ -42,12 +42,12 @@ MonoBehaviour:
     Def: 15
     HP: 20
     MoveSpeed: 10
-    Skill1: 100500
-    Skill2: 100300
-    Skill3: 100600
-    Skill4: 100700
-    Skill5: 100900
-    Skill6: 100600
+    Skill1: 121001
+    Skill2: 121002
+    Skill3: 122001
+    Skill4: 122002
+    Skill5: 123001
+    Skill6: 123002
     Item1: 0
     Item2: 0
     Sight: 50

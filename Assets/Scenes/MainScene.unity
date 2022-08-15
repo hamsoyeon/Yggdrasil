@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -359,6 +359,7 @@ MonoBehaviour:
   PlayerPiece: {fileID: 242977479076845732, guid: 3de11b3bc1b2444448357b2ddd0b9130, type: 3}
   Tile: {fileID: 4717883552673209890, guid: e4e6c443ced53c448aa3f4c193bc48b1, type: 3}
   Line: {fileID: 8166077804748737062, guid: ebc1a9c7d75a2434297c84d1f0143127, type: 3}
+  TileAsset: {fileID: 11400000, guid: 25682d25e46fb8d4fa58600f5c78ef11, type: 2}
   Width: 6
   Height: 5
 --- !u!1 &1259448267
