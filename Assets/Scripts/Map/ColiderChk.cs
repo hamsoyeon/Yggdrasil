@@ -6,7 +6,7 @@ public class ColiderChk : MonoBehaviour
 {
     public bool coliderchk = false;
     MeshRenderer mesh;
-    Material mat;
+    //Material mat;
 
     public int m_row;
     public int m_coulmn;
@@ -39,7 +39,7 @@ public class ColiderChk : MonoBehaviour
     void Start()
     {
         mesh = GetComponent<MeshRenderer>();
-        mat = mesh.material;
+        //mat = mesh.material;
     }
 
     void Update()

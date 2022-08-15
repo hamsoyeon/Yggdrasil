@@ -17,6 +17,8 @@ public class BoardBehaviour : MonoBehaviour
 	public GameObject Tile;
     public GameObject Line;
 
+    public TileAsset TileAsset;
+
 	public int Width, Height;
     const float Spacing = 1.4f;
 
@@ -26,21 +28,47 @@ public class BoardBehaviour : MonoBehaviour
 
     List<GameObject> _path;
 
-    GamePiece _selectedPiece;
-    //GameObject _torus;
+    private GameObject BossObj;
+    private GameObject PlayerObj;
 
+    int cnt;
 
-	void Start ()
+    List<int> index;
+
+    void Start ()
 	{
+        index = new List<int>();
+        foreach (var item in DataTableManager.Instance.GetDataTable<Map_TableExcelLoader>().DataList)
+        {
+            if (item.TilePrefeb.ToString() == TileAsset.m_prefab[0].TileObj.name)
+            {
+                index.Add(0);
+            }
+            else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[1].TileObj.name)
+            {
+                index.Add(1);
+            }
+            else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[2].TileObj.name)
+            {
+                index.Add(2);
+            }
+            else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[3].TileObj.name)
+            {
+                index.Add(3);
+            }
+            else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[4].TileObj.name)
+            {
+                index.Add(4);
+            }
+        }
+
         CreateBoard();
 
         CreatePieces();
 
         transform.position = new Vector3(Width / 2.0f * Spacing - (Spacing / 2), -(Width + Height) / 2 - 5, Height / 2.0f * Spacing - (Spacing / 2));
         OnGameStateChanged();
-        
-        Messenger<TileBehaviour>.AddListener("Tile selected", OnTileSelected);
-        Messenger<PieceBehaviour>.AddListener("Piece selected", OnPieceSelected);
+       
 	}
 
     //private void Update()
@@ -67,40 +95,6 @@ public class BoardBehaviour : MonoBehaviour
         line.transform.position = GetWorldCoordinates(tile.Location.X, tile.Location.Y, .375f);
         _path.Add(line);
     }
-
-    void OnTileSelected(TileBehaviour tileBehaviour)
-    {
-        if (_selectedPiece == null)
-            TileChanged(tileBehaviour);
-        else
-            MovePiece(tileBehaviour);
-    }
-
-    private void MovePiece(TileBehaviour tileBehaviour)
-    {
-        _selectedPiece.Location = tileBehaviour.Tile.Location;
-        CreatePieces();
-        OnPieceSelected(null);
-        OnGameStateChanged();
-    }
-
-    void OnPieceSelected(PieceBehaviour pieceBehaviour)
-    {
-        //Destroy(_torus);
-
-        _selectedPiece = pieceBehaviour == null || _selectedPiece == pieceBehaviour.Piece ? null : pieceBehaviour.Piece;
-
-        //DrawSelection();
-    }
-
-    //private void DrawSelection()
-    //{
-    //    if (_selectedPiece == null)
-    //        return;
-
-    //    _torus = (GameObject)Instantiate(SelectionObject);
-    //    _torus.transform.position = GetWorldCoordinates(_selectedPiece.Location.X, _selectedPiece.Location.Y, 1f);
-    //}
 
     List<GameObject> _gamePieces;
 
@@ -138,8 +132,12 @@ public class BoardBehaviour : MonoBehaviour
     //}
     private GameObject CreateBossPiece(GamePiece piece)
     {
+        BossObj = new GameObject();
+        BossObj.name = "Boss";
+
         var visualPiece = (GameObject)Instantiate(BossPiece);
         visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, .7f);
+        visualPiece.transform.parent = BossObj.transform;
 
         var pb = (PieceBehaviour)visualPiece.GetComponent("PieceBehaviour");
 
@@ -150,8 +148,12 @@ public class BoardBehaviour : MonoBehaviour
 
     private GameObject CreatePlayerPiece(GamePiece piece)
     {
+        PlayerObj = new GameObject();
+        PlayerObj.name = "Player";
+
         var visualPiece = (GameObject)Instantiate(PlayerPiece);
         visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, .7f);
+        visualPiece.transform.parent = PlayerObj.transform;
 
         var pb = (PieceBehaviour)visualPiece.GetComponent("PieceBehaviour");
 
@@ -162,6 +164,7 @@ public class BoardBehaviour : MonoBehaviour
 
     private void CreateBoard()
     {
+        cnt = 0;
         _game = new Game(Width, Height);
         _gameBoard = new GameObject[Width, Height];   // 6 5
 
@@ -169,13 +172,14 @@ public class BoardBehaviour : MonoBehaviour
         {
             for (var y = 0; y < Height; y++)
             {
-                var tile = (GameObject)Instantiate(Tile);
+                //var tile = (GameObject)Instantiate(Tile);
+                var tile = Instantiate(TileAsset.m_prefab[index[cnt]].TileObj);
 
                 _gameBoard[x, y] = tile;
 
                 var tileTransform = tile.transform;
 
-                tileTransform.position = GetWorldCoordinates(x, y, -3f);
+                tileTransform.position = GetWorldCoordinates(x, y, 0);
 
                 MainManager.Instance.GetStageManager().m_MapInfo[y, x].MapPos = tileTransform.position;
                 MainManager.Instance.GetStageManager().m_MapInfo[y, x].MapObject = tile;
@@ -194,15 +198,9 @@ public class BoardBehaviour : MonoBehaviour
 
                 Debug.Log(MainManager.Instance.GetStageManager().m_MapInfo[y, x].MapPos);
                 Debug.Log($"{MainManager.Instance.GetStageManager().m_MapInfo[y, x].row}/{MainManager.Instance.GetStageManager().m_MapInfo[y, x].column}");
+                cnt++;
             }
         }
-
-
-
-
-
-
-
     }
 
     static Vector3 GetWorldCoordinates(int x, int y, float z)
@@ -235,8 +233,8 @@ public class BoardBehaviour : MonoBehaviour
         //열거자
 
         //SpacialObject -> 분석
-        var start = _game.AllTiles.Single(o => o.X == sp.Location.X && o.Y == sp.Location.Y); // 
-        var destination = _game.AllTiles.Single(o => o.X == dp.Location.X && o.Y == dp.Location.Y);
+        var start = _game.AllTiles.Single(o => o.X == sp.Location.X && o.Y == sp.Location.Y); // sp의 x값과 y값을 추출
+        var destination = _game.AllTiles.Single(o => o.X == dp.Location.X && o.Y == dp.Location.Y); //dp의 x값과 y값을 추출
 
         Func<Tile, Tile, double> distance = (node1, node2) => 1;
         Func<Tile, double> estimate = t => Math.Sqrt(Math.Pow(t.X - destination.X, 2) + Math.Pow(t.Y - destination.Y, 2));

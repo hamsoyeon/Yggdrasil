@@ -28,10 +28,10 @@ public class TileBehaviour : MonoBehaviour
 
     }
 
-    void OnMouseUp()
-    {
-        Debug.Log(string.Format("Tile {0}", Tile.ToString()));
+    //void OnMouseUp()
+    //{
+    //    Debug.Log(string.Format("Tile {0}", Tile.ToString()));
         
-        Messenger<TileBehaviour>.Broadcast("Tile selected", this);
-    }    
+    //    Messenger<TileBehaviour>.Broadcast("Tile selected", this);
+    //}    
 }
