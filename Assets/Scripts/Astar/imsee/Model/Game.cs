@@ -20,7 +20,7 @@ namespace Model
 
             InitialiseGameBoard();
             BlockOutTiles();
-            
+
             InitialiseGamePieces();
         }
 
@@ -66,7 +66,6 @@ namespace Model
             GameBoard[2, 4].CanPass = false;
             GameBoard[2, 2].CanPass = false;
             GameBoard[3, 2].CanPass = false;
-            //GameBoard[5, 3].CanPass = false;
         }
 
         public IEnumerable<Tile> AllTiles

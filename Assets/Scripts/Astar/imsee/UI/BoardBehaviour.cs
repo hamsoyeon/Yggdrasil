@@ -18,11 +18,11 @@ public class BoardBehaviour : MonoBehaviour
 
     public TileAsset TileAsset;
 
-	public int Width, Height;
+    public int Width, Height;
     const float Spacing = 1.4f;
 
     [HideInInspector]
-	public GameObject[,] _gameBoard;
+    public GameObject[,] _gameBoard;
     Game _game;
 
     List<GameObject> _path;
@@ -36,8 +36,8 @@ public class BoardBehaviour : MonoBehaviour
     private GameObject PlayerGameObject;
 
 
-    void Start ()
-	{
+    void Start()
+    {
         int x = 0;
         int z = 0;
 
@@ -103,12 +103,12 @@ public class BoardBehaviour : MonoBehaviour
         CreatePieces();
 
 
-       
+
 
         transform.position = new Vector3(Width / 2.0f * Spacing - (Spacing / 2), -(Width + Height) / 2 - 5, Height / 2.0f * Spacing - (Spacing / 2));
         OnGameStateChanged();
-       
-	}
+
+    }
 
     //private void Update()
     //{
@@ -143,7 +143,7 @@ public class BoardBehaviour : MonoBehaviour
             _gamePieces = new List<GameObject>();
 
         _gamePieces.ForEach(Destroy);
-        
+
         var startPiece = _game.GamePieces.First();
         var destinationPiece = _game.GamePieces.Last();
 
@@ -191,7 +191,7 @@ public class BoardBehaviour : MonoBehaviour
 
     private GameObject CreatePlayerPiece(GamePiece piece)
     {
-        PlayerGameObject= new GameObject();
+        PlayerGameObject = new GameObject();
         PlayerGameObject.name = "Player";
 
         var visualPiece = (GameObject)Instantiate(PlayerPiece);
@@ -242,6 +242,8 @@ public class BoardBehaviour : MonoBehaviour
 
                 tb.SetMaterial();
 
+                Debug.Log(MainManager.Instance.GetStageManager().m_MapInfo[x, y].MapPos);
+                Debug.Log($"{MainManager.Instance.GetStageManager().m_MapInfo[x, y].row}/{MainManager.Instance.GetStageManager().m_MapInfo[x, y].column}");
                 cnt++;
             }
         }
