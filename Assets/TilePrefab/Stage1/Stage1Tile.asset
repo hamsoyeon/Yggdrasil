@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc88807e6ca75e429bf53515329cdea, type: 3}
+  m_Name: Stage1Tile
+  m_EditorClassIdentifier: 
+  m_prefab:
+  - {fileID: 11400000, guid: 3b2bf3d3d764ef94790b62039cb72575, type: 2}
+  - {fileID: 11400000, guid: aed2abbbace35cc44800a24ff4a9e4ce, type: 2}
+  - {fileID: 11400000, guid: f6c45574fdda4d64db5f68b50665f4be, type: 2}
+  - {fileID: 11400000, guid: 20804d180ea301448b81631d8a4e5001, type: 2}
+  - {fileID: 11400000, guid: 2f8e6db438e4b6e46b39e11ef7379ff2, type: 2}
