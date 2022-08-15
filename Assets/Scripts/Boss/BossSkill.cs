@@ -38,7 +38,9 @@ public class BossSkill : MonoBehaviour
 
     public GameObject[] EnemyPrefebs = new GameObject[2];
 
-    public GameObject TestSkillPrefab;
+    public GameObject SkillPrefab;
+
+
     public GameObject Skill1;
     public GameObject Skill2;
     public GameObject Skill3;
@@ -120,13 +122,21 @@ public class BossSkill : MonoBehaviour
         //플레이어의 위치와 보스의 배열 위치를 알아낸다.
         m_PlayerRow = MainManager.Instance.GetStageManager().m_PlayerRow;
         m_PlayerColumn = MainManager.Instance.GetStageManager().m_PlayerCoulmn;
-
-        Debug.Log($"현재 플레이어 위치: {m_PlayerRow}/{m_PlayerColumn}");
-
-
-
         m_BossRow = MainManager.Instance.GetStageManager().m_BossRow;
         m_BossColumn = MainManager.Instance.GetStageManager().m_BossColumn;
+
+        SkillPrefab = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.LunchPrefb];
+
+        DamageCheck check;
+        check = SkillPrefab.GetComponent<DamageCheck>();
+        if (check == null)
+        {
+            SkillPrefab.AddComponent<DamageCheck>();
+        }
+
+        
+
+
 
         //StartCoroutine(SkillAction());
         SkillAction();
@@ -276,7 +286,7 @@ public class BossSkill : MonoBehaviour
                 if (m_StageMgr.m_MapInfo[i, j].BossEffect)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
-                    GameObject effect = Instantiate(TestSkillPrefab);
+                    GameObject effect = Instantiate(SkillPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
                     effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
@@ -440,7 +450,7 @@ public class BossSkill : MonoBehaviour
                 if (m_StageMgr.m_MapInfo[i, j].BossEffect)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
-                    GameObject effect = Instantiate(TestSkillPrefab); //이펙트 표시.
+                    GameObject effect = Instantiate(SkillPrefab); //이펙트 표시.
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
                     effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
@@ -801,7 +811,7 @@ public class BossSkill : MonoBehaviour
                 if (m_StageMgr.m_MapInfo[i, j].BossEffect)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
-                    GameObject effect = Instantiate(TestSkillPrefab);
+                    GameObject effect = Instantiate(SkillPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
                     effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
@@ -1018,7 +1028,7 @@ public class BossSkill : MonoBehaviour
                 if (m_StageMgr.m_MapInfo[i, j].BossEffect)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
-                    GameObject effect = Instantiate(TestSkillPrefab);
+                    GameObject effect = Instantiate(SkillPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
                     effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
@@ -1108,7 +1118,7 @@ public class BossSkill : MonoBehaviour
         //플레이어가 있을경우
         if (colls.Length != 0)
         {
-            GameObject lightning = Instantiate(TestSkillPrefab);
+            GameObject lightning = Instantiate(SkillPrefab);
             int rand = Random.Range(0, colls.Length);
             Vector3 targetPos = colls[rand].gameObject.transform.position;
 
@@ -1193,7 +1203,7 @@ public class BossSkill : MonoBehaviour
 
         for (int i = 0; i < bolt.Length; i++)
         {
-            bolt[i] = Instantiate(TestSkillPrefab);
+            bolt[i] = Instantiate(SkillPrefab);
 
             float randX = Random.Range(bossX - 10f, bossX + 10f);
             float randZ = Random.Range(bossZ - 10f, bossZ + 10f);
@@ -1255,7 +1265,7 @@ public class BossSkill : MonoBehaviour
     IEnumerator LaserFireAction(Vector3 playerPos, float endTime)
     {
 
-        GameObject laser = Instantiate(TestSkillPrefab);
+        GameObject laser = Instantiate(SkillPrefab);
         laser.transform.position = transform.position;
         laser.transform.LookAt(playerPos);
 

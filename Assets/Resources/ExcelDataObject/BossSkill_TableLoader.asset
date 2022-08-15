@@ -33,13 +33,13 @@ MonoBehaviour:
     Direction6: 0
     "\uC815\uB839": 0
     LifeTime: 1
-    DoT: 0
+    DoT: 1
     SkillAdded: 0
     BuffAdded: 0
     SkillAnimation: 4
     SkillDelay: 0
     DelayPrefb: 0
-    LunchPrefb: 971009
+    LunchPrefb: 971001
     FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 912004
@@ -62,13 +62,13 @@ MonoBehaviour:
     Direction6: 0
     "\uC815\uB839": 0
     LifeTime: 1
-    DoT: 0
+    DoT: 1
     SkillAdded: 0
     BuffAdded: 0
     SkillAnimation: 1
     SkillDelay: 0
     DelayPrefb: 0
-    LunchPrefb: 971009
+    LunchPrefb: 971001
     FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 912004
@@ -91,13 +91,13 @@ MonoBehaviour:
     Direction6: 0
     "\uC815\uB839": 0
     LifeTime: 1
-    DoT: 0
+    DoT: 1
     SkillAdded: 0
     BuffAdded: 0
     SkillAnimation: 1
     SkillDelay: 0
     DelayPrefb: 0
-    LunchPrefb: 971009
+    LunchPrefb: 971001
     FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 912004
@@ -120,13 +120,13 @@ MonoBehaviour:
     Direction6: 1
     "\uC815\uB839": 0
     LifeTime: 1
-    DoT: 0
+    DoT: 1
     SkillAdded: 0
     BuffAdded: 0
     SkillAnimation: 0
     SkillDelay: 0
     DelayPrefb: 0
-    LunchPrefb: 0
+    LunchPrefb: 970013
     FieldPrefb: 0
     FirePrefb: 0
     DamPrefb: 0

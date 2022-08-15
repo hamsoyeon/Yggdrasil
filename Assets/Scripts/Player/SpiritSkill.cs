@@ -24,7 +24,20 @@ public class SpiritSkill : MonoBehaviour
 
 
         GameObject tempSpirit = Spirit;
-		EffectPrefab.GetComponent<DamageCheck>().Dot = skillInfo.DoT;
+
+        EffectPrefab = PrefabLoader.Instance.PrefabDic[skillInfo.LunchPrefb];
+
+        DamageCheck check;
+        check = EffectPrefab.GetComponent<DamageCheck>();
+
+        if(check == null)
+        {
+            EffectPrefab.AddComponent<DamageCheck>();
+        }
+
+       
+
+        EffectPrefab.GetComponent<DamageCheck>().Dot = skillInfo.DoT;
 		EffectPrefab.GetComponent<DamageCheck>().who = 1;
 
         //GameObject tempSkillEffect = Instantiate(EffectPrefab);
@@ -108,7 +121,6 @@ public class SpiritSkill : MonoBehaviour
                         if (checkRow_P < 5)
                         {
                             m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
-                            //m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
                             m_StageMgr.m_MapInfo[checkRow_P, checkColumn].SpiritEffect = true;
 
                         }
@@ -116,7 +128,6 @@ public class SpiritSkill : MonoBehaviour
                         if (checkRow_M >= 0)
                         {
                             m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
-                           // m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
                             m_StageMgr.m_MapInfo[checkRow_M, checkColumn].SpiritEffect = true;
 
                         }
@@ -134,8 +145,6 @@ public class SpiritSkill : MonoBehaviour
                             continue;
 
                         m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
-
-                        //m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.GetComponent<MeshRenderer>().material.color = Color.blue;
                         m_StageMgr.m_MapInfo[Row, checkColumn].SpiritEffect = true;
                     }
 
@@ -148,7 +157,6 @@ public class SpiritSkill : MonoBehaviour
         else  //range가 0이하면 사거리가 1 자기자신의 타일만 해당
         {
             m_StageMgr.m_MapInfo[Row, Column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
-            //m_StageMgr.m_MapInfo[Row, Column].MapObject.GetComponent<MeshRenderer>().material.color = Color.red;
             m_StageMgr.m_MapInfo[Row, Column].SpiritEffect = true;
 
         }
@@ -165,6 +173,9 @@ public class SpiritSkill : MonoBehaviour
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                     GameObject effect = Instantiate(EffectPrefab);
+                    //GameObject effect = Instantiate(PrefabLoader.Instance.PrefabDic[skill.LunchPrefb]);
+
+
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     m_StageMgr.m_MapInfo[i, j].SpiritEffectObject = effect;
                 }
@@ -545,10 +556,8 @@ public class SpiritSkill : MonoBehaviour
 				if(nearEnemy != null)
 				{
 					nearEnemy = null;
-				}
-
-				if (nearEnemy != null)
-					Object.Destroy(tempEffect);
+                    Object.Destroy(tempEffect);
+                }
 
 				yield break;
 			}
