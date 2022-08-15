@@ -18,7 +18,12 @@ public class CharacterClass : MonoBehaviour
 	public SpiritSkill_TableExcel m_SpiritSkillData;         //소환된 정령이 사용하는 스킬에 관한 데이터	
 	public SkillManager m_SkillMgr;
 
-	public CharacterClass()
+    public int Invincibility = 1;          //캐릭터가 사용하는 무적값.
+
+  
+
+
+    public CharacterClass()
 	{
 		m_SkillMgr = new SkillManager();
 	}

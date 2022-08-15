@@ -252,7 +252,6 @@ public class SpiritSkill : MonoBehaviour
         int Column = column;
 
         float spirit_time = 0f;
-        float buff_Time = 0f;
 
         Debug.Log("아이스 필드 실행");
         float range = skill.SkillRange - 1.0f;
@@ -427,16 +426,14 @@ public class SpiritSkill : MonoBehaviour
 				colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 8);  //9번째 레이어 = Enemy
 				foreach (var rangeCollider in colls)
 				{
-					//플레이어 회복시키는 코드.
-
+                    //플레이어 회복시키는 코드.
+                    rangeCollider.GetComponent<CharacterClass>().m_CharacterStat.HP += 100f;
                     //100씩 회복.
-
+                    rangeCollider.GetComponent<PlayerManager>().Damage();
 					Debug.Log("플레이어 회복중");
 				}
 
 			}
-
-
 			yield return null;
 		}
 
@@ -449,8 +446,6 @@ public class SpiritSkill : MonoBehaviour
 		Collider[] colls = null;
 
 		float spirit_time = 0f;
-
-		Debug.Log(spirit.transform.position);
 
 		while(true)
 		{
@@ -509,19 +504,36 @@ public class SpiritSkill : MonoBehaviour
 		//All 
 		Collider[] colls = null;
 
-		colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 8);  
-		//8번째 레이어 = Player
-		//무적버프 
+        //8번째 레이어 = Player
+        //무적버프 
 
+        float spirit_time = 0f;
 
-		yield return new WaitForSeconds(skill.LifeTime);
+        while (true)
+        {
+            //지속시간 체크
+            spirit_time += Time.deltaTime;
 
-		//무적 버프 해제 코드
+            //정령 지속시간이 경과시 
+            if (spirit_time >= skill.LifeTime)
+            {
+                //정령 파괴후 코루틴 종료
+                Object.Destroy(tempEffect);
+                yield break;
+            }
 
-		//정령 파괴후 코루틴 종료
-		Object.Destroy(tempEffect);
-		yield break;
+            colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 11);  //8번째 레이어 = Player
+          
 
+            foreach (var rangeCollider in colls)
+            {
+                rangeCollider.GetComponent<CharacterClass>().Invincibility = 0;
+            }
+
+         
+
+            yield return null;
+        }
 	}
 
 	
@@ -585,7 +597,6 @@ public class SpiritSkill : MonoBehaviour
 		if (colls.Length == 0)
 		{
 			Debug.Log("범위에 플레이어가 없습니다.");
-			DestroyObject(findStartObject);
 			return null;
 		}
 		else

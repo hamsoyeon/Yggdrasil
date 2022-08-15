@@ -11,6 +11,7 @@ public class DamageCheck : MonoBehaviour
 
 	private int minDamage;
 	private int resultDamage;
+    private int power;
 
 
 	//1.Player 2.Enemy
@@ -24,6 +25,8 @@ public class DamageCheck : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
+
+
 		Collider[] cols = Physics.OverlapSphere(transform.position, 10f);
 
 		if (cols.Length > 0)
@@ -40,7 +43,7 @@ public class DamageCheck : MonoBehaviour
 
 							EnemyClass = cols[i].GetComponent<CharacterClass>();
 							//PlayerClass = GameObject.Find("Player").GetComponent<CharacterClass>();
-                            PlayerClass = GameObject.Find("Player").transform.GetChild(0).GetComponent<CharacterClass>();
+                            PlayerClass = GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>();
 
 
 							if(cols[i].tag =="Boss")
@@ -51,16 +54,19 @@ public class DamageCheck : MonoBehaviour
 								if (minDamage <= 0)
 									minDamage = 1;
 
-								resultDamage = minDamage * (int)GameObject.Find("Player").transform.GetChild(0).GetComponent<PlayerManager>().m_Spirit.m_SpiritClass.m_SpiritSkillData.Power;
+
+                                power = (int)GameObject.Find("Player").transform.GetChild(0).GetComponent<PlayerManager>().m_Spirit.m_SpiritClass.m_SpiritSkillData.Power;
+
+                                resultDamage = minDamage * power;
 
 
-								EnemyClass.m_BossStatData.HP -= resultDamage;
+
+                                EnemyClass.m_BossStatData.HP -= resultDamage;
 								//해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
 								cols[i].GetComponent<BossFSM>().Damage();
 							}
 							
 						}
-
 						break;
 
 					case 2:
@@ -68,8 +74,9 @@ public class DamageCheck : MonoBehaviour
 						{
 							Debug.Log("플레이어 이펙트 충돌");
 							PlayerClass = cols[i].GetComponent<CharacterClass>();
-							EnemyClass = GameObject.Find("Boss").transform.GetChild(0).GetComponent<CharacterClass>();
+							EnemyClass = GameObject.FindWithTag("Boss").GetComponent<CharacterClass>();
 
+                            
 
 							minDamage = (int)EnemyClass.m_BossStatData.Atk - (int)PlayerClass.m_CharacterStat.Def;
 
@@ -77,7 +84,9 @@ public class DamageCheck : MonoBehaviour
 							if (minDamage <= 0)
 								minDamage = 1;
 
-							resultDamage = minDamage * (int)EnemyClass.m_SkillMgr.m_BossSkill.m_CurrentBossSkill.Power;
+                            power = (int)EnemyClass.m_SkillMgr.m_BossSkill.m_CurrentBossSkill.Power;
+
+                            resultDamage = minDamage * power * PlayerClass.Invincibility;
 
 							PlayerClass.m_CharacterStat.HP -= resultDamage;
 							//해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
@@ -118,10 +127,7 @@ public class DamageCheck : MonoBehaviour
 							{
 								Debug.Log("적 이펙트 충돌");
 
-								EnemyClass = cols[i].GetComponent<CharacterClass>();
-								PlayerClass = GameObject.Find("Player").transform.GetChild(0).GetComponent<CharacterClass>();
-                               //PlayerClass = GameObject.FindGameObjectsWithTag("player").
-
+								
 								if (cols[i].tag == "Boss")
 								{
 									minDamage = (int)PlayerClass.m_CharacterStat.Atk - (int)EnemyClass.m_BossStatData.Def;
@@ -130,7 +136,7 @@ public class DamageCheck : MonoBehaviour
 									if (minDamage <= 0)
 										minDamage = 1;
 
-									resultDamage = minDamage * (int)GameObject.Find("Player").transform.GetChild(0).GetComponent<PlayerManager>().m_Spirit.m_SpiritClass.m_SpiritSkillData.Power;
+									resultDamage = minDamage * power;
 
 
 									EnemyClass.m_BossStatData.HP -= resultDamage;
@@ -143,17 +149,14 @@ public class DamageCheck : MonoBehaviour
 							if (cols[i].tag == "Player")
 							{
 								Debug.Log("플레이어 이펙트 충돌");
-								PlayerClass = cols[i].GetComponent<CharacterClass>();
-								EnemyClass = GameObject.Find("Boss").transform.GetChild(0).GetComponent<CharacterClass>();
-
-
+								
 								minDamage = (int)EnemyClass.m_BossStatData.Atk - (int)PlayerClass.m_CharacterStat.Def;
 
 								//최소 데미지 보정.
 								if (minDamage <= 0)
 									minDamage = 1;
 
-								resultDamage = minDamage * (int)EnemyClass.m_SkillMgr.m_BossSkill.m_CurrentBossSkill.Power;
+								resultDamage = minDamage * power * PlayerClass.Invincibility;
 
 								PlayerClass.m_CharacterStat.HP -= resultDamage;
 								//해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.

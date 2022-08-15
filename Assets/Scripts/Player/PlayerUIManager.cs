@@ -9,8 +9,20 @@ public class PlayerUIManager : MonoBehaviour
     public GameObject UICanvas;
     public Slider hpBar;
 
+    private GameObject m_Player;
+
+    private float maxHP;
+    private float currentHP;
+
+
     void Start()
     {
+        m_Player = GameObject.Find("Player").transform.GetChild(0).gameObject;
+
+
+
+
+
         UICanvas = GameObject.Find("UICanvas");
         hpBar = UICanvas.GetComponentInChildren<Slider>();
     }

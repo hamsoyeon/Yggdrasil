@@ -40,7 +40,7 @@ MonoBehaviour:
     position: 4
     Atk: 5
     Def: 15
-    HP: 20
+    HP: 100
     MoveSpeed: 10
     Skill1: 121001
     Skill2: 121002

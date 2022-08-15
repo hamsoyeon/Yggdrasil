@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 242977479076845730}
   - component: {fileID: 5738515171472660628}
   - component: {fileID: -8311454150568158415}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -221,6 +221,7 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
+  Invincibility: 1
 --- !u!54 &242977479076845756
 Rigidbody:
   m_ObjectHideFlags: 0
