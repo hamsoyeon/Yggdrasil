@@ -99,7 +99,6 @@ public class PlayerManager : MonoBehaviour
     public void Move()
     {
         //방향키로 입력으로 변경
-<<<<<<< HEAD
         if (MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable || isWall == false)
         {
             if (Input.GetKey(KeyCode.LeftArrow))
@@ -122,7 +121,6 @@ public class PlayerManager : MonoBehaviour
                 this.transform.Translate(new Vector3(0.0f, 0.0f, -0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
                 cam.cam.transform.Translate(new Vector3(0.0f, -0.6f, -0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             }
-=======
 
         //h = Input.GetAxis("Horizontal");
         //v = Input.GetAxis("Vertical");
@@ -147,12 +145,9 @@ public class PlayerManager : MonoBehaviour
 
             //cam.CamPosUpdate(transform.position + new Vector3(0.0f,40f, -26.5f));
 
-
->>>>>>> f8bfb7f155f5f3a82d9be0254aef3ad871f2675e
         }
         else if (!MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable || isWall == true)
         {
-<<<<<<< HEAD
             Debug.Log("아 못감 ㅅㄱㅂ");
             if (Input.GetKey(KeyCode.LeftArrow))
             {
@@ -175,7 +170,6 @@ public class PlayerManager : MonoBehaviour
                 cam.cam.transform.position += UpCam * PlayerClass.m_CharacterStat.MoveSpeed;
             }
         }
-=======
 
             if (!move)
             {
@@ -229,8 +223,6 @@ public class PlayerManager : MonoBehaviour
         //    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotateSpeed);
         //}
 
-
->>>>>>> f8bfb7f155f5f3a82d9be0254aef3ad871f2675e
     }
 
 
@@ -324,7 +316,6 @@ public class PlayerManager : MonoBehaviour
         TakeDamagePrint(_damage);
     }
 
-<<<<<<< HEAD
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Wall"))
@@ -333,7 +324,6 @@ public class PlayerManager : MonoBehaviour
             isWall = true;
         }
     }
-=======
     public void TakeDamagePrint(int damage)
     {
         
@@ -349,5 +339,4 @@ public class PlayerManager : MonoBehaviour
         //Debug.Log(m_CurrentCharStat.HP);
     }
 
->>>>>>> f8bfb7f155f5f3a82d9be0254aef3ad871f2675e
 }
