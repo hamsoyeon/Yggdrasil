@@ -89,9 +89,12 @@ public class DamageCheck : MonoBehaviour
                             resultDamage = minDamage * power * PlayerClass.Invincibility;
 
 							PlayerClass.m_CharacterStat.HP -= resultDamage;
+
 							//해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
 							cols[i].GetComponent<PlayerManager>().Damage();
-						}
+                            //cols[i].GetComponent<PlayerManager>().PlayerDamageTxt
+
+                        }
 						break;
 
 				}

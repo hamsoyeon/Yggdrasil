@@ -19,36 +19,41 @@ public class PlayerManager : MonoBehaviour
     private const int m_CurrentIndex = 10002;  //임시로 사용하는 값(플레이어가 메뉴 모드에서 선택한 index값을 참고해서 솔로모드인지 멀티모드인지 판별)
 
     public CharacterClass PlayerClass;
+    public float m_MaxHp;
+    public float m_PerHp;
+
+    public KeyCode[] m_SpiritSkillKey;
+    
 
     private void InputCheck()
     {
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(m_SpiritSkillKey[3]))
         {
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill1);
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(m_SpiritSkillKey[4]))
         {
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill2);
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(m_SpiritSkillKey[5]))
         {
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill3);
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(m_SpiritSkillKey[0]))
         {
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill4);
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(m_SpiritSkillKey[1]))
         {
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill5);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(m_SpiritSkillKey[2]))
         {
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill6);
         }
@@ -90,7 +95,18 @@ public class PlayerManager : MonoBehaviour
 
 
 
-
+    private void Awake()
+    {
+        m_SpiritSkillKey = new KeyCode[6];
+        #region 정령스킬 키코드 값 설정
+        m_SpiritSkillKey[0] = KeyCode.Q;
+        m_SpiritSkillKey[1] = KeyCode.W;
+        m_SpiritSkillKey[2] = KeyCode.E;
+        m_SpiritSkillKey[3] = KeyCode.A;
+        m_SpiritSkillKey[4] = KeyCode.S;
+        m_SpiritSkillKey[5] = KeyCode.D;
+        #endregion
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -101,6 +117,8 @@ public class PlayerManager : MonoBehaviour
 
         PlayerClass = this.gameObject.GetComponent<CharacterClass>();
 
+        
+        
         // DataManager라는 Object의 List에 해당 데이터를 넣어주면 찾아서 사용가능.(디버깅용)
         // Use ExcelReader
         //foreach (var element in DataTableManager.Instance.GetDataTable<Map_TableExcelLoader>().DataList)
@@ -122,8 +140,8 @@ public class PlayerManager : MonoBehaviour
 
 
         Damage();
-
-
+        m_MaxHp = PlayerClass.m_CharacterStat.HP;
+        
     }
 
     void Update()
@@ -134,6 +152,8 @@ public class PlayerManager : MonoBehaviour
         //키보드 입력 체크 함수.
         InputCheck();
 
+        //플레이어 체력 백분률
+        RearTimePerHP();
     }
 
 
@@ -141,4 +161,11 @@ public class PlayerManager : MonoBehaviour
     {
         Debug.Log("현재 플레이어의 체력:" + PlayerClass.m_CharacterStat.HP);
     }
+
+    public void RearTimePerHP()
+    {
+        m_PerHp = PlayerClass.m_CharacterStat.HP / m_MaxHp;
+        //Debug.Log(m_CurrentCharStat.HP);
+    }
+
 }
