@@ -23,7 +23,12 @@ public class PlayerManager : MonoBehaviour
     public float m_PerHp;
 
     public KeyCode[] m_SpiritSkillKey;
-    
+
+
+    public GameObject hudDamageText;
+    public Transform hudPos;
+
+
 
     private void InputCheck()
     {
@@ -106,7 +111,11 @@ public class PlayerManager : MonoBehaviour
         m_SpiritSkillKey[4] = KeyCode.S;
         m_SpiritSkillKey[5] = KeyCode.D;
         #endregion
+        hudDamageText = Resources.Load<GameObject>("DamageText");
     }
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -139,7 +148,7 @@ public class PlayerManager : MonoBehaviour
         }
 
 
-        Damage();
+        //Damage();
         m_MaxHp = PlayerClass.m_CharacterStat.HP;
         
     }
@@ -154,12 +163,24 @@ public class PlayerManager : MonoBehaviour
 
         //플레이어 체력 백분률
         RearTimePerHP();
+
+        hudPos = GameObject.Find("Player(Clone)").transform;
     }
 
 
-    public void Damage()
+    public void Damage(int _damage)
     {
         Debug.Log("현재 플레이어의 체력:" + PlayerClass.m_CharacterStat.HP);
+        TakeDamagePrint(_damage);
+    }
+
+    public void TakeDamagePrint(int damage)
+    {
+        
+        GameObject hudText = Instantiate(hudDamageText);
+        
+        hudText.transform.position = hudPos.position + (Vector3.up * 5);
+        hudText.GetComponent<DamageTxt>().damage = damage;
     }
 
     public void RearTimePerHP()

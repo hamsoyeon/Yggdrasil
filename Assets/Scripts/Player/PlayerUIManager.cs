@@ -16,15 +16,12 @@ public class PlayerUIManager : MonoBehaviour
 
     public List<Button> spirit_Buttons;
 
+
     public float dummyHp;
     [SerializeField]
     private int m_SkillCount = 6;
 
-    public void OnClick_SpiritBtn()
-    {
-        //if()
-    }
-
+    
     void Start()
     {
         playerManager = GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<PlayerManager>();
@@ -47,7 +44,7 @@ public class PlayerUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         hpBar.value = playerManager.m_PerHp;
         dummyHp = hpBar.value;
     }
