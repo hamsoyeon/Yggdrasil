@@ -429,7 +429,7 @@ public class SpiritSkill : MonoBehaviour
                     //플레이어 회복시키는 코드.
                     rangeCollider.GetComponent<CharacterClass>().m_CharacterStat.HP += 100f;
                     //100씩 회복.
-                    rangeCollider.GetComponent<PlayerManager>().Damage();
+                    //rangeCollider.GetComponent<PlayerManager>().Damage();
 					Debug.Log("플레이어 회복중");
 				}
 

@@ -5,6 +5,7 @@ using TMPro;
 
 public class DamageTxt : MonoBehaviour
 {
+    private Transform target;
     private float moveSpeed;                                    //데미지 텍스트 움직이는 속도
     private float alphaSpeed;                                   //알파값이 변경되는 속도
     private float destroyTime;                                  //텍스트가 사라지는 시간
@@ -28,6 +29,7 @@ public class DamageTxt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         transform.Translate(new Vector3(0, moveSpeed * Time.deltaTime, 0)); // 텍스트 위치
         alpha.a = Mathf.Lerp(alpha.a, 0, Time.deltaTime * alphaSpeed); ; // 텍스트 알파값
         text.color = alpha;
@@ -37,4 +39,5 @@ public class DamageTxt : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
 }
