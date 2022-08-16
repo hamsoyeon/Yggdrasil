@@ -110,7 +110,7 @@ MonoBehaviour:
     CoolTime: 30
     SkillDistance: 3
     SkillRange: 5
-    SkillType: 3
+    SkillType: 5
     UseStat: 30
     Direction1: 1
     Direction2: 1
@@ -119,10 +119,10 @@ MonoBehaviour:
     Direction5: 1
     Direction6: 1
     "\uC815\uB839": 0
-    LifeTime: 1
+    LifeTime: 2
     DoT: 1
     SkillAdded: 0
-    BuffAdded: 0
+    BuffAdded: 1
     SkillAnimation: 0
     SkillDelay: 0
     DelayPrefb: 0

@@ -22,6 +22,8 @@ public class DamageCheck : MonoBehaviour
 	public float Dot;
 
 
+
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -54,7 +56,6 @@ public class DamageCheck : MonoBehaviour
 								if (minDamage <= 0)
 									minDamage = 1;
 
-
                                 power = (int)GameObject.Find("Player").transform.GetChild(0).GetComponent<PlayerManager>().m_Spirit.m_SpiritClass.m_SpiritSkillData.Power;
 
                                 resultDamage = minDamage * power;
@@ -76,8 +77,6 @@ public class DamageCheck : MonoBehaviour
 							PlayerClass = cols[i].GetComponent<CharacterClass>();
 							EnemyClass = GameObject.FindWithTag("Boss").GetComponent<CharacterClass>();
 
-                            
-
 							minDamage = (int)EnemyClass.m_BossStatData.Atk - (int)PlayerClass.m_CharacterStat.Def;
 
 							//최소 데미지 보정.
@@ -89,9 +88,12 @@ public class DamageCheck : MonoBehaviour
                             resultDamage = minDamage * power * PlayerClass.Invincibility;
 
 							PlayerClass.m_CharacterStat.HP -= resultDamage;
+
 							//해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
-							cols[i].GetComponent<PlayerManager>().Damage();
-						}
+							cols[i].GetComponent<PlayerManager>().Damage(resultDamage);
+                            //cols[i].GetComponent<PlayerManager>().PlayerDamageTxt
+
+                        }
 						break;
 
 				}
@@ -150,7 +152,7 @@ public class DamageCheck : MonoBehaviour
 							{
 								Debug.Log("플레이어 이펙트 충돌");
 								
-								minDamage = (int)EnemyClass.m_BossStatData.Atk - (int)PlayerClass.m_CharacterStat.Def;
+                                minDamage = (int)EnemyClass.m_BossStatData.Atk - (int)PlayerClass.m_CharacterStat.Def;
 
 								//최소 데미지 보정.
 								if (minDamage <= 0)
@@ -160,13 +162,10 @@ public class DamageCheck : MonoBehaviour
 
 								PlayerClass.m_CharacterStat.HP -= resultDamage;
 								//해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
-								cols[i].GetComponent<PlayerManager>().Damage();
+								cols[i].GetComponent<PlayerManager>().Damage(resultDamage);
 							}
 							break;
 					}
-
-
-
 				}
 			}
 			else

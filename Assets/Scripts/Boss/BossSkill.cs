@@ -36,7 +36,10 @@ public class BossSkill : MonoBehaviour
 
     public GameObject LineSkillTarget;
 
-    public GameObject[] EnemyPrefebs = new GameObject[2];
+    //public GameObject[] EnemyPrefebs = new GameObject[2];
+
+    public GameObject MobPrefabs;
+
 
     public GameObject SkillPrefab;
 
@@ -46,7 +49,7 @@ public class BossSkill : MonoBehaviour
     public GameObject Skill3;
     public GameObject Skill4;
 
-    private Animator boss_anim;
+    private Animator anim;
     private string currentState;
 
     //Animation States
@@ -134,9 +137,6 @@ public class BossSkill : MonoBehaviour
             SkillPrefab.AddComponent<DamageCheck>();
         }
 
-        
-
-
 
         //StartCoroutine(SkillAction());
         SkillAction();
@@ -161,7 +161,65 @@ public class BossSkill : MonoBehaviour
             case BossSkillType.DIFFUSION:
                 StartCoroutine(SkillDiffusionAction());
                 break;
+
+            case BossSkillType.SUMMONS:
+                StartCoroutine(MobSummons());
+                break;
         }
+    }
+
+
+    IEnumerator MobSummons()
+    {
+
+
+
+        int Row = MainManager.Instance.GetStageManager().m_BossRow;
+        int column = MainManager.Instance.GetStageManager().m_BossColumn;
+
+
+        m_StageMgr.m_MapInfo[Row, column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
+        m_StageMgr.m_MapInfo[Row, column].BossEffect = true;
+
+        Debug.Log("보스 스킬 범위 ");
+        yield return new WaitForSeconds(2f);
+
+
+        m_StageMgr.m_MapInfo[Row, column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
+        GameObject effect = Instantiate(SkillPrefab);
+        effect.transform.position = m_StageMgr.m_MapInfo[Row, column].MapPos + new Vector3(0, 5f, 0);
+        m_StageMgr.m_MapInfo[Row, column].BossEffectObject = effect;
+
+
+        //몬스터 소환.
+        int m_Count = 10;
+        GameObject[] monsters = new GameObject[m_Count];
+
+        for (int i = 0; i < m_Count; i++)
+        {
+            float randX = Random.Range(this.gameObject.transform.position.x - 15f, this.gameObject.transform.position.x + 15f);
+            float randZ = Random.Range(this.gameObject.transform.position.z - 15f, this.gameObject.transform.position.z + 15f);
+
+            monsters[i] = Instantiate(MobPrefabs);
+
+            monsters[i].transform.position = new Vector3(randX, 0, randZ);
+
+        }
+
+
+
+        yield return new WaitForSeconds(m_CurrentBossSkill.LifeTime);
+
+        AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+
+
+
+
+
+
+        yield return null;
+
+
     }
 
     IEnumerator SkillWideAction()
@@ -335,6 +393,8 @@ public class BossSkill : MonoBehaviour
 
         Debug.Log("와이드 스킬 종료");
 
+        AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+
         //연계스킬있는지 확인후 다시 스킬실행.
         if (m_CurrentBossSkill.SkillAdded != 0)
             BossSkillAction(m_CurrentBossSkill.SkillAdded);
@@ -460,7 +520,6 @@ public class BossSkill : MonoBehaviour
         }
 
         Debug.Log("이펙트 소환");
-        //이쪽 에서 데미지 처리.
 
 
         yield return new WaitForSeconds(m_CurrentBossSkill.LifeTime);  //생존시간이 지나면 이펙트 지우기
@@ -480,6 +539,7 @@ public class BossSkill : MonoBehaviour
 
         this.gameObject.GetComponent<BossFSM>().behavior = false;
         Debug.Log("타겟 스킬 종료");
+        AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
         //연계스킬 처리
         if (m_CurrentBossSkill.SkillAdded != 0)
@@ -838,6 +898,7 @@ public class BossSkill : MonoBehaviour
         }
 
         Debug.Log("확산 스킬 종료");
+        AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
         //연계스킬있는지 확인후 다시 스킬실행.
         if (m_CurrentBossSkill.SkillAdded != 0)
@@ -1056,7 +1117,7 @@ public class BossSkill : MonoBehaviour
 
 
         Debug.Log("방출(도넛) 스킬 종료");
-
+        AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
         //연계스킬있는지 확인후 다시 스킬실행.
         if (m_CurrentBossSkill.SkillAdded != 0)
             BossSkillAction(m_CurrentBossSkill.SkillAdded);
@@ -1075,253 +1136,13 @@ public class BossSkill : MonoBehaviour
 
 
 
-    public void Pull()
-    {
 
-        Debug.Log("2");
-        //boss_anim.SetInteger("IdleToSkill", 4);
-        //ChangeAnimationState(BOSS_SKILL04);
-        MainManager.Instance.GetAnimanager().ChangeAnimationState(boss_anim, BOSS_SKILL04, currentState);
-
-        //yield return new WaitForSeconds(0.01f);
-        //float curAnimationTime = anim.GetCurrentAnimatorStateInfo(0).length;
-        //yield return new WaitForSeconds(curAnimationTime);
-
-
-        checkSkill = true;
-
-        //dotValue = Mathf.Cos(Mathf.Deg2Rad * (angleRange / 2));
-        //direction = target.transform.position - transform.position;
-
-        //if (direction.magnitude < distance)
-        //{
-        //    Debug.Log("범위안에 있다.");
-        //    if (Vector3.Dot(direction.normalized, transform.forward) > dotValue)
-        //    {
-        //        Debug.Log("코루틴 시작.");
-        //        StartCoroutine(PullAction(target, transform.position, 0.5f));
-        //    }
-        //}
-
-
-    }
-
-    public void Lightning()
-    {
-        Debug.Log("3");
-
-        MainManager.Instance.GetAnimanager().ChangeAnimationState(boss_anim, BOSS_SKILL01, currentState);
-        checkSkill = true;
-        ////지정범위내의 모든 플레이어를 찾은 후
-        Collider[] colls = Physics.OverlapSphere(transform.position, 15f, 1 << 8);  //8번째 레이어 = Player
-
-        //플레이어가 있을경우
-        if (colls.Length != 0)
-        {
-            GameObject lightning = Instantiate(SkillPrefab);
-            int rand = Random.Range(0, colls.Length);
-            Vector3 targetPos = colls[rand].gameObject.transform.position;
-
-            DOTween.To(setter: value =>
-            {
-                if (value == 1)
-                {
-                    DestroyObject(lightning);
-                }
-                Debug.Log(value);
-                lightning.transform.position = EMath.Parabola(transform.position, targetPos, 10, value);
-            }, startValue: 0, endValue: 1, duration: 1).SetEase(Ease.Linear);
-
-            if (lightning.transform.position == targetPos)
-                DestroyObject(lightning);
-
-        }
-        else
-            Debug.Log("주변의 플레이어가 없습니다.");
-    }
-
-    public void Thumderbolt()
-    {
-        Debug.Log("4");
-        MainManager.Instance.GetAnimanager().ChangeAnimationState(boss_anim, BOSS_SKILL03, currentState);
-        checkSkill = true;
-        StartCoroutine(ThumderboltAction(5.0f, transform.position.x, transform.position.z));
-
-    }
-
-    public void LaserFire()
-    {
-
-        Debug.Log("5");
-        MainManager.Instance.GetAnimanager().ChangeAnimationState(boss_anim, BOSS_SKILL02, currentState);
-        checkSkill = true;
-        StartCoroutine(LaserFireAction(target.transform.position, 3f));
-
-    }
-
-    public void MonsterSummon()
-    {
-
-        Debug.Log("7");
-        MainManager.Instance.GetAnimanager().ChangeAnimationState(boss_anim, BOSS_SKILL03, currentState);
-        checkSkill = true;
-
-        StartCoroutine(MonsterSummonAction(10, transform.position.x, transform.position.z));
-    }
-
-
-
-
-
-
-    IEnumerator PullAction(GameObject target, Vector3 currentPos, float endtime)
-    {
-        float time = 0f;
-        while (true)
-        {
-            time += Time.deltaTime;
-
-            if (time >= endtime)
-                yield break;
-
-
-            target.transform.position = Vector3.MoveTowards(target.transform.position, currentPos, 0.05f);
-
-            yield return null;
-        }
-    }
-
-    IEnumerator ThumderboltAction(float endTime, float bossX, float bossZ)
-    {
-        float time = 0f;
-        float skillTime = 0f;
-
-        GameObject[] bolt = new GameObject[20];
-        Vector3[] pos = new Vector3[20];
-        int boltnum = 0;
-
-
-        for (int i = 0; i < bolt.Length; i++)
-        {
-            bolt[i] = Instantiate(SkillPrefab);
-
-            float randX = Random.Range(bossX - 10f, bossX + 10f);
-            float randZ = Random.Range(bossZ - 10f, bossZ + 10f);
-
-            bolt[i].transform.position = new Vector3(randX, 15f, randZ);
-            pos[i] = bolt[i].transform.position;
-            pos[i].y = 0f;
-            bolt[i].SetActive(false);
-        }
-
-        while (true)
-        {
-            time += Time.deltaTime;
-            skillTime += Time.deltaTime;
-
-            if (time >= endTime)
-            {
-
-                for (int i = 0; i < bolt.Length; i++)
-                {
-                    DestroyObject(bolt[i]);
-                }
-
-                skillAction = true;
-                yield break;
-            }
-
-            if (skillTime >= 0.25f && time <= endTime)
-            {
-                bolt[boltnum].SetActive(true);  //떨어질 번개를 활성화.
-                skillTime = 0f;
-                boltnum++;
-            }
-
-            for (int i = 0; i < bolt.Length; i++)
-            {
-
-                if (bolt[i].activeSelf == true)
-                {
-                    bolt[i].transform.position = Vector3.MoveTowards(bolt[i].transform.position, pos[i], 0.2f);
-                }
-
-
-                if (bolt[i].transform.position.y <= 0f)
-                {
-                    bolt[i].SetActive(false);
-                }
-
-            }
-
-            yield return null;
-        }
-
-
-
-
-    }
-
-    IEnumerator LaserFireAction(Vector3 playerPos, float endTime)
-    {
-
-        GameObject laser = Instantiate(SkillPrefab);
-        laser.transform.position = transform.position;
-        laser.transform.LookAt(playerPos);
-
-        float time = 0f;
-
-        while (true)
-        {
-            time += Time.deltaTime;
-
-            if (time > endTime)
-            {
-                DestroyObject(laser);
-                skillAction = true;
-                yield break;
-            }
-
-            laser.gameObject.transform.position = Vector3.MoveTowards(laser.gameObject.transform.position, playerPos, 0.3f);
-
-            yield return null;
-        }
-
-    }
-
-
-
-
-    IEnumerator MonsterSummonAction(int summonNum, float bossX, float bossZ)
-    {
-
-        GameObject[] monsters = new GameObject[summonNum];
-
-        for (int i = 0; i < summonNum; i++)
-        {
-            float randX = Random.Range(bossX - 5f, bossX + 5f);
-            float randZ = Random.Range(bossZ - 5f, bossZ + 5f);
-
-            if (i > 4)
-                monsters[i] = Instantiate(EnemyPrefebs[0]);
-            else
-                monsters[i] = Instantiate(EnemyPrefebs[1]);
-
-
-            monsters[i].transform.position = new Vector3(randX, 0, randZ);
-        }
-
-        yield return null;
-    }
 
     // Start is called before the first frame update
     void Start()
     {
-        boss_anim = transform.GetChild(0).GetComponent<Animator>();
-
-
+        
         m_StageMgr = MainManager.Instance.GetStageManager();
-
 
         OriginArr = new ClockDirectionList[6];
 
@@ -1330,6 +1151,14 @@ public class BossSkill : MonoBehaviour
             OriginArr[i].check = i;
             OriginArr[i].effect = false;
         }
+
+        anim = this.transform.GetChild(0).GetComponent<Animator>();
+
+        if (anim == null)
+        {
+            anim = this.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+        }
+
 
         //names[0].Name = "이세영"; names[0].Age = 102;
         //names[1].Name = "권경민"; names[1].Age = 31;
@@ -1345,14 +1174,12 @@ public class BossSkill : MonoBehaviour
         {
             checkTime += Time.deltaTime;
 
-            if (checkTime > boss_anim.GetCurrentAnimatorStateInfo(0).length)
+            if (checkTime > anim.GetCurrentAnimatorStateInfo(0).length)
             {
                 checkSkill = false;
                 checkTime = 0f;
 
-                //boss_anim.SetInteger("IdleToSkill", 0);
-
-                MainManager.Instance.GetAnimanager().ChangeAnimationState(boss_anim, BOSS_IDLE, currentState);
+                MainManager.Instance.GetAnimanager().ChangeAnimationState(anim, BOSS_IDLE, currentState);
             }
         }
 

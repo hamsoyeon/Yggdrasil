@@ -26,6 +26,9 @@ public class BossFSM : MonoBehaviour
     private BossSkill m_CurrentBossSkill;
     private CharacterClass m_BossClass;
 
+
+    private Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +42,16 @@ public class BossFSM : MonoBehaviour
         m_BossClass.m_SkillMgr.m_BossSkill = m_CurrentBossSkill;
 
         Debug.Log("현재 보스의 체력:" + m_BossClass.m_BossStatData.HP);
+
+
+        anim = this.transform.GetChild(0).GetComponent<Animator>();
+
+        if (anim == null)
+        {
+            anim = this.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+        }
+
+
     }
 
     public void Damage()
@@ -69,28 +82,36 @@ public class BossFSM : MonoBehaviour
 
                 BossRandomSkill = Random.Range(1, 4);
 
+                //BossRandomSkill = 3;
+
+               
+
+                
+
+
                 switch (BossRandomSkill)
                 {
                     case 1:
                         //스킬인덱스를 참고해 스킬을 사용.
                         Debug.Log("스킬1 사용");
                         m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill1);
-
-                        //BossSkillIndex = DataTableManager.Instance.GetDataTable<BossStat_TableExcelLoader>().DataList[BossRandomSkill].Skill1;
-                        //this.gameObject.GetComponent<BossSkill>().BossSkillAction(BossSkillIndex);
+                        AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
                         break;
                     case 2:
                         Debug.Log("스킬2 사용");
                         m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill2);
-                        //BossSkillIndex = DataTableManager.Instance.GetDataTable<BossStat_TableExcelLoader>().DataList[BossRandomSkill].Skill2;
-                        //this.gameObject.GetComponent<BossSkill>().BossSkillAction(BossSkillIndex);
+                        AnimationManager.GetInstance().PlayAnimation(anim, "Skill02");
                         break;
                     case 3:
                         Debug.Log("스킬3 사용");
                         m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill3);
+                        AnimationManager.GetInstance().PlayAnimation(anim, "Skill03");
+                        break;
 
-                        //BossSkillIndex = DataTableManager.Instance.GetDataTable<BossStat_TableExcelLoader>().DataList[BossRandomSkill].Skill3;
-                        //this.gameObject.GetComponent<BossSkill>().BossSkillAction(BossSkillIndex);
+                    case 4:
+                        Debug.Log("스킬4 사용");
+                        m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill4);
+                        AnimationManager.GetInstance().PlayAnimation(anim, "Skill04");
                         break;
                 }
 
