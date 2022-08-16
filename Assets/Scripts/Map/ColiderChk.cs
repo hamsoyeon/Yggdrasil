@@ -18,12 +18,17 @@ public class ColiderChk : MonoBehaviour
         {
 
             Debug.Log($"Player (row:{m_row} / coulmn:{m_coulmn})");
-
+               
             MainManager.Instance.GetStageManager().SetPlayerRowAndCoulmn(m_row, m_coulmn);
             coliderchk = true;
             //mat.color = new Color(1, 0, 0);
-
         }
+
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        MainManager.Instance.GetStageManager().SetPlayerRowAndCoulmn(m_row, m_coulmn);
     }
 
     private void OnTriggerExit(Collider other)

@@ -19,6 +19,7 @@ public class StageManager : MonoBehaviour
         public int column;
         public bool BossEffect;
         public bool SpiritEffect;
+        public bool IsUnWalkable; // 이동불가 타일 bool값 
     }
 
     //private GameObject BossObj;
@@ -92,18 +93,4 @@ public class StageManager : MonoBehaviour
 
     }
 
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

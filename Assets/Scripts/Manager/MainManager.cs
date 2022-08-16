@@ -72,18 +72,4 @@ public class MainManager : MonoBehaviour
     {
         return m_StageManager;
     }
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

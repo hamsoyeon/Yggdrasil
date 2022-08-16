@@ -439,6 +439,7 @@ public class SpiritSkill : MonoBehaviour
 
 	}
 
+    //밀려나는 코드
 	IEnumerator Sanctity(SpiritSkill_TableExcel skill, GameObject spirit)
 	{
 		GameObject tempEffect = Instantiate(EffectPrefab);

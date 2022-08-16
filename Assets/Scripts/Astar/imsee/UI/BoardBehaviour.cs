@@ -30,10 +30,12 @@ public class BoardBehaviour : MonoBehaviour
     int cnt;
 
     List<int> index;
-    Vector3 BossPos;
 
     private GameObject BossGameObject;
     private GameObject PlayerGameObject;
+
+    public List<int> xList; // 못지나가는 타일 x값을 받을 리스트
+    public List<int> yList; // 못지나가는 타일 y값을 받을 리스트
 
 
     void Start()
@@ -72,6 +74,7 @@ public class BoardBehaviour : MonoBehaviour
             MainManager.Instance.GetStageManager().m_MapInfo[z, x].column = x;    //세로
 
             MainManager.Instance.GetStageManager().m_MapInfo[z, x].BossEffect = false;
+            MainManager.Instance.GetStageManager().m_MapInfo[z, x].IsUnWalkable = true;
 
 
             //if (MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData.BossSummon != 0)
@@ -110,10 +113,10 @@ public class BoardBehaviour : MonoBehaviour
 
     }
 
-    //private void Update()
-    //{
-    //    OnGameStateChanged();
-    //}
+    private void Update()
+    {
+        
+    }
 
     private void DrawPath(IEnumerable<Tile> path)
     {
@@ -220,7 +223,9 @@ public class BoardBehaviour : MonoBehaviour
                 var tile = Instantiate(TileAsset.m_prefab[index[cnt]].TileObj);
 
                 if (TileAsset.m_prefab[index[cnt]].TileObj.name == TileAsset.m_prefab[4].TileObj.name)
-                    _game.BlockOutTiles(x, y);
+                {
+                    _game.SetBlockOutTiles(x, y);
+                }
 
                 _gameBoard[x, y] = tile;
 

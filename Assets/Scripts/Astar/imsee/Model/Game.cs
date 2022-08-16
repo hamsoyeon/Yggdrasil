@@ -14,6 +14,8 @@ namespace Model
         public int Width;
         public int Height;
 
+        public bool IsUnWalkable = false;
+
         public Game(int height, int width)
         {
             Width = width;
@@ -39,7 +41,7 @@ namespace Model
 
         private void InitialiseGameBoard()
         {
-            GameBoard = new Tile[Height, Width];     // 6/5
+            GameBoard = new Tile[Height, Width];     // 5/6
 
             for (var x = 0; x < Height; x++)
             {
@@ -62,10 +64,11 @@ namespace Model
         //이동 불가 타일을 실시간으로 변동점을 잡기 위한 
 
         //못가는 타일 설정
-        public void BlockOutTiles(int x, int y)
+        public void SetBlockOutTiles(int x, int y)
         {
             GameBoard[x, y].CanPass = false;
-            Debug.Log($"{GameBoard[x, y].CanPass}");
+            MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable = false;
+            Debug.Log($"TILE{x}{y} : {GameBoard[x, y].CanPass}");
         }
 
         public IEnumerable<Tile> AllTiles

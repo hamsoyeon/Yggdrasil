@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Yggdrasil.PlayerSkillSet;
+using Model;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -19,6 +20,21 @@ public class PlayerManager : MonoBehaviour
     private const int m_CurrentIndex = 10002;  //임시로 사용하는 값(플레이어가 메뉴 모드에서 선택한 index값을 참고해서 솔로모드인지 멀티모드인지 판별)
 
     public CharacterClass PlayerClass;
+
+    int x;
+    int y;
+
+    bool isWall = false;
+
+    Vector3 LeftPlayer = new Vector3(-0.2f, 0.0f, 0.0f);
+    Vector3 RightPlayer = new Vector3(0.2f, 0.0f, 0.0f);
+    Vector3 UpPlayer = new Vector3(0.0f, 0.0f, 0.225f);
+    Vector3 DownPlayer = new Vector3(0.0f, 0.0f, -0.225f);
+
+    Vector3 LeftCam = new Vector3(-0.2f, 0.0f, 0.0f);
+    Vector3 RightCam = new Vector3(0.2f, 0.0f, 0.0f);
+    Vector3 UpCam = new Vector3(0.0f, 0.0f, 0.198f);
+    Vector3 DownCam = new Vector3(0.0f, 0.0f, -0.198f);
 
     private void InputCheck()
     {
@@ -60,32 +76,53 @@ public class PlayerManager : MonoBehaviour
     public void Move()
     {
         //방향키로 입력으로 변경
-
-        //float h = Input.GetAxis("Horizontal");
-        //float v = Input.GetAxis("Vertical");
-
-        if(Input.GetKey(KeyCode.LeftArrow))
+        if (MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable || isWall == false)
         {
-            this.transform.Translate(new Vector3(-0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            cam.cam.transform.Translate(new Vector3(-0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                this.transform.Translate(new Vector3(-0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+                cam.cam.transform.Translate(new Vector3(-0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                this.transform.Translate(new Vector3(0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+                cam.cam.transform.Translate(new Vector3(0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                this.transform.Translate(new Vector3(0.0f, 0.0f, 0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+                cam.cam.transform.Translate(new Vector3(0.0f, 0.6f, 0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                this.transform.Translate(new Vector3(0.0f, 0.0f, -0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+                cam.cam.transform.Translate(new Vector3(0.0f, -0.6f, -0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            }
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        else if (!MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable || isWall == true)
         {
-            this.transform.Translate(new Vector3(0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            cam.cam.transform.Translate(new Vector3(0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            Debug.Log("아 못감 ㅅㄱㅂ");
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                this.transform.position += RightPlayer * PlayerClass.m_CharacterStat.MoveSpeed;
+                cam.cam.transform.position += RightCam * PlayerClass.m_CharacterStat.MoveSpeed;
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                this.transform.position += LeftPlayer * PlayerClass.m_CharacterStat.MoveSpeed;
+                cam.cam.transform.position += LeftCam * PlayerClass.m_CharacterStat.MoveSpeed;
+            }
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                this.transform.position += DownPlayer * PlayerClass.m_CharacterStat.MoveSpeed;
+                cam.cam.transform.position += DownCam * PlayerClass.m_CharacterStat.MoveSpeed;
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                this.transform.position += UpPlayer * PlayerClass.m_CharacterStat.MoveSpeed;
+                cam.cam.transform.position += UpCam * PlayerClass.m_CharacterStat.MoveSpeed;
+            }
         }
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            this.transform.Translate(new Vector3(0.0f, 0.0f, 0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            cam.cam.transform.Translate(new Vector3(0.0f, 0.6f, 0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            this.transform.Translate(new Vector3(0.0f, 0.0f, -0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            cam.cam.transform.Translate(new Vector3(0.0f, -0.6f, -0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-        }
-
-        //transform.Translate(new Vector3(h, 0, v) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
     }
 
 
@@ -128,6 +165,9 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+        x = MainManager.Instance.GetStageManager().m_PlayerRow;
+        y = MainManager.Instance.GetStageManager().m_PlayerCoulmn;
+
         //이동
         Move();
 
@@ -140,5 +180,14 @@ public class PlayerManager : MonoBehaviour
     public void Damage()
     {
         Debug.Log("현재 플레이어의 체력:" + PlayerClass.m_CharacterStat.HP);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("벽");
+            isWall = true;
+        }
     }
 }
