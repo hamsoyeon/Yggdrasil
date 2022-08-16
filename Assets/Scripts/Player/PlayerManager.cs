@@ -98,55 +98,58 @@ public class PlayerManager : MonoBehaviour
 
     public void Move()
     {
+
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            move = false;
+        }
+
         //방향키로 입력으로 변경
-        if (MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable || isWall == false)
+        if (MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable)
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
+                if (!move)
+                {
+                    AnimationManager.GetInstance().PlayAnimation(anim, "Run");
+                }
+
+                move = true;
                 this.transform.Translate(new Vector3(-0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
                 cam.cam.transform.Translate(new Vector3(-0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
+                if (!move)
+                {
+                    AnimationManager.GetInstance().PlayAnimation(anim, "Run");
+                }
+                move = true;
                 this.transform.Translate(new Vector3(0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
                 cam.cam.transform.Translate(new Vector3(0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             }
             if (Input.GetKey(KeyCode.UpArrow))
             {
+                if (!move)
+                {
+                    AnimationManager.GetInstance().PlayAnimation(anim, "Run");
+                }
+                move = true;
                 this.transform.Translate(new Vector3(0.0f, 0.0f, 0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
                 cam.cam.transform.Translate(new Vector3(0.0f, 0.6f, 0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
+                if (!move)
+                {
+                    AnimationManager.GetInstance().PlayAnimation(anim, "Run");
+                }
+                move = true;
                 this.transform.Translate(new Vector3(0.0f, 0.0f, -0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
                 cam.cam.transform.Translate(new Vector3(0.0f, -0.6f, -0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             }
-
-        //h = Input.GetAxis("Horizontal");
-        //v = Input.GetAxis("Vertical");
-
-
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow)|| Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            move = false;
         }
-
-
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            if (!move)
-            {
-                AnimationManager.GetInstance().PlayAnimation(anim, "Run");
-            }
-
-            move = true;
-            this.transform.Translate(new Vector3(-0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            cam.cam.transform.Translate(new Vector3(-0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-
-            //cam.CamPosUpdate(transform.position + new Vector3(0.0f,40f, -26.5f));
-
-        }
-        else if (!MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable || isWall == true)
+        else if (!MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable)
         {
             Debug.Log("아 못감 ㅅㄱㅂ");
             if (Input.GetKey(KeyCode.LeftArrow))
@@ -171,46 +174,8 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-            if (!move)
-            {
-                AnimationManager.GetInstance().PlayAnimation(anim, "Run");
-            }
-            move = true;
-            this.transform.Translate(new Vector3(0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            cam.cam.transform.Translate(new Vector3(0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            //cam.CamPosUpdate(transform.position+ new Vector3(0.0f, 40f, -26.5f));
-
-
-        }
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            if (!move)
-            {
-                AnimationManager.GetInstance().PlayAnimation(anim, "Run");
-            }
-            move = true;
-            this.transform.Translate(new Vector3(0.0f, 0.0f, 0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            cam.cam.transform.Translate(new Vector3(0.0f, 0.6f, 0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            //cam.CamPosUpdate(transform.position+ new Vector3(0.0f, 40f, -26.5f));
-
-
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            if (!move)
-            {
-                AnimationManager.GetInstance().PlayAnimation(anim, "Run");
-            }
-            move = true;
-            this.transform.Translate(new Vector3(0.0f, 0.0f, -0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            cam.cam.transform.Translate(new Vector3(0.0f, -0.6f, -0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            //cam.CamPosUpdate(transform.position+ new Vector3(0.0f, 40f, -26.5f));
-
-
-        }
-
-
-
+        //h = Input.GetAxis("Horizontal");
+        //v = Input.GetAxis("Vertical");
 
         //Vector3 dir = new Vector3(h, 0, v); // new Vector3(h, 0, v)가 자주 쓰이게 되었으므로 dir이라는 변수에 넣고 향후 편하게 사용할 수 있게 함
 
@@ -306,7 +271,8 @@ public class PlayerManager : MonoBehaviour
         //플레이어 체력 백분률
         RearTimePerHP();
 
-        hudPos = GameObject.Find("Player(Clone)").transform;
+        //hudPos = GameObject.Find("Player(Clone)").transform;
+        hudPos = GameObject.Find("Player").transform.GetChild(0).gameObject.transform;
     }
 
 
