@@ -6,6 +6,9 @@ using Yggdrasil.PlayerSkillSet;
 
 public class PlayerManager : MonoBehaviour
 {
+
+
+
     //플레이어 오브젝트
     public static GameObject p_Object;
 
@@ -19,6 +22,16 @@ public class PlayerManager : MonoBehaviour
     private const int m_CurrentIndex = 10002;  //임시로 사용하는 값(플레이어가 메뉴 모드에서 선택한 index값을 참고해서 솔로모드인지 멀티모드인지 판별)
 
     public CharacterClass PlayerClass;
+
+
+    private Animator anim;
+
+
+    private bool move;
+
+    float h, v;
+    float Speed = 5f;
+    float rotateSpeed = 5f;
 
     private void InputCheck()
     {
@@ -61,31 +74,87 @@ public class PlayerManager : MonoBehaviour
     {
         //방향키로 입력으로 변경
 
-        //float h = Input.GetAxis("Horizontal");
-        //float v = Input.GetAxis("Vertical");
+        //h = Input.GetAxis("Horizontal");
+        //v = Input.GetAxis("Vertical");
 
-        if(Input.GetKey(KeyCode.LeftArrow))
+
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow)|| Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
         {
+            move = false;
+        }
+
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            if (!move)
+            {
+                AnimationManager.GetInstance().PlayAnimation(anim, "Run");
+            }
+
+            move = true;
             this.transform.Translate(new Vector3(-0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             cam.cam.transform.Translate(new Vector3(-0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+
+            //cam.CamPosUpdate(transform.position + new Vector3(0.0f,40f, -26.5f));
+
+
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
+
+            if (!move)
+            {
+                AnimationManager.GetInstance().PlayAnimation(anim, "Run");
+            }
+            move = true;
             this.transform.Translate(new Vector3(0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             cam.cam.transform.Translate(new Vector3(0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            //cam.CamPosUpdate(transform.position+ new Vector3(0.0f, 40f, -26.5f));
+
+
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
+            if (!move)
+            {
+                AnimationManager.GetInstance().PlayAnimation(anim, "Run");
+            }
+            move = true;
             this.transform.Translate(new Vector3(0.0f, 0.0f, 0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             cam.cam.transform.Translate(new Vector3(0.0f, 0.6f, 0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            //cam.CamPosUpdate(transform.position+ new Vector3(0.0f, 40f, -26.5f));
+
+
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
+            if (!move)
+            {
+                AnimationManager.GetInstance().PlayAnimation(anim, "Run");
+            }
+            move = true;
             this.transform.Translate(new Vector3(0.0f, 0.0f, -0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             cam.cam.transform.Translate(new Vector3(0.0f, -0.6f, -0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+            //cam.CamPosUpdate(transform.position+ new Vector3(0.0f, 40f, -26.5f));
+
+
         }
 
-        //transform.Translate(new Vector3(h, 0, v) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+
+
+
+        //Vector3 dir = new Vector3(h, 0, v); // new Vector3(h, 0, v)가 자주 쓰이게 되었으므로 dir이라는 변수에 넣고 향후 편하게 사용할 수 있게 함
+
+        //// 바라보는 방향으로 회전 후 다시 정면을 바라보는 현상을 막기 위해 설정
+        //if (!(h == 0 && v == 0))
+        //{
+        //    // 이동과 회전을 함께 처리
+        //    transform.position += dir * Speed * Time.deltaTime;
+        //    // 회전하는 부분. Point 1.
+        //    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotateSpeed);
+        //}
+
+
     }
 
 
@@ -97,19 +166,19 @@ public class PlayerManager : MonoBehaviour
         cam = GetComponent<FollowCam>();
         p_Object = this.gameObject;
         m_Spirit = this.GetComponent<Spirit>();
-        //m_SpiritSkill = this.GetComponent<SpiritSkill>();
 
         PlayerClass = this.gameObject.GetComponent<CharacterClass>();
 
-        // DataManager라는 Object의 List에 해당 데이터를 넣어주면 찾아서 사용가능.(디버깅용)
-        // Use ExcelReader
-        //foreach (var element in DataTableManager.Instance.GetDataTable<Map_TableExcelLoader>().DataList)
-        //{
-        //    Debug.Log(element.No);
-        //    Debug.Log(element.StageName);
-        //}
 
+        anim = this.transform.GetChild(0).GetComponent<Animator>();
 
+        if (anim == null)
+        {
+            anim = this.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+        }
+        AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+
+        move = false;
 
         foreach (var item in DataTableManager.Instance.GetDataTable<CharStat_TableExcelLoader>().DataList)
         {
@@ -126,6 +195,7 @@ public class PlayerManager : MonoBehaviour
 
     }
 
+
     void Update()
     {
         //이동
@@ -133,6 +203,12 @@ public class PlayerManager : MonoBehaviour
 
         //키보드 입력 체크 함수.
         InputCheck();
+
+        if(!move)
+        {
+            AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+        }
+
 
     }
 

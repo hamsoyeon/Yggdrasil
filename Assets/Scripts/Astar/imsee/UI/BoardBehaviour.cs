@@ -195,6 +195,7 @@ public class BoardBehaviour : MonoBehaviour
         PlayerGameObject.name = "Player";
 
         var visualPiece = (GameObject)Instantiate(PlayerPiece);
+        //var visualPiece = PrefabLoader.Instance.PrefabDic[];
 
         visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, .7f);
         visualPiece.transform.parent = PlayerGameObject.transform;

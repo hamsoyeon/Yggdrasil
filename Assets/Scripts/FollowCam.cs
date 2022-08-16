@@ -11,6 +11,7 @@ public class FollowCam : MonoBehaviour
     [SerializeField]
 	private Vector3 camOffset;
 
+   // private Vector3 newCamPos;
     private Vector3 PlayerPos;
 
     //본인이 무슨 캐릭터를 조종을 하고 있는지 명시를 할 수 있어야 하고 그 카메라를 명시된 사람에게 붙여야 한다.
@@ -20,8 +21,21 @@ public class FollowCam : MonoBehaviour
     {
         cam = Camera.main;
         PlayerPos = this.gameObject.transform.position;
+       // newCamPos = new Vector3(PlayerPos.x + camOffset.x, 40, PlayerPos.z + camOffset.z);
         camOffset = new Vector3(0, 40, -26.5f);
 
         cam.transform.position = new Vector3(PlayerPos.x + camOffset.x, 40, PlayerPos.z + camOffset.z);
 	}
+
+    private void Update()
+    {
+        //cam.transform.position = newCamPos;
+    }
+
+    //public Vector3 CamPosUpdate(Vector3 Pos)
+    //{
+    //    newCamPos = Pos;
+
+    //    return newCamPos;
+    //}
 }

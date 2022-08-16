@@ -45,7 +45,7 @@ public class Spirit : MonoBehaviour
 			}
 		}
 
-       
+
 
         switch ((SpiritType)m_SpiritClass.m_SpiritData.SpiritType)
 		{
@@ -72,6 +72,9 @@ public class Spirit : MonoBehaviour
 
 		}
 
+        
+
+
 	}
 
 	IEnumerator TileSpirit(Spirit_TableExcel spiritInfo,SpiritSkill_TableExcel skillInfo,int Row,int Column)
@@ -83,6 +86,14 @@ public class Spirit : MonoBehaviour
         //GameObject tempSpirit = Instantiate(SpiritPrefab);
         GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
 
+        Animator anim = tempSpirit.transform.GetChild(0).GetComponent<Animator>();
+
+        if (anim == null)
+        {
+            anim = tempSpirit.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+        }
+
+        AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
 
         //스킬실행
         //PlayerManager.Instance.m_SpiritSkill.SkillUse(skillInfo, Row, Column);
@@ -131,7 +142,18 @@ public class Spirit : MonoBehaviour
 		//정령을 소환한다.(코루틴으로 정령을 소환)
 		GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
 
-		tempSpirit.transform.position = this.gameObject.transform.position + new Vector3(0,0,-7f);
+        Animator anim = tempSpirit.transform.GetChild(0).GetComponent<Animator>();
+
+        if(anim ==null)
+        {
+            anim = tempSpirit.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+        }
+
+
+        AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
+
+
+        tempSpirit.transform.position = this.gameObject.transform.position + new Vector3(0,0,-7f);
 		//PlayerManager.Instance.m_SpiritSkill.SkillUse(skillInfo, tempSpirit);
 		m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, tempSpirit);
 
@@ -167,7 +189,17 @@ public class Spirit : MonoBehaviour
 	{
 		//정령을 소환한다.(코루틴으로 정령을 소환)
 		GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
-		tempSpirit.transform.position = this.gameObject.transform.position + new Vector3(0, 0, -7f);
+
+        Animator anim = tempSpirit.transform.GetChild(0).GetComponent<Animator>();
+
+        if (anim == null)
+        {
+            anim = tempSpirit.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+        }
+
+        AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
+
+        tempSpirit.transform.position = this.gameObject.transform.position + new Vector3(0, 0, -7f);
 		m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, tempSpirit);
 		//PlayerManager.Instance.m_SpiritSkill.SkillUse(skillInfo, tempSpirit);
 

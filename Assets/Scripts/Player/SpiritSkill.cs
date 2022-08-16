@@ -477,7 +477,7 @@ public class SpiritSkill : MonoBehaviour
 					heading *= skill.SkillRange;
 
 					//보스가 아니라면
-					if (rangeCollider.gameObject.name != "Boss")
+					if (rangeCollider.gameObject.name != "Boss")  //태그나 레이어로 바꿔야함
 					{
 						rangeCollider.gameObject.transform.position = Vector3.MoveTowards(rangeCollider.gameObject.transform.position, heading, 5f);
 						Debug.Log($"{rangeCollider.ToString()}을 범위 내에서 밀어냅니다.");

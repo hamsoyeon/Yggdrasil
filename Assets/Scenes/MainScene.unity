@@ -635,7 +635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BossPiece: {fileID: 6863022358648512248, guid: f1f412bf354cff3449eae9f0b69db625, type: 3}
-  PlayerPiece: {fileID: 5212831495978784022, guid: 7c37257dadd0ab44eb7b5f34509ec6d0, type: 3}
+  PlayerPiece: {fileID: 2358126716913885333, guid: de01d37b7d0f1f6409201814a4b3e213, type: 3}
   Line: {fileID: 8166077804748737062, guid: ebc1a9c7d75a2434297c84d1f0143127, type: 3}
   TileAsset: {fileID: 11400000, guid: 25682d25e46fb8d4fa58600f5c78ef11, type: 2}
   Width: 6

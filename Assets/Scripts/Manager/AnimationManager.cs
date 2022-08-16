@@ -38,22 +38,6 @@ public class AnimationManager: MonoBehaviour
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public void ChangeAnimationState(Animator animator, string newState, string currentState)
     {
         if (currentState == newState) return;
