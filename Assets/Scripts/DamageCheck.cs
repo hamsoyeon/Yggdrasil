@@ -64,7 +64,7 @@ public class DamageCheck : MonoBehaviour
 
                                 EnemyClass.m_BossStatData.HP -= resultDamage;
 								//해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
-								cols[i].GetComponent<BossFSM>().Damage();
+								cols[i].GetComponent<BossFSM>().Damage(resultDamage);
 							}
 							
 						}
@@ -143,7 +143,7 @@ public class DamageCheck : MonoBehaviour
 
 									EnemyClass.m_BossStatData.HP -= resultDamage;
 									//해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
-									cols[i].GetComponent<BossFSM>().Damage();
+									cols[i].GetComponent<BossFSM>().Damage(resultDamage);
 								}
 							}
 							break;

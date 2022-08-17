@@ -288,7 +288,7 @@ public class PlayerManager : MonoBehaviour
         
         GameObject hudText = Instantiate(hudDamageText);
         
-        hudText.transform.position = hudPos.position + (Vector3.up * 5);
+        hudText.transform.position = hudPos.position + (Vector3.up * 15);
         hudText.GetComponent<DamageTxt>().damage = damage;
     }
 

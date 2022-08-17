@@ -26,6 +26,8 @@ public class BossFSM : MonoBehaviour
     private BossSkill m_CurrentBossSkill;
     private CharacterClass m_BossClass;
 
+    public GameObject hudDamageText;
+    public Transform hudPos;
 
     private Animator anim;
 
@@ -113,9 +115,24 @@ public class BossFSM : MonoBehaviour
 
 
 
-    public void Damage()
+    public void Damage(int _damage)
     {
         Debug.Log("현재 보스의 체력:" + m_BossClass.m_BossStatData.HP);
+        TakeDamagePrint(_damage);
+    }
+
+    public void TakeDamagePrint(int damage)
+    {
+
+        GameObject hudText = Instantiate(hudDamageText);
+
+        hudText.transform.position = hudPos.position + (Vector3.up * 20);
+        hudText.GetComponent<DamageTxt>().damage = damage;
+    }
+    private void Awake()
+    {
+        hudDamageText = Resources.Load<GameObject>("DamageText");
+        
     }
 
 
@@ -123,7 +140,7 @@ public class BossFSM : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-
+        hudPos = this.gameObject.transform;
         if (time > 1.0f && !behavior)
         {
 
