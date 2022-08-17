@@ -31,6 +31,9 @@ namespace Net
                 case EMainProtocol.LOBBY:
                     LobbyManager.Instance.RecvProcess(_recvpacket, protocol_manager);
                     break;
+                case EMainProtocol.LOGIN:
+                    m_client.SetState(m_client.m_Loginstate);
+                    break;
             }
         }
 
