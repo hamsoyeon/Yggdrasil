@@ -44,7 +44,7 @@ TCHAR* CLogMgr::WriteLog(const TCHAR* fmt, ...)
 	TCHAR cbuf[BUFSIZE];
 	ZeroMemory(cbuf, BUFSIZE);
 	t = localtime(&timer);
-	_stprintf(cbuf, _T("³¯Â¥:%d³â%d¿ù%dÀÏ ½Ã°£: %d½Ã %dºÐ "), t->tm_year + 1900, t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min);
+	_stprintf(cbuf, _T("ë‚ ì§œ:%dë…„%dì›”%dì¼ ì‹œê°„: %dì‹œ %dë¶„ "), t->tm_year + 1900, t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min);
 	int size = _tcslen(cbuf);
 	_vstprintf(cbuf+size, fmt, arg);
 	_tprintf(_T("%s"), cbuf);
@@ -60,7 +60,7 @@ TCHAR* CLogMgr::FileWriteLog(const TCHAR* fmt, ...)
 	TCHAR cbuf[BUFSIZE];
 	ZeroMemory(cbuf, BUFSIZE);
 	t = localtime(&timer);
-	_stprintf(cbuf, _T("[³¯Â¥:%d³â%d¿ù%dÀÏ] [½Ã°£: %d½Ã %dºÐ] "), t->tm_year + 1900, t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min);
+	_stprintf(cbuf, _T("[ë‚ ì§œ:%dë…„%dì›”%dì¼] [ì‹œê°„: %dì‹œ %dë¶„] "), t->tm_year + 1900, t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min);
 	int size = _tcslen(cbuf);
 	_vstprintf(cbuf + size, fmt, arg);
 	va_end(arg);
@@ -77,7 +77,7 @@ TCHAR* CLogMgr::FileWriteLog(const TCHAR* fmt, ...)
 
 	return cbuf;
 }
-//°íÄ¡±â ¾È³ª¿È
+//ê³ ì¹˜ê¸° ì•ˆë‚˜ì˜´
 TCHAR* CLogMgr::FileReadLogLast()
 {
 	char msg[BUFSIZE];

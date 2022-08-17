@@ -14,7 +14,7 @@ void CSession::Init()
 	
 }
 
-void CSession::End() // removesession½Ã ¸¶¹«¸®ÀÛ¾÷ÇÏ´Â ÇÔ¼ö
+void CSession::End() // removesessionì‹œ ë§ˆë¬´ë¦¬ìž‘ì—…í•˜ëŠ” í•¨ìˆ˜
 {
 	CloseSocket();
 	//base

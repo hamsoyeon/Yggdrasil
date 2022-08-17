@@ -21,4 +21,4 @@ public:
 private:
 	static CLock m_key;
 };
-//»ç¿ë½Ã CLockGuard_Static<Class¸í>
+//ì‚¬ìš©ì‹œ CLockGuard_Static<Classëª…>

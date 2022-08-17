@@ -14,7 +14,7 @@ public:
 		m_r_packNo = 1;
 	}
 	~CPacket() {};
-	// ÆĞÅ·, ¾ğÆĞÅ· ±â´ÉÀ» ¸í½ÃÀûÀ¸·Î 
+	// íŒ¨í‚¹, ì–¸íŒ¨í‚¹ ê¸°ëŠ¥ì„ ëª…ì‹œì ìœ¼ë¡œ 
 	void Packing(unsigned long _protocol, byte* _data, int _size);
 	void UnPacking(unsigned long& _protocol, byte* _buf);
 	void UnPacking(unsigned long& _protocol);

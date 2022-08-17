@@ -3,8 +3,8 @@
 
 #include "CCrypt.h"
 
-// »ηΐΜΑξΈ¦ •ϋ°ν ΎΟΘ£Θ­Έ¦ ΗΟΏ© ΖΠΕ·
-// ΎΟΘ£Θ­ΗΟ°ν ΊΉΘ£Θ­ΗΟ°ν
+// μ‚¬μ΄μ¦λ¥Ό λΊ΄κ³  μ•”νΈν™”λ¥Ό ν•μ—¬ ν¨ν‚Ή
+// μ•”νΈν™”ν•κ³  λ³µνΈν™”ν•κ³ 
 
 void CPacket::Packing(unsigned long _protocol, byte* _data, int _size)
 {
@@ -31,7 +31,7 @@ void CPacket::Packing(unsigned long _protocol, byte* _data, int _size)
 		CSocket::WSASEND(buf, size);
 		return;
 	}
-	//µ¥ΐΜΕΝΐΗ sizeµµ ³ΦΎξΑΨ΄Ω.
+	//λ°μ΄ν„°μ sizeλ„ λ„£μ–΄μ¤€λ‹¤.
 	memcpy(ptr, &_size, sizeof(int));
 	ptr += sizeof(int);
 	size += sizeof(int);
@@ -43,19 +43,19 @@ void CPacket::Packing(unsigned long _protocol, byte* _data, int _size)
 	memcpy(ptr, &size, sizeof(int));
 	size += sizeof(int);
 
-	/// ΎΟΘ£Θ­ ΔΪµε
-	/// 1ΉψΒ° ΖΔ¶σΉΜΕΝ : ΖΠΕ·µΘ µ¥ΐΜΕΝ
-	/// 2ΉψΒ° ΖΔ¶σΉΜΕΝ : ΎΟΘ£Θ­ΗÒ ΉφΗΑ
-	/// 3ΉψΒ° ΖΔ¶σΉΜΕΝ : µ¥ΐΜΕΝ »ηΐΜΑξ
-	/// - ΎΟΘ£Θ­½Γ ΑΦΐΗΑ΅
-	/// ΖΠΕ·µΘ µ¥ΐΜΕΝ ΎΥΏ΅ ΐΦ΄Β ΐόΓΌ µ¥ΐΜΕΝ »ηΐΜΑξ΄Β Α¦ΏάΗΨΌ­ ΎΟΘ£Θ­ΗΡ΄Ω.
+	/// μ•”νΈν™” μ½”λ“
+	/// 1λ²μ§Έ νλΌλ―Έν„° : ν¨ν‚Ήλ λ°μ΄ν„°
+	/// 2λ²μ§Έ νλΌλ―Έν„° : μ•”νΈν™”ν•  λ²„ν”„
+	/// 3λ²μ§Έ νλΌλ―Έν„° : λ°μ΄ν„° μ‚¬μ΄μ¦
+	/// - μ•”νΈν™”μ‹ μ£Όμμ 
+	/// ν¨ν‚Ήλ λ°μ΄ν„° μ•μ— μλ” μ „μ²΄ λ°μ΄ν„° μ‚¬μ΄μ¦λ” μ μ™Έν•΄μ„ μ•”νΈν™”ν•λ‹¤.
 	
 	//CCrypt::Encrypt(reinterpret_cast<BYTE*>(buf + sizeof(int)), reinterpret_cast<BYTE*>(buf + sizeof(int)), size - sizeof(int));
 
-	// ΊΞΈπΕ¬·΅½ΊΏ΅Ό­ ΗΟ΄Β ΐΟΐ» Έν½ΓΐϋΐΈ·Ξ ½αΑΨ΄Ω.
+	// λ¶€λª¨ν΄λμ¤μ—μ„ ν•λ” μΌμ„ λª…μ‹μ μΌλ΅ μ¨μ¤€λ‹¤.
 	CSocket::WSASEND(buf, size);
 }
-//ΉήΎΖΏΤΐ»¶§ ΖΠΕ¶ ±ΈΑ¶ packetno/protocol/data
+//λ°›μ•„μ™”μ„λ• ν¨ν‚· κµ¬μ΅° packetno/protocol/data
 
 //protocol size data 
 void CPacket::UnPacking(unsigned long &_protocol, byte* _buf)
@@ -63,9 +63,9 @@ void CPacket::UnPacking(unsigned long &_protocol, byte* _buf)
 	
 	const byte* ptr = m_trecvbuf.recvbuf + sizeof(int);
 	
-	// ΊΉΘ£Θ­ ΔΪµε
-	// - ΉήΎΖΏΒ µ¥ΐΜΕΝΈ¦ ΊΉΘ£Θ­ΗΡ΄Ω.
-	// - Ε¬¶σΐΜΎπΖ®Ώ΅Ό­ µ¥ΐΜΕΝ ΖΠΕ·½Γ ΎΟΘ£Θ­ΗΡ °ζΏμΏ΅ »ηΏλΗΡ΄Ω.
+	// λ³µνΈν™” μ½”λ“
+	// - λ°›μ•„μ¨ λ°μ΄ν„°λ¥Ό λ³µνΈν™”ν•λ‹¤.
+	// - ν΄λΌμ΄μ–ΈνΈμ—μ„ λ°μ΄ν„° ν¨ν‚Ήμ‹ μ•”νΈν™”ν• κ²½μ°μ— μ‚¬μ©ν•λ‹¤.
 	//CCrypt::Encrypt(reinterpret_cast<BYTE*>(m_trecvbuf.recvbuf), reinterpret_cast<BYTE*>(m_trecvbuf.recvbuf), m_trecvbuf.recvbytes);
 
 	int size = 0;
