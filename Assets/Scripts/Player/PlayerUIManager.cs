@@ -24,7 +24,9 @@ public class PlayerUIManager : MonoBehaviour
     
     void Start()
     {
-        playerManager = GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<PlayerManager>();
+        //playerManager = GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<PlayerManager>();
+        //playerManager = GameObject.FindWithTag("Player").GetComponent<PlayerManager>();
+
 
         UICanvas = GameObject.Find("UICanvas");
         spritSkillPanel = GameObject.Find("SpritSkillPanel");
@@ -45,7 +47,7 @@ public class PlayerUIManager : MonoBehaviour
     void Update()
     {
         
-        hpBar.value = playerManager.m_PerHp;
-        dummyHp = hpBar.value;
+        //hpBar.value = playerManager.m_PerHp;
+        //dummyHp = hpBar.value;
     }
 }

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using MapInformation;
 
-public class StageManager : MonoBehaviour
+namespace MapInformation
 {
-
     //추가 전체 맵 정보
     public struct MapInfo
     {
@@ -20,13 +20,26 @@ public class StageManager : MonoBehaviour
         public bool BossEffect;
         public bool SpiritEffect;
         public bool IsUnWalkable; // 이동불가 타일 bool값 
+
+        public int fCost;
+        public int gCost;
+        public int hCost;
     }
+}
+
+
+
+
+public class StageManager : MonoBehaviour
+{
+
 
     //private GameObject BossObj;
 
     public Dictionary<int, List<Map_TableExcel>> map_info;
 
     private List<Map_TableExcel> list;
+
 
     private int mapMaxCount = 30;
 
@@ -45,6 +58,8 @@ public class StageManager : MonoBehaviour
     //public TestMap map;
     public int mapX;
     public int mapZ;
+
+    
 
 
     public MapInfo GetPlayerMapInfo()
@@ -82,13 +97,9 @@ public class StageManager : MonoBehaviour
 
             m_MapInfo = new MapInfo[5, 6];
 
-            //map = GameObject.Find("MapManager").GetComponent<TestMap>();
+            
 
-            //디버그용
-            //foreach(var item in map_info[1])
-            //{
-            //    Debug.Log(item.No);
-            //}
+
         }
 
     }
