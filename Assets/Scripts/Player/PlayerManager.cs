@@ -32,9 +32,6 @@ public class PlayerManager : MonoBehaviour
     public GameObject hudDamageText;
     public Transform hudPos;
 
-
-
-
     private Animator anim;
 
 
@@ -47,8 +44,10 @@ public class PlayerManager : MonoBehaviour
     int x;
     int y;
 
-    bool isWall = false;
+    //벽인지 체크 하기 위한 불값
+    public bool isWall;
 
+    //이동못하는 타일 및 벽에 만나면 밀기 위한 벡터 변수
     Vector3 LeftPlayer = new Vector3(-0.2f, 0.0f, 0.0f);
     Vector3 RightPlayer = new Vector3(0.2f, 0.0f, 0.0f);
     Vector3 UpPlayer = new Vector3(0.0f, 0.0f, 0.225f);
@@ -105,7 +104,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         //방향키로 입력으로 변경
-        if (MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable)
+        if (MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable && !isWall)
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
@@ -115,8 +114,8 @@ public class PlayerManager : MonoBehaviour
                 }
 
                 move = true;
-                this.transform.Translate(new Vector3(-0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-                cam.cam.transform.Translate(new Vector3(-0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+                this.transform.Translate(new Vector3(-1.0f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+                cam.cam.transform.Translate(new Vector3(-1.0f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
@@ -125,8 +124,8 @@ public class PlayerManager : MonoBehaviour
                     AnimationManager.GetInstance().PlayAnimation(anim, "Run");
                 }
                 move = true;
-                this.transform.Translate(new Vector3(0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-                cam.cam.transform.Translate(new Vector3(0.8f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+                this.transform.Translate(new Vector3(1.0f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+                cam.cam.transform.Translate(new Vector3(1.0f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             }
             if (Input.GetKey(KeyCode.UpArrow))
             {
@@ -149,7 +148,7 @@ public class PlayerManager : MonoBehaviour
                 cam.cam.transform.Translate(new Vector3(0.0f, -0.6f, -0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             }
         }
-        else if (!MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable)
+        else if (!MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable || isWall)
         {
             Debug.Log("아 못감 ㅅㄱㅂ");
             if (Input.GetKey(KeyCode.LeftArrow))
@@ -194,6 +193,8 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        isWall = false;
+
         m_SpiritSkillKey = new KeyCode[6];
         #region 정령스킬 키코드 값 설정
         m_SpiritSkillKey[0] = KeyCode.Q;
@@ -282,14 +283,6 @@ public class PlayerManager : MonoBehaviour
         TakeDamagePrint(_damage);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Wall"))
-        {
-            Debug.Log("벽");
-            isWall = true;
-        }
-    }
     public void TakeDamagePrint(int damage)
     {
         
