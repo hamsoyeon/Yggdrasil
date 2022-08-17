@@ -2,14 +2,14 @@
 
 enum class MAINPROTOCOL
 {
-	NONE,
+    NONE,
     INIT,
-	LOGIN,
-	LOBBY,
-	ROOM,
-	GAME,
+    LOGIN,
+    LOBBY,
+    ROOM,
+    GAME,
     TEST,
-	MAX
+    MAX
 };
 
 class CProtocolMgr
