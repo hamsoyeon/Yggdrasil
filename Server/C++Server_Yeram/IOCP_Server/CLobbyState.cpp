@@ -5,11 +5,11 @@
 #include "CProtocolMgr.h"
 void CLobbyState::Recv()
 {
-	//mainprotocol ë¶„ë¦¬
+	//mainprotocol ºÐ¸®
 	unsigned long protocol = 0;
 	m_session->UnPacking(protocol);
 	unsigned long mainprotocol = CProtocolMgr::GetInst()->GetMainProtocol(protocol);
-	//switchë¬¸ mainprotocolë¡œ ë¶„ê¸°
+	//switch¹® mainprotocol·Î ºÐ±â
 	switch ((MAINPROTOCOL)mainprotocol)
 	{
 	case MAINPROTOCOL::LOBBY:
@@ -22,9 +22,9 @@ void CLobbyState::Recv()
 		CLobbyMgr::GetInst()->EnterRoomProcess(m_session);
 		break;
 	}
-	//ë¡œë¹„(ë¡œë¹„ì—ì„œ í•´ì•¼í•  ì¼ : ë°©ë§Œë“¤ê¸°,ì „ì²´ì±„íŒ…,ë°©ëª©ë¡)
-	//ê²Œìž„ (ê²Œìž„ ë°© ìž…ìž¥ì‹œ ì •ë³´ ì „ì†¡ í›„ snedì™„ë£Œë˜ë©´ state ë³€ê²½)
-	//ë¡œê·¸ì¸ (ì´ ê²½ìš°ëŠ” í´ë¼ê°€ ë¡œë¹„ì—ì„œ ë‚˜ì™€ì„œ ë‹¤ì‹œ ë©”ë‰´ì„ íƒì„ í•  ê²½ìš° state login ì—ì„œ ì²˜ë¦¬í•´ ì£¼ê¸° ë•Œë¬¸ì— ì—¬ê¸°ì„œ stateë¥¼ ë³€ê²½í•´ì¤Œ)
+	//·Îºñ(·Îºñ¿¡¼­ ÇØ¾ßÇÒ ÀÏ : ¹æ¸¸µé±â,ÀüÃ¼Ã¤ÆÃ,¹æ¸ñ·Ï)
+	//°ÔÀÓ (°ÔÀÓ ¹æ ÀÔÀå½Ã Á¤º¸ Àü¼Û ÈÄ sned¿Ï·áµÇ¸é state º¯°æ)
+	//·Î±×ÀÎ (ÀÌ °æ¿ì´Â Å¬¶ó°¡ ·Îºñ¿¡¼­ ³ª¿Í¼­ ´Ù½Ã ¸Þ´º¼±ÅÃÀ» ÇÒ °æ¿ì state login ¿¡¼­ Ã³¸®ÇØ ÁÖ±â ¶§¹®¿¡ ¿©±â¼­ state¸¦ º¯°æÇØÁÜ)
 }
 
 void CLobbyState::Send()

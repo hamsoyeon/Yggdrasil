@@ -48,7 +48,7 @@ CSocket::CSocket(SOCKET _sock)
 	len = sizeof(addr);
 	ZeroMemory(&m_addr, sizeof(SOCKADDR));
 	getpeername(_sock, reinterpret_cast<SOCKADDR*>(&m_addr), &len);
-	printf("ì ‘ì† %s %d\n", inet_ntoa(m_addr.sin_addr), ntohs(m_addr.sin_port));
+	printf("Á¢¼Ó %s %d\n", inet_ntoa(m_addr.sin_addr), ntohs(m_addr.sin_port));
 }
 CSocket::~CSocket()
 {
@@ -91,7 +91,7 @@ bool CSocket::wsasend()
 	{
 		if (WSAGetLastError() != ERROR_IO_PENDING)
 		{
-			err_display(_T("WSASend()")); // ì´ ê²½ìš°ë§Œ ìˆ˜ë™ìœ¼ë¡œ íì— ë„£ì–´ì¤€ë‹¤.
+			err_display(_T("WSASend()")); // ÀÌ °æ¿ì¸¸ ¼öµ¿À¸·Î Å¥¿¡ ³Ö¾îÁØ´Ù.
 			return false;
 		}
 	}
