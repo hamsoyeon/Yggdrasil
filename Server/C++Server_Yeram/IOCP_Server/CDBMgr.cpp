@@ -61,14 +61,14 @@ void CDBMgr::SetJoin(list<t_UserInfo*> _users)
 	CLockGuard<CLock> lock(m_lock);
 	char temp[100];
 	ZeroMemory(temp, 100);
-	//Å×ÀÌºí »èÁ¦ ¹× »ý¼º Äõ¸®¹® ½ÇÇà ÈÄ
-	sprintf(temp, "truncate table jointbl" /* tableÀÌ¸§ */);
+	//í…Œì´ë¸” ì‚­ì œ ë° ìƒì„± ì¿¼ë¦¬ë¬¸ ì‹¤í–‰ í›„
+	sprintf(temp, "truncate table jointbl" /* tableì´ë¦„ */);
 	if (mysql_query(&m_mysql, temp))
 	{
 		printf("** %s **\n", mysql_error(&m_mysql));
 	}
 	ZeroMemory(temp, 100);
-	//db¿¡ ³Ö´Â´Ù.
+	//dbì— ë„£ëŠ”ë‹¤.
 	for (t_UserInfo* user : _users)
 	{
 		sprintf(temp, "insert into jointbl values('%s','%s','%s');", user->id, user->pw, user->nickname);
