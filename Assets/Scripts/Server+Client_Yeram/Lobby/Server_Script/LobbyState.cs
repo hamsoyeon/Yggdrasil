@@ -11,9 +11,13 @@ namespace Net
     {
         private Net.NetSession m_client;
         private IState.State m_state;
-        public NetSession Client { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public NetSession Client 
+        {
+            get => m_client;
+            set => m_client = value;
+        }
 
-        public IState.State ClientState => throw new System.NotImplementedException();
+        public IState.State ClientState => m_state;
 
         public LobbyState(Net.NetSession _session)
         {

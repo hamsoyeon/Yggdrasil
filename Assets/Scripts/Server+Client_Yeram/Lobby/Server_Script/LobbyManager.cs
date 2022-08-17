@@ -117,7 +117,7 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
         Net.NetWorkManager.Instance.Send(sendpacket);
     }
     public void ChattingProcess(string _text)
-    {
+    { 
         Net.Protocol protocol = new Net.Protocol();
         protocol.SetProtocol((int)EMainProtocol.LOBBY, EProtocolType.Main);
         protocol.SetProtocol((int)ESubProtocol.Multi, EProtocolType.Sub);

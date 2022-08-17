@@ -149,13 +149,6 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     }
     #endregion
     #region chat update func
-    public void EnterEventFocuse_Chat()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            LobbyManager.Instance.ChattingProcess(m_input_chat.text);
-        }
-    }
     public void UpdateChat(string _text)
     {
         if (m_input_chat.text.Equals(""))
@@ -185,17 +178,5 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
             GameObject.DestroyImmediate(m_Content.GetChild(0).gameObject);
         }
     }
-    /*private void RearTimeRepit()
-    {
-        if(Input.GetKeyDown(KeyCode.Return)&&m_input_chat.isFocused==false)
-        {
-            m_input_chat.ActivateInputField();
-        }
-    }*/
     #endregion
-    private void Update()
-    {
-        EnterEventFocuse_Chat();
-        //RearTimeRepit();
-    }
 }

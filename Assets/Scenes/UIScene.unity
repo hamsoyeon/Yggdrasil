@@ -9590,7 +9590,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_TargetDisplay: 0
+  m_TargetDisplay: 1
 --- !u!1 &1089630858
 GameObject:
   m_ObjectHideFlags: 0
@@ -12001,6 +12001,7 @@ GameObject:
   - component: {fileID: 1464147502}
   - component: {fileID: 1464147504}
   - component: {fileID: 1464147503}
+  - component: {fileID: 1464147505}
   m_Layer: 5
   m_Name: Chatting
   m_TagString: Untagged
@@ -12069,6 +12070,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464147501}
   m_CullTransparentMesh: 1
+--- !u!114 &1464147505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464147501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e98ee63c94b8a64b86a434b023d98b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FocusInput: {fileID: 0}
+  OkButton: {fileID: 1978981488}
+  BackButton: {fileID: 0}
 --- !u!1 &1474466989
 GameObject:
   m_ObjectHideFlags: 0
@@ -15323,7 +15339,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
+  m_TargetDisplay: 1
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
