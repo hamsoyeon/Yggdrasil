@@ -32,27 +32,15 @@ namespace Net
 
 
         bool is_loging;
+        public Net.IState.State GetState()
+        {
+            return m_curstate.ClientState;
+        }
         #region set state
         public void SetState(IState _state)
         {
             m_curstate = _state;
         }
-        //public void SetState(IState.State _state)
-        //{
-        //    switch(_state)
-        //    {
-        //        case IState.State.Login:
-        //            m_curstate = m_Loginstate;
-        //            break;
-        //        case IState.State.Lobby:
-        //            m_curstate = m_Lobbystate;
-        //            break;
-        //        case IState.State.Room:
-        //            break;
-        //        case IState.State.Game:
-        //            break;
-        //    }
-        //}
         #endregion
         public void __Initialize()
         {
