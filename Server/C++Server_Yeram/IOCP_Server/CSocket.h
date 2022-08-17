@@ -1,6 +1,6 @@
 #pragma once
 
-//ê·¸ í—¤ë”ì—ì„œëŠ” lock ë³€ìˆ˜ë§Œ ë§Œë“¤ë ¤ê³  CLock ì „ë°©ì„ ì–¸í•œê±°ê³  cppì—ì„œ ì“°ê±°ë“  ê·¸ëž˜ì„œ cppì—ì„œ ì¸í´ë£¨ë“œí•¨.
+//±× Çì´õ¿¡¼­´Â lock º¯¼ö¸¸ ¸¸µé·Á°í CLock Àü¹æ¼±¾ðÇÑ°Å°í cpp¿¡¼­ ¾²°Åµç ±×·¡¼­ cpp¿¡¼­ ÀÎÅ¬·çµåÇÔ.
 class CLock;
 
 enum class IO_TYPE

@@ -5,7 +5,7 @@ const INT		C1 = 52845;
 const INT		C2 = 22719;
 const INT		KEY = 72957;
 
-BOOL CCrypt::Encrypt(BYTE* source, BYTE* destination, DWORD length) // 암호화
+BOOL CCrypt::Encrypt(BYTE* source, BYTE* destination, DWORD length) // ��ȣȭ
 {
 	DWORD	i;
 	INT		Key = KEY;
@@ -22,7 +22,7 @@ BOOL CCrypt::Encrypt(BYTE* source, BYTE* destination, DWORD length) // 암호화
 	return TRUE;
 }
 
-BOOL CCrypt::Decrypt(BYTE* source, BYTE* destination, DWORD length) // 복호화
+BOOL CCrypt::Decrypt(BYTE* source, BYTE* destination, DWORD length) // ��ȣȭ
 {
 	DWORD	i;
 	BYTE	PreviousBlock;
