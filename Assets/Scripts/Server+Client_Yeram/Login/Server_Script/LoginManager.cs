@@ -96,13 +96,13 @@ public class LoginManager : Singleton_Ver2.Singleton<LoginManager>
                 break;
         }
     }
-    //packet ����  allsize/packetno/protocol/datasize/data(bool=1byte,string)
+    //packet 구조  allsize/packetno/protocol/datasize/data(bool=1byte,string)
     private void LoginResult(Net.RecvPacket _recvPacket, Net.Protocol _protocol)
     {
         byte result = 0;
         string msg;
         int datasize = 0;
-        _recvPacket.Read(out datasize); /*���⼭�� �Ⱦ�*/
+        _recvPacket.Read(out datasize); /*여기서는 안씀*/
         _recvPacket.Read(out result);
         _recvPacket.Read(out msg);
 #if UNITY_EDITOR
