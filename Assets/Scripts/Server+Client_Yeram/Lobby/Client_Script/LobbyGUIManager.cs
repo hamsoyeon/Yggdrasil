@@ -10,6 +10,8 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     #region window object
     [SerializeField]
     GameObject m_window_createroom;
+    [SerializeField]
+    GameObject m_window_enterroom;
     #endregion
     #region input field object
 
@@ -43,6 +45,9 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     GameObject lobbyPanel;
     [SerializeField]
     TMP_InputField m_input_chat;
+    #endregion
+    #region enter room input field object
+    TMP_InputField m_input_enter_pw;
     #endregion
     [SerializeField]
     Canvas m_canvas;
@@ -81,6 +86,8 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
 
         Transform ChatParent = m_canvas.transform.GetChild("Chatting");
         m_input_chat = ChatParent.GetComponentInChildren<TMP_InputField>();
+        
+        //enterpw 찾아서 오브젝트 연결하기.
     }
     #endregion
     #region button click event
@@ -123,18 +130,24 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     public void OnClick_Room(uint _roomid)
     {
         ClearInputField();
+
+        m_window_enterroom.SetActive(true);
+    }
+    public void OnClick_EnterRoomOK(uint _roomid)
+    {
         //방 정보 전송 후 방 room 입장.
-        LobbyManager.Instance.EnterRoomProcess(_roomid);
-
-        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, false);
-        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, true);
-
+        LobbyManager.Instance.EnterRoomProcess(_roomid,m_input_enter_pw.text);
+        m_window_enterroom.SetActive(false);
+       
+    }
+    public void OnClick_EnterRommCancle()
+    {
+        m_window_enterroom.SetActive(false);
     }
     #endregion
     #region page update func
     public void RoomInfoSetting(int _btn_index, RoomOutInfo _room_info)
     {
-
         m_room_btns[_btn_index].GetComponent<RoomInfoBtn>().ChageInfo(_room_info);
 
         for (int i = 0; i < m_rooms_count; i++)
@@ -145,7 +158,6 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
         {
             m_room_btns[i].gameObject.SetActive(true);
         }
-
     }
     #endregion
     #region chat update func

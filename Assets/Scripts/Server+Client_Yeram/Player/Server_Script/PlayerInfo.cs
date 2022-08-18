@@ -6,11 +6,11 @@ using System.IO;
 
 public class PlayerInfo : Net.NetObjectInfo
 {
-    //id´Â »óÀ§ Å¬·¡½º id ÀÎµ¥ ±× id´Â ·Î±×ÀÎ Á¤º¸ id°¡ ¾Æ´Ï¶ó
-    //¹æ¿¡¼­ °ü¸®ÇÒ player¿¡ °üÇÑ id °ª.
+    //idëŠ” ìƒìœ„ í´ëž˜ìŠ¤ id ì¸ë° ê·¸ idëŠ” ë¡œê·¸ì¸ ì •ë³´ idê°€ ì•„ë‹ˆë¼
+    //ë°©ì—ì„œ ê´€ë¦¬í•  playerì— ê´€í•œ id ê°’.
     private string m_nick;
     private CharacterInfo m_character_info;
-
+    private bool is_ready;
     #region property
     public string GetNick
     {
@@ -20,19 +20,29 @@ public class PlayerInfo : Net.NetObjectInfo
     {
         get => m_character_info;
     }
+    public bool GetReady
+    {
+        get => is_ready;
+    }
     #endregion
     public PlayerInfo() : base(ENetObjectType.Player)
     {
-
+    
     }
-    //public int Deserialize(MemoryStream _stream)
-    //{
+    public int Deserialize(MemoryStream _stream)
+    {
+        int size = 0;
+        size += base.Deserialize(_stream);
+        size += Net.StreamReadWriter.ReadFromStreamSerialize(_stream, out m_character_info);
+        size += Net.StreamReadWriter.ReadFromStream(_stream, out is_ready);
+        return size;
+    }
 
-    //}
-
-    //public int Serialize(MemoryStream _stream)
-    //{
-
-    //}
+    public int Serialize(MemoryStream _stream)
+    {
+        int size = 0;
+        size += base.Serialize(_stream);
+        return size;
+    }
 }
 

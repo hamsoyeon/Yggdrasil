@@ -19,6 +19,7 @@ namespace Net
         IState m_curstate;
         internal LoginState m_Loginstate;
         internal LobbyState m_Lobbystate;
+        internal RoomState m_Roomstate;
         NetworkStream m_netstream;
 
         private byte[] m_recvstream;
@@ -77,8 +78,8 @@ namespace Net
         {
             m_Loginstate = new LoginState(this);
             m_Lobbystate = new LobbyState(this);
+            m_Roomstate = new RoomState(this);
             m_curstate = m_Loginstate;
-
         }
         #endregion
         public void __Finalize()

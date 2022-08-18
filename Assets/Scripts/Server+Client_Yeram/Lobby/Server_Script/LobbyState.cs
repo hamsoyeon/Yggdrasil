@@ -38,6 +38,14 @@ namespace Net
                 case EMainProtocol.LOGIN:
                     m_client.SetState(m_client.m_Loginstate);
                     break;
+                case EMainProtocol.ROOM:
+                    // 결과 리턴해주는 함수 연결하기
+                    bool result=RoomManager.Instance.RecvProcess(_recvpacket, protocol_manager);
+                    if(result)
+                    {
+                        m_client.SetState(m_client.m_Roomstate);
+                    }
+                    break;
             }
         }
 
