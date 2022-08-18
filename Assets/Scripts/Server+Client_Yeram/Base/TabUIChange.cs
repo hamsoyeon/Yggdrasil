@@ -29,6 +29,7 @@ public class TabUIChange : MonoBehaviour
     public void Init()
     {
         allChildren = GetComponentsInChildren<TMP_InputField>();
+        if(FocusInput!=null)
         SetInputFocus(FocusInput);                  //처음은 ID입력
     }
     public void SetInputFocus(TMP_InputField _input_obj)

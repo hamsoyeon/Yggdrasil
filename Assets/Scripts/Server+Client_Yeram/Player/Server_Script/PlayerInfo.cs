@@ -29,16 +29,18 @@ public class PlayerInfo : Net.NetObjectInfo
     {
     
     }
-    public int Deserialize(MemoryStream _stream)
+    override public int Deserialize(MemoryStream _stream)
     {
         int size = 0;
         size += base.Deserialize(_stream);
+        size += Net.StreamReadWriter.ReadFromStream(_stream, out m_nick);
         size += Net.StreamReadWriter.ReadFromStreamSerialize(_stream, out m_character_info);
         size += Net.StreamReadWriter.ReadFromStream(_stream, out is_ready);
+       
         return size;
     }
 
-    public int Serialize(MemoryStream _stream)
+    override public int Serialize(MemoryStream _stream)
     {
         int size = 0;
         size += base.Serialize(_stream);
