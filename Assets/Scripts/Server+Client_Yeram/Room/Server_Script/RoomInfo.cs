@@ -23,9 +23,9 @@ public class RoomInfo : RoomOutInfo
     #endregion
     public RoomInfo() : base()
     {
-
+        m_playerlist = new List<PlayerInfo>();
     }
-    public int Deserialize(MemoryStream _stream)
+    override public int Deserialize(MemoryStream _stream)
     {
         int size = 0;
         size += base.Deserialize(_stream);
@@ -39,7 +39,7 @@ public class RoomInfo : RoomOutInfo
         return size;
     }
 
-    public int Serialize(MemoryStream _stream)
+    override public int Serialize(MemoryStream _stream)
     {
         int size = 0;
         size += base.Serialize(_stream);

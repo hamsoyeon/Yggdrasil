@@ -7,9 +7,11 @@ using System.IO;
     {
         public enum ECharacterType
         {
+            None,
             Defense,
             Attack,
-            Support
+            Support,
+            Max
         }
         ECharacterType m_character_type;
         #region property
