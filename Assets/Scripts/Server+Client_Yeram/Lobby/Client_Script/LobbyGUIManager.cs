@@ -52,7 +52,6 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     [SerializeField]
     Canvas m_canvas;
 
-    uint m_enter_roomid;
 
 
 
@@ -87,10 +86,8 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
 
         Transform ChatParent = m_canvas.transform.GetChild("Chatting");
         m_input_chat = ChatParent.GetComponentInChildren<TMP_InputField>();
-
+        
         //enterpw 찾아서 오브젝트 연결하기.
-        Transform EnterParent = m_canvas.transform.GetChild("EnterRoom");
-        m_input_enter_pw = EnterParent.GetComponentInChildren<TMP_InputField>();
     }
     #endregion
     #region button click event
@@ -133,14 +130,15 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     public void OnClick_Room(uint _roomid)
     {
         ClearInputField();
-        m_enter_roomid = _roomid;
+
         m_window_enterroom.SetActive(true);
     }
-    public void OnClick_EnterRoomOK()
+    public void OnClick_EnterRoomOK(uint _roomid)
     {
         //방 정보 전송 후 방 room 입장.
-        LobbyManager.Instance.EnterRoomProcess(m_enter_roomid,m_input_enter_pw.text);
+        LobbyManager.Instance.EnterRoomProcess(_roomid,m_input_enter_pw.text);
         m_window_enterroom.SetActive(false);
+       
     }
     public void OnClick_EnterRommCancle()
     {
