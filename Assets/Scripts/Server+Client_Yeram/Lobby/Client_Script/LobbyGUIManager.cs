@@ -139,7 +139,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     public void OnClick_EnterRoomOK()
     {
         //방 정보 전송 후 방 room 입장.
-        LobbyManager.Instance.EnterRoomProcess(m_enter_roomid,m_input_enter_pw.text);
+        RoomManager.Instance.EnterRoomProcess(m_enter_roomid,m_input_enter_pw.text);
         m_window_enterroom.SetActive(false);
     }
     public void OnClick_EnterRommCancle()
