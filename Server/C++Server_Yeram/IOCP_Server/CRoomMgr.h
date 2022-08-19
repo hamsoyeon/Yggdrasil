@@ -73,8 +73,8 @@ public:
 	//get 모든 방 정보 전송 이것도 잘 안사용할듯..
 	//void SendRoom(CSession* _session);
 	//get 현재 페이지 방 정보 전송
-	void SendRoom(unsigned int page,CSession* _session);
-	bool PageCheck(unsigned int page);
+	void SendRoom(bool result, int page,CSession* _session);
+	bool PageCheck(int page);
 	ERRTYPE EnterCheck(int _roomindex,t_RoomInfo** _roominfo, const TCHAR* _pw);
 private:
 	CRoomMgr();

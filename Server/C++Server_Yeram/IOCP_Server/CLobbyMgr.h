@@ -6,6 +6,12 @@ class CLock;
 class CLobbyMgr
 {
 public :
+	enum class ERRTYPE
+	{
+		NONE,
+		PAGENULL,//없는 페이지 호출시 에러.
+		MAX
+	};
 	enum class SUBPROTOCOL
 	{
 		NONE,
@@ -51,11 +57,13 @@ public :
 
 	void AddSession(CSession* _session);
     void RemoveSession(CSession* _session);
+
 private:
 	CLobbyMgr();
 	~CLobbyMgr();
 
 	void UnPacking(byte* _recvdata, TCHAR* msg);
+	void UnPacking(byte* _recvdata, int& _page);
 	void Packing(unsigned long _protocol,bool result, TCHAR* msg,CSession* _session);
 	void Packing(unsigned long _protocol, bool result, CSession* _session);
 private :
