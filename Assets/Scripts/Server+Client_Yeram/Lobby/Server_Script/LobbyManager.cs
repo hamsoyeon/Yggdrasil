@@ -99,7 +99,18 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
     }
     private void PageReq(int _page)
     {
+        Net.Protocol protocol = new Net.Protocol();
+        protocol.SetProtocol((uint)EMainProtocol.LOBBY, EProtocolType.Main);
+        protocol.SetProtocol((uint)ESubProtocol.Multi, EProtocolType.Sub);
+        protocol.SetProtocol((uint)EDetailProtocol.RoomlistUpdate, EProtocolType.Detail);
+        protocol.SetProtocol((uint)EDetailProtocol.PageRoom, EProtocolType.Detail);
 
+        Net.SendPacket sendpacket = new Net.SendPacket();
+        sendpacket.__Initialize();
+        int size = sendpacket.Write(_page);
+        sendpacket.WriteTotalSize(size);
+        sendpacket.WriteProtocol(protocol.GetProtocol());
+        Net.NetWorkManager.Instance.Send(sendpacket);
     }
     public void CreateRoomProcess(string _title, string _pw)
     {
