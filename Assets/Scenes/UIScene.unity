@@ -2967,6 +2967,7 @@ MonoBehaviour:
   - {fileID: 308493901}
   - {fileID: 1812733204}
   - {fileID: 1846677692}
+  m_canvas: {fileID: 1077328541}
 --- !u!1 &347456222
 GameObject:
   m_ObjectHideFlags: 0
@@ -9726,7 +9727,7 @@ MonoBehaviour:
   flag: 1
   m_window_createroom: {fileID: 63604856}
   m_window_enterroom: {fileID: 7414897443950214334}
-  m_room_btn_prefeb: {fileID: 4324958339769129994, guid: 9194853297f66f54a9756f1a11e4cb2f, type: 3}
+  m_btn_room_prefeb: {fileID: 4324958339769129994, guid: 9194853297f66f54a9756f1a11e4cb2f, type: 3}
   m_Content: {fileID: 49549081}
   m_TextPrefeb: {fileID: 3604129403616071757, guid: 4c588285fc84fc04ca3de033edab4f1e, type: 3}
   lobbyPanel: {fileID: 999855411}
@@ -13320,7 +13321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1464147502
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20229,7 +20230,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 998716735}
         m_TargetAssemblyTypeName: LobbyGUIManager, Assembly-CSharp
         m_MethodName: OnClick_EnterRommCancle
         m_Mode: 1
@@ -20576,9 +20577,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 998716735}
         m_TargetAssemblyTypeName: LobbyGUIManager, Assembly-CSharp
-        m_MethodName: OnClick_EnterRoomOK
+        m_MethodName: OnClick_CreateRoomOK
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -18,14 +18,14 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     #endregion
     #region room button object
     [SerializeField]
-    private Button m_room_btn_prefeb;
+    private Button m_btn_room_prefeb;
     [ReadOnly]
     private List<Button> m_room_btns;
     private int m_rooms_count; // 한 페이지당 생성 가능한 방 수.
     #endregion
     #region page button object
-    Button m_next_btn;
-    Button m_pre_btn;
+    Button m_btn_next;
+    Button m_btn_pre;
     #endregion
     #region create room input field object
     TMP_InputField m_input_createname;
@@ -68,7 +68,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
         m_rooms_count = _btncount;
         Transform parent = m_canvas.transform.GetChild("Room View").GetChild("Content");
         for (int i = 0; i < m_rooms_count; i++)
-            m_room_btns.Add(GameObject.Instantiate<Button>(m_room_btn_prefeb, parent));
+            m_room_btns.Add(GameObject.Instantiate<Button>(m_btn_room_prefeb, parent));
 
         #region buttons init
         //m_btn_createroom = m_canvas.transform.GetChild("CreateRoomBtn").GetComponent<Button>();

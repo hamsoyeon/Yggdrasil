@@ -30,6 +30,9 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     [SerializeField]
     private Image[] render_Char;
 
+    [SerializeField]
+    private Canvas m_canvas;
+
     #region ButtonClickEvent
     public void OnClick_Attack()
     {
@@ -98,15 +101,15 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         {
 
             case Player_Type.ATTACK:
-                render_Char[1].sprite = GameObject.Find("Attack_Button").GetComponent<Image>().sprite;
+                render_Char[1].sprite = m_canvas.transform.GetChild("Attack_Button").GetComponent<Image>().sprite;// GameObject.Find("Attack_Button").GetComponent<Image>().sprite;
                 break;
 
             case Player_Type.DEFENCE:
-                render_Char[1].sprite = GameObject.Find("Defence_Button").GetComponent<Image>().sprite;
+                render_Char[1].sprite = m_canvas.transform.GetChild("Defence_Button").GetComponent<Image>().sprite;//GameObject.Find("Defence_Button").GetComponent<Image>().sprite;
                 break;
 
             case Player_Type.SUPPORT:
-                render_Char[1].sprite = GameObject.Find("support_Button").GetComponent<Image>().sprite;
+                render_Char[1].sprite = m_canvas.transform.GetChild("support_Button").GetComponent<Image>().sprite; //GameObject.Find("support_Button").GetComponent<Image>().sprite;
                 break;
         }
 
