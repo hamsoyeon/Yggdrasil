@@ -20,10 +20,7 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     private Button ready_Btn;
 
     [SerializeField]
-    private ECharacterType select_Type;
-
-    [SerializeField]
-    private GameObject[] render_Char;
+    private List<PlayerSlot> m_player_slots;
 
     [SerializeField]
     private GameObject parent_render_Char;
@@ -88,17 +85,9 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     }
     public void SettingSlotInfo(int _playerid, int _another1_id, int _another2_id)
     {
-        test_slot[0] = _another1_id;
-        test_slot[1] = _playerid;
-        test_slot[2] = _another2_id;
-    }
-    private void Awake()
-    {
-        render_Char = new GameObject[3];
-        for(int i=0;i<render_Char.Length;i++)
-        {
-            render_Char[i] = Resources.Load<GameObject>($"RenderTexture/CharRenderPanel_{i}");
-        }
+        m_player_slots[0].ID = _another1_id;
+        m_player_slots[1].ID = _playerid;
+        m_player_slots[2].ID = _another2_id;
     }
     private void Start()
     {
@@ -108,33 +97,16 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         start_Btn.gameObject.SetActive(on_Ready);
         ready_Btn.gameObject.SetActive(!on_Ready);
         start_Btn.interactable = on_Ready;
-
-        for(int i=0;i<render_Char.Length;i++)
-        {
-            var tempobj = Instantiate(render_Char[i]);
-            tempobj.transform.parent = parent_render_Char.transform;
-        }
     }
 
-    public void RenderCharImage(int _slotindex, ECharacterType _type)
+    public void RenderCharImage(int _player_id, ECharacterType _type)
     {
-        switch (_type)
+        for(int i=0;i<m_player_slots.Count;i++)
         {
-
-            case ECharacterType.Attack:
-                render_Char[_slotindex].transform.GetChild(0).GetComponent<RawImage>().texture = Resources.Load<RenderTexture>($"RenderTexture/CharRenderTexture_{ECharacterType.Defense - 1}");
-                break;
-
-            case ECharacterType.Defense:
-                render_Char[_slotindex].transform.GetChild(0).GetComponent<RawImage>().texture = Resources.Load<RenderTexture>($"RenderTexture/CharRenderTexture_{ECharacterType.Attack - 1}");
-
-                break;
-
-            case ECharacterType.Support:
-                render_Char[_slotindex].transform.GetChild(0).GetComponent<RawImage>().texture = Resources.Load<RenderTexture>($"RenderTexture/CharRenderTexture_{ECharacterType.Support - 1}");
-
-                break;
+            if(_player_id==m_player_slots[i].ID)
+            {
+                m_player_slots[i].Render(_type);
+            }
         }
-
     }
 }
