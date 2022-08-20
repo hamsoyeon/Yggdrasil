@@ -2885,7 +2885,6 @@ MonoBehaviour:
   on_Ready: 0
   start_Btn: {fileID: 624518226}
   ready_Btn: {fileID: 224010517}
-  select_Type: 0
   m_player_slots:
   - {fileID: 2071499194}
   - {fileID: 1377595725}
@@ -12604,7 +12603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5bb1c73f61e3d42af997098d787ac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_parent: {fileID: 543689303}
+  m_parent: {fileID: 970425412}
 --- !u!114 &1377595726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17818,7 +17817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5bb1c73f61e3d42af997098d787ac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_parent: {fileID: 970425412}
+  m_parent: {fileID: 543689303}
 --- !u!114 &1951956726
 MonoBehaviour:
   m_ObjectHideFlags: 0

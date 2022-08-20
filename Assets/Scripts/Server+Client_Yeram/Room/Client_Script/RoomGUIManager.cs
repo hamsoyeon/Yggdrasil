@@ -27,7 +27,7 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
 
     [SerializeField]
     private Canvas m_canvas;
-    
+
     private int[] test_slot = new int[3];
 
     #region ButtonClickEvent
@@ -83,27 +83,40 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
             start_Btn.interactable = false;
         }
     }
-    public void SettingSlotInfo(int _playerid, int _another1_id, int _another2_id)
+    public void SettingSlotInfo(PlayerInfo _myplayerinfo, PlayerInfo _another_playerinfo1, PlayerInfo _another_playerinfo2)
     {
-        m_player_slots[0].ID = _another1_id;
-        m_player_slots[1].ID = _playerid;
-        m_player_slots[2].ID = _another2_id;
+        m_player_slots[0].Player = _another_playerinfo1;
+        m_player_slots[1].Player = _myplayerinfo;
+        m_player_slots[2].Player = _another_playerinfo2;
     }
+
     private void Start()
     {
+        for(int i=0;i<m_player_slots.Count;i++)
+        {
+            m_player_slots[i].__Initialize();
+        }
         MapPannel.SetActive(false);
         on_Ready = false;
-        select_Type = ECharacterType.Attack;
         start_Btn.gameObject.SetActive(on_Ready);
         ready_Btn.gameObject.SetActive(!on_Ready);
         start_Btn.interactable = on_Ready;
     }
-
+    public void RenderCharImage(int _player_id)
+    {
+        for (int i = 0; i < m_player_slots.Count; i++)
+        {
+            if (_player_id == m_player_slots[i].ID)
+            {
+                m_player_slots[i].Render();
+            }
+        }
+    }
     public void RenderCharImage(int _player_id, ECharacterType _type)
     {
-        for(int i=0;i<m_player_slots.Count;i++)
+        for (int i = 0; i < m_player_slots.Count; i++)
         {
-            if(_player_id==m_player_slots[i].ID)
+            if (_player_id == m_player_slots[i].ID)
             {
                 m_player_slots[i].Render(_type);
             }

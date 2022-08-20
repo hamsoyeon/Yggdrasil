@@ -17,13 +17,14 @@ namespace Net
             Spirit,
             Monster,
         }
-        [SerializeField] uint m_id;
+        [SerializeField] int m_id;
         ENetObjectType m_type;
 
-        public uint GetID { get => m_id; }
+        public int GetID { get => m_id; }
         public ENetObjectType GetNetObjectType { get => m_type; }
         public NetObjectInfo(ENetObjectType _type)
         {
+            m_id = -1;
             m_type = _type;
         }
         virtual public int Deserialize(MemoryStream _stream)

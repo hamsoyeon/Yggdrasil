@@ -27,7 +27,7 @@ public class PlayerInfo : Net.NetObjectInfo
     #endregion
     public PlayerInfo() : base(ENetObjectType.Player)
     {
-    
+      
     }
     override public int Deserialize(MemoryStream _stream)
     {

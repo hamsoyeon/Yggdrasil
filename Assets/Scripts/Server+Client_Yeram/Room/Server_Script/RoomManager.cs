@@ -172,9 +172,8 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
                     //방 정보 복사하기.
                     //int curid = -1;
                     int myid = -1;
-                    int[] another_id = new int[2];
-                    another_id[0] = -1;
-                    another_id[1] = -1;
+                    PlayerInfo[] another_info = new PlayerInfo[2];
+                    PlayerInfo myinfo = null;
                     m_roominfo = new RoomInfo();
                     _recvpacket.ReadSerialize(out m_roominfo);
                     //_recvpacket.Read(out curid);
@@ -184,20 +183,30 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
                     {
                         if (player.GetID != myid)
                         {
-                            another_id[count++] = (int)player.GetID;
+                            another_info[count++] = player;
+                        }
+                        else
+                        {
+                            myinfo = player;
                         }
                     }
-                    RoomGUIManager.Instance.SettingSlotInfo(myid, another_id[0], another_id[1]);
+                    RoomGUIManager.Instance.SettingSlotInfo(myinfo, another_info[0], another_info[1]);
                     MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, false);
                     MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, true);
+                    
+                    for (int i=0;i<m_roominfo.GetPlayersInfo.Count;i++)
+                    {
+                        PlayerInfo player = m_roominfo.GetPlayersInfo[i];
+                        RoomGUIManager.Instance.RenderCharImage(player.GetID);
+                    }
+                    
                     return true;
             }
             case EErrType.NONE_ANOTHER_ENTER:
             {
                     int myid = -1;
-                    int[] another_id = new int[2];
-                    another_id[0] = -1;
-                    another_id[1] = -1;
+                    PlayerInfo[] another_info = new PlayerInfo[2];
+                    PlayerInfo myinfo = null;
                     PlayerInfo player; 
                     _recvpacket.ReadSerialize(out player);
                     m_roominfo.GetPlayersInfo.Add(player);
@@ -208,10 +217,14 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
                     {
                         if (item.GetID != myid)
                         {
-                            another_id[count++] = (int)player.GetID;
+                            another_info[count++] = item;
+                        }
+                        else
+                        {
+                            myinfo = item;
                         }
                     }
-                    RoomGUIManager.Instance.SettingSlotInfo(myid, another_id[0], another_id[1]);
+                    RoomGUIManager.Instance.SettingSlotInfo(myinfo, another_info[0], another_info[1]);
                     return false;
             }
             case EErrType.ERR_MAXENTER:
@@ -244,6 +257,15 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
                 break;
             case EErrType.NONE:
                 ECharacterType type = (ECharacterType)type_number;
+                for(int i=0;i<m_roominfo.GetPlayersInfo.Count;i++)
+                {
+                    PlayerInfo player = m_roominfo.GetPlayersInfo[i];
+                    if (player.GetID==id)
+                    {
+                        player.GetCharacterInfo.CharacterType = type;
+                    }
+
+                }
                 //이부분 슬롯을 순회하면서 id와 일치한 슬롯의 인덱스 뽑아와서 id와 바꾸기
                 RoomGUIManager.Instance.RenderCharImage(id, type);
                 break;

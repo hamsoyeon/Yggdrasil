@@ -23,7 +23,7 @@ public class RoomInfoBtn : MonoBehaviour
     }
     public void OnClick_RoomBtn()
     {
-        LobbyGUIManager.Instance.OnClick_Room(m_roominfo.GetID);
+        LobbyGUIManager.Instance.OnClick_Room((uint)m_roominfo.GetID);
     }
     private void Start()
     {
