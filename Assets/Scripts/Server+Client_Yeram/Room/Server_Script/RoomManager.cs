@@ -12,6 +12,7 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
     private enum EErrType
     {
         NONE,
+        NONE_ANOTHER_ENTER,
         ERR_MAXENTER,
         ERR_PW,
         ERR_ROOMINDEX,
@@ -87,6 +88,22 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         sendpacket.WriteTotalSize(size);
         Net.NetWorkManager.Instance.Send(sendpacket);
     }
+    public void ReadyProcess(bool _ready)
+    {
+        Net.Protocol protocol = new Net.Protocol();
+        protocol.SetProtocol((int)EMainProtocol.ROOM, EProtocolType.Main);
+        protocol.SetProtocol((int)ESubProtocol.Multi, EProtocolType.Sub);
+        protocol.SetProtocol((int)EDetailProtocol.ReadySelect, EProtocolType.Detail);
+        protocol.SetProtocol((int)EDetailProtocol.NomalReady, EProtocolType.Detail);
+
+        Net.SendPacket sendpacket = new Net.SendPacket();
+        sendpacket.__Initialize();
+        int size = sendpacket.Write(m_roominfo.GetID);
+        size += sendpacket.Write(_ready);
+        sendpacket.WriteProtocol(protocol.GetProtocol());
+        sendpacket.WriteTotalSize(size);
+        Net.NetWorkManager.Instance.Send(sendpacket);
+    }
     #endregion
 
     #region recv func
@@ -121,6 +138,10 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
                 break;
             case EDetailProtocol.MapResult:
                 break;
+            //호스트 시작 버튼 활성화 ( 모든 유저들 준비 완료상태 )
+            case EDetailProtocol.ReadySelect | EDetailProtocol.HostReady:
+                HostReadyReq(_recvpacket);
+                break;
             case EDetailProtocol.ReadyResult | EDetailProtocol.HostReady:
                 break;
             case EDetailProtocol.ReadyResult | EDetailProtocol.NomalReady:
@@ -147,14 +168,52 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         switch ((EErrType)err_type)
         {
             case EErrType.NONE:
-                //입장 성공
-                //방 정보 복사하기.
-                m_roominfo = new RoomInfo();
-                _recvpacket.ReadSerialize(out m_roominfo);
-
-                MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, false);
-                MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, true);
-                return true;
+            {   //입장 성공
+                    //방 정보 복사하기.
+                    //int curid = -1;
+                    int myid = -1;
+                    int[] another_id = new int[2];
+                    another_id[0] = -1;
+                    another_id[1] = -1;
+                    m_roominfo = new RoomInfo();
+                    _recvpacket.ReadSerialize(out m_roominfo);
+                    //_recvpacket.Read(out curid);
+                    _recvpacket.Read(out myid);
+                    int count = 0;
+                    foreach (PlayerInfo player in m_roominfo.GetPlayersInfo)
+                    {
+                        if (player.GetID != myid)
+                        {
+                            another_id[count++] = (int)player.GetID;
+                        }
+                    }
+                    RoomGUIManager.Instance.SettingSlotInfo(myid, another_id[0], another_id[1]);
+                    MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, false);
+                    MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, true);
+                    return true;
+            }
+            case EErrType.NONE_ANOTHER_ENTER:
+            {
+                    int myid = -1;
+                    int[] another_id = new int[2];
+                    another_id[0] = -1;
+                    another_id[1] = -1;
+                    PlayerInfo player; 
+                    _recvpacket.ReadSerialize(out player);
+                    m_roominfo.GetPlayersInfo.Add(player);
+                    _recvpacket.Read(out myid);
+                     int count = 0;
+                   
+                    foreach (PlayerInfo item in m_roominfo.GetPlayersInfo)
+                    {
+                        if (item.GetID != myid)
+                        {
+                            another_id[count++] = (int)player.GetID;
+                        }
+                    }
+                    RoomGUIManager.Instance.SettingSlotInfo(myid, another_id[0], another_id[1]);
+                    return false;
+            }
             case EErrType.ERR_MAXENTER:
                 //입장실패 메세지 띄우기
                 return false;
@@ -193,6 +252,15 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         //해당 아이디의 player 정보에 가서 캐릭터 타입 변경해주기.=> 이거는 레디했을 때
         //캐릭터 선택에 대한 확정은 레디했을 때로 하자.
 
+    }
+    private void HostReadyReq(Net.RecvPacket _recvPacket)
+    {
+        int datasize = 0;
+        bool allready = false;
+        //캐릭터 변경된 player 아이디 받아옴
+        _recvPacket.Read(out datasize);
+        _recvPacket.Read(out allready);
+        RoomGUIManager.Instance.EnableStartBtn(allready);
     }
     #endregion
     #region func
