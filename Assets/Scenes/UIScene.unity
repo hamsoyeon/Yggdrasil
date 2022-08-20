@@ -2944,10 +2944,8 @@ MonoBehaviour:
   start_Btn: {fileID: 624518226}
   ready_Btn: {fileID: 224010517}
   select_Type: 0
-  render_Char:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  render_Char: []
+  m_canvas: {fileID: 1077328541}
 --- !u!1 &347456222
 GameObject:
   m_ObjectHideFlags: 0
@@ -9764,7 +9762,7 @@ MonoBehaviour:
   flag: 1
   m_window_createroom: {fileID: 63604856}
   m_window_enterroom: {fileID: 7414897443950214334}
-  m_room_btn_prefeb: {fileID: 4324958339769129994, guid: 9194853297f66f54a9756f1a11e4cb2f, type: 3}
+  m_btn_room_prefeb: {fileID: 4285305570930061723, guid: 4e5f871e0c5852b479dca4d461cd3279, type: 3}
   m_Content: {fileID: 49549081}
   m_TextPrefeb: {fileID: 3604129403616071757, guid: 4c588285fc84fc04ca3de033edab4f1e, type: 3}
   lobbyPanel: {fileID: 999855411}
