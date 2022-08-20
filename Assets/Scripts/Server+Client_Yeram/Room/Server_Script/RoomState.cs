@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using EMainProtocol = Net.Protocol.EMainProtocol;
 using EProtocolType = Net.Protocol.EProtocolType;
 namespace Net
@@ -23,7 +24,22 @@ namespace Net
         }
         public void RecvComplete(RecvPacket _recvpacket)
         {
-
+            uint protocol;
+            _recvpacket.Read(out protocol);
+            Protocol protocol_manager = new Protocol(Convert.ToUInt32(protocol));
+            EMainProtocol main_protocol = (EMainProtocol)protocol_manager.GetProtocol(EProtocolType.Main);
+            switch (main_protocol)
+            {
+                case EMainProtocol.ROOM:
+                    RoomManager.Instance.RecvProcess(_recvpacket, protocol_manager);
+                    break;
+                case EMainProtocol.LOBBY:
+                   
+                    break;
+                case EMainProtocol.LOGIN:
+                   
+                    break;
+            }
         }
         public void SendComplete()
         {

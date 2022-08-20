@@ -2,16 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using ECharacterType = CharacterInfo.ECharacterType;
 
 public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
 {
-    public enum Player_Type
-    {
-        ATTACK = 0,
-        DEFENCE,
-        SUPPORT
-    };
+  
 
     public GameObject MapPannel;
 
@@ -25,26 +20,26 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     private Button ready_Btn;
 
     [SerializeField]
-    private Player_Type select_Type;
+    private ECharacterType select_Type;
 
     [SerializeField]
     private Image[] render_Char;
 
+    [SerializeField]
+    private Canvas m_canvas;
+
     #region ButtonClickEvent
     public void OnClick_Attack()
     {
-        select_Type = Player_Type.ATTACK;
-        RenderCharImage();
+        RoomManager.Instance.CharacterSelectProcess(ECharacterType.Attack);
     }
     public void OnClick_Defence()
     {
-        select_Type = Player_Type.DEFENCE;
-        RenderCharImage();
+        RoomManager.Instance.CharacterSelectProcess(ECharacterType.Defense);
     }
     public void OnClick_Support()
     {
-        select_Type = Player_Type.SUPPORT;
-        RenderCharImage();
+        RoomManager.Instance.CharacterSelectProcess(ECharacterType.Support);
     }
     public void OnClick_Map()
     {
@@ -86,27 +81,27 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     {
         MapPannel.SetActive(false);
         on_Ready = false;
-        select_Type = Player_Type.ATTACK;
+        select_Type = ECharacterType.Attack;
         start_Btn.gameObject.SetActive(on_Ready);
         ready_Btn.gameObject.SetActive(!on_Ready);
         start_Btn.interactable = on_Ready;
     }
 
-    private void RenderCharImage()
+    public void RenderCharImage(int _slotindex,ECharacterType _type)
     {
-        switch (select_Type)
+        switch (_type)
         {
 
-            case Player_Type.ATTACK:
-                render_Char[1].sprite = GameObject.Find("Attack_Button").GetComponent<Image>().sprite;
+            case ECharacterType.Attack:
+                render_Char[_slotindex].sprite = m_canvas.transform.GetChild("Attack_Button").GetComponent<Image>().sprite;// GameObject.Find("Attack_Button").GetComponent<Image>().sprite;
                 break;
 
-            case Player_Type.DEFENCE:
-                render_Char[1].sprite = GameObject.Find("Defence_Button").GetComponent<Image>().sprite;
+            case ECharacterType.Defense:
+                render_Char[_slotindex].sprite = m_canvas.transform.GetChild("Defence_Button").GetComponent<Image>().sprite;//GameObject.Find("Defence_Button").GetComponent<Image>().sprite;
                 break;
 
-            case Player_Type.SUPPORT:
-                render_Char[1].sprite = GameObject.Find("support_Button").GetComponent<Image>().sprite;
+            case ECharacterType.Support:
+                render_Char[_slotindex].sprite = m_canvas.transform.GetChild("support_Button").GetComponent<Image>().sprite; //GameObject.Find("support_Button").GetComponent<Image>().sprite;
                 break;
         }
 

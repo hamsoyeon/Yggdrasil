@@ -142,19 +142,7 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
         sendpacket.WriteTotalSize(size);
         Net.NetWorkManager.Instance.Send(sendpacket);
     }
-    public void EnterRoomProcess(uint _roomid,string _pw)
-    {
-        Net.Protocol protocol = new Net.Protocol();
-        protocol.SetProtocol((int)EMainProtocol.ROOM, EProtocolType.Main);
-
-        Net.SendPacket sendpacket = new Net.SendPacket();
-        sendpacket.__Initialize();
-        int size= sendpacket.Write(_roomid);
-        size += sendpacket.Write(_pw);
-        sendpacket.WriteProtocol(protocol.GetProtocol());
-        sendpacket.WriteTotalSize(size);
-        Net.NetWorkManager.Instance.Send(sendpacket);
-    }
+    
     #endregion
     #region recv func
     public void RecvProcess(Net.RecvPacket _recvpacket, Net.Protocol _protocol)
