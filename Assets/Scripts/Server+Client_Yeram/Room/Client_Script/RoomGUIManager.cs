@@ -23,23 +23,28 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     private ECharacterType select_Type;
 
     [SerializeField]
-    private Image[] render_Char;
+    private GameObject[] render_Char;
+    [SerializeField]
+    private GameObject parent_render_Char;
 
     [SerializeField]
     private Canvas m_canvas;
 
     #region ButtonClickEvent
-    public void OnClick_Attack()
-    {
-        RoomManager.Instance.CharacterSelectProcess(ECharacterType.Attack);
-    }
     public void OnClick_Defence()
     {
-        RoomManager.Instance.CharacterSelectProcess(ECharacterType.Defense);
+        select_Type = ECharacterType.Defense;
+        RoomManager.Instance.CharacterSelectProcess(select_Type);
+    }
+    public void OnClick_Attack()
+    {
+        select_Type = ECharacterType.Attack;
+        RoomManager.Instance.CharacterSelectProcess(select_Type);
     }
     public void OnClick_Support()
     {
-        RoomManager.Instance.CharacterSelectProcess(ECharacterType.Support);
+        select_Type = ECharacterType.Support;
+        RoomManager.Instance.CharacterSelectProcess(select_Type);
     }
     public void OnClick_Map()
     {
@@ -76,32 +81,45 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         MapPannel.SetActive(false);
     }
     #endregion
-
+    private void Awake()
+    {
+        render_Char = new GameObject[3];
+        for (int i = 0; i < render_Char.Length; i++)
+        {
+            render_Char[i] = Resources.Load<GameObject>($"RenderTexture/CharRenderPanel_{i}");
+        }
+    }
     private void Start()
     {
+        
         MapPannel.SetActive(false);
         on_Ready = false;
         select_Type = ECharacterType.Attack;
         start_Btn.gameObject.SetActive(on_Ready);
         ready_Btn.gameObject.SetActive(!on_Ready);
         start_Btn.interactable = on_Ready;
+        for(int i = 0; i < render_Char.Length; i++)
+        {
+            var tmpObj = Instantiate(render_Char[i]);
+            tmpObj.transform.parent = parent_render_Char.transform;
+        }
+        
     }
 
     public void RenderCharImage(int _slotindex,ECharacterType _type)
     {
         switch (_type)
         {
-
-            case ECharacterType.Attack:
-                render_Char[_slotindex].sprite = m_canvas.transform.GetChild("Attack_Button").GetComponent<Image>().sprite;// GameObject.Find("Attack_Button").GetComponent<Image>().sprite;
+            case ECharacterType.Defense:
+                render_Char[_slotindex].transform.GetChild(0).GetComponent<RawImage>().texture = Resources.Load<RenderTexture>($"RenderTexture/CharRenderTexture_{ECharacterType.Defense - 1}");
                 break;
 
-            case ECharacterType.Defense:
-                render_Char[_slotindex].sprite = m_canvas.transform.GetChild("Defence_Button").GetComponent<Image>().sprite;//GameObject.Find("Defence_Button").GetComponent<Image>().sprite;
+            case ECharacterType.Attack:
+                render_Char[_slotindex].transform.GetChild(0).GetComponent<RawImage>().texture = Resources.Load<RenderTexture>($"RenderTexture/CharRenderTexture_{ECharacterType.Attack - 1}");
                 break;
 
             case ECharacterType.Support:
-                render_Char[_slotindex].sprite = m_canvas.transform.GetChild("support_Button").GetComponent<Image>().sprite; //GameObject.Find("support_Button").GetComponent<Image>().sprite;
+                render_Char[_slotindex].transform.GetChild(0).GetComponent<RawImage>().texture = Resources.Load<RenderTexture>($"RenderTexture/CharRenderTexture_{ECharacterType.Support - 1}");
                 break;
         }
 
