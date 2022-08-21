@@ -92,38 +92,7 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         MapPannel.SetActive(false);
     }
     #endregion
-    public void EnableStartBtn(bool _allready)
-    {
-        if (_allready)
-        {
-            start_Btn.interactable = true;
-            //레디버튼 비활성화
-            //스타트버튼 활성화
-        }
-        else
-        {
-            start_Btn.interactable = false;
-        }
-    }
-    public void SettingSlotInfo(PlayerInfo _myplayerinfo, PlayerInfo _another_playerinfo1, PlayerInfo _another_playerinfo2)
-    {
-        m_player_slots[0].Player = _another_playerinfo1;
-        m_player_slots[1].Player = _myplayerinfo;
-        m_player_slots[2].Player = _another_playerinfo2;
-    }
 
-    private void Start()
-    {
-        for(int i=0;i<m_player_slots.Count;i++)
-        {
-            m_player_slots[i].__Initialize();
-        }
-        MapPannel.SetActive(false);
-        on_Ready = false;
-        start_Btn.gameObject.SetActive(on_Ready);
-        ready_Btn.gameObject.SetActive(!on_Ready);
-        start_Btn.interactable = on_Ready;
-    }
     public void RenderCharImage(int _player_id)
     {
         for (int i = 0; i < m_player_slots.Count; i++)
@@ -144,6 +113,34 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
             }
         }
     }
+    public void RenderReady(int _player_id,bool _ready,bool another)
+    {
+        //본인 레디에 대한 결과일 때만 버튼 활성화 비활성화 수행.
+        if(another==false)
+        EnalbleReadyBtn(_ready);
+    }
+    public void EnableStartBtn(bool _allready)
+    {
+        if (_allready)
+        {
+            start_Btn.gameObject.SetActive(true);
+            ready_Btn.gameObject.SetActive(false);
+            start_Btn.interactable = true;
+        }
+    }
+    public void EnalbleReadyBtn(bool _ready)
+    {
+       
+    }
+    public void SettingSlotInfo(PlayerInfo _myplayerinfo, PlayerInfo _another_playerinfo1, PlayerInfo _another_playerinfo2)
+    {
+        m_player_slots[0].Player = _another_playerinfo1;
+        m_player_slots[1].Player = _myplayerinfo;
+        m_player_slots[2].Player = _another_playerinfo2;
+    }
+    
+   
+   
     public void Controll_CharBtn(int _player_id)
     {
         for(int i = 0; i < m_player_slots.Count; i++)
@@ -167,5 +164,18 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
 
             }
         }
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < m_player_slots.Count; i++)
+        {
+            m_player_slots[i].__Initialize();
+        }
+        MapPannel.SetActive(false);
+        on_Ready = false;
+        start_Btn.gameObject.SetActive(on_Ready);
+        ready_Btn.gameObject.SetActive(!on_Ready);
+        start_Btn.interactable = on_Ready;
     }
 }

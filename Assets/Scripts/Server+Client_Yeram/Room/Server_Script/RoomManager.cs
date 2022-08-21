@@ -145,6 +145,7 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
             case EDetailProtocol.ReadyResult | EDetailProtocol.HostReady:
                 break;
             case EDetailProtocol.ReadyResult | EDetailProtocol.NomalReady:
+                NomalReadyResult(_recvpacket);
                 break;
             case EDetailProtocol.ChatRecv | EDetailProtocol.AllMsg:
                 break;
@@ -283,6 +284,19 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         _recvPacket.Read(out datasize);
         _recvPacket.Read(out allready);
         RoomGUIManager.Instance.EnableStartBtn(allready);
+    }
+    private void NomalReadyResult(Net.RecvPacket _recvPacket)
+    {
+        int datasize = 0;
+        int id = -1;
+        bool ready = false;
+        bool another = false;
+        //레디상태 변경 요청한 player 아이디 받아옴
+        _recvPacket.Read(out datasize);
+        _recvPacket.Read(out id);
+        _recvPacket.Read(out ready);
+        _recvPacket.Read(out another);
+        RoomGUIManager.Instance.RenderReady(id, ready,another);
     }
     #endregion
     #region func
