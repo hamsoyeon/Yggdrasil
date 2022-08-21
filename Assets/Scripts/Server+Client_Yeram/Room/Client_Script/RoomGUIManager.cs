@@ -144,13 +144,13 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
             }
         }
     }
-    public void Controll_CharBtn()
+    public void Controll_CharBtn(int _player_id)
     {
         for(int i = 0; i < m_player_slots.Count; i++)
         {
-            if (m_player_slots[i].is_ready)                                          //플레이어 슬롯에서 각 유저별 레디정보를 받고 레디했을 경우에만 실행 is_Ready저거 public으로 하면안되나?
+            if (m_player_slots[i].ID==_player_id)                                          
             {
-                switch (m_player_slots[i].m_character_info)                         //플레이어 슬롯에 저장된 캐릭터선택정보별로 선택한 캐릭터선택버튼 비활성화 m_character_info이것두.....
+                switch (m_player_slots[i].Player.GetCharacterInfo.CharacterType)                        
                 {
                     case ECharacterType.Defense:
                         m_SelectChar_Btn[0].interactable = false;
