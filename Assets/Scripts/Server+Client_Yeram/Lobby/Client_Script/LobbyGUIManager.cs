@@ -119,6 +119,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     {
         LobbyManager.Instance.CreateRoomProcess(m_input_createname.text, m_input_pw.text);
         RoomGUIManager.Instance.is_Leader = true;
+        RoomGUIManager.Instance.map_Change_Btn.interactable = true;
         m_window_createroom.SetActive(false);
         ClearInputField();
     }
