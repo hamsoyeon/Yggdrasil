@@ -70,9 +70,6 @@
     <Filter Include="Sources\01. Mgr\CRoomMgr">
       <UniqueIdentifier>{f8aa833a-77b8-4dc1-b89f-0bd91fdf9369}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\07. Room">
-      <UniqueIdentifier>{18c23669-470c-4cba-989b-367a3c283b96}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\01. Mgr\CLobbyMgr">
       <UniqueIdentifier>{0dcab43d-5a48-4bf5-85ef-88021faee270}</UniqueIdentifier>
     </Filter>
@@ -90,9 +87,6 @@
     </Filter>
     <Filter Include="Sources\01. Mgr\CInGameMgr">
       <UniqueIdentifier>{5994c834-e54b-4370-8499-d4eb5409569c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\03. Socket\Packet">
-      <UniqueIdentifier>{a4e65923-f473-40bb-9e88-2b8cab84717d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\09. DB">
       <UniqueIdentifier>{c553fad5-aaa5-4411-bbc7-61626155cb85}</UniqueIdentifier>
@@ -120,6 +114,9 @@
     </Filter>
     <Filter Include="Sources\11. MemoryPool">
       <UniqueIdentifier>{939bdc27-0bed-41ba-aa21-0c829c095006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\03. Socket\Packet">
+      <UniqueIdentifier>{a4e65923-f473-40bb-9e88-2b8cab84717d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -183,9 +180,6 @@
     </ClCompile>
     <ClCompile Include="CRoomMgr.cpp">
       <Filter>Sources\01. Mgr\CRoomMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="CRoom.cpp">
-      <Filter>Sources\07. Room</Filter>
     </ClCompile>
     <ClCompile Include="CLobbyMgr.cpp">
       <Filter>Sources\01. Mgr\CLobbyMgr</Filter>
@@ -297,9 +291,6 @@
     </ClInclude>
     <ClInclude Include="CRoomMgr.h">
       <Filter>Sources\01. Mgr\CRoomMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="CRoom.h">
-      <Filter>Sources\07. Room</Filter>
     </ClInclude>
     <ClInclude Include="CLobbyMgr.h">
       <Filter>Sources\01. Mgr\CLobbyMgr</Filter>

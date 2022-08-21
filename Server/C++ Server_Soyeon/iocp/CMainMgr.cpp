@@ -35,7 +35,8 @@ void CMainMgr::Loop()
 }
 void CMainMgr::Run()
 {
-	while (1)
+	// 클라이언트 소켓의 연결을 기다리는 구간.
+	while (1) 
 	{
 		SOCKET clientsock;
 		clientsock = listen_sock->Accept();
@@ -65,8 +66,6 @@ void CMainMgr::Init()
 
 	CLobbyMgr::GetInst()->Init();
 	CRoomMgr::GetInst()->Init();
-
-	// ++
 }
 void CMainMgr::End()
 {
@@ -139,8 +138,6 @@ void CMainMgr::SizeCheck_And_Recv(void* _session, int _combytes) // 이름을 하는 
 	{
 	case SOC::SOC_TRUE:
 	{
-		//int protocol;
-		//session->UnPacking(protocol);
 		session->GetState()->Recv();
 	}
 		break;

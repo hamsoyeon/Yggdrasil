@@ -9,8 +9,10 @@ void CLoginState::Recv()
 	int protocol;
 	TCHAR buf[BUFSIZE]; ZeroMemory(buf, BUFSIZE);
 	m_session->UnPacking(protocol);
+	
 	// test용
 	int sub_protocol = CProtocolMgr::GetInst()->GetSubProtocol(protocol);
+
 	//현재 받아온게 메뉴정보인지 로그인정보인지 회원가입정보인지 구분
 	switch (sub_protocol)
 	{

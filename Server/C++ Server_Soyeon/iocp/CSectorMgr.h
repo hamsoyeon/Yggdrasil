@@ -6,7 +6,10 @@
 #define MAX_X 15 
 #define MAX_Y 15
 
-#define MAX_SIZE 3
+#define SIZE_X 10
+#define SIZE_Z 10
+
+#define CELL_SIZE 3
 
 class CSession;
 class CSector;
@@ -39,7 +42,7 @@ public:
 	void RemoveSectorList();
 
 private:
-	list<CSector*> m_sectorList;
+	list<CSector> m_sectorList[CELL_SIZE][CELL_SIZE];
 
 };
 

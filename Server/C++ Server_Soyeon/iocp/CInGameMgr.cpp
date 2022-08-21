@@ -31,22 +31,25 @@ void CInGameMgr::StageInit(CSession* _ptr)
 	// 방장이 시작하면, 
 	unsigned long protocol = 0;
 
+	CSectorMgr::GetInst()->Init();
+
 	CProtocolMgr::GetInst()->AddSubProtocol(&protocol, (unsigned long)SUB_PROTOCOL::INGAME_RESULT);
 	CProtocolMgr::GetInst()->AddDetailProtocol(&protocol, (unsigned long)SERVER_DETAIL_PROTOCOL::STAGE_ENTER_SUCCESS);
 	_ptr->Packing(protocol, nullptr, 0); // 프로토콜만 전달
-
-	CSectorMgr::GetInst()->AddSectorList(_ptr);
 }
 
 void CInGameMgr::Move(CSession* _ptr)
 {
 	BYTE buf[BUFSIZE]; ZeroMemory(buf, BUFSIZE);
-	int eve[4]; // up, down, right, left
+	// up, down, right, left
+	list<int> eve; 
 
 	_ptr->UnPacking(buf);
 	UnPacking(buf, eve);
 
 	unsigned long protocol = 0;
+
+
 
 	CProtocolMgr::GetInst()->AddSubProtocol(&protocol, (unsigned long)SUB_PROTOCOL::PLAYER_RESULT);
 	CProtocolMgr::GetInst()->AddDetailProtocol(&protocol, (unsigned long)SERVER_DETAIL_PROTOCOL::MOVE_SUCCESS);
@@ -56,11 +59,32 @@ void CInGameMgr::Move(CSession* _ptr)
 	//_ptr->m_sector->m_veiw_sectorList.push_back();
 }
 
+void CInGameMgr::UnPacking(const BYTE* _buf, list<int>& _eve)
+{
+	const BYTE* ptr = _buf;
+	int eveCnt = 0;
+
+	memcpy(&eveCnt, ptr, sizeof(int));
+	ptr = ptr + sizeof(int);
+
+	for (int i = 0; i < eveCnt; i++)
+	{
+		int eve;
+		memcpy(&eve, ptr, sizeof(int));
+		ptr = ptr + sizeof(int);
+		_eve.push_back(eve);
+	}
+}
+
 void CInGameMgr::UnPacking(const BYTE* _buf, int _data[])
 {
 	const BYTE* ptr = _buf;
+	int eveCnt = 0;
 
-	for (int i = 0; i < 4; i++)
+	memcpy(&eveCnt, ptr, sizeof(int));
+	ptr += sizeof(int);
+
+	for (int i = 0; i < eveCnt; i++)
 	{
 		memcpy(&_data[i], ptr, sizeof(int));
 		ptr += sizeof(int);

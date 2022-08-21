@@ -30,34 +30,76 @@ void CSectorMgr::Destroy()
 
 CSectorMgr::CSectorMgr() {}
 
-CSectorMgr::~CSectorMgr()
-{
-	for (CSector* item : m_sectorList)
-	{
-		delete item;
-	}
-}
+CSectorMgr::~CSectorMgr() {}
 
 void CSectorMgr::PlayerSendPacket(CSession* _ptr, int _protocol, bool _moveflag)
 {
 
 }
 
-void CSectorMgr::AddSectorList(CSession* _ptr)
+void CSectorMgr::Init()
 {
 	vector<t_GameObj> vec = dynamic_cast<CInGameDB*>(CDBMgr::GetInst()->GetDB(DB_TYPE::STAGE))->GetVecStage();
 
-	CSector* sector = new CSector;
+	CSector sector[CELL_SIZE][CELL_SIZE];
 
 	for (t_GameObj item : vec)
-	{	
-		sector->AddGameObj(item);
-	}
-	
-	//Player의 경우.. 
-	sector->AddPlayer(_ptr);
+	{
+		int z = (UINT)((item.m_objPos.z + MAX_Y) / SIZE_Z);
+		int x = (UINT)((item.m_objPos.x + MAX_X) / SIZE_X);
 
-	m_sectorList.push_back(sector);
+		if (z >= CELL_SIZE)
+		{
+			z -= 1;
+		}
+		if (x >= CELL_SIZE)
+		{
+			x -= 1;
+		}
+
+		sector[z][x].AddGameObj(item);
+	}
+
+	for (int i = 0; i < CELL_SIZE; i++)
+	{
+		for (int j = 0; j < CELL_SIZE; j++)
+		{
+			m_sectorList[i][j].push_back(sector[i][j]);
+		}
+	}
+
+	for (int i = 0; i < CELL_SIZE; i++)
+	{
+		for (int j = 0; j < CELL_SIZE; j++)
+		{
+			for (CSector setor : m_sectorList[i][j])
+			{
+				printf("m_sectorList[%d][%d]\n", i, j);
+				printf("%d\n", setor.m_objectList.size());
+				printf("%d\n", setor.m_itemList.size());
+				printf("%d\n", setor.m_monsterList.size());
+				printf("%d\n", setor.m_playerList.size());
+				printf("%d\n", setor.m_spiritList.size());
+				printf("\n\n");
+			}
+		}
+	}
 }
 
-// 
+void CSectorMgr::AddSectorList(CSession* _ptr)
+{
+	//vector<t_GameObj> vec = dynamic_cast<CInGameDB*>(CDBMgr::GetInst()->GetDB(DB_TYPE::STAGE))->GetVecStage();
+
+	//CSector* sector = new CSector;
+
+	//for (t_GameObj item : vec)
+	//{	
+	//	sector->AddGameObj(item);
+	//}
+	//
+	////Player의 경우.. 
+	//sector->AddPlayer(_ptr);
+
+	//m_sectorList.push_back(sector);
+}
+

@@ -21,6 +21,7 @@ struct t_UserInfo
 		ZeroMemory(pw, STRING_SIZE * 2);
 		ZeroMemory(nickname, STRING_SIZE * 2);
 		is_login = false;
+		charType = -1;
 	}
 	t_UserInfo(TCHAR* _id, TCHAR* _pw, TCHAR* _nickname)
 	{
@@ -31,26 +32,39 @@ struct t_UserInfo
 		wcscpy(pw, _pw);
 		wcscpy(nickname, _nickname);
 		is_login = false;
+		charType = -1;
 	}
 
 	TCHAR id[STRING_SIZE];
 	TCHAR pw[STRING_SIZE];
 	TCHAR nickname[STRING_SIZE];
 	bool is_login;
+
+	int charType;
 };
 
-class CSession :public CPacket, public CMemoryPool<CSession>
+class CSession :public CPacket, public CMemoryPool<CSession, 10>
 {
 public:
+
 	CSession();
 	CSession(SOCKET _sock);
 
 	void Init();
 	void End();
 
-	t_UserInfo* GetUserInfo()
+public:
+
+	t_UserInfo* GetUserInfo() { return m_userinfo; }
+	CState* GetState() { return m_curstate; }
+	CState* GetLoginState() { return m_loginstate; }
+	CState* GetLobbyState() { return m_lobbystate; }
+	CState* GetStageState() { return m_stagestate; }
+	CState* GetInGameState() { return m_InGameState; }
+
+	void SetState(CState* _state)
 	{
-		return m_userinfo;
+		m_curstate = _state;
 	}
 	void SetUserInfo(t_UserInfo _tuserinfo)
 	{
@@ -72,27 +86,22 @@ public:
 		m_userinfo->is_login = _flag;
 	}
 
-	CState* GetState() { return m_curstate; }
-	CState* GetLoginState() { return m_loginstate; }
-	CState* GetLobbyState() { return m_lobbystate; }
-	CState* GetStageState() { return m_stagestate; }
-
-	void SetState(CState* _state)
-	{
-		m_curstate = _state;
-	}
-
 private:
+
 	t_UserInfo* m_userinfo;
 
-	// STATE
+	// state
 	CState* m_curstate;
 	CLoginState* m_loginstate;
 	CLobbyState* m_lobbystate;
 	CStageState* m_stagestate;
 	CInGameState* m_InGameState;
 
+	// sector
 	CSector* m_sector;
+
+	// room
+	tRoom* m_room;
 
 	friend class CState;
 	friend class CInGameMgr;
@@ -100,9 +109,6 @@ private:
 	friend class CLobbyMgr;
 	friend class CStageMgr;
 
-	tRoom* m_room;
-
-	//int substate;
 };
 
 // session은 sector를 소유. 

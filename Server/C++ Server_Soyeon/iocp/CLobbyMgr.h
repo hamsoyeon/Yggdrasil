@@ -77,15 +77,20 @@ public:
 	void MakeRoomProc(CSession* _ptr);
 	void EnterRoomProc(CSession* _ptr);
 
+	void ExitLobby(CSession* _ptr);
+
 	//void EnterLobbyProc(CSession* _ptr);
 	//void EnterRoomProc(CSession* _ptr);
 	//void MakeRoomProc(CSession* _ptr);
 
 public:
 	void Packing(unsigned long _protocol, const TCHAR* _roomName, const int _roomNum, const int _roomCnt, CSession* _ptr);
+	void Packing(unsigned long _protocol, const TCHAR* _roomName, TCHAR* _passWord,
+		const int _roomNum, const int _roomCnt, CSession* _ptr);
 	void Packing(unsigned long _protocol, const TCHAR* _msg, CSession* _ptr);
 
 	void UnPacking(const BYTE* _recvbuf, TCHAR* _str);
+	void UnPacking(const BYTE* _recvbuf, TCHAR* _str1, TCHAR* _str2);
 	void UnPacking(const BYTE* _recvbuf, int& _data);
 
 public:

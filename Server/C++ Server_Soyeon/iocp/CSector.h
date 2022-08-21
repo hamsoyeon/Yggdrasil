@@ -13,13 +13,11 @@ class CSector
 public:
 	// 프로퍼티는 자유.
 	// Player만 veiwList를 갖고있음.
-	//template<typename T>
-	//void AddObj(T* _obj);
 	void AddGameObj(t_GameObj _obj);
 	void AddPlayer(CSession* _ptr);
 
 private:
-	list<CPlayer*> m_playerList; // <- list<CSector*>viewSectorList[9]
+	list<CPlayer*> m_playerList; //
 	list<CMonster*> m_monsterList;
 	list<CSpirit*> m_spiritList;
 	list<CObject*> m_objectList;
@@ -29,6 +27,6 @@ private:
 	list<CSector*> m_veiw_sectorList; // 시야섹터 // 내 섹터를 기준으로 시야범위에 있는 섹터를 저장.
 
 	friend class CInGameMgr;
-
+	friend class CSectorMgr;
 };
 

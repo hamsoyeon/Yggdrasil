@@ -1,0 +1,22 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace test_client_unity
+{
+    public enum STATE_TYPE
+    {
+        LOGIN_STATE,
+        LOBBY_STATE,
+        STAGE_STATE,
+    }
+    abstract public class State : MonoBehaviour
+    {
+        public abstract void Recv(Byte[] _buf, Byte[] _protocol);
+        public abstract void RecvEvent(t_Eve _eve);
+        public abstract void QuitProgram(t_Eve _eve);
+    }
+}
+
+

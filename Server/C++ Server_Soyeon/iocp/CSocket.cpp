@@ -63,7 +63,6 @@ bool CSocket::WSASEND()
 
 bool CSocket::WSASEND(BYTE* _buf, int _size)
 {
-	//CLock c();
 	CLock_Guard<CLock> lock(m_lock);
 
 	t_sendbuf* sendbuf = new t_sendbuf(_buf, _size);

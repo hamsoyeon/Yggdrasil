@@ -53,21 +53,24 @@ TCHAR* CLogMgr::FileWriteLog(const TCHAR* fmt, ...)
 	va_list arg;
 	va_start(arg, fmt);
 
-	TCHAR cbuf[256]; ZeroMemory(cbuf, sizeof(cbuf));
+	TCHAR wcBuf[256]; ZeroMemory(wcBuf, sizeof(wcBuf));
+
 	t = localtime(&timer);
 	_wsetlocale(LC_ALL, _T("korean"));
-	wsprintf(cbuf, L"[날짜:%d년%d월%d일] [시간: %d시 %d분] ", t->tm_year + 1900, t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min);
-	int size = wcslen(cbuf);
-	_vstprintf(cbuf + size, fmt, arg);
+	wsprintf(wcBuf, L"[날짜:%d년%d월%d일] [시간: %d시 %d분] ", t->tm_year + 1900, t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min);
+	int size = wcslen(wcBuf);
+	_vstprintf(wcBuf + size, fmt, arg);
 	va_end(arg);
-	sprintf(m_logfilename, "[%d_%d_%d]  Log.txt", t->tm_year + 1900, t->tm_mon + 1, t->tm_mday);
 
+	sprintf(m_logfilename, "[%d_%d_%d] Log.txt", t->tm_year + 1900, t->tm_mon + 1, t->tm_mday);
 	writeFile.open(m_logfilename, std::ios::app);
-	size = wcslen(cbuf);
-	writeFile.write((char*)cbuf, size);
+	size = wcslen(wcBuf) * 2;
+	char cBuf[256 * 2]; ZeroMemory(cBuf, sizeof(cBuf));
+	WideCharToMultiByte(CP_ACP, 0, wcBuf, -1, cBuf, size, NULL, NULL);
+	writeFile.write(cBuf, strlen(cBuf));
 	writeFile.close();
 
-	return cbuf;
+	return wcBuf;
 }
 //고치기 안나옴
 TCHAR* CLogMgr::FileReadLogLast()
@@ -76,17 +79,17 @@ TCHAR* CLogMgr::FileReadLogLast()
 	ZeroMemory(temp, 256);
 	t = localtime(&timer);
 	sprintf(m_logfilename, "[%d_%d_%d]  Log.txt", t->tm_year + 1900, t->tm_mon + 1, t->tm_mday);
-	//readFile.open(m_logfilename);
-	//if (readFile.is_open())
-	//{
-	//	while (!readFile.eof())
-	//	{
-	//		readFile.getline((char*)temp, 256);
-	//	}
-	//	printf("%s\n", temp);
-	//	readFile.clear();
-	//	readFile.seekg(0, std::ios_base::beg);
-	//}
+	readFile.open(m_logfilename);
+	if (readFile.is_open())
+	{
+		while (!readFile.eof())
+		{
+			readFile.getline((char*)temp, 256);
+		}
+		printf("%s\n", temp);
+		readFile.clear();
+		readFile.seekg(0, std::ios_base::beg);
+	}
 	return 0;
 }
 TCHAR* CLogMgr::FileReadLogAll()

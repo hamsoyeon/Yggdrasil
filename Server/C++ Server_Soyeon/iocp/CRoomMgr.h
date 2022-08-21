@@ -1,6 +1,7 @@
 #pragma once
 
 #define ROOM_NAME_LEN 32
+#define ROOM_PASSWORD 32
 
 class CSession;
 class CRoom;
@@ -15,8 +16,12 @@ struct tRoom
 	}
 
 	TCHAR roomName[ROOM_NAME_LEN];
+	TCHAR passWord[ROOM_PASSWORD];
 	int roomNum;
-	list<CSession*> playerList;
+	list<CSession*> playerList; // 방에 있는 인원
+	CSession* owner; // 방주인
+	
+	list<CSession*> readyPlayerList; // 준비를 누른 플레이어
 };
 
 class CRoomMgr
@@ -38,8 +43,8 @@ public:
 
 	//void EnterRoomProc(CSession* _ptr);
 	//void ExitRoomProc(CSession* _ptr);
-	tRoom* MakeRoom(TCHAR* _roomName, CSession* _ptr);
-	int EnterRoom(CSession* _ptr, int _num);
+	tRoom* MakeRoom(TCHAR* _roomName, TCHAR* _passWord, CSession* _ptr);
+	void EnterRoom(CSession* _ptr, int _num);
 	void DeleteRoom(CSession* _ptr);
 
 public:

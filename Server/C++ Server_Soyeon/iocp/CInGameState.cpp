@@ -20,7 +20,7 @@ void CInGameState::Recv()
 		{
 		case (int)CInGameMgr::DETAIL_PROTOCOL::MOVE:
 			CInGameMgr::GetInst()->Move(m_session);
-		break;
+			break;
 		}
 	}
 	break;
