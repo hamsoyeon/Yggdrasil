@@ -20,7 +20,7 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
     }
     public enum ESubProtocol
     {
-        NONE = -1,
+        NONE = 0,
         Init,
         Multi,
         Single,
@@ -66,7 +66,7 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
     {
         Net.Protocol protocol = new Net.Protocol();
         protocol.SetProtocol((int)EMainProtocol.ROOM, EProtocolType.Main);
-
+        protocol.SetProtocol((int)ESubProtocol.NONE, EProtocolType.Sub);
         Net.SendPacket sendpacket = new Net.SendPacket();
         sendpacket.__Initialize();
         int size = sendpacket.Write(_roomid);
@@ -104,6 +104,22 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         sendpacket.__Initialize();
         int size = sendpacket.Write(m_roominfo.GetID);
         size += sendpacket.Write(_ready);
+        sendpacket.WriteProtocol(protocol.GetProtocol());
+        sendpacket.WriteTotalSize(size);
+        Net.NetWorkManager.Instance.Send(sendpacket);
+    }
+    public void ChattingProcess(string _text)
+    {
+        Net.Protocol protocol = new Net.Protocol();
+        protocol.SetProtocol((int)EMainProtocol.ROOM, EProtocolType.Main);
+        protocol.SetProtocol((int)ESubProtocol.Multi, EProtocolType.Sub);
+        protocol.SetProtocol((int)EDetailProtocol.ChatSend, EProtocolType.Detail);
+        protocol.SetProtocol((int)EDetailProtocol.AllMsg, EProtocolType.Detail);
+
+        Net.SendPacket sendpacket = new Net.SendPacket();
+        sendpacket.__Initialize();
+        int size = sendpacket.Write(m_roominfo.GetID);
+        size+=sendpacket.Write(_text);
         sendpacket.WriteProtocol(protocol.GetProtocol());
         sendpacket.WriteTotalSize(size);
         Net.NetWorkManager.Instance.Send(sendpacket);
@@ -152,6 +168,7 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
                 NomalReadyResult(_recvpacket);
                 break;
             case EDetailProtocol.ChatRecv | EDetailProtocol.AllMsg:
+                ChatRecv(_recvpacket, _protocol);
                 break;
             case EDetailProtocol.ChatRecv | EDetailProtocol.NoticeMsg:
                 break;
@@ -305,6 +322,23 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         _recvPacket.Read(out another);
       
         RoomGUIManager.Instance.RenderReady(id, ready,another);
+    }
+    public void ChatRecv(Net.RecvPacket _recvpacket, Net.Protocol _protocol)
+    {
+        string text;
+        int datasize = 0;
+        bool result = false;
+        _recvpacket.Read(out datasize);
+        _recvpacket.Read(out result);
+        if (result)
+        {
+            _recvpacket.Read(out text);
+            RoomGUIManager.Instance.UpdateChat(text);
+        }
+        else // 채팅 보내기 실패한 경우 ex) 공백 전송
+        {
+
+        }
     }
     #endregion
     #region func

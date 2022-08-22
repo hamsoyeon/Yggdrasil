@@ -52,10 +52,21 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
 
     [SerializeField]
     private Canvas m_canvas;
-
+    #region chatting object
+    [SerializeField]
+    private TMP_InputField m_input_chat;
+    [SerializeField]
+    GameObject m_TextPrefeb;
+    [SerializeField]
+    Transform m_content;
+    #endregion
     private int[] test_slot = new int[3];
 
     #region ButtonClickEvent
+    public void OnClick_ChatSend()
+    {
+        RoomManager.Instance.ChattingProcess(m_input_chat.text);
+    }
     public void OnClick_Defence()
     {
         RoomManager.Instance.CharacterSelectProcess(ECharacterType.Defense);
@@ -185,6 +196,21 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         }
     }
 
+    public void UpdateChat(string _txt)
+    {
+        if (m_input_chat.text.Equals(""))
+        {
+            return;
+        }
+        GameObject clone = Instantiate(m_TextPrefeb, m_content);
+        clone.GetComponent<TextMeshProUGUI>().text = _txt;
+        m_input_chat.text = "";
+
+        if (m_input_chat.isFocused == false)
+        {
+            m_input_chat.ActivateInputField();
+        }
+    }
     public void SettingSlotInfo(PlayerInfo _myplayerinfo, PlayerInfo _another_playerinfo1, PlayerInfo _another_playerinfo2)
     {
         m_player_slots[0].Player = _another_playerinfo1;

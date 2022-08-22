@@ -3043,6 +3043,9 @@ MonoBehaviour:
   - {fileID: 1951956725}
   parent_render_Char: {fileID: 1430300006}
   m_canvas: {fileID: 1077328541}
+  m_input_chat: {fileID: 993471929}
+  m_TextPrefeb: {fileID: 3604129403616071757, guid: 211473ed3ec7d1a48b320335fae20f57, type: 3}
+  m_content: {fileID: 395065755}
 --- !u!1 &347456222
 GameObject:
   m_ObjectHideFlags: 0
@@ -18872,8 +18875,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 998716735}
-        m_TargetAssemblyTypeName: LobbyGUIManager, Assembly-CSharp
+      - m_Target: {fileID: 310627571}
+        m_TargetAssemblyTypeName: RoomGUIManager, Assembly-CSharp
         m_MethodName: OnClick_ChatSend
         m_Mode: 1
         m_Arguments:
