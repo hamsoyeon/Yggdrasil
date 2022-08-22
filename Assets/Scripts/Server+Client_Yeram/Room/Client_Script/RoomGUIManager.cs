@@ -60,7 +60,10 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     [SerializeField]
     Transform m_content;
     #endregion
+    
     private int[] test_slot = new int[3];
+
+    MapSlot m_curmap;
 
     #region ButtonClickEvent
     public void OnClick_ChatSend()
@@ -98,6 +101,8 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     public void OnClick_Start()
     {
         Debug.Log("GameStart");
+        //선택된 모드 서버에 전송하기.
+        RoomManager.Instance.GameStartProcess(m_curmap.Mode);
         //메인씬으로 전환
     }
     public void OnClick_ClosedMap()
@@ -191,14 +196,14 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
                     button = m_SelectChar_Btn[2];
                     break;
             }
-            if(button!=null)
-            button.interactable = !_ready;
+            if (button != null)
+                button.interactable = !_ready;
         }
     }
 
     public void UpdateChat(string _txt)
     {
-       
+
         GameObject clone = Instantiate(m_TextPrefeb, m_content);
         clone.GetComponent<TextMeshProUGUI>().text = _txt;
         m_input_chat.text = "";
@@ -215,10 +220,6 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         m_player_slots[2].Player = _another_playerinfo2;
     }
 
-
-
-
-
     public void Select_Map_Btn()
     {
         for (int i = 0; i < map_Count; i++)
@@ -231,7 +232,7 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     public void Map_ViewChange(int _mapNum)
     {
         map_View.sprite = m_SelectMap_Btn[_mapNum].transform.GetChild(0).GetComponent<Image>().sprite;
-        m_MapNum = _mapNum;
+        m_curmap = m_SelectMap_Btn[_mapNum].GetComponent<MapSlot>();
     }
     public void Init_Map()
     {
@@ -241,10 +242,15 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
             m_SelectMap_Btn[i].transform.parent = selectMap_Content.transform;
             m_SelectMap_Btn[i].transform.GetChild(0).GetComponent<Image>().sprite = map_Sprit[i];
             m_SelectMap_Btn[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = map_Sprit[i].name;
+            m_SelectMap_Btn[i].gameObject.AddComponent<MapSlot>().__Initialize(i);
         }
 
     }
 
+    public void EnableMapBtn(bool _flag)
+    {
+        map_Change_Btn.interactable = _flag;
+    }
     private void Start()
     {
         for (int i = 0; i < m_player_slots.Count; i++)
@@ -267,7 +273,7 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         start_Btn.gameObject.SetActive(on_Ready);
         ready_Btn.gameObject.SetActive(!on_Ready);
         start_Btn.interactable = on_Ready;
-        map_Change_Btn.interactable = is_Leader;                       //방장만 방선택가능
+        map_Change_Btn.interactable = false;                       //방장만 방선택가능
         Init_Map();
         Select_Map_Btn();
     }

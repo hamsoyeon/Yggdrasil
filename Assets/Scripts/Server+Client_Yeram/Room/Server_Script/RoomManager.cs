@@ -124,6 +124,10 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         sendpacket.WriteTotalSize(size);
         Net.NetWorkManager.Instance.Send(sendpacket);
     }
+    public void GameStartProcess(int _mapmode)
+    {
+
+    }
     #endregion
 
     #region recv func
@@ -223,7 +227,13 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
                         RoomGUIManager.Instance.RenderCharImage(player.GetID);
                         RoomGUIManager.Instance.RenderReady(player.GetID, player.GetReady, true);
                     }
-                    
+
+                    bool map_flag = false;
+                    if(m_roominfo.GetOwner == myid)
+                    {
+                        map_flag = true;
+                    }
+                    RoomGUIManager.Instance.EnableMapBtn(map_flag);
                     return true;
             }
             case EErrType.NONE_ANOTHER_ENTER:
