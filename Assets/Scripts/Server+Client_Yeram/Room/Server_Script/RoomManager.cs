@@ -303,7 +303,7 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         _recvPacket.Read(out id);
         _recvPacket.Read(out ready);
         _recvPacket.Read(out another);
-        m_myinfo.SetReady = ready;
+      
         RoomGUIManager.Instance.RenderReady(id, ready,another);
     }
     #endregion

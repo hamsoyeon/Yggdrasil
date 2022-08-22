@@ -99,7 +99,7 @@ public:
 	void SendRoom(bool result, int page,CSession* _session);
 	bool PageCheck(int page);
 	ERRTYPE EnterCheck(int _roomindex,t_RoomInfo** _roominfo, const TCHAR* _pw);
-	ERRTYPE CharacterCheck(const t_RoomInfo* _roominfo, int _type);
+	ERRTYPE CharacterCheck(const t_RoomInfo* _roominfo, int _type,CSession* _session);
 	bool AllReadyCheck(t_RoomInfo* _room);
 	t_RoomInfo* FindRoom(int _roomindex);
 private:

@@ -183,7 +183,7 @@ void CRoomMgr::CharacterFunc(CSession* _session)
 	int type = 0;
 	UnPacking(data, roomid, type);
 	t_RoomInfo* room = FindRoom(roomid);
-	ERRTYPE err_type = CharacterCheck(room, type);
+	ERRTYPE err_type = CharacterCheck(room, type,_session);
 
 	if (err_type == ERRTYPE::NONE)
 	{
@@ -369,8 +369,12 @@ CRoomMgr::ERRTYPE CRoomMgr::EnterCheck(int _roomindex, t_RoomInfo** _roominfo, c
 		return ERRTYPE::ERR_MAXENTER;
 	}
 }
-CRoomMgr::ERRTYPE CRoomMgr::CharacterCheck(const t_RoomInfo* _roominfo, int _type)
+CRoomMgr::ERRTYPE CRoomMgr::CharacterCheck(const t_RoomInfo* _roominfo, int _type, CSession* _session)
 {
+	if (*(_session->GetPlayer()->GetReady()))
+	{
+		return ERRTYPE::ERR_CHARACTER;
+	}
 	for (CSession* session : _roominfo->sessions)
 	{
 		CPlayer* player = session->GetPlayer();
