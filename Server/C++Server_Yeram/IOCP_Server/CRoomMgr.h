@@ -46,7 +46,7 @@ public:
 	};
 	enum class SUBPROTOCOL
 	{
-		NONE = -1,
+		NONE = 0,
 		Init,
 		Multi,
 		Single,
@@ -82,11 +82,12 @@ public:
 	void End();
 
     void SendInit(CSession* _session);
-	bool EnterRoomProcess(CSession* _session);
+	bool EnterRoomProcess(CSession* _session,CLobbyState::SendCompType& _statetype);
 	void RoomProcess(CSession* _session);
 	void CharacterFunc(CSession* _session);
 	void NomalReadyFunc(CSession* _session);
 	void HostReadyFunc(CSession* _session);
+	void ChattingFunc(CSession* _session);
 	//방 추가
 	void AddRoom(CSession* _host);
 	//방 삭제
@@ -119,14 +120,17 @@ private:
 	void Packing(unsigned long _protocol, int _result,int _playerid, int _type, CSession* _session);
 	//레디 packing
 	void Packing(unsigned long _protocol, int _playerid, bool _ready,bool _another, CSession* _session);
+	//채팅 packing
+	void Packing(unsigned long _protocol, bool result, TCHAR* msg, CSession* _session);
 	//입장할 방 번호 unpacking
-	void UnPacking(byte* _recvdata, int& _roomindex,TCHAR* _pw);
+	void UnPacking(byte* _recvdata, int& _roomindex,TCHAR* _str);
 	//생성할 방 정보 unpacking
 	void UnPacking(byte* _recvdata,TCHAR* _name,TCHAR* _pw);
 	//캐릭터 선택 정보 unpacking
 	void UnPacking(byte* _recvdata, int& _roomindex, int& _type);
 	//레디 정보 unpacking
 	void UnPacking(byte* _recvdata, int& _roomindex, bool& _ready);
+	
 private:
 	static CRoomMgr* instance;
 	const unsigned int m_enter_limit = 3;
