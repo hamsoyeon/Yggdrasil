@@ -223,7 +223,15 @@ void CRoomMgr::NomalReadyFunc(CSession* _session)
 	int id = _session->GetPlayer()->GetID();
 	for (CSession* session : room->sessions)
 	{
-		Packing(protocol, id, ready, _session);
+		if (!memcmp(session, _session,sizeof(CSession)))
+		{
+			Packing(protocol, id, ready,false, _session);
+		}
+		else
+		{
+			Packing(protocol, id, ready, true, session);
+		}
+		
 	}
 
 	//모두 레디중인지 체크 모두 레디중이라면 호스트한테 시작버튼 누르라고 신호 보내기
@@ -675,7 +683,7 @@ void CRoomMgr::Packing(unsigned long _protocol, int _result, int _playerid, int 
 	_session->Packing(_protocol, ptr, size);
 }
 
-void CRoomMgr::Packing(unsigned long _protocol, int _playerid, bool _ready, CSession* _session)
+void CRoomMgr::Packing(unsigned long _protocol, int _playerid, bool _ready,bool _another, CSession* _session)
 {
 	byte _buf[BUFSIZE];
 	ZeroMemory(_buf, BUFSIZE);
@@ -687,7 +695,9 @@ void CRoomMgr::Packing(unsigned long _protocol, int _playerid, bool _ready, CSes
 	memcpy(ptr, &_ready, sizeof(bool));
 	ptr += sizeof(bool);
 	size += sizeof(bool);
-
+	memcpy(ptr, &_another, sizeof(bool));
+	ptr += sizeof(bool);
+	size += sizeof(bool);
 	ptr = _buf;
 	_session->Packing(_protocol, ptr, size);
 }

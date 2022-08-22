@@ -118,7 +118,7 @@ private:
 	//캐릭터 선택 결과 packing
 	void Packing(unsigned long _protocol, int _result,int _playerid, int _type, CSession* _session);
 	//레디 packing
-	void Packing(unsigned long _protocol, int _playerid, bool _ready, CSession* _session);
+	void Packing(unsigned long _protocol, int _playerid, bool _ready,bool _another, CSession* _session);
 	//입장할 방 번호 unpacking
 	void UnPacking(byte* _recvdata, int& _roomindex,TCHAR* _pw);
 	//생성할 방 정보 unpacking
