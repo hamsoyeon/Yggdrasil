@@ -619,13 +619,11 @@ void CRoomMgr::Packing(unsigned long _protocol, int result, t_RoomInfo* _room, C
 		size += sizeof(int);
 		//방장정보
 		CSession* host = _room->host;
-		strsize = _tcslen(host->GetUserInfo()->nickname) * CODESIZE;
-		memcpy(ptr, &strsize, sizeof(int));
+		int hostid = host->GetPlayer()->GetID();
+		memcpy(ptr, &hostid, sizeof(int));
 		ptr += sizeof(int);
 		size += sizeof(int);
-		memcpy(ptr, host->GetUserInfo()->nickname, strsize);
-		size += strsize;
-		ptr += strsize;
+		
 		//플레이어들 정보 (닉네임,선택한 캐릭터 정보)
 		int objtype = static_cast<int>(ENetObjectType::Player);
 		for (auto session : _room->sessions)
