@@ -50,9 +50,10 @@ public class V_Camera : MonoBehaviour
         }
         for (int i = 0; i < m_tag.Length; i++)
         {
-            target[i].Follow = GameObject.FindGameObjectWithTag(m_tag[i]).transform;
+            
             if(m_tag[i] != "Boss")
             {
+                target[i].Follow = GameObject.FindGameObjectWithTag(m_tag[i]).transform;
                 target[i].LookAt = GameObject.FindGameObjectWithTag(m_tag[i]).transform;
             }
             target[i].Priority = init_Priority;

@@ -18,6 +18,7 @@ public class BossFSM : MonoBehaviour
     private float currentBossStamina;
     private float bossStaminaSave;
     private float maxStamina;
+    public float perStamina;
 
     private int BossRandomSkill = 0;
 
@@ -36,6 +37,7 @@ public class BossFSM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.AddComponent<BossStamina>();
         maxStamina = DataTableManager.Instance.GetDataTable<Boss_TableExcelLoader>().DataList[0].MaxStamina;
 
         m_BossClass = this.gameObject.GetComponent<CharacterClass>();
@@ -237,8 +239,8 @@ public class BossFSM : MonoBehaviour
     {
         time += Time.deltaTime;
         hudPos = this.gameObject.transform;
-
-        if(behavior && moving)
+        perStamina = currentBossStamina / maxStamina;
+        if (behavior && moving)
         {
 
             //moveTime += Time.deltaTime;
