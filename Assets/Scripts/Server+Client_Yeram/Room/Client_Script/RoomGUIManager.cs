@@ -191,17 +191,14 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
                     button = m_SelectChar_Btn[2];
                     break;
             }
-
+            if(button!=null)
             button.interactable = !_ready;
         }
     }
 
     public void UpdateChat(string _txt)
     {
-        if (m_input_chat.text.Equals(""))
-        {
-            return;
-        }
+       
         GameObject clone = Instantiate(m_TextPrefeb, m_content);
         clone.GetComponent<TextMeshProUGUI>().text = _txt;
         m_input_chat.text = "";
