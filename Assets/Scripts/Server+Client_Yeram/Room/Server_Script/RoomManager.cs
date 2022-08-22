@@ -51,6 +51,10 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
     }
     private RoomInfo m_roominfo;
     private PlayerInfo m_myinfo;
+    public PlayerInfo PlayerInfo
+    {
+        get => m_myinfo;
+    }
     #region Initialize
     public void __Initialize()
     {
@@ -194,13 +198,13 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
                     RoomGUIManager.Instance.SettingSlotInfo(myinfo, another_info[0], another_info[1]);
                     MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, false);
                     MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, true);
-                    
+
+                    m_myinfo = myinfo;
                     for (int i=0;i<m_roominfo.GetPlayersInfo.Count;i++)
                     {
                         PlayerInfo player = m_roominfo.GetPlayersInfo[i];
-                        if (player.GetID == myid)
-                            myinfo = player;
                         RoomGUIManager.Instance.RenderCharImage(player.GetID);
+                        RoomGUIManager.Instance.RenderReady(player.GetID, player.GetReady, true);
                     }
                     
                     return true;
@@ -257,6 +261,7 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         switch((EErrType)result)
         {
             case EErrType.ERR_CHARACTER:
+
                 break;
             case EErrType.NONE:
                 ECharacterType type = (ECharacterType)type_number;
@@ -298,6 +303,7 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         _recvPacket.Read(out id);
         _recvPacket.Read(out ready);
         _recvPacket.Read(out another);
+        m_myinfo.SetReady = ready;
         RoomGUIManager.Instance.RenderReady(id, ready,another);
     }
     #endregion

@@ -125,8 +125,8 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     public void RenderReady(int _player_id, bool _ready, bool another)
     {
         //레디 텍스트 띄우기 수행.
-        EnableReadyText(_player_id,_ready);
-        if(another==false)
+        EnableReadyText(_player_id, _ready);
+        if (another == false)
         {
             EnableReadyBtn(_ready);
         }
@@ -142,7 +142,7 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
             start_Btn.interactable = true;
         }
     }
-    public void EnableReadyText(int _player_id,bool _ready)
+    public void EnableReadyText(int _player_id, bool _ready)
     {
         PlayerSlot player = FindSlot(_player_id);
         player.Enable_ReadyText(_ready);
@@ -165,7 +165,7 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     {
         PlayerSlot player = FindSlot(_player_id);
         Button button = null;
- 
+
         if (player != null)
         {
             switch (player.Player.GetCharacterInfo.CharacterType)
