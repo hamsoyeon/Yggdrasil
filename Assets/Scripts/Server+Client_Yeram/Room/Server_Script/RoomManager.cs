@@ -50,7 +50,7 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         MAX
     }
     private RoomInfo m_roominfo;
-
+    private PlayerInfo m_myinfo;
     #region Initialize
     public void __Initialize()
     {
@@ -198,6 +198,8 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
                     for (int i=0;i<m_roominfo.GetPlayersInfo.Count;i++)
                     {
                         PlayerInfo player = m_roominfo.GetPlayersInfo[i];
+                        if (player.GetID == myid)
+                            myinfo = player;
                         RoomGUIManager.Instance.RenderCharImage(player.GetID);
                     }
                     

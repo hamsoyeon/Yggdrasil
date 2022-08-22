@@ -81,28 +81,8 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     public void OnClick_Ready()
     {
         on_Ready = !on_Ready;
-        start_Btn.gameObject.SetActive(on_Ready);
-        if (is_Leader)
-        {
-            start_Btn.interactable = on_Ready;
-        }
 
-        //ready_Btn.gameObject.SetActive(!on_Ready);
         RoomManager.Instance.ReadyProcess(on_Ready);
-        if (on_Ready)
-        {
-            for(int i=0;i< m_SelectChar_Btn.Length; i++)
-            {
-                m_SelectChar_Btn[i].interactable = false;
-            }
-        }
-        else
-        {
-            for (int i = 0; i < m_SelectChar_Btn.Length; i++)
-            {
-                m_SelectChar_Btn[i].interactable = true;
-            }
-        }
     }
     public void OnClick_Start()
     {
@@ -119,88 +99,112 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     }
     #endregion
 
-    public void RenderCharImage(int _player_id)
+    private PlayerSlot FindSlot(int _player_id)
     {
         for (int i = 0; i < m_player_slots.Count; i++)
         {
             if (_player_id == m_player_slots[i].ID)
             {
-                m_player_slots[i].Render();
+                return m_player_slots[i];
             }
         }
+        return null;
+    }
+    public void RenderCharImage(int _player_id)
+    {
+        PlayerSlot player = FindSlot(_player_id);
+        if (player != null)
+            player.Render();
     }
     public void RenderCharImage(int _player_id, ECharacterType _type)
     {
-        for (int i = 0; i < m_player_slots.Count; i++)
-        {
-            if (_player_id == m_player_slots[i].ID)
-            {
-                m_player_slots[i].Render(_type);
-            }
-        }
+        PlayerSlot player = FindSlot(_player_id);
+        if (player != null)
+            player.Render(_type);
     }
-    public void RenderReady(int _player_id,bool _ready,bool another)
+    public void RenderReady(int _player_id, bool _ready, bool another)
     {
-        //본인 레디에 대한 결과일 때만 버튼 활성화 비활성화 수행.
+        //레디 텍스트 띄우기 수행.
+        EnableReadyText(_player_id,_ready);
         if(another==false)
-        EnalbleReadyBtn(_ready);
+        {
+            EnableReadyBtn(_ready);
+        }
+        //레디한 사람의 직업을 선택불가 상태로 만들기
+        EnableCharBtn(_player_id, _ready);
     }
+
     public void EnableStartBtn(bool _allready)
     {
         if (_allready)
         {
             start_Btn.gameObject.SetActive(true);
-            ready_Btn.gameObject.SetActive(false);
             start_Btn.interactable = true;
         }
     }
-    public void EnalbleReadyBtn(bool _ready)
+    public void EnableReadyText(int _player_id,bool _ready)
     {
-       
+        PlayerSlot player = FindSlot(_player_id);
+        player.Enable_ReadyText(_ready);
     }
+    public void EnableReadyBtn(bool _ready)
+    {
+        ColorBlock colorBlock = ready_Btn.colors;
+        if (_ready)
+        {
+            colorBlock.selectedColor = new Color(0f, 1f, 0f, 1f);
+        }
+        else
+        {
+            colorBlock.selectedColor = new Color(1f, 1f, 1f, 1f);
+        }
+        ready_Btn.colors = colorBlock;
+
+    }
+    public void EnableCharBtn(int _player_id, bool _ready)
+    {
+        PlayerSlot player = FindSlot(_player_id);
+        Button button = null;
+ 
+        if (player != null)
+        {
+            switch (player.Player.GetCharacterInfo.CharacterType)
+            {
+                case ECharacterType.Defense:
+                    button = m_SelectChar_Btn[0];
+                    break;
+                case ECharacterType.Attack:
+                    button = m_SelectChar_Btn[1];
+                    break;
+                case ECharacterType.Support:
+                    button = m_SelectChar_Btn[2];
+                    break;
+            }
+
+            button.interactable = !_ready;
+        }
+    }
+
     public void SettingSlotInfo(PlayerInfo _myplayerinfo, PlayerInfo _another_playerinfo1, PlayerInfo _another_playerinfo2)
     {
         m_player_slots[0].Player = _another_playerinfo1;
         m_player_slots[1].Player = _myplayerinfo;
         m_player_slots[2].Player = _another_playerinfo2;
     }
-    
-   
-   
-    public void Controll_CharBtn(int _player_id)
-    {
-        for(int i = 0; i < m_player_slots.Count; i++)
-        {
-            if (m_player_slots[i].ID==_player_id)                                          
-            {
-                switch (m_player_slots[i].Player.GetCharacterInfo.CharacterType)                        
-                {
-                    case ECharacterType.Defense:
-                        m_SelectChar_Btn[0].interactable = false;
-                        break;
 
-                    case ECharacterType.Attack:
-                        m_SelectChar_Btn[1].interactable = false;
-                        break;
 
-                    case ECharacterType.Support:
-                        m_SelectChar_Btn[2].interactable = false;
-                        break;
-                }
 
-            }
-        }
-    }
+
 
     public void Select_Map_Btn()
     {
-        for(int i = 0; i < map_Count; i++)
+        for (int i = 0; i < map_Count; i++)
         {
             int temp = i;
             m_SelectMap_Btn[temp].onClick.AddListener(() => Map_ViewChange(temp));
         }
     }
-    
+
     public void Map_ViewChange(int _mapNum)
     {
         map_View.sprite = m_SelectMap_Btn[_mapNum].transform.GetChild(0).GetComponent<Image>().sprite;
@@ -208,14 +212,14 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     }
     public void Init_Map()
     {
-        for(int i = 0; i < map_Count; i++)
+        for (int i = 0; i < map_Count; i++)
         {
             m_SelectMap_Btn.Add(Instantiate(p_MapBtn));
             m_SelectMap_Btn[i].transform.parent = selectMap_Content.transform;
             m_SelectMap_Btn[i].transform.GetChild(0).GetComponent<Image>().sprite = map_Sprit[i];
             m_SelectMap_Btn[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = map_Sprit[i].name;
         }
-       
+
     }
 
     private void Start()
@@ -224,6 +228,17 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         {
             m_player_slots[i].__Initialize();
         }
+
+        ColorBlock colorBlock;
+        for (int i = 0; i < m_SelectChar_Btn.Length; i++)
+        {
+            Button button = m_SelectChar_Btn[i];
+            colorBlock = button.colors;
+            colorBlock.disabledColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+            button.colors = colorBlock;
+        }
+
+
         MapPannel.SetActive(false);
         on_Ready = false;
         start_Btn.gameObject.SetActive(on_Ready);

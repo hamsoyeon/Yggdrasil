@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using ECharacterType = CharacterInfo.ECharacterType;
 public class PlayerSlot : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class PlayerSlot : MonoBehaviour
 
     [SerializeField]
     private Transform m_parent;
+
+    [SerializeField]
+    private TMP_Text m_txt_ready;
 
     private Dictionary<ECharacterType, GameObject> m_CharacterObject;
     private GameObject m_curRender;
@@ -36,7 +40,10 @@ public class PlayerSlot : MonoBehaviour
         }
     }
     #endregion
-
+    public void Enable_ReadyText(bool _ready)
+    {
+        m_txt_ready.gameObject.SetActive(_ready);
+    }
     public void Render()
     {
         if (m_curRender != null)
