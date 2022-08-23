@@ -86,9 +86,8 @@ public class PlayerSlot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string name = m_player.GetNick;
-        if(name.Length!=0)
-        NicknamePrint(name);
+        if(m_player != null)
+        NicknamePrint(m_player.GetNick);
     }
 
     // Update is called once per frame
