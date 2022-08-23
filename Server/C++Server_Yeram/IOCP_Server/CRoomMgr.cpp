@@ -152,15 +152,19 @@ void CRoomMgr::RemoveRoom(unsigned int _id)
 
 void CRoomMgr::RemoveSession(t_RoomInfo* _room ,CSession* _session)
 {
-	
+	bool is_host = false;
 	for (auto session : _room->sessions)
 	{
 		if (memcmp(session, _session, sizeof(CSession)) == false)
 		{
+			if (memcmp(_room->host, session, sizeof(CSession)) == false)
+				is_host = true;
 			_room->sessions.remove(session);
 			return;
 		}
 	}
+	if(is_host)
+	_room->host = _room->sessions.front();
 }
 
 void CRoomMgr::RoomProcess(CSession* _session, CRoomState::SendCompType& _statetype)
