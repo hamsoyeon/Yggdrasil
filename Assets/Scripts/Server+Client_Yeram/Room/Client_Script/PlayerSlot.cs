@@ -56,6 +56,7 @@ public class PlayerSlot : MonoBehaviour
         {
             m_curRender = m_CharacterObject[m_player.GetCharacterInfo.CharacterType];
             m_curRender.SetActive(true);
+            NicknamePrint(m_player.GetNick);
         }
 
     }
@@ -65,6 +66,7 @@ public class PlayerSlot : MonoBehaviour
             m_curRender.SetActive(false);
         m_curRender = m_CharacterObject[_type];
         m_curRender.SetActive(true);
+        NicknamePrint(m_player.GetNick);
     }
     public void __Initialize()
     {
@@ -84,7 +86,9 @@ public class PlayerSlot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        NicknamePrint(m_player.GetNick);
+        string name = m_player.GetNick;
+        if(name.Length!=0)
+        NicknamePrint(name);
     }
 
     // Update is called once per frame
