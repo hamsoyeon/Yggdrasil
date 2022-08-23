@@ -35,8 +35,8 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         RoomResult,
         CharacterSelect,
         CharacterResult,
-        MapSelect,
-        MapResult,
+        LobbyEnter,
+        LobbyResult,
         //========비트 중복 불가능========= 4bit
         ReadySelect = 8,
         ReadyResult = 16,
@@ -139,6 +139,16 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         sendpacket.WriteTotalSize(size);
         Net.NetWorkManager.Instance.Send(sendpacket);
     }
+    public void EnterLobbyProcess()
+    {
+        Net.Protocol protocol = new Net.Protocol();
+        protocol.SetProtocol((int)EMainProtocol.LOBBY, EProtocolType.Main);
+        protocol.SetProtocol((int)EDetailProtocol.LobbyEnter, EProtocolType.Detail);
+        Net.SendPacket sendpacket = new Net.SendPacket();
+        sendpacket.__Initialize();
+        sendpacket.WriteProtocol(protocol.GetProtocol());
+        Net.NetWorkManager.Instance.Send(sendpacket);
+    }
     #endregion
 
     #region recv func
@@ -171,7 +181,8 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
             case EDetailProtocol.CharacterResult:
                 CharacterResult(_recvpacket);
                 break;
-            case EDetailProtocol.MapResult:
+            case EDetailProtocol.LobbyResult:
+                LobbyResult(_recvpacket);
                 break;
             //호스트 시작 버튼 활성화 ( 모든 유저들 준비 완료상태 )
             case EDetailProtocol.ReadySelect | EDetailProtocol.HostReady:
@@ -379,6 +390,24 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         else // 채팅 보내기 실패한 경우 ex) 공백 전송
         {
 
+        }
+    }
+    public void LobbyResult(Net.RecvPacket _recvpacket)
+    {
+        int datasize = 0;
+        int deleteid = -1;
+        _recvpacket.Read(out datasize);
+        _recvpacket.Read(out deleteid);
+       
+        //나간 유저 정보 렌더링 변경.
+        foreach(var player in m_roominfo.GetPlayersInfo)
+        {
+            if(player.GetID==deleteid)
+            {
+                player.RemoveData();
+                RoomGUIManager.Instance.RenderCharImage(player.GetID);
+                RoomGUIManager.Instance.RenderReady(player.GetID, player.GetReady, true);
+            }
         }
     }
     #endregion

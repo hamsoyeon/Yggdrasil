@@ -34,7 +34,9 @@ namespace Net
                     RoomManager.Instance.RecvProcess(_recvpacket, protocol_manager);
                     break;
                 case EMainProtocol.LOBBY:
-                   
+                    MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, false);
+                    MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, true);
+                    m_client.SetState(m_client.m_Lobbystate);
                     break;
                 case EMainProtocol.LOGIN:
                    

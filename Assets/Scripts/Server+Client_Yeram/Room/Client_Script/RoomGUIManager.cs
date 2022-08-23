@@ -88,8 +88,7 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     }
     public void OnClick_Lobby()
     {
-        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, true);
-        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, false);
+        RoomManager.Instance.EnterLobbyProcess();
         LobbyGUIManager.Instance.ClearChat();
     }
     public void OnClick_Ready()
