@@ -160,7 +160,7 @@ void CRoomMgr::RemoveSession(t_RoomInfo* _room, CSession* _session)
 			if (memcmp(_room->host, session, sizeof(CSession)) == false)
 				is_host = true;
 			_room->sessions.remove(session);
-			return;
+			break;
 		}
 	}
 	if (is_host)
