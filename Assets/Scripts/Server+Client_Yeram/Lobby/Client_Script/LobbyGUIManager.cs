@@ -142,6 +142,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
         //방 정보 전송 후 방 room 입장.
         RoomManager.Instance.EnterRoomProcess(m_enter_roomid,m_input_enter_pw.text);
         m_window_enterroom.SetActive(false);
+        m_input_enter_pw.text = "";
     }
     public void OnClick_EnterRommCancle()
     {

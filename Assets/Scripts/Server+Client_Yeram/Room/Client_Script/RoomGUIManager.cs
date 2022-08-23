@@ -255,6 +255,16 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     {
         map_Change_Btn.interactable = _flag;
     }
+    public void PlayerSlot_Empty()
+    {
+        if (m_player_slots[1].Player.GetNick == "")
+        {
+            start_Btn.interactable = false;
+            ready_Btn.interactable = false;
+            map_Change_Btn.interactable = false;
+        }
+
+    }
     private void Start()
     {
         for (int i = 0; i < m_player_slots.Count; i++)
@@ -280,5 +290,6 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         map_Change_Btn.interactable = false;                       //방장만 방선택가능
         Init_Map();
         Select_Map_Btn();
+        PlayerSlot_Empty();
     }
 }
