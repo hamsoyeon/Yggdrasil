@@ -126,7 +126,18 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
     }
     public void GameStartProcess(int _mapmode)
     {
-
+        Net.Protocol protocol = new Net.Protocol();
+        protocol.SetProtocol((int)EMainProtocol.ROOM, EProtocolType.Main);
+        protocol.SetProtocol((int)ESubProtocol.Multi, EProtocolType.Sub);
+        protocol.SetProtocol((int)EDetailProtocol.ReadySelect, EProtocolType.Detail);
+        protocol.SetProtocol((int)EDetailProtocol.HostReady, EProtocolType.Detail);
+        Net.SendPacket sendpacket = new Net.SendPacket();
+        sendpacket.__Initialize();
+        int size = sendpacket.Write(m_roominfo.GetID);
+        size += sendpacket.Write(_mapmode);
+        sendpacket.WriteProtocol(protocol.GetProtocol());
+        sendpacket.WriteTotalSize(size);
+        Net.NetWorkManager.Instance.Send(sendpacket);
     }
     #endregion
 
@@ -167,6 +178,7 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
                 HostReadyReq(_recvpacket);
                 break;
             case EDetailProtocol.ReadyResult | EDetailProtocol.HostReady:
+                HostReadyResult(_recvpacket);
                 break;
             case EDetailProtocol.ReadyResult | EDetailProtocol.NomalReady:
                 NomalReadyResult(_recvpacket);
@@ -332,6 +344,25 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         _recvPacket.Read(out another);
       
         RoomGUIManager.Instance.RenderReady(id, ready,another);
+    }
+    private void HostReadyResult(Net.RecvPacket _recvPacket)
+    {
+        int datasize = 0;
+      
+        bool result = false;
+      
+        //레디상태 변경 요청한 player 아이디 받아옴
+        _recvPacket.Read(out datasize);
+        _recvPacket.Read(out result );
+      
+        if(result)
+        {
+            //상태 게임으로 진입
+        }
+        else
+        {
+            //모두 레디 안한 경우
+        }
     }
     public void ChatRecv(Net.RecvPacket _recvpacket, Net.Protocol _protocol)
     {
