@@ -154,21 +154,20 @@ C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP
 C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.h(22,3): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.h(23,3): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CLobbyMgr.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(31,3): warning C4996: '_swprintf': This function or variable may be unsafe. Consider using swprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(80,44): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(138,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(286,3): warning C4996: '_swprintf': This function or variable may be unsafe. Consider using swprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(387,17): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(448,17): warning C4018: '>=': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(522,29): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(545,44): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(564,43): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(600,44): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(611,43): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(622,62): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(644,51): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(693,56): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(763,39): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(32,3): warning C4996: '_swprintf': This function or variable may be unsafe. Consider using swprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(81,44): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(140,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(335,3): warning C4996: '_swprintf': This function or variable may be unsafe. Consider using swprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(487,17): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(562,17): warning C4018: '>=': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(636,29): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(659,44): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(678,43): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(714,44): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(725,43): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(756,51): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(805,56): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.cpp(875,39): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   CRoomState.cpp
 C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CRoomMgr.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CSector.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
@@ -249,4 +248,5 @@ C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP
 C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CSectorMgr.cpp(75,42): warning C4244: '인수': 'const int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CSectorMgr.cpp(75,23): warning C4244: '인수': 'const int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\CSectorMgr.cpp(257): warning C4172: 지역 변수 또는 임시: _parent의 주소를 반환하고 있습니다.
+  LINK : C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\x64\Debug\IOCP_Server.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
   IOCP_Server.vcxproj -> C:\Users\kimjh741963\Desktop\Git_Yggdrasil\Yggdrasil\Server\C++Server_Yeram\IOCP_Server\x64\Debug\IOCP_Server.exe

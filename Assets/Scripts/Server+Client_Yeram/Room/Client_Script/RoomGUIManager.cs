@@ -169,10 +169,13 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         if (_ready)
         {
             colorBlock.selectedColor = new Color(0f, 1f, 0f, 1f);
+            colorBlock.normalColor = new Color(0f, 1f, 0f, 1f);
+
         }
         else
         {
             colorBlock.selectedColor = new Color(1f, 1f, 1f, 1f);
+            colorBlock.normalColor = new Color(1f, 1f, 1f, 1f);
         }
         ready_Btn.colors = colorBlock;
 
