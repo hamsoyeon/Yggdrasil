@@ -112,6 +112,7 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     public void OnClick_Decide_Map()
     {
         room_Map_View.sprite = m_SelectMap_Btn[m_MapNum].transform.GetChild(0).GetComponent<Image>().sprite;
+        m_curmap = m_SelectMap_Btn[m_MapNum].GetComponent<MapSlot>();
     }
     #endregion
 
@@ -232,7 +233,7 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     public void Map_ViewChange(int _mapNum)
     {
         map_View.sprite = m_SelectMap_Btn[_mapNum].transform.GetChild(0).GetComponent<Image>().sprite;
-        m_curmap = m_SelectMap_Btn[_mapNum].GetComponent<MapSlot>();
+        m_MapNum = _mapNum;
     }
     public void Init_Map()
     {
