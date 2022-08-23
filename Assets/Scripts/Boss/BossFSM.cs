@@ -125,10 +125,10 @@ public class BossFSM : MonoBehaviour
 
                 while (true)
                 {
-                    if (startBlock.prev != null)
+                    if (startBlock != null)
                     {
-                        Debug.Log($"길 지우기:{startBlock.prev.x}/{startBlock.prev.y}");
-                        MainManager.Instance.GetStageManager().m_MapInfo[startBlock.prev.x, startBlock.prev.y].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
+                        Debug.Log($"길 지우기:{startBlock.x}/{startBlock.y}");
+                        MainManager.Instance.GetStageManager().m_MapInfo[startBlock.x, startBlock.y].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                         tempBlock = startBlock.prev;
                     }
                     else
@@ -168,10 +168,10 @@ public class BossFSM : MonoBehaviour
 
                 while (true)
                 {
-                    if (startBlock.prev != null)
+                    if (startBlock != null)
                     {
-                        Debug.Log($"길 지우기:{startBlock.prev.x}/{startBlock.prev.y}");
-                        MainManager.Instance.GetStageManager().m_MapInfo[startBlock.prev.x, startBlock.prev.y].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
+                        Debug.Log($"길 지우기:{startBlock.x}/{startBlock.y}");
+                        MainManager.Instance.GetStageManager().m_MapInfo[startBlock.x, startBlock.y].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                         tempBlock = startBlock.prev;
                     }
                     else
@@ -196,9 +196,6 @@ public class BossFSM : MonoBehaviour
 
 
     }
-
-
-
 
 
     public void Damage(int _damage)
@@ -268,7 +265,7 @@ public class BossFSM : MonoBehaviour
                     moveAndSkill = 1;
                 }
 
-                moveAndSkill = 1;
+                moveAndSkill = 1;  //이동고정
 
                 if (moveAndSkill ==1)
                 {
@@ -321,11 +318,6 @@ public class BossFSM : MonoBehaviour
                         moving = true;
 
                     }
-
-
-                    
-
-                    
 
                     
                 }
