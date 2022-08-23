@@ -366,13 +366,9 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         _recvPacket.Read(out datasize);
         _recvPacket.Read(out result );
       
-        if(result)
+        if(result==false)
         {
             //상태 게임으로 진입
-        }
-        else
-        {
-            //모두 레디 안한 경우
         }
     }
     public void ChatRecv(Net.RecvPacket _recvpacket, Net.Protocol _protocol)
