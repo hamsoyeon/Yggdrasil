@@ -9,9 +9,7 @@ public class BossStamina : MonoBehaviour
     private Slider staminaBar;
     [SerializeField]
     private BossFSM bossFsm;
-    [SerializeField]
-    private float perStamina;
-
+    
     [SerializeField]
     private GameObject p_Slider;
 
@@ -24,18 +22,19 @@ public class BossStamina : MonoBehaviour
     void Start()
     {
         Instantiate(p_Slider, gameObject.transform.position + Vector3.up * 20, Quaternion.identity).transform.parent = this.gameObject.transform;
-        staminaBar = p_Slider.transform.GetChild(0).GetComponent<Slider>();
+        staminaBar = gameObject.transform.GetChild(5).GetChild(0).GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        perStamina = bossFsm.perStamina;
-        HandleStamina();
+        Debug.Log(staminaBar.value);
+        Debug.Log(bossFsm.GetPerStamina());
+        HandleStamina(bossFsm.GetPerStamina());
     }
 
-    void HandleStamina()
+    void HandleStamina(float _stamina)
     {
-        staminaBar.value = perStamina;
+        staminaBar.value = _stamina;
     }
 }

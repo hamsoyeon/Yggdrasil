@@ -15,11 +15,12 @@ public class BossFSM : MonoBehaviour
     //private bool actionCheck=false;
     private bool spCheck = false;
 
+    [SerializeField]
     private float currentBossStamina;
     private float bossStaminaSave;
+    [SerializeField]
     private float maxStamina;
-    public float perStamina;
-
+    
     private int BossRandomSkill = 0;
 
     public bool behavior = false;
@@ -71,7 +72,7 @@ public class BossFSM : MonoBehaviour
                 }
             }
         }
-
+        #region 주석
         //Block bossBlock = new Block(MainManager.Instance.GetStageManager().m_BossRow, MainManager.Instance.GetStageManager().m_BossColumn);
         //Block PlayerBlock = new Block(MainManager.Instance.GetStageManager().m_PlayerRow, MainManager.Instance.GetStageManager().m_PlayerCoulmn);
         //var startBlock = AStarNJ.PathFinding(GameBoard, bossBlock, PlayerBlock);
@@ -80,7 +81,7 @@ public class BossFSM : MonoBehaviour
         //{
         //    Debug.Log("asd");
         //}
-        
+
         //if(startBlock.next != null)
         //{
         //    Debug.Log("qwe");
@@ -103,7 +104,7 @@ public class BossFSM : MonoBehaviour
 
         //    startBlock = tempBlock;
         //}
-
+        #endregion
     }
 
 
@@ -212,6 +213,10 @@ public class BossFSM : MonoBehaviour
         hudText.transform.position = hudPos.position + (Vector3.up * 20);
         hudText.GetComponent<DamageTxt>().damage = damage;
     }
+    public float GetPerStamina()
+    {
+        return currentBossStamina / maxStamina;
+    }
     private void Awake()
     {
         hudDamageText = Resources.Load<GameObject>("DamageText");
@@ -236,7 +241,6 @@ public class BossFSM : MonoBehaviour
     {
         time += Time.deltaTime;
         hudPos = this.gameObject.transform;
-        perStamina = currentBossStamina / maxStamina;
         if (behavior && moving)
         {
 

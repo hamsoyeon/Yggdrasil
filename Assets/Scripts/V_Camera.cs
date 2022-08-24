@@ -38,9 +38,11 @@ public class V_Camera : MonoBehaviour
             if(m_tag[i] == "Boss")
             {
                 view_Value = 80.0f;
+                view_Angle_Value = 50.0f;
             }
             else
             {
+                view_Angle_Value = 30.0f;
                 view_Value = 50.0f;
             }
             var tmpObj = Instantiate(temp, GameObject.FindGameObjectWithTag(m_tag[i]).transform.position + (Vector3.up * view_Value) + (Vector3.back * view_Value), Quaternion.Euler(view_Angle_Value, 0, 0));
