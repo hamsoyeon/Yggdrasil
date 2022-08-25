@@ -33,13 +33,13 @@ public class PlayerManager : MonoBehaviour
     public Transform hudPos;
 
     private Animator anim;
-
+    private PlayerDirection dir;
 
     private bool move;
 
     float h, v;
     float Speed = 5f;
-    float rotateSpeed = 5f;
+    public float rotateSpeed = 5f;
 
     int x;
     int y;
@@ -189,7 +189,22 @@ public class PlayerManager : MonoBehaviour
 
     }
 
+    public void ChangePlayerDirection()
+    {
+        
+        float h, v;
+        h = Input.GetAxis("Horizontal");
+        v = Input.GetAxis("Vertical");
 
+        Vector3 dir = new Vector3(h, 0, v);
+
+        if (!(h == 0 && v == 0))
+        {
+            this.transform.rotation = Quaternion.Lerp(transform.rotation,
+                Quaternion.LookRotation(dir),
+                Time.deltaTime * rotateSpeed);
+        }
+    }
 
     private void Awake()
     {
@@ -274,6 +289,11 @@ public class PlayerManager : MonoBehaviour
 
         //hudPos = GameObject.Find("Player(Clone)").transform;
         hudPos = GameObject.Find("Player").transform.GetChild(0).gameObject.transform;
+    }
+
+    private void FixedUpdate()
+    {
+        ChangePlayerDirection();
     }
 
 
