@@ -35,6 +35,9 @@ public class BossFSM : MonoBehaviour
 
     public Board GameBoard;
 
+    public GameObject player;
+
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -191,11 +194,15 @@ public class BossFSM : MonoBehaviour
                 originBlock = tempBlock;
                 bossMove = false;
             }
-
-           
         }
+    }
 
-
+    public float rotateSpeed = 5.0f;
+    void MonsterDirection(GameObject obj)
+    {
+        transform.rotation = Quaternion.Lerp(transform.rotation,
+            Quaternion.LookRotation(obj.transform.position),
+            Time.deltaTime * rotateSpeed);
     }
 
 
@@ -219,8 +226,9 @@ public class BossFSM : MonoBehaviour
     }
     private void Awake()
     {
+        player = GameObject.Find("obj_10001");
+        Debug.Log("됐다",player);
         hudDamageText = Resources.Load<GameObject>("DamageText");
-        
     }
 
     bool moving = false;
@@ -235,6 +243,11 @@ public class BossFSM : MonoBehaviour
     Block tempBlock;
     Block originBlock;
 
+    private void FixedUpdate()
+    {
+        MonsterDirection(player);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -243,10 +256,8 @@ public class BossFSM : MonoBehaviour
         hudPos = this.gameObject.transform;
         if (behavior && moving)
         {
-
             //moveTime += Time.deltaTime;
             Move();
-
         }
 
         if (time > 1.0f && !behavior)

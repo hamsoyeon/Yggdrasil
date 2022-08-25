@@ -189,12 +189,18 @@ public class PlayerManager : MonoBehaviour
 
     }
 
+
+    // Manager -> 관리자 Player 전부 3인용
+    // Movement -> Rotation, Move - PlayerController
     public void ChangePlayerDirection()
     {
-        
         float h, v;
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
+        //방향키 입력 말고 플레이어 이동 값을 받아와야겠다..
+
+        //h = this.transform.position.x;
+        //v = this.transform.position.z;
 
         Vector3 dir = new Vector3(h, 0, v);
 
@@ -293,7 +299,9 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ChangePlayerDirection();
+        //ChangePlayerDirection();
+
+        //PlayerDirection.GetInstance().ChangePlayerDirection(gameObject);
     }
 
 
