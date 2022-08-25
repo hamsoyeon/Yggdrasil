@@ -22,14 +22,12 @@ public class BossStamina : MonoBehaviour
     void Start()
     {
         Instantiate(p_Slider, gameObject.transform.position + Vector3.up * 20, Quaternion.identity).transform.parent = this.gameObject.transform;
-        staminaBar = gameObject.transform.GetChild(5).GetChild(0).GetComponent<Slider>();
+        staminaBar = gameObject.transform.GetChild(4).GetChild(0).GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(staminaBar.value);
-        Debug.Log(bossFsm.GetPerStamina());
         HandleStamina(bossFsm.GetPerStamina());
     }
 

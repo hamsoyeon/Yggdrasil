@@ -31,6 +31,13 @@ public class V_Camera : MonoBehaviour
     {
         VC_Init();
     }
+    private void FixedUpdate()
+    {
+        for (int i = 0; i < m_tag.Length; i++)
+        {
+            target[i].transform.position = GameObject.FindGameObjectWithTag(m_tag[i]).transform.position + (Vector3.up * view_Value) + (Vector3.back * view_Value);
+        }
+    }
     private void VC_Init()
     {
         for (int i = 0; i < m_tag.Length; i++)
@@ -46,7 +53,7 @@ public class V_Camera : MonoBehaviour
                 view_Value = 50.0f;
             }
             var tmpObj = Instantiate(temp, GameObject.FindGameObjectWithTag(m_tag[i]).transform.position + (Vector3.up * view_Value) + (Vector3.back * view_Value), Quaternion.Euler(view_Angle_Value, 0, 0));
-            tmpObj.transform.parent = GameObject.FindGameObjectWithTag(m_tag[i]).transform;
+            tmpObj.transform.parent = GameObject.FindGameObjectWithTag(m_tag[i]).transform.parent;
             target[i] = tmpObj.AddComponent<CinemachineVirtualCamera>();
             
         }
@@ -55,8 +62,8 @@ public class V_Camera : MonoBehaviour
             
             if(m_tag[i] != "Boss")
             {
-                target[i].Follow = GameObject.FindGameObjectWithTag(m_tag[i]).transform;
-                target[i].LookAt = GameObject.FindGameObjectWithTag(m_tag[i]).transform;
+                //target[i].Follow = GameObject.FindGameObjectWithTag(m_tag[i]).transform;
+                //target[i].LookAt = GameObject.FindGameObjectWithTag(m_tag[i]).transform;
             }
             target[i].Priority = init_Priority;
             //target[i].
