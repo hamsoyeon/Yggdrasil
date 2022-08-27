@@ -7,8 +7,6 @@ using ECharacterType = CharacterInfo.ECharacterType;
 
 public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
 {
-
-
     public GameObject MapPannel;
 
     [SerializeField]
@@ -37,6 +35,9 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     [SerializeField]
     private int m_MapNum;
 
+    [SerializeField]
+    private bool is_HostOpt;
+
 
     [SerializeField]
     private List<Button> m_SelectMap_Btn;
@@ -52,6 +53,17 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
 
     [SerializeField]
     private Canvas m_canvas;
+
+    [SerializeField]
+    private GameObject p_HostMenu;
+    [SerializeField]
+    private Button p_HostMenu_Btn;
+    [SerializeField]
+    private GameObject m_Another;
+    [SerializeField]
+    private Button[] another_Player_Btn;
+    private bool is_SelectPlayer;
+
     #region chatting object
     [SerializeField]
     private TMP_InputField m_input_chat;
@@ -112,6 +124,42 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     {
         room_Map_View.sprite = m_SelectMap_Btn[m_MapNum].transform.GetChild(0).GetComponent<Image>().sprite;
         m_curmap = m_SelectMap_Btn[m_MapNum].GetComponent<MapSlot>();
+    }
+    public void OnClick_HostMenu()
+    {
+        //호스트일때만 작동
+        is_HostOpt = !is_HostOpt;
+        p_HostMenu.SetActive(is_HostOpt);
+        
+    }
+    // 호스트 변경, 플레이어 추방, 플레이어정보 이 3가지 기능들은 자신을 제외한플레이어만 선택하면됨 오브젝트한개로 컨트롤되게 flag쓰면될듯 
+    public void OnClick_PassHost()
+    {
+        //호스트 변경
+        if (is_SelectPlayer == false)
+        {
+            is_SelectPlayer = !is_SelectPlayer;
+            m_Another.SetActive(is_SelectPlayer);
+        }
+    }
+    public void OnClick_Kick()
+    {
+        //선택한 플레이어 추방
+        if(is_SelectPlayer == false)
+        {
+            is_SelectPlayer = !is_SelectPlayer;
+            m_Another.SetActive(is_SelectPlayer);
+        }
+    }
+    public void OnClick_Info()
+    {
+        //선택한 플레이어 정보
+        if (is_SelectPlayer == false)
+        {
+            is_SelectPlayer = !is_SelectPlayer;
+            m_Another.SetActive(is_SelectPlayer);
+        }
+        
     }
     #endregion
 
@@ -251,6 +299,8 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
 
     }
 
+    
+
     public void EnableMapBtn(bool _flag)
     {
         map_Change_Btn.interactable = _flag;
@@ -280,7 +330,7 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
             colorBlock.disabledColor = new Color(0.5f, 0.5f, 0.5f, 1f);
             button.colors = colorBlock;
         }
-
+        
 
         MapPannel.SetActive(false);
         on_Ready = false;
@@ -288,8 +338,17 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         ready_Btn.gameObject.SetActive(!on_Ready);
         start_Btn.interactable = on_Ready;
         map_Change_Btn.interactable = false;                       //방장만 방선택가능
+        p_HostMenu.SetActive(false);
+        is_HostOpt = false;
+        is_SelectPlayer = false;
+
+        //if(m_player_slots[1].Player.)
+
         Init_Map();
         Select_Map_Btn();
         PlayerSlot_Empty();
+        another_Player_Btn[0].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = m_player_slots[0].Player.GetNick;
+        another_Player_Btn[1].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = m_player_slots[2].Player.GetNick;
+        Debug.Log("이름" + another_Player_Btn[0].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
     }
 }

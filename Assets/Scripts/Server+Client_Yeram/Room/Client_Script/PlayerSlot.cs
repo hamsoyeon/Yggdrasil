@@ -18,6 +18,7 @@ public class PlayerSlot : MonoBehaviour
     [SerializeField]
     private TMP_Text m_txt_NickName;
 
+    
     private Dictionary<ECharacterType, GameObject> m_CharacterObject;
     private GameObject m_curRender;
     static int m_slotcount = 0;
@@ -78,11 +79,13 @@ public class PlayerSlot : MonoBehaviour
             m_CharacterObject.Add((ECharacterType)i, obj);
             obj.SetActive(false);
         }
+        
     }
     public void NicknamePrint(string _name)
     {
         m_txt_NickName.text = _name;
     }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -93,6 +96,6 @@ public class PlayerSlot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }
