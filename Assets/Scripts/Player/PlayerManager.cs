@@ -103,6 +103,7 @@ public class PlayerManager : MonoBehaviour
             move = false;
         }
 
+        // 지금 x y 로테이션값 변경때문에 의해서 방향 이동다시 지정해야함
         //방향키로 입력으로 변경
         if (MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable && !isWall)
         {
@@ -115,7 +116,7 @@ public class PlayerManager : MonoBehaviour
 
                 move = true;
                 this.transform.Translate(new Vector3(-1.0f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-                cam.cam.transform.Translate(new Vector3(-1.0f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+                cam.cam.transform.Translate(new Vector3(-1.0f, -0.32f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
@@ -125,7 +126,7 @@ public class PlayerManager : MonoBehaviour
                 }
                 move = true;
                 this.transform.Translate(new Vector3(1.0f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-                cam.cam.transform.Translate(new Vector3(1.0f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+                cam.cam.transform.Translate(new Vector3(1.0f, 0.32f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             }
             if (Input.GetKey(KeyCode.UpArrow))
             {
@@ -135,7 +136,7 @@ public class PlayerManager : MonoBehaviour
                 }
                 move = true;
                 this.transform.Translate(new Vector3(0.0f, 0.0f, 0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-                cam.cam.transform.Translate(new Vector3(0.0f, 0.6f, 0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+                cam.cam.transform.Translate(new Vector3(0.0f, 0.4f, 0.4f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
@@ -145,7 +146,7 @@ public class PlayerManager : MonoBehaviour
                 }
                 move = true;
                 this.transform.Translate(new Vector3(0.0f, 0.0f, -0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-                cam.cam.transform.Translate(new Vector3(0.0f, -0.6f, -0.6f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
+                cam.cam.transform.Translate(new Vector3(0.0f, -0.4f, -0.4f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
             }
         }
         else if (!MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable || isWall)

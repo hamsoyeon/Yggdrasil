@@ -22,9 +22,9 @@ public class FollowCam : MonoBehaviour
         cam = Camera.main;
         PlayerPos = this.gameObject.transform.position;
        // newCamPos = new Vector3(PlayerPos.x + camOffset.x, 40, PlayerPos.z + camOffset.z);
-        camOffset = new Vector3(0, 40, -26.5f);
+        camOffset = new Vector3(-23.0f, 78.0f, -46.2f);
 
-        cam.transform.position = new Vector3(PlayerPos.x + camOffset.x, 40, PlayerPos.z + camOffset.z);
+        cam.transform.position = new Vector3(PlayerPos.x + camOffset.x, 78, PlayerPos.z + camOffset.z);
 	}
 
     private void Update()

@@ -109,7 +109,6 @@ public class Board
         }
         else
         {
-
             if (Exists(target.x-1, target.y) && !blocks[target.x -1, target.y].wall)
             {
                 Block block = blocks[target.x -1, target.y];
