@@ -3,12 +3,12 @@
 enum class MAINPROTOCOL
 {
 	NONE,
-    INIT,
+	INIT,
 	LOGIN,
 	LOBBY,
 	ROOM,
 	GAME,
-    TEST,
+	TEST,
 	MAX
 };
 

@@ -33,13 +33,13 @@ public class PlayerManager : MonoBehaviour
     public Transform hudPos;
 
     private Animator anim;
-
+    private PlayerDirection dir;
 
     private bool move;
 
     float h, v;
     float Speed = 5f;
-    float rotateSpeed = 5f;
+    public float rotateSpeed = 5f;
 
     int x;
     int y;
@@ -191,6 +191,27 @@ public class PlayerManager : MonoBehaviour
     }
 
 
+    // Manager -> 관리자 Player 전부 3인용
+    // Movement -> Rotation, Move - PlayerController
+    public void ChangePlayerDirection()
+    {
+        float h, v;
+        h = Input.GetAxis("Horizontal");
+        v = Input.GetAxis("Vertical");
+        //방향키 입력 말고 플레이어 이동 값을 받아와야겠다..
+
+        //h = this.transform.position.x;
+        //v = this.transform.position.z;
+
+        Vector3 dir = new Vector3(h, 0, v);
+
+        if (!(h == 0 && v == 0))
+        {
+            this.transform.rotation = Quaternion.Lerp(transform.rotation,
+                Quaternion.LookRotation(dir),
+                Time.deltaTime * rotateSpeed);
+        }
+    }
 
     private void Awake()
     {
@@ -277,6 +298,13 @@ public class PlayerManager : MonoBehaviour
         hudPos = GameObject.Find("Player").transform.GetChild(0).gameObject.transform;
     }
 
+    private void FixedUpdate()
+    {
+        //ChangePlayerDirection();
+
+        //PlayerDirection.GetInstance().ChangePlayerDirection(gameObject);
+    }
+
 
     public void Damage(int _damage)
     {
@@ -289,7 +317,7 @@ public class PlayerManager : MonoBehaviour
         
         GameObject hudText = Instantiate(hudDamageText);
         
-        hudText.transform.position = hudPos.position + (Vector3.up * 5);
+        hudText.transform.position = hudPos.position + (Vector3.up * 15);
         hudText.GetComponent<DamageTxt>().damage = damage;
     }
 

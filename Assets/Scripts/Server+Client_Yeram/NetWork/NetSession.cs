@@ -19,6 +19,8 @@ namespace Net
         IState m_curstate;
         internal LoginState m_Loginstate;
         internal LobbyState m_Lobbystate;
+        internal RoomState m_Roomstate;
+        internal GameState m_Gamestate;
         NetworkStream m_netstream;
 
         private byte[] m_recvstream;
@@ -32,27 +34,15 @@ namespace Net
 
 
         bool is_loging;
+        public Net.IState.State GetState()
+        {
+            return m_curstate.ClientState;
+        }
         #region set state
         public void SetState(IState _state)
         {
             m_curstate = _state;
         }
-        //public void SetState(IState.State _state)
-        //{
-        //    switch(_state)
-        //    {
-        //        case IState.State.Login:
-        //            m_curstate = m_Loginstate;
-        //            break;
-        //        case IState.State.Lobby:
-        //            m_curstate = m_Lobbystate;
-        //            break;
-        //        case IState.State.Room:
-        //            break;
-        //        case IState.State.Game:
-        //            break;
-        //    }
-        //}
         #endregion
         public void __Initialize()
         {
@@ -89,8 +79,9 @@ namespace Net
         {
             m_Loginstate = new LoginState(this);
             m_Lobbystate = new LobbyState(this);
+            m_Roomstate = new RoomState(this);
+            m_Gamestate = new GameState(this);
             m_curstate = m_Loginstate;
-
         }
         #endregion
         public void __Finalize()

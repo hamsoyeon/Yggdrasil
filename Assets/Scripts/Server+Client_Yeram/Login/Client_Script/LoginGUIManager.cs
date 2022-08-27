@@ -7,12 +7,13 @@ using EWindowType = MenuGUIManager.EWindowType;
 public class LoginGUIManager : Singleton_Ver2.Singleton<LoginGUIManager>
 {
 
-    [SerializeField]
-    TMP_InputField[] m_input_id;
+    public TMP_InputField[] m_input_id;
     [SerializeField]
     TMP_InputField[] m_input_pw;
     [SerializeField]
     TMP_InputField m_input_nick;
+    [SerializeField]
+    TextMeshProUGUI m_loginErrText;
 
     #region button click event
     public void OnClick_Exit(bool _flag)
@@ -24,7 +25,6 @@ public class LoginGUIManager : Singleton_Ver2.Singleton<LoginGUIManager>
         if (_flag)//로그인
         {
             LoginManager.Instance.LoginProcess(GetInfo(_flag)); 
-            m_input_id[0].text = "";
             m_input_pw[0].text = "";
         }
         else//회원가입
@@ -57,4 +57,18 @@ public class LoginGUIManager : Singleton_Ver2.Singleton<LoginGUIManager>
         return new LoginInfo(m_input_id[1].text, m_input_pw[1].text, m_input_nick.text);
     }
     #endregion
+    
+    public void ClearInputField(TMP_InputField _target)
+    {
+        _target.text = "";
+    }
+    public void LoginErrTextPrint()
+    {
+        m_loginErrText.gameObject.SetActive(true);
+    }
+
+    private void Start()
+    {
+        m_loginErrText.gameObject.SetActive(false);
+    }
 }

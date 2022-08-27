@@ -20,6 +20,7 @@ CSession::CSession(SOCKET _sock)
 	m_stagestate = new CStageState(this);
 	m_InGameState = new CInGameState(this);
 	m_curstate = m_loginstate;
+	//m_curstate = m_InGameState;
 	m_userinfo = new t_UserInfo();
 }
 

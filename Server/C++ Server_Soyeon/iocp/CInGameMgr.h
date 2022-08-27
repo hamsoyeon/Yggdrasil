@@ -51,6 +51,7 @@ public:
 	void Move(CSession* _ptr);
 
 public:
+	void UnPacking(const BYTE* _buf, list<int>& _eve);
 	void UnPacking(const BYTE* _buf, int _data[]);
 	void UnPacking(const BYTE* _buf, TCHAR* _str);
 

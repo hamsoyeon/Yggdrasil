@@ -10,20 +10,22 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     #region window object
     [SerializeField]
     GameObject m_window_createroom;
+    [SerializeField]
+    GameObject m_window_enterroom;
     #endregion
     #region input field object
 
     #endregion
     #region room button object
     [SerializeField]
-    private Button m_room_btn_prefeb;
+    private Button m_btn_room_prefeb;
     [ReadOnly]
     private List<Button> m_room_btns;
     private int m_rooms_count; // 한 페이지당 생성 가능한 방 수.
     #endregion
     #region page button object
-    Button m_next_btn;
-    Button m_pre_btn;
+    Button m_btn_next;
+    Button m_btn_pre;
     #endregion
     #region create room input field object
     TMP_InputField m_input_createname;
@@ -44,9 +46,13 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     [SerializeField]
     TMP_InputField m_input_chat;
     #endregion
+    #region enter room input field object
+    TMP_InputField m_input_enter_pw;
+    #endregion
     [SerializeField]
     Canvas m_canvas;
 
+    uint m_enter_roomid;
 
 
 
@@ -62,7 +68,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
         m_rooms_count = _btncount;
         Transform parent = m_canvas.transform.GetChild("Room View").GetChild("Content");
         for (int i = 0; i < m_rooms_count; i++)
-            m_room_btns.Add(GameObject.Instantiate<Button>(m_room_btn_prefeb, parent));
+            m_room_btns.Add(GameObject.Instantiate<Button>(m_btn_room_prefeb, parent));
 
         #region buttons init
         //m_btn_createroom = m_canvas.transform.GetChild("CreateRoomBtn").GetComponent<Button>();
@@ -81,6 +87,10 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
 
         Transform ChatParent = m_canvas.transform.GetChild("Chatting");
         m_input_chat = ChatParent.GetComponentInChildren<TMP_InputField>();
+
+        //enterpw 찾아서 오브젝트 연결하기.
+        Transform EnterParent = m_canvas.transform.GetChild("EnterRoom");
+        m_input_enter_pw = EnterParent.GetComponentInChildren<TMP_InputField>();
     }
     #endregion
     #region button click event
@@ -109,6 +119,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     {
         LobbyManager.Instance.CreateRoomProcess(m_input_createname.text, m_input_pw.text);
         RoomGUIManager.Instance.is_Leader = true;
+        RoomGUIManager.Instance.map_Change_Btn.interactable = true;
         m_window_createroom.SetActive(false);
         ClearInputField();
     }
@@ -123,18 +134,24 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     public void OnClick_Room(uint _roomid)
     {
         ClearInputField();
+        m_enter_roomid = _roomid;
+        m_window_enterroom.SetActive(true);
+    }
+    public void OnClick_EnterRoomOK()
+    {
         //방 정보 전송 후 방 room 입장.
-        LobbyManager.Instance.EnterRoomProcess(_roomid);
-
-        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, false);
-        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, true);
-
+        RoomManager.Instance.EnterRoomProcess(m_enter_roomid,m_input_enter_pw.text);
+        m_window_enterroom.SetActive(false);
+        m_input_enter_pw.text = "";
+    }
+    public void OnClick_EnterRommCancle()
+    {
+        m_window_enterroom.SetActive(false);
     }
     #endregion
     #region page update func
     public void RoomInfoSetting(int _btn_index, RoomOutInfo _room_info)
     {
-
         m_room_btns[_btn_index].GetComponent<RoomInfoBtn>().ChageInfo(_room_info);
 
         for (int i = 0; i < m_rooms_count; i++)
@@ -145,23 +162,12 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
         {
             m_room_btns[i].gameObject.SetActive(true);
         }
-
     }
     #endregion
     #region chat update func
-    public void EnterEventFocuse_Chat()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            LobbyManager.Instance.ChattingProcess(m_input_chat.text);
-        }
-    }
     public void UpdateChat(string _text)
     {
-        if (m_input_chat.text.Equals(""))
-        {
-            return;
-        }
+       
         GameObject clone = Instantiate(m_TextPrefeb, m_Content);
         clone.GetComponent<TextMeshProUGUI>().text = _text;
         m_input_chat.text = "";
@@ -185,17 +191,5 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
             GameObject.DestroyImmediate(m_Content.GetChild(0).gameObject);
         }
     }
-    /*private void RearTimeRepit()
-    {
-        if(Input.GetKeyDown(KeyCode.Return)&&m_input_chat.isFocused==false)
-        {
-            m_input_chat.ActivateInputField();
-        }
-    }*/
     #endregion
-    private void Update()
-    {
-        EnterEventFocuse_Chat();
-        //RearTimeRepit();
-    }
 }

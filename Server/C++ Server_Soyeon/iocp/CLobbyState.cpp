@@ -10,7 +10,6 @@
 void CLobbyState::Recv()
 {
 	int protocol;
-	TCHAR buf[BUFSIZE]; ZeroMemory(buf, BUFSIZE);
 	m_session->UnPacking(protocol);
 	unsigned long sub_protocol = CProtocolMgr::GetInst()->GetSubProtocol(protocol);
 	unsigned long detail_protocol = CProtocolMgr::GetInst()->GetDetailProtocol(protocol);
@@ -22,6 +21,9 @@ void CLobbyState::Recv()
 		{
 		case (int)CLobbyMgr::DETAIL_PROTOCOL::MULTI:
 			CLobbyMgr::GetInst()->RoomListUpdateProc(m_session);
+			break;
+		case (int)CLobbyMgr::DETAIL_PROTOCOL::EXIT_LOBBY:
+			CLobbyMgr::GetInst()->ExitLobby(m_session);
 			break;
 		}
 		break;

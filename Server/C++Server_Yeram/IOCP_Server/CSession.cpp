@@ -11,6 +11,7 @@ void CSession::Init()
 	s_overlap.type = IO_TYPE::SEND;
 	s_overlap.session = this;
 
+	m_player = nullptr;
 	
 }
 
@@ -19,4 +20,6 @@ void CSession::End() // removesession시 마무리작업하는 함수
 	CloseSocket();
 	//base
 	//CPacket::Packing();
+	if(m_player!=nullptr)
+	delete m_player;
 }

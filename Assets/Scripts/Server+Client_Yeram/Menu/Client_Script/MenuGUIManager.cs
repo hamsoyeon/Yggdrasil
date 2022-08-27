@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class MenuGUIManager:Singleton_Ver2.Singleton<MenuGUIManager>
 {
     public enum EWindowType
@@ -146,8 +147,14 @@ public class MenuGUIManager:Singleton_Ver2.Singleton<MenuGUIManager>
     {
         //로그아웃 서버 전송하기
         LoginManager.Instance.LogoutProcess();
+        DelLogInfo();
     }
     #endregion
+
+    public void DelLogInfo()
+    {
+        LoginGUIManager.Instance.ClearInputField(LoginGUIManager.Instance.m_input_id[0]);
+    }
     
     private void _Initialize()
     {

@@ -1,62 +1,50 @@
 #pragma once
-
-template<class T>
+template<class T1, int T2>
 class CMemoryPool
 {
 public:
-	CMemoryPool(SOCKET _sock) {}
 	CMemoryPool() {}
 
-	void* operator new(size_t _size) {
+	void* operator new(size_t _size)
+	{
 		// 초기에 전부 초기화.
-		static byte* bt = nullptr;
-		static int len = 0;
-
 		if (m_ptr == nullptr)
 		{
-			m_ptr = malloc(_size * 3);
-			bt = (byte*)m_ptr;
-			//reinterpret_cast<T*>(bt)->m_next = (T*)(bt + len);
-			bt = bt + len;
+			m_ptr = (unsigned char*)malloc(_size * T2);
+			unsigned char* current = m_ptr;
+			unsigned char* next = m_ptr;
 
-			len += _size;
-			m_next = bt + len;
-			//reinterpret_cast<T*>(bt)->m_next = (T*)m_next;
-			//reinterpret_cast<T*>(bt)->m_id = 1234;
-			//memcpy(m_next, bt, sizeof(int));
-
-		}
-		else
-		{
-			bt = bt + len;
-			len += _size;
-			m_next = bt + len;
+			for (int i = 0; i < T2 - 1; i++)
+			{
+				next += sizeof(T1);
+				memcpy(current, &next, sizeof(T1*));
+				current = next;
+			}
+			memset(current, 0, sizeof(T1*));
 		}
 
-		return (void*)bt;
+		unsigned char* returnPtr = m_ptr;
+		memcpy(&m_ptr, m_ptr, sizeof(T1*));
+
+		return returnPtr;
 	}
 
-	//void* operator delete(void* _adr)
-	//{
-
-	//}
-
-	void* Call()
+	void operator delete(void* _adr)
 	{
-		void* ptr = m_ptr;
-		memcpy(ptr, m_ptr, sizeof(int));
-		return m_ptr;
+		// m_ptr : new하면 주는 주소
+		// _adr 삭제할 주소
+		// 삭제할 주소 앞 next에 m_ptr번지를 넣어주고,
+		// new하면 줄 m_ptr을 삭제할 번지를 넣어준다.
+
+		memcpy(_adr, &m_ptr, sizeof(T1*));
+		m_ptr = (unsigned char*)_adr;
 	}
 
 protected:
-	// null일때만 4byte를 리턴.
-	static void* m_ptr;
-
-	static void* m_next;
+	static unsigned char* m_ptr;
 };
 
-template<class T>
-void* CMemoryPool<T>::m_ptr = nullptr;
 
-template<class T>
-void* CMemoryPool<T>::m_next = nullptr;
+template<class T1, int T2>
+unsigned char* CMemoryPool<T1, T2>::m_ptr = nullptr;
+

@@ -99,7 +99,18 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
     }
     private void PageReq(int _page)
     {
+        Net.Protocol protocol = new Net.Protocol();
+        protocol.SetProtocol((uint)EMainProtocol.LOBBY, EProtocolType.Main);
+        protocol.SetProtocol((uint)ESubProtocol.Multi, EProtocolType.Sub);
+        protocol.SetProtocol((uint)EDetailProtocol.RoomlistUpdate, EProtocolType.Detail);
+        protocol.SetProtocol((uint)EDetailProtocol.PageRoom, EProtocolType.Detail);
 
+        Net.SendPacket sendpacket = new Net.SendPacket();
+        sendpacket.__Initialize();
+        int size = sendpacket.Write(_page);
+        sendpacket.WriteTotalSize(size);
+        sendpacket.WriteProtocol(protocol.GetProtocol());
+        Net.NetWorkManager.Instance.Send(sendpacket);
     }
     public void CreateRoomProcess(string _title, string _pw)
     {
@@ -117,7 +128,7 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
         Net.NetWorkManager.Instance.Send(sendpacket);
     }
     public void ChattingProcess(string _text)
-    {
+    { 
         Net.Protocol protocol = new Net.Protocol();
         protocol.SetProtocol((int)EMainProtocol.LOBBY, EProtocolType.Main);
         protocol.SetProtocol((int)ESubProtocol.Multi, EProtocolType.Sub);
@@ -131,18 +142,7 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
         sendpacket.WriteTotalSize(size);
         Net.NetWorkManager.Instance.Send(sendpacket);
     }
-    public void EnterRoomProcess(uint _roomid)
-    {
-        Net.Protocol protocol = new Net.Protocol();
-        protocol.SetProtocol((int)EMainProtocol.ROOM, EProtocolType.Main);
-
-        Net.SendPacket sendpacket = new Net.SendPacket();
-        sendpacket.__Initialize();
-        int size= sendpacket.Write(_roomid);
-        sendpacket.WriteProtocol(protocol.GetProtocol());
-        sendpacket.WriteTotalSize(size);
-        Net.NetWorkManager.Instance.Send(sendpacket);
-    }
+    
     #endregion
     #region recv func
     public void RecvProcess(Net.RecvPacket _recvpacket, Net.Protocol _protocol)

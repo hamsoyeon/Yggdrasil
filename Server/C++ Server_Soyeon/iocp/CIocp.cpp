@@ -8,7 +8,6 @@ DWORD CIocp::WorkThread(LPVOID _iocp)
 {
 	int retval;
 
-	//CIocp* ciocp = (CIocp*)_iocp;
 	CIocp* ciocp = static_cast<CIocp*>(_iocp);
 
 	while (1)
@@ -19,8 +18,8 @@ DWORD CIocp::WorkThread(LPVOID _iocp)
 		void* session;
 		retval = GetQueuedCompletionStatus(ciocp->m_hcp, &cbTransferred, &clientsock, (LPOVERLAPPED*)&overlap_ptr, INFINITE);
 
-		bool check = ciocp->GetQueueErrorCheck(retval, cbTransferred, overlap_ptr);
-		// check에서 에러체크후 오륩발생시 type을 disconnected로 바꾸어준다.
+		ciocp->GetQueueErrorCheck(retval, cbTransferred, overlap_ptr);
+
 		switch (overlap_ptr->type)
 		{
 		case IO_TYPE::ACCEPT:

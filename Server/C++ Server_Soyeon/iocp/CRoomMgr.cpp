@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "CRoomMgr.h"
-#include "CRoom.h"
 #include "CSession.h"
 
 CRoomMgr* CRoomMgr::m_instance = nullptr;
@@ -44,47 +43,36 @@ void CRoomMgr::End()
 {
 }
 
-//void CRoomMgr::EnterRoomProc(CSession* _ptr)
-//{
-//
-//}
-
-//void CRoomMgr::ExitRoomProc(CSession* _ptr)
-//{
-//
-//}
-
-tRoom* CRoomMgr::MakeRoom(TCHAR* _roomName, CSession* _ptr)
+tRoom* CRoomMgr::MakeRoom(TCHAR* _roomName, TCHAR* _passWord, CSession* _ptr)
 {
 	// 룸을 만들면 해당 룸에 클라이언트를 넣어주고
 	// - 방의 이름, 
 	// - 방번호(서버가 클라에게 주는 것),
 	// - 방에 들어갈 클라이언트
 
-	//BYTE buf[BUFSIZE]; ZeroMemory(buf, BUFSIZE);
-	//_ptr->UnPacking(buf);
-
-	// 방번호로 이제 ptr이 어디 방에 있는지 식별할 것
-	// 방번호는 
-
 	//tRoom* room = new tRoom(_roomName, m_roomNum++, _ptr);
-	tRoom* room = new tRoom(L"Test", m_roomNum++, _ptr);
-
-	//room->playerList.push_back(_ptr); // 해당방에 들어간다.
+	tRoom* room = new tRoom(_roomName, m_roomNum++, _ptr);
+	if (_passWord != nullptr)
+		wcscpy(room->passWord, _passWord); // 비밀번호
+	room->owner = _ptr; // 방 주인
 	m_roomList.push_back(room);
+
+	// 현재 클라이언트의 방을 설정.
+	_ptr->m_room = room;
+
 
 	return room;
 }
 
-int CRoomMgr::EnterRoom(CSession* _ptr, int _num)
+void CRoomMgr::EnterRoom(CSession* _ptr, int _num)
 {
 	// roomList에서 플레이어가 선택한 num에 해당하는 방에 들어간다.
 	for (tRoom* room : m_roomList)
 	{
 		if (room->roomNum == _num)
 		{
+			_ptr->m_room = room;
 			room->playerList.push_back(_ptr);
-			return room->playerList.size(); // 현재 방의 인원을 리턴.
 		}
 	}
 }

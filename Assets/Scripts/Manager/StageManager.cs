@@ -61,6 +61,14 @@ public class StageManager : MonoBehaviour
 
     
 
+    public void GetBossAndPlayerRowBuyColumn(int bossRow,int bossColumn, int playerRow,int playerColumn)
+    {
+        bossRow = m_BossRow;
+        bossColumn = m_BossColumn;
+        playerRow = m_PlayerRow;
+        playerColumn = m_PlayerCoulmn;
+    }
+
 
     public MapInfo GetPlayerMapInfo()
     {

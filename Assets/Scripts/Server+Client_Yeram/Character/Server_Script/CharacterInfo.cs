@@ -3,30 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-    public class CharacterInfo //: Net.ISerialize
+public class CharacterInfo : Net.ISerialize
+{
+    public enum ECharacterType
     {
-        public enum ECharacterType
-        {
-            Defense,
-            Attack,
-            Support
-        }
-        ECharacterType m_character_type;
-        #region property
-        public ECharacterType GetCharacterType
-        {
-            get => m_character_type;
-        }
-        #endregion
-        // ±× ¿ÜÀÇ Ä³¸¯ÅÍ°¡ ¹Ş¾Æ¾ß ÇÒ Á¤º¸µéÀº ³ªÁß¿¡ ±âÈ¹¼­¿Í Å¬¶ó º¸¸é¼­ Ãß°¡.
-        //public int Deserialize(MemoryStream _stream)
-        //{
-            
-        //}
-
-        //public int Serialize(MemoryStream _stream)
-        //{
-          
-        //}
+        None,
+        Defense,
+        Attack,
+        Support,
+        Max
     }
+    ECharacterType m_character_type;
+    #region property
+    public ECharacterType CharacterType
+    {
+        get => m_character_type;
+        set => m_character_type = value;
+    }
+    #endregion
+    // ê·¸ ì™¸ì˜ ìºë¦­í„°ê°€ ë°›ì•„ì•¼ í•  ì •ë³´ë“¤ì€ ë‚˜ì¤‘ì— ê¸°íšì„œì™€ í´ë¼ ë³´ë©´ì„œ ì¶”ê°€.
+    public int Deserialize(MemoryStream _stream)
+    {
+        int type;
+        int size = Net.StreamReadWriter.ReadFromStream(_stream, out type);
+        m_character_type = (ECharacterType)type;
+        return size;
+    }
+
+    public int Serialize(MemoryStream _stream)
+    {
+        int size = 0;
+        return size;
+    }
+}
 

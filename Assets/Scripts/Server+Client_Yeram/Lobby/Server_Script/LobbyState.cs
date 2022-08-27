@@ -11,9 +11,13 @@ namespace Net
     {
         private Net.NetSession m_client;
         private IState.State m_state;
-        public NetSession Client { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public NetSession Client 
+        {
+            get => m_client;
+            set => m_client = value;
+        }
 
-        public IState.State ClientState => throw new System.NotImplementedException();
+        public IState.State ClientState => m_state;
 
         public LobbyState(Net.NetSession _session)
         {
@@ -30,6 +34,17 @@ namespace Net
             {
                 case EMainProtocol.LOBBY:
                     LobbyManager.Instance.RecvProcess(_recvpacket, protocol_manager);
+                    break;
+                case EMainProtocol.LOGIN:
+                    m_client.SetState(m_client.m_Loginstate);
+                    break;
+                case EMainProtocol.ROOM:
+                    // 결과 리턴해주는 함수 연결하기
+                    bool result=RoomManager.Instance.RecvProcess(_recvpacket, protocol_manager);
+                    if(result)
+                    {
+                        m_client.SetState(m_client.m_Roomstate);
+                    }
                     break;
             }
         }

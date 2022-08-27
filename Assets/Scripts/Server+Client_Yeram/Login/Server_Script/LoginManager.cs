@@ -112,6 +112,7 @@ public class LoginManager : Singleton_Ver2.Singleton<LoginManager>
         {
             case Result.Fail:
                 //로그인 실패시 임시로 저장해둔 로그인 정보 지우기.
+                LoginGUIManager.Instance.LoginErrTextPrint();
                 m_curinfo.Clear();
                 break;
             case Result.Suc:

@@ -88,12 +88,14 @@ void CLoginMgr::LoginProc(CSession* _ptr)
 		result = true;
 #ifdef _DEBUG
 		CLogMgr::GetInst()->WriteLog(L"데이터: 로그인 성공! %s, %s, %s\n", ID, PW, NICK);
+		CLogMgr::GetInst()->FileWriteLog(L"데이터: 로그인 성공! %s, %s, %s\n", ID, PW, NICK);
 #endif	
 	}
 	else//로그인 실패
 	{
 #ifdef _DEBUG
 		CLogMgr::GetInst()->WriteLog(L"데이터: 로그인 실패! %s, %s, %s\n", ID, PW, NICK);
+		CLogMgr::GetInst()->FileWriteLog(L"데이터: 로그인 실패! %s, %s, %s\n", ID, PW, NICK);
 #endif	
 		//_wsetlocale(LC_ALL, _T("korean"));
 		wcscpy(msg, L"로그인 실패!");
