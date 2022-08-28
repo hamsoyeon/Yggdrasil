@@ -64,6 +64,10 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     private Button[] another_Player_Btn;
     private bool is_SelectPlayer;
 
+    [SerializeField]
+    private GameObject m_char_Info;
+    private bool is_char_Info;
+
     #region chatting object
     [SerializeField]
     private TMP_InputField m_input_chat;
@@ -132,34 +136,32 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         p_HostMenu.SetActive(is_HostOpt);
         
     }
-    // 호스트 변경, 플레이어 추방, 플레이어정보 이 3가지 기능들은 자신을 제외한플레이어만 선택하면됨 오브젝트한개로 컨트롤되게 flag쓰면될듯 
+    // 호스트 변경, 플레이어 추방, 플레이어정보 이 3가지 기능들은 자신을 제외한플레이어만 선택 할 수 있으면됨 오브젝트 1개로 컨트롤되게 flag쓰면될듯 
     public void OnClick_PassHost()
     {
         //호스트 변경
-        if (is_SelectPlayer == false)
-        {
-            is_SelectPlayer = !is_SelectPlayer;
-            m_Another.SetActive(is_SelectPlayer);
-        }
+        is_SelectPlayer = !is_SelectPlayer;
+        m_Another.SetActive(is_SelectPlayer);
     }
     public void OnClick_Kick()
     {
         //선택한 플레이어 추방
-        if(is_SelectPlayer == false)
-        {
-            is_SelectPlayer = !is_SelectPlayer;
-            m_Another.SetActive(is_SelectPlayer);
-        }
+        is_SelectPlayer = !is_SelectPlayer;
+        m_Another.SetActive(is_SelectPlayer);
     }
     public void OnClick_Info()
     {
-        //선택한 플레이어 정보
-        if (is_SelectPlayer == false)
-        {
-            is_SelectPlayer = !is_SelectPlayer;
-            m_Another.SetActive(is_SelectPlayer);
-        }
+        //선택한 플레이어 정보(이름.....생각나는게 이거밖에없넴)
         
+        is_SelectPlayer = !is_SelectPlayer;
+        m_Another.SetActive(is_SelectPlayer);
+
+        /*is_char_Info = !is_char_Info;
+        m_char_Info.SetActive(is_char_Info);*/
+    }
+    public void OnClick_CloseInfo()
+    {
+        m_char_Info.SetActive(false);
     }
     #endregion
 
@@ -341,6 +343,8 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         p_HostMenu.SetActive(false);
         is_HostOpt = false;
         is_SelectPlayer = false;
+        is_char_Info = false;
+        m_char_Info.SetActive(is_char_Info);
 
         //if(m_player_slots[1].Player.)
 
