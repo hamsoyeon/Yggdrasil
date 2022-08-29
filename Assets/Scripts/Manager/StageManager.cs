@@ -30,11 +30,22 @@ namespace MapInformation
 
 
 
+
 public class StageManager : MonoBehaviour
 {
 
 
     //private GameObject BossObj;
+
+    public class GetObjectWorldPos
+    {
+        public Vector3 bossPos;
+        public Vector3 PlayerPos;
+        public Vector3 ItemPos;  //아직 값 없음.
+    }
+
+    public GetObjectWorldPos m_GetWorldPosByObjects;
+
 
     public Dictionary<int, List<Map_TableExcel>> map_info;
 
@@ -105,7 +116,7 @@ public class StageManager : MonoBehaviour
 
             m_MapInfo = new MapInfo[5, 6];
 
-            
+            m_GetWorldPosByObjects = new GetObjectWorldPos();
 
 
         }
