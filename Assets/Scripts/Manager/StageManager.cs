@@ -98,6 +98,12 @@ public class StageManager : MonoBehaviour
         m_PlayerCoulmn = coulmn;
     }
 
+    public void SetBossRowAndCoulmn(int row, int column)
+    {
+        m_BossRow = row;
+        m_BossColumn = column;
+    }
+
     public StageManager()
     {
 
