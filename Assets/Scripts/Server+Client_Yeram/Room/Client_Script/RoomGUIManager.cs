@@ -202,7 +202,8 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
 
     public void EnableStartBtn(bool _allready)
     {
-        if (_allready)
+        //test 위해 임시로 지움
+        //if (_allready)
         {
             start_Btn.gameObject.SetActive(true);
             start_Btn.interactable = true;
