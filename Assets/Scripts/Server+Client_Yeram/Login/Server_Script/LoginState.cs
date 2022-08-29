@@ -38,9 +38,6 @@ namespace Net
                 case Protocol.EMainProtocol.INIT:
                     LobbyManager.Instance.RecvProcess(_recvpacket, protocol_manager);
                     break;
-                case Protocol.EMainProtocol.TEST:
-                    SectorManager.Instance.InitResult(_recvpacket);
-                    break;
             }
         }
 

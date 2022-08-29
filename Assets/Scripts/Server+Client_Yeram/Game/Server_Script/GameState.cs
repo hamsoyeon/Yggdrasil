@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EMainProtocol = Net.Protocol.EMainProtocol;
 using EProtocolType = Net.Protocol.EProtocolType;
-
+using System;
 namespace Net
 {
     public class GameState : Net.IState
@@ -31,7 +31,20 @@ namespace Net
 
         public void RecvComplete(RecvPacket _recvpacket)
         {
-           
+            uint protocol = 0;
+            _recvpacket.Read(out protocol);
+            Protocol protocol_manager = new Protocol(Convert.ToUInt32(protocol));
+            switch ((EMainProtocol)protocol_manager.GetProtocol(EProtocolType.Main))
+            {
+                case EMainProtocol.INIT:
+                    _GameManager.Instance.InItResult(_recvpacket,protocol);
+                    break;
+                case EMainProtocol.GAME:
+                    break;
+                case EMainProtocol.TEST:
+                    _GameManager.Instance.TestResult(_recvpacket);
+                    break;
+            }
         }
 
         public void SendComplete()

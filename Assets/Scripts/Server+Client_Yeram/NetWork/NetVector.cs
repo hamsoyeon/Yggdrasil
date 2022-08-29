@@ -10,6 +10,11 @@ namespace Net
     {
         Vector3 vec;
 
+        public Vector3 Vector
+        {
+            set => vec = value;
+            get => vec;
+        }
         public float x
         {
             get => vec.x;

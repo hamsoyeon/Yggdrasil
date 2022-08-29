@@ -40,8 +40,10 @@ namespace Net
                     break;
                 case EMainProtocol.GAME:
                     MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, false);
+                    MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Test, true);
                     //게임 창 띄우기
                     m_client.SetState(m_client.m_Gamestate);
+                    _GameManager.Instance.InitReqest();
                     break;
             }
         }

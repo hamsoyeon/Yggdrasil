@@ -13,6 +13,7 @@ public class MenuGUIManager:Singleton_Ver2.Singleton<MenuGUIManager>
         Join,
         Lobby,
         Room,
+        Test,
     }
     public enum EMenuModeType
     {
@@ -34,6 +35,8 @@ public class MenuGUIManager:Singleton_Ver2.Singleton<MenuGUIManager>
     GameObject m_window_room;
     [SerializeField]
     GameObject m_window_option;
+    [SerializeField]
+    GameObject m_window_test;
     #endregion
 
     #region button object
@@ -73,6 +76,9 @@ public class MenuGUIManager:Singleton_Ver2.Singleton<MenuGUIManager>
                 break;
             case EWindowType.Room:
                 m_window_room.SetActive(_flag);
+                break;
+            case EWindowType.Test:
+                m_window_test.SetActive(_flag);
                 break;
         }
     }

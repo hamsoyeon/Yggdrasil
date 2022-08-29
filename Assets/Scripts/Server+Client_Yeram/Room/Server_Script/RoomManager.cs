@@ -55,6 +55,10 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
     {
         get => m_myinfo;
     }
+    public RoomInfo RoomInfo
+    {
+        get => m_roominfo;
+    }
     #region Initialize
     public void __Initialize()
     {
@@ -365,11 +369,17 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         //레디상태 변경 요청한 player 아이디 받아옴
         _recvPacket.Read(out datasize);
         _recvPacket.Read(out result );
-      
-        if(result==false)
+
+        if (result == true)
         {
             //상태 게임으로 진입
+            
         }
+        else
+        {
+            //실패 했을 때 처리
+        }
+       
     }
     public void ChatRecv(Net.RecvPacket _recvpacket, Net.Protocol _protocol)
     {
