@@ -8898,6 +8898,7 @@ MonoBehaviour:
   m_window_lobby: {fileID: 999855411}
   m_window_room: {fileID: 245863510}
   m_window_option: {fileID: 763485014}
+  m_window_test: {fileID: 0}
   m_btn_login: {fileID: 1727218007}
   m_btn_join: {fileID: 878956420}
   m_btn_multi: {fileID: 437260138}
@@ -19385,6 +19386,7 @@ MonoBehaviour:
   flag: 1
   m_parent: {fileID: 1900344020}
   m_line_prefeb: {fileID: 1836145399066072379, guid: de047d7adfa377f469a8f60f934b0a7c, type: 3}
+  startpos: []
 --- !u!4 &1900344020
 Transform:
   m_ObjectHideFlags: 0
