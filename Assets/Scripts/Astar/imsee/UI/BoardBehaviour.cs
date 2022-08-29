@@ -43,6 +43,8 @@ public class BoardBehaviour : MonoBehaviour
         int x = 0;
         int z = 0;
 
+       
+
         index = new List<int>();
 
         //각 맵 정보에 데이터 넣어주기.
@@ -172,6 +174,10 @@ public class BoardBehaviour : MonoBehaviour
 
     //    return visualPiece;
     //}
+
+  
+
+
     private GameObject CreateBossPiece(GamePiece piece)
 
     {
@@ -181,6 +187,9 @@ public class BoardBehaviour : MonoBehaviour
         var visualPiece = (GameObject)Instantiate(BossPiece);
 
         visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, .7f);
+
+        MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.bossPos = visualPiece.transform.position;
+
         visualPiece.transform.parent = BossGameObject.transform;
 
         var pb = (PieceBehaviour)visualPiece.GetComponent("PieceBehaviour");
@@ -201,6 +210,8 @@ public class BoardBehaviour : MonoBehaviour
         //var visualPiece = PrefabLoader.Instance.PrefabDic[];
 
         visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, .7f);
+        MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos = visualPiece.transform.position;
+
         visualPiece.transform.parent = PlayerGameObject.transform;
 
         var pb = (PieceBehaviour)visualPiece.GetComponent("PieceBehaviour");
