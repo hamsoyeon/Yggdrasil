@@ -35,8 +35,8 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         RoomResult,
         CharacterSelect,
         CharacterResult,
-        MapSelect,
-        MapResult,
+        LobbyEnter,
+        LobbyResult,
         //========비트 중복 불가능========= 4bit
         ReadySelect = 8,
         ReadyResult = 16,
@@ -124,6 +124,31 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         sendpacket.WriteTotalSize(size);
         Net.NetWorkManager.Instance.Send(sendpacket);
     }
+    public void GameStartProcess(int _mapmode)
+    {
+        Net.Protocol protocol = new Net.Protocol();
+        protocol.SetProtocol((int)EMainProtocol.ROOM, EProtocolType.Main);
+        protocol.SetProtocol((int)ESubProtocol.Multi, EProtocolType.Sub);
+        protocol.SetProtocol((int)EDetailProtocol.ReadySelect, EProtocolType.Detail);
+        protocol.SetProtocol((int)EDetailProtocol.HostReady, EProtocolType.Detail);
+        Net.SendPacket sendpacket = new Net.SendPacket();
+        sendpacket.__Initialize();
+        int size = sendpacket.Write(m_roominfo.GetID);
+        size += sendpacket.Write(_mapmode);
+        sendpacket.WriteProtocol(protocol.GetProtocol());
+        sendpacket.WriteTotalSize(size);
+        Net.NetWorkManager.Instance.Send(sendpacket);
+    }
+    public void EnterLobbyProcess()
+    {
+        Net.Protocol protocol = new Net.Protocol();
+        protocol.SetProtocol((int)EMainProtocol.LOBBY, EProtocolType.Main);
+        protocol.SetProtocol((int)EDetailProtocol.LobbyEnter, EProtocolType.Detail);
+        Net.SendPacket sendpacket = new Net.SendPacket();
+        sendpacket.__Initialize();
+        sendpacket.WriteProtocol(protocol.GetProtocol());
+        Net.NetWorkManager.Instance.Send(sendpacket);
+    }
     #endregion
 
     #region recv func
@@ -156,13 +181,15 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
             case EDetailProtocol.CharacterResult:
                 CharacterResult(_recvpacket);
                 break;
-            case EDetailProtocol.MapResult:
+            case EDetailProtocol.LobbyResult:
+                LobbyResult(_recvpacket);
                 break;
             //호스트 시작 버튼 활성화 ( 모든 유저들 준비 완료상태 )
             case EDetailProtocol.ReadySelect | EDetailProtocol.HostReady:
                 HostReadyReq(_recvpacket);
                 break;
             case EDetailProtocol.ReadyResult | EDetailProtocol.HostReady:
+                HostReadyResult(_recvpacket);
                 break;
             case EDetailProtocol.ReadyResult | EDetailProtocol.NomalReady:
                 NomalReadyResult(_recvpacket);
@@ -223,7 +250,13 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
                         RoomGUIManager.Instance.RenderCharImage(player.GetID);
                         RoomGUIManager.Instance.RenderReady(player.GetID, player.GetReady, true);
                     }
-                    
+
+                    bool map_flag = false;
+                    if(m_roominfo.GetOwner == myid)
+                    {
+                        map_flag = true;
+                    }
+                    RoomGUIManager.Instance.EnableMapBtn(map_flag);
                     return true;
             }
             case EErrType.NONE_ANOTHER_ENTER:
@@ -323,6 +356,21 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
       
         RoomGUIManager.Instance.RenderReady(id, ready,another);
     }
+    private void HostReadyResult(Net.RecvPacket _recvPacket)
+    {
+        int datasize = 0;
+      
+        bool result = false;
+      
+        //레디상태 변경 요청한 player 아이디 받아옴
+        _recvPacket.Read(out datasize);
+        _recvPacket.Read(out result );
+      
+        if(result==false)
+        {
+            //상태 게임으로 진입
+        }
+    }
     public void ChatRecv(Net.RecvPacket _recvpacket, Net.Protocol _protocol)
     {
         string text;
@@ -338,6 +386,24 @@ public class RoomManager : Singleton_Ver2.Singleton<RoomManager>
         else // 채팅 보내기 실패한 경우 ex) 공백 전송
         {
 
+        }
+    }
+    public void LobbyResult(Net.RecvPacket _recvpacket)
+    {
+        int datasize = 0;
+        int deleteid = -1;
+        _recvpacket.Read(out datasize);
+        _recvpacket.Read(out deleteid);
+       
+        //나간 유저 정보 렌더링 변경.
+        foreach(var player in m_roominfo.GetPlayersInfo)
+        {
+            if(player.GetID==deleteid)
+            {
+                player.RemoveData();
+                RoomGUIManager.Instance.RenderCharImage(player.GetID);
+                RoomGUIManager.Instance.RenderReady(player.GetID, player.GetReady, true);
+            }
         }
     }
     #endregion

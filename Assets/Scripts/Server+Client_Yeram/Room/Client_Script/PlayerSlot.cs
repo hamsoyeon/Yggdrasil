@@ -15,7 +15,10 @@ public class PlayerSlot : MonoBehaviour
 
     [SerializeField]
     private TMP_Text m_txt_ready;
+    [SerializeField]
+    private TMP_Text m_txt_NickName;
 
+    
     private Dictionary<ECharacterType, GameObject> m_CharacterObject;
     private GameObject m_curRender;
     static int m_slotcount = 0;
@@ -54,6 +57,7 @@ public class PlayerSlot : MonoBehaviour
         {
             m_curRender = m_CharacterObject[m_player.GetCharacterInfo.CharacterType];
             m_curRender.SetActive(true);
+            NicknamePrint(m_player.GetNick);
         }
 
     }
@@ -63,6 +67,7 @@ public class PlayerSlot : MonoBehaviour
             m_curRender.SetActive(false);
         m_curRender = m_CharacterObject[_type];
         m_curRender.SetActive(true);
+        NicknamePrint(m_player.GetNick);
     }
     public void __Initialize()
     {
@@ -74,16 +79,23 @@ public class PlayerSlot : MonoBehaviour
             m_CharacterObject.Add((ECharacterType)i, obj);
             obj.SetActive(false);
         }
+        
     }
+    public void NicknamePrint(string _name)
+    {
+        m_txt_NickName.text = _name;
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(m_player != null)
+        NicknamePrint(m_player.GetNick);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }

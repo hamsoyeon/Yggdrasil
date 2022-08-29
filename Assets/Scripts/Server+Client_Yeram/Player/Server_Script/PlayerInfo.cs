@@ -29,6 +29,12 @@ public class PlayerInfo : Net.NetObjectInfo
     {
         is_ready = false;
     }
+    public void RemoveData()
+    {
+        m_nick = "";
+        m_character_info.CharacterType = CharacterInfo.ECharacterType.None;
+        is_ready = false;
+    }
     override public int Deserialize(MemoryStream _stream)
     {
         int size = 0;

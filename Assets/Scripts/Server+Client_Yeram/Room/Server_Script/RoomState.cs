@@ -34,10 +34,14 @@ namespace Net
                     RoomManager.Instance.RecvProcess(_recvpacket, protocol_manager);
                     break;
                 case EMainProtocol.LOBBY:
-                   
+                    MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, false);
+                    MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, true);
+                    m_client.SetState(m_client.m_Lobbystate);
                     break;
-                case EMainProtocol.LOGIN:
-                   
+                case EMainProtocol.GAME:
+                    MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, false);
+                    //게임 창 띄우기
+                    m_client.SetState(m_client.m_Gamestate);
                     break;
             }
         }

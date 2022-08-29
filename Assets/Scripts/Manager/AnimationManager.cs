@@ -2,8 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class AnimClip
+{
+    public AnimationClip clip = null;
+    public float speed = 0.0f;
+    public string name = "";
+}
+
 public class AnimationManager: MonoBehaviour
 {
+    private Dictionary<string, AnimationClip> m_dicAnimationClip;
+    
+
     //사용범 : 타 스크립트에서 개체 참조 없이 AnimationManager.GetInstance()로 접근해서
     //PlayAnimation() 함수를 실행합니다. 
     //애니메이션을 재생 시킬 모델에 있는 Animator와 그 state 이름을 매개변수에 기입합니다.
@@ -47,7 +57,15 @@ public class AnimationManager: MonoBehaviour
         currentState = newState;
     }
 
-
+    public void PlayerClipMove(Animator animator, Vector2 direction, float speed = 0.0f) 
+    {
+        animator.Play("Run");
+        
+        animator.SetFloat("X", direction.x);
+        animator.SetFloat("Z", direction.y);
+    }
+    public void PlayerClipAttack() { }
+    public void PlayerClipIdle() { }
 
 
 

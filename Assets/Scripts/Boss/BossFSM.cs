@@ -15,10 +15,12 @@ public class BossFSM : MonoBehaviour
     //private bool actionCheck=false;
     private bool spCheck = false;
 
+    [SerializeField]
     private float currentBossStamina;
     private float bossStaminaSave;
+    [SerializeField]
     private float maxStamina;
-
+    
     private int BossRandomSkill = 0;
 
     public bool behavior = false;
@@ -33,9 +35,13 @@ public class BossFSM : MonoBehaviour
 
     public Board GameBoard;
 
+    public GameObject player;
+
+   
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.AddComponent<BossStamina>();
         maxStamina = DataTableManager.Instance.GetDataTable<Boss_TableExcelLoader>().DataList[0].MaxStamina;
 
         m_BossClass = this.gameObject.GetComponent<CharacterClass>();
@@ -69,7 +75,7 @@ public class BossFSM : MonoBehaviour
                 }
             }
         }
-
+        #region 주석
         //Block bossBlock = new Block(MainManager.Instance.GetStageManager().m_BossRow, MainManager.Instance.GetStageManager().m_BossColumn);
         //Block PlayerBlock = new Block(MainManager.Instance.GetStageManager().m_PlayerRow, MainManager.Instance.GetStageManager().m_PlayerCoulmn);
         //var startBlock = AStarNJ.PathFinding(GameBoard, bossBlock, PlayerBlock);
@@ -78,7 +84,7 @@ public class BossFSM : MonoBehaviour
         //{
         //    Debug.Log("asd");
         //}
-        
+
         //if(startBlock.next != null)
         //{
         //    Debug.Log("qwe");
@@ -101,7 +107,7 @@ public class BossFSM : MonoBehaviour
 
         //    startBlock = tempBlock;
         //}
-
+        #endregion
     }
 
 
@@ -123,10 +129,10 @@ public class BossFSM : MonoBehaviour
 
                 while (true)
                 {
-                    if (startBlock.prev != null)
+                    if (startBlock != null)
                     {
-                        Debug.Log($"길 지우기:{startBlock.prev.x}/{startBlock.prev.y}");
-                        MainManager.Instance.GetStageManager().m_MapInfo[startBlock.prev.x, startBlock.prev.y].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
+                        Debug.Log($"길 지우기:{startBlock.x}/{startBlock.y}");
+                        MainManager.Instance.GetStageManager().m_MapInfo[startBlock.x, startBlock.y].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                         tempBlock = startBlock.prev;
                     }
                     else
@@ -166,10 +172,10 @@ public class BossFSM : MonoBehaviour
 
                 while (true)
                 {
-                    if (startBlock.prev != null)
+                    if (startBlock != null)
                     {
-                        Debug.Log($"길 지우기:{startBlock.prev.x}/{startBlock.prev.y}");
-                        MainManager.Instance.GetStageManager().m_MapInfo[startBlock.prev.x, startBlock.prev.y].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
+                        Debug.Log($"길 지우기:{startBlock.x}/{startBlock.y}");
+                        MainManager.Instance.GetStageManager().m_MapInfo[startBlock.x, startBlock.y].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                         tempBlock = startBlock.prev;
                     }
                     else
@@ -188,15 +194,16 @@ public class BossFSM : MonoBehaviour
                 originBlock = tempBlock;
                 bossMove = false;
             }
-
-           
         }
-
-
     }
 
-
-
+    public float rotateSpeed = 5.0f;
+    void MonsterDirection(GameObject obj)
+    {
+        transform.rotation = Quaternion.Lerp(transform.rotation,
+            Quaternion.LookRotation(obj.transform.position),
+            Time.deltaTime * rotateSpeed);
+    }
 
 
     public void Damage(int _damage)
@@ -213,10 +220,15 @@ public class BossFSM : MonoBehaviour
         hudText.transform.position = hudPos.position + (Vector3.up * 20);
         hudText.GetComponent<DamageTxt>().damage = damage;
     }
+    public float GetPerStamina()
+    {
+        return currentBossStamina / maxStamina;
+    }
     private void Awake()
     {
+        player = GameObject.Find("obj_10001");
+        Debug.Log("됐다",player);
         hudDamageText = Resources.Load<GameObject>("DamageText");
-        
     }
 
     bool moving = false;
@@ -231,19 +243,21 @@ public class BossFSM : MonoBehaviour
     Block tempBlock;
     Block originBlock;
 
+    private void FixedUpdate()
+    {
+        MonsterDirection(player);
+    }
+
 
     // Update is called once per frame
     void Update()
     {
         time += Time.deltaTime;
         hudPos = this.gameObject.transform;
-
-        if(behavior && moving)
+        if (behavior && moving)
         {
-
             //moveTime += Time.deltaTime;
             Move();
-
         }
 
         if (time > 1.0f && !behavior)
@@ -266,7 +280,7 @@ public class BossFSM : MonoBehaviour
                     moveAndSkill = 1;
                 }
 
-                moveAndSkill = 1;
+                moveAndSkill = 1;  //이동고정
 
                 if (moveAndSkill ==1)
                 {
@@ -319,11 +333,6 @@ public class BossFSM : MonoBehaviour
                         moving = true;
 
                     }
-
-
-                    
-
-                    
 
                     
                 }

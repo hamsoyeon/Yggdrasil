@@ -6,12 +6,12 @@ using System.IO;
 public class RoomInfo : RoomOutInfo
 {
     //방장 정보 playerinfo 라는 클래스 만들면 그걸로 저장하기.
-    string m_owner;
+    int m_owner;
     //참가자 정보(유저정보,포지션정보)
     List<PlayerInfo> m_playerlist;
   
     #region property
-    public string GetOwner
+    public int GetOwner
     {
         get => m_owner;
     }

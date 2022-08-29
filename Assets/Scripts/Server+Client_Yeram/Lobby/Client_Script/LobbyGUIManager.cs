@@ -142,6 +142,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
         //방 정보 전송 후 방 room 입장.
         RoomManager.Instance.EnterRoomProcess(m_enter_roomid,m_input_enter_pw.text);
         m_window_enterroom.SetActive(false);
+        m_input_enter_pw.text = "";
     }
     public void OnClick_EnterRommCancle()
     {
@@ -166,10 +167,7 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
     #region chat update func
     public void UpdateChat(string _text)
     {
-        if (m_input_chat.text.Equals(""))
-        {
-            return;
-        }
+       
         GameObject clone = Instantiate(m_TextPrefeb, m_Content);
         clone.GetComponent<TextMeshProUGUI>().text = _text;
         m_input_chat.text = "";

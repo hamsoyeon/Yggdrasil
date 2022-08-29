@@ -7,8 +7,6 @@ using ECharacterType = CharacterInfo.ECharacterType;
 
 public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
 {
-
-
     public GameObject MapPannel;
 
     [SerializeField]
@@ -37,6 +35,9 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     [SerializeField]
     private int m_MapNum;
 
+    [SerializeField]
+    private bool is_HostOpt;
+
 
     [SerializeField]
     private List<Button> m_SelectMap_Btn;
@@ -52,6 +53,21 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
 
     [SerializeField]
     private Canvas m_canvas;
+
+    [SerializeField]
+    private GameObject p_HostMenu;
+    [SerializeField]
+    private Button p_HostMenu_Btn;
+    [SerializeField]
+    private GameObject m_Another;
+    [SerializeField]
+    private Button[] another_Player_Btn;
+    private bool is_SelectPlayer;
+
+    [SerializeField]
+    private GameObject m_char_Info;
+    private bool is_char_Info;
+
     #region chatting object
     [SerializeField]
     private TMP_InputField m_input_chat;
@@ -60,7 +76,10 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     [SerializeField]
     Transform m_content;
     #endregion
+    
     private int[] test_slot = new int[3];
+
+    MapSlot m_curmap;
 
     #region ButtonClickEvent
     public void OnClick_ChatSend()
@@ -85,8 +104,7 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     }
     public void OnClick_Lobby()
     {
-        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Lobby, true);
-        MenuGUIManager.Instance.WindowActive(MenuGUIManager.EWindowType.Room, false);
+        RoomManager.Instance.EnterLobbyProcess();
         LobbyGUIManager.Instance.ClearChat();
     }
     public void OnClick_Ready()
@@ -98,6 +116,8 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     public void OnClick_Start()
     {
         Debug.Log("GameStart");
+        //선택된 모드 서버에 전송하기.
+        RoomManager.Instance.GameStartProcess(m_curmap.Mode);
         //메인씬으로 전환
     }
     public void OnClick_ClosedMap()
@@ -107,6 +127,41 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     public void OnClick_Decide_Map()
     {
         room_Map_View.sprite = m_SelectMap_Btn[m_MapNum].transform.GetChild(0).GetComponent<Image>().sprite;
+        m_curmap = m_SelectMap_Btn[m_MapNum].GetComponent<MapSlot>();
+    }
+    public void OnClick_HostMenu()
+    {
+        //호스트일때만 작동
+        is_HostOpt = !is_HostOpt;
+        p_HostMenu.SetActive(is_HostOpt);
+        
+    }
+    // 호스트 변경, 플레이어 추방, 플레이어정보 이 3가지 기능들은 자신을 제외한플레이어만 선택 할 수 있으면됨 오브젝트 1개로 컨트롤되게 flag쓰면될듯 
+    public void OnClick_PassHost()
+    {
+        //호스트 변경
+        is_SelectPlayer = !is_SelectPlayer;
+        m_Another.SetActive(is_SelectPlayer);
+    }
+    public void OnClick_Kick()
+    {
+        //선택한 플레이어 추방
+        is_SelectPlayer = !is_SelectPlayer;
+        m_Another.SetActive(is_SelectPlayer);
+    }
+    public void OnClick_Info()
+    {
+        //선택한 플레이어 정보(이름.....생각나는게 이거밖에없넴)
+        
+        is_SelectPlayer = !is_SelectPlayer;
+        m_Another.SetActive(is_SelectPlayer);
+
+        /*is_char_Info = !is_char_Info;
+        m_char_Info.SetActive(is_char_Info);*/
+    }
+    public void OnClick_CloseInfo()
+    {
+        m_char_Info.SetActive(false);
     }
     #endregion
 
@@ -164,10 +219,14 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         if (_ready)
         {
             colorBlock.selectedColor = new Color(0f, 1f, 0f, 1f);
+            colorBlock.normalColor = new Color(0f, 1f, 0f, 1f);
+            colorBlock.highlightedColor = new Color(0f, 1f, 0f, 1f);
         }
         else
         {
             colorBlock.selectedColor = new Color(1f, 1f, 1f, 1f);
+            colorBlock.normalColor = new Color(1f, 1f, 1f, 1f);
+            colorBlock.highlightedColor = new Color(1f, 1f, 1f, 1f);
         }
         ready_Btn.colors = colorBlock;
 
@@ -191,17 +250,14 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
                     button = m_SelectChar_Btn[2];
                     break;
             }
-
-            button.interactable = !_ready;
+            if (button != null)
+                button.interactable = !_ready;
         }
     }
 
     public void UpdateChat(string _txt)
     {
-        if (m_input_chat.text.Equals(""))
-        {
-            return;
-        }
+
         GameObject clone = Instantiate(m_TextPrefeb, m_content);
         clone.GetComponent<TextMeshProUGUI>().text = _txt;
         m_input_chat.text = "";
@@ -217,10 +273,6 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         m_player_slots[1].Player = _myplayerinfo;
         m_player_slots[2].Player = _another_playerinfo2;
     }
-
-
-
-
 
     public void Select_Map_Btn()
     {
@@ -244,10 +296,27 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
             m_SelectMap_Btn[i].transform.parent = selectMap_Content.transform;
             m_SelectMap_Btn[i].transform.GetChild(0).GetComponent<Image>().sprite = map_Sprit[i];
             m_SelectMap_Btn[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = map_Sprit[i].name;
+            m_SelectMap_Btn[i].gameObject.AddComponent<MapSlot>().__Initialize(i);
         }
 
     }
 
+    
+
+    public void EnableMapBtn(bool _flag)
+    {
+        map_Change_Btn.interactable = _flag;
+    }
+    public void PlayerSlot_Empty()
+    {
+        if (m_player_slots[1].Player.GetNick == "")
+        {
+            start_Btn.interactable = false;
+            ready_Btn.interactable = false;
+            map_Change_Btn.interactable = false;
+        }
+
+    }
     private void Start()
     {
         for (int i = 0; i < m_player_slots.Count; i++)
@@ -263,15 +332,27 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
             colorBlock.disabledColor = new Color(0.5f, 0.5f, 0.5f, 1f);
             button.colors = colorBlock;
         }
-
+        
 
         MapPannel.SetActive(false);
         on_Ready = false;
         start_Btn.gameObject.SetActive(on_Ready);
         ready_Btn.gameObject.SetActive(!on_Ready);
         start_Btn.interactable = on_Ready;
-        map_Change_Btn.interactable = is_Leader;                       //방장만 방선택가능
+        map_Change_Btn.interactable = false;                       //방장만 방선택가능
+        p_HostMenu.SetActive(false);
+        is_HostOpt = false;
+        is_SelectPlayer = false;
+        is_char_Info = false;
+        m_char_Info.SetActive(is_char_Info);
+
+        //if(m_player_slots[1].Player.)
+
         Init_Map();
         Select_Map_Btn();
+        PlayerSlot_Empty();
+        another_Player_Btn[0].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = m_player_slots[0].Player.GetNick;
+        another_Player_Btn[1].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = m_player_slots[2].Player.GetNick;
+        Debug.Log("이름" + another_Player_Btn[0].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
     }
 }
