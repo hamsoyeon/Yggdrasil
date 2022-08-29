@@ -20,6 +20,10 @@ public class ColiderChk : MonoBehaviour
             Debug.Log($"Player (row:{m_row} / coulmn:{m_coulmn})");
                
             MainManager.Instance.GetStageManager().SetPlayerRowAndCoulmn(m_row, m_coulmn);
+
+            MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos = other.transform.position;
+
+            Debug.Log($"이동한 타일의 플레이어 포지션 { MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos}");
             coliderchk = true;
             //mat.color = new Color(1, 0, 0);
         }
@@ -28,7 +32,14 @@ public class ColiderChk : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        MainManager.Instance.GetStageManager().SetPlayerRowAndCoulmn(m_row, m_coulmn);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            MainManager.Instance.GetStageManager().SetPlayerRowAndCoulmn(m_row, m_coulmn);
+
+            MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos = other.transform.position;
+
+            //Debug.Log($"머물고 있는 타일의 플레이어 포지션 { MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos}");
+        }
     }
 
     private void OnTriggerExit(Collider other)

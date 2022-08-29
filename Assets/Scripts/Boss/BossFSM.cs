@@ -151,7 +151,6 @@ public class BossFSM : MonoBehaviour
             targetPos = MainManager.Instance.GetStageManager().m_MapInfo[tempBlock.x, tempBlock.y].MapPos;    //x=row y=column
             bossMove = true;
             Debug.Log(targetPos);
-
         }
         else
         {
@@ -245,7 +244,7 @@ public class BossFSM : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MonsterDirection(player);
+        //MonsterDirection(player);
     }
 
 

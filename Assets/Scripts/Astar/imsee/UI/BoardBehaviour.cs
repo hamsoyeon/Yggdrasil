@@ -189,6 +189,7 @@ public class BoardBehaviour : MonoBehaviour
         visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, .7f);
 
         MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.bossPos = visualPiece.transform.position;
+        Debug.Log($"보스 포지션 { MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.bossPos}");
 
         visualPiece.transform.parent = BossGameObject.transform;
 
@@ -211,6 +212,8 @@ public class BoardBehaviour : MonoBehaviour
 
         visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, .7f);
         MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos = visualPiece.transform.position;
+
+        Debug.Log($"플레이어 포지션 { MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos}");
 
         visualPiece.transform.parent = PlayerGameObject.transform;
 
