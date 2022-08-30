@@ -23,8 +23,8 @@ public class PlayerManager : MonoBehaviour
     private const int m_CurrentIndex = 10002;  //임시로 사용하는 값(플레이어가 메뉴 모드에서 선택한 index값을 참고해서 솔로모드인지 멀티모드인지 판별)
 
     public CharacterClass PlayerClass;
-    public float m_MaxHp;
-    public float m_PerHp;
+    private float m_MaxHp;
+    private float m_PerHp;
 
     public KeyCode[] m_SpiritSkillKey;
 
@@ -321,10 +321,15 @@ public class PlayerManager : MonoBehaviour
         hudText.GetComponent<DamageTxt>().damage = damage;
     }
 
-    public void RearTimePerHP()
+    private void RearTimePerHP()
     {
         m_PerHp = PlayerClass.m_CharacterStat.HP / m_MaxHp;
         //Debug.Log(m_CurrentCharStat.HP);
+       
+    }
+    public float GetPlayerPerHp()
+    {
+        return m_PerHp;
     }
 
 }

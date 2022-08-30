@@ -8,6 +8,11 @@ public class CopyPosition : MonoBehaviour
     private bool x, y, z;                                          //이값들이 true면 target의 좌표, false면 현재좌표를 그대로 사용
     [SerializeField]
     private Transform target;                                      //캐릭터 타겟 Tranaform
+
+    private void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
     private void Update()
     {
         if (!target)
