@@ -11,6 +11,7 @@ public class PlayerUIManager : MonoBehaviour
     public GameObject UICanvas;
     public GameObject spritSkillPanel;
     public Slider hpBar;
+    public Sprite buttonTexture;
 
     public Button p_spiritSkillBtn;
 
@@ -36,6 +37,9 @@ public class PlayerUIManager : MonoBehaviour
             Button child = Instantiate(p_spiritSkillBtn);
             child.transform.SetParent(spritSkillPanel.transform);
             child.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = playerManager.m_SpiritSkillKey[i].ToString();
+
+            child.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(255, 255, 255, 255);
+            child.GetComponent<Image>().sprite = buttonTexture;
             spirit_Buttons.Add(child);
 
         }
