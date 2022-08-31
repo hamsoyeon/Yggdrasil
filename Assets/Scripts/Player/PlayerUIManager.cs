@@ -26,7 +26,7 @@ public class PlayerUIManager : MonoBehaviour
         playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
         spritSkillPanel = GameObject.Find("SpritSkillPanel");
         minimap_2DIcon_Player.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
-        minimap_2DIcon_Player.transform.position = GameObject.FindGameObjectWithTag("Player").transform.position;
+        minimap_2DIcon_Player.transform.position = GameObject.FindGameObjectWithTag("Player").transform.position + (Vector3.up * 10);
         GameObject.FindGameObjectWithTag("Player").layer = 14;
         for (int i = 0; i < m_SkillCount; i++)
         {

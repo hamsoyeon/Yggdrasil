@@ -158,6 +158,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Campfire
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 141324, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 141326, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 141328, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 141330, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 141332, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57101be5092d449418905f928b7a3227, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -214,6 +238,82 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19841322, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19841322, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19841324, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19841324, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19841324, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19841324, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19841328, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19841328, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19841328, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19841328, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19841330, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19841330, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19841330, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19841330, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19941322, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19941324, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19941326, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19941328, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19941330, guid: 57101be5092d449418905f928b7a3227, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57101be5092d449418905f928b7a3227, type: 3}
 --- !u!4 &2269421282826234865 stripped
@@ -231,6 +331,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
       propertyPath: m_Name
       value: Ground_Decal3 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
       propertyPath: m_RootOrder
@@ -306,6 +410,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fern1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ccbd20ee5ad18d54ca6977adad173cc1, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ccbd20ee5ad18d54ca6977adad173cc1, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -379,6 +487,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: fc4eae100fe5001449eb37e9ef21c174, type: 3}
       propertyPath: m_Name
       value: Bush_09 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fc4eae100fe5001449eb37e9ef21c174, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fc4eae100fe5001449eb37e9ef21c174, type: 3}
       propertyPath: m_RootOrder
@@ -454,6 +566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor3
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 94d2af53c0731d8468dcc2cd6b9f22e8, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 94d2af53c0731d8468dcc2cd6b9f22e8, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -527,6 +643,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 4c1af75c164d6dc4b822ed5e42af0517, type: 3}
       propertyPath: m_Name
       value: Plant_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4c1af75c164d6dc4b822ed5e42af0517, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4c1af75c164d6dc4b822ed5e42af0517, type: 3}
       propertyPath: m_RootOrder
@@ -602,6 +722,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground_Decal3 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -675,6 +799,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: d774ae5fef7ba3c489ea83e74c08f696, type: 3}
       propertyPath: m_Name
       value: Rock_02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d774ae5fef7ba3c489ea83e74c08f696, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d774ae5fef7ba3c489ea83e74c08f696, type: 3}
       propertyPath: m_RootOrder
@@ -750,6 +878,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bush_09
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fc4eae100fe5001449eb37e9ef21c174, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fc4eae100fe5001449eb37e9ef21c174, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -823,6 +955,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
       propertyPath: m_Name
       value: Ground_Decal3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
       propertyPath: m_RootOrder
@@ -898,6 +1034,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bush_02
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4fc951837d1497e42b0c1f7a31906ab6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4fc951837d1497e42b0c1f7a31906ab6, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -971,6 +1111,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ccbd20ee5ad18d54ca6977adad173cc1, type: 3}
       propertyPath: m_Name
       value: Fern1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ccbd20ee5ad18d54ca6977adad173cc1, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ccbd20ee5ad18d54ca6977adad173cc1, type: 3}
       propertyPath: m_RootOrder
@@ -1046,6 +1190,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bush_02 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4fc951837d1497e42b0c1f7a31906ab6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4fc951837d1497e42b0c1f7a31906ab6, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -1119,6 +1267,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
       propertyPath: m_Name
       value: Ground_Decal3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
       propertyPath: m_RootOrder
@@ -1194,6 +1346,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground_Decal3 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -1267,6 +1423,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ae1bfaed41d170647b31864257fe8702, type: 3}
       propertyPath: m_Name
       value: Banner
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae1bfaed41d170647b31864257fe8702, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae1bfaed41d170647b31864257fe8702, type: 3}
       propertyPath: m_RootOrder
@@ -1342,6 +1502,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Banner (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae1bfaed41d170647b31864257fe8702, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae1bfaed41d170647b31864257fe8702, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1415,6 +1579,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
       propertyPath: m_Name
       value: Ground_Decal3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
       propertyPath: m_RootOrder
@@ -1490,6 +1658,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_02
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d774ae5fef7ba3c489ea83e74c08f696, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d774ae5fef7ba3c489ea83e74c08f696, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -1563,6 +1735,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
       propertyPath: m_Name
       value: Ground_Decal3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 154b222ed4271f9498042c251fee0755, type: 3}
       propertyPath: m_RootOrder

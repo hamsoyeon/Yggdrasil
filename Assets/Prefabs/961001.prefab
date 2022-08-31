@@ -149,6 +149,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree_02
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d32d728eff7559c4aa80f27e12f441ee, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d32d728eff7559c4aa80f27e12f441ee, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -223,6 +227,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_08
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6ae4b619dbb29f041bc3a8b5e5b7537f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6ae4b619dbb29f041bc3a8b5e5b7537f, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -284,6 +292,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 56fcad316909a954e9befd47adff7b8d, type: 3}
       propertyPath: m_Name
       value: Tree_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 56fcad316909a954e9befd47adff7b8d, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 56fcad316909a954e9befd47adff7b8d, type: 3}
       propertyPath: m_RootOrder
@@ -359,6 +371,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree_06
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 34665cecaa8640b4ea6cf4975388913a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 34665cecaa8640b4ea6cf4975388913a, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -433,6 +449,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_08 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6ae4b619dbb29f041bc3a8b5e5b7537f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6ae4b619dbb29f041bc3a8b5e5b7537f, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -494,6 +514,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 56fcad316909a954e9befd47adff7b8d, type: 3}
       propertyPath: m_Name
       value: Tree_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 56fcad316909a954e9befd47adff7b8d, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 56fcad316909a954e9befd47adff7b8d, type: 3}
       propertyPath: m_RootOrder
@@ -569,6 +593,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 56fcad316909a954e9befd47adff7b8d, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 56fcad316909a954e9befd47adff7b8d, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -642,6 +670,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 119065208299f964abea5d59f436a2a6, type: 3}
       propertyPath: m_Name
       value: Mushroom2A
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 119065208299f964abea5d59f436a2a6, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 119065208299f964abea5d59f436a2a6, type: 3}
       propertyPath: m_RootOrder
@@ -717,6 +749,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_08 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6ae4b619dbb29f041bc3a8b5e5b7537f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6ae4b619dbb29f041bc3a8b5e5b7537f, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -779,6 +815,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_08 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6ae4b619dbb29f041bc3a8b5e5b7537f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6ae4b619dbb29f041bc3a8b5e5b7537f, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -840,6 +880,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 01662245ba3b92f41bd4a058a62aa405, type: 3}
       propertyPath: m_Name
       value: Tree_04
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 01662245ba3b92f41bd4a058a62aa405, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 01662245ba3b92f41bd4a058a62aa405, type: 3}
       propertyPath: m_RootOrder
@@ -915,6 +959,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree_01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 56fcad316909a954e9befd47adff7b8d, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 56fcad316909a954e9befd47adff7b8d, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -988,6 +1036,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 01662245ba3b92f41bd4a058a62aa405, type: 3}
       propertyPath: m_Name
       value: Tree_04 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 01662245ba3b92f41bd4a058a62aa405, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 01662245ba3b92f41bd4a058a62aa405, type: 3}
       propertyPath: m_RootOrder
@@ -1063,6 +1115,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_07
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b5387c447b6a0264b92cf54b79501b13, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b5387c447b6a0264b92cf54b79501b13, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1136,6 +1192,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 34665cecaa8640b4ea6cf4975388913a, type: 3}
       propertyPath: m_Name
       value: Tree_06 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 34665cecaa8640b4ea6cf4975388913a, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 34665cecaa8640b4ea6cf4975388913a, type: 3}
       propertyPath: m_RootOrder
@@ -1211,6 +1271,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_07 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b5387c447b6a0264b92cf54b79501b13, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b5387c447b6a0264b92cf54b79501b13, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -1285,6 +1349,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_08 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6ae4b619dbb29f041bc3a8b5e5b7537f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6ae4b619dbb29f041bc3a8b5e5b7537f, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -1346,6 +1414,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6ae4b619dbb29f041bc3a8b5e5b7537f, type: 3}
       propertyPath: m_Name
       value: Rock_08 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6ae4b619dbb29f041bc3a8b5e5b7537f, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6ae4b619dbb29f041bc3a8b5e5b7537f, type: 3}
       propertyPath: m_RootOrder
