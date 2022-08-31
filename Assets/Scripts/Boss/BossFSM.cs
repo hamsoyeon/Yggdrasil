@@ -279,7 +279,7 @@ public class BossFSM : MonoBehaviour
                     moveAndSkill = 1;
                 }
 
-                moveAndSkill = 1;  //이동고정
+                moveAndSkill = 2;  // 스킬고정
 
                 if (moveAndSkill ==1)
                 {
