@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 4224560175939b842be983065d149573
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - SANGJU Gyeongcheon Island
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: e511a74cd2a8b814ea2f72aee63208ed, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

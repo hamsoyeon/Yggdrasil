@@ -351,9 +351,9 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
 
         Init_Map();
         Select_Map_Btn();
-        PlayerSlot_Empty();
-        another_Player_Btn[0].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = m_player_slots[0].Player.GetNick;
-        another_Player_Btn[1].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = m_player_slots[2].Player.GetNick;
+        //PlayerSlot_Empty();
+        //another_Player_Btn[0].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = m_player_slots[0].Player.GetNick;
+        //another_Player_Btn[1].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = m_player_slots[2].Player.GetNick;
         Debug.Log("이름" + another_Player_Btn[0].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
     }
 }
