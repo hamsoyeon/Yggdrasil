@@ -5,9 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 public class RoomInfoBtn : MonoBehaviour
 {
-    private TMP_Text m_roomindex;
-    private TMP_Text m_title;
-    private TMP_Text m_enterinfo;
+    [SerializeField]
+    private TextMeshProUGUI m_roomindex;
+    [SerializeField]
+    private TextMeshProUGUI m_title;
+    [SerializeField]
+    private TextMeshProUGUI m_enterinfo;
     private Image m_image;
     private Button m_btn;
     RoomOutInfo m_roominfo;
@@ -27,9 +30,9 @@ public class RoomInfoBtn : MonoBehaviour
     }
     private void Start()
     {
-        m_roomindex=this.transform.Find("RoomIndex").GetComponent<TMP_Text>();
-        m_title = this.transform.Find("Title").GetComponent<TMP_Text>();
-        m_enterinfo = this.transform.Find("EnterInfo").GetComponent<TMP_Text>();
+        m_roomindex=this.transform.GetChild(0).Find("RoomIndex").GetComponent<TextMeshProUGUI>();
+        m_title = this.transform.GetChild(0).Find("Title").GetComponent<TextMeshProUGUI>();
+        m_enterinfo = this.transform.GetChild(1).Find("EnterInfo").GetComponent<TextMeshProUGUI>();
         m_btn = this.gameObject.GetComponent<Button>();
         m_btn.onClick.AddListener(OnClick_RoomBtn);
     }
