@@ -127,6 +127,9 @@ public class BossFSM : MonoBehaviour
                 behavior = false;
                 moving = false;
 
+
+
+
                 while (true)
                 {
                     if (startBlock != null)
@@ -137,6 +140,7 @@ public class BossFSM : MonoBehaviour
                     }
                     else
                     {
+                        AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
                         break;
                     }
                     startBlock = tempBlock;
@@ -151,6 +155,7 @@ public class BossFSM : MonoBehaviour
             targetPos = MainManager.Instance.GetStageManager().m_MapInfo[tempBlock.x, tempBlock.y].MapPos;    //x=row y=column
             bossMove = true;
             Debug.Log(targetPos);
+           
         }
         else
         {
@@ -166,7 +171,9 @@ public class BossFSM : MonoBehaviour
             int playerRow = MainManager.Instance.GetStageManager().m_PlayerRow;
             int playerColumn = MainManager.Instance.GetStageManager().m_PlayerCoulmn;
 
-            if(bossRow ==playerRow && bossColumn == playerColumn)
+            
+
+            if (bossRow == playerRow && bossColumn == playerColumn)
             {
 
                 while (true)
@@ -179,6 +186,7 @@ public class BossFSM : MonoBehaviour
                     }
                     else
                     {
+                        AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
                         break;
                     }
                     startBlock = tempBlock;
@@ -187,6 +195,7 @@ public class BossFSM : MonoBehaviour
                 behavior = false;
                 moving = false;
                 bossMove = false;
+               
             }
             else
             {
@@ -194,6 +203,7 @@ public class BossFSM : MonoBehaviour
                 bossMove = false;
             }
         }
+
     }
 
     public float rotateSpeed = 5.0f;
@@ -253,6 +263,10 @@ public class BossFSM : MonoBehaviour
     {
         time += Time.deltaTime;
         hudPos = this.gameObject.transform;
+
+        
+
+
         if (behavior && moving)
         {
             //moveTime += Time.deltaTime;
@@ -336,7 +350,7 @@ public class BossFSM : MonoBehaviour
                         bossMove = false;
                         behavior = true;
                         moving = true;
-
+                        AnimationManager.GetInstance().PlayAnimation(anim, "Run");
                     }
 
 
