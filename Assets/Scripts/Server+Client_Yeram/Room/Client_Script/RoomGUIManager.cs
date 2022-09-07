@@ -124,10 +124,11 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     {
         MapPannel.SetActive(false);
     }
-    public void OnClick_Decide_Map()
+    public void OnClick_Decide_Map(int mapNum)
     {
-        room_Map_View.sprite = m_SelectMap_Btn[m_MapNum].transform.GetChild(0).GetComponent<Image>().sprite;
-        m_curmap = m_SelectMap_Btn[m_MapNum].GetComponent<MapSlot>();
+        room_Map_View.sprite = m_SelectMap_Btn[mapNum].transform.GetChild(0).GetComponent<Image>().sprite;
+        m_curmap = m_SelectMap_Btn[mapNum].GetComponent<MapSlot>();
+        
     }
     public void OnClick_HostMenu()
     {
@@ -279,8 +280,10 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
     {
         for (int i = 0; i < map_Count; i++)
         {
+            Debug.Log(i);
             int temp = i;
             m_SelectMap_Btn[temp].onClick.AddListener(() => Map_ViewChange(temp));
+            m_SelectMap_Btn[temp].onClick.AddListener(() => OnClick_Decide_Map(temp));
         }
     }
 

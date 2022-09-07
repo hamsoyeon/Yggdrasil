@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Test Packed Assets
+  m_EditorClassIdentifier: 
+  m_GroupName: Test Packed Assets
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 778682a1ff0782f458ef9cf1d6ab2b7f
+  m_SerializeEntries:
+  - m_GUID: 787bf97a858eb704585a3362afbc56e5
+    m_Address: Assets/98.Asset/Char/Fire Demon/FBX/Fire Demon.FBX
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 04993e33d43fd2346a9fe00044fdb011
+    m_Address: Assets/99_Tower/Models/FallenAngel02.FBX
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: cd8946c0c30ade14ab5d83a045afbec5, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 8e56540d16923474d9c28eede847554e, type: 2}
+    - {fileID: 11400000, guid: b4e741c67a220914a9bf1d9b479301af, type: 2}
