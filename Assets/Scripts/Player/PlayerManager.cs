@@ -29,6 +29,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject hudDamageText;
     public Transform hudPos;
 
+    [SerializeField]
     private Animator anim;
     private PlayerDirection dir;
 
@@ -135,7 +136,12 @@ public class PlayerManager : MonoBehaviour
 
         if(h != 0 || v != 0)
         {
-            AnimationManager.GetInstance().PlayAnimation(anim, "Run"); //이동할때마다 호출을 하여서 Run 애니메이션을 호출하여 파닥파닥 거리는 현상 발생
+            //AnimationManager.GetInstance().PlayAnimation(anim, "Run"); //이동할때마다 호출을 하여서 Run 애니메이션을 호출하여 파닥파닥 거리는 현상 발생
+            anim.SetBool("isRunning", true);
+        }
+        else if(h ==0 && v == 0)
+        {
+            anim.SetBool("isRunning", false);
         }
 
         characterController.Move(MoveForce * Time.deltaTime);
@@ -178,6 +184,8 @@ public class PlayerManager : MonoBehaviour
         m_SpiritSkillKey[5] = KeyCode.D;
         #endregion
         hudDamageText = Resources.Load<GameObject>("DamageText");
+
+        
     }
 
     
@@ -217,7 +225,8 @@ public class PlayerManager : MonoBehaviour
         {
             anim = this.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
         }
-        AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+        //AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+        anim.SetBool("isRunning", false);
 
         move = false;
 
@@ -248,11 +257,12 @@ public class PlayerManager : MonoBehaviour
         //키보드 입력 체크 함수.
         InputCheck();
 
+        /*
         if(!move)
         {
             AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
         }
-
+        */
         //플레이어 체력 백분률
         RearTimePerHP();
 
