@@ -44,6 +44,20 @@ public class PlayerManager : MonoBehaviour
     int x;
     int y;
 
+    // 0 -> q / 1 -> w / 2 -> e / 3 -> a / 4 -> s / 5 -> d
+    bool[] CanSkill; // 스킬이 사용이 가능한지 판단하기 위한 bool값
+
+    float[] SkillCollTime;
+
+    float Qcooltime = 5.0f; // Q쿨타임
+    float Wcooltime = 4.0f;
+    float Ecooltime = 3.0f;
+    float Acooltime = 2.0f;
+    float Scooltime = 1.0f;
+    float Dcooltime = 6.0f;
+
+    public float m_BuffCoolDown = 0.0f; //아이템 혹은 버프타일에 의하여 쿨타임이 줄어드는 버프에 사용을 하기 위해 넣어놓은 변수 
+
     //벽인지 체크 하기 위한 불값
     public bool isWall;
 
@@ -60,35 +74,59 @@ public class PlayerManager : MonoBehaviour
 
     private void InputCheck()
     {
-
-        if (Input.GetKeyDown(m_SpiritSkillKey[3]))
+        // 0 -> q / 1 -> w / 2 -> e / 3 -> a / 4 -> s / 5 -> d
+        if (Input.GetKeyDown(m_SpiritSkillKey[3]) && CanSkill[3]) //플레이어 A스킬
         {
+            CanSkill[3] = false;
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill1);
+            Debug.Log($"스킬 A 는 {CanSkill[3]}");
+            // 쿨타임 코루틴 작동
+            StartCoroutine(CoolTime(SkillCollTime[3], 3, m_BuffCoolDown));
         }
 
-        if (Input.GetKeyDown(m_SpiritSkillKey[4]))
+        if (Input.GetKeyDown(m_SpiritSkillKey[4]) && CanSkill[4]) //플레이어 S스킬
         {
+            CanSkill[4] = false;
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill2);
+            Debug.Log($"스킬 S 는 {CanSkill[4]}");
+            // 쿨타임 코루틴 작동
+            StartCoroutine(CoolTime(SkillCollTime[4], 4, m_BuffCoolDown));
         }
 
-        if (Input.GetKeyDown(m_SpiritSkillKey[5]))
+        if (Input.GetKeyDown(m_SpiritSkillKey[5]) && CanSkill[5]) //플레이어 D스킬
         {
+            CanSkill[5] = false;
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill3);
+            Debug.Log($"스킬 D 는 {CanSkill[5]}");
+            // 쿨타임 코루틴 작동
+            StartCoroutine(CoolTime(SkillCollTime[5], 5, m_BuffCoolDown));
         }
 
-        if (Input.GetKeyDown(m_SpiritSkillKey[0]))
+        if (Input.GetKeyDown(m_SpiritSkillKey[0]) && CanSkill[0]) //플레이어 Q스킬
         {
+            CanSkill[0] = false;
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill4);
+            Debug.Log($"스킬 Q 는 {CanSkill[0]}");
+            // 쿨타임 코루틴 작동
+            StartCoroutine(CoolTime(SkillCollTime[0], 0, m_BuffCoolDown));
         }
 
-        if (Input.GetKeyDown(m_SpiritSkillKey[1]))
+        if (Input.GetKeyDown(m_SpiritSkillKey[1]) && CanSkill[1]) //플레이어 W스킬
         {
+            CanSkill[1] = false;
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill5);
+            Debug.Log($"스킬 W 는 {CanSkill[1]}");
+            // 쿨타임 코루틴 작동
+            StartCoroutine(CoolTime(SkillCollTime[1], 1, m_BuffCoolDown));
         }
 
-        if (Input.GetKeyDown(m_SpiritSkillKey[2]))
+        if (Input.GetKeyDown(m_SpiritSkillKey[2]) && CanSkill[2]) //플레이어 E스킬
         {
+            CanSkill[2] = false;
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill6);
+            Debug.Log($"스킬 E 는 {CanSkill[2]}");
+            // 쿨타임 코루틴 작동
+            StartCoroutine(CoolTime(SkillCollTime[2], 2, m_BuffCoolDown));
         }
 
     }
@@ -97,6 +135,8 @@ public class PlayerManager : MonoBehaviour
 
     public void Move()
     {
+        //h = Input.GetAxis("Horizontal"); //프로젝트 셋팅으로 wasd 값 날려놓음 방향키만 적용이 될겁니다.
+        //v = Input.GetAxis("Vertical");
 
         if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
         {
@@ -154,28 +194,26 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("아 못감 ㅅㄱㅂ");
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                this.transform.position += RightPlayer * PlayerClass.m_CharacterStat.MoveSpeed;
-                cam.cam.transform.position += RightCam * PlayerClass.m_CharacterStat.MoveSpeed;
+                this.transform.position += RightPlayer * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
+                cam.cam.transform.position += RightCam * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                this.transform.position += LeftPlayer * PlayerClass.m_CharacterStat.MoveSpeed;
-                cam.cam.transform.position += LeftCam * PlayerClass.m_CharacterStat.MoveSpeed;
+                this.transform.position += LeftPlayer * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
+                cam.cam.transform.position += LeftCam * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
             }
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                this.transform.position += DownPlayer * PlayerClass.m_CharacterStat.MoveSpeed;
-                cam.cam.transform.position += DownCam * PlayerClass.m_CharacterStat.MoveSpeed;
+                this.transform.position += DownPlayer * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
+                cam.cam.transform.position += DownCam * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                this.transform.position += UpPlayer * PlayerClass.m_CharacterStat.MoveSpeed;
-                cam.cam.transform.position += UpCam * PlayerClass.m_CharacterStat.MoveSpeed;
+                this.transform.position += UpPlayer * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
+                cam.cam.transform.position += UpCam * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
             }
         }
 
-        //h = Input.GetAxis("Horizontal");
-        //v = Input.GetAxis("Vertical");
 
         //Vector3 dir = new Vector3(h, 0, v); // new Vector3(h, 0, v)가 자주 쓰이게 되었으므로 dir이라는 변수에 넣고 향후 편하게 사용할 수 있게 함
 
@@ -239,7 +277,17 @@ public class PlayerManager : MonoBehaviour
         m_Spirit = this.GetComponent<Spirit>();
 
         PlayerClass = this.gameObject.GetComponent<CharacterClass>();
-        
+
+        CanSkill = new bool[6]; // 0 -> q / 1 -> w / 2 -> e / 3 -> a / 4 -> s / 5 -> d 
+        SkillCollTime = new float[6];
+
+        //Start 되는 부분에서 스킬사용 가능 불값과 스킬 쿨타임값을 설정
+        for (int i = 0; i < CanSkill.Length; i++)
+        {
+            CanSkill[i] = true;
+            SkillCollTime[i] = 5.0f;
+        }
+
         
         // DataManager라는 Object의 List에 해당 데이터를 넣어주면 찾아서 사용가능.(디버깅용)
         // Use ExcelReader
@@ -332,4 +380,17 @@ public class PlayerManager : MonoBehaviour
         return m_PerHp;
     }
 
+    IEnumerator CoolTime(float cool, int index, float Buff)
+    {
+        Debug.Log($"{index} 스킬의 쿨타임 시작");
+
+        //if (cool > 1.0f)
+        //{
+        //    cool -= Time.deltaTime;
+        //    //img_Skill.fillAmount = (1.0f / cool); // 이미지 ui 에 차오르는 ui 구현
+        //    yield return new WaitForFixedUpdate();
+        //}
+        yield return new WaitForSeconds(cool - Buff);
+        CanSkill[index] = true;
+    }
 }

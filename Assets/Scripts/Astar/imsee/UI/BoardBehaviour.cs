@@ -111,7 +111,7 @@ public class BoardBehaviour : MonoBehaviour
 
 
         transform.position = new Vector3(Width / 2.0f * Spacing - (Spacing / 2), -(Width + Height) / 2 - 5, Height / 2.0f * Spacing - (Spacing / 2));
-        OnGameStateChanged();
+       // OnGameStateChanged();
 
     }
 
@@ -280,34 +280,34 @@ public class BoardBehaviour : MonoBehaviour
         return new Vector3(offsetX, z, offsetZ);
     }
 
-    void TileChanged(TileBehaviour tileBehaviour)
-    {
-        tileBehaviour.Tile.CanPass = !tileBehaviour.Tile.CanPass;
-        tileBehaviour.SetMaterial();
-        OnGameStateChanged();
-    }
+    //void TileChanged(TileBehaviour tileBehaviour)
+    //{
+    //    tileBehaviour.Tile.CanPass = !tileBehaviour.Tile.CanPass;
+    //    tileBehaviour.SetMaterial();
+    //    OnGameStateChanged();
+    //}
 
     //이부분을 이동을 통해서 바로바로 업데이트에서 확인이 가능하도록 잡는다.
     //수정을 해야한다.
-    void OnGameStateChanged()
-    {
-        Debug.Log("Game-state changed");
+    //void OnGameStateChanged()
+    //{
+    //    Debug.Log("Game-state changed");
 
-        var sp = _game.GamePieces.First();
-        var dp = _game.GamePieces.Last();
+    //    var sp = _game.GamePieces.First();
+    //    var dp = _game.GamePieces.Last();
 
-        //데이터 컨테이너에 모든곳에서 사용이 가능하게 만들어놓은것 -> linq
-        //열거자
+    //    //데이터 컨테이너에 모든곳에서 사용이 가능하게 만들어놓은것 -> linq
+    //    //열거자
 
-        //SpacialObject -> 분석
-        var start = _game.AllTiles.Single(o => o.X == sp.Location.X && o.Y == sp.Location.Y); // sp의 x값과 y값을 추출
-        var destination = _game.AllTiles.Single(o => o.X == dp.Location.X && o.Y == dp.Location.Y); //dp의 x값과 y값을 추출
+    //    //SpacialObject -> 분석
+    //    var start = _game.AllTiles.Single(o => o.X == sp.Location.X && o.Y == sp.Location.Y); // sp의 x값과 y값을 추출
+    //    var destination = _game.AllTiles.Single(o => o.X == dp.Location.X && o.Y == dp.Location.Y); //dp의 x값과 y값을 추출
 
-        Func<Tile, Tile, double> distance = (node1, node2) => 1;
-        Func<Tile, double> estimate = t => Math.Sqrt(Math.Pow(t.X - destination.X, 2) + Math.Pow(t.Y - destination.Y, 2));
+    //    Func<Tile, Tile, double> distance = (node1, node2) => 1;
+    //    Func<Tile, double> estimate = t => Math.Sqrt(Math.Pow(t.X - destination.X, 2) + Math.Pow(t.Y - destination.Y, 2));
 
-        var path = PathFind.PathFind.FindPath(start, destination, distance, estimate);
+    //    var path = PathFind.PathFind.FindPath(start, destination, distance, estimate);
 
-        DrawPath(path);
-    }
+    //    DrawPath(path);
+    //}
 }
