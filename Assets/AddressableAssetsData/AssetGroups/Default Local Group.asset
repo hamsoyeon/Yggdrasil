@@ -16,7 +16,15 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 4c5e4b213fdbdaf46a50a8c97adec40b
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 1194a538bfe5d6544b1135fb7322ea14
+    m_Address: Assets/99_Tower/Prefabs/FallenAngel01.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 98c1b9465b5182c4892e0e69b5e13396
+    m_Address: Assets/98.Asset/UI/Fantasy GUI pack/Textures/Coins/Coin_02_Gold.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: cd8946c0c30ade14ab5d83a045afbec5, type: 2}
   m_SchemaSet:

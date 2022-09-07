@@ -8,11 +8,22 @@ using UnityEngine.UI;
 
 public class ResourceManager : MonoBehaviour
 {
-    [SerializeField] private AssetReferenceGameObject assetReferenceGameObject;
+    [SerializeField] Image mIMG;
+    AsyncOperationHandle Handle;
 
-    //아직 쓰지 마세요
-    public void AddressablesPrefab()
+    public void _ClickLoad()
     {
-        Addressables.InstantiateAsync(assetReferenceGameObject);
+        Addressables.LoadAssetAsync<Sprite>("Coin_02_Gold").Completed +=
+            (AsyncOperationHandle<Sprite> Obj) =>
+            {
+                Handle = Obj;
+                mIMG.sprite = Obj.Result;
+            };
+    }
+
+    public void _ClickUnLoad()
+    {
+        Addressables.Release(Handle);
+        mIMG.sprite = null;
     }
 }
