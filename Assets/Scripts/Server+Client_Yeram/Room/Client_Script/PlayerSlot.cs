@@ -17,6 +17,8 @@ public class PlayerSlot : MonoBehaviour
     private TMP_Text m_txt_ready;
     [SerializeField]
     private TMP_Text m_txt_NickName;
+    [SerializeField]
+    private GameObject m_obj_Empty;
 
     
     private Dictionary<ECharacterType, GameObject> m_CharacterObject;
@@ -57,7 +59,12 @@ public class PlayerSlot : MonoBehaviour
         {
             m_curRender = m_CharacterObject[m_player.GetCharacterInfo.CharacterType];
             m_curRender.SetActive(true);
+            m_obj_Empty.SetActive(false);
             NicknamePrint(m_player.GetNick);
+        }
+        else
+        {
+            m_obj_Empty.SetActive(true);
         }
 
     }
@@ -65,6 +72,8 @@ public class PlayerSlot : MonoBehaviour
     {
         if (m_curRender != null)
             m_curRender.SetActive(false);
+        else
+            m_obj_Empty.SetActive(false);
         m_curRender = m_CharacterObject[_type];
         m_curRender.SetActive(true);
         NicknamePrint(m_player.GetNick);
@@ -91,6 +100,7 @@ public class PlayerSlot : MonoBehaviour
     {
         if(m_player != null)
         NicknamePrint(m_player.GetNick);
+        m_obj_Empty.SetActive(true);
     }
 
     // Update is called once per frame

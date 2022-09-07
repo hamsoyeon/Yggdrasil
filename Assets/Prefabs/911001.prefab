@@ -103,8 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2358126716913885334}
-  - component: {fileID: 7855321527201739004}
-  - component: {fileID: 9198033748334673725}
+  - component: {fileID: -7080411643228014343}
   - component: {fileID: 1623807679893083382}
   - component: {fileID: 7164028929054871144}
   - component: {fileID: 4139102079110736010}
@@ -126,7 +125,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2358126716913885333}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -135,36 +134,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &7855321527201739004
-CapsuleCollider:
+--- !u!143 &-7080411643228014343
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2358126716913885333}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.4
-  m_Height: 6
-  m_Direction: 1
-  m_Center: {x: 0, y: 2.49, z: 0}
---- !u!54 &9198033748334673725
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2358126716913885333}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Height: 6.2
+  m_Radius: 1.5
+  m_SlopeLimit: 0
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!114 &1623807679893083382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,12 +324,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Spirit: {fileID: 0}
   PlayerClass: {fileID: 0}
-  m_MaxHp: 0
-  m_PerHp: 0
   m_SpiritSkillKey: 
   hudDamageText: {fileID: 0}
   hudPos: {fileID: 0}
   rotateSpeed: 5
+  m_BuffCoolDown: 0
   isWall: 0
 --- !u!114 &8855655524254577207
 MonoBehaviour:

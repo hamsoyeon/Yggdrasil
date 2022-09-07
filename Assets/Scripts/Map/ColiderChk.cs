@@ -27,7 +27,13 @@ public class ColiderChk : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        MainManager.Instance.GetStageManager().SetPlayerRowAndCoulmn(m_row, m_coulmn);
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            MainManager.Instance.GetStageManager().SetPlayerRowAndCoulmn(m_row, m_coulmn);
+
+        }
+       
     }
 
     private void OnTriggerExit(Collider other)
