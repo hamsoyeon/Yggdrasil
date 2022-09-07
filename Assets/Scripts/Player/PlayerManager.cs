@@ -33,8 +33,7 @@ public class PlayerManager : MonoBehaviour
     private Animator anim;
     private PlayerDirection dir;
 
-    private bool move;
-
+    
     float h, v;
     public float rotateSpeed = 5f;
 
@@ -228,7 +227,6 @@ public class PlayerManager : MonoBehaviour
         //AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
         anim.SetBool("isRunning", false);
 
-        move = false;
 
         foreach (var item in DataTableManager.Instance.GetDataTable<CharStat_TableExcelLoader>().DataList)
         {
@@ -257,12 +255,6 @@ public class PlayerManager : MonoBehaviour
         //키보드 입력 체크 함수.
         InputCheck();
 
-        /*
-        if(!move)
-        {
-            AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
-        }
-        */
         //플레이어 체력 백분률
         RearTimePerHP();
 
@@ -272,7 +264,7 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //ChangePlayerDirection();
+        ChangePlayerDirection();
 
         //PlayerDirection.GetInstance().ChangePlayerDirection(gameObject);
     }
