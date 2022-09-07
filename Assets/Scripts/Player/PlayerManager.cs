@@ -7,9 +7,6 @@ using Model;
 
 public class PlayerManager : MonoBehaviour
 {
-
-
-
     //플레이어 오브젝트
     public static GameObject p_Object;
 
@@ -38,8 +35,9 @@ public class PlayerManager : MonoBehaviour
     private bool move;
 
     float h, v;
-    float Speed = 5f;
     public float rotateSpeed = 5f;
+
+    private CharacterController characterController;
 
     int x;
     int y;
@@ -47,14 +45,8 @@ public class PlayerManager : MonoBehaviour
     // 0 -> q / 1 -> w / 2 -> e / 3 -> a / 4 -> s / 5 -> d
     bool[] CanSkill; // 스킬이 사용이 가능한지 판단하기 위한 bool값
 
+    //각각 스킬의 쿨타임 넣어놓는 배열
     float[] SkillCollTime;
-
-    float Qcooltime = 5.0f; // Q쿨타임
-    float Wcooltime = 4.0f;
-    float Ecooltime = 3.0f;
-    float Acooltime = 2.0f;
-    float Scooltime = 1.0f;
-    float Dcooltime = 6.0f;
 
     public float m_BuffCoolDown = 0.0f; //아이템 혹은 버프타일에 의하여 쿨타임이 줄어드는 버프에 사용을 하기 위해 넣어놓은 변수 
 
@@ -135,97 +127,18 @@ public class PlayerManager : MonoBehaviour
 
     public void Move()
     {
-        //h = Input.GetAxis("Horizontal"); //프로젝트 셋팅으로 wasd 값 날려놓음 방향키만 적용이 될겁니다.
-        //v = Input.GetAxis("Vertical");
+        h = Input.GetAxis("Horizontal"); //프로젝트 셋팅으로 wasd 값 날려놓음 방향키만 적용이 될겁니다.
+        v = Input.GetAxis("Vertical");
 
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
+        // new Vector3(h, 0, v)가 자주 쓰이게 되었으므로 dir이라는 변수에 넣고 향후 편하게 사용할 수 있게 함
+        Vector3 MoveForce = new Vector3(h * PlayerClass.m_CharacterStat.MoveSpeed, -1, v * PlayerClass.m_CharacterStat.MoveSpeed);
+
+        if(h != 0 || v != 0)
         {
-            move = false;
+            AnimationManager.GetInstance().PlayAnimation(anim, "Run"); //이동할때마다 호출을 하여서 Run 애니메이션을 호출하여 파닥파닥 거리는 현상 발생
         }
 
-        // 지금 x y 로테이션값 변경때문에 의해서 방향 이동다시 지정해야함
-        //방향키로 입력으로 변경
-        if (MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable && !isWall)
-        {
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                if (!move)
-                {
-                    AnimationManager.GetInstance().PlayAnimation(anim, "Run");
-                }
-
-                move = true;
-                this.transform.Translate(new Vector3(-1.0f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-                cam.cam.transform.Translate(new Vector3(-1.0f, -0.32f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                if (!move)
-                {
-                    AnimationManager.GetInstance().PlayAnimation(anim, "Run");
-                }
-                move = true;
-                this.transform.Translate(new Vector3(1.0f, 0.0f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-                cam.cam.transform.Translate(new Vector3(1.0f, 0.32f, 0.0f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                if (!move)
-                {
-                    AnimationManager.GetInstance().PlayAnimation(anim, "Run");
-                }
-                move = true;
-                this.transform.Translate(new Vector3(0.0f, 0.0f, 0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-                cam.cam.transform.Translate(new Vector3(0.0f, 0.4f, 0.4f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.DownArrow))
-            {
-                if (!move)
-                {
-                    AnimationManager.GetInstance().PlayAnimation(anim, "Run");
-                }
-                move = true;
-                this.transform.Translate(new Vector3(0.0f, 0.0f, -0.9f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-                cam.cam.transform.Translate(new Vector3(0.0f, -0.4f, -0.4f) * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime);
-            }
-        }
-        else if (!MainManager.Instance.GetStageManager().m_MapInfo[x, y].IsUnWalkable || isWall)
-        {
-            Debug.Log("아 못감 ㅅㄱㅂ");
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                this.transform.position += RightPlayer * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
-                cam.cam.transform.position += RightCam * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
-            }
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                this.transform.position += LeftPlayer * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
-                cam.cam.transform.position += LeftCam * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
-            }
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                this.transform.position += DownPlayer * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
-                cam.cam.transform.position += DownCam * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
-            }
-            if (Input.GetKey(KeyCode.DownArrow))
-            {
-                this.transform.position += UpPlayer * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
-                cam.cam.transform.position += UpCam * PlayerClass.m_CharacterStat.MoveSpeed * Time.deltaTime;
-            }
-        }
-
-
-        //Vector3 dir = new Vector3(h, 0, v); // new Vector3(h, 0, v)가 자주 쓰이게 되었으므로 dir이라는 변수에 넣고 향후 편하게 사용할 수 있게 함
-
-        //// 바라보는 방향으로 회전 후 다시 정면을 바라보는 현상을 막기 위해 설정
-        //if (!(h == 0 && v == 0))
-        //{
-        //    // 이동과 회전을 함께 처리
-        //    transform.position += dir * Speed * Time.deltaTime;
-        //    // 회전하는 부분. Point 1.
-        //    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotateSpeed);
-        //}
-
+        characterController.Move(MoveForce * Time.deltaTime);
     }
 
 
@@ -272,6 +185,7 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        characterController = GetComponent<CharacterController>();
         cam = GetComponent<FollowCam>();
         p_Object = this.gameObject;
         m_Spirit = this.GetComponent<Spirit>();
@@ -386,7 +300,6 @@ public class PlayerManager : MonoBehaviour
 
         //if (cool > 1.0f)
         //{
-        //    cool -= Time.deltaTime;
         //    //img_Skill.fillAmount = (1.0f / cool); // 이미지 ui 에 차오르는 ui 구현
         //    yield return new WaitForFixedUpdate();
         //}

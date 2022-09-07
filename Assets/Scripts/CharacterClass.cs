@@ -20,9 +20,6 @@ public class CharacterClass : MonoBehaviour
 
     public int Invincibility = 1;          //캐릭터가 사용하는 무적값.
 
-  
-
-
     public CharacterClass()
 	{
 		m_SkillMgr = new SkillManager();

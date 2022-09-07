@@ -114,25 +114,6 @@ public class BoardBehaviour : MonoBehaviour
        // OnGameStateChanged();
 
     }
-
-    private void Update()
-    {
-        
-    }
-
-    private void DrawPath(IEnumerable<Tile> path)
-    {
-        if (_path == null)
-            _path = new List<GameObject>();
-
-        _path.ForEach(Destroy);
-        _path = new List<GameObject>();
-        if (path != null)
-        {
-            path.ToList().ForEach(CreateLine);
-        }
-    }
-
     void CreateLine(Tile tile)
     {
         var line = (GameObject)Instantiate(Line);
@@ -210,7 +191,7 @@ public class BoardBehaviour : MonoBehaviour
         var visualPiece = (GameObject)Instantiate(PlayerPiece);
         //var visualPiece = PrefabLoader.Instance.PrefabDic[];
 
-        visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, .7f);
+        visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, 0);
         MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos = visualPiece.transform.position;
 
         Debug.Log($"플레이어 포지션 { MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos}");
