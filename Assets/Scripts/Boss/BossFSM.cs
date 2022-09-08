@@ -37,8 +37,21 @@ public class BossFSM : MonoBehaviour
 
     public GameObject player;
 
-   
-    // Start is called before the first frame update
+
+    float h, v; //BossDirection
+
+
+    private void Awake()
+    {
+        player = GameObject.Find("obj_10001");
+        Debug.Log("됐다", player);
+        hudDamageText = Resources.Load<GameObject>("DamageText");
+
+        h = transform.position.x;
+        v = transform.position.z;
+
+    }
+
     void Start()
     {
         gameObject.AddComponent<BossStamina>();
@@ -110,6 +123,10 @@ public class BossFSM : MonoBehaviour
         #endregion
     }
 
+    private void FixedUpdate()
+    {
+        MonsterDirection();
+    }
 
     //보스가 이동할때.
     public void Move()
@@ -206,13 +223,42 @@ public class BossFSM : MonoBehaviour
 
     }
 
+
+
     public float rotateSpeed = 5.0f;
-    void MonsterDirection(GameObject obj)
+
+    
+    void MonsterDirection()
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation,
-            Quaternion.LookRotation(obj.transform.position),
+        float _h, _v;
+        _h = 0;
+        _v = 0;
+        
+
+
+        if (h!=transform.position.x || v!=transform.position.z)
+        {
+            if (h > transform.position.x)
+                _h = -1;
+            else if (h < transform.position.x)
+                _h = 1;
+
+            if (v > transform.position.z)
+                _v = -1;
+            else if (v < transform.position.z)
+                _v = 1;
+
+            Vector3 dir = new Vector3(_h, 0, _v);
+            transform.rotation = Quaternion.Lerp(transform.rotation,
+            Quaternion.LookRotation(dir),
             Time.deltaTime * rotateSpeed);
+
+            h = transform.position.x;
+            v = transform.position.z;
+        }
     }
+
+        
 
 
     public void Damage(int _damage)
@@ -233,12 +279,7 @@ public class BossFSM : MonoBehaviour
     {
         return currentBossStamina / maxStamina;
     }
-    private void Awake()
-    {
-        player = GameObject.Find("obj_10001");
-        Debug.Log("됐다",player);
-        hudDamageText = Resources.Load<GameObject>("DamageText");
-    }
+    
 
     bool moving = false;
     bool bossMove = false;
@@ -252,10 +293,7 @@ public class BossFSM : MonoBehaviour
     Block tempBlock;
     Block originBlock;
 
-    private void FixedUpdate()
-    {
-        //MonsterDirection(player);
-    }
+    
 
 
     // Update is called once per frame
