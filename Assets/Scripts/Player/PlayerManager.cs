@@ -130,11 +130,11 @@ public class PlayerManager : MonoBehaviour
         h = Input.GetAxis("Horizontal"); //프로젝트 셋팅으로 wasd 값 날려놓음 방향키만 적용이 될겁니다.
         v = Input.GetAxis("Vertical");
 
-        // new Vector3(h, 0, v)가 자주 쓰이게 되었으므로 dir이라는 변수에 넣고 향후 편하게 사용할 수 있게 함
-        Vector3 MoveForce = new Vector3(h * PlayerClass.m_CharacterStat.MoveSpeed, -1, v * PlayerClass.m_CharacterStat.MoveSpeed);
+        Vector3 MoveForce = new Vector3(h * PlayerClass.m_CharacterStat.MoveSpeed, 0, v * PlayerClass.m_CharacterStat.MoveSpeed);
 
         if(h != 0 || v != 0)
         {
+            //루프는 작동하나 왜이렇게 빠르냐
             AnimationManager.GetInstance().PlayAnimation(anim, "Run"); //이동할때마다 호출을 하여서 Run 애니메이션을 호출하여 파닥파닥 거리는 현상 발생
         }
 

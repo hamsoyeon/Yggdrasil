@@ -191,7 +191,7 @@ public class BoardBehaviour : MonoBehaviour
         var visualPiece = (GameObject)Instantiate(PlayerPiece);
         //var visualPiece = PrefabLoader.Instance.PrefabDic[];
 
-        visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, 0);
+        visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, -0.1f);
         MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos = visualPiece.transform.position;
 
         Debug.Log($"플레이어 포지션 { MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos}");
