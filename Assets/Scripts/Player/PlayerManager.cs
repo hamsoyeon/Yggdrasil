@@ -145,14 +145,11 @@ public class PlayerManager : MonoBehaviour
         v = Input.GetAxis("Vertical");
         //방향키 입력 말고 플레이어 이동 값을 받아와야겠다..
 
-        //h = this.transform.position.x;
-        //v = this.transform.position.z;
-
         Vector3 dir = new Vector3(h, 0, v);
 
         if (!(h == 0 && v == 0))
         {
-            this.transform.rotation = Quaternion.Lerp(transform.rotation,
+           transform.rotation = Quaternion.Lerp(transform.rotation,
                 Quaternion.LookRotation(dir),
                 Time.deltaTime * rotateSpeed);
         }

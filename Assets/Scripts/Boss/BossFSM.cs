@@ -37,11 +37,11 @@ public class BossFSM : MonoBehaviour
 
     public GameObject player;
 
-    int[] UpRotation = { -45, 45 }; // 타일 z - 1 을 할 때 사용할 로테이션 값
-    int[] SameRotation = { -90, 90 }; // 타일 z 값이 같을 때 사용할 로테이션 값
-    int[] DownRotation = { -135, 135 }; // 타일 z + 1 을 할 때 사용할 로테이션 값
+    //int[] UpRotation = { -45, 45 }; // 타일 z - 1 을 할 때 사용할 로테이션 값
+    //int[] SameRotation = { -90, 90 }; // 타일 z 값이 같을 때 사용할 로테이션 값
+    //int[] DownRotation = { -135, 135 }; // 타일 z + 1 을 할 때 사용할 로테이션 값
 
-    int BossRotation;
+    //int BossRotation;
 
     //보스의 디렉션값을 비교하는 방식은 보스의 현재 타일의 포지션 값과 다음 이동 타겟의 포지션값을 연산 -> 
     //현재 보스 타일 z < 다음 타일 z = DownRotation배열 사용 || 보스 타일 z > 다음 타일 z = UpRotation 배열 사용 || 보스 타일 z = 다음 타일 z = SameRotation 사용
@@ -50,6 +50,20 @@ public class BossFSM : MonoBehaviour
     //BossObject.transform.rotation.y = BossRotation;
     //이렇게 하면 보스 디렉션 만들 수 있을 것 같다.
     //그냥 이동한 로테이션 값 그대로 둔다.
+
+    float h, v; //BossDirection
+
+
+    private void Awake()
+    {
+        player = GameObject.Find("obj_10001");
+        Debug.Log("됐다", player);
+        hudDamageText = Resources.Load<GameObject>("DamageText");
+
+        h = transform.position.x;
+        v = transform.position.z;
+
+    }
 
     void Start()
     {
@@ -122,6 +136,10 @@ public class BossFSM : MonoBehaviour
         #endregion
     }
 
+    private void FixedUpdate()
+    {
+        MonsterDirection();
+    }
 
     //보스가 이동할때.
     public void Move()
@@ -218,13 +236,42 @@ public class BossFSM : MonoBehaviour
 
     }
 
+
+
     public float rotateSpeed = 5.0f;
-    void MonsterDirection(GameObject obj)
+
+    
+    void MonsterDirection()
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation,
-            Quaternion.LookRotation(obj.transform.position),
+        float _h, _v;
+        _h = 0;
+        _v = 0;
+        
+
+
+        if (h!=transform.position.x || v!=transform.position.z)
+        {
+            if (h > transform.position.x)
+                _h = -1;
+            else if (h < transform.position.x)
+                _h = 1;
+
+            if (v > transform.position.z)
+                _v = -1;
+            else if (v < transform.position.z)
+                _v = 1;
+
+            Vector3 dir = new Vector3(_h, 0, _v);
+            transform.rotation = Quaternion.Lerp(transform.rotation,
+            Quaternion.LookRotation(dir),
             Time.deltaTime * rotateSpeed);
+
+            h = transform.position.x;
+            v = transform.position.z;
+        }
     }
+
+        
 
 
     public void Damage(int _damage)
@@ -245,12 +292,7 @@ public class BossFSM : MonoBehaviour
     {
         return currentBossStamina / maxStamina;
     }
-    private void Awake()
-    {
-        player = GameObject.Find("obj_10001");
-        Debug.Log("됐다",player);
-        hudDamageText = Resources.Load<GameObject>("DamageText");
-    }
+    
 
     bool moving = false;
     bool bossMove = false;
@@ -264,10 +306,7 @@ public class BossFSM : MonoBehaviour
     Block tempBlock;
     Block originBlock;
 
-    private void FixedUpdate()
-    {
-        //MonsterDirection(player);
-    }
+    
 
 
     // Update is called once per frame
