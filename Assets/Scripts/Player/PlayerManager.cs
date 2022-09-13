@@ -53,17 +53,6 @@ public class PlayerManager : MonoBehaviour
     //벽인지 체크 하기 위한 불값
     public bool isWall;
 
-    //이동못하는 타일 및 벽에 만나면 밀기 위한 벡터 변수
-    Vector3 LeftPlayer = new Vector3(-0.2f, 0.0f, 0.0f);
-    Vector3 RightPlayer = new Vector3(0.2f, 0.0f, 0.0f);
-    Vector3 UpPlayer = new Vector3(0.0f, 0.0f, 0.225f);
-    Vector3 DownPlayer = new Vector3(0.0f, 0.0f, -0.225f);
-
-    Vector3 LeftCam = new Vector3(-0.2f, 0.0f, 0.0f);
-    Vector3 RightCam = new Vector3(0.2f, 0.0f, 0.0f);
-    Vector3 UpCam = new Vector3(0.0f, 0.0f, 0.198f);
-    Vector3 DownCam = new Vector3(0.0f, 0.0f, -0.198f);
-
     private void InputCheck()
     {
         // 0 -> q / 1 -> w / 2 -> e / 3 -> a / 4 -> s / 5 -> d
@@ -132,14 +121,13 @@ public class PlayerManager : MonoBehaviour
 
         Vector3 MoveForce = new Vector3(h * PlayerClass.m_CharacterStat.MoveSpeed, 0, v * PlayerClass.m_CharacterStat.MoveSpeed);
 
-        if(h != 0 || v != 0)
+        if(h != 0 || v != 0) //이동중일때 런 애니메이션 실행
         {
-            //루프는 작동하나 왜이렇게 빠르냐
-            AnimationManager.GetInstance().PlayAnimation(anim, "Run"); //이동할때마다 호출을 하여서 Run 애니메이션을 호출하여 파닥파닥 거리는 현상 발생
+            AnimationManager.GetInstance().PlayAnimation(anim, "Run");
 
             anim.SetBool("isRunning", true);
         }
-        else if(h == 0 && v == 0)
+        else if(h == 0 && v == 0) //이동이 아닐때 아이들 애니메이션으로 넘겨준다.
         {
             anim.SetBool("isRunning", false);
         }
