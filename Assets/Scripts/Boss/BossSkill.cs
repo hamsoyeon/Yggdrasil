@@ -213,12 +213,7 @@ public class BossSkill : MonoBehaviour
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
 
-
-
-
-
         yield return null;
-
 
     }
 
@@ -395,6 +390,15 @@ public class BossSkill : MonoBehaviour
 
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
+
+        //버프가 있다면 버프를 발동.
+        if(m_CurrentBossSkill.BuffAdded != 0)
+        {
+            MainManager.Instance.GetBuffManager().Buff(m_CurrentBossSkill.BuffAdded);
+        }
+
+
+
         //연계스킬있는지 확인후 다시 스킬실행.
         if (m_CurrentBossSkill.SkillAdded != 0)
             BossSkillAction(m_CurrentBossSkill.SkillAdded);
@@ -541,13 +545,19 @@ public class BossSkill : MonoBehaviour
         Debug.Log("타겟 스킬 종료");
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
+
+        //버프가 있다면 버프를 발동.
+        if (m_CurrentBossSkill.BuffAdded != 0)
+        {
+            MainManager.Instance.GetBuffManager().Buff(m_CurrentBossSkill.BuffAdded);
+        }
+
         //연계스킬 처리
         if (m_CurrentBossSkill.SkillAdded != 0)
         {
             BossSkillAction(m_CurrentBossSkill.SkillAdded);
             TargetLockOn = true;
         }
-
         else
         {
             this.gameObject.GetComponent<BossFSM>().behavior = false;
@@ -900,6 +910,13 @@ public class BossSkill : MonoBehaviour
         Debug.Log("확산 스킬 종료");
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
+
+        //버프가 있다면 버프를 발동.
+        if (m_CurrentBossSkill.BuffAdded != 0)
+        {
+            MainManager.Instance.GetBuffManager().Buff(m_CurrentBossSkill.BuffAdded);
+        }
+
         //연계스킬있는지 확인후 다시 스킬실행.
         if (m_CurrentBossSkill.SkillAdded != 0)
             BossSkillAction(m_CurrentBossSkill.SkillAdded);
@@ -1118,6 +1135,14 @@ public class BossSkill : MonoBehaviour
 
         Debug.Log("방출(도넛) 스킬 종료");
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+
+        //버프가 있다면 버프를 발동.
+        if (m_CurrentBossSkill.BuffAdded != 0)
+        {
+            MainManager.Instance.GetBuffManager().Buff(m_CurrentBossSkill.BuffAdded);
+        }
+
+
         //연계스킬있는지 확인후 다시 스킬실행.
         if (m_CurrentBossSkill.SkillAdded != 0)
             BossSkillAction(m_CurrentBossSkill.SkillAdded);

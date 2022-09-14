@@ -26,8 +26,6 @@ public class Spirit : MonoBehaviour
 		foreach (var spirit in DataTableManager.Instance.GetDataTable<Spirit_TableExcelLoader>().DataList)
 		{
 
-
-            
 			if (spirit.SpritTableIndex == index)
 			{
 				m_SpiritClass.m_SpiritData = spirit;
@@ -58,7 +56,6 @@ public class Spirit : MonoBehaviour
 				}
 				else
 				{
-					
 					StartCoroutine(TileSpirit(m_SpiritClass.m_SpiritData, m_SpiritClass.m_SpiritSkillData, m_PlayerRow,m_PlayerColumn));
 				}
 				

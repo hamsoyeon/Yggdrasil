@@ -347,7 +347,7 @@ public class BossFSM : MonoBehaviour
 
                     if( (bossRow == playerRow) && ( bossColumn == playerColumn ))
                     {
-
+                        Debug.Log("보스가 플레이어 위치에 도착했습니다.");
                         Debug.Log($"Boss : {bossRow}/{bossColumn}");
                         Debug.Log($"Player: {playerRow}/{playerColumn}");
                     }
@@ -391,47 +391,6 @@ public class BossFSM : MonoBehaviour
                         AnimationManager.GetInstance().PlayAnimation(anim, "Run");
                     }
 
-
-                    //if (bossRow != playerRow && bossColumn != playerColumn)        //좌표가 똑같지 않다면.
-                    //{
-                    //    //a*알고리즘 발동.
-                    //    bossBlock = new Block(bossRow, bossColumn); //보스 위치좌표 할당
-                    //    PlayerBlock = new Block(playerRow, playerColumn); //플레이어 위치좌표 할당
-
-                    //    //현재 패스얻어오는곳에서 가중치 값이 똑같은 타일에 있을경우 보스가 안움직이는 버그 발생 + 일정이상의 거리를 벌려야 추격.(한칸 주위에서는 플레이어 자리까지 추격안됨)
-
-                    //    startBlock = AStarNJ.PathFinding(GameBoard, bossBlock, PlayerBlock);  // 두 좌표로 a* 사용후 패스 얻어오기
-                    //    tempBlock = null;  //임시 블럭 다음블럭을 저장후 바꾸기위한 값. 
-
-                    //    if (startBlock != null) //원본값 저장.
-                    //    {
-                    //        originBlock = startBlock;
-                    //    }
-
-
-                    //    // 플레이어까지의 타일 루트  노란색으로 색칠해주기
-                    //    while (true)
-                    //    {
-                            
-                    //        if (startBlock.next != null)
-                    //        {
-                    //            Debug.Log($"길 찾기:{startBlock.next.x}/{startBlock.next.y}");
-                    //            MainManager.Instance.GetStageManager().m_MapInfo[startBlock.next.x, startBlock.next.y].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.yellow;
-                    //            tempBlock = startBlock.next;
-                    //        }
-                    //        else
-                    //        {
-                    //            break;
-                    //        }
-                    //        startBlock = tempBlock;
-                    //    }
-
-                    //    bossMove = false;
-                    //    behavior = true;
-                    //    moving = true;
-
-                    //}
-
                     
                 }
                 else if(moveAndSkill == 2)
@@ -440,7 +399,7 @@ public class BossFSM : MonoBehaviour
                     Debug.Log("스킬발동");
                     currentBossStamina = 0;
 
-                    BossRandomSkill = Random.Range(1, 4);
+                    BossRandomSkill = Random.Range(1, 4);  //스킬 3개만 사용중 (소환스킬 사용x)
                     switch (BossRandomSkill)
                     {
                         case 1:
