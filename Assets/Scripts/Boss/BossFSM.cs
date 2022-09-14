@@ -37,6 +37,19 @@ public class BossFSM : MonoBehaviour
 
     public GameObject player;
 
+    //int[] UpRotation = { -45, 45 }; // 타일 z - 1 을 할 때 사용할 로테이션 값
+    //int[] SameRotation = { -90, 90 }; // 타일 z 값이 같을 때 사용할 로테이션 값
+    //int[] DownRotation = { -135, 135 }; // 타일 z + 1 을 할 때 사용할 로테이션 값
+
+    //int BossRotation;
+
+    //보스의 디렉션값을 비교하는 방식은 보스의 현재 타일의 포지션 값과 다음 이동 타겟의 포지션값을 연산 -> 
+    //현재 보스 타일 z < 다음 타일 z = DownRotation배열 사용 || 보스 타일 z > 다음 타일 z = UpRotation 배열 사용 || 보스 타일 z = 다음 타일 z = SameRotation 사용
+    //배열 사용 방식은 x 값을 비교하고 결정한다(람다식 사용)
+    //만약 z값이 UpRotation 을 사용한다고 하면 BossRotation =  현재 보스 x > 다음 타일 x ? UpRotaion[0] : UpRotation[1];
+    //BossObject.transform.rotation.y = BossRotation;
+    //이렇게 하면 보스 디렉션 만들 수 있을 것 같다.
+    //그냥 이동한 로테이션 값 그대로 둔다.
 
     float h, v; //BossDirection
 
@@ -171,7 +184,7 @@ public class BossFSM : MonoBehaviour
             currentBossStamina -= m_BossClass.m_BossStatData.MoveStUsed; //스태미너 감소
             targetPos = MainManager.Instance.GetStageManager().m_MapInfo[tempBlock.x, tempBlock.y].MapPos;    //x=row y=column
             bossMove = true;
-            Debug.Log(targetPos);
+            Debug.Log(targetPos); //보스 이동 하는 다음 타일의 포지션값 던져준다.
            
         }
         else
