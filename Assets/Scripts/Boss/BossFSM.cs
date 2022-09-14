@@ -347,7 +347,8 @@ public class BossFSM : MonoBehaviour
                     moveAndSkill = 1;
                 }
 
-                //moveAndSkill = 1;  // 스킬고정
+                //moveAndSkill = 1;  // 이동고정
+                moveAndSkill = 2;  // 스킬고정
 
                 if (moveAndSkill ==1)
                 {
@@ -415,7 +416,9 @@ public class BossFSM : MonoBehaviour
                     Debug.Log("스킬발동");
                     currentBossStamina = 0;
 
-                    BossRandomSkill = Random.Range(1, 4);  //스킬 3개만 사용중 (소환스킬 사용x)
+                    //BossRandomSkill = Random.Range(1, 5);  //스킬 3개만 사용중 (소환스킬 사용x)
+                    BossRandomSkill = 4;  //고정스킬(몹 소환)
+
                     switch (BossRandomSkill)
                     {
                         case 1:

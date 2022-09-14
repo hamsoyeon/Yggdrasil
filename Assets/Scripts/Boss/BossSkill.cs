@@ -161,7 +161,6 @@ public class BossSkill : MonoBehaviour
             case BossSkillType.DIFFUSION:
                 StartCoroutine(SkillDiffusionAction());
                 break;
-
             case BossSkillType.SUMMONS:
                 StartCoroutine(MobSummons());
                 break;
@@ -201,7 +200,10 @@ public class BossSkill : MonoBehaviour
 
         yield return new WaitForSeconds(m_CurrentBossSkill.LifeTime);
 
+        m_StageMgr.m_MapInfo[Row, column].BossEffect = false;
+        Destroy(m_StageMgr.m_MapInfo[Row, column].BossEffectObject);
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+        this.gameObject.GetComponent<BossFSM>().behavior = false;
 
         yield return null;
     }
