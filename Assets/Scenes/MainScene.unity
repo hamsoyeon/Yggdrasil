@@ -9238,6 +9238,8 @@ MonoBehaviour:
   buttonTexture: {fileID: 21300000, guid: b95d168bf09e4e9469f46e238681fcc8, type: 3}
   p_spiritSkillBtn: {fileID: 4668501934086259184, guid: 82480d5fa307e974581ad4e3c328924a, type: 3}
   spirit_Buttons: []
+  is_CoolTime: []
+  collTime_Text: []
   minimap_2DIcon_Player: {fileID: 1641483170}
   m_ATK_Spirit: {r: 0.990566, g: 0.4532307, b: 0.4532307, a: 0}
   m_DEF_Spirit: {r: 0.13803846, g: 0.50445, b: 0.8867924, a: 0}
