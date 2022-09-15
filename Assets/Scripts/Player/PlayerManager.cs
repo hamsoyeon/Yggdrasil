@@ -196,14 +196,6 @@ public class PlayerManager : MonoBehaviour
         }
 
         
-        // DataManager라는 Object의 List에 해당 데이터를 넣어주면 찾아서 사용가능.(디버깅용)
-        // Use ExcelReader
-        //foreach (var element in DataTableManager.Instance.GetDataTable<Map_TableExcelLoader>().DataList)
-        //{
-        //    Debug.Log(element.No);
-        //    Debug.Log(element.StageName);
-        //}
-
         anim = this.transform.GetChild(0).GetComponent<Animator>();
 
         if (anim == null)

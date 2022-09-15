@@ -155,7 +155,8 @@ public class BoardBehaviour : MonoBehaviour
     {
         PlayerGameObject = new GameObject();
         PlayerGameObject.name = "Player";
-
+        PlayerGameObject.layer = 11;
+       
         var visualPiece = (GameObject)Instantiate(PlayerPiece);
         //var visualPiece = PrefabLoader.Instance.PrefabDic[];
 
@@ -166,6 +167,7 @@ public class BoardBehaviour : MonoBehaviour
 
         visualPiece.transform.parent = PlayerGameObject.transform;
 
+        
         var pb = (PieceBehaviour)visualPiece.GetComponent("PieceBehaviour");
 
         pb.Piece = piece;

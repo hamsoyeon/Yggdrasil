@@ -32,7 +32,7 @@ public class Action : MonoBehaviour
 
 
 
-	public GameObject SpiritPrefab;  //ÀÓ½Ã
+	public GameObject SpiritPrefab;  //ì„ì‹œ
 	//private SkillManager skillMgr;
 	private Vector3 direction;
 
@@ -58,21 +58,21 @@ public class Action : MonoBehaviour
 		float near = 0f;
 		GameObject nearEnemy = null;
 
-		//¹üÀ§ ³»ÀÇ ÀûÀ» Ã£´Â´Ù.
-		Collider[] colls = Physics.OverlapSphere(findStartObject.transform.position, distance, 1 << 9);  //9¹øÂ° ·¹ÀÌ¾î = Enemy
+		//ë²”ìœ„ ë‚´ì˜ ì ì„ ì°¾ëŠ”ë‹¤.
+		Collider[] colls = Physics.OverlapSphere(findStartObject.transform.position, distance, 1 << 9);  //9ë²ˆì§¸ ë ˆì´ì–´ = Enemy
 
 		if (colls.Length == 0)
 		{
-			Debug.Log("¹üÀ§¿¡ ÀûÀÌ ¾ø½À´Ï´Ù.");
+			Debug.Log("ë²”ìœ„ì— ì ì´ ì—†ìŠµë‹ˆë‹¤.");
 			DestroyObject(findStartObject);
 			return null;
 		}
 		else
 		{
-			//ÀûÀÌ ÀÖ´Ù¸é ±× Àûµé Áß¿¡
+			//ì ì´ ìˆë‹¤ë©´ ê·¸ ì ë“¤ ì¤‘ì—
 			for (int i = 0; i < colls.Length; i++)
 			{
-				//Á¤·É°úÀÇ °Å¸®¸¦ °è»êÈÄ
+				//ì •ë ¹ê³¼ì˜ ê±°ë¦¬ë¥¼ ê³„ì‚°í›„
 				Dist = Vector3.Distance(findStartObject.transform.position, colls[i].transform.position);
 
 				if (i == 0)
@@ -81,7 +81,7 @@ public class Action : MonoBehaviour
 					nearEnemy = colls[i].gameObject;
 				}
 
-				//±× °Å¸®°¡ ÀÛ´Ù¸é °Å¸®¸¦ ÀúÀåÇÏ°í ÇØ´ç ¿ÀºêÁ§Æ®¸¦ ÀúÀå
+				//ê·¸ ê±°ë¦¬ê°€ ì‘ë‹¤ë©´ ê±°ë¦¬ë¥¼ ì €ì¥í•˜ê³  í•´ë‹¹ ì˜¤ë¸Œì íŠ¸ë¥¼ ì €ì¥
 				if (Dist < near)
 				{
 					near = Dist;
@@ -110,15 +110,15 @@ public class Action : MonoBehaviour
 
 		while (true)
 		{
-			//Áö¼Ó½Ã°£ Ã¼Å©
+			//ì§€ì†ì‹œê°„ ì²´í¬
 			spirit_time += Time.deltaTime;
 
-			//Á¤·É Áö¼Ó½Ã°£ÀÌ °æ°ú½Ã 
+			//ì •ë ¹ ì§€ì†ì‹œê°„ì´ ê²½ê³¼ì‹œ 
 			if (spirit_time >= duration)
 			{
-				//¹öÇÁ ÇØÁ¦ ÄÚµå
+				//ë²„í”„ í•´ì œ ì½”ë“œ
 
-				//Á¤·É ÆÄ±«ÈÄ ÄÚ·çÆ¾ Á¾·á
+				//ì •ë ¹ íŒŒê´´í›„ ì½”ë£¨í‹´ ì¢…ë£Œ
 				DestroyObject(spirit);
 				yield break;
 			}
@@ -127,14 +127,14 @@ public class Action : MonoBehaviour
 			{
 				case SkillList.DefenseDmg:
 					{
-						//¹üÀ§³»ÀÇ ÇÃ·¹ÀÌ¾î¸¦ Ã£¾Æ¼­ 
-						colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 8);  //8¹øÂ° ·¹ÀÌ¾î = Player
+						//ë²”ìœ„ë‚´ì˜ í”Œë ˆì´ì–´ë¥¼ ì°¾ì•„ì„œ 
+						colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 8);  //8ë²ˆì§¸ ë ˆì´ì–´ = Player
 						foreach (var rangeCollider in colls)
 						{
-							//¹üÀ§³»¿¡¼­ Àû¿ë½ÃÅ³ ¹öÇÁ ³»¿ë
+							//ë²”ìœ„ë‚´ì—ì„œ ì ìš©ì‹œí‚¬ ë²„í”„ ë‚´ìš©
 
-							//µğ¹ö±ë
-							Debug.Log($"{rangeCollider.name}ÀÇ ÀÔ´Â ÇÇÇØ°¡ 70% °¨¼ÒÇÕ´Ï´Ù.");
+							//ë””ë²„ê¹…
+							Debug.Log($"{rangeCollider.name}ì˜ ì…ëŠ” í”¼í•´ê°€ 70% ê°ì†Œí•©ë‹ˆë‹¤.");
 						}
 					}
 					break;
@@ -147,22 +147,22 @@ public class Action : MonoBehaviour
 						{
 							attack_time = 0f;
 
-							//¹üÀ§³»ÀÇ ÀûÀ» Ã£¾Æ¼­ 
-							colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9¹øÂ° ·¹ÀÌ¾î = Enemy
+							//ë²”ìœ„ë‚´ì˜ ì ì„ ì°¾ì•„ì„œ 
+							colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9ë²ˆì§¸ ë ˆì´ì–´ = Enemy
 							foreach (var rangeCollider in colls)
 							{
-								//¹Ğ¸®´Â ¹°Ã¼¿Í ¹Ğ¸®´Â ¸¶Áö¸· Á¡°úÀÇ °Å¸®(Èû)À» ±¸ÇÏ°í
+								//ë°€ë¦¬ëŠ” ë¬¼ì²´ì™€ ë°€ë¦¬ëŠ” ë§ˆì§€ë§‰ ì ê³¼ì˜ ê±°ë¦¬(í˜)ì„ êµ¬í•˜ê³ 
 
-								//ÇÃ·¹ÀÌ¾î¿Í ¹Ğ¸®´Â ¹°Ã¼»çÀÌÀÇ ¹æÇâÀ» ±¸ÇØ¼­
+								//í”Œë ˆì´ì–´ì™€ ë°€ë¦¬ëŠ” ë¬¼ì²´ì‚¬ì´ì˜ ë°©í–¥ì„ êµ¬í•´ì„œ
 								var heading = rangeCollider.transform.position - spirit.transform.position;
 								heading.y = 0f;
 								heading *= range;
 
-								//º¸½º°¡ ¾Æ´Ï¶ó¸é
+								//ë³´ìŠ¤ê°€ ì•„ë‹ˆë¼ë©´
 								if (rangeCollider.gameObject.name != "Boss")
 								{
 									rangeCollider.gameObject.transform.position = Vector3.MoveTowards(rangeCollider.gameObject.transform.position, heading, 1.5f);
-									Debug.Log($"{rangeCollider.ToString()}À» ¹üÀ§ ³»¿¡¼­ ¹Ğ¾î³À´Ï´Ù.");
+									Debug.Log($"{rangeCollider.ToString()}ì„ ë²”ìœ„ ë‚´ì—ì„œ ë°€ì–´ëƒ…ë‹ˆë‹¤.");
 								}
 							}
 
@@ -172,34 +172,34 @@ public class Action : MonoBehaviour
 
 				case SkillList.DefenseSpd:
 					{
-						//¹üÀ§³»ÀÇ ÇÃ·¹ÀÌ¾î¸¦ Ã£¾Æ¼­ 
+						//ë²”ìœ„ë‚´ì˜ í”Œë ˆì´ì–´ë¥¼ ì°¾ì•„ì„œ 
 						if (range_check)
 						{
-							colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9¹øÂ° ·¹ÀÌ¾î = Enemy
+							colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9ë²ˆì§¸ ë ˆì´ì–´ = Enemy
 							range_check = false;
 						}
 
 
 						foreach (var rangeCollider in colls)
 						{
-							//¹üÀ§³»¿¡¼­ Àû¿ë½ÃÅ³ ¹öÇÁ ³»¿ë
+							//ë²”ìœ„ë‚´ì—ì„œ ì ìš©ì‹œí‚¬ ë²„í”„ ë‚´ìš©
 
-							//µğ¹ö±ë
-							Debug.Log($"{rangeCollider.ToString()}ÀÇ ÀÌµ¿¼Óµµ¸¦ 0À¸·Î(½ºÅÏÈ¿°ú)¸¦ Áİ´Ï´Ù.");
+							//ë””ë²„ê¹…
+							Debug.Log($"{rangeCollider.ToString()}ì˜ ì´ë™ì†ë„ë¥¼ 0ìœ¼ë¡œ(ìŠ¤í„´íš¨ê³¼)ë¥¼ ì¤ë‹ˆë‹¤.");
 						}
 					}
 					break;
 
 				case SkillList.SupportDmg:
 					{
-						//¹üÀ§³»ÀÇ ÀûÀ» Ã£¾Æ¼­ 
-						colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9¹øÂ° ·¹ÀÌ¾î = Enemy
+						//ë²”ìœ„ë‚´ì˜ ì ì„ ì°¾ì•„ì„œ 
+						colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9ë²ˆì§¸ ë ˆì´ì–´ = Enemy
 						foreach (var rangeCollider in colls)
 						{
-							//¹üÀ§³»¿¡¼­ Àû¿ë½ÃÅ³ µğ¹öÇÁ ³»¿ë
+							//ë²”ìœ„ë‚´ì—ì„œ ì ìš©ì‹œí‚¬ ë””ë²„í”„ ë‚´ìš©
 
-							//µğ¹ö±ë
-							Debug.Log($"{rangeCollider.name}Àº ÀÔ´Â ÇÇÇØ°¡ 20% Áõ°¡ÇÕ´Ï´Ù.");
+							//ë””ë²„ê¹…
+							Debug.Log($"{rangeCollider.name}ì€ ì…ëŠ” í”¼í•´ê°€ 20% ì¦ê°€í•©ë‹ˆë‹¤.");
 						}
 					}
 					break;
@@ -222,7 +222,7 @@ public class Action : MonoBehaviour
 
 		if (skill != SkillList.AttackDis)
 		{
-			//Àû¿¡°Ô ÀÌµ¿.
+			//ì ì—ê²Œ ì´ë™.
 			while (true)
 			{
 				spirit.transform.position = Vector3.MoveTowards(spirit.transform.position, nearbyEnemy.transform.position, 0.1f);
@@ -252,15 +252,15 @@ public class Action : MonoBehaviour
 					{
 						int randvalue = 0;
 
-						//ÁöÁ¤¹üÀ§³»ÀÇ ¸ğµç ¿¡³Ê¹Ì(¸÷µé¸¸)¸¦ Ã£Àº ÈÄ
-						Collider[] colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9¹øÂ° ·¹ÀÌ¾î = Enemy
+						//ì§€ì •ë²”ìœ„ë‚´ì˜ ëª¨ë“  ì—ë„ˆë¯¸(ëª¹ë“¤ë§Œ)ë¥¼ ì°¾ì€ í›„
+						Collider[] colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9ë²ˆì§¸ ë ˆì´ì–´ = Enemy
 
 						for (int i = 0; i < 10; i++)
 						{
 							randvalue = Random.Range(0, colls.Length);
 
-							//°°Àº ´ë»ó¿¡°Ô ÇÇÇØ¸¦ ÀÔÈú½Ã 20% °¨¼ÒµÈ ÇÇÇØ¸¦ ÁÖ´Â ÄÚµå Ãß°¡.
-							Debug.Log($"{colls[randvalue].name}¿¡°Ô ´ë¹ÌÁö¸¦ Áİ´Ï´Ù");
+							//ê°™ì€ ëŒ€ìƒì—ê²Œ í”¼í•´ë¥¼ ì…íì‹œ 20% ê°ì†Œëœ í”¼í•´ë¥¼ ì£¼ëŠ” ì½”ë“œ ì¶”ê°€.
+							Debug.Log($"{colls[randvalue].name}ì—ê²Œ ëŒ€ë¯¸ì§€ë¥¼ ì¤ë‹ˆë‹¤");
 
 						}
 						DestroyObject(spirit);
@@ -277,12 +277,12 @@ public class Action : MonoBehaviour
 
 							spirit.transform.position = Vector3.MoveTowards(spirit.transform.position, nearbyEnemy.transform.position + direction, 1.5f);
 
-							Collider[] colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9¹øÂ° ·¹ÀÌ¾î = Enemy
+							Collider[] colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9ë²ˆì§¸ ë ˆì´ì–´ = Enemy
 
 							foreach (var rangeCollider in colls)
 							{
-								//´ë¹ÌÁö ÄÚµå
-								Debug.Log($"{rangeCollider.name}¿¡°Ô ÇÇÇØ¸¦ Áİ´Ï´Ù.");
+								//ëŒ€ë¯¸ì§€ ì½”ë“œ
+								Debug.Log($"{rangeCollider.name}ì—ê²Œ í”¼í•´ë¥¼ ì¤ë‹ˆë‹¤.");
 							}
 
 						}
@@ -297,13 +297,13 @@ public class Action : MonoBehaviour
 						if (attack_time >= 0.33f)
 						{
 							attack_time = 0f;
-							//ÁöÁ¤¹üÀ§³»ÀÇ ¸ğµç ¿¡³Ê¹Ì¸¦ Ã£Àº ÈÄ
-							Collider[] colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9¹øÂ° ·¹ÀÌ¾î = Enemy
+							//ì§€ì •ë²”ìœ„ë‚´ì˜ ëª¨ë“  ì—ë„ˆë¯¸ë¥¼ ì°¾ì€ í›„
+							Collider[] colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9ë²ˆì§¸ ë ˆì´ì–´ = Enemy
 
 							foreach (var rangeCollider in colls)
 							{
-								//´ë¹ÌÁö ÄÚµå
-								Debug.Log($"{rangeCollider.name}¿¡°Ô ÀåÆÇ ÇÇÇØ¸¦ Áİ´Ï´Ù.");
+								//ëŒ€ë¯¸ì§€ ì½”ë“œ
+								Debug.Log($"{rangeCollider.name}ì—ê²Œ ì¥íŒ í”¼í•´ë¥¼ ì¤ë‹ˆë‹¤.");
 							}
 
 						}
@@ -313,10 +313,10 @@ public class Action : MonoBehaviour
 					{
 						if (spirit_time < 0.75f)
 						{
-							Collider[] colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9¹øÂ° ·¹ÀÌ¾î = Enemy
+							Collider[] colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9ë²ˆì§¸ ë ˆì´ì–´ = Enemy
 							foreach (var rangeCollider in colls)
 							{
-								//º¸½º°¡ ¾Æ´Ï¶ó¸é + À§Ä¡°¡ °°Áö ¾Ê´Ù¸é ±× ´ë»óÀ» ²ø°í¿Â´Ù.
+								//ë³´ìŠ¤ê°€ ì•„ë‹ˆë¼ë©´ + ìœ„ì¹˜ê°€ ê°™ì§€ ì•Šë‹¤ë©´ ê·¸ ëŒ€ìƒì„ ëŒê³ ì˜¨ë‹¤.
 								if (rangeCollider.gameObject.name != "Boss" && rangeCollider.transform.position != spirit.transform.position)
 								{
 									rangeCollider.gameObject.transform.position = Vector3.MoveTowards(rangeCollider.gameObject.transform.position, spirit.transform.position, 0.05f);
@@ -327,11 +327,11 @@ public class Action : MonoBehaviour
 
 						if (spirit_time >= 0.75f)
 						{
-							//³ª¸ÓÁö ½Ã°£µ¿¾È ÀÌµ¿¼Óµµ 0À¸·Î ¸¸µå´Â ÄÚµå.
-							Collider[] colls = Physics.OverlapSphere(spirit.transform.position, 0.5f, 1 << 9);  //9¹øÂ° ·¹ÀÌ¾î = Enemy
+							//ë‚˜ë¨¸ì§€ ì‹œê°„ë™ì•ˆ ì´ë™ì†ë„ 0ìœ¼ë¡œ ë§Œë“œëŠ” ì½”ë“œ.
+							Collider[] colls = Physics.OverlapSphere(spirit.transform.position, 0.5f, 1 << 9);  //9ë²ˆì§¸ ë ˆì´ì–´ = Enemy
 							foreach (var rangeCollider in colls)
 							{
-								Debug.Log($"{rangeCollider.name}´Â ½ºÅÏ¿¡ °É·È½À´Ï´Ù.");
+								Debug.Log($"{rangeCollider.name}ëŠ” ìŠ¤í„´ì— ê±¸ë ¸ìŠµë‹ˆë‹¤.");
 							}
 						}
 					}
@@ -339,14 +339,14 @@ public class Action : MonoBehaviour
 					break;
 				case SkillList.SupportSpd:
 					{
-						//¹üÀ§³»ÀÇ ÀûÀ» Ã£´Â´Ù.
-						Collider[] colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9¹øÂ° ·¹ÀÌ¾î = Enemy
+						//ë²”ìœ„ë‚´ì˜ ì ì„ ì°¾ëŠ”ë‹¤.
+						Collider[] colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 9);  //9ë²ˆì§¸ ë ˆì´ì–´ = Enemy
 						foreach (var rangeCollider in colls)
 						{
-							//¿©±â¼­ ÀÌµ¿¼Óµµ °¨¼Ò ÇÏ´Â ³»¿ë Ãß°¡.
+							//ì—¬ê¸°ì„œ ì´ë™ì†ë„ ê°ì†Œ í•˜ëŠ” ë‚´ìš© ì¶”ê°€.
 
-							//µğ¹ö±ë
-							Debug.Log($"{rangeCollider.name}ÀÇ ÀÌµ¿¼Óµµ´Â -50% °¨¼ÒÇÕ´Ï´Ù.");
+							//ë””ë²„ê¹…
+							Debug.Log($"{rangeCollider.name}ì˜ ì´ë™ì†ë„ëŠ” -50% ê°ì†Œí•©ë‹ˆë‹¤.");
 						}
 
 					}
@@ -361,25 +361,25 @@ public class Action : MonoBehaviour
 
 
 	#region SupportSkill 
-	public void SupportDamage()  //Áö¿ø-ÇÇÇØ
+	public void SupportDamage()  //ì§€ì›-í”¼í•´
 	{
 		GameObject SupDmg_Spirit = Instantiate(SpiritPrefab);
 
-		//Á¤·ÉÀ» ÇÃ·¹ÀÌ¾î À§Ä¡¿¡ ÀÌµ¿.  -> ³ªÁß¿¡ ÇöÀçÀÖ´Â Å¸ÀÏ Áß¾Ó¿¡ À§Ä¡½ÃÄÑ¾ßÇÔ(ÀÌ¹Ì Å¸ÀÏÁß¾Ó¿¡ Á¤·ÉÀÌ ÀÖÀ»°æ¿ì ¼³Ä¡ºÒ°¡)
+		//ì •ë ¹ì„ í”Œë ˆì´ì–´ ìœ„ì¹˜ì— ì´ë™.  -> ë‚˜ì¤‘ì— í˜„ì¬ìˆëŠ” íƒ€ì¼ ì¤‘ì•™ì— ìœ„ì¹˜ì‹œì¼œì•¼í•¨(ì´ë¯¸ íƒ€ì¼ì¤‘ì•™ì— ì •ë ¹ì´ ìˆì„ê²½ìš° ì„¤ì¹˜ë¶ˆê°€)
 		SupDmg_Spirit.transform.position = PlayerManager.p_Object.transform.position;
 
 		StartCoroutine(InstallSprit(SupDmg_Spirit, 2f, 5f, SkillList.SupportDmg));
 	}
 
 
-	public void SupportDistance() //Áö¿ø-°Å¸®
+	public void SupportDistance() //ì§€ì›-ê±°ë¦¬
 	{
 		GameObject nearEnemy = null;
 		GameObject SupDis_Spirit = Instantiate(SpiritPrefab);
-		//Á¤·ÉÀ» ÇÃ·¹ÀÌ¾î À§Ä¡¿¡ ÀÌµ¿
+		//ì •ë ¹ì„ í”Œë ˆì´ì–´ ìœ„ì¹˜ì— ì´ë™
 		SupDis_Spirit.transform.position = PlayerManager.p_Object.transform.position;
 
-		//±ÙÃ³¿¡ ÀûÀ» Ã£´Â´Ù
+		//ê·¼ì²˜ì— ì ì„ ì°¾ëŠ”ë‹¤
 		nearEnemy = FindNearbyEnemy(SupDis_Spirit, 15f);
 
 		if (nearEnemy == null)
@@ -388,14 +388,14 @@ public class Action : MonoBehaviour
 			StartCoroutine(TrackingSpirit(SupDis_Spirit, nearEnemy, 1.5f, 5f, SkillList.SupportDis));
 	}
 
-	public void SupportSpeed()  //Áö¿ø-ÀÌµ¿
+	public void SupportSpeed()  //ì§€ì›-ì´ë™
 	{
 		GameObject nearEnemy = null;
 		GameObject SupSpeed_Spirit = Instantiate(SpiritPrefab);
-		//Á¤·ÉÀ» ÇÃ·¹ÀÌ¾î À§Ä¡¿¡ ÀÌµ¿
+		//ì •ë ¹ì„ í”Œë ˆì´ì–´ ìœ„ì¹˜ì— ì´ë™
 		SupSpeed_Spirit.transform.position = PlayerManager.p_Object.transform.position;
 
-		//±ÙÃ³¿¡ ÀûÀ» Ã£´Â´Ù
+		//ê·¼ì²˜ì— ì ì„ ì°¾ëŠ”ë‹¤
 		nearEnemy = FindNearbyEnemy(SupSpeed_Spirit, 15f);
 
 		if (nearEnemy == null)
@@ -411,10 +411,10 @@ public class Action : MonoBehaviour
 	{
 		GameObject nearEnemy = null;
 		GameObject AtkDis_Spirit = Instantiate(SpiritPrefab);
-		//Á¤·ÉÀ» ÇÃ·¹ÀÌ¾î À§Ä¡¿¡ ÀÌµ¿
+		//ì •ë ¹ì„ í”Œë ˆì´ì–´ ìœ„ì¹˜ì— ì´ë™
 		AtkDis_Spirit.transform.position = PlayerManager.p_Object.transform.position;
 
-		//±ÙÃ³¿¡ ÀûÀ» Ã£´Â´Ù
+		//ê·¼ì²˜ì— ì ì„ ì°¾ëŠ”ë‹¤
 		nearEnemy = FindNearbyEnemy(AtkDis_Spirit, 15f);
 
 		if (nearEnemy == null)
@@ -428,10 +428,10 @@ public class Action : MonoBehaviour
 	{
 		GameObject nearEnemy = null;
 		GameObject AtkDmg_Spirit = Instantiate(SpiritPrefab);
-		//Á¤·ÉÀ» ÇÃ·¹ÀÌ¾î À§Ä¡¿¡ ÀÌµ¿
+		//ì •ë ¹ì„ í”Œë ˆì´ì–´ ìœ„ì¹˜ì— ì´ë™
 		AtkDmg_Spirit.transform.position = PlayerManager.p_Object.transform.position;
 
-		//±ÙÃ³¿¡ ÀûÀ» Ã£´Â´Ù
+		//ê·¼ì²˜ì— ì ì„ ì°¾ëŠ”ë‹¤
 		nearEnemy = FindNearbyEnemy(AtkDmg_Spirit, 10f);
 
 		if (nearEnemy == null)
@@ -455,10 +455,10 @@ public class Action : MonoBehaviour
 	{
 		GameObject nearEnemy = null;
 		GameObject AtkSpeed_Spirit = Instantiate(SpiritPrefab);
-		//Á¤·ÉÀ» ÇÃ·¹ÀÌ¾î À§Ä¡¿¡ ÀÌµ¿
+		//ì •ë ¹ì„ í”Œë ˆì´ì–´ ìœ„ì¹˜ì— ì´ë™
 		AtkSpeed_Spirit.transform.position = PlayerManager.p_Object.transform.position;
 
-		//±ÙÃ³¿¡ ÀûÀ» Ã£´Â´Ù
+		//ê·¼ì²˜ì— ì ì„ ì°¾ëŠ”ë‹¤
 		nearEnemy = FindNearbyEnemy(AtkSpeed_Spirit, 10f);
 
 		AtkSpeed_Spirit.transform.position = nearEnemy.transform.position;
@@ -477,7 +477,7 @@ public class Action : MonoBehaviour
 	{
 		GameObject DefDmg_Spirit = Instantiate(SpiritPrefab);
 
-		//Á¤·ÉÀ» ÇÃ·¹ÀÌ¾î À§Ä¡¿¡ ÀÌµ¿.  -> ³ªÁß¿¡ ÇöÀçÀÖ´Â Å¸ÀÏ Áß¾Ó¿¡ À§Ä¡½ÃÄÑ¾ßÇÔ(ÀÌ¹Ì Å¸ÀÏÁß¾Ó¿¡ Á¤·ÉÀÌ ÀÖÀ»°æ¿ì ¼³Ä¡ºÒ°¡)
+		//ì •ë ¹ì„ í”Œë ˆì´ì–´ ìœ„ì¹˜ì— ì´ë™.  -> ë‚˜ì¤‘ì— í˜„ì¬ìˆëŠ” íƒ€ì¼ ì¤‘ì•™ì— ìœ„ì¹˜ì‹œì¼œì•¼í•¨(ì´ë¯¸ íƒ€ì¼ì¤‘ì•™ì— ì •ë ¹ì´ ìˆì„ê²½ìš° ì„¤ì¹˜ë¶ˆê°€)
 		DefDmg_Spirit.transform.position = PlayerManager.p_Object.transform.position;
 
 		StartCoroutine(InstallSprit(DefDmg_Spirit, 1.5f, 3f, SkillList.DefenseDmg));
@@ -487,7 +487,7 @@ public class Action : MonoBehaviour
 	{
 		GameObject DefDis_Spirit = Instantiate(SpiritPrefab);
 
-		//Á¤·ÉÀ» ÇÃ·¹ÀÌ¾î À§Ä¡¿¡ ÀÌµ¿.  -> ³ªÁß¿¡ ÇöÀçÀÖ´Â Å¸ÀÏ Áß¾Ó¿¡ À§Ä¡½ÃÄÑ¾ßÇÔ(ÀÌ¹Ì Å¸ÀÏÁß¾Ó¿¡ Á¤·ÉÀÌ ÀÖÀ»°æ¿ì ¼³Ä¡ºÒ°¡)
+		//ì •ë ¹ì„ í”Œë ˆì´ì–´ ìœ„ì¹˜ì— ì´ë™.  -> ë‚˜ì¤‘ì— í˜„ì¬ìˆëŠ” íƒ€ì¼ ì¤‘ì•™ì— ìœ„ì¹˜ì‹œì¼œì•¼í•¨(ì´ë¯¸ íƒ€ì¼ì¤‘ì•™ì— ì •ë ¹ì´ ìˆì„ê²½ìš° ì„¤ì¹˜ë¶ˆê°€)
 		DefDis_Spirit.transform.position = PlayerManager.p_Object.transform.position;
 
 		StartCoroutine(InstallSprit(DefDis_Spirit, 3.2f, 5f, SkillList.DefenseDis));
@@ -497,12 +497,23 @@ public class Action : MonoBehaviour
 	{
 		GameObject DefSpd_Spirit = Instantiate(SpiritPrefab);
 
-		//Á¤·ÉÀ» ÇÃ·¹ÀÌ¾î À§Ä¡¿¡ ÀÌµ¿.  -> ³ªÁß¿¡ ÇöÀçÀÖ´Â Å¸ÀÏ Áß¾Ó¿¡ À§Ä¡½ÃÄÑ¾ßÇÔ(ÀÌ¹Ì Å¸ÀÏÁß¾Ó¿¡ Á¤·ÉÀÌ ÀÖÀ»°æ¿ì ¼³Ä¡ºÒ°¡)
+		//ì •ë ¹ì„ í”Œë ˆì´ì–´ ìœ„ì¹˜ì— ì´ë™.  -> ë‚˜ì¤‘ì— í˜„ì¬ìˆëŠ” íƒ€ì¼ ì¤‘ì•™ì— ìœ„ì¹˜ì‹œì¼œì•¼í•¨(ì´ë¯¸ íƒ€ì¼ì¤‘ì•™ì— ì •ë ¹ì´ ìˆì„ê²½ìš° ì„¤ì¹˜ë¶ˆê°€)
 		DefSpd_Spirit.transform.position = PlayerManager.p_Object.transform.position;
 
 		StartCoroutine(InstallSprit(DefSpd_Spirit, 2.0f, 5f, SkillList.DefenseSpd));
 	}
-	#endregion
+    #endregion
+
+    float rotateSpeed = 5.0f;
+
+
+
+    public void SummonDirection(GameObject summon, GameObject target)
+    {
+        summon.transform.rotation = Quaternion.Lerp(transform.rotation,
+            Quaternion.LookRotation(target.transform.position),
+            Time.deltaTime * rotateSpeed);
+    }
 
 
 	private void Awake()
