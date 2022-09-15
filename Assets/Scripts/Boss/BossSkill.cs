@@ -168,28 +168,22 @@ public class BossSkill : MonoBehaviour
         }
     }
 
-
+    //쫄몹 소환 코루틴
     IEnumerator MobSummons()
     {
+        int Row = MainManager.Instance.GetStageManager().m_BossRow; //현재 보스 Row
+        int column = MainManager.Instance.GetStageManager().m_BossColumn; //현재 보스 Column
 
-
-
-        int Row = MainManager.Instance.GetStageManager().m_BossRow;
-        int column = MainManager.Instance.GetStageManager().m_BossColumn;
-
-
-        m_StageMgr.m_MapInfo[Row, column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
-        m_StageMgr.m_MapInfo[Row, column].BossEffect = true;
+        m_StageMgr.m_MapInfo[Row, column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red; //현재 보스가 서있는 타일의 색깔을 red로 변경
+        m_StageMgr.m_MapInfo[Row, column].BossEffect = true; //현재 타일의 보스 이펙트를 true로 설정
 
         Debug.Log("보스 스킬 범위 ");
         yield return new WaitForSeconds(2f);
-
 
         m_StageMgr.m_MapInfo[Row, column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
         GameObject effect = Instantiate(SkillPrefab);
         effect.transform.position = m_StageMgr.m_MapInfo[Row, column].MapPos + new Vector3(0, 5f, 0);
         m_StageMgr.m_MapInfo[Row, column].BossEffectObject = effect;
-
 
         //몬스터 소환.
         int m_Count = 10;
@@ -203,23 +197,13 @@ public class BossSkill : MonoBehaviour
             monsters[i] = Instantiate(MobPrefabs);
 
             monsters[i].transform.position = new Vector3(randX, 0, randZ);
-
         }
-
-
 
         yield return new WaitForSeconds(m_CurrentBossSkill.LifeTime);
 
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
-
-
-
-
-
         yield return null;
-
-
     }
 
     IEnumerator SkillWideAction()
