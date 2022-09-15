@@ -6,7 +6,6 @@ using TMPro;
 
 public class PlayerUIManager : MonoBehaviour
 {
-    static int a;
     public PlayerManager playerManager;
     public GameObject spritSkillPanel;
     public Image hpBar;
@@ -15,6 +14,9 @@ public class PlayerUIManager : MonoBehaviour
     public Button p_spiritSkillBtn;
 
     public List<Button> spirit_Buttons;
+    public Image[] is_CoolTime;
+
+    public TextMeshProUGUI[] collTime_Text;
 
     public GameObject minimap_2DIcon_Player;
 
@@ -24,6 +26,12 @@ public class PlayerUIManager : MonoBehaviour
 
     [SerializeField]
     private int m_SkillCount = 6;
+
+    private void Awake()
+    {
+        is_CoolTime = new Image[6];
+        collTime_Text = new TextMeshProUGUI[6];
+    }
 
     void Start()
     {
@@ -43,7 +51,9 @@ public class PlayerUIManager : MonoBehaviour
             child.GetComponent<Image>().sprite = buttonTexture;
             spirit_Buttons.Add(child);
             ColorBlock colorBlock = spirit_Buttons[i].colors;
-
+            is_CoolTime[i] = spirit_Buttons[i].transform.GetChild(1).GetComponent<Image>();
+            is_CoolTime[i].fillAmount = 0f;
+            collTime_Text[i] = spirit_Buttons[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             //(r, g, b, a) 기준 빨간색으로 normal Color 지정
             switch (i % 3)
             {
@@ -67,9 +77,6 @@ public class PlayerUIManager : MonoBehaviour
                     colorBlock.selectedColor = new Color(m_SUP_Spirit.r, m_SUP_Spirit.g, m_SUP_Spirit.b);
                     break;
             }
-
-            
-
             spirit_Buttons[i].colors = colorBlock;
 
         }
@@ -80,6 +87,23 @@ public class PlayerUIManager : MonoBehaviour
     void Update()
     {
         hpBar.fillAmount = playerManager.GetPlayerPerHp();
+        for(int i = 0; i < playerManager.CanSkill.Length; i++)
+        {
+            if (playerManager.CanSkill[i] == false)//스킬 쿨타임 중일때
+            {
+                is_CoolTime[i].fillAmount = playerManager.currenCollTime[i] / playerManager.SkillCollTime[i];
+                collTime_Text[i].gameObject.SetActive(true);
+                collTime_Text[i].text = ((int)playerManager.currenCollTime[i]).ToString();
+                spirit_Buttons[i].transform.GetChild(0).gameObject.SetActive(false);
+            }
+            else
+            {
+                is_CoolTime[i].fillAmount = 0f;
+                collTime_Text[i].gameObject.SetActive(false);
+                spirit_Buttons[i].transform.GetChild(0).gameObject.SetActive(true);
+            }
+        }
         
     }
+
 }

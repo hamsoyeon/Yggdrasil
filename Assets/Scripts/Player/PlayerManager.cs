@@ -43,10 +43,12 @@ public class PlayerManager : MonoBehaviour
     int y;
 
     // 0 -> q / 1 -> w / 2 -> e / 3 -> a / 4 -> s / 5 -> d
-    bool[] CanSkill; // 스킬이 사용이 가능한지 판단하기 위한 bool값
+    public bool[] CanSkill; // 스킬이 사용이 가능한지 판단하기 위한 bool값
 
     //각각 스킬의 쿨타임 넣어놓는 배열
-    float[] SkillCollTime;
+    public float[] SkillCollTime;
+
+    public float[] currenCollTime;
 
     public float m_BuffCoolDown = 0.0f; //아이템 혹은 버프타일에 의하여 쿨타임이 줄어드는 버프에 사용을 하기 위해 넣어놓은 변수 
 
@@ -187,12 +189,14 @@ public class PlayerManager : MonoBehaviour
 
         CanSkill = new bool[6]; // 0 -> q / 1 -> w / 2 -> e / 3 -> a / 4 -> s / 5 -> d 
         SkillCollTime = new float[6];
+        currenCollTime = new float[6];
 
         //Start 되는 부분에서 스킬사용 가능 불값과 스킬 쿨타임값을 설정
         for (int i = 0; i < CanSkill.Length; i++)
         {
             CanSkill[i] = true;
             SkillCollTime[i] = 5.0f;
+            currenCollTime[i] = SkillCollTime[i];
         }
 
         
@@ -283,7 +287,19 @@ public class PlayerManager : MonoBehaviour
         //    //img_Skill.fillAmount = (1.0f / cool); // 이미지 ui 에 차오르는 ui 구현
         //    yield return new WaitForFixedUpdate();
         //}
+        StartCoroutine(Activation(index));
         yield return new WaitForSeconds(cool - Buff);
         CanSkill[index] = true;
+    }
+    WaitForSeconds seconds = new WaitForSeconds(0.1f);
+    IEnumerator Activation(int index)
+    {
+        while (currenCollTime[index] > 0)
+        {
+            currenCollTime[index] -= 0.1f;
+            yield return seconds;
+        }
+        currenCollTime[index] = SkillCollTime[index];
+        StopCoroutine("Activation");
     }
 }

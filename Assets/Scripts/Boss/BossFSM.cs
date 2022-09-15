@@ -246,8 +246,9 @@ public class BossFSM : MonoBehaviour
         float _h, _v;
         _h = 0;
         _v = 0;
-        
 
+        
+        
 
         if (h!=transform.position.x || v!=transform.position.z)
         {
@@ -262,6 +263,8 @@ public class BossFSM : MonoBehaviour
                 _v = 1;
 
             Vector3 dir = new Vector3(_h, 0, _v);
+            Debug.Log("In if vector : " + dir);
+
             transform.rotation = Quaternion.Lerp(transform.rotation,
             Quaternion.LookRotation(dir),
             Time.deltaTime * rotateSpeed);
@@ -346,6 +349,7 @@ public class BossFSM : MonoBehaviour
 
                 //moveAndSkill = 1;  // 이동고정
                 //moveAndSkill = 2;  // 스킬고정
+                moveAndSkill = 2;  // 스킬고정
 
                 if (moveAndSkill ==1)
                 {
@@ -414,6 +418,9 @@ public class BossFSM : MonoBehaviour
                     currentBossStamina = 0;
 
                     BossRandomSkill = Random.Range(1, 5);  //스킬 3개만 사용중 (소환스킬 사용x)
+                    //BossRandomSkill = Random.Range(1, 5);  //스킬 3개만 사용중 (소환스킬 사용x)
+                    BossRandomSkill = 4;  //고정스킬(몹 소환)
+
                     switch (BossRandomSkill)
                     {
                         case 1:
