@@ -233,8 +233,9 @@ public class BossFSM : MonoBehaviour
         float _h, _v;
         _h = 0;
         _v = 0;
-        
 
+        
+        
 
         if (h!=transform.position.x || v!=transform.position.z)
         {
@@ -249,6 +250,8 @@ public class BossFSM : MonoBehaviour
                 _v = 1;
 
             Vector3 dir = new Vector3(_h, 0, _v);
+            Debug.Log("In if vector : " + dir);
+
             transform.rotation = Quaternion.Lerp(transform.rotation,
             Quaternion.LookRotation(dir),
             Time.deltaTime * rotateSpeed);
