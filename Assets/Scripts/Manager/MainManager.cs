@@ -11,6 +11,7 @@ public class MainManager : MonoBehaviour
     private UIManager m_UIManager;
     private StageManager m_StageManager;
     private AnimationManager m_Animanager;
+    private BuffManager m_BuffManager;
 
 
     public int xp, zp;
@@ -27,6 +28,7 @@ public class MainManager : MonoBehaviour
             m_UIManager = new UIManager();
             m_StageManager = new StageManager();
             m_Animanager = new AnimationManager();
+            m_BuffManager = new BuffManager();
             //m_Resource = new ResourceManager();
 
             DontDestroyOnLoad(this.gameObject);
@@ -55,7 +57,10 @@ public class MainManager : MonoBehaviour
 
     //public static ResourceManager Resource { get { return Instance.m_Resource; } }
 
-
+    public BuffManager GetBuffManager()
+    {
+        return m_BuffManager;
+    }
 
     public AnimationManager GetAnimanager()
     {

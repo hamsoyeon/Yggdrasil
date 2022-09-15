@@ -168,28 +168,22 @@ public class BossSkill : MonoBehaviour
         }
     }
 
-
+    //쫄몹 소환 코루틴
     IEnumerator MobSummons()
     {
+        int Row = MainManager.Instance.GetStageManager().m_BossRow; //현재 보스 Row
+        int column = MainManager.Instance.GetStageManager().m_BossColumn; //현재 보스 Column
 
-
-
-        int Row = MainManager.Instance.GetStageManager().m_BossRow;
-        int column = MainManager.Instance.GetStageManager().m_BossColumn;
-
-
-        m_StageMgr.m_MapInfo[Row, column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
-        m_StageMgr.m_MapInfo[Row, column].BossEffect = true;
+        m_StageMgr.m_MapInfo[Row, column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red; //현재 보스가 서있는 타일의 색깔을 red로 변경
+        m_StageMgr.m_MapInfo[Row, column].BossEffect = true; //현재 타일의 보스 이펙트를 true로 설정
 
         Debug.Log("보스 스킬 범위 ");
         yield return new WaitForSeconds(2f);
-
 
         m_StageMgr.m_MapInfo[Row, column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
         GameObject effect = Instantiate(SkillPrefab);
         effect.transform.position = m_StageMgr.m_MapInfo[Row, column].MapPos + new Vector3(0, 5f, 0);
         m_StageMgr.m_MapInfo[Row, column].BossEffectObject = effect;
-
 
         //몬스터 소환.
         int m_Count = 10;
@@ -203,23 +197,13 @@ public class BossSkill : MonoBehaviour
             monsters[i] = Instantiate(MobPrefabs);
 
             monsters[i].transform.position = new Vector3(randX, 0, randZ);
-
         }
-
-
 
         yield return new WaitForSeconds(m_CurrentBossSkill.LifeTime);
 
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
-
-
-
-
-
         yield return null;
-
-
     }
 
     IEnumerator SkillWideAction()
@@ -395,6 +379,15 @@ public class BossSkill : MonoBehaviour
 
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
+
+        //버프가 있다면 버프를 발동.
+        if(m_CurrentBossSkill.BuffAdded != 0)
+        {
+            MainManager.Instance.GetBuffManager().Buff(m_CurrentBossSkill.BuffAdded);
+        }
+
+
+
         //연계스킬있는지 확인후 다시 스킬실행.
         if (m_CurrentBossSkill.SkillAdded != 0)
             BossSkillAction(m_CurrentBossSkill.SkillAdded);
@@ -541,13 +534,19 @@ public class BossSkill : MonoBehaviour
         Debug.Log("타겟 스킬 종료");
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
+
+        //버프가 있다면 버프를 발동.
+        if (m_CurrentBossSkill.BuffAdded != 0)
+        {
+            MainManager.Instance.GetBuffManager().Buff(m_CurrentBossSkill.BuffAdded);
+        }
+
         //연계스킬 처리
         if (m_CurrentBossSkill.SkillAdded != 0)
         {
             BossSkillAction(m_CurrentBossSkill.SkillAdded);
             TargetLockOn = true;
         }
-
         else
         {
             this.gameObject.GetComponent<BossFSM>().behavior = false;
@@ -900,6 +899,13 @@ public class BossSkill : MonoBehaviour
         Debug.Log("확산 스킬 종료");
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
+
+        //버프가 있다면 버프를 발동.
+        if (m_CurrentBossSkill.BuffAdded != 0)
+        {
+            MainManager.Instance.GetBuffManager().Buff(m_CurrentBossSkill.BuffAdded);
+        }
+
         //연계스킬있는지 확인후 다시 스킬실행.
         if (m_CurrentBossSkill.SkillAdded != 0)
             BossSkillAction(m_CurrentBossSkill.SkillAdded);
@@ -1118,6 +1124,14 @@ public class BossSkill : MonoBehaviour
 
         Debug.Log("방출(도넛) 스킬 종료");
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+
+        //버프가 있다면 버프를 발동.
+        if (m_CurrentBossSkill.BuffAdded != 0)
+        {
+            MainManager.Instance.GetBuffManager().Buff(m_CurrentBossSkill.BuffAdded);
+        }
+
+
         //연계스킬있는지 확인후 다시 스킬실행.
         if (m_CurrentBossSkill.SkillAdded != 0)
             BossSkillAction(m_CurrentBossSkill.SkillAdded);
