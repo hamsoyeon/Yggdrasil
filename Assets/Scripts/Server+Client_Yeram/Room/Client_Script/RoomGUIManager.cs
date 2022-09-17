@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 using ECharacterType = CharacterInfo.ECharacterType;
 
@@ -119,6 +120,7 @@ public class RoomGUIManager : Singleton_Ver2.Singleton<RoomGUIManager>
         //선택된 모드 서버에 전송하기.
         RoomManager.Instance.GameStartProcess(m_curmap.Mode);
         //메인씬으로 전환
+        SceneManager.LoadScene("MainScene");
     }
     public void OnClick_ClosedMap()
     {
