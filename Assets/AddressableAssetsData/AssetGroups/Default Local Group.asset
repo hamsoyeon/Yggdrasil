@@ -25,6 +25,14 @@ MonoBehaviour:
     m_Address: Assets/98.Asset/UI/Fantasy GUI pack/Textures/Coins/Coin_02_Gold.png
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: dc74071d40cde4b45aef7dc1467e5b69
+    m_Address: ACoin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5b511a8dfae72e347b56deb4889dc760
+    m_Address: FireDemonRed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: cd8946c0c30ade14ab5d83a045afbec5, type: 2}
   m_SchemaSet:
