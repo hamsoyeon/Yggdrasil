@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70da9903be9234946a23fdf42494e60a, type: 3}
+  m_Name: BuffTableLoader
+  m_EditorClassIdentifier: 
+  filepath: Assets\00.Data\Txt\BuffTable.txt
+  DataList:
+  - No: 1
+    Name_KR: "\uB514\uBC95"
+    Name_EN: def
+    BuffsTableIndex: 12
+    CheckBuff: 1
+    BuffEffect: 1
+    EffType: 1
+    EffAmount: 1
+    EffDoT: 1
+    EffRate: 1
+    EffTime: 0
+    EffTurn: 1
+    SummonMon: 0
+    EffPosApp: 1
+    EffAppealPrf: 0
+    EffPosDelay: 1
+    EffDelayPrf: 0
+    EffAdded: 0
+  - No: 2
+    Name_KR: "\uB514\uBC95\uC774"
+    Name_EN: defyi
+    BuffsTableIndex: 123
+    CheckBuff: 0
+    BuffEffect: 5
+    EffType: 1
+    EffAmount: 0.5
+    EffDoT: 1
+    EffRate: 1
+    EffTime: 20
+    EffTurn: 2
+    SummonMon: 0
+    EffPosApp: 2
+    EffAppealPrf: 0
+    EffPosDelay: 2
+    EffDelayPrf: 0
+    EffAdded: 0
+  - No: 3
+    Name_KR: "\uB514\uBC95\uAC10"
+    Name_EN: defgam
+    BuffsTableIndex: 456
+    CheckBuff: 1
+    BuffEffect: 6
+    EffType: 0
+    EffAmount: 0.7
+    EffDoT: 1
+    EffRate: 1
+    EffTime: 5
+    EffTurn: 0
+    SummonMon: 0
+    EffPosApp: 3
+    EffAppealPrf: 0
+    EffPosDelay: 3
+    EffDelayPrf: 0
+    EffAdded: 0
