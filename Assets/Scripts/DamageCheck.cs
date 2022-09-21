@@ -8,6 +8,10 @@ public class DamageCheck : MonoBehaviour
 	
 	private CharacterClass PlayerClass;
 	private CharacterClass EnemyClass;
+    private Buff BuffClass;
+
+
+    
 
 	private int minDamage;
 	private int resultDamage;
@@ -22,10 +26,12 @@ public class DamageCheck : MonoBehaviour
 	public float Dot;
 
 
+    public int buffIndex;         //Dot시간이 될때마다 Buff.cs파일의 Buff()혹은 DeBuff()를 실행시켜서 버프/디버프의 추가 or 지속시간 갱신을 시킨다.
 
 
-	// Start is called before the first frame update
-	void Start()
+
+    // Start is called before the first frame update
+    void Start()
     {
 
 
@@ -43,12 +49,19 @@ public class DamageCheck : MonoBehaviour
 						{
 							Debug.Log("적 이펙트 충돌");
 
-							EnemyClass = cols[i].GetComponent<CharacterClass>();
-							//PlayerClass = GameObject.Find("Player").GetComponent<CharacterClass>();
+                            BuffClass = cols[i].GetComponent<Buff>();
+                            BuffClass.AddBuff(buffIndex);  //버프 추가.
+
+                            EnemyClass = cols[i].GetComponent<CharacterClass>();
+                            //PlayerClass = GameObject.Find("Player").GetComponent<CharacterClass>();
                             PlayerClass = GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>();
 
+                            
 
-							if(cols[i].tag =="Boss")
+
+
+
+                            if (cols[i].tag =="Boss")
 							{
 								minDamage = (int)PlayerClass.m_CharacterStat.Atk - (int)EnemyClass.m_BossStatData.Def;
 
@@ -60,8 +73,6 @@ public class DamageCheck : MonoBehaviour
 
                                 resultDamage = minDamage * power;
 
-
-
                                 EnemyClass.m_BossStatData.HP -= resultDamage;
 								//해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
 								cols[i].GetComponent<BossFSM>().Damage(resultDamage);
@@ -72,9 +83,12 @@ public class DamageCheck : MonoBehaviour
 
 					case 2:
 						if (cols[i].tag == "Player")
-						{
+                        { 
 							Debug.Log("플레이어 이펙트 충돌");
-							PlayerClass = cols[i].GetComponent<CharacterClass>();
+                            BuffClass = cols[i].GetComponent<Buff>(); //맞은 대상의 Buff를 가지고 와서 지금 가지고있는 버프 목록을 리스트에 추가.
+                            BuffClass.AddBuff(buffIndex);  //버프 추가.
+
+                            PlayerClass = cols[i].GetComponent<CharacterClass>();
 							EnemyClass = GameObject.FindWithTag("Boss").GetComponent<CharacterClass>();
 
 							minDamage = (int)EnemyClass.m_BossStatData.Atk - (int)PlayerClass.m_CharacterStat.Def;

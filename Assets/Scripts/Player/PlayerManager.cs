@@ -55,6 +55,8 @@ public class PlayerManager : MonoBehaviour
     //벽인지 체크 하기 위한 불값
     public bool isWall;
 
+    float addSpeed = 0f;
+
     private void InputCheck()
     {
         // 0 -> q / 1 -> w / 2 -> e / 3 -> a / 4 -> s / 5 -> d
@@ -121,7 +123,7 @@ public class PlayerManager : MonoBehaviour
         h = Input.GetAxis("Horizontal"); //프로젝트 셋팅으로 wasd 값 날려놓음 방향키만 적용이 될겁니다.
         v = Input.GetAxis("Vertical");
 
-        Vector3 MoveForce = new Vector3(h * PlayerClass.m_CharacterStat.MoveSpeed, 0, v * PlayerClass.m_CharacterStat.MoveSpeed);
+        Vector3 MoveForce = new Vector3(h * (PlayerClass.m_CharacterStat.MoveSpeed+ addSpeed), 0, v * PlayerClass.m_CharacterStat.MoveSpeed);
 
         if(h != 0 || v != 0) //이동중일때 런 애니메이션 실행
         {
@@ -291,7 +293,9 @@ public class PlayerManager : MonoBehaviour
         yield return new WaitForSeconds(cool - Buff);
         CanSkill[index] = true;
     }
+
     WaitForSeconds seconds = new WaitForSeconds(0.1f);
+
     IEnumerator Activation(int index)
     {
         while (currenCollTime[index] > 0)
