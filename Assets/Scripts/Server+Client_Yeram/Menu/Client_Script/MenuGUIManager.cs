@@ -96,6 +96,7 @@ public class MenuGUIManager:Singleton_Ver2.Singleton<MenuGUIManager>
                 LoginObjectActive(false);
                 MenuObjectActive(true);
                 break;
+           
         }
     }
     private void LoginObjectActive(bool _flag)
