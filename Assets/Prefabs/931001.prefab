@@ -193,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentBossStamina: 0
   maxStamina: 0
+  maxHp: 0
   behavior: 0
   hudDamageText: {fileID: 0}
   hudPos: {fileID: 0}
@@ -404,7 +405,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6863022358648512248}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb7ff2da3d5e67c4c86271b496646165, type: 3}
   m_Name: 
