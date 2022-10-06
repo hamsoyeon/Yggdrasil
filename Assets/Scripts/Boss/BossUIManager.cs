@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class BossUIManager : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class BossUIManager : MonoBehaviour
     public GameObject minimap_2DIcon_Boss;
     public Slider bossHp_Slider;
     public Slider bossStamina_Slider;
+    [SerializeField]
+    TextMeshProUGUI bossHp_Text;
+    [SerializeField]
+    TextMeshProUGUI bossName_Text;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +28,8 @@ public class BossUIManager : MonoBehaviour
     {
         HandleStamina(bossFsm.GetPerStamina());
         HandleHp(bossFsm.GetPerHp());
+        bossHp_Text.text = bossFsm.GetCurrentHp().ToString() + " / " + bossFsm.GetMaxHp().ToString();
+        bossName_Text.text = bossFsm.GetBossName();
     }
     void HandleStamina(float _stamina)
     {

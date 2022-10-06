@@ -304,6 +304,18 @@ public class BossFSM : MonoBehaviour
         return m_BossClass.m_BossStatData.HP / maxHp;
     }
 
+    public float GetMaxHp()
+    {
+        return maxHp;
+    }
+    public float GetCurrentHp()
+    {
+        return m_BossClass.m_BossStatData.HP;
+    }
+    public string GetBossName()
+    {
+        return m_BossClass.m_BossStatData.Name_EN;
+    }
 
 
     bool moving = false;
