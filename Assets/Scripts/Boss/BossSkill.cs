@@ -90,6 +90,9 @@ public class BossSkill : MonoBehaviour
     private StageManager m_StageMgr;
     private bool TargetLockOn = false;
 
+    public Transform PlayerPosition; //잡몹의 플레이어 위치를 잡기 위한 변수
+
+    public EnemyFSM enemyTarget;
 
     //private Map map;
 
@@ -185,7 +188,7 @@ public class BossSkill : MonoBehaviour
         m_StageMgr.m_MapInfo[Row, column].BossEffectObject = effect;
 
         //몬스터 소환.
-        int m_Count = 10;
+        int m_Count = 3;
         GameObject[] monsters = new GameObject[m_Count];
 
         for (int i = 0; i < m_Count; i++)
@@ -1149,15 +1152,8 @@ public class BossSkill : MonoBehaviour
         yield break;
     }
 
-
-
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        
         m_StageMgr = MainManager.Instance.GetStageManager();
 
         OriginArr = new ClockDirectionList[6];
@@ -1175,14 +1171,14 @@ public class BossSkill : MonoBehaviour
             anim = this.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
         }
 
+        PlayerPosition = GameObject.FindGameObjectWithTag("Player").transform;
 
+        enemyTarget.SetUp(PlayerPosition);
         //names[0].Name = "이세영"; names[0].Age = 102;
         //names[1].Name = "권경민"; names[1].Age = 31;
 
     }
 
-
-    // Update is called once per frame
     void Update()
     {
 

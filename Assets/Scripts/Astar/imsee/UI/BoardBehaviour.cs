@@ -25,8 +25,6 @@ public class BoardBehaviour : MonoBehaviour
     public GameObject[,] _gameBoard;
     Game _game;
 
-    List<GameObject> _path;
-
     int cnt;
 
     List<int> index;
@@ -42,8 +40,6 @@ public class BoardBehaviour : MonoBehaviour
     {
         int x = 0;
         int z = 0;
-
-       
 
         index = new List<int>();
 
@@ -123,10 +119,10 @@ public class BoardBehaviour : MonoBehaviour
         var destinationPiece = _game.GamePieces.Last();
 
         _gamePieces = new List<GameObject>
-                          {
-                              CreateBossPiece(startPiece),
-                              CreatePlayerPiece(destinationPiece)
-                          };
+        {
+                CreateBossPiece(startPiece),
+                CreatePlayerPiece(destinationPiece)
+        };
     }
 
     private GameObject CreateBossPiece(GamePiece piece)

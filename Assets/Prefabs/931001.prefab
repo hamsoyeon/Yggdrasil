@@ -220,6 +220,8 @@ MonoBehaviour:
   angleRange: 60
   distance: 5
   isCollision: 0
+  PlayerPosition: {fileID: 0}
+  enemyTarget: {fileID: -8888581076120763707, guid: 708a6eb5aaef2f3488c087a67aadfdec, type: 3}
   m_CurrentBossSkill:
     Name_KR: 
     Name_EN: 
