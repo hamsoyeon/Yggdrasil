@@ -20,6 +20,9 @@ public class BossFSM : MonoBehaviour
     private float bossStaminaSave;
     [SerializeField]
     private float maxStamina;
+
+    [SerializeField]
+    private float maxHp;
     
     private int BossRandomSkill = 0;
 
@@ -59,7 +62,6 @@ public class BossFSM : MonoBehaviour
         player = GameObject.Find("obj_10001");
         Debug.Log("됐다", player);
         hudDamageText = Resources.Load<GameObject>("DamageText");
-
         h = transform.position.x;
         v = transform.position.z;
 
@@ -67,8 +69,9 @@ public class BossFSM : MonoBehaviour
 
     void Start()
     {
-        gameObject.AddComponent<BossStamina>();
+        //gameObject.AddComponent<BossStamina>();
         maxStamina = DataTableManager.Instance.GetDataTable<Boss_TableExcelLoader>().DataList[0].MaxStamina;
+        maxHp = DataTableManager.Instance.GetDataTable<Boss_TableExcelLoader>().DataList[0].HP;
 
         m_BossClass = this.gameObject.GetComponent<CharacterClass>();
         m_CurrentBossSkill = this.gameObject.GetComponent<BossSkill>();
@@ -295,7 +298,25 @@ public class BossFSM : MonoBehaviour
     {
         return currentBossStamina / maxStamina;
     }
-    
+
+    public float GetPerHp()
+    {
+        return m_BossClass.m_BossStatData.HP / maxHp;
+    }
+
+    public float GetMaxHp()
+    {
+        return maxHp;
+    }
+    public float GetCurrentHp()
+    {
+        return m_BossClass.m_BossStatData.HP;
+    }
+    public string GetBossName()
+    {
+        return m_BossClass.m_BossStatData.Name_EN;
+    }
+
 
     bool moving = false;
     bool bossMove = false;

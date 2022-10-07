@@ -370,7 +370,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5908d472ac5674d99534a7b570ac05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mIMG: {fileID: 0}
+  assetReference:
+    m_AssetGUID: 5b511a8dfae72e347b56deb4889dc760
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!1 &1081729371
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,7 +958,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 555593706}
         m_TargetAssemblyTypeName: ResourceManager, Assembly-CSharp
-        m_MethodName: _ClickLoad
+        m_MethodName: AssetLoad
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1198,7 +1202,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 555593706}
         m_TargetAssemblyTypeName: ResourceManager, Assembly-CSharp
-        m_MethodName: _ClickUnLoad
+        m_MethodName: AssetUnLoadTest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -140,7 +140,7 @@ public class BossSkill : MonoBehaviour
             SkillPrefab.AddComponent<DamageCheck>();
         }
 
-
+       
         //StartCoroutine(SkillAction());
         SkillAction();
     }
@@ -337,6 +337,11 @@ public class BossSkill : MonoBehaviour
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
                     effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
+                    //버프가 있다면 버프를 발동.
+                    if (m_CurrentBossSkill.BuffAdded != 0)
+                    {
+                        effect.GetComponent<DamageCheck>().buffIndex = m_CurrentBossSkill.BuffAdded;
+                    }
                     m_StageMgr.m_MapInfo[i, j].BossEffectObject = effect;
                 }
             }
@@ -383,13 +388,6 @@ public class BossSkill : MonoBehaviour
         Debug.Log("와이드 스킬 종료");
 
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
-
-
-        //버프가 있다면 버프를 발동.
-        if(m_CurrentBossSkill.BuffAdded != 0)
-        {
-            MainManager.Instance.GetBuffManager().Buff(m_CurrentBossSkill.BuffAdded);
-        }
 
 
 
@@ -512,6 +510,12 @@ public class BossSkill : MonoBehaviour
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
                     effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
+                    //버프가 있다면 버프를 발동.
+                    if (m_CurrentBossSkill.BuffAdded != 0)
+                    {
+                        effect.GetComponent<DamageCheck>().buffIndex = m_CurrentBossSkill.BuffAdded;
+                    }
+
                     m_StageMgr.m_MapInfo[i, j].BossEffectObject = effect;
                 }
             }
@@ -540,11 +544,7 @@ public class BossSkill : MonoBehaviour
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
 
-        //버프가 있다면 버프를 발동.
-        if (m_CurrentBossSkill.BuffAdded != 0)
-        {
-            MainManager.Instance.GetBuffManager().Buff(m_CurrentBossSkill.BuffAdded);
-        }
+       
 
         //연계스킬 처리
         if (m_CurrentBossSkill.SkillAdded != 0)
@@ -879,6 +879,12 @@ public class BossSkill : MonoBehaviour
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
                     effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
+                    //버프가 있다면 버프를 발동.
+                    if (m_CurrentBossSkill.BuffAdded != 0)
+                    {
+                        effect.GetComponent<DamageCheck>().buffIndex = m_CurrentBossSkill.BuffAdded;
+                    }
+
                     m_StageMgr.m_MapInfo[i, j].BossEffectObject = effect;
                 }
             }
@@ -905,11 +911,7 @@ public class BossSkill : MonoBehaviour
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
 
-        //버프가 있다면 버프를 발동.
-        if (m_CurrentBossSkill.BuffAdded != 0)
-        {
-            MainManager.Instance.GetBuffManager().Buff(m_CurrentBossSkill.BuffAdded);
-        }
+      
 
         //연계스킬있는지 확인후 다시 스킬실행.
         if (m_CurrentBossSkill.SkillAdded != 0)
@@ -996,7 +998,7 @@ public class BossSkill : MonoBehaviour
                                 m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].BossEffect = true;
                             }
 
-                            if(checkRow_P < 6)
+                            if(checkRow_P < 5)
                             {
                                 m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                                 m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].BossEffect = true;
@@ -1017,7 +1019,7 @@ public class BossSkill : MonoBehaviour
                             }
 
 
-                            if(checkRow_P < 6)
+                            if(checkRow_P < 5)
                             {
                                 m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                                 m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].BossEffect = true;
@@ -1104,6 +1106,12 @@ public class BossSkill : MonoBehaviour
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     effect.GetComponent<DamageCheck>().who = 2;
                     effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
+                    //버프가 있다면 버프를 발동.
+                    if (m_CurrentBossSkill.BuffAdded != 0)
+                    {
+                        effect.GetComponent<DamageCheck>().buffIndex = m_CurrentBossSkill.BuffAdded;
+                    }
+
                     m_StageMgr.m_MapInfo[i, j].BossEffectObject = effect;
                 }
             }
@@ -1129,12 +1137,6 @@ public class BossSkill : MonoBehaviour
 
         Debug.Log("방출(도넛) 스킬 종료");
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
-
-        //버프가 있다면 버프를 발동.
-        if (m_CurrentBossSkill.BuffAdded != 0)
-        {
-            MainManager.Instance.GetBuffManager().Buff(m_CurrentBossSkill.BuffAdded);
-        }
 
 
         //연계스킬있는지 확인후 다시 스킬실행.

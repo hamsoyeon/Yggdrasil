@@ -35,14 +35,9 @@ public class SpiritSkill : MonoBehaviour
             EffectPrefab.AddComponent<DamageCheck>();
         }
 
-       
 
-        EffectPrefab.GetComponent<DamageCheck>().Dot = skillInfo.DoT;
-		EffectPrefab.GetComponent<DamageCheck>().who = 1;
 
-        //GameObject tempSkillEffect = Instantiate(EffectPrefab);
-
-		switch (skillInfo.SpritSkillIndex)
+        switch (skillInfo.SpritSkillIndex)
 		{
 			case 170001:  //얼음장판
                 StartCoroutine(IceField(skillInfo, Row, Column));
@@ -68,13 +63,6 @@ public class SpiritSkill : MonoBehaviour
 
 	}
 
-	//public void SkillUse(SpiritSkill_TableExcel skillInfo,int row, int column)  //타일형
-	//{
-	//	//GameObject tempSkillEffect = Instantiate(EffectPrefab);
-	//	StartCoroutine(SkillWideAction(skillInfo, row, column));
-	//	EffectPrefab.GetComponent<DamageCheck>().Dot = skillInfo.DoT;
-	//	EffectPrefab.GetComponent<DamageCheck>().who = 1;
-	//}
 
     IEnumerator SpeedField(SpiritSkill_TableExcel skill, int row, int column)
     {
@@ -173,6 +161,18 @@ public class SpiritSkill : MonoBehaviour
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                     GameObject effect = Instantiate(EffectPrefab);
+
+                    effect.GetComponent<DamageCheck>().Dot = skill.DoT;
+                    effect.GetComponent<DamageCheck>().who = 1;
+
+                    //버프 스킬이 있는지 확인후 스킬실행.
+                    if (skill.BuffAdded != 0)
+                    {
+
+                        effect.GetComponent<DamageCheck>().buffIndex = skill.BuffAdded;
+                    }
+
+
                     //GameObject effect = Instantiate(PrefabLoader.Instance.PrefabDic[skill.LunchPrefb]);
 
 
@@ -343,6 +343,16 @@ public class SpiritSkill : MonoBehaviour
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                     GameObject effect = Instantiate(EffectPrefab);
+
+                    effect.GetComponent<DamageCheck>().Dot = skill.DoT;
+                    effect.GetComponent<DamageCheck>().who = 1;
+                    //버프 스킬이 있는지 확인후 스킬실행.
+                    if (skill.BuffAdded != 0)
+                    {
+
+                        effect.GetComponent<DamageCheck>().buffIndex = skill.BuffAdded;
+                    }
+
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     m_StageMgr.m_MapInfo[i, j].SpiritEffectObject = effect;
                 }
@@ -376,14 +386,6 @@ public class SpiritSkill : MonoBehaviour
                 }
 
 
-                //버프 스킬이 있는지 확인후 스킬실행.
-                if(skill.BuffAdded != 0)
-                {
-                    MainManager.Instance.GetBuffManager().Buff(skill.BuffAdded);
-
-                }
-
-
                 //연계스킬있는지 확인후 다시 스킬실행.
                 if (skill.SkillAdded != 0)
                 {
@@ -408,7 +410,19 @@ public class SpiritSkill : MonoBehaviour
 	{
         Debug.Log("힐 실행");
         GameObject tempEffect = Instantiate(EffectPrefab);
-		tempEffect.transform.position = spirit.transform.position;
+        tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
+        tempEffect.GetComponent<DamageCheck>().who = 1;
+
+        //버프 스킬이 있는지 확인후 스킬실행.
+        if (skill.BuffAdded != 0)
+        {
+
+            tempEffect.GetComponent<DamageCheck>().buffIndex = skill.BuffAdded;
+        }
+
+
+
+        tempEffect.transform.position = spirit.transform.position;
 		Collider[] colls = null;
 
 		float spirit_time = 0f;
@@ -432,22 +446,16 @@ public class SpiritSkill : MonoBehaviour
 			{
 				buff_Time = 0f;
 
-                colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 14);  //11번째 레이어 = Player
+                colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 14);  //11번째 레이어 = Player    ,14번째 레이어 메인카메라.
 
                 //colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange);
 
-                if (colls.Length == 0)
-                    Debug.Log("아무도 안걸림");
-                else
-                {
-                    Debug.Log(colls.Length);
-                    Debug.Log("누군가 걸림");
-                }
+               
 
 				foreach (var rangeCollider in colls)
 				{
                     //플레이어 회복시키는 코드.
-                    rangeCollider.GetComponent<CharacterClass>().m_CharacterStat.HP += 100f;
+                    rangeCollider.GetComponent<CharacterClass>().m_CharacterStat.HP += 10f;
                     //rangeCollider.transform.GetChild(0).GetComponent<CharacterClass>().m_CharacterStat.HP += 100f;
                     //100씩 회복.
                     //rangeCollider.GetComponent<PlayerManager>().Damage();
@@ -466,7 +474,7 @@ public class SpiritSkill : MonoBehaviour
 	{
         Debug.Log("신성지대 실행");
 		GameObject tempEffect = Instantiate(EffectPrefab);
-		tempEffect.transform.position = spirit.transform.position;
+        tempEffect.transform.position = spirit.transform.position;
 		Collider[] colls = null;
 
 		float spirit_time = 0f;
@@ -485,25 +493,31 @@ public class SpiritSkill : MonoBehaviour
 			}
 
 
-			colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 9);  //9번째 레이어 = Enemy
+			colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 9);  //9번째 레이어 = Enemy  //콜라이더가 없어서 OverlapSphere가 안됨. 잡몹한테 콜라이더 부착.
+
+
+
+           
 
 			if(colls != null)
 			{
 				foreach (var rangeCollider in colls)
 				{
 
-					Debug.Log(rangeCollider);
-					//밀리는 물체와 밀리는 마지막 점과의 거리(힘)을 구하고
-
-					//정령과 밀리는 물체사이의 방향을 구해서
-					var heading = rangeCollider.transform.position - spirit.transform.position;
-					heading.y = 0f;
-					heading *= skill.SkillRange;
-
 					//보스가 아니라면
 					if (rangeCollider.gameObject.name != "931001(Clone)")  //태그나 레이어로 바꿔야함   => 931001(Clone)는 보스
 					{
-						rangeCollider.gameObject.transform.position = Vector3.MoveTowards(rangeCollider.gameObject.transform.position, heading, 5f);
+                        Debug.Log(rangeCollider);
+                        //밀리는 물체와 밀리는 마지막 점과의 거리(힘)을 구하고
+
+                        //정령과 밀리는 물체사이의 방향을 구해서
+                        var heading = rangeCollider.transform.position - spirit.transform.position;
+                        heading.y = 0f;
+                        heading *= skill.SkillRange;
+
+
+
+                        rangeCollider.gameObject.transform.position = Vector3.MoveTowards(rangeCollider.gameObject.transform.position, heading, 5f);
 						Debug.Log($"{rangeCollider.ToString()}을 범위 내에서 밀어냅니다.");
 					}
 				}
@@ -580,7 +594,16 @@ public class SpiritSkill : MonoBehaviour
 		if (nearEnemy  != null)
 		{
 			tempEffect = Instantiate(EffectPrefab);
-			tempEffect.transform.position = nearEnemy.transform.position + new Vector3(0, 5f, 0);
+            tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
+            tempEffect.GetComponent<DamageCheck>().who = 1;
+
+            //버프 스킬이 있는지 확인후 스킬실행.
+            if (skill.BuffAdded != 0)
+            {
+
+                tempEffect.GetComponent<DamageCheck>().buffIndex = skill.BuffAdded;
+            }
+            tempEffect.transform.position = nearEnemy.transform.position + new Vector3(0, 5f, 0);
 		}
 
 
