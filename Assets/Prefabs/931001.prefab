@@ -211,14 +211,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa67e10618bbcbd4d9767dcba8aa3ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 242977479076845732, guid: 3de11b3bc1b2444448357b2ddd0b9130, type: 3}
   LineSkillTarget: {fileID: 0}
-  MobPrefabs: {fileID: 856238153596727669, guid: 708a6eb5aaef2f3488c087a67aadfdec, type: 3}
+  MobPrefabs: {fileID: 856238153596727669, guid: 6c0083467b8a5c04e9a969a5c5846c87, type: 3}
   SkillPrefab: {fileID: 0}
-  Skill1: {fileID: 0}
-  Skill2: {fileID: 0}
-  Skill3: {fileID: 0}
-  Skill4: {fileID: 0}
   angleRange: 60
   distance: 5
   isCollision: 0
