@@ -85,7 +85,6 @@ public class BoardBehaviour : MonoBehaviour
             //디버그용
             if (item.BossSummon != 0)
             {
-
                 MainManager.Instance.GetStageManager().m_BossRow = z;
                 MainManager.Instance.GetStageManager().m_BossColumn = x;
             }

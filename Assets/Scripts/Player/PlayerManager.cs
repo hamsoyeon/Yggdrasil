@@ -123,7 +123,8 @@ public class PlayerManager : MonoBehaviour
         h = Input.GetAxis("Horizontal"); //프로젝트 셋팅으로 wasd 값 날려놓음 방향키만 적용이 될겁니다.
         v = Input.GetAxis("Vertical");
 
-        Vector3 MoveForce = new Vector3(h * (PlayerClass.m_CharacterStat.MoveSpeed+ addSpeed), 0, v * PlayerClass.m_CharacterStat.MoveSpeed);
+        //Character_stat -> MoveSpeed = 30이여서 개빠름 15정도로 깍아야 함
+        Vector3 MoveForce = new Vector3(h * (PlayerClass.m_CharacterStat.MoveSpeed + addSpeed), 0, v * PlayerClass.m_CharacterStat.MoveSpeed);
 
         if(h != 0 || v != 0) //이동중일때 런 애니메이션 실행
         {

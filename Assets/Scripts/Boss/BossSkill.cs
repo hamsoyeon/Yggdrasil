@@ -1175,7 +1175,7 @@ public class BossSkill : MonoBehaviour
 
         PlayerPosition = GameObject.FindGameObjectWithTag("Player").transform;
 
-        enemyTarget.SetUp(PlayerPosition);
+        //enemyTarget.SetUp(PlayerPosition);
         //names[0].Name = "이세영"; names[0].Age = 102;
         //names[1].Name = "권경민"; names[1].Age = 31;
 
