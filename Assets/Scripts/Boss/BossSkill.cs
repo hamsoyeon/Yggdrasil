@@ -32,7 +32,7 @@ public class BossSkill : MonoBehaviour
 
     public enum BossSkillType { WIDE = 1, TARGET, LINE, DIFFUSION, SUMMONS }
 
-    public GameObject target;
+    //public GameObject target;
 
     public GameObject LineSkillTarget;
 
@@ -44,10 +44,10 @@ public class BossSkill : MonoBehaviour
     public GameObject SkillPrefab;
 
 
-    public GameObject Skill1;
-    public GameObject Skill2;
-    public GameObject Skill3;
-    public GameObject Skill4;
+    //public GameObject Skill1;
+    //public GameObject Skill2;
+    //public GameObject Skill3;
+    //public GameObject Skill4;
 
     private Animator anim;
     private string currentState;
