@@ -51,7 +51,6 @@ public class SpiritSkill : MonoBehaviour
 
         DamageCheck check;
         check = EffectPrefab[effectNumber].GetComponent<DamageCheck>();
-
         if(check == null)
         {
             EffectPrefab[effectNumber].AddComponent<DamageCheck>();
@@ -62,9 +61,12 @@ public class SpiritSkill : MonoBehaviour
         switch (skillInfo.SpritSkillIndex)
 		{
 			case 170001:  //얼음장판
+                check.dmg_check = true;
                 StartCoroutine(IceField(skillInfo, Row, Column));
                 break;
 			case 170002:  //독구름
+                check.dmg_check = true;
+
                 StartCoroutine(PoisonCloud(skillInfo, tempSpirit));
                 break;
 			case 170003:  //무적
@@ -129,14 +131,14 @@ public class SpiritSkill : MonoBehaviour
                         if (checkRow_P < 5)
                         {
                             m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
-                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].SpiritEffect = true;
+                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].SpiritEffect2 = true;
 
                         }
 
                         if (checkRow_M >= 0)
                         {
                             m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
-                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].SpiritEffect = true;
+                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].SpiritEffect2 = true;
 
                         }
 
@@ -153,7 +155,7 @@ public class SpiritSkill : MonoBehaviour
                             continue;
 
                         m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
-                        m_StageMgr.m_MapInfo[Row, checkColumn].SpiritEffect = true;
+                        m_StageMgr.m_MapInfo[Row, checkColumn].SpiritEffect2 = true;
                     }
 
 
@@ -165,7 +167,7 @@ public class SpiritSkill : MonoBehaviour
         else  //range가 0이하면 사거리가 1 자기자신의 타일만 해당
         {
             m_StageMgr.m_MapInfo[Row, Column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
-            m_StageMgr.m_MapInfo[Row, Column].SpiritEffect = true;
+            m_StageMgr.m_MapInfo[Row, Column].SpiritEffect2 = true;
 
         }
 
@@ -177,7 +179,7 @@ public class SpiritSkill : MonoBehaviour
             for (int j = 0; j < m_StageMgr.mapX; j++)
             {
 
-                if (m_StageMgr.m_MapInfo[i, j].SpiritEffect)
+                if (m_StageMgr.m_MapInfo[i, j].SpiritEffect2)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                     GameObject effect = Instantiate(EffectPrefab[5]);
@@ -188,7 +190,6 @@ public class SpiritSkill : MonoBehaviour
                     //버프 스킬이 있는지 확인후 스킬실행.
                     if (skill.BuffAdded != 0)
                     {
-
                         effect.GetComponent<DamageCheck>().buffIndex = skill.BuffAdded;
                     }
 
@@ -197,7 +198,7 @@ public class SpiritSkill : MonoBehaviour
 
 
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
-                    m_StageMgr.m_MapInfo[i, j].SpiritEffectObject = effect;
+                    m_StageMgr.m_MapInfo[i, j].SpiritEffectObject2 = effect;
                     
                 }
             }
@@ -220,10 +221,10 @@ public class SpiritSkill : MonoBehaviour
                     for (int j = 0; j < m_StageMgr.mapX; j++)
                     {
 
-                        if (m_StageMgr.m_MapInfo[i, j].SpiritEffect)
+                        if (m_StageMgr.m_MapInfo[i, j].SpiritEffect2)
                         {
-                            m_StageMgr.m_MapInfo[i, j].SpiritEffect = false;
-                            Object.Destroy(m_StageMgr.m_MapInfo[i, j].SpiritEffectObject);
+                            m_StageMgr.m_MapInfo[i, j].SpiritEffect2 = false;
+                            Object.Destroy(m_StageMgr.m_MapInfo[i, j].SpiritEffectObject2);
                            
                         }
                     }
@@ -242,7 +243,7 @@ public class SpiritSkill : MonoBehaviour
                 yield break;
             }
 
-           if(MainManager.Instance.GetStageManager().GetPlayerMapInfo().SpiritEffect)
+           if(MainManager.Instance.GetStageManager().GetPlayerMapInfo().SpiritEffect2)
            {
                 //transform.Find("Player").transform.GetChild(0).GetComponent<CharacterClass>().m_CharacterStat.MoveSpeed = 20f;
 
@@ -313,14 +314,14 @@ public class SpiritSkill : MonoBehaviour
                         if (checkRow_P < 5)
                         {
                             m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
-                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].SpiritEffect = true;
+                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].SpiritEffect1 = true;
 
                         }
 
                         if (checkRow_M >= 0)
                         {
                             m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
-                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].SpiritEffect = true;
+                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].SpiritEffect1 = true;
 
                         }
 
@@ -337,7 +338,7 @@ public class SpiritSkill : MonoBehaviour
                             continue;
 
                         m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
-                        m_StageMgr.m_MapInfo[Row, checkColumn].SpiritEffect = true;
+                        m_StageMgr.m_MapInfo[Row, checkColumn].SpiritEffect1 = true;
                     }
 
 
@@ -349,7 +350,7 @@ public class SpiritSkill : MonoBehaviour
         else  //range가 0이하면 사거리가 1 자기자신의 타일만 해당
         {
             m_StageMgr.m_MapInfo[Row, Column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
-            m_StageMgr.m_MapInfo[Row, Column].SpiritEffect = true;
+            m_StageMgr.m_MapInfo[Row, Column].SpiritEffect1 = true;
 
         }
 
@@ -361,7 +362,7 @@ public class SpiritSkill : MonoBehaviour
             for (int j = 0; j < m_StageMgr.mapX; j++)
             {
 
-                if (m_StageMgr.m_MapInfo[i, j].SpiritEffect)
+                if (m_StageMgr.m_MapInfo[i, j].SpiritEffect1)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
                     GameObject effect = Instantiate(EffectPrefab[0]);
@@ -376,7 +377,7 @@ public class SpiritSkill : MonoBehaviour
                     }
 
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
-                    m_StageMgr.m_MapInfo[i, j].SpiritEffectObject = effect;
+                    m_StageMgr.m_MapInfo[i, j].SpiritEffectObject1 = effect;
                    
                 }
             }
@@ -400,10 +401,10 @@ public class SpiritSkill : MonoBehaviour
                     for (int j = 0; j < m_StageMgr.mapX; j++)
                     {
 
-                        if (m_StageMgr.m_MapInfo[i, j].SpiritEffect)
+                        if (m_StageMgr.m_MapInfo[i, j].SpiritEffect1)
                         {
-                            m_StageMgr.m_MapInfo[i, j].SpiritEffect = false;
-                            Object.Destroy(m_StageMgr.m_MapInfo[i, j].SpiritEffectObject);
+                            m_StageMgr.m_MapInfo[i, j].SpiritEffect1 = false;
+                            Object.Destroy(m_StageMgr.m_MapInfo[i, j].SpiritEffectObject1);
                            
                         }
                     }

@@ -140,6 +140,7 @@ public class BossSkill : MonoBehaviour
             SkillPrefab.AddComponent<DamageCheck>();
         }
 
+        check.dmg_check = true;
        
         //StartCoroutine(SkillAction());
         SkillAction();
