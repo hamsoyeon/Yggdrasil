@@ -13,6 +13,8 @@ namespace MapInformation
         public GameObject BossEffectObject;
         public bool Spirit;
         public GameObject SpiritEffectObject;
+       
+        
         public Map_TableExcel MapData;     //맵에 엑셀 데이터
         public Vector3 MapPos;             //맵에 위치
         public int row;
@@ -121,6 +123,7 @@ public class StageManager : MonoBehaviour
             }
 
             m_MapInfo = new MapInfo[5, 6];
+            
 
             m_GetWorldPosByObjects = new GetObjectWorldPos();
 

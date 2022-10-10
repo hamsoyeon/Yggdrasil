@@ -7,7 +7,7 @@ public class DamageCheck : MonoBehaviour
 
 	
 	private CharacterClass PlayerClass;
-	private CharacterClass EnemyClass;
+	public CharacterClass EnemyClass;
     private Buff BuffClass;
 
 
@@ -34,8 +34,15 @@ public class DamageCheck : MonoBehaviour
     void Start()
     {
 
-
 		Collider[] cols = Physics.OverlapSphere(transform.position, 10f);
+
+        //Debug.Log(cols.Length);
+
+        //foreach(var ii in cols)
+        //{
+        //    //Debug.Log(ii.name);
+        //}
+
 
 		if (cols.Length > 0)
 		{
@@ -47,19 +54,18 @@ public class DamageCheck : MonoBehaviour
 					case 1: 
 						if(cols[i].tag =="Boss" || cols[i].tag == "Mob")
 						{
+
+                            Debug.Log(cols[i].name);
 							Debug.Log("적 이펙트 충돌");
 
-                            BuffClass = cols[i].GetComponent<Buff>();
-                            BuffClass.AddBuff(buffIndex);  //버프 추가.
+                            //BuffClass = cols[i].GetComponent<Buff>();
+                            //BuffClass.AddBuff(buffIndex);  //버프 추가.
 
                             EnemyClass = cols[i].GetComponent<CharacterClass>();
                             //PlayerClass = GameObject.Find("Player").GetComponent<CharacterClass>();
                             PlayerClass = GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>();
 
                             
-
-
-
 
                             if (cols[i].tag =="Boss")
 							{
@@ -85,8 +91,8 @@ public class DamageCheck : MonoBehaviour
 						if (cols[i].tag == "Player")
                         { 
 							Debug.Log("플레이어 이펙트 충돌");
-                            BuffClass = cols[i].GetComponent<Buff>(); //맞은 대상의 Buff를 가지고 와서 지금 가지고있는 버프 목록을 리스트에 추가.
-                            BuffClass.AddBuff(buffIndex);  //버프 추가.
+                            //BuffClass = cols[i].GetComponent<Buff>(); //맞은 대상의 Buff를 가지고 와서 지금 가지고있는 버프 목록을 리스트에 추가.
+                            //BuffClass.AddBuff(buffIndex);  //버프 추가.
 
                             PlayerClass = cols[i].GetComponent<CharacterClass>();
 							EnemyClass = GameObject.FindWithTag("Boss").GetComponent<CharacterClass>();
@@ -99,7 +105,7 @@ public class DamageCheck : MonoBehaviour
 
                             power = (int)EnemyClass.m_SkillMgr.m_BossSkill.m_CurrentBossSkill.Power;
 
-                            resultDamage = minDamage * power * PlayerClass.Invincibility;
+                            resultDamage = minDamage * power;
 
 							PlayerClass.m_CharacterStat.HP -= resultDamage;
 
@@ -172,7 +178,7 @@ public class DamageCheck : MonoBehaviour
 								if (minDamage <= 0)
 									minDamage = 1;
 
-								resultDamage = minDamage * power * PlayerClass.Invincibility;
+								resultDamage = minDamage * power;
 
 								PlayerClass.m_CharacterStat.HP -= resultDamage;
 								//해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
