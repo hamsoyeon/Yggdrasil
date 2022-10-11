@@ -12,13 +12,18 @@ namespace MapInformation
         public GameObject MapObject;
         public GameObject BossEffectObject;
         public bool Spirit;
-        public GameObject SpiritEffectObject;
+        public GameObject SpiritEffectObject1;
+        public GameObject SpiritEffectObject2;
+       
+        
         public Map_TableExcel MapData;     //맵에 엑셀 데이터
         public Vector3 MapPos;             //맵에 위치
         public int row;
         public int column;
         public bool BossEffect;
-        public bool SpiritEffect;
+        public bool SpiritEffect1;
+        public bool SpiritEffect2;
+
         public bool IsUnWalkable; // 이동불가 타일 bool값 
 
         public int fCost;
@@ -121,6 +126,7 @@ public class StageManager : MonoBehaviour
             }
 
             m_MapInfo = new MapInfo[5, 6];
+            
 
             m_GetWorldPosByObjects = new GetObjectWorldPos();
 
