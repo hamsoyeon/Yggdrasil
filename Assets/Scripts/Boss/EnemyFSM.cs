@@ -251,9 +251,5 @@ public class EnemyFSM : MonoBehaviour
         //공격 범위
         Gizmos.color = new Color(0.39f, 0.04f, 0.04f);
         Gizmos.DrawWireSphere(transform.position, attackRange);
-
-        //"배회" 상태일 때 이동할 경로 표시
-        Gizmos.color = Color.black;
-        Gizmos.DrawRay(transform.position, navMeshAgent.destination - transform.position);
     }
 }
