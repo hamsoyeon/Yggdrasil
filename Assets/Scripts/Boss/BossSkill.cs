@@ -69,6 +69,7 @@ public class BossSkill : MonoBehaviour
 
     Color _blue = new Color(0f, 0f, 1f, 0.2f);
     Color _red = new Color(1f, 0f, 0f, 0.2f);
+    Color _origin = new Color(0f, 0.541f, 0.603f, 0.784f); //원래대로 돌릴 색깔
 
     //Vector3 direction;
 
@@ -179,6 +180,7 @@ public class BossSkill : MonoBehaviour
 
         m_StageMgr.m_MapInfo[Row, column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red; //현재 보스가 서있는 타일의 색깔을 red로 변경
         m_StageMgr.m_MapInfo[Row, column].BossEffect = true; //현재 타일의 보스 이펙트를 true로 설정
+        PlayerPosition = GameObject.Find("Player").transform;
 
         Debug.Log("보스 스킬 범위 ");
         yield return new WaitForSeconds(2f);
@@ -206,6 +208,8 @@ public class BossSkill : MonoBehaviour
 
         m_StageMgr.m_MapInfo[Row, column].BossEffect = false;
         Destroy(m_StageMgr.m_MapInfo[Row, column].BossEffectObject);
+
+        StartCoroutine(AllTileOriginColor());
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
         this.gameObject.GetComponent<BossFSM>().behavior = false;
 
@@ -388,6 +392,7 @@ public class BossSkill : MonoBehaviour
 
         Debug.Log("와이드 스킬 종료");
 
+        StartCoroutine(AllTileOriginColor());
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
 
@@ -542,6 +547,7 @@ public class BossSkill : MonoBehaviour
 
         this.gameObject.GetComponent<BossFSM>().behavior = false;
         Debug.Log("타겟 스킬 종료");
+        StartCoroutine(AllTileOriginColor());
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
 
@@ -909,6 +915,7 @@ public class BossSkill : MonoBehaviour
         }
 
         Debug.Log("확산 스킬 종료");
+        StartCoroutine(AllTileOriginColor());
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
 
@@ -1137,6 +1144,7 @@ public class BossSkill : MonoBehaviour
 
 
         Debug.Log("방출(도넛) 스킬 종료");
+        StartCoroutine(AllTileOriginColor());
         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
 
@@ -1153,6 +1161,20 @@ public class BossSkill : MonoBehaviour
 
 
         yield break;
+    }
+
+    IEnumerator AllTileOriginColor()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        for (int i = 0; i < m_StageMgr.mapZ; i++)
+        {
+            for(int j = 0; j < m_StageMgr.mapX; j++)
+            {
+                //rgba값이 이상하게 들어감
+                m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = _origin;
+            }
+        }
     }
 
     void Start()
