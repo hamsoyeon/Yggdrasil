@@ -75,13 +75,20 @@ public class MenuManager : MonoBehaviour
 
     public void ShowLoseMenu()
     {
+        if (WinPanel.activeSelf)
+            return;
+
         //LosePanel = GameObject.Find("UICanvas").transform.Find("LosePanel").gameObject;
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         LosePanel.SetActive(true);  //패배했을때의 패널을 보여주고
     }
 
     public void ShowWinMenu()
     {
+
+        if (LosePanel.activeSelf)
+            return;
+
         Time.timeScale = 0f;
         //WinPanel = GameObject.Find("UICanvas").transform.Find("WinPanel").gameObject;
         WinPanel.SetActive(true);
