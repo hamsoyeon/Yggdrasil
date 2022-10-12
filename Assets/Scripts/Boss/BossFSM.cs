@@ -310,6 +310,9 @@ public class BossFSM : MonoBehaviour
     }
     public float GetCurrentHp()
     {
+        if (m_BossClass.m_BossStatData.HP < 0)
+            m_BossClass.m_BossStatData.HP = 0;
+
         return m_BossClass.m_BossStatData.HP;
     }
     public string GetBossName()

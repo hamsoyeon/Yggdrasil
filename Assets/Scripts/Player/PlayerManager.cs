@@ -10,6 +10,8 @@ public class PlayerManager : MonoBehaviour
     //플레이어 오브젝트
     public static GameObject p_Object;
 
+    public GameObject m_MenuManager;
+
     FollowCam cam;
 
     //스킬 
@@ -224,7 +226,10 @@ public class PlayerManager : MonoBehaviour
 
         //Damage();
         m_MaxHp = PlayerClass.m_CharacterStat.HP;
-        
+
+        m_MenuManager = GameObject.Find("MenuManager");
+
+
     }
 
 
@@ -244,6 +249,12 @@ public class PlayerManager : MonoBehaviour
 
         //hudPos = GameObject.Find("Player(Clone)").transform;
         hudPos = GameObject.Find("Player").transform.GetChild(0).gameObject.transform;
+
+        if(PlayerClass.m_CharacterStat.HP <=0)
+        {
+            m_MenuManager.GetComponent<MenuManager>().ShowLoseMenu();
+        }
+
     }
 
     private void FixedUpdate()

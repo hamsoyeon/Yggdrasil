@@ -30,6 +30,7 @@ public class MainManager : MonoBehaviour
             m_Animanager = new AnimationManager();
             m_BuffManager = new BuffManager();
             //m_Resource = new ResourceManager();
+          
 
             DontDestroyOnLoad(this.gameObject);
 
@@ -56,6 +57,9 @@ public class MainManager : MonoBehaviour
     }
 
     //public static ResourceManager Resource { get { return Instance.m_Resource; } }
+
+  
+
 
     public BuffManager GetBuffManager()
     {

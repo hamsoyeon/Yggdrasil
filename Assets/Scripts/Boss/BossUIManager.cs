@@ -15,12 +15,15 @@ public class BossUIManager : MonoBehaviour
     TextMeshProUGUI bossHp_Text;
     [SerializeField]
     TextMeshProUGUI bossName_Text;
+
+    public GameObject m_MenuObj;
     // Start is called before the first frame update
     void Start()
     {
         minimap_2DIcon_Boss.transform.parent = GameObject.FindGameObjectWithTag("Boss").transform;
         minimap_2DIcon_Boss.transform.position = GameObject.FindGameObjectWithTag("Boss").transform.position + (Vector3.up * 30);
         bossFsm = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossFSM>();
+        m_MenuObj = GameObject.Find("MenuManager");
     }
 
     // Update is called once per frame
@@ -37,6 +40,13 @@ public class BossUIManager : MonoBehaviour
     }
     void HandleHp(float _hp)
     {
+        if (_hp <= 0)
+        {
+            m_MenuObj.GetComponent<MenuManager>().ShowWinMenu();
+        }
+
         bossHp_Slider.value = _hp;
+
+      
     }
 }
