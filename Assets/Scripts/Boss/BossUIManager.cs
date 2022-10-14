@@ -22,8 +22,8 @@ public class BossUIManager : MonoBehaviour
 
     void Start()
     {
-        minimap_2DIcon_Boss.transform.parent = GameObject.FindGameObjectWithTag("Boss").transform;
-        minimap_2DIcon_Boss.transform.position = GameObject.FindGameObjectWithTag("Boss").transform.position + (Vector3.up * 30);
+        
+        //minimap_2DIcon_Boss.transform.position = GameObject.FindGameObjectWithTag("Boss").transform.position;
         bossFsm = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossFSM>();
 
         m_MenuObj = GameObject.Find("MenuManager");
@@ -51,6 +51,10 @@ public class BossUIManager : MonoBehaviour
             bossHp_Text.gameObject.SetActive(true);
             bossName_Text.gameObject.SetActive(true);
         }
+    }
+    private void FixedUpdate()
+    {
+        minimap_2DIcon_Boss.transform.position = GameObject.FindGameObjectWithTag("Boss").transform.position + (Vector3.up * 30);
     }
     void HandleStamina(float _stamina)
     {

@@ -293,6 +293,14 @@ public class PlayerManager : MonoBehaviour
     {
         return m_PerHp;
     }
+    public float GetMaxHp()
+    {
+        return m_MaxHp;
+    }
+    public float GetRealHp()
+    {
+        return PlayerClass.m_CharacterStat.HP;
+    }
 
     IEnumerator CoolTime(float cool, int index, float Buff)
     {

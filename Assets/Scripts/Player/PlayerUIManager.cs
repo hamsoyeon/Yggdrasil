@@ -8,7 +8,8 @@ public class PlayerUIManager : MonoBehaviour
 {
     public PlayerManager playerManager;
     public GameObject spritSkillPanel;
-    public Image hpBar;
+    public Slider hpBar;
+    public TextMeshProUGUI hpText;
     public Sprite buttonTexture;
 
     public Button p_spiritSkillBtn;
@@ -20,9 +21,9 @@ public class PlayerUIManager : MonoBehaviour
 
     public GameObject minimap_2DIcon_Player;
 
-    public Color m_ATK_Spirit;
-    public Color m_DEF_Spirit;
-    public Color m_SUP_Spirit;
+    //public Color m_ATK_Spirit;
+    //public Color m_DEF_Spirit;
+    //public Color m_SUP_Spirit;
 
     [SerializeField]
     private int m_SkillCount = 6;
@@ -37,8 +38,9 @@ public class PlayerUIManager : MonoBehaviour
     {
         playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
         spritSkillPanel = GameObject.Find("SpritSkillPanel");
-        minimap_2DIcon_Player.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
-        minimap_2DIcon_Player.transform.position = GameObject.FindGameObjectWithTag("Player").transform.position + (Vector3.up * 10);
+        
+        //minimap_2DIcon_Player.transform.position = GameObject.FindGameObjectWithTag("Player").transform.position;
+
         GameObject.FindGameObjectWithTag("Player").layer = 14;
         
         for (int i = 0; i < m_SkillCount; i++)
@@ -55,7 +57,7 @@ public class PlayerUIManager : MonoBehaviour
             is_CoolTime[i].fillAmount = 0f;
             collTime_Text[i] = spirit_Buttons[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             //(r, g, b, a) 기준 빨간색으로 normal Color 지정
-            switch (i % 3)
+            /*switch (i % 3)
             {
                 
                 case 0:
@@ -76,7 +78,7 @@ public class PlayerUIManager : MonoBehaviour
                     colorBlock.pressedColor = new Color(m_SUP_Spirit.r, m_SUP_Spirit.g, m_SUP_Spirit.b);
                     colorBlock.selectedColor = new Color(m_SUP_Spirit.r, m_SUP_Spirit.g, m_SUP_Spirit.b);
                     break;
-            }
+            }*/
             spirit_Buttons[i].colors = colorBlock;
 
         }
@@ -86,7 +88,8 @@ public class PlayerUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hpBar.fillAmount = playerManager.GetPlayerPerHp();
+        hpBar.value = playerManager.GetPlayerPerHp();
+        hpText.text = playerManager.GetRealHp().ToString();
         for(int i = 0; i < playerManager.CanSkill.Length; i++)
         {
             if (playerManager.CanSkill[i] == false)//스킬 쿨타임 중일때
@@ -104,6 +107,10 @@ public class PlayerUIManager : MonoBehaviour
             }
         }
         
+    }
+    private void FixedUpdate()
+    {
+        minimap_2DIcon_Player.transform.position = GameObject.FindGameObjectWithTag("Player").transform.position + (Vector3.up * 10);
     }
 
 }
