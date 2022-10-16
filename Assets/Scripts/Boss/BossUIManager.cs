@@ -17,17 +17,23 @@ public class BossUIManager : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI bossName_Text;
 
-    // Start is called before the first frame update
+
+    public GameObject m_MenuObj;
+
     void Start()
     {
-        minimap_2DIcon_Boss.transform.parent = GameObject.FindGameObjectWithTag("Boss").transform;
-        minimap_2DIcon_Boss.transform.position = GameObject.FindGameObjectWithTag("Boss").transform.position + (Vector3.up * 30);
+        
+        //minimap_2DIcon_Boss.transform.position = GameObject.FindGameObjectWithTag("Boss").transform.position;
         bossFsm = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossFSM>();
+
+        m_MenuObj = GameObject.Find("MenuManager");
+
 
         bossHp_Slider.gameObject.SetActive(false);
         bossStamina_Slider.gameObject.SetActive(false);
         bossHp_Text.gameObject.SetActive(false);
         bossName_Text.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -46,12 +52,23 @@ public class BossUIManager : MonoBehaviour
             bossName_Text.gameObject.SetActive(true);
         }
     }
+    private void FixedUpdate()
+    {
+        minimap_2DIcon_Boss.transform.position = GameObject.FindGameObjectWithTag("Boss").transform.position + (Vector3.up * 30);
+    }
     void HandleStamina(float _stamina)
     {
         bossStamina_Slider.value = _stamina;
     }
     void HandleHp(float _hp)
     {
+        if (_hp <= 0)
+        {
+            m_MenuObj.GetComponent<MenuManager>().ShowWinMenu();
+        }
+
         bossHp_Slider.value = _hp;
+
+      
     }
 }
