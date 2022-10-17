@@ -181,7 +181,7 @@ public class BossSkill : MonoBehaviour
         PlayerPosition = GameObject.Find("Player").transform;
 
         Debug.Log("보스 스킬 범위 ");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
 
         m_StageMgr.m_MapInfo[Row, column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
         GameObject effect = Instantiate(SkillPrefab);
@@ -326,7 +326,7 @@ public class BossSkill : MonoBehaviour
 
         //경고시간(모든스킬 0.5f초로 고정)이  경과하면 빨간색을 다시 원래색깔로 돌린후 그 범위에 이펙트 출현하고 데미지 로직 처리.
         Debug.Log("보스 스킬 범위 ");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
         {
@@ -500,7 +500,7 @@ public class BossSkill : MonoBehaviour
 
         //경고시간(모든스킬 2f초로 고정)이  경과하면 빨간색을 다시 원래색깔로 돌린후 그 범위에 이펙트 출현하고 데미지 로직 처리.
         Debug.Log("보스 스킬 범위 ");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
 
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
@@ -871,7 +871,7 @@ public class BossSkill : MonoBehaviour
 
         //경고시간(모든스킬 0.5f초로 고정)이  경과하면 빨간색을 다시 원래색깔로 돌린후 그 범위에 이펙트 출현하고 데미지 로직 처리.
         Debug.Log("보스 스킬 범위 ");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
         {
@@ -1098,7 +1098,7 @@ public class BossSkill : MonoBehaviour
 
         //경고시간(모든스킬 0.5f초로 고정)이  경과하면 빨간색을 다시 원래색깔로 돌린후 그 범위에 이펙트 출현하고 데미지 로직 처리.
         Debug.Log("보스 스킬 범위 ");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
 
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)

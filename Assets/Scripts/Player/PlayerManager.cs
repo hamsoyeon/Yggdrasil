@@ -59,6 +59,9 @@ public class PlayerManager : MonoBehaviour
 
     float addSpeed = 0f;
 
+
+    private float deathTime =0f;
+
     private void InputCheck()
     {
         // 0 -> q / 1 -> w / 2 -> e / 3 -> a / 4 -> s / 5 -> d
@@ -253,7 +256,17 @@ public class PlayerManager : MonoBehaviour
 
         if(PlayerClass.m_CharacterStat.HP <=0)
         {
-            m_MenuManager.GetComponent<MenuManager>().ShowLoseMenu();
+
+            deathTime += Time.deltaTime;
+            // 플레이어 죽는 모션을 취한후 게임 메뉴 보여주기.
+
+            AnimationManager.GetInstance().PlayAnimation(anim, "Die");
+
+            if(deathTime >= 1.0f)
+            {
+                //deathTime = 0f;
+                m_MenuManager.GetComponent<MenuManager>().ShowLoseMenu();
+            }
         }
 
     }
