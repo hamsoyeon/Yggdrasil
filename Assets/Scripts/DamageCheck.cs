@@ -79,7 +79,21 @@ public class DamageCheck : MonoBehaviour
                                     //해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
                                     cols[i].GetComponent<BossFSM>().Damage(resultDamage);
                                 }
+                                if (cols[i].tag == "Mob")
+                                {
+                                    Debug.Log("아 왜이리 빠른가요");
+                                    minDamage = (int)PlayerClass.m_CharacterStat.Atk;
 
+                                    //최소 데미지 보정.
+                                    if (minDamage <= 0)
+                                        minDamage = 1;
+
+                                    power = (int)GameObject.Find("Player").transform.GetChild(0).GetComponent<PlayerManager>().m_Spirit.m_SpiritClass.m_SpiritSkillData.Power;
+
+                                    resultDamage = minDamage * power;
+
+                                    cols[i].transform.GetComponent<Enemy>().TakeDamage(resultDamage);
+                                }
                             }
                             break;
 

@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
 
     private Animator anim;
 
+    Coroutine coroutine;
     void Start()
     {
         status = GetComponent<Status>();
@@ -43,27 +44,28 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+
         CalculateDistacveToTargetAndSelectState();
     }
 
     IEnumerator Move()
     {
+        AnimationManager.GetInstance().PlayAnimation(anim, "Run");
         if (navMeshAgent.destination != target.transform.position)
         {
             navMeshAgent.SetDestination(target.transform.position);
-            AnimationManager.GetInstance().PlayAnimation(anim, "Run");
         }
         else
         {
-            AnimationManager.GetInstance().PlayAnimation(anim, "Run");
             navMeshAgent.SetDestination(transform.position);
         }
         yield return null;
+
+        coroutine = null;
     }
 
-    private IEnumerator Attack()
+    IEnumerator Attack()
     {
-        Debug.Log("쫄몹 ATTACK FSM 변경");
         //공격할때는 이동을 멈추도록 설정
         navMeshAgent.ResetPath();
         anim.SetBool("IsAttack", true);
@@ -82,6 +84,8 @@ public class Enemy : MonoBehaviour
             }
 
             yield return null;
+
+            coroutine = null;
         }
     }
 
@@ -106,11 +110,28 @@ public class Enemy : MonoBehaviour
 
         if (distance <= attackRange)
         {
-            StartCoroutine(Attack());
+            if (coroutine != null)
+            {
+                //StopCoroutine(coroutine);
+                //coroutine = null;
+            }
+            else
+            {
+                coroutine = StartCoroutine(Attack());
+            }
+
         }
         else
         {
-            StartCoroutine(Move());
+            if (coroutine != null)
+            {
+                //StopCoroutine(coroutine);
+                //coroutine = null;
+            }
+            else
+            {
+                coroutine = StartCoroutine(Move()); 
+            }
         }
     }
 
@@ -119,5 +140,19 @@ public class Enemy : MonoBehaviour
         //공격 범위
         Gizmos.color = new Color(0.39f, 0.04f, 0.04f);
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    //쫄몹 데미지 받는 함수
+    public void TakeDamage(int damage)
+    {
+        bool isDie = status.DecreaseHP(damage);
+
+        if (isDie == true)
+        {
+            //죽었을때의 행동 개설
+
+            anim.SetBool("IsDie", true);
+
+        }
     }
 }
