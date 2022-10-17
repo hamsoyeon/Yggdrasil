@@ -64,6 +64,11 @@ public class BossUIManager : MonoBehaviour
     {
         if (_hp <= 0)
         {
+
+            //보스 죽음 애니메이션을 출력(1~초 정도 뒤) -> 보스의 행동을 정지 시켜야됨
+
+            
+
             m_MenuObj.GetComponent<MenuManager>().ShowWinMenu();
         }
 
