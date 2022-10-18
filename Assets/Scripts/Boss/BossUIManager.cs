@@ -18,16 +18,13 @@ public class BossUIManager : MonoBehaviour
     TextMeshProUGUI bossName_Text;
 
 
-    public GameObject m_MenuObj;
 
-    void Start()
+
+void Start()
     {
         
         //minimap_2DIcon_Boss.transform.position = GameObject.FindGameObjectWithTag("Boss").transform.position;
         bossFsm = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossFSM>();
-
-        m_MenuObj = GameObject.Find("MenuManager");
-
 
         bossHp_Slider.gameObject.SetActive(false);
         bossStamina_Slider.gameObject.SetActive(false);
@@ -62,10 +59,7 @@ public class BossUIManager : MonoBehaviour
     }
     void HandleHp(float _hp)
     {
-        if (_hp <= 0)
-        {
-            m_MenuObj.GetComponent<MenuManager>().ShowWinMenu();
-        }
+       
 
         bossHp_Slider.value = _hp;
 

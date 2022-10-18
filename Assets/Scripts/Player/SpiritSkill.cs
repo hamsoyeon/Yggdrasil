@@ -6,8 +6,16 @@ using UnityEngine;
 // 스킬은 공통된 개념 -> 
 
 public class SpiritSkill : MonoBehaviour
-{ 
-	public GameObject[] EffectPrefab;
+{
+
+    
+    enum SkillNumber { ICE=0,POISON ,INVINCIBILITY ,SANCTITY,HEAL ,SPEED }
+
+	public GameObject[] Lunch_Prefab;
+    public GameObject[] Fire_Prefab;
+    public GameObject[] Damage_Prefab;
+
+
     private int effectNumber = 0;
 
 	private StageManager m_StageMgr;
@@ -47,13 +55,13 @@ public class SpiritSkill : MonoBehaviour
                 break;
         }
 
-        EffectPrefab[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.LunchPrefb];
+        Lunch_Prefab[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.LunchPrefb];
 
         DamageCheck check;
-        check = EffectPrefab[effectNumber].GetComponent<DamageCheck>();
+        check = Lunch_Prefab[effectNumber].GetComponent<DamageCheck>();
         if(check == null)
         {
-            EffectPrefab[effectNumber].AddComponent<DamageCheck>();
+            Lunch_Prefab[effectNumber].AddComponent<DamageCheck>();
         }
 
 
@@ -182,7 +190,7 @@ public class SpiritSkill : MonoBehaviour
                 if (m_StageMgr.m_MapInfo[i, j].SpiritEffect2)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
-                    GameObject effect = Instantiate(EffectPrefab[5]);
+                    GameObject effect = Instantiate(Lunch_Prefab[(int)SkillNumber.SPEED]);
 
                     effect.GetComponent<DamageCheck>().Dot = skill.DoT;
                     effect.GetComponent<DamageCheck>().who = 1;
@@ -365,7 +373,7 @@ public class SpiritSkill : MonoBehaviour
                 if (m_StageMgr.m_MapInfo[i, j].SpiritEffect1)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
-                    GameObject effect = Instantiate(EffectPrefab[0]);
+                    GameObject effect = Instantiate(Lunch_Prefab[(int)SkillNumber.ICE]);
 
                     effect.GetComponent<DamageCheck>().Dot = skill.DoT;
                     effect.GetComponent<DamageCheck>().who = 1;
@@ -434,7 +442,7 @@ public class SpiritSkill : MonoBehaviour
 	IEnumerator Heal(SpiritSkill_TableExcel skill, GameObject spirit)
 	{
         Debug.Log("힐 실행");
-        GameObject tempEffect = Instantiate(EffectPrefab[4]);
+        GameObject tempEffect = Instantiate(Lunch_Prefab[(int)SkillNumber.HEAL]);
         tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
         tempEffect.GetComponent<DamageCheck>().who = 1;
 
@@ -496,7 +504,7 @@ public class SpiritSkill : MonoBehaviour
 	IEnumerator Sanctity(SpiritSkill_TableExcel skill, GameObject spirit)
 	{
         Debug.Log("신성지대 실행");
-		GameObject tempEffect = Instantiate(EffectPrefab[3]);
+		GameObject tempEffect = Instantiate(Lunch_Prefab[(int)SkillNumber.SANCTITY]);
         tempEffect.transform.position = spirit.transform.position;
 		Collider[] colls = null;
 
@@ -558,7 +566,7 @@ public class SpiritSkill : MonoBehaviour
 	IEnumerator Invincibility(SpiritSkill_TableExcel skill, GameObject spirit)
 	{
         Debug.Log("무적 실행");
-        GameObject tempEffect = Instantiate(EffectPrefab[2]);
+        GameObject tempEffect = Instantiate(Lunch_Prefab[(int)SkillNumber.INVINCIBILITY]);
 		tempEffect.transform.position = spirit.transform.position;
 
 
@@ -570,6 +578,8 @@ public class SpiritSkill : MonoBehaviour
 
         float spirit_time = 0f;
 
+        GameObject player = null;
+
         while (true)
         {
             //지속시간 체크
@@ -580,6 +590,7 @@ public class SpiritSkill : MonoBehaviour
             {
                 //정령 파괴후 코루틴 종료
                 Object.Destroy(tempEffect);
+                player.GetComponent<PlayerManager>().PlayerClass.Invincibility = 1.0f;
                 yield break;
             }
 
@@ -588,6 +599,13 @@ public class SpiritSkill : MonoBehaviour
             if(colls.Length !=0)
             {
                 Debug.Log("무적실행");
+
+                foreach(var p in colls)
+                {
+                    p.GetComponent<PlayerManager>().PlayerClass.Invincibility = 0.0f;
+                    player = p.gameObject;
+                }
+               
 
             }
             else
@@ -616,7 +634,7 @@ public class SpiritSkill : MonoBehaviour
 
 		if (nearEnemy  != null)
 		{
-			tempEffect = Instantiate(EffectPrefab[1]);
+			tempEffect = Instantiate(Lunch_Prefab[(int)SkillNumber.POISON]);
             tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
             tempEffect.GetComponent<DamageCheck>().who = 1;
 
@@ -762,7 +780,7 @@ public class SpiritSkill : MonoBehaviour
 	{
 
 		m_StageMgr = MainManager.Instance.GetStageManager();
-        EffectPrefab = new GameObject[6];
+        Lunch_Prefab = new GameObject[6];
 
 
 
