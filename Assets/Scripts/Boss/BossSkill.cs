@@ -208,7 +208,7 @@ public class BossSkill : MonoBehaviour
         Destroy(m_StageMgr.m_MapInfo[Row, column].BossEffectObject);
 
         StartCoroutine(AllTileOriginColor());
-        AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+        //AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
         this.gameObject.GetComponent<BossFSM>().behavior = false;
 
         yield return null;
@@ -391,7 +391,7 @@ public class BossSkill : MonoBehaviour
         Debug.Log("와이드 스킬 종료");
 
         StartCoroutine(AllTileOriginColor());
-        AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+        //AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
 
 
@@ -546,7 +546,7 @@ public class BossSkill : MonoBehaviour
         this.gameObject.GetComponent<BossFSM>().behavior = false;
         Debug.Log("타겟 스킬 종료");
         StartCoroutine(AllTileOriginColor());
-        AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+        //AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
 
        
@@ -914,7 +914,7 @@ public class BossSkill : MonoBehaviour
 
         Debug.Log("확산 스킬 종료");
         StartCoroutine(AllTileOriginColor());
-        AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+        //AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
 
       
@@ -1143,7 +1143,7 @@ public class BossSkill : MonoBehaviour
 
         Debug.Log("방출(도넛) 스킬 종료");
         StartCoroutine(AllTileOriginColor());
-        AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+        //AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
 
         //연계스킬있는지 확인후 다시 스킬실행.

@@ -40,6 +40,14 @@ public class BossFSM : MonoBehaviour
 
     public GameObject player;
 
+    private AnimatorStateInfo info;
+    private float animation_length =0f;
+    private bool setIdle = false;
+    private bool skill = false;
+    private float animation_time = 0f;
+
+
+
     //int[] UpRotation = { -45, 45 }; // 타일 z - 1 을 할 때 사용할 로테이션 값
     //int[] SameRotation = { -90, 90 }; // 타일 z 값이 같을 때 사용할 로테이션 값
     //int[] DownRotation = { -135, 135 }; // 타일 z + 1 을 할 때 사용할 로테이션 값
@@ -80,7 +88,9 @@ public class BossFSM : MonoBehaviour
         m_BossClass.m_BossStatData = DataTableManager.Instance.GetDataTable<Boss_TableExcelLoader>().DataList[currentBossNumber];
         m_BossClass.m_SkillMgr.m_BossSkill = m_CurrentBossSkill;
 
+
         Debug.Log("현재 보스의 체력:" + m_BossClass.m_BossStatData.HP);
+
 
 
         anim = this.transform.GetChild(0).GetComponent<Animator>();
@@ -344,6 +354,17 @@ public class BossFSM : MonoBehaviour
         hudPos = this.gameObject.transform;
 
         
+        if(skill)
+        {
+            animation_time = Time.deltaTime;
+
+            if(animation_time >= animation_length)
+            {
+                skill = false;
+                AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+            }
+        }
+
 
 
         if (behavior && moving)
@@ -442,6 +463,7 @@ public class BossFSM : MonoBehaviour
 
                     Debug.Log("스킬발동");
                     currentBossStamina = 0;
+                    skill = true;
 
                     //BossRandomSkill = Random.Range(1, 4);  //스킬 3개만 사용중 (소환스킬 사용x)
                     //BossRandomSkill = Random.Range(1, 5);  //스킬 3개만 사용중 (소환스킬 사용x)
@@ -473,6 +495,9 @@ public class BossFSM : MonoBehaviour
                             AnimationManager.GetInstance().PlayAnimation(anim, "Skill04");
                             break;
                     }
+
+                    info = anim.GetCurrentAnimatorStateInfo(0);
+                    animation_length = info.length;
 
                 }
             }
