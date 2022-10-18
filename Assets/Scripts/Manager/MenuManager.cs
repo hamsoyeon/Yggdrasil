@@ -90,6 +90,7 @@ public class MenuManager : MonoBehaviour
             return;
 
         Time.timeScale = 0f;
+
         //WinPanel = GameObject.Find("UICanvas").transform.Find("WinPanel").gameObject;
         WinPanel.SetActive(true);
     }

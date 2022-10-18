@@ -29,7 +29,7 @@ public class BossFSM : MonoBehaviour
     public bool behavior = false;
 
     private BossSkill m_CurrentBossSkill;
-    private CharacterClass m_BossClass;
+    public CharacterClass m_BossClass;
 
     public GameObject hudDamageText;
     public Transform hudPos;
@@ -46,7 +46,10 @@ public class BossFSM : MonoBehaviour
     private bool skill = false;
     private float animation_time = 0f;
 
+    public GameObject m_MenuObj;
 
+    private float deathTime = 0f;
+    private bool player_Invin = false;
 
     //int[] UpRotation = { -45, 45 }; // 타일 z - 1 을 할 때 사용할 로테이션 값
     //int[] SameRotation = { -90, 90 }; // 타일 z 값이 같을 때 사용할 로테이션 값
@@ -77,6 +80,7 @@ public class BossFSM : MonoBehaviour
 
     void Start()
     {
+
         //gameObject.AddComponent<BossStamina>();
         maxStamina = DataTableManager.Instance.GetDataTable<Boss_TableExcelLoader>().DataList[0].MaxStamina;
         maxHp = DataTableManager.Instance.GetDataTable<Boss_TableExcelLoader>().DataList[0].HP;
@@ -103,6 +107,7 @@ public class BossFSM : MonoBehaviour
 
         GameBoard = new Board(6, 5);
 
+        m_MenuObj = GameObject.Find("MenuManager");
 
         for (int i=0;i<5;i++)
         {
@@ -344,26 +349,71 @@ public class BossFSM : MonoBehaviour
     Block tempBlock;
     Block originBlock;
 
+
+  
+
+   
+
     
 
 
-    // Update is called once per frame
+
+// Update is called once per frame
     void Update()
     {
         time += Time.deltaTime;
         hudPos = this.gameObject.transform;
 
-        
-        if(skill)
+        if (m_BossClass.m_BossStatData.HP <= 0)
         {
-            animation_time = Time.deltaTime;
+
+            //보스 죽음 애니메이션을 출력(1~초 정도 뒤) -> 보스의 행동을 정지 시켜야됨
+            if(!player_Invin)
+            {
+                
+                GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>().Invincibility = 0.0f;  //플레이어 무적으로 만들고.
+                AnimationManager.GetInstance().PlayAnimation(anim, "Die");
+                player_Invin = true;
+            }
+
+            
+            deathTime += Time.deltaTime;
+            // 플레이어 죽는 모션을 취한후 게임 메뉴 보여주기.
+            AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
+
+            if (deathTime >= info.length)
+            {
+                GameObject.Destroy(this.gameObject);
+                m_MenuObj.GetComponent<MenuManager>().ShowWinMenu();
+            }
+           
+        }
+
+
+        if (skill)
+        {
+            animation_time += Time.deltaTime;
 
             if(animation_time >= animation_length)
             {
                 skill = false;
+                animation_time = 0f;
                 AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
             }
         }
+
+        //if (checkSkill)
+        //{
+        //    checkTime += Time.deltaTime;
+
+        //    if (checkTime > anim.GetCurrentAnimatorStateInfo(0).length)
+        //    {
+        //        checkSkill = false;
+        //        checkTime = 0f;
+
+        //        MainManager.Instance.GetAnimanager().ChangeAnimationState(anim, BOSS_IDLE, currentState);
+        //    }
+        //}
 
 
 

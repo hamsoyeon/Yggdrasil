@@ -1204,18 +1204,7 @@ public class BossSkill : MonoBehaviour
     void Update()
     {
 
-        if (checkSkill)
-        {
-            checkTime += Time.deltaTime;
-
-            if (checkTime > anim.GetCurrentAnimatorStateInfo(0).length)
-            {
-                checkSkill = false;
-                checkTime = 0f;
-
-                MainManager.Instance.GetAnimanager().ChangeAnimationState(anim, BOSS_IDLE, currentState);
-            }
-        }
+        
 
     }
 
