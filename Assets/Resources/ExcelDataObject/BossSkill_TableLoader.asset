@@ -14,134 +14,134 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   filepath: Assets\00.Data\Txt\BossSkill_Table.txt
   DataList:
-  - Name_KR: "\uC57D \uD3ED\uBC1C"
-    Name_EN: weak_explosion
+  - Name_KR: "\uC7A5\uD48D"
+    Name_EN: Air_Strike
     BossSkillIndex: 231001
     TargetType: 2
     Target: 2
-    Power: 50
-    CoolTime: 10
-    SkillDistance: 4
-    SkillRange: 2
+    Power: 10
+    CoolTime: 1
+    SkillDistance: 3
+    SkillRange: 4
     SkillType: 3
-    UseStat: 10
+    UseStat: 20
     Direction1: 1
-    Direction2: 1
+    Direction2: 0
     Direction3: 0
     Direction4: 0
     Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
     LifeTime: 1
-    DoT: 1
+    DoT: 1.1
     SkillAdded: 0
     BuffAdded: 0
-    SkillAnimation: 4
+    SkillAnimation: 3
     SkillDelay: 2
     DelayPrefb: 0
-    LunchPrefb: 971001
-    FieldPrefb: 0
-    FirePrefb: 0
-    DamPrefb: 912004
-  - Name_KR: "\uC911 \uD3ED\uBC1C"
-    Name_EN: medium_explosion
+    LunchPrefb: 971017
+    SingleTile: 1
+    FirePrefb: 971017
+    DamPrefb: 0
+  - Name_KR: "\uD3ED\uD30C"
+    Name_EN: Explosion
     BossSkillIndex: 231002
     TargetType: 2
     Target: 2
-    Power: 20
-    CoolTime: 15
+    Power: 10
+    CoolTime: 3
     SkillDistance: 2
     SkillRange: 3
-    SkillType: 3
-    UseStat: 20
+    SkillType: 1
+    UseStat: 35
     Direction1: 1
-    Direction2: 1
-    Direction3: 1
+    Direction2: 0
+    Direction3: 0
     Direction4: 0
     Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
     LifeTime: 1
-    DoT: 1
+    DoT: 1.1
     SkillAdded: 0
     BuffAdded: 0
-    SkillAnimation: 1
+    SkillAnimation: 2
     SkillDelay: 2
     DelayPrefb: 0
-    LunchPrefb: 971001
-    FieldPrefb: 0
-    FirePrefb: 0
-    DamPrefb: 912004
-  - Name_KR: "\uAC15 \uD3ED\uBC1C"
-    Name_EN: strong_explosion
+    LunchPrefb: 971015
+    SingleTile: 1
+    FirePrefb: 971015
+    DamPrefb: 0
+  - Name_KR: "\uB300\uC9C0\uC9C4"
+    Name_EN: EarthQuake
     BossSkillIndex: 231003
     TargetType: 2
     Target: 2
-    Power: 40
-    CoolTime: 20
-    SkillDistance: 3
+    Power: 10
+    CoolTime: 4
+    SkillDistance: 2
     SkillRange: 4
-    SkillType: 3
-    UseStat: 30
+    SkillType: 1
+    UseStat: 40
     Direction1: 1
-    Direction2: 1
-    Direction3: 1
-    Direction4: 1
-    Direction5: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
     LifeTime: 1
-    DoT: 1
-    SkillAdded: 0
+    DoT: 1.1
+    SkillAdded: 4
     BuffAdded: 0
     SkillAnimation: 1
     SkillDelay: 2
     DelayPrefb: 0
-    LunchPrefb: 971001
-    FieldPrefb: 0
-    FirePrefb: 0
-    DamPrefb: 912004
-  - Name_KR: "\uB291\uB300 \uC18C\uD658"
-    Name_EN: Summons_Wolf
+    LunchPrefb: 971014
+    SingleTile: 0
+    FirePrefb: 971014
+    DamPrefb: 0
+  - Name_KR: "\uB300\uC9C0\uC9C4 \uC5F0\uACC4 1"
+    Name_EN: EarthQuake-1
     BossSkillIndex: 231004
     TargetType: 2
     Target: 2
     Power: 10
-    CoolTime: 30
+    CoolTime: 1
     SkillDistance: 3
-    SkillRange: 5
-    SkillType: 5
-    UseStat: 30
+    SkillRange: 4
+    SkillType: 4
+    UseStat: 0
     Direction1: 1
-    Direction2: 1
-    Direction3: 1
-    Direction4: 1
-    Direction5: 1
-    Direction6: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
     "\uC815\uB839": 0
-    LifeTime: 2
-    DoT: 1
-    SkillAdded: 0
-    BuffAdded: 1
-    SkillAnimation: 0
-    SkillDelay: 2
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 5
+    BuffAdded: 0
+    SkillAnimation: 1
+    SkillDelay: 0.5
     DelayPrefb: 0
-    LunchPrefb: 970013
-    FieldPrefb: 0
-    FirePrefb: 0
+    LunchPrefb: 971014
+    SingleTile: 0
+    FirePrefb: 971014
     DamPrefb: 0
-  - Name_KR: "\uC5F0\uACC41"
-    Name_EN: Link1
+  - Name_KR: "\uB300\uC9C0\uC9C4 \uC5F0\uACC4 2"
+    Name_EN: EarthQuake-2
     BossSkillIndex: 231005
     TargetType: 2
     Target: 2
-    Power: 120
-    CoolTime: 40
+    Power: 10
+    CoolTime: 1
     SkillDistance: 4
     SkillRange: 4
-    SkillType: 0
-    UseStat: 50
-    Direction1: 0
+    SkillType: 4
+    UseStat: 0
+    Direction1: 1
     Direction2: 0
     Direction3: 0
     Direction4: 0
@@ -149,28 +149,28 @@ MonoBehaviour:
     Direction6: 0
     "\uC815\uB839": 0
     LifeTime: 1
-    DoT: 0
-    SkillAdded: 231006
+    DoT: 1.1
+    SkillAdded: 0
     BuffAdded: 0
-    SkillAnimation: 2
-    SkillDelay: 0
+    SkillAnimation: 1
+    SkillDelay: 0.5
     DelayPrefb: 0
-    LunchPrefb: 971012
-    FieldPrefb: 0
-    FirePrefb: 0
+    LunchPrefb: 971014
+    SingleTile: 0
+    FirePrefb: 971014
     DamPrefb: 0
-  - Name_KR: "\uBC88\uAC1C"
-    Name_EN: Lighting
+  - Name_KR: "\uB291\uB300 \uC18C\uD658"
+    Name_EN: SummonWolf
     BossSkillIndex: 231006
     TargetType: 2
     Target: 2
-    Power: 80
-    CoolTime: 0
-    SkillDistance: 4
-    SkillRange: 4
-    SkillType: 3
-    UseStat: 20
-    Direction1: 0
+    Power: 0
+    CoolTime: 8
+    SkillDistance: 10
+    SkillRange: 1
+    SkillType: 1
+    UseStat: 30
+    Direction1: 1
     Direction2: 0
     Direction3: 0
     Direction4: 0
@@ -178,28 +178,28 @@ MonoBehaviour:
     Direction6: 0
     "\uC815\uB839": 0
     LifeTime: 1
-    DoT: 0
-    SkillAdded: 231007
-    BuffAdded: 0
-    SkillAnimation: 1
-    SkillDelay: 0
+    DoT: 1.1
+    SkillAdded: 0
+    BuffAdded: 1
+    SkillAnimation: 4
+    SkillDelay: 0.5
     DelayPrefb: 0
-    LunchPrefb: 0
-    FieldPrefb: 0
-    FirePrefb: 0
-    DamPrefb: 912003
-  - Name_KR: "\uD68C\uC624\uB9AC"
-    Name_EN: Tornado
+    LunchPrefb: 971017
+    SingleTile: 0
+    FirePrefb: 971017
+    DamPrefb: 0
+  - Name_KR: "\uD68C\uC624\uB9AC \uBC30\uAE30"
+    Name_EN: WhileSlash
     BossSkillIndex: 231007
     TargetType: 2
     Target: 2
-    Power: 40
-    CoolTime: 0
+    Power: 10
+    CoolTime: 1
     SkillDistance: 3
-    SkillRange: 3
-    SkillType: 2
-    UseStat: 30
-    Direction1: 0
+    SkillRange: 2
+    SkillType: 1
+    UseStat: 20
+    Direction1: 1
     Direction2: 0
     Direction3: 0
     Direction4: 0
@@ -207,28 +207,28 @@ MonoBehaviour:
     Direction6: 0
     "\uC815\uB839": 0
     LifeTime: 1
-    DoT: 0
+    DoT: 1.1
     SkillAdded: 0
     BuffAdded: 0
-    SkillAnimation: 3
-    SkillDelay: 0
+    SkillAnimation: 1
+    SkillDelay: 2
     DelayPrefb: 0
     LunchPrefb: 0
-    FieldPrefb: 0
+    SingleTile: 1
     FirePrefb: 0
-    DamPrefb: 912001
-  - Name_KR: "\uC5F0\uACC42"
-    Name_EN: Link2
+    DamPrefb: 0
+  - Name_KR: "\uC2EC\uD310"
+    Name_EN: Judegement
     BossSkillIndex: 231008
     TargetType: 2
     Target: 2
-    Power: 200
-    CoolTime: 60
-    SkillDistance: 4
-    SkillRange: 4
-    SkillType: 0
-    UseStat: 50
-    Direction1: 0
+    Power: 10
+    CoolTime: 4
+    SkillDistance: 10
+    SkillRange: 2
+    SkillType: 2
+    UseStat: 30
+    Direction1: 1
     Direction2: 0
     Direction3: 0
     Direction4: 0
@@ -236,28 +236,28 @@ MonoBehaviour:
     Direction6: 0
     "\uC815\uB839": 0
     LifeTime: 1
-    DoT: 0
-    SkillAdded: 231009
+    DoT: 1.1
+    SkillAdded: 9
     BuffAdded: 0
     SkillAnimation: 2
-    SkillDelay: 0
+    SkillDelay: 2
     DelayPrefb: 0
     LunchPrefb: 0
-    FieldPrefb: 0
+    SingleTile: 1
     FirePrefb: 0
     DamPrefb: 0
-  - Name_KR: "\uBE14\uB799\uD640"
-    Name_EN: black hole
+  - Name_KR: "\uC2EC\uD310 \uC5F0\uACC4 1"
+    Name_EN: Judegement-1
     BossSkillIndex: 231009
     TargetType: 2
     Target: 2
-    Power: 80
-    CoolTime: 0
-    SkillDistance: 3
-    SkillRange: 3
-    SkillType: 4
-    UseStat: 20
-    Direction1: 0
+    Power: 10
+    CoolTime: 1
+    SkillDistance: 10
+    SkillRange: 2
+    SkillType: 2
+    UseStat: 0
+    Direction1: 1
     Direction2: 0
     Direction3: 0
     Direction4: 0
@@ -265,28 +265,28 @@ MonoBehaviour:
     Direction6: 0
     "\uC815\uB839": 0
     LifeTime: 1
-    DoT: 0
-    SkillAdded: 231010
+    DoT: 1.1
+    SkillAdded: 10
     BuffAdded: 0
-    SkillAnimation: 3
-    SkillDelay: 0
+    SkillAnimation: 0
+    SkillDelay: 1
     DelayPrefb: 0
-    LunchPrefb: 971013
-    FieldPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
     FirePrefb: 0
-    DamPrefb: 912003
-  - Name_KR: "\uD68C\uC624\uB9AC"
-    Name_EN: tornado
+    DamPrefb: 0
+  - Name_KR: "\uC2EC\uD310 \uC5F0\uACC4 2"
+    Name_EN: Judegement-2
     BossSkillIndex: 231010
     TargetType: 2
     Target: 2
-    Power: 40
-    CoolTime: 0
-    SkillDistance: 3
-    SkillRange: 3
-    SkillType: 4
-    UseStat: 30
-    Direction1: 0
+    Power: 10
+    CoolTime: 1
+    SkillDistance: 10
+    SkillRange: 2
+    SkillType: 2
+    UseStat: 0
+    Direction1: 1
     Direction2: 0
     Direction3: 0
     Direction4: 0
@@ -294,28 +294,28 @@ MonoBehaviour:
     Direction6: 0
     "\uC815\uB839": 0
     LifeTime: 1
-    DoT: 0
-    SkillAdded: 231010
+    DoT: 1.1
+    SkillAdded: 11
     BuffAdded: 0
-    SkillAnimation: 3
-    SkillDelay: 0
+    SkillAnimation: 0
+    SkillDelay: 1
     DelayPrefb: 0
     LunchPrefb: 0
-    FieldPrefb: 0
+    SingleTile: 1
     FirePrefb: 0
-    DamPrefb: 912001
-  - Name_KR: "\uD53C\uD3ED"
-    Name_EN: exposure
+    DamPrefb: 0
+  - Name_KR: "\uC774\uD504\uB9AC\uD2B8 \uC18C\uD658"
+    Name_EN: SummonIfrit
     BossSkillIndex: 231011
     TargetType: 2
     Target: 2
-    Power: 40
-    CoolTime: 0
-    SkillDistance: 4
-    SkillRange: 4
-    SkillType: 3
-    UseStat: 10
-    Direction1: 0
+    Power: 0
+    CoolTime: 1
+    SkillDistance: 10
+    SkillRange: 1
+    SkillType: 1
+    UseStat: 0
+    Direction1: 1
     Direction2: 0
     Direction3: 0
     Direction4: 0
@@ -323,42 +323,13 @@ MonoBehaviour:
     Direction6: 0
     "\uC815\uB839": 0
     LifeTime: 1
-    DoT: 0
-    SkillAdded: 231011
-    BuffAdded: 0
-    SkillAnimation: 1
-    SkillDelay: 0
-    DelayPrefb: 0
-    LunchPrefb: 0
-    FieldPrefb: 0
-    FirePrefb: 0
-    DamPrefb: 912006
-  - Name_KR: "\uD53C\uD3ED2"
-    Name_EN: exposure
-    BossSkillIndex: 231012
-    TargetType: 2
-    Target: 2
-    Power: 40
-    CoolTime: 0
-    SkillDistance: 3
-    SkillRange: 3
-    SkillType: 2
-    UseStat: 10
-    Direction1: 0
-    Direction2: 0
-    Direction3: 0
-    Direction4: 0
-    Direction5: 0
-    Direction6: 0
-    "\uC815\uB839": 0
-    LifeTime: 1
-    DoT: 0
+    DoT: 1.1
     SkillAdded: 0
-    BuffAdded: 0
-    SkillAnimation: 3
-    SkillDelay: 0
+    BuffAdded: 2
+    SkillAnimation: 0
+    SkillDelay: 1
     DelayPrefb: 0
     LunchPrefb: 0
-    FieldPrefb: 0
+    SingleTile: 0
     FirePrefb: 0
-    DamPrefb: 912006
+    DamPrefb: 0
