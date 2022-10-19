@@ -24,7 +24,7 @@ MonoBehaviour:
     CRange: 2
     FRange: 3
     MaxStamina: 100
-    Speed: 50
+    Speed: 12
     MoveStUsed: 20
     Skill1: 231001
     Skill2: 231002

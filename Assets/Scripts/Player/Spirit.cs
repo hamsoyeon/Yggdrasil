@@ -7,10 +7,9 @@ public class Spirit : MonoBehaviour
 
 	enum SpiritType { Tile=1, NonTileNotMove, NonTileMove }
 
-	//public Spirit_TableExcel m_CurrentSpirit;
 	public GameObject SpiritPrefab;
 
-	//public SpiritSkill_TableExcel m_CurrentSkill;
+	
 	public SpiritSkill m_SpiritSkill;
 
 
@@ -58,7 +57,6 @@ public class Spirit : MonoBehaviour
 				{
 					StartCoroutine(TileSpirit(m_SpiritClass.m_SpiritData, m_SpiritClass.m_SpiritSkillData, m_PlayerRow,m_PlayerColumn));
 				}
-				
 				break;
 			case SpiritType.NonTileNotMove:
 				StartCoroutine(NonTileSpiritByNotMove(m_SpiritClass.m_SpiritData, m_SpiritClass.m_SpiritSkillData));
@@ -68,19 +66,12 @@ public class Spirit : MonoBehaviour
 				break;
 
 		}
-
-        
-
-
 	}
 
 	IEnumerator TileSpirit(Spirit_TableExcel spiritInfo,SpiritSkill_TableExcel skillInfo,int Row,int Column)
 	{
 
         //정령을 소환한다.(코루틴으로 정령을 소환)
-
-
-        //GameObject tempSpirit = Instantiate(SpiritPrefab);
         GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
 
         Animator anim = tempSpirit.transform.GetChild(0).GetComponent<Animator>();
@@ -95,10 +86,6 @@ public class Spirit : MonoBehaviour
         AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
         float animation_length = info.length;
         bool setIdle = false;
-
-        //스킬실행
-        //PlayerManager.Instance.m_SpiritSkill.SkillUse(skillInfo, Row, Column);
-        //m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, m_PlayerRow, m_PlayerColumn);
 
         m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, tempSpirit);
 
@@ -268,11 +255,6 @@ public class Spirit : MonoBehaviour
 
 	private void Start()
 	{
-		//임시 프리팹을 가져옴.
-		//SpiritPrefab = Resources.Load("Prefabs/Spirit") as GameObject;
-
-		//m_SpiritSkill = PlayerManager.Instance.m_SpiritSkill;
-
 		m_SpiritSkill = this.GetComponent<SpiritSkill>();
 		m_SpiritClass = this.GetComponent<CharacterClass>();
 		m_SpiritClass.m_SkillMgr.m_SpiritSkill = m_SpiritSkill;

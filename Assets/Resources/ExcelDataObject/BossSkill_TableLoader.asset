@@ -39,7 +39,7 @@ MonoBehaviour:
     SkillAnimation: 3
     SkillDelay: 3
     DelayPrefb: 971009
-    LunchPrefb: 971001
+    LunchPrefb: 970008
     SingleTile: 0
     FirePrefb: 971001
     DamPrefb: 0

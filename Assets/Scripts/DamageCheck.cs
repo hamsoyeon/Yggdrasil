@@ -7,6 +7,7 @@ public class DamageCheck : MonoBehaviour
 
     public CharacterClass EnemyClass;
     public bool dmg_check = false;
+    public GameObject DamageEffect;  //해당 이펙트의 피격된 적의 PosBody에 생성.
 
     private CharacterClass PlayerClass;
 

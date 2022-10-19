@@ -41,36 +41,23 @@ public class BossSkill : MonoBehaviour
     public GameObject MobPrefabs;
 
 
-    public GameObject SkillPrefab;
-    public GameObject DelayPrefab; //딜레이 시 나올 프리팹.
-    public GameObject EmptyPrefab;
+    public GameObject DamagePrefab;  // 맞았을때 이펙트 
+    public GameObject firePrefab;    // 실제로 보이거나 날아가는 이펙트
+    public GameObject LunchPrefab;   // PosAtk의 위치에서 발생되는 이펙트
+    public GameObject DelayPrefab;   // 딜레이 시 나올 프리팹.
+    public GameObject EmptyPrefab;   // SingleTile일때 데미지 판정을 위한 임시 이펙트
 
+    public Transform PosAtk;
 
-    //public bool SingleTile = false; //딜레이 이펙트를 타일 전체에게 나오게 할것인가의 여부
-
-
-    //public GameObject Skill1;
-    //public GameObject Skill2;
-    //public GameObject Skill3;
-    //public GameObject Skill4;
+    //public GameObject SkillPrefab;   //현재 런치 프리팹 -> 파이어 프리팹으로 바뀌어야 한다..
+     
 
     private Animator anim;
-    private string currentState;
-
-    //Animation States
-    const string BOSS_IDLE = "Idle01";
-    const string BOSS_SKILL01 = "Skill01";
-    const string BOSS_SKILL02 = "Skill02";
-    const string BOSS_SKILL03 = "Skill03";
-    const string BOSS_SKILL04 = "Skill04";
 
 
     public float angleRange = 60f;
     public float distance = 5f;
     public bool isCollision = false;
-
-    private float checkTime = 0f;
-    private bool checkSkill = false;
 
     Color _blue = new Color(0f, 0f, 1f, 0.2f);
     Color _red = new Color(1f, 0f, 0f, 0.2f);
@@ -79,13 +66,6 @@ public class BossSkill : MonoBehaviour
     //Vector3 direction;
 
     float dotValue = 0f;
-
-    //private BossSkillSet m_bossSkillSet;
-
-    private int m_SkillCheck = 0;  //보스의 스킬연계가 얼만큼 진행되는지.
-    private bool skillAction = true;
-    private int m_BossSkillIndex;
-
 
     private int m_PlayerRow;
     private int m_PlayerColumn;
@@ -103,6 +83,7 @@ public class BossSkill : MonoBehaviour
     //private BossStat_TableExcel m_CurrentBossStat;
     public BossSkill_TableExcel m_CurrentBossSkill;
 
+    private GameObject TempLunch = null;
 
     struct ClockDirectionList
     {
@@ -135,18 +116,27 @@ public class BossSkill : MonoBehaviour
         m_BossRow = MainManager.Instance.GetStageManager().m_BossRow;
         m_BossColumn = MainManager.Instance.GetStageManager().m_BossColumn;
 
-        SkillPrefab = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.LunchPrefb];
+        //SkillPrefab = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.LunchPrefb];
+
+
+        LunchPrefab = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.LunchPrefb];
         DelayPrefab = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.DelayPrefb];
         EmptyPrefab = PrefabLoader.Instance.PrefabDic[000000];
+        firePrefab = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.FirePrefb];
+        DamagePrefab = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.DamPrefb];
+
+       
 
         DamageCheck check1,check2;
-        check1 = SkillPrefab.GetComponent<DamageCheck>();
+        check1 = firePrefab.GetComponent<DamageCheck>();
         if (check1 == null)
         {
-            SkillPrefab.AddComponent<DamageCheck>();
+            firePrefab.AddComponent<DamageCheck>();
+            check1 = firePrefab.GetComponent<DamageCheck>();
         }
 
         check1.dmg_check = true;
+        check1.DamageEffect = DamagePrefab;  //데미지 프리팹 넣어주기.
 
 
         check2 = EmptyPrefab.GetComponent<DamageCheck>();
@@ -201,7 +191,7 @@ public class BossSkill : MonoBehaviour
         yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
 
         m_StageMgr.m_MapInfo[Row, column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
-        GameObject effect = Instantiate(SkillPrefab);
+        GameObject effect = Instantiate(firePrefab);
         effect.transform.position = m_StageMgr.m_MapInfo[Row, column].MapPos + new Vector3(0, 5f, 0);
         m_StageMgr.m_MapInfo[Row, column].BossEffectObject = effect;
 
@@ -229,6 +219,30 @@ public class BossSkill : MonoBehaviour
         this.gameObject.GetComponent<BossFSM>().behavior = false;
 
         yield return null;
+    }
+
+
+    private void DelayAndLunchPrefabSet()
+    {
+
+        TempLunch = Instantiate(LunchPrefab);
+        TempLunch.transform.SetParent(PosAtk);
+        //lunch.transform.position = PosAtk.position;
+
+        for (int i = 0; i < m_StageMgr.mapZ; i++)
+        {
+            for (int j = 0; j < m_StageMgr.mapX; j++)
+            {
+                if (m_StageMgr.m_MapInfo[i, j].BossEffect || m_StageMgr.m_MapInfo[i, j].EmptyEffect)
+                {
+                    GameObject effect = Instantiate(DelayPrefab);
+                    effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
+
+                    m_StageMgr.m_MapInfo[i, j].BossDelayObject = effect;
+                }
+            }
+        }
+
     }
 
     IEnumerator SkillWideAction()
@@ -385,24 +399,13 @@ public class BossSkill : MonoBehaviour
 
         //경고시간동안 딜레이 프리팹 생성한 것을 지우고 타일 빨간색을 다시 원래색깔로 돌린후 그 범위에 이펙트 출현하고 데미지 로직 처리.
 
-        for (int i = 0; i < m_StageMgr.mapZ; i++)
-        {
-            for (int j = 0; j < m_StageMgr.mapX; j++)
-            {
-                if (m_StageMgr.m_MapInfo[i, j].BossEffect || m_StageMgr.m_MapInfo[i, j].EmptyEffect)
-                {
-                    GameObject effect = Instantiate(DelayPrefab);
-                    effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
-
-                    m_StageMgr.m_MapInfo[i, j].BossDelayObject = effect;
-                }
-            }
-        }
-      
-
-
+        
+        DelayAndLunchPrefabSet();
         Debug.Log("보스 스킬 범위 ");
         yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
+        Destroy(TempLunch);
+
+
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
         {
@@ -590,21 +593,14 @@ public class BossSkill : MonoBehaviour
         }
 
 
-        for (int i = 0; i < m_StageMgr.mapZ; i++)
-        {
-            for (int j = 0; j < m_StageMgr.mapX; j++)
-            {
-
-                if (m_StageMgr.m_MapInfo[i, j].BossEffect || m_StageMgr.m_MapInfo[i, j].EmptyEffect)
-                {
-                    GameObject effect = Instantiate(DelayPrefab);
-                    effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
-                    m_StageMgr.m_MapInfo[i, j].BossDelayObject = effect;
-                }
-            }
-        }
+        
+        DelayAndLunchPrefabSet();
         Debug.Log("보스 스킬 범위 ");
         yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
+        Destroy(TempLunch);
+
+
+
 
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
@@ -987,24 +983,13 @@ public class BossSkill : MonoBehaviour
         }
 
 
+
        
+        DelayAndLunchPrefabSet();
         Debug.Log("보스 스킬 범위 ");
-        for (int i = 0; i < m_StageMgr.mapZ; i++)
-        {
-            for (int j = 0; j < m_StageMgr.mapX; j++)
-            {
-                if (m_StageMgr.m_MapInfo[i, j].BossEffect || m_StageMgr.m_MapInfo[i, j].EmptyEffect)
-                {
-                    GameObject effect = Instantiate(DelayPrefab);
-                    effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
-                    m_StageMgr.m_MapInfo[i, j].BossDelayObject = effect;
-                }
-            }
-        }
-
-
-
         yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
+        Destroy(TempLunch);
+
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
         {
@@ -1068,7 +1053,7 @@ public class BossSkill : MonoBehaviour
         {
             Object.Destroy(m_StageMgr.m_MapInfo[i, j].BossDelayObject);
             m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
-            GameObject effect = Instantiate(SkillPrefab);
+            GameObject effect = Instantiate(firePrefab);
             effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
             effect.GetComponent<DamageCheck>().who = 2;
             effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
@@ -1163,8 +1148,7 @@ public class BossSkill : MonoBehaviour
                     {
                         if (saveColumn_M >= 0)
                         {
-                   ;
-
+                   
                             if (checkRow_M >= 0)
                             {
                                 
@@ -1359,24 +1343,13 @@ public class BossSkill : MonoBehaviour
             
         }
 
+
       
+        DelayAndLunchPrefabSet();
         Debug.Log("보스 스킬 범위 ");
-
-        for (int i = 0; i < m_StageMgr.mapZ; i++)
-        {
-            for (int j = 0; j < m_StageMgr.mapX; j++)
-            {
-                if (m_StageMgr.m_MapInfo[i, j].BossEffect || m_StageMgr.m_MapInfo[i, j].EmptyEffect)
-                {
-                    GameObject effect = Instantiate(DelayPrefab);
-                    effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
-                    m_StageMgr.m_MapInfo[i, j].BossDelayObject = effect;
-                }
-            }
-        }
-        
-
         yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
+        Destroy(TempLunch);
+
 
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
@@ -1464,6 +1437,19 @@ public class BossSkill : MonoBehaviour
         }
 
         PlayerPosition = GameObject.FindGameObjectWithTag("Player").transform;
+
+
+        Transform[] allChildren = GetComponentsInChildren<Transform>();
+        foreach(Transform child in allChildren)
+        {
+            if(child.name =="PosAtk")
+            {
+                PosAtk = child;
+                Debug.Log("보스스킬스크립트:" + PosAtk.name);
+            }
+        }
+
+        
 
         //names[0].Name = "이세영"; names[0].Age = 102;
         //names[1].Name = "권경민"; names[1].Age = 31;

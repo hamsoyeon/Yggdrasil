@@ -11,7 +11,7 @@ public class SpiritSkill : MonoBehaviour
     
     enum SkillNumber { ICE=0,POISON ,INVINCIBILITY ,SANCTITY,HEAL ,SPEED }
 
-	public GameObject[] Lunch_Prefab;
+	public GameObject[] Lunch_Prefab;  //정령의 PosAtk에서 나오는 것.
     public GameObject[] Fire_Prefab;
     public GameObject[] Damage_Prefab;
 
@@ -33,27 +33,29 @@ public class SpiritSkill : MonoBehaviour
         GameObject tempSpirit = Spirit;
 
 
-        switch (skillInfo.SpritSkillIndex)
-        {
-            case 170001:  //얼음장판
-                effectNumber = 0;
-                break;
-            case 170002:  //독구름
-                effectNumber = 1;
-                break;
-            case 170003:  //무적
-                effectNumber = 2;
-                break;
-            case 170004:  //신성지대
-                effectNumber = 3;
-                break;
-            case 170005: //힐
-                effectNumber = 4;
-                break;
-            case 170006: //이속증가
-                effectNumber = 5;
-                break;
-        }
+        effectNumber = skillInfo.SpritSkillIndex - 170001;
+
+        //switch (skillInfo.SpritSkillIndex)
+        //{
+        //    case 170001:  //얼음장판
+        //        effectNumber = 0;
+        //        break;
+        //    case 170002:  //독구름
+        //        effectNumber = 1;
+        //        break;
+        //    case 170003:  //무적
+        //        effectNumber = 2;
+        //        break;
+        //    case 170004:  //신성지대
+        //        effectNumber = 3;
+        //        break;
+        //    case 170005: //힐
+        //        effectNumber = 4;
+        //        break;
+        //    case 170006: //이속증가
+        //        effectNumber = 5;
+        //        break;
+        //}
 
         Lunch_Prefab[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.LunchPrefb];
 
@@ -63,7 +65,6 @@ public class SpiritSkill : MonoBehaviour
         {
             Lunch_Prefab[effectNumber].AddComponent<DamageCheck>();
         }
-
 
 
         switch (skillInfo.SpritSkillIndex)
@@ -578,7 +579,7 @@ public class SpiritSkill : MonoBehaviour
 
         float spirit_time = 0f;
 
-        GameObject player = null;
+        CharacterClass player_characterclass = null;
 
         while (true)
         {
@@ -590,10 +591,16 @@ public class SpiritSkill : MonoBehaviour
             {
                 //정령 파괴후 코루틴 종료
                 Object.Destroy(tempEffect);
-                player.GetComponent<PlayerManager>().PlayerClass.Invincibility = 1.0f;
+
+                if(player_characterclass != null)
+                {
+                    player_characterclass.Invincibility = 1.0f;
+                }
+                    
                 yield break;
             }
 
+            // 현재 무적이 안되는 버그가 있음..
             colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 11);  //11번째 레이어 = Player
 
             if(colls.Length !=0)
@@ -602,8 +609,8 @@ public class SpiritSkill : MonoBehaviour
 
                 foreach(var p in colls)
                 {
-                    p.GetComponent<PlayerManager>().PlayerClass.Invincibility = 0.0f;
-                    player = p.gameObject;
+                    player_characterclass = p.GetComponent<CharacterClass>();
+                    player_characterclass.Invincibility = 0.0f;
                 }
                
 
