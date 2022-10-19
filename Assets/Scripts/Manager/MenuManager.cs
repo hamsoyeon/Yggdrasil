@@ -14,6 +14,7 @@ public class MenuManager : MonoBehaviour
     // 패널이 보이는 경우 메뉴를 눌렀을때,졌을때,스테이지를 클리어했을때(이겼을때)
     public GameObject LosePanel;  //게임이 졌을 때
     public GameObject WinPanel;  //게임에 이겼을 때
+    public GameObject MinimapPanel;
     public int m_menu = 0;
 
     public string thisScene;
@@ -81,6 +82,7 @@ public class MenuManager : MonoBehaviour
         //LosePanel = GameObject.Find("UICanvas").transform.Find("LosePanel").gameObject;
         //Time.timeScale = 0f;
         LosePanel.SetActive(true);  //패배했을때의 패널을 보여주고
+        MinimapPanel.SetActive(false);//미니맵 끄기
     }
 
     public void ShowWinMenu()
@@ -90,8 +92,10 @@ public class MenuManager : MonoBehaviour
             return;
 
         Time.timeScale = 0f;
+
         //WinPanel = GameObject.Find("UICanvas").transform.Find("WinPanel").gameObject;
         WinPanel.SetActive(true);
+        MinimapPanel.SetActive(false);//미니맵 끄기
     }
 
     public void ReStart()

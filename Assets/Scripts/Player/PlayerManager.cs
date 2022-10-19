@@ -59,6 +59,8 @@ public class PlayerManager : MonoBehaviour
 
     float addSpeed = 0f;
 
+    bool boss_Invin = false;
+
 
     private float deathTime =0f;
 
@@ -257,12 +259,18 @@ public class PlayerManager : MonoBehaviour
         if(PlayerClass.m_CharacterStat.HP <=0)
         {
 
+            if(!boss_Invin)
+            {
+                //GameObject.Find("931001(Clone)").transform.GetChild(0).gameObject.GetComponent<CharacterClass>().Invincibility = 0.0f;  //보스를 무적으로 만들고.
+                AnimationManager.GetInstance().PlayAnimation(anim, "Die");
+                boss_Invin = true;
+            }
+
             deathTime += Time.deltaTime;
             // 플레이어 죽는 모션을 취한후 게임 메뉴 보여주기.
 
-            AnimationManager.GetInstance().PlayAnimation(anim, "Die");
-
-            if(deathTime >= 1.0f)
+            AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
+            if(deathTime >= info.length)
             {
                 //deathTime = 0f;
                 m_MenuManager.GetComponent<MenuManager>().ShowLoseMenu();
@@ -282,6 +290,8 @@ public class PlayerManager : MonoBehaviour
     public void Damage(int _damage)
     {
         //Debug.Log(_damage);
+
+
 
         Debug.Log("현재 플레이어의 체력:" + PlayerClass.m_CharacterStat.HP);
         TakeDamagePrint(_damage);

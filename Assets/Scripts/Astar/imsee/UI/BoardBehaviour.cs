@@ -127,7 +127,6 @@ public class BoardBehaviour : MonoBehaviour
     }
 
     private GameObject CreateBossPiece(GamePiece piece)
-
     {
         BossGameObject = new GameObject();
         BossGameObject.name = "Boss";

@@ -92,6 +92,10 @@ public class Spirit : MonoBehaviour
 
         AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
 
+        AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
+        float animation_length = info.length;
+        bool setIdle = false;
+
         //스킬실행
         //PlayerManager.Instance.m_SpiritSkill.SkillUse(skillInfo, Row, Column);
         //m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, m_PlayerRow, m_PlayerColumn);
@@ -111,6 +115,14 @@ public class Spirit : MonoBehaviour
 			//지속시간 체크
 			spirit_time += Time.deltaTime;
 			attack_time += Time.deltaTime;
+
+
+
+            if(spirit_time >= animation_length && !setIdle)
+            {
+                AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+                setIdle = true;
+            }
 
 			//정령 지속시간이 경과시 
 			if (spirit_time >= spiritInfo.Duration)
@@ -148,6 +160,9 @@ public class Spirit : MonoBehaviour
 
 
         AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
+        AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
+        float animation_length = info.length;
+        bool setIdle = false;
 
 
         tempSpirit.transform.position = this.gameObject.transform.position + new Vector3(0,0,-7f);
@@ -163,8 +178,15 @@ public class Spirit : MonoBehaviour
 			spirit_time += Time.deltaTime;
 			attack_time += Time.deltaTime;
 
-			//정령 지속시간이 경과시 
-			if (spirit_time >= spiritInfo.Duration)
+
+            if (spirit_time >= animation_length && !setIdle)
+            {
+                AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+                setIdle = true;
+            }
+
+            //정령 지속시간이 경과시 
+            if (spirit_time >= spiritInfo.Duration)
 			{
 				//정령 파괴후 코루틴 종료
 				Object.Destroy(tempSpirit);
@@ -195,6 +217,9 @@ public class Spirit : MonoBehaviour
         }
 
         AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
+        AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
+        float animation_length = info.length;
+        bool setIdle = false;
 
         tempSpirit.transform.position = this.gameObject.transform.position + new Vector3(0, 0, -7f);
 		m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, tempSpirit);
@@ -210,8 +235,14 @@ public class Spirit : MonoBehaviour
 			spirit_time += Time.deltaTime;
 			attack_time += Time.deltaTime;
 
-			//정령 지속시간이 경과시 
-			if (spirit_time >= spiritInfo.Duration)
+            if (spirit_time >= animation_length && !setIdle)
+            {
+                AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+                setIdle = true;
+            }
+
+            //정령 지속시간이 경과시 
+            if (spirit_time >= spiritInfo.Duration)
 			{
 				//정령 파괴후 코루틴 종료
 				Object.Destroy(tempSpirit);

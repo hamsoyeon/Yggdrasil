@@ -578,6 +578,8 @@ public class SpiritSkill : MonoBehaviour
 
         float spirit_time = 0f;
 
+        GameObject player = null;
+
         while (true)
         {
             //지속시간 체크
@@ -588,6 +590,7 @@ public class SpiritSkill : MonoBehaviour
             {
                 //정령 파괴후 코루틴 종료
                 Object.Destroy(tempEffect);
+                player.GetComponent<PlayerManager>().PlayerClass.Invincibility = 1.0f;
                 yield break;
             }
 
@@ -596,6 +599,13 @@ public class SpiritSkill : MonoBehaviour
             if(colls.Length !=0)
             {
                 Debug.Log("무적실행");
+
+                foreach(var p in colls)
+                {
+                    p.GetComponent<PlayerManager>().PlayerClass.Invincibility = 0.0f;
+                    player = p.gameObject;
+                }
+               
 
             }
             else
