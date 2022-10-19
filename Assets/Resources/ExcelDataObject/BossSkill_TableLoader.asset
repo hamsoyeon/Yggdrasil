@@ -39,9 +39,9 @@ MonoBehaviour:
     SkillAnimation: 3
     SkillDelay: 2
     DelayPrefb: 971009
-    LunchPrefb: 971017
+    LunchPrefb: 971001
     SingleTile: 1
-    FirePrefb: 971017
+    FirePrefb: 971001
     DamPrefb: 0
   - Name_KR: "\uD3ED\uD30C"
     Name_EN: Explosion

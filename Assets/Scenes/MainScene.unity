@@ -1141,8 +1141,9 @@ MonoBehaviour:
   - {fileID: 1003016772751546655, guid: e28c704c40b2a39469ea637b5eb15815, type: 3}
   - {fileID: 7548329720797303464, guid: 60fdf67d68015ac41bf555921580c7df, type: 3}
   - {fileID: 964483326553317703, guid: 9b0aa7ace35f3494eb3b451c48fbeff6, type: 3}
-  - {fileID: 1498407761032689853, guid: 3d64e25e0917bfe4bae751fa77b2bfd5, type: 3}
+  - {fileID: 5006970940163314085, guid: b1806d82e1729834db45e2395dd40d12, type: 3}
   - {fileID: 8106546959657055898, guid: 13b872f752247a04ab9312371017753c, type: 3}
+  - {fileID: 4143968955512158408, guid: af7dc0bbd0c4c194c9e353398fe4fc39, type: 3}
 --- !u!4 &424885998
 Transform:
   m_ObjectHideFlags: 0
@@ -18122,8 +18123,6 @@ RectTransform:
   m_AnchorMax: {x: 0.68464583, y: 0.24800001}
   m_AnchoredPosition: {x: 286.59998, y: -3.1999512}
   m_SizeDelta: {x: -470.7942, y: -146.8409}
-  m_AnchoredPosition: {x: 246.55005, y: -8.909912}
-  m_SizeDelta: {x: -533.9473, y: -201.8821}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1819709044
 MonoBehaviour:
