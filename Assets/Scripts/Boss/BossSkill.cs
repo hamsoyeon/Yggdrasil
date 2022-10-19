@@ -389,7 +389,7 @@ public class BossSkill : MonoBehaviour
         {
             for (int j = 0; j < m_StageMgr.mapX; j++)
             {
-                if (m_StageMgr.m_MapInfo[i, j].BossEffect)
+                if (m_StageMgr.m_MapInfo[i, j].BossEffect || m_StageMgr.m_MapInfo[i, j].EmptyEffect)
                 {
                     GameObject effect = Instantiate(DelayPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
@@ -595,7 +595,7 @@ public class BossSkill : MonoBehaviour
             for (int j = 0; j < m_StageMgr.mapX; j++)
             {
 
-                if (m_StageMgr.m_MapInfo[i, j].BossEffect)
+                if (m_StageMgr.m_MapInfo[i, j].BossEffect || m_StageMgr.m_MapInfo[i, j].EmptyEffect)
                 {
                     GameObject effect = Instantiate(DelayPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
@@ -993,7 +993,7 @@ public class BossSkill : MonoBehaviour
         {
             for (int j = 0; j < m_StageMgr.mapX; j++)
             {
-                if (m_StageMgr.m_MapInfo[i, j].BossEffect)
+                if (m_StageMgr.m_MapInfo[i, j].BossEffect || m_StageMgr.m_MapInfo[i, j].EmptyEffect)
                 {
                     GameObject effect = Instantiate(DelayPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
@@ -1082,6 +1082,7 @@ public class BossSkill : MonoBehaviour
         }
         else if (m_StageMgr.m_MapInfo[i, j].EmptyEffect)
         {
+            Object.Destroy(m_StageMgr.m_MapInfo[i, j].BossDelayObject);
             GameObject effect = Instantiate(EmptyPrefab);
             effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
             effect.GetComponent<DamageCheck>().who = 2;
@@ -1365,7 +1366,7 @@ public class BossSkill : MonoBehaviour
         {
             for (int j = 0; j < m_StageMgr.mapX; j++)
             {
-                if (m_StageMgr.m_MapInfo[i, j].BossEffect)
+                if (m_StageMgr.m_MapInfo[i, j].BossEffect || m_StageMgr.m_MapInfo[i, j].EmptyEffect)
                 {
                     GameObject effect = Instantiate(DelayPrefab);
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);

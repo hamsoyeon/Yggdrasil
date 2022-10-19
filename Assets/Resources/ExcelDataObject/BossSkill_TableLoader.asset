@@ -23,7 +23,7 @@ MonoBehaviour:
     CoolTime: 1
     SkillDistance: 3
     SkillRange: 4
-    SkillType: 4
+    SkillType: 3
     UseStat: 20
     Direction1: 1
     Direction2: 0
@@ -37,10 +37,10 @@ MonoBehaviour:
     SkillAdded: 0
     BuffAdded: 0
     SkillAnimation: 3
-    SkillDelay: 2
+    SkillDelay: 3
     DelayPrefb: 971009
     LunchPrefb: 971001
-    SingleTile: 1
+    SingleTile: 0
     FirePrefb: 971001
     DamPrefb: 0
   - Name_KR: "\uD3ED\uD30C"
