@@ -30,9 +30,9 @@ MonoBehaviour:
     Cshape2: 2
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970007
-    FirePrefb: 0
-    DamPrefb: 912001
+    LunchPrefb: 970008
+    FirePrefb: 970007
+    DamPrefb: 0
   - Name_KR: "\uB3C5\uAD6C\uB984"
     Name_EN: Posion_Cloud
     SpritSkillIndex: 170002
@@ -49,9 +49,9 @@ MonoBehaviour:
     Cshape2: 10
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970001
-    FirePrefb: 0
-    DamPrefb: 912002
+    LunchPrefb: 970008
+    FirePrefb: 970001
+    DamPrefb: 0
   - Name_KR: "\uBB34\uC801"
     Name_EN: Invincibility
     SpritSkillIndex: 170003
@@ -68,9 +68,9 @@ MonoBehaviour:
     Cshape2: 8
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970005
-    FirePrefb: 0
-    DamPrefb: 912007
+    LunchPrefb: 970008
+    FirePrefb: 970005
+    DamPrefb: 0
   - Name_KR: "\uC811\uADFC\uBD88\uAC00"
     Name_EN: KeepAway
     SpritSkillIndex: 170004
@@ -87,8 +87,8 @@ MonoBehaviour:
     Cshape2: 0
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970017
-    FirePrefb: 0
+    LunchPrefb: 970008
+    FirePrefb: 970017
     DamPrefb: 0
   - Name_KR: "\uD790"
     Name_EN: Heal
@@ -106,9 +106,9 @@ MonoBehaviour:
     Cshape2: 0
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970004
-    FirePrefb: 0
-    DamPrefb: 912009
+    LunchPrefb: 970008
+    FirePrefb: 970004
+    DamPrefb: 0
   - Name_KR: "\uC774\uC18D \uC99D\uAC00"
     Name_EN: Speedup
     SpritSkillIndex: 170006
@@ -125,6 +125,6 @@ MonoBehaviour:
     Cshape2: 0
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970003
-    FirePrefb: 0
-    DamPrefb: 912008
+    LunchPrefb: 970008
+    FirePrefb: 970003
+    DamPrefb: 0

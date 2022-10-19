@@ -11,10 +11,13 @@ public class SpiritSkill : MonoBehaviour
     
     enum SkillNumber { ICE=0,POISON ,INVINCIBILITY ,SANCTITY,HEAL ,SPEED }
 
-	public GameObject[] Lunch_Prefab;  //정령의 PosAtk에서 나오는 것.
-    public GameObject[] Fire_Prefab;
-    public GameObject[] Damage_Prefab;
+	public GameObject[] Lunch_Prefabs;  //정령의 PosAtk에서 나오는 것.
+    public GameObject[] Fire_Prefabs;
+    public GameObject[] Damage_Prefabs;
 
+    public Transform[] PosAtk;
+
+    public GameObject[] TempObjects;
 
     private int effectNumber = 0;
 
@@ -24,7 +27,9 @@ public class SpiritSkill : MonoBehaviour
     private int Row;
     private int Column;
 
-	public void SkillUse(SpiritSkill_TableExcel skillInfo,GameObject Spirit)  //비타일형
+    CharacterClass player_characterclass = null;
+
+    public void SkillUse(SpiritSkill_TableExcel skillInfo,GameObject Spirit)  //비타일형
 	{
         //현재 플레이어의 좌표
         Row = MainManager.instance.GetStageManager().m_PlayerRow;
@@ -34,6 +39,22 @@ public class SpiritSkill : MonoBehaviour
 
 
         effectNumber = skillInfo.SpritSkillIndex - 170001;
+
+        Debug.Log("스킬스킬 " + PosAtk[effectNumber]);
+
+        if(PosAtk[effectNumber] == null)
+        {
+            Transform[] allChildren = Spirit.GetComponentsInChildren<Transform>();
+
+            foreach (Transform child in allChildren)
+            {
+                if (child.name == "PosAtk")
+                {
+                    PosAtk[effectNumber] = child;
+                    Debug.Log("플레이어 스킬스크립트:" + PosAtk[effectNumber].name);
+                }
+            }
+        }
 
         //switch (skillInfo.SpritSkillIndex)
         //{
@@ -57,13 +78,16 @@ public class SpiritSkill : MonoBehaviour
         //        break;
         //}
 
-        Lunch_Prefab[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.LunchPrefb];
+        Lunch_Prefabs[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.LunchPrefb];
+        Fire_Prefabs[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.FirePrefb];
+        Damage_Prefabs[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.DamPrefb];
 
         DamageCheck check;
-        check = Lunch_Prefab[effectNumber].GetComponent<DamageCheck>();
+        check = Fire_Prefabs[effectNumber].GetComponent<DamageCheck>();
         if(check == null)
         {
-            Lunch_Prefab[effectNumber].AddComponent<DamageCheck>();
+            Fire_Prefabs[effectNumber].AddComponent<DamageCheck>();
+            check = Fire_Prefabs[effectNumber].GetComponent<DamageCheck>();
         }
 
 
@@ -71,34 +95,50 @@ public class SpiritSkill : MonoBehaviour
 		{
 			case 170001:  //얼음장판
                 check.dmg_check = true;
-                StartCoroutine(IceField(skillInfo, Row, Column));
+                check.DamageEffect = Damage_Prefabs[effectNumber];
+                StartCoroutine(IceField(skillInfo, Row, Column,effectNumber));
                 break;
 			case 170002:  //독구름
                 check.dmg_check = true;
-
-                StartCoroutine(PoisonCloud(skillInfo, tempSpirit));
+                check.DamageEffect = Damage_Prefabs[effectNumber];
+                StartCoroutine(PoisonCloud(skillInfo, tempSpirit, effectNumber));
                 break;
 			case 170003:  //무적
-                StartCoroutine(Invincibility(skillInfo, tempSpirit));
+                StartCoroutine(Invincibility(skillInfo, tempSpirit, effectNumber));
                 break;
 			case 170004:  //신성지대
-                StartCoroutine(Sanctity(skillInfo, tempSpirit));
+                StartCoroutine(Sanctity(skillInfo, tempSpirit, effectNumber));
                 break;
             case 170005: //힐
-                StartCoroutine(Heal(skillInfo, tempSpirit));
+                StartCoroutine(Heal(skillInfo, tempSpirit, effectNumber));
                 break;
             case 170006: //이속증가
-                StartCoroutine(SpeedField(skillInfo, Row,Column));
+                StartCoroutine(SpeedField(skillInfo, Row,Column, effectNumber));
                 break;
         }
 
 	}
 
+    private void DelayAndLunchPrefabSet(int number)
+    {
 
-    IEnumerator SpeedField(SpiritSkill_TableExcel skill, int row, int column)
+        if (TempObjects[number] == null)
+            TempObjects[number] = new GameObject();
+
+
+        TempObjects[number] = Instantiate(Lunch_Prefabs[number]);
+        TempObjects[number].transform.SetParent(PosAtk[number]);
+        TempObjects[number].transform.position = PosAtk[number].position;
+
+    }
+
+
+    IEnumerator SpeedField(SpiritSkill_TableExcel skill, int row, int column,int n)
     {
         int Row = row;
         int Column = column;
+
+        int number = n;
 
         float spirit_time = 0f;
 
@@ -181,7 +221,15 @@ public class SpiritSkill : MonoBehaviour
         }
 
         //경고시간(모든스킬 0.5f초로 고정)이  경과하면 파란색을 다시 원래색깔로 돌린후 그 범위에 이펙트 출현하고 데미지 로직 처리.
+
+        DelayAndLunchPrefabSet(number);
+
         yield return new WaitForSeconds(2f);
+
+        Destroy(TempObjects[number]);
+
+
+
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
         {
@@ -191,7 +239,7 @@ public class SpiritSkill : MonoBehaviour
                 if (m_StageMgr.m_MapInfo[i, j].SpiritEffect2)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
-                    GameObject effect = Instantiate(Lunch_Prefab[(int)SkillNumber.SPEED]);
+                    GameObject effect = Instantiate(Fire_Prefabs[(int)SkillNumber.SPEED]);
 
                     effect.GetComponent<DamageCheck>().Dot = skill.DoT;
                     effect.GetComponent<DamageCheck>().who = 1;
@@ -201,10 +249,6 @@ public class SpiritSkill : MonoBehaviour
                     {
                         effect.GetComponent<DamageCheck>().buffIndex = skill.BuffAdded;
                     }
-
-
-                    //GameObject effect = Instantiate(PrefabLoader.Instance.PrefabDic[skill.LunchPrefb]);
-
 
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     m_StageMgr.m_MapInfo[i, j].SpiritEffectObject2 = effect;
@@ -248,7 +292,6 @@ public class SpiritSkill : MonoBehaviour
 
                 }
 
-
                 yield break;
             }
 
@@ -278,10 +321,11 @@ public class SpiritSkill : MonoBehaviour
     }
 
 
-    IEnumerator IceField(SpiritSkill_TableExcel skill, int row, int column)
+    IEnumerator IceField(SpiritSkill_TableExcel skill, int row, int column, int n)
     {
         int Row = row;
         int Column = column;
+        int number = n;
 
         float spirit_time = 0f;
 
@@ -363,8 +407,9 @@ public class SpiritSkill : MonoBehaviour
 
         }
 
-        //경고시간(모든스킬 0.5f초로 고정)이  경과하면 파란색을 다시 원래색깔로 돌린후 그 범위에 이펙트 출현하고 데미지 로직 처리.
+        DelayAndLunchPrefabSet(number);
         yield return new WaitForSeconds(2f);
+        Destroy(TempObjects[number]);
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
         {
@@ -374,7 +419,7 @@ public class SpiritSkill : MonoBehaviour
                 if (m_StageMgr.m_MapInfo[i, j].SpiritEffect1)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
-                    GameObject effect = Instantiate(Lunch_Prefab[(int)SkillNumber.ICE]);
+                    GameObject effect = Instantiate(Fire_Prefabs[(int)SkillNumber.ICE]);
 
                     effect.GetComponent<DamageCheck>().Dot = skill.DoT;
                     effect.GetComponent<DamageCheck>().who = 1;
@@ -418,15 +463,11 @@ public class SpiritSkill : MonoBehaviour
                         }
                     }
                 }
-
-
                 //연계스킬있는지 확인후 다시 스킬실행.
                 if (skill.SkillAdded != 0)
                 {
 
                 }
-
-
                 yield break;
             }
 
@@ -434,18 +475,16 @@ public class SpiritSkill : MonoBehaviour
             yield return null;
         }
 
-
-     
-
     }
 
-
-	IEnumerator Heal(SpiritSkill_TableExcel skill, GameObject spirit)
+	IEnumerator Heal(SpiritSkill_TableExcel skill, GameObject spirit, int n)
 	{
         Debug.Log("힐 실행");
-        GameObject tempEffect = Instantiate(Lunch_Prefab[(int)SkillNumber.HEAL]);
+        GameObject tempEffect = Instantiate(Fire_Prefabs[(int)SkillNumber.HEAL]);
         tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
         tempEffect.GetComponent<DamageCheck>().who = 1;
+
+        int number = n;
 
         //버프 스킬이 있는지 확인후 스킬실행.
         if (skill.BuffAdded != 0)
@@ -454,7 +493,7 @@ public class SpiritSkill : MonoBehaviour
             tempEffect.GetComponent<DamageCheck>().buffIndex = skill.BuffAdded;
         }
 
-
+        DelayAndLunchPrefabSet(number);
 
         tempEffect.transform.position = spirit.transform.position;
 		Collider[] colls = null;
@@ -473,7 +512,8 @@ public class SpiritSkill : MonoBehaviour
 			{
 				//정령 파괴후 코루틴 종료
 				Object.Destroy(tempEffect);
-				yield break;
+                Destroy(TempObjects[number]);
+                yield break;
 			}
 
 			if(buff_Time >= skill.DoT)
@@ -502,16 +542,19 @@ public class SpiritSkill : MonoBehaviour
 	}
 
     //밀려나는 코드
-	IEnumerator Sanctity(SpiritSkill_TableExcel skill, GameObject spirit)
+	IEnumerator Sanctity(SpiritSkill_TableExcel skill, GameObject spirit, int n)
 	{
         Debug.Log("신성지대 실행");
-		GameObject tempEffect = Instantiate(Lunch_Prefab[(int)SkillNumber.SANCTITY]);
+		GameObject tempEffect = Instantiate(Fire_Prefabs[(int)SkillNumber.SANCTITY]);
         tempEffect.transform.position = spirit.transform.position;
 		Collider[] colls = null;
 
-		float spirit_time = 0f;
+        int number = n;
+        float spirit_time = 0f;
 
-		while(true)
+        DelayAndLunchPrefabSet(number);
+
+        while (true)
 		{
 			//지속시간 체크
 			spirit_time += Time.deltaTime;
@@ -521,15 +564,11 @@ public class SpiritSkill : MonoBehaviour
 			{
 				//정령 파괴후 코루틴 종료
 				Object.Destroy(tempEffect);
-				yield break;
+                Destroy(TempObjects[number]);
+                yield break;
 			}
 
-
 			colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 9);  //9번째 레이어 = Enemy  //콜라이더가 없어서 OverlapSphere가 안됨. 잡몹한테 콜라이더 부착.
-
-
-
-           
 
 			if(colls != null)
 			{
@@ -564,22 +603,25 @@ public class SpiritSkill : MonoBehaviour
 
 	}
 
-	IEnumerator Invincibility(SpiritSkill_TableExcel skill, GameObject spirit)
+	IEnumerator Invincibility(SpiritSkill_TableExcel skill, GameObject spirit, int n)
 	{
         Debug.Log("무적 실행");
-        GameObject tempEffect = Instantiate(Lunch_Prefab[(int)SkillNumber.INVINCIBILITY]);
+        GameObject tempEffect = Instantiate(Fire_Prefabs[(int)SkillNumber.INVINCIBILITY]);
 		tempEffect.transform.position = spirit.transform.position;
 
+        int number = n;
 
-		//All 
-		Collider[] colls = null;
+        //All 
+        Collider[] colls = null;
 
         //8번째 레이어 = Player
         //무적버프 
 
         float spirit_time = 0f;
 
-        CharacterClass player_characterclass = null;
+        
+
+        DelayAndLunchPrefabSet(number);
 
         while (true)
         {
@@ -591,8 +633,9 @@ public class SpiritSkill : MonoBehaviour
             {
                 //정령 파괴후 코루틴 종료
                 Object.Destroy(tempEffect);
+                Destroy(TempObjects[number]);
 
-                if(player_characterclass != null)
+                if (player_characterclass != null)
                 {
                     player_characterclass.Invincibility = 1.0f;
                 }
@@ -632,16 +675,19 @@ public class SpiritSkill : MonoBehaviour
 	}
 
 	
-	IEnumerator PoisonCloud(SpiritSkill_TableExcel skill,GameObject spirit)
+	IEnumerator PoisonCloud(SpiritSkill_TableExcel skill,GameObject spirit, int n)
 	{
         Debug.Log("독구름 실행");
         GameObject nearEnemy = FindNearbyEnemy(spirit, skill.SkillRange);
 		GameObject tempEffect = null;
 
+        int number = n;
 
-		if (nearEnemy  != null)
+        DelayAndLunchPrefabSet(number);
+
+        if (nearEnemy  != null)
 		{
-			tempEffect = Instantiate(Lunch_Prefab[(int)SkillNumber.POISON]);
+			tempEffect = Instantiate(Fire_Prefabs[(int)SkillNumber.POISON]);
             tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
             tempEffect.GetComponent<DamageCheck>().who = 1;
 
@@ -675,7 +721,9 @@ public class SpiritSkill : MonoBehaviour
                     Object.Destroy(tempEffect);
                 }
 
-				yield break;
+                Destroy(TempObjects[number]);
+
+                yield break;
 			}
 
 			if (attack_time > skill.DoT)
@@ -787,7 +835,14 @@ public class SpiritSkill : MonoBehaviour
 	{
 
 		m_StageMgr = MainManager.Instance.GetStageManager();
-        Lunch_Prefab = new GameObject[6];
+        Lunch_Prefabs = new GameObject[6];
+        Fire_Prefabs = new GameObject[6];
+        Damage_Prefabs = new GameObject[6];
+
+        PosAtk = new Transform[6];
+
+
+        TempObjects = new GameObject[6];
 
 
 

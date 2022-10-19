@@ -227,6 +227,8 @@ public class BossSkill : MonoBehaviour
 
         TempLunch = Instantiate(LunchPrefab);
         TempLunch.transform.SetParent(PosAtk);
+        TempLunch.transform.position = PosAtk.position;
+
         //lunch.transform.position = PosAtk.position;
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)

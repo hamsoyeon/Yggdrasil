@@ -116,9 +116,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4292865521676624688}
-  m_LocalRotation: {x: 0.64117056, y: 0.7612573, z: 0.09453116, w: -0.021249224}
-  m_LocalPosition: {x: -0.062261283, y: 0.0674278, z: -0.033514455}
-  m_LocalScale: {x: 0.12499997, y: 0.124999955, z: 0.12499995}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7785711006273149416}
@@ -195,9 +195,11 @@ MonoBehaviour:
   maxStamina: 0
   maxHp: 0
   behavior: 0
+  m_BossClass: {fileID: 0}
   hudDamageText: {fileID: 0}
   hudPos: {fileID: 0}
   player: {fileID: 0}
+  m_MenuObj: {fileID: 0}
   rotateSpeed: 5
 --- !u!114 &2427279729168433314
 MonoBehaviour:
@@ -213,12 +215,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LineSkillTarget: {fileID: 0}
   MobPrefabs: {fileID: 856238153596727669, guid: 6c0083467b8a5c04e9a969a5c5846c87, type: 3}
-  SkillPrefab: {fileID: 0}
+  DamagePrefab: {fileID: 0}
+  firePrefab: {fileID: 0}
+  LunchPrefab: {fileID: 0}
+  DelayPrefab: {fileID: 0}
+  EmptyPrefab: {fileID: 0}
+  PosAtk: {fileID: 0}
   angleRange: 60
   distance: 5
   isCollision: 0
   PlayerPosition: {fileID: 0}
-  enemyTarget: {fileID: -8888581076120763707, guid: 708a6eb5aaef2f3488c087a67aadfdec, type: 3}
   m_CurrentBossSkill:
     Name_KR: 
     Name_EN: 
@@ -246,7 +252,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 0
-    FieldPrefb: 0
+    SingleTile: 0
     FirePrefb: 0
     DamPrefb: 0
 --- !u!114 &-5016034091275603396
@@ -288,7 +294,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 0
-    FieldPrefb: 0
+    SingleTile: 0
     FirePrefb: 0
     DamPrefb: 0
   m_BossStatData:
