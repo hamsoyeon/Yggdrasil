@@ -85,7 +85,6 @@ public class MenuManager : MonoBehaviour
 
     public void ShowWinMenu()
     {
-
         if (LosePanel.activeSelf)
             return;
 
