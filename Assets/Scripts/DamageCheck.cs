@@ -38,7 +38,7 @@ public class DamageCheck : MonoBehaviour
     {
         if(dmg_check)
         {
-            Collider[] cols = Physics.OverlapSphere(transform.position, 10f);
+            Collider[] cols = Physics.OverlapSphere(transform.position, 12f);
             if (cols.Length > 0)
             {
 

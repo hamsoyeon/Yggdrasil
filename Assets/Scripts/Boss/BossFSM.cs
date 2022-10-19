@@ -402,24 +402,10 @@ public class BossFSM : MonoBehaviour
             }
         }
 
-        //if (checkSkill)
-        //{
-        //    checkTime += Time.deltaTime;
-
-        //    if (checkTime > anim.GetCurrentAnimatorStateInfo(0).length)
-        //    {
-        //        checkSkill = false;
-        //        checkTime = 0f;
-
-        //        MainManager.Instance.GetAnimanager().ChangeAnimationState(anim, BOSS_IDLE, currentState);
-        //    }
-        //}
-
-
 
         if (behavior && moving)
         {
-            //moveTime += Time.deltaTime;
+            
             Move();
         }
 

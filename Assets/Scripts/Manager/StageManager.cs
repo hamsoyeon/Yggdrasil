@@ -11,6 +11,7 @@ namespace MapInformation
     {
         public GameObject MapObject;
         public GameObject BossEffectObject;
+        public GameObject BossDelayObject;
         public bool Spirit;
         public GameObject SpiritEffectObject1;
         public GameObject SpiritEffectObject2;
@@ -21,6 +22,7 @@ namespace MapInformation
         public int row;
         public int column;
         public bool BossEffect;
+        public bool DelayEffect;
         public bool SpiritEffect1;
         public bool SpiritEffect2;
 
