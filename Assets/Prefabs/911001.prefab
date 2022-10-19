@@ -192,7 +192,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 0
-    FieldPrefb: 0
+    SingleTile: 0
     FirePrefb: 0
     DamPrefb: 0
   m_BossStatData:
@@ -298,7 +298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7833f78949b9c241b16e04f63b610f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EffectPrefab: {fileID: 0}
+  Lunch_Prefab: []
+  Fire_Prefab: []
+  Damage_Prefab: []
 --- !u!114 &4896468093667369820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3994b352e36f73447af3d1a756eb2fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MenuManager: {fileID: 0}
   m_Spirit: {fileID: 0}
   PlayerClass: {fileID: 0}
   m_SpiritSkillKey: 
@@ -402,7 +405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8207812925801239738}
   m_Layer: 11
-  m_Name: PosAttack
+  m_Name: PosAtk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
