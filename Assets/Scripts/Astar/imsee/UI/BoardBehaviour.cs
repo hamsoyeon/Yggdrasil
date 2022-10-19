@@ -14,7 +14,6 @@ public class BoardBehaviour : MonoBehaviour
 {
     public GameObject BossPiece;
     public GameObject PlayerPiece;
-    public GameObject Line;
 
     public TileAsset TileAsset;
 
@@ -24,6 +23,8 @@ public class BoardBehaviour : MonoBehaviour
     [HideInInspector]
     public GameObject[,] _gameBoard;
     Game _game;
+
+    Transform parent;
 
     int cnt;
 
@@ -41,6 +42,7 @@ public class BoardBehaviour : MonoBehaviour
         int x = 0;
         int z = 0;
 
+        parent = GameObject.Find("960001").transform;
         index = new List<int>();
 
         //각 맵 정보에 데이터 넣어주기.
@@ -181,6 +183,7 @@ public class BoardBehaviour : MonoBehaviour
             {
                 //var tile = (GameObject)Instantiate(Tile);
                 var tile = Instantiate(TileAsset.m_prefab[index[cnt]].TileObj);
+                tile.transform.parent = parent;
 
                 if (TileAsset.m_prefab[index[cnt]].TileObj.name == TileAsset.m_prefab[4].TileObj.name)
                 {
@@ -213,6 +216,8 @@ public class BoardBehaviour : MonoBehaviour
                 cnt++;
             }
         }
+
+        parent.GetComponent<NavMeshCom>().TestBuild();
     }
 
     static Vector3 GetWorldCoordinates(int x, int y, float z)

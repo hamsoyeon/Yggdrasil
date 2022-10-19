@@ -15,6 +15,10 @@ public class Status : MonoBehaviour
     [SerializeField]
     private float runSpeed;
 
+    [Header("ATK")]
+    [SerializeField]
+    private float Attack;
+
     [Header("HP")]
     [SerializeField]
     private int maxHP = 100;
@@ -39,21 +43,11 @@ public class Status : MonoBehaviour
 
         onHPEvent.Invoke(previousHP, currentHP);
 
-        if(currentHP == 0)
+        if(currentHP <= 0)
         {
             return true;
         }
 
         return false;
-    }
-
-    //회복 스킬을 받았을 때 호출 함수
-    public void IncreaseHP(int hp)
-    {
-        int previousHP = currentHP;
-
-        currentHP = currentHP + hp > maxHP ? maxHP : currentHP + hp;
-
-        onHPEvent.Invoke(previousHP, currentHP);
     }
 }

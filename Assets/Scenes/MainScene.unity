@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: c76d22966c178624190ade0b09a20a63, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &17524568
 GameObject:
   m_ObjectHideFlags: 0
@@ -3079,7 +3079,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BossPiece: {fileID: 6863022358648512248, guid: f1f412bf354cff3449eae9f0b69db625, type: 3}
   PlayerPiece: {fileID: 2358126716913885333, guid: de01d37b7d0f1f6409201814a4b3e213, type: 3}
-  Line: {fileID: 8166077804748737062, guid: ebc1a9c7d75a2434297c84d1f0143127, type: 3}
   TileAsset: {fileID: 11400000, guid: 25682d25e46fb8d4fa58600f5c78ef11, type: 2}
   Width: 6
   Height: 5
@@ -17742,6 +17741,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693572378}
   m_CullTransparentMesh: 1
+--- !u!1 &1694754405 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3036600519939862943, guid: ca8b827be3f6bd14f961b5a613cca929, type: 3}
+  m_PrefabInstance: {fileID: 1305104137}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1694754407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694754405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a48e2b689baea64386df5cdac8c9d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1694754408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694754405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 2
+  m_Size: {x: 151.7118, y: 84.67338, z: 88.60631}
+  m_Center: {x: -33.852684, y: 4.1775856, z: 21.020042}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 52791
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &1700329561
 GameObject:
   m_ObjectHideFlags: 0
@@ -18075,6 +18120,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
   m_AnchorMin: {x: 0.36872923, y: 0.002}
   m_AnchorMax: {x: 0.68464583, y: 0.24800001}
+  m_AnchoredPosition: {x: 286.59998, y: -3.1999512}
+  m_SizeDelta: {x: -470.7942, y: -146.8409}
   m_AnchoredPosition: {x: 246.55005, y: -8.909912}
   m_SizeDelta: {x: -533.9473, y: -201.8821}
   m_Pivot: {x: 0.5, y: 0.5}
