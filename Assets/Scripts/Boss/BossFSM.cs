@@ -419,8 +419,9 @@ public class BossFSM : MonoBehaviour
                 //int moveAndSkill = Random.Range(1, 3);
 
                 // 랜덤값 추출후 행동(이동 or 스킬)을 정함.
-                //int moveAndSkill = Random.Range(1, 11); //이부분을 2로 고정하면 스킬만 사용
-                int moveAndSkill = 2;
+                int moveAndSkill = Random.Range(1, 11); //이부분을 2로 고정하면 스킬만 사용
+
+
                 if (moveAndSkill > 3)
                 {
                     moveAndSkill = 2;
@@ -431,7 +432,7 @@ public class BossFSM : MonoBehaviour
                 }
 
                 //moveAndSkill = 1;  // 이동고정
-                moveAndSkill = 2;  // 스킬고정
+                //moveAndSkill = 2;  // 스킬고정
                 //moveAndSkill = 1;  // 스킬고정
 
                 if (moveAndSkill ==1)
