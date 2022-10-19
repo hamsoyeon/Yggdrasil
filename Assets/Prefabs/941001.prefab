@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6874221130741766314}
   - component: {fileID: 4851454927155046729}
+  - component: {fileID: 4115930841781945936}
   - component: {fileID: 3856060071282914444}
-  - component: {fileID: 4332448070526019020}
   - component: {fileID: -3656633972936921271}
+  - component: {fileID: -5206960289941901482}
   m_Layer: 0
   m_Name: 941001
   m_TagString: Mob
@@ -58,6 +59,124 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4115930841781945936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856238153596727669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64136c781e8bd2743a5da9d287c90e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BossSkillData:
+    Name_KR: 
+    Name_EN: 
+    BossSkillIndex: 0
+    TargetType: 0
+    Target: 0
+    Power: 0
+    CoolTime: 0
+    SkillDistance: 0
+    SkillRange: 0
+    SkillType: 0
+    UseStat: 0
+    Direction1: 0
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 0
+    DoT: 0
+    SkillAdded: 0
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 0
+    DelayPrefb: 0
+    LunchPrefb: 0
+    FieldPrefb: 0
+    FirePrefb: 0
+    DamPrefb: 0
+  m_BossStatData:
+    Name_KR: 
+    Name_EN: 
+    BossStatIndex: 0
+    Atk: 0
+    HP: 0
+    Def: 0
+    SRange: 0
+    CRange: 0
+    FRange: 0
+    MaxStamina: 0
+    Speed: 0
+    MoveStUsed: 0
+    Skill1: 0
+    Skill2: 0
+    Skill3: 0
+    Skill4: 0
+    Prefeb: 0
+  m_CharacterStat:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    CharStatIndex: 0
+    position: 0
+    Atk: 0
+    Def: 0
+    HP: 0
+    MoveSpeed: 0
+    Skill1: 0
+    Skill2: 0
+    Skill3: 0
+    Skill4: 0
+    Skill5: 0
+    Skill6: 0
+    Item1: 0
+    Item2: 0
+    Sight: 0
+    Prefeb: 0
+  m_SpiritData:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    SpritTableIndex: 0
+    SpritClass: 0
+    SpiritType: 0
+    Atk: 0
+    Atk_Speed: 0
+    Move_Speed: 0
+    Crit_rate: 0
+    Crit_Dmg: 0
+    ChaceTarget: 0
+    Duration: 0
+    CoolTime: 0
+    Skill1Code: 0
+    Prefab: 0
+  m_SpiritSkillData:
+    Name_KR: 
+    Name_EN: 
+    SpritSkillIndex: 0
+    Target: 0
+    Power: 0
+    SkillRange: 0
+    SkillType: 0
+    BulletSpeed: 0
+    TargetNum: 0
+    LifeTime: 0
+    DoT: 0
+    Shapeform: 0
+    Cshape1: 0
+    Cshape2: 0
+    SkillAdded: 0
+    BuffAdded: 0
+    LunchPrefb: 0
+    FirePrefb: 0
+    DamPrefb: 0
+  Invincibility: 1
 --- !u!114 &3856060071282914444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,21 +191,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 6
   attackRate: 1
-  pursiotLimitRange: 200
---- !u!114 &4332448070526019020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 856238153596727669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66f53bd7f3073044ebfbc2355cc103c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Tracked: {fileID: 6874221130741766314}
-  m_Size: {x: 50, y: 5, z: 50}
+  hudDamageText: {fileID: 0}
+  hudPos: {fileID: 0}
 --- !u!114 &-3656633972936921271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,7 +209,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   runSpeed: 20
+  Attack: 0
   maxHP: 100
+--- !u!65 &-5206960289941901482
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856238153596727669}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5915143850236844326
 PrefabInstance:
   m_ObjectHideFlags: 0

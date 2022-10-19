@@ -9,12 +9,8 @@ public class DamageCheck : MonoBehaviour
     public bool dmg_check = false;
 
     private CharacterClass PlayerClass;
-	
-    
+
     private Buff BuffClass;
-
-
-    
 
 	private int minDamage;
 	private int resultDamage;
@@ -31,9 +27,6 @@ public class DamageCheck : MonoBehaviour
 
     public int buffIndex;         //Dot시간이 될때마다 Buff.cs파일의 Buff()혹은 DeBuff()를 실행시켜서 버프/디버프의 추가 or 지속시간 갱신을 시킨다.
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
         if(dmg_check)
@@ -79,7 +72,7 @@ public class DamageCheck : MonoBehaviour
                                     //해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
                                     cols[i].GetComponent<BossFSM>().Damage(resultDamage);
                                 }
-                                if (cols[i].tag == "Mob")
+                                if (cols[i].CompareTag("Mob"))
                                 {
                                     Debug.Log("아 왜이리 빠른가요");
                                     minDamage = (int)PlayerClass.m_CharacterStat.Atk;
@@ -135,12 +128,8 @@ public class DamageCheck : MonoBehaviour
                 Debug.Log("범위내 오브젝트 없음.");
             }
         }
-
-
-		
 	}
 
-	// Update is called once per frame
 	void Update()
     {
         if (dmg_check)
@@ -180,6 +169,21 @@ public class DamageCheck : MonoBehaviour
                                         //해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
                                         cols[i].GetComponent<BossFSM>().Damage(resultDamage);
                                     }
+                                    if (cols[i].CompareTag("Mob"))
+                                    {
+                                        Debug.Log("아 왜이리 빠른가요");
+                                        minDamage = (int)PlayerClass.m_CharacterStat.Atk;
+
+                                        //최소 데미지 보정.
+                                        if (minDamage <= 0)
+                                            minDamage = 1;
+
+                                        power = (int)GameObject.Find("Player").transform.GetChild(0).GetComponent<PlayerManager>().m_Spirit.m_SpiritClass.m_SpiritSkillData.Power;
+
+                                        resultDamage = minDamage * power;
+
+                                        cols[i].GetComponent<Enemy>().TakeDamage(resultDamage);
+                                    }
                                 }
                                 break;
                             case 2:
@@ -207,13 +211,9 @@ public class DamageCheck : MonoBehaviour
                 {
                     Debug.Log("범위내 오브젝트 없음.");
                 }
-
             }
         }
-
-        
 	}
-
 }
 
 

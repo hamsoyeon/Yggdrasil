@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum EnemyState { None = -1, Pursuit = 0, Attack};
-
 public class Enemy : MonoBehaviour
 {
     NavMeshAgent navMeshAgent;
@@ -17,13 +15,13 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float attackRate = 1; //공격 속도
 
-    [SerializeField]
-    private float pursiotLimitRange = 200; //추적 범위(이 범위 바깥으로 나가면 wander 상태로 변경)
-
-    private EnemyState enemyState = EnemyState.None;
     private float lastAttackTime = 0; //공격 주기 계산용 변수
 
+    public GameObject hudDamageText;
+    public Transform hudPos;
+
     private Animator anim;
+    bool isDie;
 
     Coroutine coroutine;
     void Start()
@@ -33,6 +31,8 @@ public class Enemy : MonoBehaviour
         navMeshAgent.speed = status.RunSpeed;
         target = GameObject.Find("Player").transform.GetChild(0).gameObject;
         Debug.Log($"현재 타겟 : {target.transform.position}");
+        hudDamageText = Resources.Load<GameObject>("DamageText");
+        hudPos = this.gameObject.transform;
 
         anim = this.transform.GetChild(0).GetComponent<Animator>();
 
@@ -44,7 +44,6 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-
         CalculateDistacveToTargetAndSelectState();
     }
 
@@ -79,8 +78,6 @@ public class Enemy : MonoBehaviour
             {
                 //공격 주기가 되어야 공격할 수 있도록 하기 위해 현재 시간 저장
                 lastAttackTime = Time.time;
-
-               
             }
 
             yield return null;
@@ -130,7 +127,12 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                coroutine = StartCoroutine(Move()); 
+                if(isDie)
+                {
+                    coroutine = StartCoroutine(IsDie());
+                }
+                else
+                    coroutine = StartCoroutine(Move());
             }
         }
     }
@@ -145,14 +147,35 @@ public class Enemy : MonoBehaviour
     //쫄몹 데미지 받는 함수
     public void TakeDamage(int damage)
     {
-        bool isDie = status.DecreaseHP(damage);
+        Debug.Log("데미지 받는다.");
+        isDie = status.DecreaseHP(damage);
+        anim.SetBool("IsDie", isDie);
+        TakeDamagePrint(damage);
+    }
 
-        if (isDie == true)
+    IEnumerator IsDie()
+    {
+        //죽었을때의 행동 개설
+        Debug.Log("죽었다.");
+        AnimationManager.GetInstance().PlayAnimation(anim, "Die");
+        //AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
+
+        if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
-            //죽었을때의 행동 개설
+            this.gameObject.SetActive(false);
 
-            anim.SetBool("IsDie", true);
-
+            //삭제
+            Destroy(this.gameObject);
+            yield break;
         }
+    }
+
+    public void TakeDamagePrint(int damage)
+    {
+
+        GameObject hudText = Instantiate(hudDamageText);
+
+        hudText.transform.position = hudPos.position + (Vector3.up * 20);
+        hudText.GetComponent<DamageTxt>().damage = damage;
     }
 }
