@@ -26,7 +26,7 @@ MonoBehaviour:
     MaxStamina: 100
     Speed: 50
     MoveStUsed: 20
-    Skill1: 231001
+    Skill1: 231003
     Skill2: 231002
     Skill3: 231003
     Skill4: 231002

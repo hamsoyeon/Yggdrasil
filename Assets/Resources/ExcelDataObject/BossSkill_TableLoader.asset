@@ -37,11 +37,11 @@ MonoBehaviour:
     SkillAdded: 0
     BuffAdded: 0
     SkillAnimation: 3
-    SkillDelay: 3
-    DelayPrefb: 971009
-    LunchPrefb: 970008
-    SingleTile: 0
-    FirePrefb: 971001
+    SkillDelay: 2
+    DelayPrefb: 970020
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 971017
     DamPrefb: 0
   - Name_KR: "\uD3ED\uD30C"
     Name_EN: Explosion
@@ -51,7 +51,7 @@ MonoBehaviour:
     Power: 10
     CoolTime: 3
     SkillDistance: 2
-    SkillRange: 3
+    SkillRange: 2
     SkillType: 1
     UseStat: 35
     Direction1: 1
@@ -66,12 +66,12 @@ MonoBehaviour:
     SkillAdded: 0
     BuffAdded: 0
     SkillAnimation: 2
-    SkillDelay: 2
-    DelayPrefb: 0
-    LunchPrefb: 971015
-    SingleTile: 1
+    SkillDelay: 1
+    DelayPrefb: 970020
+    LunchPrefb: 971009
+    SingleTile: 0
     FirePrefb: 971015
-    DamPrefb: 0
+    DamPrefb: 971007
   - Name_KR: "\uB300\uC9C0\uC9C4"
     Name_EN: EarthQuake
     BossSkillIndex: 231003
@@ -80,7 +80,7 @@ MonoBehaviour:
     Power: 10
     CoolTime: 4
     SkillDistance: 2
-    SkillRange: 4
+    SkillRange: 1
     SkillType: 1
     UseStat: 40
     Direction1: 1
@@ -90,14 +90,14 @@ MonoBehaviour:
     Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
-    LifeTime: 1
+    LifeTime: 0.2
     DoT: 1.1
-    SkillAdded: 4
+    SkillAdded: 231004
     BuffAdded: 0
     SkillAnimation: 1
-    SkillDelay: 2
+    SkillDelay: 1
     DelayPrefb: 0
-    LunchPrefb: 971014
+    LunchPrefb: 970014
     SingleTile: 0
     FirePrefb: 971014
     DamPrefb: 0
@@ -106,10 +106,10 @@ MonoBehaviour:
     BossSkillIndex: 231004
     TargetType: 2
     Target: 2
-    Power: 10
+    Power: 10000
     CoolTime: 1
     SkillDistance: 3
-    SkillRange: 4
+    SkillRange: 2
     SkillType: 4
     UseStat: 0
     Direction1: 1
@@ -119,14 +119,14 @@ MonoBehaviour:
     Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
-    LifeTime: 1
+    LifeTime: 0.2
     DoT: 1.1
-    SkillAdded: 5
+    SkillAdded: 231005
     BuffAdded: 0
     SkillAnimation: 1
-    SkillDelay: 0.5
+    SkillDelay: 0.2
     DelayPrefb: 0
-    LunchPrefb: 971014
+    LunchPrefb: 970014
     SingleTile: 0
     FirePrefb: 971014
     DamPrefb: 0
@@ -138,7 +138,7 @@ MonoBehaviour:
     Power: 10
     CoolTime: 1
     SkillDistance: 4
-    SkillRange: 4
+    SkillRange: 3
     SkillType: 4
     UseStat: 0
     Direction1: 1
@@ -148,14 +148,14 @@ MonoBehaviour:
     Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
-    LifeTime: 1
+    LifeTime: 0.2
     DoT: 1.1
     SkillAdded: 0
     BuffAdded: 0
     SkillAnimation: 1
-    SkillDelay: 0.5
+    SkillDelay: 0.2
     DelayPrefb: 0
-    LunchPrefb: 971014
+    LunchPrefb: 970014
     SingleTile: 0
     FirePrefb: 971014
     DamPrefb: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
     "\uC815\uB839": 0
     LifeTime: 1
     DoT: 1.1
-    SkillAdded: 9
+    SkillAdded: 231009
     BuffAdded: 0
     SkillAnimation: 2
     SkillDelay: 2
@@ -266,7 +266,7 @@ MonoBehaviour:
     "\uC815\uB839": 0
     LifeTime: 1
     DoT: 1.1
-    SkillAdded: 10
+    SkillAdded: 231010
     BuffAdded: 0
     SkillAnimation: 0
     SkillDelay: 1
@@ -295,7 +295,7 @@ MonoBehaviour:
     "\uC815\uB839": 0
     LifeTime: 1
     DoT: 1.1
-    SkillAdded: 11
+    SkillAdded: 231011
     BuffAdded: 0
     SkillAnimation: 0
     SkillDelay: 1

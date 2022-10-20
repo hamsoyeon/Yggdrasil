@@ -107,6 +107,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 19914454, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -192,6 +208,22 @@ PrefabInstance:
     - target: {fileID: 483760, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19914454, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
       propertyPath: m_Materials.Array.size
@@ -279,6 +311,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 19914454, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -364,6 +412,22 @@ PrefabInstance:
     - target: {fileID: 483760, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19914454, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
       propertyPath: m_Materials.Array.size
@@ -451,6 +515,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 19914454, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -536,6 +616,22 @@ PrefabInstance:
     - target: {fileID: 483760, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19914454, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
       propertyPath: m_Materials.Array.size
@@ -623,6 +719,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 19914454, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -709,6 +821,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 19914454, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -794,6 +922,22 @@ PrefabInstance:
     - target: {fileID: 483760, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19864512, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19914454, guid: 8e90da8ab078f484aa0034ce9934759b, type: 3}
       propertyPath: m_Materials.Array.size
