@@ -20,17 +20,17 @@ public class BossUIManager : MonoBehaviour
 
 
 
-void Start()
+    void Start()
     {
         
         //minimap_2DIcon_Boss.transform.position = GameObject.FindGameObjectWithTag("Boss").transform.position;
         bossFsm = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossFSM>();
-
+        /*
         bossHp_Slider.gameObject.SetActive(false);
         bossStamina_Slider.gameObject.SetActive(false);
         bossHp_Text.gameObject.SetActive(false);
         bossName_Text.gameObject.SetActive(false);
-
+        */
     }
 
     // Update is called once per frame
@@ -41,13 +41,13 @@ void Start()
         bossHp_Text.text = bossFsm.GetCurrentHp().ToString() + " / " + bossFsm.GetMaxHp().ToString();
         bossName_Text.text = bossFsm.GetBossName();
 
-        if((int)bossFsm.GetCurrentHp() != (int)bossFsm.GetMaxHp())
+        /*if((int)bossFsm.GetCurrentHp() != (int)bossFsm.GetMaxHp())
         {
             bossHp_Slider.gameObject.SetActive(true);
             bossStamina_Slider.gameObject.SetActive(true);
             bossHp_Text.gameObject.SetActive(true);
             bossName_Text.gameObject.SetActive(true);
-        }
+        }*/
     }
     private void FixedUpdate()
     {
