@@ -150,6 +150,11 @@ public class MenuGUIManager:Singleton_Ver2.Singleton<MenuGUIManager>
         m_window_menu.SetActive(true);
         m_window_option.SetActive(false);
     }
+    public void OnClick_Start()
+    {
+        m_window_menu.SetActive(false);
+        m_window_room.SetActive(true);
+    }
     public void OnClick_Logout()
     {
         //로그아웃 서버 전송하기

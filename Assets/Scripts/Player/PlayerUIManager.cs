@@ -21,6 +21,8 @@ public class PlayerUIManager : MonoBehaviour
 
     public GameObject minimap_2DIcon_Player;
 
+    public Sprite[] spritSkill_Img;
+
     //public Color m_ATK_Spirit;
     //public Color m_DEF_Spirit;
     //public Color m_SUP_Spirit;
@@ -55,7 +57,11 @@ public class PlayerUIManager : MonoBehaviour
             ColorBlock colorBlock = spirit_Buttons[i].colors;
             is_CoolTime[i] = spirit_Buttons[i].transform.GetChild(1).GetComponent<Image>();
             is_CoolTime[i].fillAmount = 0f;
+            //spirit_Buttons[i].transform.GetChild(1).GetComponent<Image>().color = new Color(0, 0, 0, 190);
             collTime_Text[i] = spirit_Buttons[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+            spirit_Buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().fontSize = 18;
+            spirit_Buttons[i].transform.GetChild(0).GetComponent<RectTransform>().position = new Vector3(-30, -30, 0);
+            spirit_Buttons[i].GetComponent<Image>().sprite = spritSkill_Img[i];
             //(r, g, b, a) 기준 빨간색으로 normal Color 지정
             /*switch (i % 3)
             {
