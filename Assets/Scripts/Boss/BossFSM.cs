@@ -189,7 +189,7 @@ public class BossFSM : MonoBehaviour
                     else
                     {
                         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
-                        MainManager.Instance.GetStageManager().m_MapInfo[startBlock.x, startBlock.y].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = new Color(0.0f, 138.0f, 154.0f, 200.0f);
+                        //MainManager.Instance.GetStageManager().m_MapInfo[startBlock.x, startBlock.y].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = new Color(0.0f, 138.0f, 154.0f, 200.0f);
                         break;
                     }
                     startBlock = tempBlock;
