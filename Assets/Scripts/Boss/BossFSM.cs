@@ -503,8 +503,7 @@ public class BossFSM : MonoBehaviour
                     BossRandomSkill = Random.Range(1, 4);  //스킬 3개만 사용중 (소환스킬 사용x)
                     //BossRandomSkill = Random.Range(1, 5);  //스킬 3개만 사용중 (소환스킬 사용x)
                     //BossRandomSkill = 4;  //고정스킬(몹 소환)
-
-                    BossRandomSkill = 1;
+                    //BossRandomSkill = 1;
 
                     switch (BossRandomSkill)
                     {
