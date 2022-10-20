@@ -176,8 +176,6 @@ public class BossFSM : MonoBehaviour
                 moving = false;
 
 
-
-
                 while (true)
                 {
                     if (startBlock != null)
@@ -502,7 +500,7 @@ public class BossFSM : MonoBehaviour
                     currentBossStamina = 0;
                     skill = true;
 
-                    //BossRandomSkill = Random.Range(1, 4);  //스킬 3개만 사용중 (소환스킬 사용x)
+                    BossRandomSkill = Random.Range(1, 4);  //스킬 3개만 사용중 (소환스킬 사용x)
                     //BossRandomSkill = Random.Range(1, 5);  //스킬 3개만 사용중 (소환스킬 사용x)
                     //BossRandomSkill = 4;  //고정스킬(몹 소환)
 
