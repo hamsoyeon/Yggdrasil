@@ -32,11 +32,9 @@ public class BossSkill : MonoBehaviour
 
     public enum BossSkillType { WIDE = 1, TARGET, LINE, DIFFUSION, SUMMONS }
 
-    //public GameObject target;
-
     public GameObject LineSkillTarget;
 
-    //public GameObject[] EnemyPrefebs = new GameObject[2];
+    private BossFSM m_BossFSM;
 
     public GameObject MobPrefabs;
 
@@ -49,7 +47,7 @@ public class BossSkill : MonoBehaviour
 
     public Transform PosAtk;
 
-    //public GameObject SkillPrefab;   //현재 런치 프리팹 -> 파이어 프리팹으로 바뀌어야 한다..
+    
      
 
     private Animator anim;
@@ -109,6 +107,7 @@ public class BossSkill : MonoBehaviour
                 break;
             }
         }
+
 
         //플레이어의 위치와 보스의 배열 위치를 알아낸다.
         m_PlayerRow = MainManager.Instance.GetStageManager().m_PlayerRow;
@@ -1460,7 +1459,7 @@ public class BossSkill : MonoBehaviour
             }
         }
 
-        
+        m_BossFSM = GetComponent<BossFSM>();
 
         //names[0].Name = "이세영"; names[0].Age = 102;
         //names[1].Name = "권경민"; names[1].Age = 31;

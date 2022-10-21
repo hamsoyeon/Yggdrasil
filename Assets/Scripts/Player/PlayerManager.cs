@@ -49,7 +49,6 @@ public class PlayerManager : MonoBehaviour
 
     //각각 스킬의 쿨타임 넣어놓는 배열
     public float[] SkillCollTime;
-
     public float[] currenCollTime;
 
     public float m_BuffCoolDown = 0.0f; //아이템 혹은 버프타일에 의하여 쿨타임이 줄어드는 버프에 사용을 하기 위해 넣어놓은 변수 
