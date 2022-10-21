@@ -90,6 +90,15 @@ public class SpiritSkill : MonoBehaviour
             check = Fire_Prefabs[effectNumber].GetComponent<DamageCheck>();
         }
 
+        DamageEffect dmgCheck;
+        dmgCheck = Damage_Prefabs[effectNumber].GetComponent<DamageEffect>();
+        if(dmgCheck == null)
+        {
+            Damage_Prefabs[effectNumber].AddComponent<DamageEffect>();
+        }
+
+        //check.DamageEffect = PrefabLoader.Instance.PrefabDic[skillInfo.DamPrefb];  // 데미지 이펙트 넣어주기.
+
 
         switch (skillInfo.SpritSkillIndex)
 		{

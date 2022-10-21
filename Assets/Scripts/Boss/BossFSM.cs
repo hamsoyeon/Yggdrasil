@@ -15,21 +15,29 @@ public class BossFSM : MonoBehaviour
     //private bool actionCheck=false;
     private bool spCheck = false;
 
+   
     [SerializeField]
-    private float currentBossStamina;
     private float bossStaminaSave;
+    private float currentBossStamina;
     [SerializeField]
     private float maxStamina;
 
     [SerializeField]
     private float maxHp;
-    
+
+   
     private int BossRandomSkill = 0;
 
     public bool behavior = false;
 
-    private BossSkill m_CurrentBossSkill;
+    //private BossSkill m_CurrentBossSkill;
     public CharacterClass m_BossClass;
+
+    private BossSkill m_CurrentBossSkill;
+
+    [SerializeField]
+    private BossSkill_TableExcel m_BossSkill;
+
 
     public GameObject hudDamageText;
     public Transform hudPos;
@@ -50,6 +58,8 @@ public class BossFSM : MonoBehaviour
 
     private float deathTime = 0f;
     private bool player_Invin = false;
+
+    private bool stIsFull = false;  //스태미너가 다차면.
 
     //int[] UpRotation = { -45, 45 }; // 타일 z - 1 을 할 때 사용할 로테이션 값
     //int[] SameRotation = { -90, 90 }; // 타일 z 값이 같을 때 사용할 로테이션 값
@@ -91,8 +101,6 @@ public class BossFSM : MonoBehaviour
 
         m_BossClass.m_BossStatData = DataTableManager.Instance.GetDataTable<Boss_TableExcelLoader>().DataList[currentBossNumber];
         m_BossClass.m_SkillMgr.m_BossSkill = m_CurrentBossSkill;
-
-
         Debug.Log("현재 보스의 체력:" + m_BossClass.m_BossStatData.HP);
 
 
@@ -187,7 +195,7 @@ public class BossFSM : MonoBehaviour
                     else
                     {
                         AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
-                        //MainManager.Instance.GetStageManager().m_MapInfo[startBlock.x, startBlock.y].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = new Color(0.0f, 138.0f, 154.0f, 200.0f);
+                     
                         break;
                     }
                     startBlock = tempBlock;
@@ -265,8 +273,6 @@ public class BossFSM : MonoBehaviour
         _v = 0;
 
         
-        
-
         if (h!=transform.position.x || v!=transform.position.z)
         {
             if (h > transform.position.x)
@@ -291,14 +297,16 @@ public class BossFSM : MonoBehaviour
         }
     }
 
-        
 
 
     public void Damage(int _damage)
     {
+        
+
         Debug.Log("현재 보스의 체력:" + m_BossClass.m_BossStatData.HP);
         TakeDamagePrint(_damage);
     }
+
 
     public void TakeDamagePrint(int damage)
     {
@@ -351,7 +359,74 @@ public class BossFSM : MonoBehaviour
   
 
    
+    bool BossUseSkill()
+    {
 
+        BossRandomSkill = Random.Range(1, 4);
+        int skillIndex = 0;
+
+        // 사용가능한지 체크.
+        switch (BossRandomSkill)
+        {
+            case 1:
+                skillIndex = m_BossClass.m_BossStatData.Skill1;
+                break;
+            case 2:
+                skillIndex = m_BossClass.m_BossStatData.Skill2;
+                break;
+            case 3:
+                skillIndex = m_BossClass.m_BossStatData.Skill3;
+                break;
+            case 4:
+                skillIndex = m_BossClass.m_BossStatData.Skill4;
+                break;
+        }
+
+        foreach (var item in DataTableManager.Instance.GetDataTable<BossSkill_TableExcelLoader>().DataList)
+        {
+            if (item.BossSkillIndex == skillIndex)
+            {
+                m_BossSkill = item; //현재 스킬 정보를 찾아낸다.
+                break;
+            }
+        }
+
+        Debug.Log(m_BossSkill.Name_KR);
+
+        if(currentBossStamina - m_BossSkill.UseStat < 0)
+            return false;
+        else
+            currentBossStamina -= m_BossSkill.UseStat;
+
+
+        switch (BossRandomSkill)
+        {
+            case 1:
+                //스킬인덱스를 참고해 스킬을 사용.
+                Debug.Log("스킬1 사용");
+                m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill1);
+                AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
+                break;
+            case 2:
+                Debug.Log("스킬2 사용");
+                m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill2);
+                AnimationManager.GetInstance().PlayAnimation(anim, "Skill02");
+                break;
+            case 3:
+                Debug.Log("스킬3 사용");
+                m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill3);
+                AnimationManager.GetInstance().PlayAnimation(anim, "Skill03");
+                break;
+            case 4:
+                Debug.Log("스킬4 사용");
+                m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill4);
+                AnimationManager.GetInstance().PlayAnimation(anim, "Skill04");
+                break;
+        }
+
+
+        return true;
+    }
     
 
 
@@ -368,7 +443,6 @@ public class BossFSM : MonoBehaviour
             //보스 죽음 애니메이션을 출력(1~초 정도 뒤) -> 보스의 행동을 정지 시켜야됨
             if(!player_Invin)
             {
-                
                 GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>().Invincibility = 0.0f;  //플레이어 무적으로 만들고.
                 AnimationManager.GetInstance().PlayAnimation(anim, "Die");
                 player_Invin = true;
@@ -403,24 +477,27 @@ public class BossFSM : MonoBehaviour
 
         if (behavior && moving)
         {
-            
             Move();
         }
 
         if (time > 1.0f && !behavior)
         {
-            currentBossStamina += DataTableManager.Instance.GetDataTable<Boss_TableExcelLoader>().DataList[0].Speed;
-            Debug.Log($"턴미터 회복{maxStamina}/{currentBossStamina}");
-
-            if (currentBossStamina >= maxStamina)
+            if (stIsFull)
             {
-                //int moveAndSkill = Random.Range(1, 3);
+                skill = true;
+                if (BossUseSkill() == false)
+                {
+                    stIsFull = false;
+                }
+
+            }
+            else if (currentBossStamina >= maxStamina && !stIsFull)
+            {
+                stIsFull = true;
 
                 // 랜덤값 추출후 행동(이동 or 스킬)을 정함.
-                int moveAndSkill = Random.Range(1, 11); //이부분을 2로 고정하면 스킬만 사용
-
-
-                if (moveAndSkill > 3)
+                int moveAndSkill = Random.Range(1, 11); 
+                if (moveAndSkill > 4)
                 {
                     moveAndSkill = 2;
                 }
@@ -429,14 +506,8 @@ public class BossFSM : MonoBehaviour
                     moveAndSkill = 1;
                 }
 
-                //moveAndSkill = 1;  // 이동고정
-                //moveAndSkill = 2;  // 스킬고정
-                //moveAndSkill = 1;  // 스킬고정
-
                 if (moveAndSkill ==1)
                 {
-                    Debug.Log("상대방 추적");
-
 
                     int bossRow = MainManager.Instance.GetStageManager().m_BossRow;
                     int bossColumn = MainManager.Instance.GetStageManager().m_BossColumn;
@@ -491,51 +562,33 @@ public class BossFSM : MonoBehaviour
                         AnimationManager.GetInstance().PlayAnimation(anim, "Run");
                     }
 
-                    
                 }
                 else if(moveAndSkill == 2)
                 {
-
                     Debug.Log("스킬발동");
-                    currentBossStamina = 0;
+                    //currentBossStamina = 0;
+                    
                     skill = true;
 
-                    BossRandomSkill = Random.Range(1, 4);  //스킬 3개만 사용중 (소환스킬 사용x)
-                    //BossRandomSkill = Random.Range(1, 5);  //스킬 3개만 사용중 (소환스킬 사용x)
-                    //BossRandomSkill = 4;  //고정스킬(몹 소환)
 
-                    BossRandomSkill = 1;
+                    // 쿨타임 체크
 
-                    switch (BossRandomSkill)
+                    // 스킬 사용
+                    if(BossUseSkill())
                     {
-                        case 1:
-                            //스킬인덱스를 참고해 스킬을 사용.
-                            Debug.Log("스킬1 사용");
-                            m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill1);
-                            AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
-                            break;
-                        case 2:
-                            Debug.Log("스킬2 사용");
-                            m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill2);
-                            AnimationManager.GetInstance().PlayAnimation(anim, "Skill02");
-                            break;
-                        case 3:
-                            Debug.Log("스킬3 사용");
-                            m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill3);
-                            AnimationManager.GetInstance().PlayAnimation(anim, "Skill03");
-                            break;
-                        case 4:
-                            Debug.Log("스킬4 사용");
-                            m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill4);
-                            AnimationManager.GetInstance().PlayAnimation(anim, "Skill04");
-                            break;
+                          info = anim.GetCurrentAnimatorStateInfo(0);
+                          animation_length = info.length;
                     }
-
-                    info = anim.GetCurrentAnimatorStateInfo(0);
-                    animation_length = info.length;
 
                 }
             }
+            else
+            {
+                currentBossStamina += DataTableManager.Instance.GetDataTable<Boss_TableExcelLoader>().DataList[0].Speed;
+                Debug.Log($"턴미터 회복{maxStamina}/{currentBossStamina}");
+            }
+
+
             time = 0;
         }
     }

@@ -32,11 +32,9 @@ public class BossSkill : MonoBehaviour
 
     public enum BossSkillType { WIDE = 1, TARGET, LINE, DIFFUSION, SUMMONS }
 
-    //public GameObject target;
-
     public GameObject LineSkillTarget;
 
-    //public GameObject[] EnemyPrefebs = new GameObject[2];
+    private BossFSM m_BossFSM;
 
     public GameObject MobPrefabs;
 
@@ -49,7 +47,7 @@ public class BossSkill : MonoBehaviour
 
     public Transform PosAtk;
 
-    //public GameObject SkillPrefab;   //현재 런치 프리팹 -> 파이어 프리팹으로 바뀌어야 한다..
+    
      
 
     private Animator anim;
@@ -110,6 +108,7 @@ public class BossSkill : MonoBehaviour
             }
         }
 
+
         //플레이어의 위치와 보스의 배열 위치를 알아낸다.
         m_PlayerRow = MainManager.Instance.GetStageManager().m_PlayerRow;
         m_PlayerColumn = MainManager.Instance.GetStageManager().m_PlayerCoulmn;
@@ -136,7 +135,14 @@ public class BossSkill : MonoBehaviour
         }
 
         check1.dmg_check = true;
-        check1.DamageEffect = DamagePrefab;  //데미지 프리팹 넣어주기.
+        DamageEffect dmgCheck;
+        dmgCheck = DamagePrefab.GetComponent<DamageEffect>();
+        if (dmgCheck == null)
+        {
+            DamagePrefab.AddComponent<DamageEffect>();
+        }
+
+        check1.DamageEffect = DamagePrefab;  // 데미지 프리팹 넣어주기.
 
 
         check2 = EmptyPrefab.GetComponent<DamageCheck>();
@@ -145,6 +151,8 @@ public class BossSkill : MonoBehaviour
             EmptyPrefab.AddComponent<DamageCheck>();
         }
         check2.dmg_check = true;
+
+        check2.DamageEffect = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.DamPrefb];    // 공백프리팹에 데미지 프리팹 넣어주기.
 
 
 
@@ -1451,7 +1459,7 @@ public class BossSkill : MonoBehaviour
             }
         }
 
-        
+        m_BossFSM = GetComponent<BossFSM>();
 
         //names[0].Name = "이세영"; names[0].Age = 102;
         //names[1].Name = "권경민"; names[1].Age = 31;

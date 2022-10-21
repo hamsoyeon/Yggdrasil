@@ -32,7 +32,7 @@ MonoBehaviour:
     BuffAdded: 0
     LunchPrefb: 970008
     FirePrefb: 970007
-    DamPrefb: 0
+    DamPrefb: 970016
   - Name_KR: "\uB3C5\uAD6C\uB984"
     Name_EN: Posion_Cloud
     SpritSkillIndex: 170002
