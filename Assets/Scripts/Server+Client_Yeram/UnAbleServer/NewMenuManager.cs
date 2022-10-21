@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewMenuManager : Singleton_Ver2.Singleton<NewMenuManager>
 {
@@ -41,5 +42,9 @@ public class NewMenuManager : Singleton_Ver2.Singleton<NewMenuManager>
     {
         m_Room.SetActive(false);
         m_MainMenu.SetActive(true);
+    }
+    public void OnClickStart()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }

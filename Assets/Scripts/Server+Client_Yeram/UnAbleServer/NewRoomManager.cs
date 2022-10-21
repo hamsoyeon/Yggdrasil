@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+//using ECharacterType = NewCharacterInfo.ECharacterType;
 
 public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
 {
@@ -34,12 +35,6 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
 
     [SerializeField]
     private Button[] m_SelectChar_Btn;
-
-    [SerializeField]
-    private PlayerSlot m_player_slot;//1 개만있으면됨
-
-    [SerializeField]
-    private GameObject parent_render_Char;
 
     MapSlot m_curmap;
     private void Start()
@@ -88,7 +83,7 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
             m_SelectMap_Btn[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = map_Sprit[i].name;
             m_SelectMap_Btn[i].gameObject.AddComponent<MapSlot>().__Initialize(i);
         }
-
+        Map_ViewChange(0);
+        OnClick_Decide_Map(0);
     }
-    
 }
