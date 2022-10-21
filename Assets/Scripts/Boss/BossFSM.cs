@@ -291,14 +291,16 @@ public class BossFSM : MonoBehaviour
         }
     }
 
-        
 
 
     public void Damage(int _damage)
     {
+        
+
         Debug.Log("현재 보스의 체력:" + m_BossClass.m_BossStatData.HP);
         TakeDamagePrint(_damage);
     }
+
 
     public void TakeDamagePrint(int damage)
     {

@@ -289,9 +289,6 @@ public class PlayerManager : MonoBehaviour
 
     public void Damage(int _damage)
     {
-        //Debug.Log(_damage);
-
-
 
         Debug.Log("현재 플레이어의 체력:" + PlayerClass.m_CharacterStat.HP);
         TakeDamagePrint(_damage);

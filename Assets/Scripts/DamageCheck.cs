@@ -13,6 +13,12 @@ public class DamageCheck : MonoBehaviour
 
     private Buff BuffClass;
 
+    private Transform PosBody;
+
+    
+   
+
+
 	private float minDamage;
 	private float resultDamage;
     private float power;
@@ -29,7 +35,14 @@ public class DamageCheck : MonoBehaviour
 
     void Start()
     {
-        if(dmg_check)
+
+        //Instantiate(DamageEffect, PosBody);
+        //TempLunch.transform.SetParent(PosBody);
+        //TempLunch.transform.position = PosBody.position;
+        //Instantiate(DamageEffect, PosBody);
+
+
+        if (dmg_check)
         {
             Collider[] cols = Physics.OverlapSphere(transform.position, 12f);
             if (cols.Length > 0)
@@ -43,7 +56,6 @@ public class DamageCheck : MonoBehaviour
                         case 1:
                             if (cols[i].tag == "Boss" || cols[i].tag == "Mob")
                             {
-
 
                                 Debug.Log("적 이펙트 충돌");
 
@@ -71,6 +83,17 @@ public class DamageCheck : MonoBehaviour
                                     EnemyClass.m_BossStatData.HP -= resultDamage;
                                     //해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
                                     cols[i].GetComponent<BossFSM>().Damage((int)resultDamage);
+
+                                    Transform[] allChildren = cols[i].GetComponentsInChildren<Transform>();
+                                    foreach (Transform child in allChildren)
+                                    {
+                                        if (child.name == "PosBody")
+                                        {
+                                            PosBody = child;
+                                        }
+                                    }
+                                    Instantiate(DamageEffect, PosBody);
+
                                 }
                                 if (cols[i].CompareTag("Mob"))
                                 {
@@ -115,6 +138,17 @@ public class DamageCheck : MonoBehaviour
                                 //해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
                                 cols[i].GetComponent<PlayerManager>().Damage((int)resultDamage);
                                 //cols[i].GetComponent<PlayerManager>().PlayerDamageTxt
+
+                                Transform[] allChildren = cols[i].GetComponentsInChildren<Transform>();
+                                foreach (Transform child in allChildren)
+                                {
+                                    if (child.name == "PosBody")
+                                    {
+                                        PosBody = child;
+                                    }
+                                }
+                                Instantiate(DamageEffect, PosBody);
+
 
                             }
                             break;
@@ -168,6 +202,17 @@ public class DamageCheck : MonoBehaviour
                                         EnemyClass.m_BossStatData.HP -= resultDamage;
                                         //해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
                                         cols[i].GetComponent<BossFSM>().Damage((int)resultDamage);
+
+                                        Transform[] allChildren = cols[i].GetComponentsInChildren<Transform>();
+                                        foreach (Transform child in allChildren)
+                                        {
+                                            if (child.name == "PosBody")
+                                            {
+                                                PosBody = child;
+                                            }
+                                        }
+                                        Instantiate(DamageEffect, PosBody);
+
                                     }
                                     if (cols[i].CompareTag("Mob"))
                                     {
@@ -202,6 +247,16 @@ public class DamageCheck : MonoBehaviour
                                     PlayerClass.m_CharacterStat.HP -= resultDamage;
                                     //해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
                                     cols[i].GetComponent<PlayerManager>().Damage((int)resultDamage);
+
+                                    Transform[] allChildren = cols[i].GetComponentsInChildren<Transform>();
+                                    foreach (Transform child in allChildren)
+                                    {
+                                        if (child.name == "PosBody")
+                                        {
+                                            PosBody = child;
+                                        }
+                                    }
+                                    Instantiate(DamageEffect, PosBody);
                                 }
                                 break;
                         }
