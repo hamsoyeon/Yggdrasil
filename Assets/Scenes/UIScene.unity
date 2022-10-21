@@ -2291,9 +2291,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RoomGUIManager, Assembly-CSharp
-        m_MethodName: OnClick_Start
+      - m_Target: {fileID: 751828933}
+        m_TargetAssemblyTypeName: NewMenuManager, Assembly-CSharp
+        m_MethodName: OnClickStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2722,8 +2722,6 @@ MonoBehaviour:
   m_SelectChar_Btn:
   - {fileID: 1893429261}
   - {fileID: 249499309}
-  m_player_slot: {fileID: 0}
-  parent_render_Char: {fileID: 0}
 --- !u!114 &751828936
 MonoBehaviour:
   m_ObjectHideFlags: 0
