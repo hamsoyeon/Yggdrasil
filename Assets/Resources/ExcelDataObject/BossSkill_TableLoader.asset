@@ -49,7 +49,7 @@ MonoBehaviour:
     TargetType: 2
     Target: 2
     Power: 10
-    CoolTime: 10
+    CoolTime: 400
     SkillDistance: 2
     SkillRange: 2
     SkillType: 1
@@ -78,7 +78,7 @@ MonoBehaviour:
     TargetType: 2
     Target: 2
     Power: 10
-    CoolTime: 30
+    CoolTime: 400
     SkillDistance: 2
     SkillRange: 1
     SkillType: 4
