@@ -535,12 +535,32 @@ public class SpiritSkill : MonoBehaviour
 
 				foreach (var rangeCollider in colls)
 				{
+                    CharacterClass cc = rangeCollider.GetComponent<CharacterClass>();
+                    PlayerManager pm = rangeCollider.GetComponent<PlayerManager>();
+
+
                     //플레이어 회복시키는 코드.
-                    rangeCollider.GetComponent<CharacterClass>().m_CharacterStat.HP += 100f;
-                    //rangeCollider.transform.GetChild(0).GetComponent<CharacterClass>().m_CharacterStat.HP += 100f;
-                    //100씩 회복.
-                    //rangeCollider.GetComponent<PlayerManager>().Damage();
-                    Debug.Log("플레이어 회복중");
+                    if(pm.GetMaxHp() > cc.m_CharacterStat.HP)
+                    {
+                        int heal = (int)(pm.GetMaxHp() - cc.m_CharacterStat.HP);
+
+                        if(heal >= 50)
+                        {
+                            rangeCollider.GetComponent<CharacterClass>().m_CharacterStat.HP += 50f;
+                        }
+                        else
+                        {
+                            rangeCollider.GetComponent<CharacterClass>().m_CharacterStat.HP += heal;
+                        }
+
+                        Debug.Log("플레이어 회복중");
+                    }
+                    else
+                    {
+                        Debug.Log("플레이어의 HP가 MAX 입니다.");
+                    }
+                   
+                   
 
                 }
 
@@ -577,9 +597,11 @@ public class SpiritSkill : MonoBehaviour
                 yield break;
 			}
 
-			colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 9);  //9번째 레이어 = Enemy  //콜라이더가 없어서 OverlapSphere가 안됨. 잡몹한테 콜라이더 부착.
+            colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 9);  //9번째 레이어 = Enemy  //콜라이더가 없어서 OverlapSphere가 안됨. 잡몹한테 콜라이더 부착.
+            
+           
 
-			if(colls != null)
+            if (colls != null)
 			{
 				foreach (var rangeCollider in colls)
 				{
@@ -595,9 +617,7 @@ public class SpiritSkill : MonoBehaviour
                         heading.y = 0f;
                         heading *= skill.SkillRange;
 
-
-
-                        rangeCollider.gameObject.transform.position = Vector3.MoveTowards(rangeCollider.gameObject.transform.position, heading, 5f);
+                        rangeCollider.gameObject.transform.position = Vector3.MoveTowards(rangeCollider.gameObject.transform.position, heading, 15f);
 						Debug.Log($"{rangeCollider.ToString()}을 범위 내에서 밀어냅니다.");
 					}
 				}
@@ -653,31 +673,32 @@ public class SpiritSkill : MonoBehaviour
             }
 
             // 현재 무적이 안되는 버그가 있음..
-            colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 11);  //11번째 레이어 = Player
+            //colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 11);  //11번째 레이어 = Player
+            colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 14);
 
-            if(colls.Length !=0)
+            if (colls.Length > 0)
             {
-                Debug.Log("무적실행");
 
                 foreach(var p in colls)
                 {
-                    player_characterclass = p.GetComponent<CharacterClass>();
-                    player_characterclass.Invincibility = 0.0f;
-                }
-               
 
+                    if (p.name != "911001(Clone)")
+                        continue;
+                    else
+                    {
+                        player_characterclass = p.GetComponent<CharacterClass>();
+                        player_characterclass.Invincibility = 0.0f;
+                        //Debug.Log("플레이어 무적 계수 :" + player_characterclass.Invincibility);
+                        //Debug.Log("플레이어 무적실행...");
+                    }
+
+                  
+                }
             }
             else
             {
                 Debug.Log("주위의 플레이어가 없습니다");
             }
-
-            foreach (var rangeCollider in colls)
-            {
-                rangeCollider.GetComponent<CharacterClass>().Invincibility = 0;
-            }
-
-         
 
             yield return null;
         }
