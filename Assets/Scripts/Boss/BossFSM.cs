@@ -485,10 +485,6 @@ public class BossFSM : MonoBehaviour
         return true;
     }
     
-
-
-
-// Update is called once per frame
     void Update()
     {
         time += Time.deltaTime;
@@ -496,7 +492,6 @@ public class BossFSM : MonoBehaviour
 
         if (m_BossClass.m_BossStatData.HP <= 0)
         {
-
             //보스 죽음 애니메이션을 출력(1~초 정도 뒤) -> 보스의 행동을 정지 시켜야됨
             if(!player_Invin)
             {
@@ -505,7 +500,6 @@ public class BossFSM : MonoBehaviour
                 player_Invin = true;
             }
 
-            
             deathTime += Time.deltaTime;
             // 플레이어 죽는 모션을 취한후 게임 메뉴 보여주기.
             AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);

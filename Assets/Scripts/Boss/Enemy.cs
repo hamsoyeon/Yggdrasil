@@ -74,12 +74,6 @@ public class Enemy : MonoBehaviour
             //타겟 방향 주시
             LockRotationToTarget();
 
-            if (Time.time - lastAttackTime > attackRate)
-            {
-                //공격 주기가 되어야 공격할 수 있도록 하기 위해 현재 시간 저장
-                lastAttackTime = Time.time;
-            }
-
             yield return null;
 
             coroutine = null;
@@ -115,6 +109,14 @@ public class Enemy : MonoBehaviour
             else
             {
                 coroutine = StartCoroutine(Attack());
+
+                if (Time.time - lastAttackTime > attackRate)
+                {
+                    //공격 주기가 되어야 공격할 수 있도록 하기 위해 현재 시간 저장
+                    target.GetComponent<PlayerManager>().TakeDamage(status.ATTACK);
+                    lastAttackTime = Time.time;
+                }
+
             }
 
         }

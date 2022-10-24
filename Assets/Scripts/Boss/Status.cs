@@ -26,6 +26,8 @@ public class Status : MonoBehaviour
 
     public float RunSpeed => runSpeed;
 
+    public float ATTACK => Attack;
+
     public int CurrentHP => currentHP;
     public int MaxHP => maxHP;
 

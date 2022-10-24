@@ -98,7 +98,7 @@ MonoBehaviour:
     SkillDelay: 0
     DelayPrefb: 0
     LunchPrefb: 0
-    FieldPrefb: 0
+    SingleTile: 0
     FirePrefb: 0
     DamPrefb: 0
   m_BossStatData:
@@ -209,7 +209,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   runSpeed: 20
-  Attack: 0
+  Attack: 10
   maxHP: 100
 --- !u!65 &-5206960289941901482
 BoxCollider:

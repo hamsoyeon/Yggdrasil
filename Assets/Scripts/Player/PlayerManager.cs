@@ -294,6 +294,13 @@ public class PlayerManager : MonoBehaviour
         TakeDamagePrint(_damage);
     }
 
+    public void TakeDamage(float _damage)
+    {
+        Debug.Log("쫄몹 체력 깎는 함수 호출 완료");
+        PlayerClass.m_CharacterStat.HP -= _damage;
+        TakeDamagePrint((int)_damage);
+    }
+
     public void TakeDamagePrint(int damage)
     {
         

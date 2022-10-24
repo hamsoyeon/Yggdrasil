@@ -100,7 +100,8 @@ public class MenuManager : MonoBehaviour
     public void ReStart()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadSceneAsync(thisScene);
+        //SceneManager.LoadSceneAsync(thisScene);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void NextStage()
