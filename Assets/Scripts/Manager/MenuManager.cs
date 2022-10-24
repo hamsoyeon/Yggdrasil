@@ -9,15 +9,6 @@ public class MenuManager : MonoBehaviour
 {
     //public static MenuManager instance;
 
-    public class GlobalValue
-    {
-        public enum Transition
-        {
-            Fade,
-        }
-    }
-
-
     enum ShowMenu { WIN = 1, LOSE }
 
 
@@ -30,35 +21,7 @@ public class MenuManager : MonoBehaviour
     public string thisScene;
     public string endingScene = "EndingScene";
 
-    //private void Awake()
-    //{
-    //    if (null == instance)
-    //    {
-    //        instance = this;
-    //        DontDestroyOnLoad(this.gameObject);
-
-    //    }
-    //    else
-    //    {
-    //        Destroy(this.gameObject);
-    //    }
-
-    //}
-
-
-    //public static MenuManager Instance
-    //{
-    //    get
-    //    {
-    //        if (null == instance)
-    //        {
-    //            return null;
-    //        }
-    //        return instance;
-    //    }
-
-    //}
-
+    GameObject blank;
 
     // Start is called before the first frame update
     void Start()
@@ -66,13 +29,21 @@ public class MenuManager : MonoBehaviour
         thisScene = SceneManager.GetActiveScene().name; //현재 씬 이름을 가져옴
         LosePanel = GameObject.Find("UICanvas").transform.Find("LosePanel").gameObject;
 
+        blank = GameObject.Find("UICanvas").transform.Find("Blank").gameObject;
+        blank.SetActive(true);
+        rt = blank.GetComponent<RectTransform>();
+        rt.DOScale(0, 1f);
 
+        img = blank.GetComponent<CanvasGroup>();//.alpha;
+        img.DOFade(0, 1f)
+            .OnComplete(BlankActive);
 
     }
 
-
-
-
+    void BlankActive()
+    {
+        blank.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
@@ -96,11 +67,7 @@ public class MenuManager : MonoBehaviour
         if (WinPanel.activeSelf)
             return;
 
-
-        //LosePanel = GameObject.Find("UICanvas").transform.Find("LosePanel").gameObject;
-        //Time.timeScale = 0f;
         LosePanel.SetActive(true);  //패배했을때의 패널을 보여주고
-
 
 
         rt = LosePanel.GetComponent<RectTransform>();
@@ -109,18 +76,17 @@ public class MenuManager : MonoBehaviour
         img = LosePanel.GetComponent<CanvasGroup>();//.alpha;
         img.DOFade(1, 2f)
             //.SetUpdate(true);   // Unity TimeScale에 영향받지않고 Dotween 내부적으로 체크할수있게 설정을 변경하는 기능... 이렇게 사용하면 위에서 Time.timeScale이 0이 되어도 Dotween이 돌아간다!!!   
-            .OnComplete(TweenComplete);  //위에 DOFade가 완료되면 실행될 함수. 
+            .OnComplete(TimeStop);  //위에 DOFade가 완료되면 실행될 함수. 
 
         MinimapPanel.SetActive(false);//미니맵 끄기
     }
 
-    void TweenComplete()
+    void TimeStop()
     {
-        Debug.Log("트윈함수 완료");
+        
         Time.timeScale = 0f;
 
     }
-
 
 
     public void ShowWinMenu()
@@ -128,33 +94,72 @@ public class MenuManager : MonoBehaviour
         if (LosePanel.activeSelf)
             return;
 
-        Time.timeScale = 0f;
+        
         WinPanel.SetActive(true);
 
-
-        rt = LosePanel.GetComponent<RectTransform>();
+        rt = WinPanel.GetComponent<RectTransform>();
         rt.DOScale(1, 2f);
+            
 
         //CanvasGroup 넣어주기...
-        var img = LosePanel.GetComponent<CanvasGroup>();//.alpha;
+        var img = WinPanel.GetComponent<CanvasGroup>();//.alpha;
         img.DOFade(1, 2f)
-            .SetUpdate(true); 
-
-        //WinPanel = GameObject.Find("UICanvas").transform.Find("WinPanel").gameObject;
+            .OnComplete(TimeStop);
 
         MinimapPanel.SetActive(false);//미니맵 끄기
     }
 
     public void ReStart()
     {
+
+        blank = GameObject.Find("UICanvas").transform.Find("Blank").gameObject;
+
+        blank.SetActive(true);
+
+        rt = blank.GetComponent<RectTransform>();
+        rt.DOScale(1, 1f)
+            .SetUpdate(true);
+
+        img = blank.GetComponent<CanvasGroup>();//.alpha;
+        img.DOFade(1, 1f)
+            .SetUpdate(true)
+            .OnComplete(ThisSceneFade);
+            
+
+
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+   
+
+    void ThisSceneFade()
+    {
+
         Time.timeScale = 1f;
-        //SceneManager.LoadSceneAsync(thisScene);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(thisScene);
+    }
+
+    void NextSceneFade()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(endingScene);
     }
 
     public void NextStage()
     {
-        SceneManager.LoadScene(endingScene);
+        blank = GameObject.Find("UICanvas").transform.Find("Blank").gameObject;
+
+        blank.SetActive(true);
+
+        rt = blank.GetComponent<RectTransform>();
+        rt.DOScale(1, 1f)
+            .SetUpdate(true);
+
+        img = blank.GetComponent<CanvasGroup>();//.alpha;
+        img.DOFade(1, 1f)
+            .SetUpdate(true)
+            .OnComplete(NextSceneFade);
     }
 
     public void GameEnd()

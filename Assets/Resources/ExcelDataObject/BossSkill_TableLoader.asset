@@ -48,11 +48,11 @@ MonoBehaviour:
     BossSkillIndex: 231002
     TargetType: 2
     Target: 2
-    Power: 10
+    Power: 10000
     CoolTime: 400
     SkillDistance: 2
-    SkillRange: 2
-    SkillType: 5
+    SkillRange: 3
+    SkillType: 1
     UseStat: 35
     Direction1: 1
     Direction2: 0
@@ -77,11 +77,11 @@ MonoBehaviour:
     BossSkillIndex: 231003
     TargetType: 2
     Target: 2
-    Power: 10
+    Power: 10000
     CoolTime: 400
     SkillDistance: 2
     SkillRange: 1
-    SkillType: 5
+    SkillType: 4
     UseStat: 40
     Direction1: 1
     Direction2: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
     BossSkillIndex: 231004
     TargetType: 2
     Target: 2
-    Power: 10
+    Power: 10000
     CoolTime: 1
     SkillDistance: 3
     SkillRange: 2
@@ -135,7 +135,7 @@ MonoBehaviour:
     BossSkillIndex: 231005
     TargetType: 2
     Target: 2
-    Power: 10
+    Power: 10000
     CoolTime: 1
     SkillDistance: 4
     SkillRange: 3

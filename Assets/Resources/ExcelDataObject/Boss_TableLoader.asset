@@ -18,7 +18,7 @@ MonoBehaviour:
     Name_EN: FightBear
     BossStatIndex: 131001
     Atk: 10
-    HP: 2000
+    HP: 100
     Def: 100
     SRange: 1
     CRange: 2
