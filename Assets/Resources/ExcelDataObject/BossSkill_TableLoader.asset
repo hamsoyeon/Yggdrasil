@@ -49,7 +49,7 @@ MonoBehaviour:
     TargetType: 2
     Target: 2
     Power: 10
-    CoolTime: 10
+    CoolTime: 400
     SkillDistance: 2
     SkillRange: 2
     SkillType: 5
@@ -78,7 +78,7 @@ MonoBehaviour:
     TargetType: 2
     Target: 2
     Power: 10
-    CoolTime: 30
+    CoolTime: 400
     SkillDistance: 2
     SkillRange: 1
     SkillType: 5
@@ -106,7 +106,7 @@ MonoBehaviour:
     BossSkillIndex: 231004
     TargetType: 2
     Target: 2
-    Power: 10000
+    Power: 10
     CoolTime: 1
     SkillDistance: 3
     SkillRange: 2

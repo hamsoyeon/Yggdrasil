@@ -122,9 +122,10 @@ public class BossFSM : MonoBehaviour
             anim = this.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
         }
 
-        CanSkill = new bool[6]; 
-        SkillCoolTime = new float[6];
-        currenCoolTime = new float[6];
+        CanSkill = new bool[4]; 
+        SkillCoolTime = new float[4];
+        currenCoolTime = new float[4];
+
 
 
         for (int i = 0; i < CanSkill.Length; i++)
@@ -133,8 +134,6 @@ public class BossFSM : MonoBehaviour
             SkillCoolTime[i] = 0.0f;
             currenCoolTime[i] = SkillCoolTime[i];
         }
-
-
 
 
         GameBoard = new Board(6, 5);
@@ -395,15 +394,32 @@ public class BossFSM : MonoBehaviour
 
         if(!CanSkill[CoolTimeindex])  //스킬이 쿨타임 중이라면.
         {
-            if(checkDuplicateCoolTime >= 3) //3번이상 중복되었다면
+            int count = 0;
+
+            // 남아있는 스킬중에 쿨타임이 있는지 확인.
+            for(int i=0;i<4;i++)
             {
-                checkDuplicateCoolTime = 0;
+                if(CanSkill[i])
+                {
+                    BossRandomSkill = i + 1;
+                    CoolTimeindex = i;
+                }
+                else
+                {
+                    count++;
+                }
+            }
+
+            if(count == 4)  //모든 스킬이 쿨타임 중이기 때문에...
+            {
+                Debug.Log("모든스킬이 쿨타임 중입니다...");
+                bossMove = false;
+                behavior = true;
+                moving = true;
+
                 return false;
             }
 
-            Debug.Log("현재 스킬은 쿨타임 입니다. 스킬을 다시 선별합니다...");
-            checkDuplicateCoolTime++;
-            return true;   //true를 리턴하면 스킬은 사용하지 않은채 다시 스킬을 뽑는 효과를 줄수있다.
         }
 
         switch (BossRandomSkill)
@@ -422,6 +438,7 @@ public class BossFSM : MonoBehaviour
                 break;
         }
 
+
        
 
         foreach (var item in DataTableManager.Instance.GetDataTable<BossSkill_TableExcelLoader>().DataList)
@@ -433,11 +450,6 @@ public class BossFSM : MonoBehaviour
             }
         }
 
-
-
-
-        Debug.Log(m_BossSkill.Name_KR);
-
         if(currentBossStamina - m_BossSkill.UseStat < 0)
             return false;
         else
@@ -446,6 +458,8 @@ public class BossFSM : MonoBehaviour
 
         SkillCoolTime[CoolTimeindex] = m_BossSkill.CoolTime;
         currenCoolTime[CoolTimeindex] = SkillCoolTime[CoolTimeindex];
+        StartCoroutine(Activation(CoolTimeindex));
+
 
 
         switch (BossRandomSkill)
@@ -455,28 +469,28 @@ public class BossFSM : MonoBehaviour
                 Debug.Log("스킬1 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill1);
                 CanSkill[CoolTimeindex] = false;
-                StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
+                //StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
                 AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
                 break;
             case 2:
                 Debug.Log("스킬2 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill2);
                 CanSkill[CoolTimeindex] = false;
-                StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
+                //StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
                 AnimationManager.GetInstance().PlayAnimation(anim, "Skill02");
                 break;
             case 3:
                 Debug.Log("스킬3 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill3);
                 CanSkill[CoolTimeindex] = false;
-                StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
+                //StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
                 AnimationManager.GetInstance().PlayAnimation(anim, "Skill03");
                 break;
             case 4:
                 Debug.Log("스킬4 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill4);
                 CanSkill[CoolTimeindex] = false;
-                StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
+                //StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
                 AnimationManager.GetInstance().PlayAnimation(anim, "Skill04");
                 break;
         }
@@ -533,18 +547,19 @@ public class BossFSM : MonoBehaviour
 
         if (time > 1.0f && !behavior)
         {
-            if (stIsFull)
-            {
-                skill = true;
-                if (BossUseSkill() == false)
-                {
-                    stIsFull = false;
-                }
+            //if (stIsFull)
+            //{
+            //    skill = true;
+            //    if (BossUseSkill() == false)
+            //    {
+            //        stIsFull = false;
+            //    }
 
-            }
-            else if (currentBossStamina >= maxStamina && !stIsFull)
+            //}
+
+            if (currentBossStamina >= maxStamina )  // && !stIsFull
             {
-                stIsFull = true;
+                //stIsFull = true;
 
                 // 랜덤값 추출후 행동(이동 or 스킬)을 정함.
                 int moveAndSkill = Random.Range(1, 11); 
@@ -617,8 +632,6 @@ public class BossFSM : MonoBehaviour
                 else if(moveAndSkill == 2)
                 {
                     Debug.Log("스킬발동");
-                    //currentBossStamina = 0;
-                    
                     skill = true;
 
 
@@ -645,25 +658,30 @@ public class BossFSM : MonoBehaviour
     }
 
 
-    IEnumerator CoolTime(float cool, int index)
-    {
-        Debug.Log($"{index} 보스 스킬의 쿨타임 시작");
+    //IEnumerator CoolTime(float cool, int index)
+    //{
+    //    Debug.Log($"{index} 보스 스킬의 쿨타임 시작");
 
-        StartCoroutine(Activation(index));
-        yield return new WaitForSeconds(cool);
-        CanSkill[index] = true;
-    }
+    //    StartCoroutine(Activation(index));
+    //    yield return new WaitForSeconds(cool);
+
+    //}
+
+    //WaitForSeconds seconds = new WaitForSeconds(0.1f);
+
 
     WaitForSeconds seconds = new WaitForSeconds(0.1f);
 
     IEnumerator Activation(int index)
     {
+        
         while (currenCoolTime[index] > 0)
         {
             currenCoolTime[index] -= 0.1f;
             yield return seconds;
         }
         currenCoolTime[index] = SkillCoolTime[index];
+        CanSkill[index] = true;
         StopCoroutine("Activation");
     }
 
