@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class TutorialButton : MonoBehaviour
 {
+    public bool IsTutorialClear = false;
     void Start()
     {
-        
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
@@ -17,6 +18,7 @@ public class TutorialButton : MonoBehaviour
 
     public void BtnPress()
     {
+        IsTutorialClear = true;
         SceneManager.LoadScene("UIScene");
     }
 }

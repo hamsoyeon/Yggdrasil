@@ -11,20 +11,32 @@ public class NewMenuManager : Singleton_Ver2.Singleton<NewMenuManager>
     GameObject m_Room;
     [SerializeField]
     GameObject m_Option;
-    // Start is called before the first frame update
+
+    [SerializeField]
+    bool m_IsTutorialClear = false;
+    GameObject ui;
+
     void Start()
     {
         m_MainMenu.SetActive(true);
         m_Option.SetActive(false);
         m_Room.SetActive(false);
+        ui = GameObject.Find("UIController");
+        m_IsTutorialClear = ui.GetComponent<TutorialButton>().IsTutorialClear;
     }
 
-    // Update is called once per frame
     public void OnClickGameStart()
     {
         m_MainMenu.SetActive(false);
-        SceneManager.LoadScene("TutorialScene");
-        //m_Room.SetActive(true);
+        if(!m_IsTutorialClear)
+        {
+            SceneManager.LoadScene("TutorialScene");
+        }
+        if(m_IsTutorialClear)
+        {
+            m_Room.SetActive(true);
+        }
+
     }
     public void OnClickOption()
     {
