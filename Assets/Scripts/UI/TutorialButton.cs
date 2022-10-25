@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TutorialButton : MonoBehaviour
 {
-    public GameObject[] panel;
-
     void Start()
     {
         
@@ -19,6 +17,6 @@ public class TutorialButton : MonoBehaviour
 
     public void BtnPress()
     {
-
+        SceneManager.LoadScene("UIScene");
     }
 }
