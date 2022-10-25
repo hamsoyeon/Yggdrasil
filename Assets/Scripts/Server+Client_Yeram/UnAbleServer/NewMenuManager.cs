@@ -23,7 +23,8 @@ public class NewMenuManager : Singleton_Ver2.Singleton<NewMenuManager>
     public void OnClickGameStart()
     {
         m_MainMenu.SetActive(false);
-        m_Room.SetActive(true);
+        SceneManager.LoadScene("TutorialScene");
+        //m_Room.SetActive(true);
     }
     public void OnClickOption()
     {
