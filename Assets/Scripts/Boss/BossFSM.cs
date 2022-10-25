@@ -230,6 +230,7 @@ public class BossFSM : MonoBehaviour
 
             tempBlock = originBlock.next;
             currentBossStamina -= m_BossClass.m_BossStatData.MoveStUsed; //스태미너 감소
+            stIsFull = false;
             targetPos = MainManager.Instance.GetStageManager().m_MapInfo[tempBlock.x, tempBlock.y].MapPos;    //x=row y=column
             bossMove = true;
             Debug.Log(targetPos); //보스 이동 하는 다음 타일의 포지션값 던져준다.
@@ -273,7 +274,8 @@ public class BossFSM : MonoBehaviour
                 behavior = false;
                 moving = false;
                 bossMove = false;
-               
+                stIsFull = false;
+
             }
             else
             {
@@ -414,8 +416,9 @@ public class BossFSM : MonoBehaviour
             {
                 Debug.Log("모든스킬이 쿨타임 중입니다...");
                 bossMove = false;
-                behavior = true;
+                behavior = false;
                 moving = true;
+                stIsFull = true;
 
                 return false;
             }
@@ -459,7 +462,6 @@ public class BossFSM : MonoBehaviour
         SkillCoolTime[CoolTimeindex] = m_BossSkill.CoolTime;
         currenCoolTime[CoolTimeindex] = SkillCoolTime[CoolTimeindex];
         StartCoroutine(Activation(CoolTimeindex));
-
 
 
         switch (BossRandomSkill)
@@ -510,7 +512,9 @@ public class BossFSM : MonoBehaviour
             if(!player_Invin)
             {
                 GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>().Invincibility = 0.0f;  //플레이어 무적으로 만들고.
+
                 AnimationManager.GetInstance().PlayAnimation(anim, "Die");
+
                 player_Invin = true;
             }
 
@@ -518,8 +522,10 @@ public class BossFSM : MonoBehaviour
             // 플레이어 죽는 모션을 취한후 게임 메뉴 보여주기.
             AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
 
+            
             if (deathTime >= info.length)
             {
+                Debug.Log("deathTime" + deathTime + "info.length" + info.length);
                 GameObject.Destroy(this.gameObject);
                 m_MenuObj.GetComponent<MenuManager>().ShowWinMenu();
             }
@@ -559,8 +565,7 @@ public class BossFSM : MonoBehaviour
 
             if (currentBossStamina >= maxStamina )  // && !stIsFull
             {
-                //stIsFull = true;
-
+                
                 // 랜덤값 추출후 행동(이동 or 스킬)을 정함.
                 int moveAndSkill = Random.Range(1, 11); 
                 if (moveAndSkill > 4)
@@ -568,6 +573,12 @@ public class BossFSM : MonoBehaviour
                     moveAndSkill = 2;
                 }
                 else
+                {
+                    moveAndSkill = 1;
+                }
+
+                // 만약 상태가 
+                if(stIsFull)
                 {
                     moveAndSkill = 1;
                 }

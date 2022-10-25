@@ -228,6 +228,9 @@ public class DamageCheck : MonoBehaviour
                                         resultDamage = minDamage * power;
 
                                         cols[i].GetComponent<Enemy>().TakeDamage((int)resultDamage);
+
+
+
                                     }
                                 }
                                 break;

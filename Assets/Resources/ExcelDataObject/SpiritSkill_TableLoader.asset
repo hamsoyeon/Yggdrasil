@@ -19,10 +19,10 @@ MonoBehaviour:
     SpritSkillIndex: 170001
     Target: 2
     Power: 40
-    SkillRange: 3
-    SkillType: 1
+    SkillRange: 25
+    SkillType: 3
     BulletSpeed: 1
-    TargetNum: 10
+    TargetNum: 5
     LifeTime: 5
     DoT: 1
     Shapeform: 2
@@ -31,7 +31,7 @@ MonoBehaviour:
     SkillAdded: 0
     BuffAdded: 0
     LunchPrefb: 970008
-    FirePrefb: 970007
+    FirePrefb: 970009
     DamPrefb: 970016
   - Name_KR: "\uB3C5\uAD6C\uB984"
     Name_EN: Posion_Cloud
@@ -39,7 +39,7 @@ MonoBehaviour:
     Target: 2
     Power: 30
     SkillRange: 20
-    SkillType: 1
+    SkillType: 3
     BulletSpeed: 1
     TargetNum: 10
     LifeTime: 6
