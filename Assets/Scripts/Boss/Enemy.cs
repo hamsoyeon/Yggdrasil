@@ -65,8 +65,6 @@ public class Enemy : MonoBehaviour
 
     IEnumerator Attack()
     {
-        //공격할때는 이동을 멈추도록 설정
-        navMeshAgent.ResetPath();
         anim.SetBool("IsAttack", true);
 
         while (true)
@@ -108,6 +106,14 @@ public class Enemy : MonoBehaviour
             }
             else
             {
+                //공격할때는 이동을 멈추도록 설정
+                navMeshAgent.ResetPath();
+
+                navMeshAgent.isStopped = true;
+                navMeshAgent.updatePosition = false;
+                navMeshAgent.updateRotation = false;
+                navMeshAgent.velocity = Vector3.zero;
+
                 coroutine = StartCoroutine(Attack());
 
                 if (Time.time - lastAttackTime > attackRate)
@@ -131,10 +137,26 @@ public class Enemy : MonoBehaviour
             {
                 if(isDie)
                 {
+                    //공격할때는 이동을 멈추도록 설정
+                    navMeshAgent.ResetPath();
+
+                    navMeshAgent.isStopped = false;
+                    navMeshAgent.updatePosition = true;
+                    navMeshAgent.updateRotation = true;
+
                     coroutine = StartCoroutine(IsDie());
                 }
                 else
+                {
+                    //공격할때는 이동을 멈추도록 설정
+                    navMeshAgent.ResetPath();
+
+                    navMeshAgent.isStopped = false;
+                    navMeshAgent.updatePosition = true;
+                    navMeshAgent.updateRotation = true;
+
                     coroutine = StartCoroutine(Move());
+                }
             }
         }
     }
