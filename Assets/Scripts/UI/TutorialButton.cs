@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TutorialButton : MonoBehaviour
 {
-    public GameObject[] panel;
-
+    public bool IsTutorialClear = false;
     void Start()
     {
-        
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
@@ -19,6 +18,7 @@ public class TutorialButton : MonoBehaviour
 
     public void BtnPress()
     {
-
+        IsTutorialClear = true;
+        SceneManager.LoadScene("UIScene");
     }
 }
