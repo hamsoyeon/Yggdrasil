@@ -470,33 +470,43 @@ public class BossFSM : MonoBehaviour
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill1);
                 CanSkill[CoolTimeindex] = false;
                 //StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
-                AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
+                //AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
+                anim.SetBool("isSkill01 0", true);
                 break;
             case 2:
                 Debug.Log("스킬2 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill2);
                 CanSkill[CoolTimeindex] = false;
                 //StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
-                AnimationManager.GetInstance().PlayAnimation(anim, "Skill02");
+                //AnimationManager.GetInstance().PlayAnimation(anim, "Skill02");
+                anim.SetBool("isSkill02", true);
                 break;
             case 3:
                 Debug.Log("스킬3 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill3);
                 CanSkill[CoolTimeindex] = false;
                 //StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
-                AnimationManager.GetInstance().PlayAnimation(anim, "Skill03");
+                //AnimationManager.GetInstance().PlayAnimation(anim, "Skill03");
+                anim.SetBool("isSkill03", true);
                 break;
             case 4:
                 Debug.Log("스킬4 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill4);
                 CanSkill[CoolTimeindex] = false;
                 //StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
-                AnimationManager.GetInstance().PlayAnimation(anim, "Skill04");
+                //AnimationManager.GetInstance().PlayAnimation(anim, "Skill04");
+                anim.SetBool("isSkill04", true);
                 break;
         }
 
 
         return true;
+    }
+
+    bool isAnimationEnd(string _name, float _exitTime)//애니메이션 끝났는지 확인
+    {
+        return anim.GetCurrentAnimatorStateInfo(0).IsName(_name) &&
+            anim.GetCurrentAnimatorStateInfo(0).normalizedTime > _exitTime;
     }
     
     void Update()
@@ -510,7 +520,8 @@ public class BossFSM : MonoBehaviour
             if(!player_Invin)
             {
                 GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>().Invincibility = 0.0f;  //플레이어 무적으로 만들고.
-                AnimationManager.GetInstance().PlayAnimation(anim, "Die");
+                //AnimationManager.GetInstance().PlayAnimation(anim, "Die");
+                anim.SetBool("isDie", true);
                 player_Invin = true;
             }
 
@@ -518,12 +529,19 @@ public class BossFSM : MonoBehaviour
             // 플레이어 죽는 모션을 취한후 게임 메뉴 보여주기.
             AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
 
+            /*
             if (deathTime >= info.length)
             {
                 GameObject.Destroy(this.gameObject);
                 m_MenuObj.GetComponent<MenuManager>().ShowWinMenu();
             }
-           
+           */
+
+            if (isAnimationEnd("Die", 0.95f))
+            {
+                GameObject.Destroy(this.gameObject);
+                m_MenuObj.GetComponent<MenuManager>().ShowWinMenu();
+            }
         }
 
 
@@ -535,7 +553,8 @@ public class BossFSM : MonoBehaviour
             {
                 skill = false;
                 animation_time = 0f;
-                AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+                //AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+                anim.SetBool("isSkill", false);
             }
         }
 
