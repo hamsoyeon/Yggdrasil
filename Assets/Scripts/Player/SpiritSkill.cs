@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using System.Linq;
 
 
-// 스킬은 공통된 개념 -> 
+
+
 
 public class SpiritSkill : MonoBehaviour
 {
 
-    
-    enum SkillNumber { ICE=0,POISON ,INVINCIBILITY ,SANCTITY,HEAL ,SPEED }
+    enum SkillNumber { ICE=0, POISON ,INVINCIBILITY ,SANCTITY, HEAL ,SPEED }
+
+    enum SkillType { ATTACK=1, WIDE_MOVE, TARGET, WIDE_FIX, TILE  }
 
 	public GameObject[] Lunch_Prefabs;  //정령의 PosAtk에서 나오는 것.
     public GameObject[] Fire_Prefabs;
@@ -29,19 +33,18 @@ public class SpiritSkill : MonoBehaviour
 
     CharacterClass player_characterclass = null;
 
-    public void SkillUse(SpiritSkill_TableExcel skillInfo,GameObject Spirit)  //비타일형
+    public void SkillUse(SpiritSkill_TableExcel skillInfo, GameObject Spirit)  //비타일형
 	{
+
         //현재 플레이어의 좌표
         Row = MainManager.instance.GetStageManager().m_PlayerRow;
         Column = MainManager.instance.GetStageManager().m_PlayerCoulmn;
         
         GameObject tempSpirit = Spirit;
 
-
         effectNumber = skillInfo.SpritSkillIndex - 170001;
 
-        Debug.Log("스킬스킬 " + PosAtk[effectNumber]);
-
+       
         if(PosAtk[effectNumber] == null)
         {
             Transform[] allChildren = Spirit.GetComponentsInChildren<Transform>();
@@ -51,37 +54,15 @@ public class SpiritSkill : MonoBehaviour
                 if (child.name == "PosAtk")
                 {
                     PosAtk[effectNumber] = child;
-                    Debug.Log("플레이어 스킬스크립트:" + PosAtk[effectNumber].name);
                 }
             }
         }
-
-        //switch (skillInfo.SpritSkillIndex)
-        //{
-        //    case 170001:  //얼음장판
-        //        effectNumber = 0;
-        //        break;
-        //    case 170002:  //독구름
-        //        effectNumber = 1;
-        //        break;
-        //    case 170003:  //무적
-        //        effectNumber = 2;
-        //        break;
-        //    case 170004:  //신성지대
-        //        effectNumber = 3;
-        //        break;
-        //    case 170005: //힐
-        //        effectNumber = 4;
-        //        break;
-        //    case 170006: //이속증가
-        //        effectNumber = 5;
-        //        break;
-        //}
 
         Lunch_Prefabs[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.LunchPrefb];
         Fire_Prefabs[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.FirePrefb];
         Damage_Prefabs[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.DamPrefb];
 
+        // 데미지 체크 가능하게
         DamageCheck check;
         check = Fire_Prefabs[effectNumber].GetComponent<DamageCheck>();
         if(check == null)
@@ -90,6 +71,11 @@ public class SpiritSkill : MonoBehaviour
             check = Fire_Prefabs[effectNumber].GetComponent<DamageCheck>();
         }
 
+        // 데미지 프리팹 셋팅 및 데미지 체크 가능하게
+        check.dmg_check = true;
+        check.DamageEffect = Damage_Prefabs[effectNumber];
+
+        // 데미지 프리팹 설정 셋
         DamageEffect dmgCheck;
         dmgCheck = Damage_Prefabs[effectNumber].GetComponent<DamageEffect>();
         if(dmgCheck == null)
@@ -97,19 +83,16 @@ public class SpiritSkill : MonoBehaviour
             Damage_Prefabs[effectNumber].AddComponent<DamageEffect>();
         }
 
-        //check.DamageEffect = PrefabLoader.Instance.PrefabDic[skillInfo.DamPrefb];  // 데미지 이펙트 넣어주기.
 
 
+        // 이건 스킬 고정형태..
+        /*
         switch (skillInfo.SpritSkillIndex)
 		{
 			case 170001:  //얼음장판
-                check.dmg_check = true;
-                check.DamageEffect = Damage_Prefabs[effectNumber];
                 StartCoroutine(IceField(skillInfo, Row, Column,effectNumber));
                 break;
 			case 170002:  //독구름
-                check.dmg_check = true;
-                check.DamageEffect = Damage_Prefabs[effectNumber];
                 StartCoroutine(PoisonCloud(skillInfo, tempSpirit, effectNumber));
                 break;
 			case 170003:  //무적
@@ -125,8 +108,174 @@ public class SpiritSkill : MonoBehaviour
                 StartCoroutine(SpeedField(skillInfo, Row,Column, effectNumber));
                 break;
         }
+        */
 
-	}
+        // 엑셀데이터에서 불러와 만들어지는 가변행태로 만들기.
+
+        // skillInfo.TargetNum  // 스킬이 적용될 대상 숫자.
+
+
+
+        // skillInfo.SkillType  // 1-> 근접공격(파이어 프리팹 안씀,대미지 프리팹만 대상에게 출력)
+        // 2-> 광역(cshape1 = 부채꼴 각도, cshape2 = 부채꼴의 넓이)  -> 가장 가까운 적을 찾아서 그 적을 추격하며 브레스? 형태의 스킬. 
+        // 3-> 원거리 공격(range안에 있는 가장 가까운 적을 TargetNum값만큼 찾아서 fireFrepab실행)
+        // 4-> 광역(2번과 똑같지만 고정 브레스 형태의 스킬)
+        // 5-> 타일형(보스의 1번과 동일하게) 추후의 보스의 스킬 4가지형태로 추가하는 방향
+
+        // 나중에 스킬셋형태로 보스가 1번 스킬을 사용할때(ex. 4개의 스킬을 들고있는 엑셀 데이터를 불러와서) 거기서 랜덤으로 스킬을 사용하는 ... 작업이 끝나면 추가 예정..
+        // 모든 위치 추적 스킬은 보스를 가장 최우선으로 한다..
+
+        switch ((SkillType)skillInfo.SkillType)
+        {
+            case SkillType.ATTACK:
+                StartCoroutine(Spirit_Attack(skillInfo));
+                break;
+            case SkillType.WIDE_MOVE:
+                StartCoroutine(Spirit_Wide_Move(skillInfo));
+                break;
+            case SkillType.TARGET:
+                StartCoroutine(Spirit_Target(skillInfo,tempSpirit));
+                break;
+            case SkillType.WIDE_FIX:
+                StartCoroutine(Spirit_Wide_Fix(skillInfo));
+                break;
+            case SkillType.TILE:
+                StartCoroutine(Spirit_Tile(skillInfo));
+                break;
+        }
+
+    }
+
+
+    // NewSkill
+    // BackUp
+
+    IEnumerator Spirit_Attack(SpiritSkill_TableExcel skill)
+    {
+
+
+        yield return null;
+    }
+
+
+    IEnumerator Spirit_Wide_Move(SpiritSkill_TableExcel skill)
+    {
+
+
+        yield return null;
+    }
+
+
+    IEnumerator Spirit_Target(SpiritSkill_TableExcel skill, GameObject spirit)
+    {
+        Debug.Log("정령 타겟스킬 실행");
+        // 정령이 소환된 후.
+
+        int number = (int)skill.TargetNum;
+
+        List<GameObject> findEnemys = null;
+
+        findEnemys = FindNearbyEnemys(spirit.transform.position, skill.SkillRange, number);
+        
+        GameObject[] tempEffects = null; // Effects변수
+
+        GameObject effect = null;
+
+        if (findEnemys == null) // 널이라면
+        {
+            StopCoroutine("Spirit_Target");
+        }
+        else  // 널이 아니라면.
+        {
+
+            if(findEnemys.Count <= 0) //적을 발견하지 못했을 경우..
+            {
+                StopCoroutine("Spirit_Target");
+            }
+            else
+            {
+                // 디버깅용
+                int a = 1;
+                foreach (GameObject enemy in findEnemys)
+                {
+                    Debug.Log("찾은 적의 이름:" + a + "." + enemy.name + "적의 포지션 값:" + enemy.transform.position);
+                    a++;
+                }
+
+                effect = Instantiate(Fire_Prefabs[effectNumber]);
+                effect.transform.position = spirit.transform.position;
+
+
+                // 발견한 수만큼 이펙트 공간을 만들어주기.
+                tempEffects = new GameObject[findEnemys.Count];
+
+                for (int i = 0; i < findEnemys.Count; i++)
+                {
+                    tempEffects[i] = effect;
+                    //tempEffects[i].transform.position = spirit.transform.position; // 좌표설정
+                    tempEffects[i].transform.LookAt(findEnemys[i].transform);      // 목표의 방향 설정.
+
+                    // 타겟이 2(적군)일 경우에 데미지 셋팅을 해줌.
+                    if (skill.Target == 2)
+                    {
+                        tempEffects[i].GetComponent<DamageCheck>().Dot = skill.DoT;
+                        tempEffects[i].GetComponent<DamageCheck>().who = 1;
+                    }
+
+                }
+
+                // 딜레이 및 LunchPrefab셋팅
+                DelayAndLunchPrefabSet(effectNumber);
+
+
+                float time = 0f;
+                while (true)
+                {
+                    time += Time.deltaTime;
+
+                    if (time > skill.LifeTime)
+                    {
+                        for (int i = 0; i < tempEffects.Length; i++)
+                        {
+                            Destroy(tempEffects[i]);
+                        }
+
+                        Destroy(TempObjects[effectNumber]);
+                        Destroy(effect);
+                        yield break;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < findEnemys.Count; i++)
+                        {
+                            tempEffects[i].transform.position = Vector3.MoveTowards(tempEffects[i].transform.position, findEnemys[i].transform.position, skill.BulletSpeed);
+                        }
+                    }
+
+                    yield return null;
+                }
+            }
+        }
+
+        yield return null;
+    }
+
+    IEnumerator Spirit_Wide_Fix(SpiritSkill_TableExcel skill)
+    {
+
+
+        yield return null;
+    }
+
+    IEnumerator Spirit_Tile(SpiritSkill_TableExcel skill)
+    {
+
+
+
+        yield return null;
+    }
+
+
 
     private void DelayAndLunchPrefabSet(int number)
     {
@@ -146,9 +295,7 @@ public class SpiritSkill : MonoBehaviour
     {
         int Row = row;
         int Column = column;
-
         int number = n;
-
         float spirit_time = 0f;
 
         Debug.Log("스피드 필드 실행");
@@ -236,8 +383,6 @@ public class SpiritSkill : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         Destroy(TempObjects[number]);
-
-
 
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
@@ -731,6 +876,7 @@ public class SpiritSkill : MonoBehaviour
 		}
 
 
+
 		float spirit_time = 0f;
 		float attack_time = 0f;
 
@@ -767,7 +913,6 @@ public class SpiritSkill : MonoBehaviour
 	}
 
 
-
 	GameObject FindNearbyPlayer(GameObject findStartObject, float distance)
 	{
 		float Dist = 0f;
@@ -783,6 +928,7 @@ public class SpiritSkill : MonoBehaviour
 		}
 		else
 		{
+
 			//적이 있다면 그 적들 중에
 			for (int i = 0; i < colls.Length; i++)
 			{
@@ -818,7 +964,6 @@ public class SpiritSkill : MonoBehaviour
 		//범위 내의 적을 찾는다.
 		Collider[] colls = Physics.OverlapSphere(findStartObject.transform.position, distance, 1 << 9);  //9번째 레이어 = Enemy
 
-
 		if (colls.Length == 0)
 		{
 			Debug.Log("범위에 적이 없습니다.");
@@ -835,9 +980,6 @@ public class SpiritSkill : MonoBehaviour
 					nearEnemy = colls[i].gameObject;
 					break;
 				}
-
-				
-
 
 				//정령과의 거리를 계산후
 				Dist = Vector3.Distance(findStartObject.transform.position, colls[i].transform.position);
@@ -861,7 +1003,109 @@ public class SpiritSkill : MonoBehaviour
 	}
 
 
-	private void Start()
+    List<GameObject> FindNearbyEnemys(Vector3 StartPos, float distance , int targetNum)
+    {
+        float Dist = 0f;
+        float near = 0f;
+        GameObject findBoss = null;
+
+        List<GameObject> findEnemyList = new List<GameObject>();
+        
+        
+
+        // 범위 내의 적을 찾는다.
+        Collider[] colls = Physics.OverlapSphere(StartPos, distance, 1 << 9);  //9번째 레이어 = Enemy
+
+        
+
+        // 범위에 적이없을경우
+        if (colls.Length <= 0)
+        {
+            Debug.Log("범위에 적이 없습니다.");
+            return null;
+        }
+        else  // 적이 있다면 그 적들 중에
+        {
+            List<float> EnemyNearList = new List<float>();
+
+            for (int i = 0; i < colls.Length; i++)
+            {
+                // 보스가 있을경우 보스로 고정
+                if (colls[i].gameObject.name == "931001(Clone)")
+                {
+                    findBoss = colls[i].gameObject;
+                    continue;
+                }
+
+                // 정령과의 거리를 계산후
+                Dist = Vector3.Distance(StartPos, colls[i].gameObject.transform.position);
+
+                if (i < targetNum)  // 범위내의 찾은 적이 설정한 목표치 보다 적을때 전부 리스트에 추가.
+                {
+                    
+                    findEnemyList.Add(colls[i].gameObject);
+                    EnemyNearList.Add(Dist);
+                    Debug.Log(i + "번째 Object추가하기");
+                }
+                else // i >= targetNum    // 범위내의 찾은 적이 설정한 목표보다 초과했을 때 
+                {
+                   
+                    if(findEnemyList.Count < targetNum) // 보스때문에 i가 증가할 수 도 있음...
+                    {
+                        Debug.Log(i + "번째 Object추가하기");
+                        findEnemyList.Add(colls[i].gameObject);
+                        EnemyNearList.Add(Dist);
+                    }
+                    else // 그게 아니라면
+                    {
+                        Debug.Log(i + "번째 Object추가하기 및 요소 삭제하기.");
+                        for (int j= findEnemyList.Count -1; j>0; j--)   // 현재 저장된 리스트 순회.(역for문으로 해야 오류가 안남) 정방향으로 하면 인덱스가 삭제될시 당겨지기 때문에.
+                        {
+                            // 그 거리가 작다면 거리를 저장하고 해당 오브젝트를 저장
+                            if (Dist < EnemyNearList[j])
+                            {
+                                findEnemyList.RemoveAt(j);
+                                EnemyNearList.RemoveAt(j);
+
+                                //findEnemyList[j] = colls[i].gameObject;
+                                //EnemyNearList[j] = Dist;
+                                findEnemyList.Insert(j, colls[i].gameObject);
+                                EnemyNearList.Insert(j,Dist);
+                                break;
+                            }
+                        }
+
+                    }
+
+                }
+
+            }
+
+            if(findBoss != null)
+            {
+
+                if(findEnemyList.Count < targetNum)
+                {
+                    //Debug.Log("TargetNum보다 작음");
+                    findEnemyList.Add(findBoss);
+                }
+                else
+                {
+
+                    //Debug.Log("TargetNum보다 같거나 크다");
+                    int count = findEnemyList.Count-1;
+                    findEnemyList.RemoveAt(count);
+                    findEnemyList.Insert(count,findBoss);
+                }
+            }
+
+            Debug.Log("적을 찾은 수" + findEnemyList.Count);
+            return findEnemyList;
+        }
+    }
+
+
+    private void Start()
 	{
 
 		m_StageMgr = MainManager.Instance.GetStageManager();
@@ -870,12 +1114,43 @@ public class SpiritSkill : MonoBehaviour
         Damage_Prefabs = new GameObject[6];
 
         PosAtk = new Transform[6];
-
-
         TempObjects = new GameObject[6];
-
-
-
     }
 
+
+
+
+    // BackUp
+    // NewSkill
+
+    IEnumerator LaserFireAction(GameObject firePrefab, int PrefabNumber ,Vector3 TargetPos, float endTime)
+    {
+
+        GameObject laser = firePrefab;
+        //laser.transform.position = spirit.transform.position;
+        laser.transform.LookAt(TargetPos);
+
+        //Object.Destroy(tempEffect);
+       
+
+        float time = 0f;
+
+        while (true)
+        {
+            time += Time.deltaTime;
+
+            if (time > endTime || (laser.transform.position == TargetPos ) )
+            {
+                Destroy(TempObjects[PrefabNumber]);
+                DestroyObject(laser);
+
+                yield break;
+            }
+
+            laser.gameObject.transform.position = Vector3.MoveTowards(laser.gameObject.transform.position, TargetPos, 0.3f);
+
+            yield return null;
+        }
+
+    }
 }

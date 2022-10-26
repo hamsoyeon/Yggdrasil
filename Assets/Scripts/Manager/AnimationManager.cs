@@ -33,11 +33,23 @@ public class AnimationManager: MonoBehaviour
                 instance = container.AddComponent<AnimationManager>();
             }
         }
+
         return instance;
     }
 
+    public string GetCurrentClipName(Animator _ani)
+    {
+        AnimatorClipInfo[] clipInfo = _ani.GetCurrentAnimatorClipInfo(0);
+        return clipInfo[0].clip.name;
+
+
+    }
+
+
+
     public void PlayAnimation(Animator _ani, string name)
     {
+        
         _ani.Play(name);
     }
     public void PlayAnimation(Animator _ani, string name, float speed)

@@ -27,7 +27,8 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         thisScene = SceneManager.GetActiveScene().name; //현재 씬 이름을 가져옴
-        LosePanel = GameObject.Find("UICanvas").transform.Find("LosePanel").gameObject;
+        WinPanel = GameObject.Find("UICanvas").transform.Find("Victory_Image").gameObject;
+        LosePanel = GameObject.Find("UICanvas").transform.Find("Failed_Image").gameObject;
 
         blank = GameObject.Find("UICanvas").transform.Find("Blank").gameObject;
         blank.SetActive(true);
@@ -125,8 +126,6 @@ public class MenuManager : MonoBehaviour
             .SetUpdate(true)
             .OnComplete(ThisSceneFade);
             
-
-
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

@@ -43,7 +43,6 @@ public class Spirit : MonoBehaviour
 		}
 
 
-
         switch ((SpiritType)m_SpiritClass.m_SpiritData.SpiritType)
 		{
 			case SpiritType.Tile:
@@ -87,14 +86,15 @@ public class Spirit : MonoBehaviour
         float animation_length = info.length;
         bool setIdle = false;
 
-        m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, tempSpirit);
+        MainManager.Instance.GetStageManager().m_MapInfo[Row, Column].Spirit = true;
+        tempSpirit.transform.position = MainManager.Instance.GetStageManager().m_MapInfo[Row, Column].MapPos + new Vector3(0, 5f, 0);
 
+        m_SpiritClass.m_SkillMgr.m_SpiritSkill.SkillUse(m_SpiritClass.m_SpiritSkillData, tempSpirit);
 
         float spirit_time = 0f;
 		float attack_time = 0f;
 
-		MainManager.Instance.GetStageManager().m_MapInfo[Row, Column].Spirit = true;
-		tempSpirit.transform.position = MainManager.Instance.GetStageManager().m_MapInfo[Row, Column].MapPos + new Vector3(0,5f,0);
+	
 
        
 		while (true)
