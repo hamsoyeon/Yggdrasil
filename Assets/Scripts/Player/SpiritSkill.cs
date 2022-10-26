@@ -878,5 +878,4 @@ public class SpiritSkill : MonoBehaviour
 
     }
 
-
 }
