@@ -21,7 +21,7 @@ public class SpiritSkill : MonoBehaviour
 
     public Transform[] PosAtk;
 
-    public GameObject[] TempObjects;
+    public GameObject[] LunchObjects;
 
     private int effectNumber = 0;
 
@@ -61,6 +61,16 @@ public class SpiritSkill : MonoBehaviour
         Lunch_Prefabs[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.LunchPrefb];
         Fire_Prefabs[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.FirePrefb];
         Damage_Prefabs[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.DamPrefb];
+
+
+        LockOn LockCheck;
+        LockCheck = Fire_Prefabs[effectNumber].GetComponent<LockOn>();  
+        if(LockCheck ==null)
+        {
+            Fire_Prefabs[effectNumber].AddComponent<LockOn>();
+            //LockCheck = Fire_Prefabs[effectNumber].GetComponent<LockOn>();
+        }
+
 
         // 데미지 체크 가능하게
         DamageCheck check;
@@ -112,10 +122,6 @@ public class SpiritSkill : MonoBehaviour
 
         // 엑셀데이터에서 불러와 만들어지는 가변행태로 만들기.
 
-        // skillInfo.TargetNum  // 스킬이 적용될 대상 숫자.
-
-
-
         // skillInfo.SkillType  // 1-> 근접공격(파이어 프리팹 안씀,대미지 프리팹만 대상에게 출력)
         // 2-> 광역(cshape1 = 부채꼴 각도, cshape2 = 부채꼴의 넓이)  -> 가장 가까운 적을 찾아서 그 적을 추격하며 브레스? 형태의 스킬. 
         // 3-> 원거리 공격(range안에 있는 가장 가까운 적을 TargetNum값만큼 찾아서 fireFrepab실행)
@@ -147,8 +153,6 @@ public class SpiritSkill : MonoBehaviour
     }
 
 
-    // NewSkill
-    // BackUp
 
     IEnumerator Spirit_Attack(SpiritSkill_TableExcel skill)
     {
@@ -175,12 +179,10 @@ public class SpiritSkill : MonoBehaviour
 
         List<GameObject> findEnemys = null;
 
+        // 근처에 가장 가까운 적을 찾는다.
         findEnemys = FindNearbyEnemys(spirit.transform.position, skill.SkillRange, number);
         
-        GameObject[] tempEffects = null; // Effects변수
-
-        GameObject effect = null;
-
+        
         if (findEnemys == null) // 널이라면
         {
             StopCoroutine("Spirit_Target");
@@ -194,6 +196,9 @@ public class SpiritSkill : MonoBehaviour
             }
             else
             {
+
+                Debug.Log("찾은 적의 Count:" + findEnemys.Count);
+
                 // 디버깅용
                 int a = 1;
                 foreach (GameObject enemy in findEnemys)
@@ -202,56 +207,43 @@ public class SpiritSkill : MonoBehaviour
                     a++;
                 }
 
-                effect = Instantiate(Fire_Prefabs[effectNumber]);
-                effect.transform.position = spirit.transform.position;
 
-
-                // 발견한 수만큼 이펙트 공간을 만들어주기.
-                tempEffects = new GameObject[findEnemys.Count];
+                GameObject effect = null;
 
                 for (int i = 0; i < findEnemys.Count; i++)
                 {
-                    tempEffects[i] = effect;
-                    //tempEffects[i].transform.position = spirit.transform.position; // 좌표설정
-                    tempEffects[i].transform.LookAt(findEnemys[i].transform);      // 목표의 방향 설정.
+                    effect = Instantiate(Fire_Prefabs[effectNumber]);
+                    effect.transform.position = spirit.transform.position;
+                    effect.GetComponent<LockOn>().m_lockOn = true;
+                    effect.GetComponent<LockOn>().target = findEnemys[i];
+                    effect.GetComponent<LockOn>().moveSpeed = skill.BulletSpeed;
+
 
                     // 타겟이 2(적군)일 경우에 데미지 셋팅을 해줌.
                     if (skill.Target == 2)
                     {
-                        tempEffects[i].GetComponent<DamageCheck>().Dot = skill.DoT;
-                        tempEffects[i].GetComponent<DamageCheck>().who = 1;
+                        effect.GetComponent<DamageCheck>().Dot = skill.DoT;
+                        effect.GetComponent<DamageCheck>().who = 1;
                     }
-
                 }
+
+                Destroy(effect);
 
                 // 딜레이 및 LunchPrefab셋팅
                 DelayAndLunchPrefabSet(effectNumber);
 
-
                 float time = 0f;
                 while (true)
                 {
+
                     time += Time.deltaTime;
 
                     if (time > skill.LifeTime)
                     {
-                        for (int i = 0; i < tempEffects.Length; i++)
-                        {
-                            Destroy(tempEffects[i]);
-                        }
-
-                        Destroy(TempObjects[effectNumber]);
-                        Destroy(effect);
+                        Destroy(LunchObjects[effectNumber]);
                         yield break;
                     }
-                    else
-                    {
-                        for (int i = 0; i < findEnemys.Count; i++)
-                        {
-                            tempEffects[i].transform.position = Vector3.MoveTowards(tempEffects[i].transform.position, findEnemys[i].transform.position, skill.BulletSpeed);
-                        }
-                    }
-
+                   
                     yield return null;
                 }
             }
@@ -280,13 +272,9 @@ public class SpiritSkill : MonoBehaviour
     private void DelayAndLunchPrefabSet(int number)
     {
 
-        if (TempObjects[number] == null)
-            TempObjects[number] = new GameObject();
-
-
-        TempObjects[number] = Instantiate(Lunch_Prefabs[number]);
-        TempObjects[number].transform.SetParent(PosAtk[number]);
-        TempObjects[number].transform.position = PosAtk[number].position;
+        LunchObjects[number] = Instantiate(Lunch_Prefabs[number]);
+        LunchObjects[number].transform.SetParent(PosAtk[number]);
+        LunchObjects[number].transform.position = PosAtk[number].position;
 
     }
 
@@ -382,7 +370,7 @@ public class SpiritSkill : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        Destroy(TempObjects[number]);
+        Destroy(LunchObjects[number]);
 
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
@@ -563,7 +551,7 @@ public class SpiritSkill : MonoBehaviour
 
         DelayAndLunchPrefabSet(number);
         yield return new WaitForSeconds(2f);
-        Destroy(TempObjects[number]);
+        Destroy(LunchObjects[number]);
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
         {
@@ -666,7 +654,7 @@ public class SpiritSkill : MonoBehaviour
 			{
 				//정령 파괴후 코루틴 종료
 				Object.Destroy(tempEffect);
-                Destroy(TempObjects[number]);
+                Destroy(LunchObjects[number]);
                 yield break;
 			}
 
@@ -704,8 +692,6 @@ public class SpiritSkill : MonoBehaviour
                     {
                         Debug.Log("플레이어의 HP가 MAX 입니다.");
                     }
-                   
-                   
 
                 }
 
@@ -738,7 +724,7 @@ public class SpiritSkill : MonoBehaviour
 			{
 				//정령 파괴후 코루틴 종료
 				Object.Destroy(tempEffect);
-                Destroy(TempObjects[number]);
+                Destroy(LunchObjects[number]);
                 yield break;
 			}
 
@@ -807,7 +793,7 @@ public class SpiritSkill : MonoBehaviour
             {
                 //정령 파괴후 코루틴 종료
                 Object.Destroy(tempEffect);
-                Destroy(TempObjects[number]);
+                Destroy(LunchObjects[number]);
 
                 if (player_characterclass != null)
                 {
@@ -836,8 +822,6 @@ public class SpiritSkill : MonoBehaviour
                         //Debug.Log("플레이어 무적 계수 :" + player_characterclass.Invincibility);
                         //Debug.Log("플레이어 무적실행...");
                     }
-
-                  
                 }
             }
             else
@@ -897,7 +881,7 @@ public class SpiritSkill : MonoBehaviour
                     Object.Destroy(tempEffect);
                 }
 
-                Destroy(TempObjects[number]);
+                Destroy(LunchObjects[number]);
 
                 yield break;
 			}
@@ -1006,7 +990,6 @@ public class SpiritSkill : MonoBehaviour
     List<GameObject> FindNearbyEnemys(Vector3 StartPos, float distance , int targetNum)
     {
         float Dist = 0f;
-        float near = 0f;
         GameObject findBoss = null;
 
         List<GameObject> findEnemyList = new List<GameObject>();
@@ -1114,43 +1097,8 @@ public class SpiritSkill : MonoBehaviour
         Damage_Prefabs = new GameObject[6];
 
         PosAtk = new Transform[6];
-        TempObjects = new GameObject[6];
+        LunchObjects = new GameObject[6];
     }
 
 
-
-
-    // BackUp
-    // NewSkill
-
-    IEnumerator LaserFireAction(GameObject firePrefab, int PrefabNumber ,Vector3 TargetPos, float endTime)
-    {
-
-        GameObject laser = firePrefab;
-        //laser.transform.position = spirit.transform.position;
-        laser.transform.LookAt(TargetPos);
-
-        //Object.Destroy(tempEffect);
-       
-
-        float time = 0f;
-
-        while (true)
-        {
-            time += Time.deltaTime;
-
-            if (time > endTime || (laser.transform.position == TargetPos ) )
-            {
-                Destroy(TempObjects[PrefabNumber]);
-                DestroyObject(laser);
-
-                yield break;
-            }
-
-            laser.gameObject.transform.position = Vector3.MoveTowards(laser.gameObject.transform.position, TargetPos, 0.3f);
-
-            yield return null;
-        }
-
-    }
 }

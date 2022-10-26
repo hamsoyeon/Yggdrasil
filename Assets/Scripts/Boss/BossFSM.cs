@@ -462,8 +462,6 @@ public class BossFSM : MonoBehaviour
         SkillCoolTime[CoolTimeindex] = m_BossSkill.CoolTime;
         currenCoolTime[CoolTimeindex] = SkillCoolTime[CoolTimeindex];
         StartCoroutine(Activation(CoolTimeindex));
-
-
         switch (BossRandomSkill)
         {
             case 1:
@@ -471,7 +469,6 @@ public class BossFSM : MonoBehaviour
                 Debug.Log("스킬1 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill1);
                 CanSkill[CoolTimeindex] = false;
-                //StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
                 //AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
                 anim.SetBool("isSkill01 0", true);
                 break;
@@ -479,7 +476,6 @@ public class BossFSM : MonoBehaviour
                 Debug.Log("스킬2 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill2);
                 CanSkill[CoolTimeindex] = false;
-                //StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
                 //AnimationManager.GetInstance().PlayAnimation(anim, "Skill02");
                 anim.SetBool("isSkill02", true);
                 break;
@@ -487,7 +483,6 @@ public class BossFSM : MonoBehaviour
                 Debug.Log("스킬3 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill3);
                 CanSkill[CoolTimeindex] = false;
-                //StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
                 //AnimationManager.GetInstance().PlayAnimation(anim, "Skill03");
                 anim.SetBool("isSkill03", true);
                 break;
@@ -495,7 +490,6 @@ public class BossFSM : MonoBehaviour
                 Debug.Log("스킬4 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill4);
                 CanSkill[CoolTimeindex] = false;
-                //StartCoroutine(CoolTime(SkillCoolTime[CoolTimeindex], CoolTimeindex));
                 //AnimationManager.GetInstance().PlayAnimation(anim, "Skill04");
                 anim.SetBool("isSkill04", true);
                 break;
@@ -524,7 +518,7 @@ public class BossFSM : MonoBehaviour
                 GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>().Invincibility = 0.0f;  //플레이어 무적으로 만들고.
 
 
-                AnimationManager.GetInstance().PlayAnimation(anim, "Die");
+                //AnimationManager.GetInstance().PlayAnimation(anim, "Die");
 
 
                 //AnimationManager.GetInstance().PlayAnimation(anim, "Die");
