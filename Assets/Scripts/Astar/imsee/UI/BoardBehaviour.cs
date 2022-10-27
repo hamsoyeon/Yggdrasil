@@ -153,17 +153,21 @@ public class BoardBehaviour : MonoBehaviour
         PlayerGameObject = new GameObject();
         PlayerGameObject.name = "Player";
         PlayerGameObject.layer = 11;
-        PlayerGameObject.transform.position = GetWorldCoordinates(piece.X, piece.Y, -0.1f);
 
-        var visualPiece = (GameObject)Instantiate(PlayerPiece);
+        //PlayerGameObject.transform.position = GetWorldCoordinates(piece.X, piece.Y, -0.1f);
+
+        GameObject visualPiece = (GameObject)Instantiate(PlayerPiece);
         //var visualPiece = PrefabLoader.Instance.PrefabDic[];
 
-        visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, -0.1f);
+        //visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, -0.1f);
+        visualPiece.transform.parent = PlayerGameObject.transform;
+        visualPiece.transform.position = MainManager.Instance.GetStageManager().m_MapInfo[piece.Y , piece.X].MapPos;
+
         MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos = visualPiece.transform.position;
 
         Debug.Log($"플레이어 포지션 { MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos}");
 
-        visualPiece.transform.parent = PlayerGameObject.transform;
+       
 
         
         var pb = (PieceBehaviour)visualPiece.GetComponent("PieceBehaviour");
