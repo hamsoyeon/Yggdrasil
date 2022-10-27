@@ -25,8 +25,8 @@ MonoBehaviour:
     Move_Speed: 0.05
     Crit_rate: 0.15
     Crit_Dmg: 1.5
-    ChaceTarget: 2
-    Duration: 5
+    ChaceTarget: 1
+    Duration: 5.2
     CoolTime: 20
     Skill1Code: 170001
     Prefab: 921001
@@ -37,13 +37,13 @@ MonoBehaviour:
     SpritClass: 3
     SpiritType: 3
     Atk: 0
-    Atk_Speed: 5
+    Atk_Speed: 1
     Move_Speed: 0.15
     Crit_rate: 0.15
     Crit_Dmg: 1.5
     ChaceTarget: 2
-    Duration: 5
-    CoolTime: 40
+    Duration: 3.1
+    CoolTime: 2
     Skill1Code: 170002
     Prefab: 921002
   - No: 3
@@ -90,7 +90,7 @@ MonoBehaviour:
     Crit_rate: 0
     Crit_Dmg: 0
     ChaceTarget: 4
-    Duration: 5
+    Duration: 2.5
     CoolTime: 35
     Skill1Code: 170005
     Prefab: 923001

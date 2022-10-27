@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4465284001360016017}
   - component: {fileID: -8003854198229258194}
+  - component: {fileID: -1490758638906474195}
   m_Layer: 0
   m_Name: 970017
   m_TagString: Untagged
@@ -45,8 +46,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78a32159cbbd16439c2ef1b7507ca21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyClass: {fileID: 0}
+  dmg_check: 1
+  DamageEffect: {fileID: 5006970940163314085, guid: b1806d82e1729834db45e2395dd40d12, type: 3}
   who: 1
   Dot: 0
+  buffIndex: 0
+--- !u!114 &-1490758638906474195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003016772751546655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 604c65c91369a9643b47e7d70d221ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_lockOn: 0
+  target: {fileID: 0}
+  moveSpeed: 0
 --- !u!1001 &7854756884415525300
 PrefabInstance:
   m_ObjectHideFlags: 0

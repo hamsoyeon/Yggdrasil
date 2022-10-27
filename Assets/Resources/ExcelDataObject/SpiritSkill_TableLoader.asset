@@ -18,46 +18,46 @@ MonoBehaviour:
     Name_EN: Ice_Spike
     SpritSkillIndex: 170001
     Target: 2
-    Power: 40
-    SkillRange: 2
-    SkillType: 3
+    Power: 5
+    SkillRange: 1
+    SkillType: 1
     BulletSpeed: 1
-    TargetNum: 5
-    LifeTime: 5
-    DoT: 1
+    TargetNum: 10
+    LifeTime: 3.1
+    DoT: 0.25
     Shapeform: 2
     Cshape1: 360
     Cshape2: 2
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970008
-    FirePrefb: 970009
-    DamPrefb: 970016
+    LunchPrefb: 0
+    FirePrefb: 921004
+    DamPrefb: 921005
   - Name_KR: "\uB3C5\uAD6C\uB984"
     Name_EN: Posion_Cloud
     SpritSkillIndex: 170002
     Target: 2
-    Power: 30
-    SkillRange: 20
+    Power: 15
+    SkillRange: 25
     SkillType: 3
     BulletSpeed: 1
     TargetNum: 10
-    LifeTime: 6
-    DoT: 1
+    LifeTime: 1
+    DoT: 1.1
     Shapeform: 2
     Cshape1: 360
     Cshape2: 10
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970008
-    FirePrefb: 970001
-    DamPrefb: 0
+    LunchPrefb: 0
+    FirePrefb: 0
+    DamPrefb: 921003
   - Name_KR: "\uBB34\uC801"
     Name_EN: Invincibility
     SpritSkillIndex: 170003
     Target: 1
     Power: 0
-    SkillRange: 20
+    SkillRange: 10
     SkillType: 1
     BulletSpeed: 1
     TargetNum: 3
@@ -68,8 +68,8 @@ MonoBehaviour:
     Cshape2: 8
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970008
-    FirePrefb: 970005
+    LunchPrefb: 0
+    FirePrefb: 0
     DamPrefb: 0
   - Name_KR: "\uC811\uADFC\uBD88\uAC00"
     Name_EN: KeepAway
@@ -99,22 +99,22 @@ MonoBehaviour:
     SkillType: 2
     BulletSpeed: 1
     TargetNum: 3
-    LifeTime: 5
-    DoT: 0.5
+    LifeTime: 1.9
+    DoT: 1
     Shapeform: 2
     Cshape1: 360
     Cshape2: 0
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970008
-    FirePrefb: 970004
-    DamPrefb: 0
+    LunchPrefb: 0
+    FirePrefb: 923003
+    DamPrefb: 923004
   - Name_KR: "\uC774\uC18D \uC99D\uAC00"
     Name_EN: Speedup
     SpritSkillIndex: 170006
     Target: 1
     Power: 0
-    SkillRange: 3
+    SkillRange: 2
     SkillType: 2
     BulletSpeed: 1
     TargetNum: 3
@@ -125,6 +125,6 @@ MonoBehaviour:
     Cshape2: 0
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 970008
-    FirePrefb: 970003
+    LunchPrefb: 0
+    FirePrefb: 923005
     DamPrefb: 0

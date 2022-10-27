@@ -17,19 +17,19 @@ MonoBehaviour:
   - Name_KR: "\uC2F8\uC6C0\uACF0"
     Name_EN: FightBear
     BossStatIndex: 131001
-    Atk: 10
-    HP: 100
-    Def: 100
+    Atk: 30
+    HP: 500
+    Def: 18
     SRange: 1
     CRange: 2
     FRange: 3
     MaxStamina: 100
-    Speed: 12
-    MoveStUsed: 20
-    Skill1: 231003
+    Speed: 24
+    MoveStUsed: 25
+    Skill1: 231001
     Skill2: 231002
     Skill3: 231003
-    Skill4: 231002
+    Skill4: 231006
     Prefeb: 931001
   - Name_KR: "\r\n\uD0C0\uCC9C\uC0AC"
     Name_EN: FallenAngel

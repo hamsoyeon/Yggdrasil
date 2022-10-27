@@ -21,9 +21,9 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 1
-    SkillDistance: 3
     SkillRange: 4
-    SkillType: 5
+    SkillDistance: 3
+    SkillType: 3
     UseStat: 20
     Direction1: 1
     Direction2: 0
@@ -40,19 +40,19 @@ MonoBehaviour:
     SkillDelay: 2
     DelayPrefb: 970020
     LunchPrefb: 0
-    SingleTile: 1
-    FirePrefb: 971017
-    DamPrefb: 0
+    SingleTile: 0
+    FirePrefb: 971019
+    DamPrefb: 972002
   - Name_KR: "\uD3ED\uD30C"
     Name_EN: Explosion
     BossSkillIndex: 231002
     TargetType: 2
     Target: 2
-    Power: 10000
-    CoolTime: 400
+    Power: 18
+    CoolTime: 40
+    SkillRange: 2
     SkillDistance: 2
-    SkillRange: 3
-    SkillType: 5
+    SkillType: 1
     UseStat: 35
     Direction1: 1
     Direction2: 0
@@ -71,17 +71,17 @@ MonoBehaviour:
     LunchPrefb: 971009
     SingleTile: 0
     FirePrefb: 971015
-    DamPrefb: 971007
+    DamPrefb: 0
   - Name_KR: "\uB300\uC9C0\uC9C4"
     Name_EN: EarthQuake
     BossSkillIndex: 231003
     TargetType: 2
     Target: 2
-    Power: 10000
+    Power: 12.5
     CoolTime: 400
-    SkillDistance: 2
     SkillRange: 1
-    SkillType: 5
+    SkillDistance: 2
+    SkillType: 4
     UseStat: 40
     Direction1: 1
     Direction2: 0
@@ -97,19 +97,19 @@ MonoBehaviour:
     SkillAnimation: 1
     SkillDelay: 1
     DelayPrefb: 0
-    LunchPrefb: 970014
+    LunchPrefb: 0
     SingleTile: 0
     FirePrefb: 971014
-    DamPrefb: 0
+    DamPrefb: 972003
   - Name_KR: "\uB300\uC9C0\uC9C4 \uC5F0\uACC4 1"
     Name_EN: EarthQuake-1
     BossSkillIndex: 231004
     TargetType: 2
     Target: 2
-    Power: 10000
+    Power: 12.5
     CoolTime: 1
-    SkillDistance: 3
     SkillRange: 2
+    SkillDistance: 3
     SkillType: 4
     UseStat: 0
     Direction1: 1
@@ -126,19 +126,19 @@ MonoBehaviour:
     SkillAnimation: 1
     SkillDelay: 0.2
     DelayPrefb: 0
-    LunchPrefb: 970014
+    LunchPrefb: 0
     SingleTile: 0
     FirePrefb: 971014
-    DamPrefb: 0
+    DamPrefb: 972003
   - Name_KR: "\uB300\uC9C0\uC9C4 \uC5F0\uACC4 2"
     Name_EN: EarthQuake-2
     BossSkillIndex: 231005
     TargetType: 2
     Target: 2
-    Power: 10000
+    Power: 12.5
     CoolTime: 1
-    SkillDistance: 4
     SkillRange: 3
+    SkillDistance: 4
     SkillType: 4
     UseStat: 0
     Direction1: 1
@@ -155,19 +155,19 @@ MonoBehaviour:
     SkillAnimation: 1
     SkillDelay: 0.2
     DelayPrefb: 0
-    LunchPrefb: 970014
+    LunchPrefb: 0
     SingleTile: 0
     FirePrefb: 971014
-    DamPrefb: 0
+    DamPrefb: 972003
   - Name_KR: "\uB291\uB300 \uC18C\uD658"
     Name_EN: SummonWolf
     BossSkillIndex: 231006
     TargetType: 2
     Target: 2
     Power: 0
-    CoolTime: 8
-    SkillDistance: 10
+    CoolTime: 300
     SkillRange: 1
+    SkillDistance: 10
     SkillType: 5
     UseStat: 30
     Direction1: 1
@@ -186,7 +186,7 @@ MonoBehaviour:
     DelayPrefb: 0
     LunchPrefb: 971017
     SingleTile: 0
-    FirePrefb: 971017
+    FirePrefb: 971016
     DamPrefb: 0
   - Name_KR: "\uD68C\uC624\uB9AC \uBC30\uAE30"
     Name_EN: WhileSlash
@@ -195,8 +195,8 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 1
-    SkillDistance: 3
     SkillRange: 2
+    SkillDistance: 3
     SkillType: 1
     UseStat: 20
     Direction1: 1
@@ -224,8 +224,8 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 4
-    SkillDistance: 10
     SkillRange: 2
+    SkillDistance: 10
     SkillType: 2
     UseStat: 30
     Direction1: 1
@@ -253,8 +253,8 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 1
-    SkillDistance: 10
     SkillRange: 2
+    SkillDistance: 10
     SkillType: 2
     UseStat: 0
     Direction1: 1
@@ -282,8 +282,8 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 1
-    SkillDistance: 10
     SkillRange: 2
+    SkillDistance: 10
     SkillType: 2
     UseStat: 0
     Direction1: 1
@@ -311,8 +311,8 @@ MonoBehaviour:
     Target: 2
     Power: 0
     CoolTime: 1
-    SkillDistance: 10
     SkillRange: 1
+    SkillDistance: 10
     SkillType: 1
     UseStat: 0
     Direction1: 1
