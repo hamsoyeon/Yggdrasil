@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using System.Collections;
 using System;
 using Model;
 
@@ -102,7 +103,7 @@ public class BoardBehaviour : MonoBehaviour
         MainManager.Instance.GetStageManager().mapZ = Height;
 
         CreateBoard();
-        CreatePieces();
+        StartCoroutine(Wait());
 
         transform.position = new Vector3(Width / 2.0f * Spacing - (Spacing / 2), -(Width + Height) / 2 - 5, Height / 2.0f * Spacing - (Spacing / 2));
     }
@@ -152,7 +153,8 @@ public class BoardBehaviour : MonoBehaviour
         PlayerGameObject = new GameObject();
         PlayerGameObject.name = "Player";
         PlayerGameObject.layer = 11;
-       
+        PlayerGameObject.transform.position = GetWorldCoordinates(piece.X, piece.Y, -0.1f);
+
         var visualPiece = (GameObject)Instantiate(PlayerPiece);
         //var visualPiece = PrefabLoader.Instance.PrefabDic[];
 
@@ -228,5 +230,11 @@ public class BoardBehaviour : MonoBehaviour
         float offsetZ = y * -27.2f;
 
         return new Vector3(offsetX, z, offsetZ);
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(3.0f);
+        CreatePieces();
     }
 }
