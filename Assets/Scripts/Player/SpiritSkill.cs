@@ -1153,4 +1153,11 @@ public class SpiritSkill : MonoBehaviour
         }
 
     }
+
+    IEnumerator SectorFormSkill()
+    {
+
+
+        yield return null;
+    }
 }
