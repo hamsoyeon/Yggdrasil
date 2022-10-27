@@ -9,6 +9,7 @@ TagManager:
   - Mob
   - UnWalkable
   - Wall
+  - Enemy
   layers:
   - Default
   - TransparentFX
