@@ -101,8 +101,8 @@ public class Enemy : MonoBehaviour
         {
             if (coroutine != null)
             {
-                //StopCoroutine(coroutine);
-                //coroutine = null;
+                StopCoroutine(coroutine);
+                coroutine = null;
             }
             else
             {
@@ -130,8 +130,8 @@ public class Enemy : MonoBehaviour
         {
             if (coroutine != null)
             {
-                //StopCoroutine(coroutine);
-                //coroutine = null;
+                StopCoroutine(coroutine);
+                coroutine = null;
             }
             else
             {
@@ -190,6 +190,8 @@ public class Enemy : MonoBehaviour
 
             //삭제
             Destroy(this.gameObject);
+
+            coroutine = null;
             yield break;
         }
     }

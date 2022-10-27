@@ -92,7 +92,7 @@ public class SpiritSkill : MonoBehaviour
 
 
         // 이건 스킬 고정형태..
-        /*
+        
         switch (skillInfo.SpritSkillIndex)
 		{
 			case 170001:  //얼음장판
@@ -114,7 +114,7 @@ public class SpiritSkill : MonoBehaviour
                 StartCoroutine(SpeedField(skillInfo, Row,Column, effectNumber));
                 break;
         }
-        */
+        
 
         // 엑셀데이터에서 불러와 만들어지는 가변행태로 만들기.
 
@@ -127,24 +127,24 @@ public class SpiritSkill : MonoBehaviour
         // 나중에 스킬셋형태로 보스가 1번 스킬을 사용할때(ex. 4개의 스킬을 들고있는 엑셀 데이터를 불러와서) 거기서 랜덤으로 스킬을 사용하는 ... 작업이 끝나면 추가 예정..
         // 모든 위치 추적 스킬은 보스를 가장 최우선으로 한다..
 
-        switch ((SkillType)skillInfo.SkillType)
-        {
-            case SkillType.ATTACK:
-                StartCoroutine(Spirit_Attack(skillInfo));
-                break;
-            case SkillType.WIDE_MOVE:
-                StartCoroutine(Spirit_Wide_Move(skillInfo));
-                break;
-            case SkillType.TARGET:
-                StartCoroutine(Spirit_Target(skillInfo,tempSpirit));
-                break;
-            case SkillType.WIDE_FIX:
-                StartCoroutine(Spirit_Wide_Fix(skillInfo));
-                break;
-            case SkillType.TILE:
-                StartCoroutine(Spirit_Tile(skillInfo));
-                break;
-        }
+        //switch ((SkillType)skillInfo.SkillType)
+        //{
+        //    case SkillType.ATTACK:
+        //        StartCoroutine(Spirit_Attack(skillInfo));
+        //        break;
+        //    case SkillType.WIDE_MOVE:
+        //        StartCoroutine(Spirit_Wide_Move(skillInfo));
+        //        break;
+        //    case SkillType.TARGET:
+        //        StartCoroutine(Spirit_Target(skillInfo,tempSpirit));
+        //        break;
+        //    case SkillType.WIDE_FIX:
+        //        StartCoroutine(Spirit_Wide_Fix(skillInfo));
+        //        break;
+        //    case SkillType.TILE:
+        //        StartCoroutine(Spirit_Tile(skillInfo));
+        //        break;
+        //}
 
     }
 

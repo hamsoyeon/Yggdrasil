@@ -87,6 +87,7 @@ public class BossFSM : MonoBehaviour
 
     float h, v; //BossDirection
 
+    Color _origin = new Color(0f, 0.541f, 0.603f, 0.784f); //원래대로 돌릴 색깔
 
     private void Awake()
     {
@@ -284,6 +285,7 @@ public class BossFSM : MonoBehaviour
             }
         }
 
+        StartCoroutine(AllTileOriginColor());
     }
 
 
@@ -495,6 +497,10 @@ public class BossFSM : MonoBehaviour
                 break;
         }
 
+        anim.SetBool("isSkill01 0", false);
+        anim.SetBool("isSkill02", false);
+        anim.SetBool("isSkill03", false);
+        anim.SetBool("isSkill04", false);
 
         return true;
     }
@@ -710,4 +716,16 @@ public class BossFSM : MonoBehaviour
         StopCoroutine("Activation");
     }
 
+    IEnumerator AllTileOriginColor()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        for (int i = 0; i < MainManager.Instance.GetStageManager().mapZ; i++)
+        {
+            for (int j = 0; j < MainManager.Instance.GetStageManager().mapX; j++)
+            {
+                MainManager.Instance.GetStageManager().m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = _origin;
+            }
+        }
+    }
 }

@@ -19,7 +19,7 @@ MonoBehaviour:
     SpritSkillIndex: 170001
     Target: 2
     Power: 40
-    SkillRange: 25
+    SkillRange: 2
     SkillType: 3
     BulletSpeed: 1
     TargetNum: 5
