@@ -1512,7 +1512,7 @@ MonoBehaviour:
   - {fileID: 939617132}
   - {fileID: 1420259794}
   swipeTime: 0.2
-  swipeDistance: 50
+  swipeDistance: 100
 --- !u!1 &544739315
 GameObject:
   m_ObjectHideFlags: 0
