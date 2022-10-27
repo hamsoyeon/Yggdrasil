@@ -103,7 +103,7 @@ public class BoardBehaviour : MonoBehaviour
         MainManager.Instance.GetStageManager().mapZ = Height;
 
         CreateBoard();
-        StartCoroutine(Wait());
+        CreatePieces();
 
         transform.position = new Vector3(Width / 2.0f * Spacing - (Spacing / 2), -(Width + Height) / 2 - 5, Height / 2.0f * Spacing - (Spacing / 2));
     }
@@ -235,6 +235,6 @@ public class BoardBehaviour : MonoBehaviour
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(3.0f);
-        CreatePieces();
+        
     }
 }

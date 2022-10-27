@@ -32,6 +32,15 @@ public class Buff : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         anim.SetBool("isStunned", true);//스턴 애니 재생
 
+        IEnumerator Duration(float duration)
+        {
+            float time = 0.0f;
+            while(time<1.0f)
+            {
+                time += Time.deltaTime / duration;
+                yield return null;
+            }
+        }
 
         anim.SetBool("isStunned", false);
     }
