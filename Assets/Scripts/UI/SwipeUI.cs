@@ -63,11 +63,26 @@ public class SwipeUI : MonoBehaviour
 	private void UpdateInput()
 	{
 		// 현재 Swipe를 진행중이면 터치 불가
-		if ( isSwipeMode == true ) return;
+		if ( isSwipeMode == true ) 
+            return;
 
-		#if UNITY_EDITOR
-		// 마우스 왼쪽 버튼을 눌렀을 때 1회
-		if ( Input.GetMouseButtonDown(0) )
+        // 마우스 왼쪽 버튼을 눌렀을 때 1회
+        if (Input.GetMouseButtonDown(0))
+        {
+            // 터치 시작 지점 (Swipe 방향 구분)
+            startTouchX = Input.mousePosition.x;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            // 터치 종료 지점 (Swipe 방향 구분)
+            endTouchX = Input.mousePosition.x;
+
+            UpdateSwipe();
+        }
+
+#if UNITY_EDITOR
+        // 마우스 왼쪽 버튼을 눌렀을 때 1회
+        if ( Input.GetMouseButtonDown(0) )
 		{
 			// 터치 시작 지점 (Swipe 방향 구분)
 			startTouchX = Input.mousePosition.x;
