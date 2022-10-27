@@ -21,7 +21,12 @@ public class Enemy : MonoBehaviour
     public Transform hudPos;
 
     private Animator anim;
+
+    //쫄몹이 죽었는지 확인할 변수
     bool isDie;
+
+    //플레이어와 쫄몹간의 차이를 계산할 변수
+    float distance;
 
     Coroutine coroutine;
     void Start()
@@ -44,6 +49,8 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        //플레이어(target)와 적의 거리 계산 후 거리에 따라 행동 선택
+        distance = Vector3.Distance(target.transform.position, transform.transform.position);
         CalculateDistacveToTargetAndSelectState();
     }
 
@@ -56,7 +63,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            navMeshAgent.SetDestination(transform.position);
+            navMeshAgent.SetDestination(target.transform.position);
         }
         yield return null;
 
@@ -94,9 +101,6 @@ public class Enemy : MonoBehaviour
         if (target == null)
             return;
 
-        //플레이어(target)와 적의 거리 계산 후 거리에 따라 행동 선택
-        float distance = Vector3.Distance(target.transform.position, transform.transform.position);
-
         if (distance <= attackRange)
         {
             if (coroutine != null)
@@ -106,9 +110,6 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                //공격할때는 이동을 멈추도록 설정
-                navMeshAgent.ResetPath();
-
                 navMeshAgent.isStopped = true;
                 navMeshAgent.updatePosition = false;
                 navMeshAgent.updateRotation = false;
@@ -128,6 +129,10 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            navMeshAgent.isStopped = false;
+            navMeshAgent.updatePosition = true;
+            navMeshAgent.updateRotation = true;
+
             if (coroutine != null)
             {
                 StopCoroutine(coroutine);
@@ -135,45 +140,30 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                if(isDie)
+                if (isDie)
                 {
-                    //공격할때는 이동을 멈추도록 설정
-                    navMeshAgent.ResetPath();
-
-                    navMeshAgent.isStopped = false;
-                    navMeshAgent.updatePosition = true;
-                    navMeshAgent.updateRotation = true;
-
                     coroutine = StartCoroutine(IsDie());
                 }
                 else
                 {
-                    //공격할때는 이동을 멈추도록 설정
-                    navMeshAgent.ResetPath();
-
-                    navMeshAgent.isStopped = false;
-                    navMeshAgent.updatePosition = true;
-                    navMeshAgent.updateRotation = true;
-
                     coroutine = StartCoroutine(Move());
                 }
             }
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        //공격 범위
-        Gizmos.color = new Color(0.39f, 0.04f, 0.04f);
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    //공격 범위
+    //    Gizmos.color = new Color(0.39f, 0.04f, 0.04f);
+    //    Gizmos.DrawWireSphere(transform.position, attackRange);
+    //}
 
     //쫄몹 데미지 받는 함수
     public void TakeDamage(int damage)
     {
         Debug.Log("데미지 받는다.");
         isDie = status.DecreaseHP(damage);
-        anim.SetBool("IsDie", isDie);
         TakeDamagePrint(damage);
     }
 
@@ -181,10 +171,11 @@ public class Enemy : MonoBehaviour
     {
         //죽었을때의 행동 개설
         Debug.Log("죽었다.");
+        anim.SetBool("IsDie", isDie);
         AnimationManager.GetInstance().PlayAnimation(anim, "Die");
         //AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
 
-        if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             this.gameObject.SetActive(false);
 

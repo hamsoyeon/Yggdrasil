@@ -471,28 +471,28 @@ public class BossFSM : MonoBehaviour
                 Debug.Log("스킬1 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill1);
                 CanSkill[CoolTimeindex] = false;
-                //AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
+                AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
                 anim.SetBool("isSkill01 0", true);
                 break;
             case 2:
                 Debug.Log("스킬2 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill2);
                 CanSkill[CoolTimeindex] = false;
-                //AnimationManager.GetInstance().PlayAnimation(anim, "Skill02");
+                AnimationManager.GetInstance().PlayAnimation(anim, "Skill02");
                 anim.SetBool("isSkill02", true);
                 break;
             case 3:
                 Debug.Log("스킬3 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill3);
                 CanSkill[CoolTimeindex] = false;
-                //AnimationManager.GetInstance().PlayAnimation(anim, "Skill03");
+                AnimationManager.GetInstance().PlayAnimation(anim, "Skill03");
                 anim.SetBool("isSkill03", true);
                 break;
             case 4:
                 Debug.Log("스킬4 사용");
                 m_BossClass.Skill(CharacterClass.Character.BOSS, m_BossClass.m_BossStatData.Skill4);
                 CanSkill[CoolTimeindex] = false;
-                //AnimationManager.GetInstance().PlayAnimation(anim, "Skill04");
+                AnimationManager.GetInstance().PlayAnimation(anim, "Skill04");
                 anim.SetBool("isSkill04", true);
                 break;
         }
@@ -560,7 +560,7 @@ public class BossFSM : MonoBehaviour
             {
                 skill = false;
                 animation_time = 0f;
-                //AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
+                AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
                 anim.SetBool("isSkill", false);
             }
         }
