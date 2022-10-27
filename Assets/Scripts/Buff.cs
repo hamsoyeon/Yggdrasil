@@ -26,6 +26,16 @@ public class Buff : MonoBehaviour
 
     }
 
+    public void Stun()
+    {
+        Animator anim;
+        anim = GetComponentInChildren<Animator>();
+        anim.SetBool("isStunned", true);//스턴 애니 재생
+
+
+        anim.SetBool("isStunned", false);
+    }
+
 
 
     // 버프와 디버프를 하나의 함수에 모두 구혀할 것인가?
@@ -36,7 +46,7 @@ public class Buff : MonoBehaviour
         {
             //현재 버프 리스트에 있는 버프인지 확인하고 없는 버프이면 추가 있는 버프면 업데이트.
             BuffList.Add(m_CurrentBuff);
-
+            
         }
 
 
