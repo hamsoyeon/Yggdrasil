@@ -4,10 +4,6 @@ using UnityEngine;
 using DG.Tweening;
 using System.Linq;
 
-
-
-
-
 public class SpiritSkill : MonoBehaviour
 {
 
@@ -1121,7 +1117,7 @@ public class SpiritSkill : MonoBehaviour
 
             if (time > endTime || (laser.transform.position == TargetPos ) )
             {
-                Destroy(TempObjects[PrefabNumber]);
+                Destroy(LunchObjects[PrefabNumber]);
                 DestroyObject(laser);
 
                 yield break;
