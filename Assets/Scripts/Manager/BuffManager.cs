@@ -5,7 +5,22 @@ using UnityEngine;
 
 public class BuffManager : MonoBehaviour
 {
+    public CharacterClass PlayerClass;
 
+    //임시(엑셀 데이터 안 받음)
+    public void Stun(GameObject _target)
+    {
+        Animator ani;
+        ani = _target.GetComponentInChildren<Animator>();
+        ani.Play("Idle01"); //추후 디폴트 스테이트 애니 재생으로 변경
+
+    }
+
+    //임시 플레이어 힐
+    public void Heal(GameObject _target, float _healAmount)
+    {
+        PlayerClass.m_CharacterStat.HP += _healAmount;
+    }
 
     public void Buff(BuffTableExcel buff)
     {
