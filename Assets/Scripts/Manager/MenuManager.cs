@@ -161,12 +161,13 @@ public class MenuManager : MonoBehaviour
             .OnComplete(NextSceneFade);
     }
 
-    public void GameEnd()
+    public void ReturnToTitle()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        SceneManager.LoadScene("UIScene");
+//#if UNITY_EDITOR
+//        UnityEditor.EditorApplication.isPlaying = false;
+//#else
+//        Application.Quit();
+//#endif
     }
 }

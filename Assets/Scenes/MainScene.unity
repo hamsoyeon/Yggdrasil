@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1833,7 +1833,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1370224729}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: GameEnd
+        m_MethodName: ReturnToTitle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15862,7 +15862,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
   m_AnchorMin: {x: 0.36872923, y: 0.002}
   m_AnchorMax: {x: 0.68464583, y: 0.24800001}
-  m_AnchoredPosition: {x: -256.4924, y: -2.4837036}
+  m_AnchoredPosition: {x: -256.49243, y: -2.4836426}
   m_SizeDelta: {x: -553.3193, y: -198.3106}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1313917298
@@ -16211,7 +16211,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1342044584}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
@@ -17527,7 +17527,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
   m_AnchorMin: {x: 0.36872923, y: 0.002}
   m_AnchorMax: {x: 0.68464583, y: 0.24800001}
-  m_AnchoredPosition: {x: 157.564, y: -3.9234009}
+  m_AnchoredPosition: {x: 157.56396, y: -3.9233398}
   m_SizeDelta: {x: -553.2732, y: -198.3002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1819709044
@@ -17993,10 +17993,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -18017,7 +18017,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1370224729}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: GameEnd
+        m_MethodName: ReturnToTitle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

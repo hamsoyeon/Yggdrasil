@@ -298,6 +298,10 @@ public class PlayerManager : MonoBehaviour
     {
         Debug.Log("쫄몹 체력 깎는 함수 호출 완료");
         PlayerClass.m_CharacterStat.HP -= _damage;
+        if(PlayerClass.m_CharacterStat.HP == 0)
+        {
+            PlayerClass.m_CharacterStat.HP = 0;
+        }
         TakeDamagePrint((int)_damage);
     }
 
