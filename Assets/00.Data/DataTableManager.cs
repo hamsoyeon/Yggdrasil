@@ -14,6 +14,7 @@ public enum E_DataTableType
     BossSkill,
     Spirit,
     SpiritSkill,
+    SubMonster,
 
     Max
 }

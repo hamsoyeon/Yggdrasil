@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4851454927155046729}
   - component: {fileID: 4115930841781945936}
   - component: {fileID: 3856060071282914444}
-  - component: {fileID: -3656633972936921271}
+  - component: {fileID: 7787896861799574852}
   - component: {fileID: -5206960289941901482}
   - component: {fileID: 7537645635332936396}
   m_Layer: 9
@@ -177,6 +177,18 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
+  m_SubMonsterData:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    SubMonsterIndex: 0
+    HP: 0
+    Defense: 0
+    Demege: 0
+    Speed: 0
+    Prefb: 0
+    Baseskill: 0
+    Epicskill: 0
   Invincibility: 1
 --- !u!114 &3856060071282914444
 MonoBehaviour:
@@ -194,7 +206,7 @@ MonoBehaviour:
   attackRate: 1
   hudDamageText: {fileID: 0}
   hudPos: {fileID: 0}
---- !u!114 &-3656633972936921271
+--- !u!114 &7787896861799574852
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,12 +218,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe0a00bcc30dce40a7889e45505c9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SubMonsterClass: {fileID: 0}
   onHPEvent:
     m_PersistentCalls:
       m_Calls: []
-  runSpeed: 20
-  Attack: 10
-  maxHP: 100
+  runSpeed: 0
+  Atk: 0
+  maxHP: 0
 --- !u!65 &-5206960289941901482
 BoxCollider:
   m_ObjectHideFlags: 0

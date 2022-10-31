@@ -1130,6 +1130,7 @@ public class SpiritSkill : MonoBehaviour
 
     }
 
+    //고정 및 이동 -> 고정을 만들고
     IEnumerator SectorFormSkill()
     {
 

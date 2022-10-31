@@ -289,16 +289,15 @@ public class PlayerManager : MonoBehaviour
 
     public void Damage(int _damage)
     {
-
         Debug.Log("현재 플레이어의 체력:" + PlayerClass.m_CharacterStat.HP);
         TakeDamagePrint(_damage);
     }
 
     public void TakeDamage(float _damage)
     {
-        Debug.Log("쫄몹 체력 깎는 함수 호출 완료");
+        Debug.Log("쫄몹이 플레이어에게 데미지 주는 함수 호출 완료");
         PlayerClass.m_CharacterStat.HP -= _damage;
-        if(PlayerClass.m_CharacterStat.HP == 0)
+        if(PlayerClass.m_CharacterStat.HP <= 0)
         {
             PlayerClass.m_CharacterStat.HP = 0;
         }
