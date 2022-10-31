@@ -62,7 +62,6 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
     {
         for (int i = 0; i < map_Count; i++)
         {
-            Debug.Log(i);
             int temp = i;
             m_SelectMap_Btn[temp].onClick.AddListener(() => Map_ViewChange(temp));
             m_SelectMap_Btn[temp].onClick.AddListener(() => OnClick_Decide_Map(temp));
