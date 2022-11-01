@@ -142,7 +142,7 @@ public class BossSkill : MonoBehaviour
             DamagePrefab.AddComponent<DamageEffect>();
         }
 
-        check1.DamageEffect = DamagePrefab;  // 데미지 프리팹 넣어주기.
+        check1.m_DamageEffect = DamagePrefab;  // 데미지 프리팹 넣어주기.
 
 
         check2 = EmptyPrefab.GetComponent<DamageCheck>();
@@ -152,7 +152,7 @@ public class BossSkill : MonoBehaviour
         }
         check2.dmg_check = true;
 
-        check2.DamageEffect = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.DamPrefb];    // 공백프리팹에 데미지 프리팹 넣어주기.
+        check2.m_DamageEffect = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.DamPrefb];    // 공백프리팹에 데미지 프리팹 넣어주기.
 
 
 
