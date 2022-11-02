@@ -117,7 +117,6 @@ public class SpiritSkill : MonoBehaviour
 
 
         // 엑셀데이터에서 불러와 만들어지는 가변행태로 만들기.
-
         // skillInfo.SkillType  // 1-> 근접공격(파이어 프리팹 안씀,대미지 프리팹만 대상에게 출력)
         // 2-> 광역(cshape1 = 부채꼴 각도, cshape2 = 부채꼴의 넓이)  -> 가장 가까운 적을 찾아서 그 적을 추격하며 브레스? 형태의 스킬. 
         // 3-> 원거리 공격(range안에 있는 가장 가까운 적을 TargetNum값만큼 찾아서 fireFrepab실행)
@@ -136,13 +135,13 @@ public class SpiritSkill : MonoBehaviour
                 StartCoroutine(Spirit_Wide_Move(skillInfo));
                 break;
             case SkillType.TARGET:
-                StartCoroutine(Spirit_Target(skillInfo, tempSpirit));
+                StartCoroutine(Spirit_Target(skillInfo, tempSpirit, effectNumber));
                 break;
             case SkillType.WIDE_FIX:
                 StartCoroutine(Spirit_Wide_Fix(skillInfo));
                 break;
             case SkillType.TILE:
-                StartCoroutine(Spirit_Tile(skillInfo));
+                StartCoroutine(Spirit_Tile(skillInfo, Row, Column, effectNumber));
                 break;
         }
 
@@ -152,6 +151,9 @@ public class SpiritSkill : MonoBehaviour
 
     IEnumerator Spirit_Attack(SpiritSkill_TableExcel skill)
     {
+
+
+
 
 
         yield return null;
@@ -166,7 +168,7 @@ public class SpiritSkill : MonoBehaviour
     }
 
 
-    IEnumerator Spirit_Target(SpiritSkill_TableExcel skill, GameObject spirit)
+    IEnumerator Spirit_Target(SpiritSkill_TableExcel skill, GameObject spirit, int effect_num)
     {
         Debug.Log("정령 타겟스킬 실행");
         // 정령이 소환된 후.
@@ -205,8 +207,8 @@ public class SpiritSkill : MonoBehaviour
                     Debug.Log("I : " + a + "의 게임 오브젝트 이름:" + enemy.name);
                     Debug.Log("에너미의 위치" + enemy.transform);
 
-                    effect = Instantiate(Fire_Prefabs[effectNumber]);
-                    effect.GetComponent<LockOn>().m_DamPrefab = Damage_Prefabs[effectNumber];
+                    effect = Instantiate(Fire_Prefabs[effect_num]);
+                    effect.GetComponent<LockOn>().m_DamPrefab = Damage_Prefabs[effect_num];
 
                     effect.transform.position = spirit.transform.position;
                     effect.GetComponent<LockOn>().m_lockOn = true;
@@ -222,33 +224,8 @@ public class SpiritSkill : MonoBehaviour
                     a++;
                 }
 
-
-                //for (int i = 0; i < findEnemys.Count; i++)
-                //{
-                    
-                    
-                //    effect = Instantiate(Fire_Prefabs[effectNumber]);
-                //    effect.GetComponent<LockOn>().m_DamPrefab = Damage_Prefabs[effectNumber];
-
-                //    effect.transform.position = spirit.transform.position;
-                //    effect.GetComponent<LockOn>().m_lockOn = true;
-                //    effect.GetComponent<LockOn>().target = findEnemys[i];
-                //    effect.GetComponent<LockOn>().moveSpeed = skill.BulletSpeed;
-                    
-
-                //    // 타겟이 2(적군)일 경우에 데미지 셋팅을 해줌.
-                //    if (skill.Target == 2)
-                //    {
-                //        effect.GetComponent<DamageCheck>().dmg_check = false;
-                //        //effect.GetComponent<DamageCheck>().Dot = skill.DoT;
-                //        //effect.GetComponent<DamageCheck>().who = 1;
-                //    }
-                //}
-
-               
-
                 // 딜레이 및 LunchPrefab셋팅
-                DelayAndLunchPrefabSet(effectNumber);
+                DelayAndLunchPrefabSet(effect_num);
 
                 float time = 0f;
                 while (true)
@@ -259,7 +236,7 @@ public class SpiritSkill : MonoBehaviour
                     if (time > skill.LifeTime)
                     {
                         Destroy(effect);
-                        Destroy(LunchObjects[effectNumber]);
+                        Destroy(LunchObjects[effect_num]);
                         yield break;
                     }
                    
@@ -278,12 +255,161 @@ public class SpiritSkill : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator Spirit_Tile(SpiritSkill_TableExcel skill)
+    IEnumerator Spirit_Tile(SpiritSkill_TableExcel skill, int row, int column, int n)
     {
 
+        int Row = row;
+        int Column = column;
+        int number = n;
+
+        float spirit_time = 0f;
+
+        Debug.Log("아이스 필드 실행");
+        float range = skill.SkillRange - 1.0f;
+        float xRange = skill.SkillRange + range;
+
+        //정령의 스킬범위를 표시해 주는 부분.
+        if (range > 0)  //range는 -1을한값 범위가 2부터 여기 들어온다. 범위가 1일경우는 해당 타일에 계산하면 된다.
+        {
+            int saveRow = Row;
+            int saveColumn = 0;
+
+            int checkRow_P;   //정령 기준 아래쪽에 있는 Column값
+            int checkRow_M;   //정령 기준 위쪽에 있는 Column값
+            int checkColumn;  //현재 색을 바꿀 타일의 Column값
+
+            for (float i = 0; i < skill.SkillRange; i += 1.0f)
+            {
+
+                checkRow_P = Row + (int)i;
+                checkRow_M = Row - (int)i;
 
 
-        yield return null;
+                if (checkRow_P % 2 == 1) //024(135라인)
+                    saveColumn++;
+
+                for (float j = 0; j < xRange; j += 1.0f)
+                {
+
+                    if (i != 0) //정령이 있는 라인의 +-1라인씩 그림.
+                    {
+
+                        checkColumn = saveColumn + (int)j;
+
+                        if (checkColumn < 0 || checkColumn > 5)
+                            continue;
+
+                        if (checkRow_P < 5)
+                        {
+                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
+                            m_StageMgr.m_MapInfo[checkRow_P, checkColumn].SpiritEffect1 = true;
+
+                        }
+
+                        if (checkRow_M >= 0)
+                        {
+                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
+                            m_StageMgr.m_MapInfo[checkRow_M, checkColumn].SpiritEffect1 = true;
+
+                        }
+
+                    }
+                    else  //정령이 있는 라인을 쭉그림.
+                    {
+
+                        checkColumn = Column - (int)range + (int)j;
+
+                        if (j == 0)
+                            saveColumn = checkColumn;   //정령라인에서 첫번째 타일 색변환위치 저장.
+
+                        if (checkColumn < 0 || checkColumn > 5)
+                            continue;
+
+                        m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
+                        m_StageMgr.m_MapInfo[Row, checkColumn].SpiritEffect1 = true;
+                    }
+
+
+                }
+
+                xRange -= 1.0f;
+            }
+        }
+        else  //range가 0이하면 사거리가 1 자기자신의 타일만 해당
+        {
+            m_StageMgr.m_MapInfo[Row, Column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
+            m_StageMgr.m_MapInfo[Row, Column].SpiritEffect1 = true;
+
+        }
+
+        DelayAndLunchPrefabSet(number);
+        yield return new WaitForSeconds(2f);
+        Destroy(LunchObjects[number]);
+
+        for (int i = 0; i < m_StageMgr.mapZ; i++)
+        {
+            for (int j = 0; j < m_StageMgr.mapX; j++)
+            {
+
+                if (m_StageMgr.m_MapInfo[i, j].SpiritEffect1)
+                {
+                    m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
+                    GameObject effect = Instantiate(Fire_Prefabs[(int)SkillNumber.ICE]);
+
+                    effect.GetComponent<DamageCheck>().Dot = skill.DoT;
+                    effect.GetComponent<DamageCheck>().who = 1;
+                    //버프 스킬이 있는지 확인후 스킬실행.
+                    if (skill.BuffAdded != 0)
+                    {
+
+                        effect.GetComponent<DamageCheck>().buffIndex = skill.BuffAdded;
+                    }
+
+                    effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
+                    m_StageMgr.m_MapInfo[i, j].SpiritEffectObject1 = effect;
+
+                }
+            }
+        }
+
+        Debug.Log("이펙트 소환");
+
+
+
+        while (true)
+        {
+            //지속시간 체크
+            spirit_time += Time.deltaTime;
+
+            //정령 지속시간이 경과시 
+            if (spirit_time >= skill.LifeTime)
+            {
+                //이펙트 파괴
+                for (int i = 0; i < m_StageMgr.mapZ; i++)
+                {
+                    for (int j = 0; j < m_StageMgr.mapX; j++)
+                    {
+
+                        if (m_StageMgr.m_MapInfo[i, j].SpiritEffect1)
+                        {
+                            m_StageMgr.m_MapInfo[i, j].SpiritEffect1 = false;
+                            Object.Destroy(m_StageMgr.m_MapInfo[i, j].SpiritEffectObject1);
+
+                        }
+                    }
+                }
+                //연계스킬있는지 확인후 다시 스킬실행.
+                if (skill.SkillAdded != 0)
+                {
+
+                }
+                yield break;
+            }
+
+
+            yield return null;
+        }
+
     }
 
 
@@ -1092,7 +1218,6 @@ public class SpiritSkill : MonoBehaviour
                 }
                 else
                 {
-
                     //Debug.Log("TargetNum보다 같거나 크다");
                     int count = findEnemyList.Count-1;
                     findEnemyList.RemoveAt(count);

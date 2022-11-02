@@ -23,8 +23,6 @@ public class LockOn : MonoBehaviour
 
         }
 
-        Debug.Log("Target LockOn:" + target.gameObject.name);
-        
     }
 
     // Update is called once per frame
