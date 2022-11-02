@@ -7,7 +7,7 @@ public class DamageCheck : MonoBehaviour
 
     public CharacterClass EnemyClass;
     public bool dmg_check = false;
-    public GameObject DamageEffect;  //해당 이펙트의 피격된 적의 PosBody에 생성.
+    public GameObject m_DamageEffect;  //해당 이펙트의 피격된 적의 PosBody에 생성.
 
     private CharacterClass PlayerClass;
 
@@ -92,7 +92,7 @@ public class DamageCheck : MonoBehaviour
                                             PosBody = child;
                                         }
                                     }
-                                    Instantiate(DamageEffect, PosBody);
+                                    Instantiate(m_DamageEffect, PosBody);
 
                                 }
                                 if (cols[i].CompareTag("Mob"))
@@ -147,7 +147,7 @@ public class DamageCheck : MonoBehaviour
                                         PosBody = child;
                                     }
                                 }
-                                Instantiate(DamageEffect, PosBody);
+                                Instantiate(m_DamageEffect, PosBody);
 
 
                             }
@@ -211,7 +211,7 @@ public class DamageCheck : MonoBehaviour
                                                 PosBody = child;
                                             }
                                         }
-                                        Instantiate(DamageEffect, PosBody);
+                                        Instantiate(m_DamageEffect, PosBody);
 
                                     }
                                     if (cols[i].CompareTag("Mob"))
@@ -259,7 +259,7 @@ public class DamageCheck : MonoBehaviour
                                             PosBody = child;
                                         }
                                     }
-                                    Instantiate(DamageEffect, PosBody);
+                                    Instantiate(m_DamageEffect, PosBody);
                                 }
                                 break;
                         }

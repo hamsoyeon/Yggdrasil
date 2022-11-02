@@ -79,7 +79,7 @@ public class SpiritSkill : MonoBehaviour
 
         // 데미지 프리팹 셋팅 및 데미지 체크 가능하게
         check.dmg_check = true;
-        check.DamageEffect = Damage_Prefabs[effectNumber];
+        check.m_DamageEffect = Damage_Prefabs[effectNumber];
 
         // 데미지 프리팹 설정 셋
         DamageEffect dmgCheck;
@@ -92,29 +92,29 @@ public class SpiritSkill : MonoBehaviour
 
 
         // 이건 스킬 고정형태..
-        
-        switch (skillInfo.SpritSkillIndex)
-		{
-			case 170001:  //얼음장판
-                StartCoroutine(IceField(skillInfo, Row, Column,effectNumber));
-                break;
-			case 170002:  //독구름
-                StartCoroutine(PoisonCloud(skillInfo, tempSpirit, effectNumber));
-                break;
-			case 170003:  //무적
-                StartCoroutine(Invincibility(skillInfo, tempSpirit, effectNumber));
-                break;
-			case 170004:  //신성지대
-                StartCoroutine(Sanctity(skillInfo, tempSpirit, effectNumber));
-                break;
-            case 170005: //힐
-                StartCoroutine(Heal(skillInfo, tempSpirit, effectNumber));
-                break;
-            case 170006: //이속증가
-                StartCoroutine(SpeedField(skillInfo, Row,Column, effectNumber));
-                break;
-        }
-        
+
+        //      switch (skillInfo.SpritSkillIndex)
+        //{
+        //	case 170001:  //얼음장판
+        //              StartCoroutine(IceField(skillInfo, Row, Column,effectNumber));
+        //              break;
+        //	case 170002:  //독구름
+        //              StartCoroutine(PoisonCloud(skillInfo, tempSpirit, effectNumber));
+        //              break;
+        //	case 170003:  //무적
+        //              StartCoroutine(Invincibility(skillInfo, tempSpirit, effectNumber));
+        //              break;
+        //	case 170004:  //신성지대
+        //              StartCoroutine(Sanctity(skillInfo, tempSpirit, effectNumber));
+        //              break;
+        //          case 170005: //힐
+        //              StartCoroutine(Heal(skillInfo, tempSpirit, effectNumber));
+        //              break;
+        //          case 170006: //이속증가
+        //              StartCoroutine(SpeedField(skillInfo, Row,Column, effectNumber));
+        //              break;
+        //      }
+
 
         // 엑셀데이터에서 불러와 만들어지는 가변행태로 만들기.
 
@@ -127,24 +127,24 @@ public class SpiritSkill : MonoBehaviour
         // 나중에 스킬셋형태로 보스가 1번 스킬을 사용할때(ex. 4개의 스킬을 들고있는 엑셀 데이터를 불러와서) 거기서 랜덤으로 스킬을 사용하는 ... 작업이 끝나면 추가 예정..
         // 모든 위치 추적 스킬은 보스를 가장 최우선으로 한다..
 
-        //switch ((SkillType)skillInfo.SkillType)
-        //{
-        //    case SkillType.ATTACK:
-        //        StartCoroutine(Spirit_Attack(skillInfo));
-        //        break;
-        //    case SkillType.WIDE_MOVE:
-        //        StartCoroutine(Spirit_Wide_Move(skillInfo));
-        //        break;
-        //    case SkillType.TARGET:
-        //        StartCoroutine(Spirit_Target(skillInfo,tempSpirit));
-        //        break;
-        //    case SkillType.WIDE_FIX:
-        //        StartCoroutine(Spirit_Wide_Fix(skillInfo));
-        //        break;
-        //    case SkillType.TILE:
-        //        StartCoroutine(Spirit_Tile(skillInfo));
-        //        break;
-        //}
+        switch ((SkillType)skillInfo.SkillType)
+        {
+            case SkillType.ATTACK:
+                StartCoroutine(Spirit_Attack(skillInfo));
+                break;
+            case SkillType.WIDE_MOVE:
+                StartCoroutine(Spirit_Wide_Move(skillInfo));
+                break;
+            case SkillType.TARGET:
+                StartCoroutine(Spirit_Target(skillInfo, tempSpirit));
+                break;
+            case SkillType.WIDE_FIX:
+                StartCoroutine(Spirit_Wide_Fix(skillInfo));
+                break;
+            case SkillType.TILE:
+                StartCoroutine(Spirit_Tile(skillInfo));
+                break;
+        }
 
     }
 
@@ -196,34 +196,56 @@ public class SpiritSkill : MonoBehaviour
                 Debug.Log("찾은 적의 Count:" + findEnemys.Count);
 
                 // 디버깅용
-                int a = 1;
+                int a = 0;
+
+                GameObject effect = null;
                 foreach (GameObject enemy in findEnemys)
                 {
                     Debug.Log("찾은 적의 이름:" + a + "." + enemy.name + "적의 포지션 값:" + enemy.transform.position);
-                    a++;
-                }
+                    Debug.Log("I : " + a + "의 게임 오브젝트 이름:" + enemy.name);
+                    Debug.Log("에너미의 위치" + enemy.transform);
 
-
-                GameObject effect = null;
-
-                for (int i = 0; i < findEnemys.Count; i++)
-                {
                     effect = Instantiate(Fire_Prefabs[effectNumber]);
+                    effect.GetComponent<LockOn>().m_DamPrefab = Damage_Prefabs[effectNumber];
+
                     effect.transform.position = spirit.transform.position;
                     effect.GetComponent<LockOn>().m_lockOn = true;
-                    effect.GetComponent<LockOn>().target = findEnemys[i];
+                    effect.GetComponent<LockOn>().target = enemy;
                     effect.GetComponent<LockOn>().moveSpeed = skill.BulletSpeed;
 
 
                     // 타겟이 2(적군)일 경우에 데미지 셋팅을 해줌.
                     if (skill.Target == 2)
-                    {
-                        effect.GetComponent<DamageCheck>().Dot = skill.DoT;
-                        effect.GetComponent<DamageCheck>().who = 1;
-                    }
+                        effect.GetComponent<DamageCheck>().dmg_check = false;
+
+
+                    a++;
                 }
 
-                Destroy(effect);
+
+                //for (int i = 0; i < findEnemys.Count; i++)
+                //{
+                    
+                    
+                //    effect = Instantiate(Fire_Prefabs[effectNumber]);
+                //    effect.GetComponent<LockOn>().m_DamPrefab = Damage_Prefabs[effectNumber];
+
+                //    effect.transform.position = spirit.transform.position;
+                //    effect.GetComponent<LockOn>().m_lockOn = true;
+                //    effect.GetComponent<LockOn>().target = findEnemys[i];
+                //    effect.GetComponent<LockOn>().moveSpeed = skill.BulletSpeed;
+                    
+
+                //    // 타겟이 2(적군)일 경우에 데미지 셋팅을 해줌.
+                //    if (skill.Target == 2)
+                //    {
+                //        effect.GetComponent<DamageCheck>().dmg_check = false;
+                //        //effect.GetComponent<DamageCheck>().Dot = skill.DoT;
+                //        //effect.GetComponent<DamageCheck>().who = 1;
+                //    }
+                //}
+
+               
 
                 // 딜레이 및 LunchPrefab셋팅
                 DelayAndLunchPrefabSet(effectNumber);
@@ -236,6 +258,7 @@ public class SpiritSkill : MonoBehaviour
 
                     if (time > skill.LifeTime)
                     {
+                        Destroy(effect);
                         Destroy(LunchObjects[effectNumber]);
                         yield break;
                     }
@@ -983,7 +1006,7 @@ public class SpiritSkill : MonoBehaviour
 	}
 
 
-    List<GameObject> FindNearbyEnemys(Vector3 StartPos, float distance , int targetNum)
+    List<GameObject> FindNearbyEnemys(Vector3 StartPos, float range , int targetNum)
     {
         float Dist = 0f;
         GameObject findBoss = null;
@@ -993,10 +1016,9 @@ public class SpiritSkill : MonoBehaviour
         
 
         // 범위 내의 적을 찾는다.
-        Collider[] colls = Physics.OverlapSphere(StartPos, distance, 1 << 9);  //9번째 레이어 = Enemy
+        Collider[] colls = Physics.OverlapSphere(StartPos, range, 1 << 9);  //9번째 레이어 = Enemy
 
         
-
         // 범위에 적이없을경우
         if (colls.Length <= 0)
         {
@@ -1024,14 +1046,14 @@ public class SpiritSkill : MonoBehaviour
                     
                     findEnemyList.Add(colls[i].gameObject);
                     EnemyNearList.Add(Dist);
-                    Debug.Log(i + "번째 Object추가하기");
+                    Debug.Log("i < targetNum" + i + "번째 Object추가하기");
                 }
                 else // i >= targetNum    // 범위내의 찾은 적이 설정한 목표보다 초과했을 때 
                 {
                    
                     if(findEnemyList.Count < targetNum) // 보스때문에 i가 증가할 수 도 있음...
                     {
-                        Debug.Log(i + "번째 Object추가하기");
+                        Debug.Log("i >= targetNum"+i + "번째 Object추가하기");
                         findEnemyList.Add(colls[i].gameObject);
                         EnemyNearList.Add(Dist);
                     }
@@ -1118,7 +1140,7 @@ public class SpiritSkill : MonoBehaviour
             if (time > endTime || (laser.transform.position == TargetPos ) )
             {
                 Destroy(LunchObjects[PrefabNumber]);
-                DestroyObject(laser);
+                Destroy(laser);
 
                 yield break;
             }
