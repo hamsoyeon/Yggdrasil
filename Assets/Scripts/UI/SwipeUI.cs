@@ -7,8 +7,6 @@ public class SwipeUI : MonoBehaviour
 	[SerializeField]
 	private	Scrollbar	scrollBar;					// Scrollbar의 위치를 바탕으로 현재 페이지 검사
 	[SerializeField]
-	private	Transform[]	circleContents;				// 현재 페이지를 나타내는 원 Image UI들의 Transform
-	[SerializeField]
 	private	float		swipeTime = 0.2f;			// 페이지가 Swipe 되는 시간
 	[SerializeField]
 	private	float		swipeDistance = 50.0f;		// 페이지가 Swipe되기 위해 움직여야 하는 최소 거리
@@ -20,7 +18,6 @@ public class SwipeUI : MonoBehaviour
 	private	float		startTouchX;				// 터치 시작 위치
 	private	float		endTouchX;					// 터치 종료 위치
 	private	bool		isSwipeMode = false;		// 현재 Swipe가 되고 있는지 체크
-	private	float		circleContentScale = 1.6f;	// 현재 페이지의 원 크기(배율)
 
 	private void Awake()
 	{
@@ -55,9 +52,6 @@ public class SwipeUI : MonoBehaviour
 	private void Update()
 	{
 		UpdateInput();
-
-		// 아래에 배치된 페이지 버튼 제어
-		UpdateCircleContent();
 	}
 
 	private void UpdateInput()
@@ -79,44 +73,47 @@ public class SwipeUI : MonoBehaviour
 
             UpdateSwipe();
         }
+        else if(Input.GetKeyDown(KeyCode.Return))
+        {
+            UpdateKeySwipe();
+        }
 
-#if UNITY_EDITOR
-        // 마우스 왼쪽 버튼을 눌렀을 때 1회
-        if ( Input.GetMouseButtonDown(0) )
-		{
-			// 터치 시작 지점 (Swipe 방향 구분)
-			startTouchX = Input.mousePosition.x;
-		}
-		else if ( Input.GetMouseButtonUp(0) )
-		{
-			// 터치 종료 지점 (Swipe 방향 구분)
-			endTouchX = Input.mousePosition.x;
+//#if UNITY_EDITOR
+//        // 마우스 왼쪽 버튼을 눌렀을 때 1회
+//        if ( Input.GetMouseButtonDown(0) )
+//		{
+//			// 터치 시작 지점 (Swipe 방향 구분)
+//			startTouchX = Input.mousePosition.x;
+//		}
+//		else if ( Input.GetMouseButtonUp(0) )
+//		{
+//			// 터치 종료 지점 (Swipe 방향 구분)
+//			endTouchX = Input.mousePosition.x;
 
-			UpdateSwipe();
-		}
-		#endif
+//			UpdateSwipe();
+//		}
+//		#endif
 
-		#if UNITY_ANDROID
-		if ( Input.touchCount == 1 )
-		{
-			Touch touch = Input.GetTouch(0);
+//		#if UNITY_ANDROID
+//		if ( Input.touchCount == 1 )
+//		{
+//			Touch touch = Input.GetTouch(0);
 
-			if ( touch.phase == TouchPhase.Began )
-			{
-				// 터치 시작 지점 (Swipe 방향 구분)
-				startTouchX = touch.position.x;
-			}
-			else if ( touch.phase == TouchPhase.Ended )
-			{
-				// 터치 종료 지점 (Swipe 방향 구분)
-				endTouchX = touch.position.x;
+//			if ( touch.phase == TouchPhase.Began )
+//			{
+//				// 터치 시작 지점 (Swipe 방향 구분)
+//				startTouchX = touch.position.x;
+//			}
+//			else if ( touch.phase == TouchPhase.Ended )
+//			{
+//				// 터치 종료 지점 (Swipe 방향 구분)
+//				endTouchX = touch.position.x;
 
-				UpdateSwipe();
-			}
-		}
-		#endif
+//				UpdateSwipe();
+//			}
+//		}
+//		#endif
 	}
-
 	private void UpdateSwipe()
 	{
 		// 너무 작은 거리를 움직였을 때는 Swipe X
@@ -153,10 +150,39 @@ public class SwipeUI : MonoBehaviour
 		StartCoroutine(OnSwipeOneStep(currentPage));
 	}
 
-	/// <summary>
-	/// 페이지를 한 장 옆으로 넘기는 Swipe 효과 재생
-	/// </summary>
-	private IEnumerator OnSwipeOneStep(int index)
+    private void UpdateKeySwipe()
+    {
+
+        // Swipe 방향
+        bool isLeft = false;
+
+        // 이동 방향이 왼쪽일 때
+        if (isLeft == true)
+        {
+            // 현재 페이지가 왼쪽 끝이면 종료
+            if (currentPage == 0) 
+                return;
+
+            // 왼쪽으로 이동을 위해 현재 페이지를 1 감소
+            currentPage--;
+        }
+        // 이동 방향이 오른쪽일 떄
+        else
+        {
+            // 현재 페이지가 오른쪽 끝이면 종료
+            if (currentPage == maxPage - 1) 
+                return;
+
+            // 오른쪽으로 이동을 위해 현재 페이지를 1 증가
+            currentPage++;
+        }
+
+        // currentIndex번째 페이지로 Swipe해서 이동
+        StartCoroutine(OnSwipeOneStep(currentPage));
+    }
+
+    /// 페이지를 한 장 옆으로 넘기는 Swipe 효과 재생
+    private IEnumerator OnSwipeOneStep(int index)
 	{
 		float start		= scrollBar.value;
 		float current	= 0;
@@ -175,22 +201,5 @@ public class SwipeUI : MonoBehaviour
 		}
 
 		isSwipeMode = false;
-	}
-
-	private void UpdateCircleContent()
-	{
-		// 아래에 배치된 페이지 버튼 크기, 색상 제어 (현재 머물고 있는 페이지의 버튼만 수정)
-		for ( int i = 0; i < scrollPageValues.Length; ++ i )
-		{
-			circleContents[i].localScale					= Vector2.one;
-			circleContents[i].GetComponent<Image>().color	= Color.white;
-
-			// 페이지의 절반을 넘어가면 현재 페이지 원을 바꾸도록
-			if ( scrollBar.value < scrollPageValues[i] + (valueDistance / 2) && scrollBar.value > scrollPageValues[i] - (valueDistance / 2) )
-			{
-				circleContents[i].localScale					= Vector2.one * circleContentScale;
-				circleContents[i].GetComponent<Image>().color	= Color.black;
-			}
-		}
 	}
 }
