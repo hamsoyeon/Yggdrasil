@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     {
         status = GetComponent<Status>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.speed = status.RunSpeed;
+        navMeshAgent.speed = status.SubMonsterClass.m_SubMonsterData.Speed;
         target = GameObject.Find("Player").transform.GetChild(0).gameObject;
         Debug.Log($"현재 타겟 : {target.transform.position}");
         hudDamageText = Resources.Load<GameObject>("DamageText");
@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            navMeshAgent.SetDestination(target.transform.position);
+            navMeshAgent.SetDestination(transform.position);
         }
         yield return null;
 
@@ -98,6 +98,7 @@ public class Enemy : MonoBehaviour
 
     private void CalculateDistacveToTargetAndSelectState()
     {
+        Debug.Log($"거리 차이 : {distance}");
         if (target == null)
             return;
 
@@ -120,7 +121,7 @@ public class Enemy : MonoBehaviour
                 if (Time.time - lastAttackTime > attackRate)
                 {
                     //공격 주기가 되어야 공격할 수 있도록 하기 위해 현재 시간 저장
-                    target.GetComponent<PlayerManager>().TakeDamage(status.ATTACK);
+                    target.GetComponent<PlayerManager>().TakeDamage(status.SubMonsterClass.m_SubMonsterData.Demege);
                     lastAttackTime = Time.time;
                 }
 
@@ -152,12 +153,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    //공격 범위
-    //    Gizmos.color = new Color(0.39f, 0.04f, 0.04f);
-    //    Gizmos.DrawWireSphere(transform.position, attackRange);
-    //}
+    private void OnDrawGizmos()
+    {
+        //공격 범위
+        Gizmos.color = new Color(0.39f, 0.04f, 0.04f);
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
 
     //쫄몹 데미지 받는 함수
     public void TakeDamage(int damage)

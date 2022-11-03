@@ -98,7 +98,7 @@ public class DamageCheck : MonoBehaviour
                                 if (cols[i].CompareTag("Mob"))
                                 {
                                     Debug.Log("아 왜이리 빠른가요");
-                                    minDamage = (int)PlayerClass.m_CharacterStat.Atk;
+                                    minDamage = (int)PlayerClass.m_CharacterStat.Atk - EnemyClass.m_SubMonsterData.Defense;
 
                                     //최소 데미지 보정.
                                     if (minDamage <= 0)
@@ -217,7 +217,7 @@ public class DamageCheck : MonoBehaviour
                                     if (cols[i].CompareTag("Mob"))
                                     {
                                         Debug.Log("아 왜이리 빠른가요");
-                                        minDamage = (int)PlayerClass.m_CharacterStat.Atk;
+                                        minDamage = (int)PlayerClass.m_CharacterStat.Atk - EnemyClass.m_SubMonsterData.Defense;
 
                                         //최소 데미지 보정.
                                         if (minDamage <= 0)

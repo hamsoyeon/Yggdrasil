@@ -7,6 +7,11 @@ public class HPEvent : UnityEngine.Events.UnityEvent<int, int> { }
 
 public class Status : MonoBehaviour
 {
+    private SubMonster_TableExcel m_CurrentSubMonsterStat;
+    private const int m_CurrentIndex = 141001;
+
+    public CharacterClass SubMonsterClass;
+
     [HideInInspector]
     public HPEvent onHPEvent = new HPEvent();
 
@@ -17,23 +22,41 @@ public class Status : MonoBehaviour
 
     [Header("ATK")]
     [SerializeField]
-    private float Attack;
+    private float Atk;
+
+    [Header("DEF")]
+    [SerializeField]
+    private float Def;
 
     [Header("HP")]
     [SerializeField]
-    private int maxHP = 100;
+    private int maxHP;
     private int currentHP;
 
     public float RunSpeed => runSpeed;
-
-    public float ATTACK => Attack;
-
     public int CurrentHP => currentHP;
     public int MaxHP => maxHP;
+    public float ATTACK => Atk;
 
-    private void Awake()
+    void Awake()
     {
-        currentHP = maxHP;
+        SubMonsterClass = this.gameObject.GetComponent<CharacterClass>();
+
+        foreach (var item in DataTableManager.Instance.GetDataTable<SubMonster_TableExcelLoader>().DataList)
+        {
+            if (item.SubMonsterIndex == m_CurrentIndex)
+            {
+                SubMonsterClass.m_SubMonsterData = item;
+                break;
+            }
+        }
+
+        currentHP = SubMonsterClass.m_SubMonsterData.HP;
+        runSpeed = SubMonsterClass.m_SubMonsterData.Speed;
+        Atk = SubMonsterClass.m_SubMonsterData.Demege;
+        Def = SubMonsterClass.m_SubMonsterData.Defense;
+
+        maxHP = currentHP;
     }
 
     //데미지를 받았을 때 호출 함수
@@ -45,7 +68,7 @@ public class Status : MonoBehaviour
 
         onHPEvent.Invoke(previousHP, currentHP);
 
-        if(currentHP <= 0)
+        if (currentHP <= 0)
         {
             return true;
         }

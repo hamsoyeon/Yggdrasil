@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-
 public class CharacterClass : MonoBehaviour
 {
 
@@ -16,6 +13,7 @@ public class CharacterClass : MonoBehaviour
 	public CharStat_TableExcel m_CharacterStat;          //플레이어 스텟에 관한 데이터 
 	public Spirit_TableExcel m_SpiritData;               //플레이어가 소환하는 정령에 관한 데이터
 	public SpiritSkill_TableExcel m_SpiritSkillData;         //소환된 정령이 사용하는 스킬에 관한 데이터	
+    public SubMonster_TableExcel m_SubMonsterData;
 	public SkillManager m_SkillMgr;
 
     public float Invincibility = 1.0f;          //캐릭터가 사용하는 무적값.
