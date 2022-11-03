@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Linq;
+using UnityEditor;
 
 public class SpiritSkill : MonoBehaviour
 {
@@ -1130,11 +1131,40 @@ public class SpiritSkill : MonoBehaviour
 
     }
 
-    //고정 및 이동 -> 고정을 만들고
-    IEnumerator SectorFormSkill()
+    //30도짜리 삼각형 개 때려박아
+    // 부채꼴 스킬
+    IEnumerator SectorFormSkill(SpiritSkill_TableExcel skill, GameObject spirit, GameObject SectorFormPrefab)
     {
+        //Vector3 interV = target.position - transform.position;
 
+        //// target과 나 사이의 거리가 radius 보다 작다면
+        //if (interV.magnitude <= radius)
+        //{
+        //    // '타겟-나 벡터'와 '내 정면 벡터'를 내적
+        //    float dot = Vector3.Dot(interV.normalized, transform.forward);
+        //    // 두 벡터 모두 단위 벡터이므로 내적 결과에 cos의 역을 취해서 theta를 구함
+        //    float theta = Mathf.Acos(dot);
+        //    // angleRange와 비교하기 위해 degree로 변환
+        //    float degree = Mathf.Rad2Deg * theta;
+
+        //    // 시야각 판별
+        //    if (degree <= angleRange / 2f)
+        //        isCollision = true;
+        //    else
+        //        isCollision = false;
+
+        //}
+        //else
+        //    isCollision = false;
 
         yield return null;
     }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Handles.color = isCollision ? _red : _blue;
+    //    // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
+    //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
+    //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
+    //}
 }
