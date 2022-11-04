@@ -130,7 +130,8 @@ public class SpiritSkill : MonoBehaviour
         switch ((SkillType)skillInfo.SkillType)
         {
             case SkillType.ATTACK:
-                StartCoroutine(Spirit_Attack(skillInfo));
+                
+                StartCoroutine(Spirit_Attack(skillInfo, tempSpirit, effectNumber));
                 break;
             case SkillType.WIDE_MOVE:
                 StartCoroutine(Spirit_Wide_Move(skillInfo));
@@ -150,10 +151,30 @@ public class SpiritSkill : MonoBehaviour
 
 
 
-    IEnumerator Spirit_Attack(SpiritSkill_TableExcel skill)
+    IEnumerator Spirit_Attack(SpiritSkill_TableExcel skill, GameObject spirit, int effect_num)
     {
 
+        Debug.Log("정령 어택스킬 실행");
+        // 정령이 소환된 후.
+        GameObject findEnemy = null;
+        // 근처에 가장 가까운 적을 찾는다.
+        findEnemy = FindNearbyEnemy(spirit.transform.position, skill.SkillRange);
 
+        if (findEnemy == null) // 널이라면
+        {
+            StopCoroutine("Spirit_Target");
+        }
+        else  // 널이 아니라면.
+        {
+            // SpiritMove에 근접공격을 해야할 대상을 저장.
+            spirit.GetComponent<SpiritMove>().isMove = true;
+            spirit.GetComponent<SpiritMove>().TargetEnemy = findEnemy; // 근처에 가장 가까운적 넣어주기.
+            spirit.GetComponent<SpiritMove>().DamPrefab = Damage_Prefabs[effect_num]; // 데미지 프리팹 넣어주기.
+            spirit.GetComponent<SpiritMove>().moveSpeed = skill.BulletSpeed;
+
+
+
+        }
 
 
 
@@ -163,7 +184,7 @@ public class SpiritSkill : MonoBehaviour
 
     IEnumerator Spirit_Wide_Move(SpiritSkill_TableExcel skill)
     {
-
+       
 
         yield return null;
     }
@@ -265,7 +286,7 @@ public class SpiritSkill : MonoBehaviour
 
         float spirit_time = 0f;
 
-        Debug.Log("아이스 필드 실행");
+        Debug.Log("타일형 스킬 실행");
         float range = skill.SkillRange - 1.0f;
         float xRange = skill.SkillRange + range;
 
@@ -983,7 +1004,7 @@ public class SpiritSkill : MonoBehaviour
 	IEnumerator PoisonCloud(SpiritSkill_TableExcel skill,GameObject spirit, int n)
 	{
         Debug.Log("독구름 실행");
-        GameObject nearEnemy = FindNearbyEnemy(spirit, skill.SkillRange);
+        GameObject nearEnemy = FindNearbyEnemy(spirit.transform.position, skill.SkillRange);
 		GameObject tempEffect = null;
 
         int number = n;
@@ -1085,14 +1106,14 @@ public class SpiritSkill : MonoBehaviour
 	}
 
 
-	GameObject FindNearbyEnemy(GameObject findStartObject, float distance)
+	GameObject FindNearbyEnemy(Vector3 StartPos, float distance)
 	{
 		float Dist = 0f;
 		float near = 0f;
 		GameObject nearEnemy = null;
 
 		//범위 내의 적을 찾는다.
-		Collider[] colls = Physics.OverlapSphere(findStartObject.transform.position, distance, 1 << 9);  //9번째 레이어 = Enemy
+		Collider[] colls = Physics.OverlapSphere(StartPos, distance, 1 << 9);  //9번째 레이어 = Enemy
 
 		if (colls.Length == 0)
 		{
@@ -1112,7 +1133,7 @@ public class SpiritSkill : MonoBehaviour
 				}
 
 				//정령과의 거리를 계산후
-				Dist = Vector3.Distance(findStartObject.transform.position, colls[i].transform.position);
+				Dist = Vector3.Distance(StartPos, colls[i].transform.position);
 
 				if (i == 0)
 				{

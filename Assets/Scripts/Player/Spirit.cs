@@ -73,12 +73,23 @@ public class Spirit : MonoBehaviour
         //정령을 소환한다.(코루틴으로 정령을 소환)
         GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
 
+        SpiritMove moveCheck;
+        moveCheck = tempSpirit.GetComponent<SpiritMove>();
+        if (moveCheck == null)
+        {
+            tempSpirit.AddComponent<SpiritMove>();
+        }
+
+
+
         Animator anim = tempSpirit.transform.GetChild(0).GetComponent<Animator>();
 
         if (anim == null)
         {
             anim = tempSpirit.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
         }
+
+        tempSpirit.GetComponent<SpiritMove>().anim = anim;
 
         AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
 
@@ -138,6 +149,14 @@ public class Spirit : MonoBehaviour
 		//정령을 소환한다.(코루틴으로 정령을 소환)
 		GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
 
+        SpiritMove moveCheck;
+        moveCheck = tempSpirit.GetComponent<SpiritMove>();
+        if (moveCheck == null)
+        {
+            tempSpirit.AddComponent<SpiritMove>();
+        }
+
+
         Animator anim = tempSpirit.transform.GetChild(0).GetComponent<Animator>();
 
         if(anim ==null)
@@ -145,6 +164,7 @@ public class Spirit : MonoBehaviour
             anim = tempSpirit.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
         }
 
+        tempSpirit.GetComponent<SpiritMove>().anim = anim;
 
         AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
         AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
@@ -195,13 +215,21 @@ public class Spirit : MonoBehaviour
 	{
 		//정령을 소환한다.(코루틴으로 정령을 소환)
 		GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
+        SpiritMove moveCheck;
+        moveCheck = tempSpirit.GetComponent<SpiritMove>();
+        if (moveCheck == null)
+        {
+            tempSpirit.AddComponent<SpiritMove>();
+        }
+
 
         Animator anim = tempSpirit.transform.GetChild(0).GetComponent<Animator>();
-
         if (anim == null)
         {
             anim = tempSpirit.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
         }
+
+        tempSpirit.GetComponent<SpiritMove>().anim = anim;
 
         AnimationManager.GetInstance().PlayAnimation(anim, "Skill01");
         AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);

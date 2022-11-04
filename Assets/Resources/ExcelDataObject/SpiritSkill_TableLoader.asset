@@ -20,7 +20,7 @@ MonoBehaviour:
     Target: 2
     Power: 5
     SkillRange: 20
-    SkillType: 3
+    SkillType: 1
     BulletSpeed: 1
     TargetNum: 10
     LifeTime: 3.1
