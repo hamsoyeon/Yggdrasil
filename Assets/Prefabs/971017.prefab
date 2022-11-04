@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyClass: {fileID: 0}
   dmg_check: 1
+  m_DamageEffect: {fileID: 0}
   who: 0
   Dot: 0
   buffIndex: 0
