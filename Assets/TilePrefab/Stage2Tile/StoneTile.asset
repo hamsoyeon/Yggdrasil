@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92fd82bc27de63745b57d8aadce987d6, type: 3}
   m_Name: StoneTile
   m_EditorClassIdentifier: 
-  TileObj: {fileID: 0}
-  isWall: 0
+  TileObj: {fileID: 4231532701706093994, guid: 922451cd71b8428418f86698e0b5218b, type: 3}
+  isWall: 1
   isBuffTile: 0
