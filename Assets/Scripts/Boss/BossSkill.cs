@@ -745,7 +745,7 @@ public class BossSkill : MonoBehaviour
 
        
 
-        // 보스가 스킬을 사용할때 해당로 돌려준다음
+        // 보스가 스킬을 사용할때 해당 각도로 돌려준다음
         this.gameObject.transform.rotation = Quaternion.Euler(0, tempAngle, 0);
 
 
@@ -1005,7 +1005,7 @@ public class BossSkill : MonoBehaviour
         {
             for (int j = 0; j < m_StageMgr.mapX; j++)
             {
-                checkSettingEffect(i, j);
+                checkSettingEffect(i, j,tempAngle);
             }
         }
 
@@ -1056,7 +1056,7 @@ public class BossSkill : MonoBehaviour
     }
 
 
-    private void checkSettingEffect(int i,int j)
+    private void checkSettingEffect(int i,int j, float angle =0)
     {
 
         if (m_StageMgr.m_MapInfo[i, j].BossEffect)
@@ -1064,6 +1064,10 @@ public class BossSkill : MonoBehaviour
             Object.Destroy(m_StageMgr.m_MapInfo[i, j].BossDelayObject);
             m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
             GameObject effect = Instantiate(firePrefab);
+            //effect.transform.rotation += Quaternion.Euler(0, angle, 0);
+            effect.transform.rotation = Quaternion.Euler(effect.transform.rotation.x, angle, effect.transform.rotation.z);
+
+
             effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
             effect.GetComponent<DamageCheck>().who = 2;
             effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;

@@ -64,7 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyClass: {fileID: 0}
   dmg_check: 1
-  DamageEffect: {fileID: 8374413056478911666, guid: 4434184a8516e2041a98b63474a93cd7, type: 3}
+  m_DamageEffect: {fileID: 0}
   who: 0
   Dot: 0
   buffIndex: 0
