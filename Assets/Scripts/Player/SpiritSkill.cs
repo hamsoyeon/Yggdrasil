@@ -30,6 +30,12 @@ public class SpiritSkill : MonoBehaviour
 
     CharacterClass player_characterclass = null;
 
+    //부채꼴 스킬에 범위안에 들어왔는지 확인할 변수
+    bool isCollision;
+
+    //업데이트마다 적군 오브젝트를 찾는 리스트
+    public List<GameObject> FoundObeject;
+
     public void SkillUse(SpiritSkill_TableExcel skillInfo, GameObject Spirit)  //비타일형
 	{
 
@@ -1244,6 +1250,16 @@ public class SpiritSkill : MonoBehaviour
         LunchObjects = new GameObject[6];
     }
 
+    private void Update()
+    {
+        FoundObeject = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+
+        if(FoundObeject[0] == null)
+        {
+            FoundObeject[0] = GameObject.Find("Boss");
+        }
+    }
+
     // BackUp
     // NewSkill
 
@@ -1278,13 +1294,12 @@ public class SpiritSkill : MonoBehaviour
 
     }
 
-    //30도짜리 삼각형 개 때려박아
     // 부채꼴 스킬
     IEnumerator SectorFormSkill(SpiritSkill_TableExcel skill, GameObject spirit, GameObject SectorFormPrefab)
     {
         //Vector3 interV = target.position - transform.position;
 
-        //// target과 나 사이의 거리가 radius 보다 작다면
+        // target과 나 사이의 거리가 radius 보다 작다면
         //if (interV.magnitude <= radius)
         //{
         //    // '타겟-나 벡터'와 '내 정면 벡터'를 내적

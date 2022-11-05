@@ -16129,6 +16129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1342044587}
   - component: {fileID: 1342044586}
+  - component: {fileID: 1342044589}
   - component: {fileID: 1342044585}
   - component: {fileID: 1342044588}
   m_Layer: 0
@@ -16264,6 +16265,18 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &1342044589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342044584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc710fe67f51fe4e8554b87f8ee672b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1345133349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18463,7 +18476,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.59662515, y: 0.042000003}
   m_AnchorMax: {x: 0.6701458, y: 0.21400002}
-  m_AnchoredPosition: {x: 70.85022, y: -60.10388}
+  m_AnchoredPosition: {x: 70.85022, y: -60.10376}
   m_SizeDelta: {x: 20.0697, y: -85.8536}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3463102640182262312

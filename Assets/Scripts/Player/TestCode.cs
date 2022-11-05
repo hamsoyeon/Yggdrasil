@@ -81,18 +81,18 @@ public class TestCode : MonoBehaviour
     }
 
     // 유니티 에디터에 부채꼴을 그려줄 메소드
-    private void OnDrawGizmos()
-    {
-#if UNITY_EDITOR
-        Handles.color = isCollision ? _red : _blue;
-        // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
+//    private void OnDrawGizmos()
+//    {
+//#if UNITY_EDITOR
+//        Handles.color = isCollision ? _red : _blue;
+//        // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
+//        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
+//        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
 
-        Gizmos.color = new Color(0.39f, 0.04f, 0.04f);
-        Gizmos.DrawWireSphere(transform.position, recognition);
-#else
-        Application
-#endif
-    }
+//        Gizmos.color = new Color(0.39f, 0.04f, 0.04f);
+//        Gizmos.DrawWireSphere(transform.position, recognition);
+//#else
+//        Application
+//#endif
+//    }
 }
