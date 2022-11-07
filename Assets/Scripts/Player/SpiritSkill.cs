@@ -33,8 +33,10 @@ public class SpiritSkill : MonoBehaviour
     //부채꼴 스킬에 범위안에 들어왔는지 확인할 변수
     bool isCollision;
 
-    //업데이트마다 적군 오브젝트를 찾는 리스트
-    public List<GameObject> FoundObeject;
+    Color _red = new Color(1f, 0, 0);
+    Color _blue = new Color(0, 0, 1f);
+    public float angleRange;  // Cshape1;
+    public float radius;// Cshape2;
 
     public void SkillUse(SpiritSkill_TableExcel skillInfo, GameObject Spirit)  //비타일형
 	{
@@ -1262,23 +1264,13 @@ public class SpiritSkill : MonoBehaviour
     private void Start()
 	{
 
-		m_StageMgr = MainManager.Instance.GetStageManager();
+        m_StageMgr = MainManager.Instance.GetStageManager();
         Lunch_Prefabs = new GameObject[6];
         Fire_Prefabs = new GameObject[6];
         Damage_Prefabs = new GameObject[6];
 
         PosAtk = new Transform[6];
         LunchObjects = new GameObject[6];
-    }
-
-    private void Update()
-    {
-        FoundObeject = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
-
-        if(FoundObeject[0] == null)
-        {
-            FoundObeject[0] = GameObject.Find("Boss");
-        }
     }
 
     // BackUp
@@ -1316,38 +1308,42 @@ public class SpiritSkill : MonoBehaviour
     }
 
     // 부채꼴 스킬
-    IEnumerator SectorFormSkill(SpiritSkill_TableExcel skill, GameObject spirit, GameObject SectorFormPrefab)
+    IEnumerator SectorFormSkill(SpiritSkill_TableExcel skill, GameObject spirit, GameObject SectorFormPrefab, int prefabNum)
     {
-        //Vector3 interV = target.position - transform.position;
+        GameObject FindEnemys = FindNearbyEnemy(spirit.transform.position, skill.SkillRange);
+
+        Vector3 interV = FindEnemys.transform.position - transform.position;
 
         // target과 나 사이의 거리가 radius 보다 작다면
-        //if (interV.magnitude <= radius)
-        //{
-        //    // '타겟-나 벡터'와 '내 정면 벡터'를 내적
-        //    float dot = Vector3.Dot(interV.normalized, transform.forward);
-        //    // 두 벡터 모두 단위 벡터이므로 내적 결과에 cos의 역을 취해서 theta를 구함
-        //    float theta = Mathf.Acos(dot);
-        //    // angleRange와 비교하기 위해 degree로 변환
-        //    float degree = Mathf.Rad2Deg * theta;
+        if (interV.magnitude <= radius)
+        {
+            // '타겟-나 벡터'와 '내 정면 벡터'를 내적
+            float dot = Vector3.Dot(interV.normalized, transform.forward);
+            // 두 벡터 모두 단위 벡터이므로 내적 결과에 cos의 역을 취해서 theta를 구함
+            float theta = Mathf.Acos(dot);
+            // angleRange와 비교하기 위해 degree로 변환
+            float degree = Mathf.Rad2Deg * theta;
 
-        //    // 시야각 판별
-        //    if (degree <= angleRange / 2f)
-        //        isCollision = true;
-        //    else
-        //        isCollision = false;
-
-        //}
-        //else
-        //    isCollision = false;
+            // 시야각 판별
+            if (degree <= angleRange / 2f)
+            {
+                isCollision = true;
+                
+            }
+            else
+                isCollision = false;
+        }
+        else
+            isCollision = false;
 
         yield return null;
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Handles.color = isCollision ? _red : _blue;
-    //    // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
-    //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
-    //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
-    //}
+    private void OnDrawGizmos()
+    {
+        Handles.color = isCollision ? _red : _blue;
+        // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
+    }
 }
