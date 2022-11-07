@@ -34,10 +34,6 @@ public class BoardBehaviour : MonoBehaviour
     private GameObject BossGameObject;
     private GameObject PlayerGameObject;
 
-    public List<int> xList; // 못지나가는 타일 x값을 받을 리스트
-    public List<int> yList; // 못지나가는 타일 y값을 받을 리스트
-
-
     void Start()
     {
         int x = 0;
