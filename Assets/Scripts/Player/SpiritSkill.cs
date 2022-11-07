@@ -36,7 +36,9 @@ public class SpiritSkill : MonoBehaviour
     Color _red = new Color(1f, 0, 0);
     Color _blue = new Color(0, 0, 1f);
     public float angleRange;  // Cshape1;
-   // public float radius;// Cshape2;
+    // public float radius;// Cshape2;
+
+    public float recognition = 10;
 
     public void SkillUse(SpiritSkill_TableExcel skillInfo, GameObject Spirit)  //비타일형
 	{
@@ -1311,9 +1313,9 @@ public class SpiritSkill : MonoBehaviour
     // 부채꼴 스킬
     IEnumerator SectorFormSkill(SpiritSkill_TableExcel skill, GameObject spirit, int prefabNum)
     {
-      //  Debug.Log("부채꼴스킬 입장");
+        spirit.transform.rotation = Quaternion.Euler(0, -180f, 0);
         GameObject FindEnemys = FindNearbyEnemy(spirit.transform.position, skill.SkillRange);
-        //spirit.transform.rotation = 
+        spirit.transform.LookAt(FindEnemys.transform);
 
         GameObject tempEffect = null;
         Collider[] colls = null;
@@ -1336,7 +1338,6 @@ public class SpiritSkill : MonoBehaviour
 
         while (true)
         {
-           // Debug.Log("부채꼴스킬 와일문 입장");
             time += Time.deltaTime;
             damageTime += Time.deltaTime;
 
@@ -1349,11 +1350,8 @@ public class SpiritSkill : MonoBehaviour
 
             if(damageTime> skill.DoT)
             {
-               // Debug.Log("부채꼴스킬 dot 입장");
                 damageTime = 0f;
                 colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 9);
-
-              //  Debug.Log($"부채꼴스킬 카운트 : {colls.Length}");
 
                 foreach (var rangeCollider in colls)
                 {
@@ -1367,8 +1365,6 @@ public class SpiritSkill : MonoBehaviour
 
                     if (degree <= angleRange / 2f)
                     {
-                        Debug.Log(rangeCollider.name);
-
                         if (rangeCollider.CompareTag("Boss"))
                         {
                             rangeCollider.GetComponent<BossFSM>().m_BossClass.m_BossStatData.HP -= 100;
@@ -1378,7 +1374,6 @@ public class SpiritSkill : MonoBehaviour
                             rangeCollider.GetComponent<Enemy>().TakeDamage(100);
                         }
                     }
-
                 }
             }
             yield return null;
