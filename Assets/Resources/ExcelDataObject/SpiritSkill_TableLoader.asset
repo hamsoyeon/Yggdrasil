@@ -20,17 +20,17 @@ MonoBehaviour:
     Target: 2
     Power: 5
     SkillRange: 20
-    SkillType: 1
+    SkillType: 4
     BulletSpeed: 1
     TargetNum: 10
     LifeTime: 3.1
     DoT: 0.25
-    Shapeform: 2
-    Cshape1: 360
+    Shapeform: 1
+    Cshape1: 90
     Cshape2: 2
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 0
+    LunchPrefb: 970008
     FirePrefb: 970009
     DamPrefb: 921005
   - Name_KR: "\uB3C5\uAD6C\uB984"

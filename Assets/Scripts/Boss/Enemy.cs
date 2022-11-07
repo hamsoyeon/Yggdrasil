@@ -98,7 +98,7 @@ public class Enemy : MonoBehaviour
 
     private void CalculateDistacveToTargetAndSelectState()
     {
-        Debug.Log($"거리 차이 : {distance}");
+        //Debug.Log($"거리 차이 : {distance}");
         if (target == null)
             return;
 

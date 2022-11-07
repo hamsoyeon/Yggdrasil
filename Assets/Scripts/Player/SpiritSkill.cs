@@ -36,7 +36,7 @@ public class SpiritSkill : MonoBehaviour
     Color _red = new Color(1f, 0, 0);
     Color _blue = new Color(0, 0, 1f);
     public float angleRange;  // Cshape1;
-    public float radius;// Cshape2;
+   // public float radius;// Cshape2;
 
     public void SkillUse(SpiritSkill_TableExcel skillInfo, GameObject Spirit)  //비타일형
 	{
@@ -148,7 +148,8 @@ public class SpiritSkill : MonoBehaviour
                 StartCoroutine(Spirit_Target(skillInfo, tempSpirit, effectNumber));
                 break;
             case SkillType.WIDE_FIX:
-                StartCoroutine(Spirit_Wide_Fix(skillInfo));
+                //StartCoroutine(Spirit_Wide_Fix(skillInfo));
+                StartCoroutine(SectorFormSkill(skillInfo, tempSpirit, effectNumber));
                 break;
             case SkillType.TILE:
                 StartCoroutine(Spirit_Tile(skillInfo, Row, Column, effectNumber));
@@ -1308,42 +1309,79 @@ public class SpiritSkill : MonoBehaviour
     }
 
     // 부채꼴 스킬
-    IEnumerator SectorFormSkill(SpiritSkill_TableExcel skill, GameObject spirit, GameObject SectorFormPrefab, int prefabNum)
+    IEnumerator SectorFormSkill(SpiritSkill_TableExcel skill, GameObject spirit, int prefabNum)
     {
+      //  Debug.Log("부채꼴스킬 입장");
         GameObject FindEnemys = FindNearbyEnemy(spirit.transform.position, skill.SkillRange);
+        //spirit.transform.rotation = 
 
-        Vector3 interV = FindEnemys.transform.position - transform.position;
+        GameObject tempEffect = null;
+        Collider[] colls = null;
 
-        // target과 나 사이의 거리가 radius 보다 작다면
-        if (interV.magnitude <= radius)
+        angleRange = skill.Cshape1;
+
+        float time =0f;
+        float damageTime = 0f;
+
+        DelayAndLunchPrefabSet(prefabNum);
+
+        if (FindEnemys != null)
         {
-            // '타겟-나 벡터'와 '내 정면 벡터'를 내적
-            float dot = Vector3.Dot(interV.normalized, transform.forward);
-            // 두 벡터 모두 단위 벡터이므로 내적 결과에 cos의 역을 취해서 theta를 구함
-            float theta = Mathf.Acos(dot);
-            // angleRange와 비교하기 위해 degree로 변환
-            float degree = Mathf.Rad2Deg * theta;
-
-            // 시야각 판별
-            if (degree <= angleRange / 2f)
-            {
-                isCollision = true;
-                
-            }
-            else
-                isCollision = false;
+            tempEffect = Instantiate(Fire_Prefabs[prefabNum]);
+            tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
+            tempEffect.GetComponent<DamageCheck>().who = 1;
+            tempEffect.GetComponent<DamageCheck>().dmg_check = false;
+            tempEffect.transform.position = FindEnemys.transform.position + new Vector3(0, 5f, 0);
         }
-        else
-            isCollision = false;
 
-        yield return null;
+        while (true)
+        {
+           // Debug.Log("부채꼴스킬 와일문 입장");
+            time += Time.deltaTime;
+            damageTime += Time.deltaTime;
+
+            if (time > skill.LifeTime)
+            {
+                Destroy(LunchObjects[prefabNum]);
+                Destroy(tempEffect);
+                yield break;
+            }
+
+            if(damageTime> skill.DoT)
+            {
+               // Debug.Log("부채꼴스킬 dot 입장");
+                damageTime = 0f;
+                colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 9);
+
+              //  Debug.Log($"부채꼴스킬 카운트 : {colls.Length}");
+
+                foreach (var rangeCollider in colls)
+                {
+                    Vector3 interV = rangeCollider.transform.position - spirit.transform.position;
+                    // '타겟-나 벡터'와 '내 정면 벡터'를 내적
+                    float dot = Vector3.Dot(interV.normalized, spirit.transform.forward);
+                    // 두 벡터 모두 단위 벡터이므로 내적 결과에 cos의 역을 취해서 theta를 구함
+                    float theta = Mathf.Acos(dot);
+                    // angleRange와 비교하기 위해 degree로 변환
+                    float degree = Mathf.Rad2Deg * theta;
+
+                    if (degree <= angleRange / 2f)
+                    {
+                        Debug.Log(rangeCollider.name);
+
+                        if (rangeCollider.CompareTag("Boss"))
+                        {
+                            rangeCollider.GetComponent<BossFSM>().m_BossClass.m_BossStatData.HP -= 100;
+                        }
+                        if(rangeCollider.CompareTag("Mob"))
+                        {
+                            rangeCollider.GetComponent<Enemy>().TakeDamage(100);
+                        }
+                    }
+
+                }
+            }
+            yield return null;
+        }
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Handles.color = isCollision ? _red : _blue;
-    //    // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
-    //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
-    //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
-    //}
 }
