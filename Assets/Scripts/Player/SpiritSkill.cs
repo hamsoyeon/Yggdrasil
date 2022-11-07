@@ -1379,4 +1379,10 @@ public class SpiritSkill : MonoBehaviour
             yield return null;
         }
     }
+
+    IEnumerator RectangleSkill(SpiritSkill_TableExcel skill, GameObject spirit, int prefabNum)
+    {
+
+        yield return null;
+    }
 }
