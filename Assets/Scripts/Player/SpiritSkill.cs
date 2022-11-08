@@ -192,8 +192,6 @@ public class SpiritSkill : MonoBehaviour
             spirit.GetComponent<SpiritMove>().DamPrefab = Damage_Prefabs[effect_num]; // 데미지 프리팹 넣어주기.
             spirit.GetComponent<SpiritMove>().moveSpeed = skill.BulletSpeed;
 
-
-
         }
 
 
@@ -237,17 +235,9 @@ public class SpiritSkill : MonoBehaviour
             else
             {
 
-                Debug.Log("찾은 적의 Count:" + findEnemys.Count);
-
-                // 디버깅용
-                int a = 0;
-
                 GameObject effect = null;
                 foreach (GameObject enemy in findEnemys)
                 {
-                    Debug.Log("찾은 적의 이름:" + a + "." + enemy.name + "적의 포지션 값:" + enemy.transform.position);
-                    Debug.Log("I : " + a + "의 게임 오브젝트 이름:" + enemy.name);
-                    Debug.Log("에너미의 위치" + enemy.transform);
 
                     effect = Instantiate(Fire_Prefabs[effect_num]);
                     effect.GetComponent<LockOn>().m_DamPrefab = Damage_Prefabs[effect_num];
@@ -262,8 +252,7 @@ public class SpiritSkill : MonoBehaviour
                     if (skill.Target == 2)
                         effect.GetComponent<DamageCheck>().dmg_check = false;
 
-
-                    a++;
+                    
                 }
 
                 // 딜레이 및 LunchPrefab셋팅
@@ -1285,39 +1274,6 @@ public class SpiritSkill : MonoBehaviour
         LunchObjects = new GameObject[6];
     }
 
-    // BackUp
-    // NewSkill
-
-    IEnumerator LaserFireAction(GameObject firePrefab, int PrefabNumber ,Vector3 TargetPos, float endTime)
-    {
-
-        GameObject laser = firePrefab;
-        //laser.transform.position = spirit.transform.position;
-        laser.transform.LookAt(TargetPos);
-
-        //Object.Destroy(tempEffect);
-       
-
-        float time = 0f;
-
-        while (true)
-        {
-            time += Time.deltaTime;
-
-            if (time > endTime || (laser.transform.position == TargetPos ) )
-            {
-                Destroy(LunchObjects[PrefabNumber]);
-                Destroy(laser);
-
-                yield break;
-            }
-
-            laser.gameObject.transform.position = Vector3.MoveTowards(laser.gameObject.transform.position, TargetPos, 0.3f);
-
-            yield return null;
-        }
-
-    }
 
     // 부채꼴 스킬
     IEnumerator SectorFormSkill(SpiritSkill_TableExcel skill, GameObject spirit, int prefabNum)

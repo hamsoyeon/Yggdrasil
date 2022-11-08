@@ -73,6 +73,8 @@ public class BossSkill : MonoBehaviour
 
     private StageManager m_StageMgr;
     private bool TargetLockOn = false;
+    private int m_TargetRow;
+    private int m_TargetColumn;
 
     public Transform PlayerPosition; //잡몹의 플레이어 위치를 잡기 위한 변수
 
@@ -262,8 +264,8 @@ public class BossSkill : MonoBehaviour
 
         if (TargetLockOn)
         {
-            Row = m_PlayerRow;
-            Column = m_PlayerColumn;
+            Row = m_TargetRow;
+            Column = m_TargetColumn;
         }
         else
         {
@@ -460,7 +462,12 @@ public class BossSkill : MonoBehaviour
         {
             this.gameObject.GetComponent<BossFSM>().behavior = false;
             if (TargetLockOn)
+            {
                 TargetLockOn = false;
+                m_TargetRow = 0;
+                m_TargetColumn = 0;
+            }
+               
 
         }
         yield break;
@@ -475,6 +482,8 @@ public class BossSkill : MonoBehaviour
         float range = m_CurrentBossSkill.SkillRange - 1.0f;
         float xRange = m_CurrentBossSkill.SkillRange + range;
 
+        m_TargetRow = m_PlayerRow;
+        m_TargetColumn = m_PlayerColumn;
 
 
         //보스 스킬범위를 표시해 주는 부분.
@@ -691,8 +700,11 @@ public class BossSkill : MonoBehaviour
 
         if (TargetLockOn)
         {
-            Row = m_PlayerRow;
-            Column = m_PlayerColumn;
+
+            Row = m_TargetRow;
+            Column = m_TargetColumn;
+            //Row = m_PlayerRow;
+            //Column = m_PlayerColumn;
         }
         else
         {
@@ -1043,8 +1055,13 @@ public class BossSkill : MonoBehaviour
             BossSkillAction(m_CurrentBossSkill.SkillAdded);
         else
         {
+
             if (TargetLockOn)
+            {
                 TargetLockOn = false;
+                m_TargetRow = 0;
+                m_TargetColumn = 0;
+            }
 
             this.gameObject.GetComponent<BossFSM>().behavior = false;
         }
@@ -1107,8 +1124,8 @@ public class BossSkill : MonoBehaviour
 
         if (TargetLockOn)
         {
-            Row = m_PlayerRow;
-            Column = m_PlayerColumn;
+            Row = m_TargetRow;
+            Column = m_TargetColumn;
         }
         else
         {
@@ -1410,7 +1427,11 @@ public class BossSkill : MonoBehaviour
             this.gameObject.GetComponent<BossFSM>().behavior = false;
 
             if (TargetLockOn)
+            {
                 TargetLockOn = false;
+                m_TargetRow = 0;
+                m_TargetColumn = 0;
+            }
         }
 
 
@@ -1475,14 +1496,14 @@ public class BossSkill : MonoBehaviour
 
     }
 
-#if UNITY_EDITOR
-    //씬뷰에서 확인용
-    private void OnDrawGizmos()
-    {
-        UnityEditor.Handles.color = isCollision ? _red : _blue;
-        UnityEditor.Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, distance);
-        UnityEditor.Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, distance);
-    }
-#endif
+//#if UNITY_EDITOR
+//    //씬뷰에서 확인용
+//    private void OnDrawGizmos()
+//    {
+//        UnityEditor.Handles.color = isCollision ? _red : _blue;
+//        UnityEditor.Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, distance);
+//        UnityEditor.Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, distance);
+//    }
+//#endif
 
 }
