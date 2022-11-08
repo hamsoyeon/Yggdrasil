@@ -25,7 +25,7 @@ MonoBehaviour:
     TargetNum: 10
     LifeTime: 3.1
     DoT: 0.25
-    Shapeform: 1
+    Shapeform: 2
     Cshape1: 90
     Cshape2: 2
     SkillAdded: 0

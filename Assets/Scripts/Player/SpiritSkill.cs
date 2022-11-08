@@ -150,9 +150,18 @@ public class SpiritSkill : MonoBehaviour
                 StartCoroutine(Spirit_Target(skillInfo, tempSpirit, effectNumber));
                 break;
             case SkillType.WIDE_FIX:
+                {
+                    if(skillInfo.Shapeform == 1)
+                    {
+                        StartCoroutine(SectorFormSkill(skillInfo, tempSpirit, effectNumber));
+                    }
+                    if(skillInfo.Shapeform == 2)
+                    {
+                        StartCoroutine(RectangleSkill(skillInfo, tempSpirit, effectNumber));
+                    }
+                    break;
+                }
                 //StartCoroutine(Spirit_Wide_Fix(skillInfo));
-                StartCoroutine(SectorFormSkill(skillInfo, tempSpirit, effectNumber));
-                break;
             case SkillType.TILE:
                 StartCoroutine(Spirit_Tile(skillInfo, Row, Column, effectNumber));
                 break;
@@ -1322,7 +1331,7 @@ public class SpiritSkill : MonoBehaviour
 
         angleRange = skill.Cshape1;
 
-        float time =0f;
+        float time = 0f;
         float damageTime = 0f;
 
         DelayAndLunchPrefabSet(prefabNum);
@@ -1382,7 +1391,59 @@ public class SpiritSkill : MonoBehaviour
 
     IEnumerator RectangleSkill(SpiritSkill_TableExcel skill, GameObject spirit, int prefabNum)
     {
+        spirit.transform.rotation = Quaternion.Euler(0, -180f, 0);
+        GameObject FindEnemys = FindNearbyEnemy(spirit.transform.position, skill.SkillRange);
+        spirit.transform.LookAt(FindEnemys.transform);
 
-        yield return null;
+        GameObject tempEffect = null;
+        Collider[] colls = null;
+
+        angleRange = skill.Cshape1;
+
+        float time = 0f;
+        float damageTime = 0f;
+
+        DelayAndLunchPrefabSet(prefabNum);
+
+        if (FindEnemys != null)
+        {
+            tempEffect = Instantiate(Fire_Prefabs[prefabNum]);
+            tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
+            tempEffect.GetComponent<DamageCheck>().who = 1;
+            tempEffect.GetComponent<DamageCheck>().dmg_check = false;
+            tempEffect.transform.position = FindEnemys.transform.position + new Vector3(0, 5f, 0);
+        }
+
+        while (true)
+        {
+            time += Time.deltaTime;
+            damageTime += Time.deltaTime;
+
+            if (time > skill.LifeTime)
+            {
+                Destroy(LunchObjects[prefabNum]);
+                Destroy(tempEffect);
+                yield break;
+            }
+
+            if (damageTime > skill.DoT)
+            {
+                damageTime = 0f;
+                colls = Physics.OverlapBox(spirit.transform.position, new Vector3(2, 1, skill.SkillRange) * 0.5f, spirit.transform.rotation , 1 << 9);
+
+                foreach (var rangeCollider in colls)
+                {
+                    if (rangeCollider.CompareTag("Boss"))
+                    {
+                        rangeCollider.GetComponent<BossFSM>().m_BossClass.m_BossStatData.HP -= 100;
+                    }
+                    if (rangeCollider.CompareTag("Mob"))
+                    {
+                        rangeCollider.GetComponent<Enemy>().TakeDamage(100);
+                    }
+                }
+            }
+            yield return null;
+        }
     }
 }
