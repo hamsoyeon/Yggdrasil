@@ -186,6 +186,8 @@ public class SpiritSkill : MonoBehaviour
         }
         else  // 널이 아니라면.
         {
+            spirit.transform.LookAt(findEnemy.transform);
+
             // SpiritMove에 근접공격을 해야할 대상을 저장.
             spirit.GetComponent<SpiritMove>().isMove = true;
             spirit.GetComponent<SpiritMove>().TargetEnemy = findEnemy; // 근처에 가장 가까운적 넣어주기.
@@ -234,6 +236,8 @@ public class SpiritSkill : MonoBehaviour
             }
             else
             {
+
+                spirit.transform.LookAt(findEnemys[0].transform);
 
                 GameObject effect = null;
                 foreach (GameObject enemy in findEnemys)

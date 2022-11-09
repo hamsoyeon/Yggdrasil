@@ -691,8 +691,6 @@ public class BossSkill : MonoBehaviour
 
     IEnumerator SkillLineAction()
     {
-
-
         LineSkillTarget = GameObject.Find("Player").transform.GetChild(0).gameObject;
 
         int Row = 0;
@@ -726,7 +724,8 @@ public class BossSkill : MonoBehaviour
         //각도의 범위를 고정으로
         if (tempAngle > 0 && tempAngle <= 45)
         {
-            tempAngle = 45;
+            //tempAngle = 45;
+            tempAngle = 30;
             checkIndex = 0;
         }
         else if (tempAngle > 45 && tempAngle <= 90)
@@ -736,12 +735,14 @@ public class BossSkill : MonoBehaviour
         }
         else if (tempAngle > 90 && tempAngle <= 180)
         {
-            tempAngle = 135;
+            //tempAngle = 135;
+            tempAngle = 150;
             checkIndex = 2;
         }
         else if (tempAngle > 180 && tempAngle <= 225)
         {
-            tempAngle = 225;
+            //tempAngle = 225;
+            tempAngle = 210;
             checkIndex = 3;
         }
         else if (tempAngle > 225 && tempAngle <= 270)
@@ -751,7 +752,8 @@ public class BossSkill : MonoBehaviour
         }
         else if (tempAngle > 270 && tempAngle <= 360)
         {
-            tempAngle = 315;
+            //tempAngle = 315;
+            tempAngle = 330;
             checkIndex = 5;
         }
 
@@ -768,7 +770,6 @@ public class BossSkill : MonoBehaviour
         for (int i = 0; i < OriginArr.Length; i++)
         {
 
-           
             //Row
             if (i == 0 || i == 5)
             {
@@ -777,6 +778,8 @@ public class BossSkill : MonoBehaviour
             else if (i == 2 || i == 3)
             {
                 OriginArr[i].row = Row + 1;
+
+               
             }
 
             if (i == 1 || i == 4)
@@ -900,8 +903,10 @@ public class BossSkill : MonoBehaviour
                         if ((tempCDLARR[j].column >= 0 && tempCDLARR[j].column < 6) && (tempCDLARR[j].row >= 0 && tempCDLARR[j].row < 5))
                         {
                             m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
-                            
-                            if(!m_CurrentBossSkill.SingleTile)
+                           
+
+
+                            if (!m_CurrentBossSkill.SingleTile)
                             {
                                 m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].BossEffect = true;
                                 m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].EmptyEffect = false;
@@ -983,8 +988,9 @@ public class BossSkill : MonoBehaviour
                         if ((tempCDLARR[j].column >= 0 && tempCDLARR[j].column < 6) && (tempCDLARR[j].row >= 0 && tempCDLARR[j].row < 5))
                         {
                             m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
-                            
-                            if(!m_CurrentBossSkill.SingleTile)
+                           
+
+                            if (!m_CurrentBossSkill.SingleTile)
                             {
                                 m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].BossEffect = true;
                                 m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].EmptyEffect = false;
@@ -1081,7 +1087,10 @@ public class BossSkill : MonoBehaviour
             Object.Destroy(m_StageMgr.m_MapInfo[i, j].BossDelayObject);
             m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
             GameObject effect = Instantiate(firePrefab);
+
+
             //effect.transform.rotation += Quaternion.Euler(0, angle, 0);
+
             effect.transform.rotation = Quaternion.Euler(effect.transform.rotation.x, angle, effect.transform.rotation.z);
 
 
