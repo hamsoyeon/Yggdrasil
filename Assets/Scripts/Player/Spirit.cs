@@ -287,8 +287,10 @@ public class Spirit : MonoBehaviour
 
     private void Awake()
     {
+        //쿨타임 배열 생성
         CoolTimeArr = new float[6];
 
+        //쿨타임 배열에 값 넣기
         for (int i = 0; i < DataTableManager.Instance.GetDataTable<Spirit_TableExcelLoader>().DataList.Count; i++)
         {
             CoolTimeArr[i] = DataTableManager.Instance.GetDataTable<Spirit_TableExcelLoader>().DataList[i].CoolTime;

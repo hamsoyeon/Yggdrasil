@@ -190,6 +190,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         SkillCollTime = new float[6];
+        //스피릿에서 넣은 쿨타임 배열 받아오기
         SkillCollTime = (float[])GetComponent<Spirit>().CoolTimeArr.Clone();
         characterController = GetComponent<CharacterController>();
         cam = GetComponent<FollowCam>();
