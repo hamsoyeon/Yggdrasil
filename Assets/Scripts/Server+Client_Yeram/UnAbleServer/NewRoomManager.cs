@@ -38,7 +38,8 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
 
 
     // ------------------------------------ 추가한 내용(남진)
-
+    [Space (10f)]
+    [Header("스킬 설명")]
     // 스킬 설명 패널 
     [SerializeField]
     private GameObject m_skInfoPanel;
