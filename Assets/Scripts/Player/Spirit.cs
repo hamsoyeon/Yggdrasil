@@ -74,6 +74,8 @@ public class Spirit : MonoBehaviour
         //정령을 소환한다.(코루틴으로 정령을 소환)
         GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
 
+        tempSpirit.transform.rotation = Quaternion.Euler(0, 180, 0);
+
         SpiritMove moveCheck;
         moveCheck = tempSpirit.GetComponent<SpiritMove>();
         if (moveCheck == null)
@@ -149,6 +151,8 @@ public class Spirit : MonoBehaviour
 	{
 		//정령을 소환한다.(코루틴으로 정령을 소환)
 		GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
+        tempSpirit.transform.rotation = Quaternion.Euler(0, 180, 0);
+
 
         SpiritMove moveCheck;
         moveCheck = tempSpirit.GetComponent<SpiritMove>();
@@ -216,6 +220,8 @@ public class Spirit : MonoBehaviour
 	{
 		//정령을 소환한다.(코루틴으로 정령을 소환)
 		GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
+        tempSpirit.transform.rotation = Quaternion.Euler(0, 180, 0);
+
         SpiritMove moveCheck;
         moveCheck = tempSpirit.GetComponent<SpiritMove>();
         if (moveCheck == null)

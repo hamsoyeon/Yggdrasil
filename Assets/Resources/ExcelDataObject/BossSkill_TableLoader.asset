@@ -23,7 +23,7 @@ MonoBehaviour:
     CoolTime: 1
     SkillDistance: 3
     SkillRange: 4
-    SkillType: 5
+    SkillType: 3
     UseStat: 20
     Direction1: 1
     Direction2: 0
