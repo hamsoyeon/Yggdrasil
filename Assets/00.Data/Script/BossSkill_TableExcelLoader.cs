@@ -11,8 +11,8 @@ public struct BossSkill_TableExcel
 	public int Target;
 	public float Power;
 	public float CoolTime;
-	public float SkillDistance;
 	public float SkillRange;
+	public float SkillDistance;
 	public float SkillType;
 	public float UseStat;
 	public bool Direction1;
@@ -60,8 +60,8 @@ public class BossSkill_TableExcelLoader :ScriptableObject
 		data.Target = int.Parse(strs[idx++]);
 		data.Power = float.Parse(strs[idx++]);
 		data.CoolTime = float.Parse(strs[idx++]);
-		data.SkillDistance = float.Parse(strs[idx++]);
 		data.SkillRange = float.Parse(strs[idx++]);
+		data.SkillDistance = float.Parse(strs[idx++]);
 		data.SkillType = float.Parse(strs[idx++]);
 		data.UseStat = float.Parse(strs[idx++]);
 		data.Direction1 = bool.Parse(strs[idx++]);
