@@ -37,12 +37,14 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
     private Button[] m_SelectChar_Btn;
 
 
-    // ------------------------------------ 추가한 내용(남진)
+    // ------------------------------------ 추가한 내용(남진) by Value
     [Space (10f)]
     [Header("스킬 설명")]
+
     // 스킬 설명 패널 
-    [SerializeField]
-    private GameObject m_skInfoPanel;
+    public GameObject m_skInfoPanel;
+
+    
 
     // 영상 들어갈 변수
     [SerializeField]
@@ -51,8 +53,13 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
     // 스킬 아이콘 이미지를 받을 변수 (Resource에 있는 img폴더에 있는 리소스들을 가지고 옴)
     private Spirit[] m_skImg;
 
-    // 버튼 6개 생성 후(Room/Player_BackImg/Image~Image(5)) -> 버튼을 클릭하면 설명 패널창이 나온다.
-    public List<Button> m_buttons;
+    // 버튼 7개 생성 후(Room/Player_BackImg/Image~Image(5) => ShowButton(6) + HideButton(1)) -> 버튼을 클릭하면 설명 패널창이 나온다.
+    public List<Button> m_skButtons;
+
+    // 스킬 설명 및 선택 창이 켜져 있는지의 여부(켜져있으면 = TRUE)
+    private bool m_isInfo = false;
+
+
 
     // ---------------------------------------------------------
 
@@ -106,4 +113,23 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
         Map_ViewChange(0);
         OnClick_Decide_Map(0);
     }
+
+    // ------------------------------------ 추가한 내용(남진) by Method
+
+    public void ShowInfoPanel()
+    {
+        m_isInfo = true;
+        m_skInfoPanel.SetActive(m_isInfo);
+
+    }
+
+    public void HideInfoPanel()
+    {
+        m_isInfo = false;
+        m_skInfoPanel.SetActive(false);
+    }
+
+
+    // ---------------------------------------------------------
+
 }
