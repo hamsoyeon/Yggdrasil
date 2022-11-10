@@ -47,6 +47,7 @@ public class SelectChar : MonoBehaviour
                 select_Img[i].color = new Color(255 / 255f, 255 / 255f, 255 / 255f, 255 / 255f);
             }
         }
+
     }
     public void OnClickRightBtn()
     {
