@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -55,6 +55,30 @@ public class SEManager : MonoBehaviour
         }
     }
 
+    public void LoopPlaySE(string key)
+    {
+        if (se_map.ContainsKey(key) == false)
+        {
+            Debug.LogError(key + " SE가 SEManager에 없습니다.");
+        }
+        else
+        {
+            LoopPlaySound(se_map[key]);
+        }
+    }
+
+    public void StopSE(string key)
+    {
+        if(se_map.ContainsKey(key) == false)
+        {
+            Debug.LogError(key + " SE가 SEManager에 없습니다.");
+        }
+        else
+        {
+            StopSound(se_map[key]);
+        }
+    }
+
     void PlaySound(AudioClip clip)
     {
         AudioSource availableAS = null;
@@ -76,5 +100,44 @@ public class SEManager : MonoBehaviour
         }
         availableAS.clip = clip;
         availableAS.Play();
+    }
+
+    void LoopPlaySound(AudioClip clip)
+    {
+        AudioSource availableAS = null;
+        foreach (var AS in audioPool)
+        {
+            if (AS.isPlaying == false)
+            {
+                availableAS = AS;
+                break;
+            }
+        }
+
+        if (availableAS == null)
+        {
+            availableAS = gameObject.AddComponent<AudioSource>();
+            audioPool.Add(availableAS);
+            availableAS.playOnAwake = false;
+            availableAS.loop = true;
+        }
+        availableAS.clip = clip;
+        availableAS.Play();
+    }
+
+    void StopSound(AudioClip clip)
+    {
+        AudioSource avilableAS = null;
+        foreach(var AS in audioPool)
+        {
+            if(AS.isPlaying == true)
+            {
+                avilableAS = AS;
+                break;
+            }
+        }
+
+        avilableAS.clip = clip;
+        avilableAS.Stop();
     }
 }
