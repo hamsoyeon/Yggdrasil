@@ -44,22 +44,39 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
     // 스킬 설명 패널 
     public GameObject m_skInfoPanel;
 
-    
+
+    [SerializeField]
+    // 스킬 아이콘 패널
+    private GameObject m_IconPanel;
+
+
+    // 유저가 고른 스킬 버튼
+    public List<Button> m_skillButtons;
+
+
+    // 스킬 버튼 리스트.
+    public List<Button> m_skBtnList;
+
+
 
     // 영상 들어갈 변수
     [SerializeField]
     private RawImage m_skVideo;
 
+    [SerializeField]
     // 스킬 아이콘 이미지를 받을 변수 (Resource에 있는 img폴더에 있는 리소스들을 가지고 옴)
     private Sprite[] m_skImg;
 
-    // 버튼 7개 생성 후(Room/Player_BackImg/Image~Image(5) => ShowButton(6) + HideButton(1)) -> 버튼을 클릭하면 설명 패널창이 나온다.
-    public List<Button> m_skButtons;
+    
 
     // 스킬 설명 및 선택 창이 켜져 있는지의 여부(켜져있으면 = TRUE)
     private bool m_isInfo = false;
 
-    private List<int> m_CheckIcon;
+    // 선택한 아이콘을 블러처리할 
+    private List<int> m_blurIcon;
+
+    private int m_selectNumber = -1;
+    private int[] m_prevNumber;
 
     // ---------------------------------------------------------
 
@@ -71,9 +88,39 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
         Init_Map();
         Select_Map_Btn();
 
-        //m_skImg = Resources.LoadAll<Sprite>("Prefabs/Icon"); // Prefabs/Icon폴더에리소스 가져오기.
-        
+       
+        // 아이콘 패널 가져오기.
+        m_IconPanel = m_skInfoPanel.transform.Find("IconPanel").gameObject;
 
+        // 스프라이트 생성 및 할당.
+        //m_skImg = new Sprite[16];
+        m_skImg = Resources.LoadAll<Sprite>("Icon"); // Icon폴더에리소스 가져오기.
+
+        for (int i=0; i<16; i++)
+        {
+            int a = i;
+            m_skBtnList[i] = m_IconPanel.transform.GetChild(i).gameObject.GetComponent<Button>(); //버튼 할당.
+            m_skBtnList[i].interactable = true;
+            m_skBtnList[i].GetComponent<Image>().sprite = m_skImg[i];
+            m_skBtnList[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(-190f + (i%4)*120 , 230f - (i/4)*150, 0.0f);
+            m_skBtnList[i].onClick.AddListener(() => GetSkillInfo(a));
+        }
+
+        // 버튼들 비활성화 처리.
+        for (int i = 0; i < m_skillButtons.Count; i++)
+        {
+            int a = i;
+            m_skillButtons[i].interactable = false;
+            m_skillButtons[i].onClick.AddListener(() => SetSkillBtn(a));
+            
+           
+        }
+
+        m_prevNumber = new int[6];
+        for(int i=0;i<m_prevNumber.Length;i++)
+        {
+            m_prevNumber[i] = -1;
+        }    
 
 
 
@@ -126,17 +173,81 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
     public void ShowInfoPanel()
     {
         m_isInfo = true;
-        m_skInfoPanel.SetActive(m_isInfo);
+        m_skInfoPanel.SetActive(true);
+
+        // 버튼들 활성화 처리.
+        for (int i = 0; i < m_skillButtons.Count; i++)
+            m_skillButtons[i].interactable = true;
 
     }
 
+    
     public void HideInfoPanel()
     {
         m_isInfo = false;
         m_skInfoPanel.SetActive(false);
+
+        // 버튼들 비활성화 처리.
+        for (int i = 0; i < m_skillButtons.Count; i++)
+            m_skillButtons[i].interactable = false;
     }
 
 
+    // 현재 선택한 버튼 셋팅
+    public void SetSkillBtn(int index)
+    {
+        m_selectNumber = index;
+        Debug.Log($"{index}번째 버튼 들어옴");
+    }
+
+    public void GetSkillInfo(int index)
+    {
+        // 예외처리 
+        if(m_selectNumber <0)
+        {
+            Debug.Log("버튼이 선택되지 않았습니다.");
+            return;
+        }
+
+        if(m_skBtnList[index].GetComponent<Image>().color.a != 1.0f)
+        {
+            Debug.Log("이미 선택한 스킬입니다.");
+            return;
+        }
+
+
+        if(m_prevNumber[m_selectNumber] == -1)
+        {
+            // 처음 선택하는 거라면...
+            m_skillButtons[m_selectNumber].GetComponent<Image>().sprite = m_skBtnList[index].GetComponent<Image>().sprite;
+            Color color = m_skBtnList[index].GetComponent<Image>().color;
+            color.a = 0.5f;
+            m_skBtnList[index].GetComponent<Image>().color = color;
+            m_prevNumber[m_selectNumber] = index;
+        }
+        else
+        {
+            // 이미 선택된 거라면
+            Color color = m_skBtnList[m_prevNumber[m_selectNumber]].GetComponent<Image>().color;
+            color.a = 1.0f;
+            m_skBtnList[m_prevNumber[m_selectNumber]].GetComponent<Image>().color = color;
+
+            m_skillButtons[m_selectNumber].GetComponent<Image>().sprite = m_skBtnList[index].GetComponent<Image>().sprite;
+            color = m_skBtnList[index].GetComponent<Image>().color;
+            color.a = 0.5f;
+            m_skBtnList[index].GetComponent<Image>().color = color;
+            m_prevNumber[m_selectNumber] = index;
+
+        }
+
+   
+
+
+        // 선택된 
+        Debug.Log($"IconPanel -> {index}번째 버튼 들어옴");
+    }
+
+   
     
     public void ShowSkillList()
     {
@@ -152,6 +263,11 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
 
 
     }
+
+
+    
+
+
 
     // ---------------------------------------------------------
 
