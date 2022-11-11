@@ -790,6 +790,11 @@ public class SpiritSkill : MonoBehaviour
         tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
         tempEffect.GetComponent<DamageCheck>().who = 1;
 
+        if(skill.SpritSkillIndex == 1)
+        {
+            SEManager.instance.PlaySE("Heal1");
+        }
+
         int number = n;
 
         //버프 스킬이 있는지 확인후 스킬실행.
