@@ -36,12 +36,15 @@ public class BossSkill : MonoBehaviour
     public GameObject LunchPrefab;   // PosAtk의 위치에서 발생되는 이펙트
     public GameObject DelayPrefab;   // 딜레이 시 나올 프리팹.
     public GameObject EmptyPrefab;   // SingleTile일때 데미지 판정을 위한 임시 이펙트
+    public GameObject DebuffTilePrefab; //디버프 타일 생성에 사용할 프리팹
     public Transform PosAtk;
     private Animator anim;
 
     public float angleRange = 60f;
     public float distance = 5f;
     public bool isCollision = false;
+    //디버프 타일 지속시간 임시 변수
+    public float DelayTime = 10f;
     Color _origin = new Color(0f, 0.541f, 0.603f, 0.784f); //원래대로 돌릴 색깔
 
     private int m_PlayerRow;
@@ -54,6 +57,8 @@ public class BossSkill : MonoBehaviour
     private bool TargetLockOn = false;
     private int m_TargetRow;
     private int m_TargetColumn;
+
+    bool DebuffTile;
 
     public Transform PlayerPosition; //잡몹의 플레이어 위치를 잡기 위한 변수
     public BossSkill_TableExcel m_CurrentBossSkill;
@@ -911,10 +916,12 @@ public class BossSkill : MonoBehaviour
 
     private void checkSettingEffect(int i,int j, float angle =0)
     {
+        
+
         if (m_StageMgr.m_MapInfo[i, j].BossEffect)
         {
             Object.Destroy(m_StageMgr.m_MapInfo[i, j].BossDelayObject);
-            m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
+            //m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
             GameObject effect = Instantiate(firePrefab);
 
             effect.transform.rotation = Quaternion.Euler(effect.transform.rotation.x, angle, effect.transform.rotation.z);
@@ -943,6 +950,14 @@ public class BossSkill : MonoBehaviour
                 effect.GetComponent<DamageCheck>().buffIndex = m_CurrentBossSkill.BuffAdded;
             }
             m_StageMgr.m_MapInfo[i, j].BossEmptyObject = effect;
+        }
+
+        if (DebuffTile)
+        {
+            GameObject effect = Instantiate(DebuffTilePrefab);
+            effect.transform.rotation = Quaternion.Euler(effect.transform.rotation.x, angle, effect.transform.rotation.z);
+            effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
+            m_StageMgr.m_MapInfo[i, j].BossDebuffTileObjcet = effect;
         }
     }
 
@@ -1467,24 +1482,11 @@ public class BossSkill : MonoBehaviour
             }
         }
 
-        Debug.Log("방출(도넛) 스킬 종료");
+        Debug.Log("디버프 타일 생성 스킬 종료");
+
+        //지속시간이 끝난 후에 타일의 색상을 변경
+        yield return new WaitForSeconds(DelayTime);
         StartCoroutine(AllTileOriginColor());
-
-        //디버프 타일 생성 스킬은 연계스킬이 없는게 나을듯
-        //연계스킬있는지 확인후 다시 스킬실행.
-        //if (m_CurrentBossSkill.SkillAdded != 0)
-        //    BossSkillAction(m_CurrentBossSkill.SkillAdded);
-        //else
-        //{
-        //    this.gameObject.GetComponent<BossFSM>().behavior = false;
-
-        //    if (TargetLockOn)
-        //    {
-        //        TargetLockOn = false;
-        //        m_TargetRow = 0;
-        //        m_TargetColumn = 0;
-        //    }
-        //}
         yield break;
     }
 

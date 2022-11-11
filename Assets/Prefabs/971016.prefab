@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyClass: {fileID: 0}
   dmg_check: 1
-  DamageEffect: {fileID: 5006970940163314085, guid: b1806d82e1729834db45e2395dd40d12, type: 3}
+  m_DamageEffect: {fileID: 0}
   who: 0
   Dot: 0
   buffIndex: 0
@@ -105,6 +105,30 @@ PrefabInstance:
     - target: {fileID: 473300, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800656, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19822286, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19846720, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19868000, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19869168, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19889422, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: looping
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
