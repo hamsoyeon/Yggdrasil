@@ -59,6 +59,8 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
     // 스킬 설명 및 선택 창이 켜져 있는지의 여부(켜져있으면 = TRUE)
     private bool m_isInfo = false;
 
+    private List<int> m_CheckIcon;
+
     // ---------------------------------------------------------
 
 
@@ -134,10 +136,17 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
         m_skInfoPanel.SetActive(false);
     }
 
+
+    
     public void ShowSkillList()
     {
+
+        // 여기서 스프라이트 이미지 배치.
         for(int i=0; i< m_skImg.Length; i++)
         {
+            //m_skImg
+
+            // if( m_CheckIcon의 있는 인덱스는 블러처리)
 
         }
 
