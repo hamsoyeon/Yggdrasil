@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DamageCheck : MonoBehaviour
 {
-
     public CharacterClass EnemyClass;
     public bool dmg_check = false;
     public GameObject m_DamageEffect;  //해당 이펙트의 피격된 적의 PosBody에 생성.
@@ -14,10 +13,6 @@ public class DamageCheck : MonoBehaviour
     private Buff BuffClass;
 
     private Transform PosBody;
-
-    
-   
-
 
 	private float minDamage;
 	private float resultDamage;
@@ -30,18 +25,10 @@ public class DamageCheck : MonoBehaviour
 
 	public float Dot;
 
-
     public int buffIndex;         //Dot시간이 될때마다 Buff.cs파일의 Buff()혹은 DeBuff()를 실행시켜서 버프/디버프의 추가 or 지속시간 갱신을 시킨다.
 
     void Start()
     {
-
-        //Instantiate(DamageEffect, PosBody);
-        //TempLunch.transform.SetParent(PosBody);
-        //TempLunch.transform.position = PosBody.position;
-        //Instantiate(DamageEffect, PosBody);
-
-
         if (dmg_check)
         {
             Collider[] cols = Physics.OverlapSphere(transform.position, 12f);
@@ -65,8 +52,6 @@ public class DamageCheck : MonoBehaviour
                                 EnemyClass = cols[i].GetComponent<CharacterClass>();
                                 //PlayerClass = GameObject.Find("Player").GetComponent<CharacterClass>();
                                 PlayerClass = GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>();
-
-
 
                                 if (cols[i].tag == "Boss")
                                 {
@@ -169,7 +154,6 @@ public class DamageCheck : MonoBehaviour
         if (dmg_check)
         {
             time += Time.deltaTime;
-
             if (time >= Dot)
             {
                 time = 0f;
@@ -179,14 +163,12 @@ public class DamageCheck : MonoBehaviour
                 {
                     for (int i = 0; i < cols.Length; i++)
                     {
-
                         switch (who)
                         {
                             case 1:
                                 if (cols[i].tag == "Boss" || cols[i].tag == "Mob")
                                 {
                                     Debug.Log("적 이펙트 충돌");
-
 
                                     if (cols[i].tag == "Boss")
                                     {
@@ -197,7 +179,6 @@ public class DamageCheck : MonoBehaviour
                                             minDamage = 1;
 
                                         resultDamage = (minDamage * power) * EnemyClass.Invincibility;
-
 
                                         EnemyClass.m_BossStatData.HP -= resultDamage;
                                         //해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
@@ -228,9 +209,6 @@ public class DamageCheck : MonoBehaviour
                                         resultDamage = minDamage * power;
 
                                         cols[i].GetComponent<Enemy>().TakeDamage((int)resultDamage);
-
-
-
                                     }
                                 }
                                 break;

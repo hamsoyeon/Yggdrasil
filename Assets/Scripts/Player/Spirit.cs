@@ -83,8 +83,6 @@ public class Spirit : MonoBehaviour
             tempSpirit.AddComponent<SpiritMove>();
         }
 
-
-
         Animator anim = tempSpirit.transform.GetChild(0).GetComponent<Animator>();
 
         if (anim == null)
@@ -113,7 +111,6 @@ public class Spirit : MonoBehaviour
 			//지속시간 체크
 			spirit_time += Time.deltaTime;
 			attack_time += Time.deltaTime;
-
 
             if(spirit_time >= animation_length && !setIdle)
             {
@@ -209,7 +206,6 @@ public class Spirit : MonoBehaviour
 			}
 			yield return null;
 		}
-
 	}
 
 	IEnumerator NonTileSpiritByMove(Spirit_TableExcel spiritInfo, SpiritSkill_TableExcel skillInfo)
@@ -224,7 +220,6 @@ public class Spirit : MonoBehaviour
         {
             tempSpirit.AddComponent<SpiritMove>();
         }
-
 
         Animator anim = tempSpirit.transform.GetChild(0).GetComponent<Animator>();
         if (anim == null)
@@ -293,21 +288,10 @@ public class Spirit : MonoBehaviour
         }
     }
 
-
     private void Start()
 	{
 		m_SpiritSkill = this.GetComponent<SpiritSkill>();
 		m_SpiritClass = this.GetComponent<CharacterClass>();
 		m_SpiritClass.m_SkillMgr.m_SpiritSkill = m_SpiritSkill;
 	}
-
-
-
-
-
-
-
-	
-
-
 }

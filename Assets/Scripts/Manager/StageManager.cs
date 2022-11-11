@@ -13,6 +13,7 @@ namespace MapInformation
         public GameObject BossEffectObject;
         public GameObject BossDelayObject;
         public GameObject BossEmptyObject;
+        public GameObject BossDebuffTileObjcet;
         public bool Spirit;
         public GameObject SpiritEffectObject1;  // 타일형 스킬1
         public GameObject SpiritEffectObject2;  // 타일형 스킬2
