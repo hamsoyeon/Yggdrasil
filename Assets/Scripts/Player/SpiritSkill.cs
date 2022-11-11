@@ -38,7 +38,15 @@ public class SpiritSkill : MonoBehaviour
     public float angleRange;  // Cshape1;
     // public float radius;// Cshape2;
 
+    private float minDamage;
+    private float resultDamage;
+    private float power;
+    private CharacterClass PlayerClass;
+    public CharacterClass EnemyClass;
+
     public float recognition = 10;
+
+    Coroutine coroutine;
 
     public void SkillUse(SpiritSkill_TableExcel skillInfo, GameObject Spirit)  //비타일형
 	{
@@ -140,30 +148,60 @@ public class SpiritSkill : MonoBehaviour
         switch ((SkillType)skillInfo.SkillType)
         {
             case SkillType.ATTACK:
-                
-                StartCoroutine(Spirit_Attack(skillInfo, tempSpirit, effectNumber));
+                if(coroutine != null)
+                {
+
+                    coroutine = null;
+                }
+                else
+                    coroutine = StartCoroutine(Spirit_Attack(skillInfo, tempSpirit, effectNumber));
                 break;
             case SkillType.WIDE_MOVE:
-                StartCoroutine(Spirit_Wide_Move(skillInfo));
+                if (coroutine != null)
+                {
+
+                    coroutine = null;
+                }
+                else
+                    coroutine = StartCoroutine(Spirit_Wide_Move(skillInfo));
                 break;
             case SkillType.TARGET:
-                StartCoroutine(Spirit_Target(skillInfo, tempSpirit, effectNumber));
+                if (coroutine != null)
+                {
+
+                    coroutine = null;
+                }
+                else
+                    coroutine = StartCoroutine(Spirit_Target(skillInfo, tempSpirit, effectNumber));
                 break;
             case SkillType.WIDE_FIX:
                 {
-                    if(skillInfo.Shapeform == 1)
+                    if (coroutine != null)
                     {
-                        StartCoroutine(SectorFormSkill(skillInfo, tempSpirit, effectNumber));
+
+                        coroutine = null;
                     }
-                    if(skillInfo.Shapeform == 2)
+                    else
                     {
-                        StartCoroutine(RectangleSkill(skillInfo, tempSpirit, effectNumber));
+                        if (skillInfo.Shapeform == 1)
+                        {
+                            coroutine = StartCoroutine(SectorFormSkill(skillInfo, tempSpirit, effectNumber));
+                        }
+                        if (skillInfo.Shapeform == 2)
+                        {
+                            coroutine = StartCoroutine(RectangleSkill(skillInfo, tempSpirit, effectNumber));
+                        }
                     }
                     break;
                 }
                 //StartCoroutine(Spirit_Wide_Fix(skillInfo));
             case SkillType.TILE:
-                StartCoroutine(Spirit_Tile(skillInfo, Row, Column, effectNumber));
+                if(coroutine != null)
+                {
+                    coroutine = null;
+                }
+                else
+                    coroutine = StartCoroutine(Spirit_Tile(skillInfo, Row, Column, effectNumber));
                 break;
         }
 
@@ -292,7 +330,6 @@ public class SpiritSkill : MonoBehaviour
 
     IEnumerator Spirit_Tile(SpiritSkill_TableExcel skill, int row, int column, int n)
     {
-
         int Row = row;
         int Column = column;
         int number = n;
@@ -315,20 +352,16 @@ public class SpiritSkill : MonoBehaviour
 
             for (float i = 0; i < skill.SkillRange; i += 1.0f)
             {
-
                 checkRow_P = Row + (int)i;
                 checkRow_M = Row - (int)i;
-
 
                 if (checkRow_P % 2 == 1) //024(135라인)
                     saveColumn++;
 
                 for (float j = 0; j < xRange; j += 1.0f)
                 {
-
                     if (i != 0) //정령이 있는 라인의 +-1라인씩 그림.
                     {
-
                         checkColumn = saveColumn + (int)j;
 
                         if (checkColumn < 0 || checkColumn > 5)
@@ -338,20 +371,16 @@ public class SpiritSkill : MonoBehaviour
                         {
                             m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
                             m_StageMgr.m_MapInfo[checkRow_P, checkColumn].SpiritEffect1 = true;
-
                         }
 
                         if (checkRow_M >= 0)
                         {
                             m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
                             m_StageMgr.m_MapInfo[checkRow_M, checkColumn].SpiritEffect1 = true;
-
                         }
-
                     }
                     else  //정령이 있는 라인을 쭉그림.
                     {
-
                         checkColumn = Column - (int)range + (int)j;
 
                         if (j == 0)
@@ -363,10 +392,7 @@ public class SpiritSkill : MonoBehaviour
                         m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.blue;
                         m_StageMgr.m_MapInfo[Row, checkColumn].SpiritEffect1 = true;
                     }
-
-
                 }
-
                 xRange -= 1.0f;
             }
         }
@@ -374,7 +400,6 @@ public class SpiritSkill : MonoBehaviour
         {
             m_StageMgr.m_MapInfo[Row, Column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
             m_StageMgr.m_MapInfo[Row, Column].SpiritEffect1 = true;
-
         }
 
         DelayAndLunchPrefabSet(number);
@@ -385,7 +410,6 @@ public class SpiritSkill : MonoBehaviour
         {
             for (int j = 0; j < m_StageMgr.mapX; j++)
             {
-
                 if (m_StageMgr.m_MapInfo[i, j].SpiritEffect1)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
@@ -396,20 +420,16 @@ public class SpiritSkill : MonoBehaviour
                     //버프 스킬이 있는지 확인후 스킬실행.
                     if (skill.BuffAdded != 0)
                     {
-
                         effect.GetComponent<DamageCheck>().buffIndex = skill.BuffAdded;
                     }
 
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     m_StageMgr.m_MapInfo[i, j].SpiritEffectObject1 = effect;
-
                 }
             }
         }
 
         Debug.Log("이펙트 소환");
-
-
 
         while (true)
         {
@@ -424,12 +444,10 @@ public class SpiritSkill : MonoBehaviour
                 {
                     for (int j = 0; j < m_StageMgr.mapX; j++)
                     {
-
                         if (m_StageMgr.m_MapInfo[i, j].SpiritEffect1)
                         {
                             m_StageMgr.m_MapInfo[i, j].SpiritEffect1 = false;
                             Object.Destroy(m_StageMgr.m_MapInfo[i, j].SpiritEffectObject1);
-
                         }
                     }
                 }
@@ -440,11 +458,8 @@ public class SpiritSkill : MonoBehaviour
                 }
                 yield break;
             }
-
-
             yield return null;
         }
-
     }
 
 
@@ -557,7 +572,6 @@ public class SpiritSkill : MonoBehaviour
         {
             for (int j = 0; j < m_StageMgr.mapX; j++)
             {
-
                 if (m_StageMgr.m_MapInfo[i, j].SpiritEffect2)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
@@ -1268,7 +1282,7 @@ public class SpiritSkill : MonoBehaviour
 
     private void Start()
 	{
-
+        coroutine = null;
         m_StageMgr = MainManager.Instance.GetStageManager();
         Lunch_Prefabs = new GameObject[6];
         Fire_Prefabs = new GameObject[6];
@@ -1284,7 +1298,9 @@ public class SpiritSkill : MonoBehaviour
     {
         spirit.transform.rotation = Quaternion.Euler(0, -180f, 0);
         GameObject FindEnemys = FindNearbyEnemy(spirit.transform.position, skill.SkillRange);
-        spirit.transform.LookAt(FindEnemys.transform);
+
+        if (FindEnemys == null)
+            yield break;
 
         GameObject tempEffect = null;
         Collider[] colls = null;
@@ -1298,6 +1314,7 @@ public class SpiritSkill : MonoBehaviour
 
         if (FindEnemys != null)
         {
+            spirit.transform.LookAt(FindEnemys.transform);
             tempEffect = Instantiate(Fire_Prefabs[prefabNum]);
             tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
             tempEffect.GetComponent<DamageCheck>().who = 1;
@@ -1336,11 +1353,33 @@ public class SpiritSkill : MonoBehaviour
                     {
                         if (rangeCollider.CompareTag("Boss"))
                         {
-                            rangeCollider.GetComponent<BossFSM>().m_BossClass.m_BossStatData.HP -= 100;
+                            EnemyClass = rangeCollider.GetComponent<CharacterClass>();
+                            minDamage = PlayerClass.m_CharacterStat.Atk - EnemyClass.m_BossStatData.Def;
+
+                            //최소 데미지 보정.
+                            if (minDamage <= 0)
+                                minDamage = 1;
+
+                            power = (int)transform.GetChild(0).GetComponent<PlayerManager>().m_Spirit.m_SpiritClass.m_SpiritSkillData.Power;
+
+                            resultDamage = (minDamage * power) * EnemyClass.Invincibility;
+
+                            rangeCollider.GetComponent<BossFSM>().m_BossClass.m_BossStatData.HP -= resultDamage;
                         }
                         if(rangeCollider.CompareTag("Mob"))
                         {
-                            rangeCollider.GetComponent<Enemy>().TakeDamage(100);
+                            EnemyClass = rangeCollider.GetComponent<CharacterClass>();
+                            minDamage = (int)PlayerClass.m_CharacterStat.Atk - EnemyClass.m_SubMonsterData.Defense;
+
+                            //최소 데미지 보정.
+                            if (minDamage <= 0)
+                                minDamage = 1;
+
+                            power = (int)transform.GetChild(0).GetComponent<PlayerManager>().m_Spirit.m_SpiritClass.m_SpiritSkillData.Power;
+
+                            resultDamage = minDamage * power;
+
+                            rangeCollider.GetComponent<Enemy>().TakeDamage((int)resultDamage);
                         }
                     }
                 }
@@ -1353,7 +1392,9 @@ public class SpiritSkill : MonoBehaviour
     {
         spirit.transform.rotation = Quaternion.Euler(0, -180f, 0);
         GameObject FindEnemys = FindNearbyEnemy(spirit.transform.position, skill.SkillRange);
-        spirit.transform.LookAt(FindEnemys.transform);
+
+        if (FindEnemys == null)
+            yield break;
 
         GameObject tempEffect = null;
         Collider[] colls = null;
@@ -1367,6 +1408,7 @@ public class SpiritSkill : MonoBehaviour
 
         if (FindEnemys != null)
         {
+            spirit.transform.LookAt(FindEnemys.transform);
             tempEffect = Instantiate(Fire_Prefabs[prefabNum]);
             tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
             tempEffect.GetComponent<DamageCheck>().who = 1;

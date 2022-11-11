@@ -36,12 +36,15 @@ public class BossSkill : MonoBehaviour
     public GameObject LunchPrefab;   // PosAtk의 위치에서 발생되는 이펙트
     public GameObject DelayPrefab;   // 딜레이 시 나올 프리팹.
     public GameObject EmptyPrefab;   // SingleTile일때 데미지 판정을 위한 임시 이펙트
+    public GameObject DebuffTilePrefab; //디버프 타일 생성에 사용할 프리팹
     public Transform PosAtk;
     private Animator anim;
 
     public float angleRange = 60f;
     public float distance = 5f;
     public bool isCollision = false;
+    //디버프 타일 지속시간 임시 변수
+    public float DelayTime = 10f;
     Color _origin = new Color(0f, 0.541f, 0.603f, 0.784f); //원래대로 돌릴 색깔
 
     private int m_PlayerRow;
@@ -54,6 +57,8 @@ public class BossSkill : MonoBehaviour
     private bool TargetLockOn = false;
     private int m_TargetRow;
     private int m_TargetColumn;
+
+    bool DebuffTile;
 
     public Transform PlayerPosition; //잡몹의 플레이어 위치를 잡기 위한 변수
     public BossSkill_TableExcel m_CurrentBossSkill;
@@ -911,10 +916,12 @@ public class BossSkill : MonoBehaviour
 
     private void checkSettingEffect(int i,int j, float angle =0)
     {
+        
+
         if (m_StageMgr.m_MapInfo[i, j].BossEffect)
         {
             Object.Destroy(m_StageMgr.m_MapInfo[i, j].BossDelayObject);
-            m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
+            //m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
             GameObject effect = Instantiate(firePrefab);
 
             effect.transform.rotation = Quaternion.Euler(effect.transform.rotation.x, angle, effect.transform.rotation.z);
@@ -943,6 +950,14 @@ public class BossSkill : MonoBehaviour
                 effect.GetComponent<DamageCheck>().buffIndex = m_CurrentBossSkill.BuffAdded;
             }
             m_StageMgr.m_MapInfo[i, j].BossEmptyObject = effect;
+        }
+
+        if (DebuffTile)
+        {
+            GameObject effect = Instantiate(DebuffTilePrefab);
+            effect.transform.rotation = Quaternion.Euler(effect.transform.rotation.x, angle, effect.transform.rotation.z);
+            effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
+            m_StageMgr.m_MapInfo[i, j].BossDebuffTileObjcet = effect;
         }
     }
 
@@ -1221,6 +1236,263 @@ public class BossSkill : MonoBehaviour
         yield break;
     }
 
+    //디버프 타일 생성하는 스킬 함수
+    IEnumerator CreateDebuffTile()
+    {
+        //타겟위치는 없게 그냥 사용하면 자기 주위에 디버프 타일 생성 자기 자신이 밟으면 버프타일?
+        int Row = 0;
+        int Column = 0;
+
+        DebuffTile = true;
+
+        Row = m_BossRow;
+        Column = m_BossColumn;
+
+        Debug.Log("디버프 타일 생성 스킬 시작");
+        float range = m_CurrentBossSkill.SkillRange - 1.0f;
+        float xRange = m_CurrentBossSkill.SkillRange + range;
+
+        //보스 스킬범위를 표시해 주는 부분.
+        if (range > 0)  //range는 -1을한값 범위가 2부터 여기 들어온다. 범위가 1일경우는 해당 타일에 계산하면 된다.
+        {
+            int saveRow = Row;
+            int saveColumn_P = 0;
+            int saveColumn_M = 0;
+
+            int checkRow_P;   //보스 기준 아래쪽에 있는 Column값
+            int checkRow_M;   //보스 기준 위쪽에 있는 Column값
+            int checkColumn;  //현재 색을 바꿀 타일의 Column값
+
+            if (m_CurrentBossSkill.SingleTile)
+            {
+                m_StageMgr.m_MapInfo[Row, Column].BossEffect = true;
+                m_StageMgr.m_MapInfo[Row, Column].EmptyEffect = false;
+            }
+
+            for (float i = 0; i < m_CurrentBossSkill.SkillRange; i += 1.0f)
+            {
+                checkRow_P = Row + (int)i;
+                checkRow_M = Row - (int)i;
+
+                if (checkRow_P % 2 == 1) //024(135라인)
+                    saveColumn_M++;
+                else
+                    saveColumn_P--;
+
+                if (i != 0)
+                {
+
+                    if (i != range)
+                    {
+                        if (saveColumn_M >= 0)
+                        {
+                            if (checkRow_M >= 0)
+                            {
+                                //디버프 타일은 노란색으로 표시
+                                m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.yellow;
+
+                                if (!m_CurrentBossSkill.SingleTile)
+                                {
+                                    m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].BossEffect = true;
+                                    m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].EmptyEffect = false;
+                                }
+                                else
+                                {
+                                    m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].BossEffect = false;
+                                    m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].EmptyEffect = true;
+                                }
+                            }
+
+                            if (checkRow_P < 5)
+                            {
+                                m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.yellow;
+
+                                if (!m_CurrentBossSkill.SingleTile)
+                                {
+                                    m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].BossEffect = true;
+                                    m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].EmptyEffect = false;
+                                }
+                                else
+                                {
+                                    m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].BossEffect = false;
+                                    m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].EmptyEffect = true;
+                                }
+                            }
+                        }
+
+                        if (saveColumn_P < 6)
+                        {
+                            if (checkRow_M >= 0)
+                            {
+                                m_StageMgr.m_MapInfo[checkRow_M, saveColumn_P].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.yellow;
+
+                                if (!m_CurrentBossSkill.SingleTile)
+                                {
+                                    m_StageMgr.m_MapInfo[checkRow_M, saveColumn_P].BossEffect = true;
+                                    m_StageMgr.m_MapInfo[checkRow_M, saveColumn_P].EmptyEffect = false;
+                                }
+                                else
+                                {
+                                    m_StageMgr.m_MapInfo[checkRow_M, saveColumn_P].BossEffect = false;
+                                    m_StageMgr.m_MapInfo[checkRow_M, saveColumn_P].EmptyEffect = true;
+                                }
+
+                            }
+
+                            if (checkRow_P < 5)
+                            {
+                                m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.yellow;
+
+                                if (!m_CurrentBossSkill.SingleTile)
+                                {
+                                    m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].BossEffect = true;
+                                    m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].EmptyEffect = false;
+                                }
+                                else
+                                {
+                                    m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].BossEffect = false;
+                                    m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].EmptyEffect = true;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (float j = 0; j < xRange; j += 1.0f)
+                        {
+                            checkColumn = saveColumn_M + (int)j;
+
+                            if (checkColumn < 0 || checkColumn > 5)
+                                continue;
+
+                            if (checkRow_P < 5)
+                            {
+                                m_StageMgr.m_MapInfo[checkRow_P, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.yellow;
+
+                                if (!m_CurrentBossSkill.SingleTile)
+                                {
+                                    m_StageMgr.m_MapInfo[checkRow_P, checkColumn].BossEffect = true;
+                                    m_StageMgr.m_MapInfo[checkRow_P, checkColumn].EmptyEffect = false;
+                                }
+                                else
+                                {
+                                    m_StageMgr.m_MapInfo[checkRow_P, checkColumn].BossEffect = false;
+                                    m_StageMgr.m_MapInfo[checkRow_P, checkColumn].EmptyEffect = true;
+                                }
+                            }
+
+                            if (checkRow_M >= 0)
+                            {
+                                m_StageMgr.m_MapInfo[checkRow_M, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.yellow;
+
+                                if (!m_CurrentBossSkill.SingleTile)
+                                {
+                                    m_StageMgr.m_MapInfo[checkRow_M, checkColumn].BossEffect = true;
+                                    m_StageMgr.m_MapInfo[checkRow_M, checkColumn].EmptyEffect = false;
+                                }
+                                else
+                                {
+                                    m_StageMgr.m_MapInfo[checkRow_M, checkColumn].BossEffect = false;
+                                    m_StageMgr.m_MapInfo[checkRow_M, checkColumn].EmptyEffect = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    int Column_M = Column - (int)range;
+                    int Column_P = Column + (int)range;
+                    saveColumn_M = Column_M;
+                    saveColumn_P = Column_P;
+
+                    if (Column_M >= 0)
+                    {
+                        m_StageMgr.m_MapInfo[Row, Column_M].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.yellow;
+
+                        if (!m_CurrentBossSkill.SingleTile)
+                        {
+                            m_StageMgr.m_MapInfo[Row, Column_M].BossEffect = true;
+                            m_StageMgr.m_MapInfo[Row, Column_M].EmptyEffect = false;
+                        }
+                        else
+                        {
+                            m_StageMgr.m_MapInfo[Row, Column_M].BossEffect = false;
+                            m_StageMgr.m_MapInfo[Row, Column_M].EmptyEffect = true;
+                        }
+                    }
+
+                    if (Column_P < 6)
+                    {
+                        m_StageMgr.m_MapInfo[Row, Column_P].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.yellow;
+
+                        if (!m_CurrentBossSkill.SingleTile)
+                        {
+                            m_StageMgr.m_MapInfo[Row, Column_P].BossEffect = true;
+                            m_StageMgr.m_MapInfo[Row, Column_P].EmptyEffect = false;
+                        }
+                        else
+                        {
+                            m_StageMgr.m_MapInfo[Row, Column_P].BossEffect = false;
+                            m_StageMgr.m_MapInfo[Row, Column_P].EmptyEffect = true;
+                        }
+                    }
+                }
+                xRange -= 1.0f;
+            }
+        }
+        else  //range가 0이하면 사거리가 1 자기자신의 타일만 해당
+        {
+            m_StageMgr.m_MapInfo[Row, Column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.yellow;
+            m_StageMgr.m_MapInfo[Row, Column].BossEffect = true;
+            m_StageMgr.m_MapInfo[Row, Column].EmptyEffect = false;
+        }
+
+        DelayAndLunchPrefabSet();
+        Debug.Log("보스 스킬 범위 ");
+        //스킬 딜레이 시간 후에 시작 -> 이것을 지속 시간 후에 삭제되도록 유지
+        yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
+        Destroy(TempLunch);
+
+        for (int i = 0; i < m_StageMgr.mapZ; i++)
+        {
+            for (int j = 0; j < m_StageMgr.mapX; j++)
+            {
+                //계산된 타일에서 버프, 딜 인지 체크후에 연산
+                checkSettingEffect(i, j);
+            }
+        }
+
+        Debug.Log("이펙트 소환");
+        //이쪽 에서 데미지 처리.
+        yield return new WaitForSeconds(m_CurrentBossSkill.LifeTime);  //생존시간이 지나면 이펙트 지우기
+
+        for (int i = 0; i < m_StageMgr.mapZ; i++)
+        {
+            for (int j = 0; j < m_StageMgr.mapX; j++)
+            {
+                if (m_StageMgr.m_MapInfo[i, j].BossEffect)
+                {
+                    m_StageMgr.m_MapInfo[i, j].BossEffect = false;
+                    Object.Destroy(m_StageMgr.m_MapInfo[i, j].BossEffectObject);
+                }
+                else if (m_StageMgr.m_MapInfo[i, j].EmptyEffect)
+                {
+                    m_StageMgr.m_MapInfo[i, j].EmptyEffect = false;
+                    Object.Destroy(m_StageMgr.m_MapInfo[i, j].BossEmptyObject);
+                }
+            }
+        }
+
+        Debug.Log("디버프 타일 생성 스킬 종료");
+
+        //지속시간이 끝난 후에 타일의 색상을 변경
+        yield return new WaitForSeconds(DelayTime);
+        DebuffTile = false;
+        StartCoroutine(AllTileOriginColor());
+        yield break;
+    }
+
     IEnumerator AllTileOriginColor()
     {
         yield return new WaitForSeconds(1.0f);
@@ -1240,6 +1512,7 @@ public class BossSkill : MonoBehaviour
         m_StageMgr = MainManager.Instance.GetStageManager();
 
         OriginArr = new ClockDirectionList[6];
+        DebuffTile = false;
 
         for (int i = 0; i < 6; i++)
         {

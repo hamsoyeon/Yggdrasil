@@ -13,6 +13,7 @@ namespace MapInformation
         public GameObject BossEffectObject;
         public GameObject BossDelayObject;
         public GameObject BossEmptyObject;
+        public GameObject BossDebuffTileObjcet;
         public bool Spirit;
         public GameObject SpiritEffectObject1;
         public GameObject SpiritEffectObject2;
