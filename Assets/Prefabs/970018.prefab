@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9102028047069285784}
   - component: {fileID: 2360462287151654159}
+  - component: {fileID: 1354491173261976794}
   m_Layer: 0
   m_Name: 970018
   m_TagString: Untagged
@@ -47,10 +48,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyClass: {fileID: 0}
   dmg_check: 1
-  DamageEffect: {fileID: 1605288786288348, guid: 3aac4a4542e1ce6479b29b670d422e59, type: 3}
+  m_DamageEffect: {fileID: 1605288786288348, guid: 3aac4a4542e1ce6479b29b670d422e59, type: 3}
   who: 0
   Dot: 0
   buffIndex: 0
+--- !u!114 &1354491173261976794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4723591253984493827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 604c65c91369a9643b47e7d70d221ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_lockOn: 0
+  target: {fileID: 0}
+  m_DamPrefab: {fileID: 0}
+  moveSpeed: 0
 --- !u!1001 &1779804080772190533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65,6 +82,18 @@ PrefabInstance:
     - target: {fileID: 452208, guid: a4b7bb927847e4848ad1f5c73de3b541, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 452208, guid: a4b7bb927847e4848ad1f5c73de3b541, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 452208, guid: a4b7bb927847e4848ad1f5c73de3b541, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 452208, guid: a4b7bb927847e4848ad1f5c73de3b541, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 452208, guid: a4b7bb927847e4848ad1f5c73de3b541, type: 3}
       propertyPath: m_LocalPosition.x
@@ -108,11 +137,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19847364, guid: a4b7bb927847e4848ad1f5c73de3b541, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 2.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 19847364, guid: a4b7bb927847e4848ad1f5c73de3b541, type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 1.5
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19873838, guid: a4b7bb927847e4848ad1f5c73de3b541, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 19873838, guid: a4b7bb927847e4848ad1f5c73de3b541, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19873838, guid: a4b7bb927847e4848ad1f5c73de3b541, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19891596, guid: a4b7bb927847e4848ad1f5c73de3b541, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 19891596, guid: a4b7bb927847e4848ad1f5c73de3b541, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4b7bb927847e4848ad1f5c73de3b541, type: 3}
