@@ -64,6 +64,8 @@ public class Buff : MonoBehaviour
         {
             Debug.Log("anim 비어있음");
         }
+        else
+            Debug.Log(anim.name);
 
         if (target == 1) //boss면
         {
@@ -86,7 +88,9 @@ public class Buff : MonoBehaviour
 
 
         anim.SetBool("isStunned", true);//스턴 애니 재생
-
+        //다른 애니 재생 될 때만 안 되는거임..왜??
+        //내가 다른데서도 애니메이션을 재생하는 스크립트를 짰으니까..
+        //그럼 어카지
 
         StartCoroutine(Normalization(durationTime, anim, 1, originSpeed));
 
