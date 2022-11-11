@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System;
 using Model;
+using UnityEngine.SceneManagement;
 
 //가비지 컬렉터는 힙메모리에서 사용을 하지 않는 new된 메모리를 삭제한다.
 //프로파일러로 돌려본다. -> 최적화 관련하여 
@@ -39,7 +40,10 @@ public class BoardBehaviour : MonoBehaviour
         int x = 0;
         int z = 0;
 
-        parent = GameObject.Find("960001").transform;
+        if(SceneManager.GetActiveScene().name == "MainScene")
+            parent = GameObject.Find("960001").transform;
+        if (SceneManager.GetActiveScene().name == "Stage2")
+            parent = GameObject.Find("960002").transform;
         index = new List<int>();
 
         //각 맵 정보에 데이터 넣어주기.
