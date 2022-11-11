@@ -1243,6 +1243,8 @@ public class BossSkill : MonoBehaviour
         int Row = 0;
         int Column = 0;
 
+        DebuffTile = true;
+
         Row = m_BossRow;
         Column = m_BossColumn;
 
@@ -1486,6 +1488,7 @@ public class BossSkill : MonoBehaviour
 
         //지속시간이 끝난 후에 타일의 색상을 변경
         yield return new WaitForSeconds(DelayTime);
+        DebuffTile = false;
         StartCoroutine(AllTileOriginColor());
         yield break;
     }
@@ -1509,6 +1512,7 @@ public class BossSkill : MonoBehaviour
         m_StageMgr = MainManager.Instance.GetStageManager();
 
         OriginArr = new ClockDirectionList[6];
+        DebuffTile = false;
 
         for (int i = 0; i < 6; i++)
         {
