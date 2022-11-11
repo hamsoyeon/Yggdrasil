@@ -7,7 +7,7 @@ public class Spirit : MonoBehaviour
 
 	enum SpiritType { Tile=1, NonTileNotMove, NonTileMove }
 
-	public GameObject SpiritPrefab;
+	//public GameObject SpiritPrefab;
 
 	
 	public SpiritSkill m_SpiritSkill;
@@ -146,9 +146,9 @@ public class Spirit : MonoBehaviour
 		GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
         tempSpirit.transform.rotation = Quaternion.Euler(0, 180, 0);
 
-
         SpiritMove moveCheck;
         moveCheck = tempSpirit.GetComponent<SpiritMove>();
+
         if (moveCheck == null)
         {
             tempSpirit.AddComponent<SpiritMove>();

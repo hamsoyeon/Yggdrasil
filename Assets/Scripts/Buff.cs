@@ -25,11 +25,7 @@ public class Buff : MonoBehaviour
         return false;
 
     }
-    /// <summary>
-    /// ///
-    /// </summary>
-    /// <param name="isWho"></param>
-    /// <returns></returns>
+
 
     //몬스터인지 플레이어인지 식별. 0이면 플레이어, 1이면 보스
     public GameObject isPlayerOrMonster(int isWho)

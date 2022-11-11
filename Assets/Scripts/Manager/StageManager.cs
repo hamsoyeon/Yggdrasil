@@ -15,8 +15,8 @@ namespace MapInformation
         public GameObject BossEmptyObject;
         public GameObject BossDebuffTileObjcet;
         public bool Spirit;
-        public GameObject SpiritEffectObject1;
-        public GameObject SpiritEffectObject2;
+        public GameObject SpiritEffectObject1;  // 타일형 스킬1
+        public GameObject SpiritEffectObject2;  // 타일형 스킬2
        
         
         public Map_TableExcel MapData;     //맵에 엑셀 데이터
