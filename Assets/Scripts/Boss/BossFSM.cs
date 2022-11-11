@@ -25,6 +25,9 @@ public class BossFSM : MonoBehaviour
     [SerializeField]
     private float maxHp;
 
+    [SerializeField]
+    public float bossSpeed;
+
    
     private int BossRandomSkill = 0;
 
@@ -96,7 +99,7 @@ public class BossFSM : MonoBehaviour
         hudDamageText = Resources.Load<GameObject>("DamageText");
         h = transform.position.x;
         v = transform.position.z;
-
+        bossSpeed = 1.0f;
     }
 
     void Start()
@@ -239,7 +242,8 @@ public class BossFSM : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position,targetPos, 1f);
+            Debug.Log("boss speed = " + bossSpeed);
+            transform.position = Vector3.MoveTowards(transform.position,targetPos, bossSpeed);
         }
 
 
