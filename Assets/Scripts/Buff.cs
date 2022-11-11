@@ -5,7 +5,8 @@ using UnityEngine;
 public class Buff : MonoBehaviour
 {
     public GameObject stunEffect;
-    public Vector3 effectOffset = new Vector3(0, 5.0f, 0);
+    public GameObject stunEffectTemp;
+    public Vector3 effectOffset = new Vector3(0, 10.0f, 0);
 
 
     // 배열이나 리스트로 버프/디버프를 관리
@@ -68,12 +69,17 @@ public class Buff : MonoBehaviour
         {
             originSpeed = isPlayerOrMonster(target).GetComponent<BossFSM>().bossSpeed;  //기존 이속 저장
             isPlayerOrMonster(target).GetComponent<BossFSM>().bossSpeed = 0.0f; //boss 이속을 0으로 만듦
-            Instantiate(stunEffect).transform.position = isPlayerOrMonster(target).transform.position += effectOffset;  //스턴 이펙트 생성
+            //스턴 이펙트 생성
+            stunEffectTemp = Instantiate(stunEffect);
+            stunEffectTemp.transform.position = (isPlayerOrMonster(target).transform.position) + effectOffset;  //이펙트 위치 셋
             
-            
+
+            //offset 따로 추가하기
+
+
             //공격력 0으로 만들기
 
-          
+
         }
 
         //애니 도저히 안 되면 그냥 이펙트만 넣기
@@ -83,8 +89,6 @@ public class Buff : MonoBehaviour
 
 
         StartCoroutine(Normalization(durationTime,anim,1,originSpeed)); 
-
-
 
     }
 
@@ -97,7 +101,7 @@ public class Buff : MonoBehaviour
         //지연후 값 정상화
         _anim.SetBool("isStunned", false);
         isPlayerOrMonster(target).GetComponent<BossFSM>().bossSpeed = originSpeed;
-        Destroy(stunEffect);
+        Destroy(stunEffectTemp);
     }
 
     // 버프와 디버프를 하나의 함수에 모두 구혀할 것인가?

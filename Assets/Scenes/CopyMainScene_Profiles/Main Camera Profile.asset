@@ -21,10 +21,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.28
+    value: 1.12
   color:
     overrideState: 1
-    value: {r: 0.062158585, g: 0, b: 1, a: 1}
+    value: {r: 0.2627449, g: 0, b: 1, a: 1}
   ambientOnly:
     overrideState: 0
     value: 1
@@ -66,7 +66,7 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   mode:
-    overrideState: 0
+    overrideState: 1
     value: 0
   color:
     overrideState: 0
@@ -76,12 +76,12 @@ MonoBehaviour:
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.358
+    value: 0.25
   smoothness:
     overrideState: 1
-    value: 0.512
+    value: 0.549
   roundness:
-    overrideState: 0
+    overrideState: 1
     value: 1
   rounded:
     overrideState: 0
@@ -108,10 +108,10 @@ MonoBehaviour:
   active: 0
   enabled:
     overrideState: 1
-    value: 1
+    value: 0
   filtering:
     overrideState: 1
-    value: {x: 21.527027, y: 66.52702}
+    value: {x: 21.883486, y: 66.8835}
   minLuminance:
     overrideState: 1
     value: -0.8
@@ -222,10 +222,10 @@ MonoBehaviour:
     value: 0
   contrast:
     overrideState: 1
-    value: 34
+    value: 0
   mixerRedOutRedIn:
     overrideState: 0
-    value: 100
+    value: 0
   mixerRedOutGreenIn:
     overrideState: 0
     value: 0
@@ -252,13 +252,13 @@ MonoBehaviour:
     value: 100
   lift:
     overrideState: 1
-    value: {x: 1, y: 0.8131835, z: 0.9818361, w: 0}
+    value: {x: 1, y: 1, z: 1, w: 0.044130698}
   gamma:
-    overrideState: 0
-    value: {x: 0.84402704, y: 0.94531226, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 1, y: 1, z: 1, w: -0.17652252}
   gain:
     overrideState: 1
-    value: {x: 1, y: 0.81856304, z: 0.25177902, w: 0.15084536}
+    value: {x: 1, y: 1, z: 1, w: 0.2383054}
   masterCurve:
     overrideState: 0
     value:
@@ -1477,10 +1477,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 7.77
+    value: 4.68
   threshold:
     overrideState: 1
-    value: 9
+    value: 0.43
   softKnee:
     overrideState: 0
     value: 0.5

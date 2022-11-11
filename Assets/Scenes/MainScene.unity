@@ -3451,6 +3451,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb7ff2da3d5e67c4c86271b496646165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stunEffect: {fileID: 1315660968943644648, guid: 6897853fe0aae3c4dae9262ee373cb65, type: 3}
+  stunEffectTemp: {fileID: 0}
+  effectOffset: {x: 0, y: 20, z: 0}
 --- !u!4 &1245427808
 Transform:
   m_ObjectHideFlags: 0
@@ -11414,6 +11417,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3036600520925973729, guid: ca8b827be3f6bd14f961b5a613cca929, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036600520925973729, guid: ca8b827be3f6bd14f961b5a613cca929, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
@@ -16094,7 +16101,15 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7981156208585402048, guid: ca8b827be3f6bd14f961b5a613cca929, type: 3}
+      propertyPath: weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7981156208585402048, guid: ca8b827be3f6bd14f961b5a613cca929, type: 3}
       propertyPath: isGlobal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7981156208585402048, guid: ca8b827be3f6bd14f961b5a613cca929, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7981156208585402048, guid: ca8b827be3f6bd14f961b5a613cca929, type: 3}
