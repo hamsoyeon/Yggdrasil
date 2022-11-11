@@ -18,6 +18,7 @@ public class Spirit : MonoBehaviour
 
 	public CharacterClass m_SpiritClass;
 
+    public float[] CoolTimeArr;
 
 	public void SpiritSummon(int index)
 	{
@@ -284,15 +285,24 @@ public class Spirit : MonoBehaviour
 		}
 	}
 
+    private void Awake()
+    {
+        //쿨타임 배열 생성
+        CoolTimeArr = new float[6];
+
+        //쿨타임 배열에 값 넣기
+        for (int i = 0; i < DataTableManager.Instance.GetDataTable<Spirit_TableExcelLoader>().DataList.Count; i++)
+        {
+            CoolTimeArr[i] = DataTableManager.Instance.GetDataTable<Spirit_TableExcelLoader>().DataList[i].CoolTime;
+        }
+    }
 
 
-
-	private void Start()
+    private void Start()
 	{
 		m_SpiritSkill = this.GetComponent<SpiritSkill>();
 		m_SpiritClass = this.GetComponent<CharacterClass>();
 		m_SpiritClass.m_SkillMgr.m_SpiritSkill = m_SpiritSkill;
-
 	}
 
 

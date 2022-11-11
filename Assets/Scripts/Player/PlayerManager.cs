@@ -35,7 +35,6 @@ public class PlayerManager : MonoBehaviour
     private Animator anim;
     private PlayerDirection dir;
 
-    
     float h, v;
     public float rotateSpeed = 5f;
 
@@ -190,6 +189,9 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SkillCollTime = new float[6];
+        //스피릿에서 넣은 쿨타임 배열 받아오기
+        SkillCollTime = (float[])GetComponent<Spirit>().CoolTimeArr.Clone();
         characterController = GetComponent<CharacterController>();
         cam = GetComponent<FollowCam>();
         p_Object = this.gameObject;
@@ -198,18 +200,15 @@ public class PlayerManager : MonoBehaviour
         PlayerClass = this.gameObject.GetComponent<CharacterClass>();
 
         CanSkill = new bool[6]; // 0 -> q / 1 -> w / 2 -> e / 3 -> a / 4 -> s / 5 -> d 
-        SkillCollTime = new float[6];
         currenCollTime = new float[6];
 
         //Start 되는 부분에서 스킬사용 가능 불값과 스킬 쿨타임값을 설정
         for (int i = 0; i < CanSkill.Length; i++)
         {
             CanSkill[i] = true;
-            SkillCollTime[i] = 5.0f;
             currenCollTime[i] = SkillCollTime[i];
         }
 
-        
         anim = this.transform.GetChild(0).GetComponent<Animator>();
 
         if (anim == null)

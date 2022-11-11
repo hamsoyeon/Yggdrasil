@@ -25,45 +25,24 @@ public partial class EMath
     }
 }
 
-
-
 public class BossSkill : MonoBehaviour
 {
-
     public enum BossSkillType { WIDE = 1, TARGET, LINE, DIFFUSION, SUMMONS }
-
     public GameObject LineSkillTarget;
-
     private BossFSM m_BossFSM;
-
     public GameObject MobPrefabs;
-
-
     public GameObject DamagePrefab;  // 맞았을때 이펙트 
     public GameObject firePrefab;    // 실제로 보이거나 날아가는 이펙트
     public GameObject LunchPrefab;   // PosAtk의 위치에서 발생되는 이펙트
     public GameObject DelayPrefab;   // 딜레이 시 나올 프리팹.
     public GameObject EmptyPrefab;   // SingleTile일때 데미지 판정을 위한 임시 이펙트
-
     public Transform PosAtk;
-
-    
-     
-
     private Animator anim;
-
 
     public float angleRange = 60f;
     public float distance = 5f;
     public bool isCollision = false;
-
-    Color _blue = new Color(0f, 0f, 1f, 0.2f);
-    Color _red = new Color(1f, 0f, 0f, 0.2f);
     Color _origin = new Color(0f, 0.541f, 0.603f, 0.784f); //원래대로 돌릴 색깔
-
-    //Vector3 direction;
-
-    float dotValue = 0f;
 
     private int m_PlayerRow;
     private int m_PlayerColumn;
@@ -77,12 +56,7 @@ public class BossSkill : MonoBehaviour
     private int m_TargetColumn;
 
     public Transform PlayerPosition; //잡몹의 플레이어 위치를 잡기 위한 변수
-
-    //private Map map;
-
-    //private BossStat_TableExcel m_CurrentBossStat;
     public BossSkill_TableExcel m_CurrentBossSkill;
-
     private GameObject TempLunch = null;
 
     struct ClockDirectionList
@@ -97,8 +71,6 @@ public class BossSkill : MonoBehaviour
 
     public void BossSkillAction(int skillIndex)
     {
-        //m_BossSkillIndex = skillIndex;
-
         Debug.Log("스킬진입");
 
         foreach (var item in DataTableManager.Instance.GetDataTable<BossSkill_TableExcelLoader>().DataList)
@@ -110,23 +82,17 @@ public class BossSkill : MonoBehaviour
             }
         }
 
-
         //플레이어의 위치와 보스의 배열 위치를 알아낸다.
         m_PlayerRow = MainManager.Instance.GetStageManager().m_PlayerRow;
         m_PlayerColumn = MainManager.Instance.GetStageManager().m_PlayerCoulmn;
         m_BossRow = MainManager.Instance.GetStageManager().m_BossRow;
         m_BossColumn = MainManager.Instance.GetStageManager().m_BossColumn;
 
-        //SkillPrefab = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.LunchPrefb];
-
-
         LunchPrefab = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.LunchPrefb];
         DelayPrefab = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.DelayPrefb];
         EmptyPrefab = PrefabLoader.Instance.PrefabDic[000000];
         firePrefab = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.FirePrefb];
         DamagePrefab = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.DamPrefb];
-
-       
 
         DamageCheck check1,check2;
         check1 = firePrefab.GetComponent<DamageCheck>();
@@ -146,19 +112,14 @@ public class BossSkill : MonoBehaviour
 
         check1.m_DamageEffect = DamagePrefab;  // 데미지 프리팹 넣어주기.
 
-
         check2 = EmptyPrefab.GetComponent<DamageCheck>();
         if (check2 == null)
         {
             EmptyPrefab.AddComponent<DamageCheck>();
         }
         check2.dmg_check = true;
-
         check2.m_DamageEffect = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.DamPrefb];    // 공백프리팹에 데미지 프리팹 넣어주기.
 
-
-
-        //StartCoroutine(SkillAction());
         SkillAction();
     }
 
@@ -231,10 +192,8 @@ public class BossSkill : MonoBehaviour
         yield return null;
     }
 
-
     private void DelayAndLunchPrefabSet()
     {
-
         TempLunch = Instantiate(LunchPrefab);
         TempLunch.transform.SetParent(PosAtk);
         TempLunch.transform.position = PosAtk.position;
@@ -254,7 +213,6 @@ public class BossSkill : MonoBehaviour
                 }
             }
         }
-
     }
 
     IEnumerator SkillWideAction()
@@ -292,7 +250,6 @@ public class BossSkill : MonoBehaviour
             // 보스의 위치가 배열의 0,2,4번째요소(1,3,5번째 줄) 일 경우 제일 마지막배열에서 row값+-1,  column값은 변경이없다. 
             // 배열의 1,3번째요소(2,4번째 줄) 일 경우 제일 마지막배열에서 row값+-1, column값 +1 값을 해줘야한다.
 
-
             int saveRow = Row;
             int saveColumn = 0;
 
@@ -302,22 +259,17 @@ public class BossSkill : MonoBehaviour
 
             for (float i = 0; i < m_CurrentBossSkill.SkillRange; i += 1.0f)
             {
-
                 checkRow_P = Row + (int)i;
                 checkRow_M = Row - (int)i;
-
 
                 if (checkRow_P % 2 == 1) //024(135라인)
                     saveColumn++;
 
                 for (float j = 0; j < xRange; j += 1.0f)
                 {
-
                     if (i != 0) //보스가 있는 라인의 +-1라인씩 그림.
                     {
-
                         checkColumn = saveColumn + (int)j;
-
                         if (checkColumn < 0 || checkColumn > 5)
                             continue;
 
@@ -334,9 +286,7 @@ public class BossSkill : MonoBehaviour
                             {
                                 m_StageMgr.m_MapInfo[checkRow_P, checkColumn].BossEffect = false;
                                 m_StageMgr.m_MapInfo[checkRow_P, checkColumn].EmptyEffect = true;
-                            }
-                           
-                           
+                            } 
                         }
 
                         if (checkRow_M >= 0)
@@ -352,21 +302,16 @@ public class BossSkill : MonoBehaviour
                                 m_StageMgr.m_MapInfo[checkRow_M, checkColumn].BossEffect = false;
                                 m_StageMgr.m_MapInfo[checkRow_M, checkColumn].EmptyEffect = true;
                             }
-
                         }
-
                     }
                     else  //보스가 있는 라인을 쭉그림.
                     {
-
                         checkColumn = Column - (int)range + (int)j;
-
                         if (j == 0)
                             saveColumn = checkColumn;   //보스라인에서 첫번째 타일 색변환위치 저장.
 
                         if (checkColumn < 0 || checkColumn > 5)
                             continue;
-
                        
                         m_StageMgr.m_MapInfo[Row, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                         
@@ -387,17 +332,9 @@ public class BossSkill : MonoBehaviour
                                 m_StageMgr.m_MapInfo[Row, checkColumn].BossEffect = false;
                                 m_StageMgr.m_MapInfo[Row, checkColumn].EmptyEffect = true;
                             }
-
-                        }
-
-                        
+                        }        
                     }
-
-
                 }
-
-                //Debug.Log($"{i+1}번째 SaveColumn={saveColumn}");
-
                 xRange -= 1.0f;
             }
         }
@@ -406,18 +343,13 @@ public class BossSkill : MonoBehaviour
             m_StageMgr.m_MapInfo[Row, Column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
             m_StageMgr.m_MapInfo[Row, Column].BossEffect = true;
             m_StageMgr.m_MapInfo[Row, Column].EmptyEffect = false;
-
         }
 
         //경고시간동안 딜레이 프리팹 생성한 것을 지우고 타일 빨간색을 다시 원래색깔로 돌린후 그 범위에 이펙트 출현하고 데미지 로직 처리.
-
-        
         DelayAndLunchPrefabSet();
         Debug.Log("보스 스킬 범위 ");
         yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
         Destroy(TempLunch);
-
-
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
         {
@@ -449,11 +381,9 @@ public class BossSkill : MonoBehaviour
             }
         }
 
-
         Debug.Log("와이드 스킬 종료");
 
         StartCoroutine(AllTileOriginColor());
-
 
         //연계스킬있는지 확인후 다시 스킬실행.
         if (m_CurrentBossSkill.SkillAdded != 0)
@@ -467,16 +397,12 @@ public class BossSkill : MonoBehaviour
                 m_TargetRow = 0;
                 m_TargetColumn = 0;
             }
-               
-
         }
         yield break;
     }
 
     IEnumerator SkillTargetAction()
     {
-
-
         //타켓에서 연계스킬이 있는경우 광역,확산,도넛의 시작범위가 보스가 아니라 타겟된 대상을 기준으로 적용됨.
         Debug.Log("타겟 스킬 실행");
         float range = m_CurrentBossSkill.SkillRange - 1.0f;
@@ -484,7 +410,6 @@ public class BossSkill : MonoBehaviour
 
         m_TargetRow = m_PlayerRow;
         m_TargetColumn = m_PlayerColumn;
-
 
         //보스 스킬범위를 표시해 주는 부분.
         if (range > 0)  //range는 -1을한값 범위가 2부터 여기 들어온다. 범위가 1일경우는 해당 타일에 계산하면 된다.
@@ -508,16 +433,12 @@ public class BossSkill : MonoBehaviour
 
                 for (float j = 0; j < xRange; j += 1.0f)
                 {
-
                     if (i != 0) //보스가 있는 라인의 +-1라인씩 그림.
                     {
-
                         checkColumn = saveColumn + (int)j;
 
                         if (checkColumn < 0 || checkColumn > 5)
                             continue;
-
-
 
                         if (checkRow_P < 5)
                         {
@@ -532,9 +453,7 @@ public class BossSkill : MonoBehaviour
                             {
                                 m_StageMgr.m_MapInfo[checkRow_P, checkColumn].BossEffect = false;
                                 m_StageMgr.m_MapInfo[checkRow_P, checkColumn].EmptyEffect = true;
-                            }
-                            
-                            
+                            }   
                         }
 
                         if (checkRow_M >= 0)
@@ -551,15 +470,10 @@ public class BossSkill : MonoBehaviour
                                 m_StageMgr.m_MapInfo[checkRow_M, checkColumn].BossEffect = false;
                                 m_StageMgr.m_MapInfo[checkRow_M, checkColumn].EmptyEffect = true;
                             }
-
-
-
                         }
-
                     }
                     else  //플레이어가 있는 라인을 쭉그림.
                     {
-
                         checkColumn = m_PlayerColumn - (int)range + (int)j;
 
                         if (j == 0)
@@ -568,7 +482,6 @@ public class BossSkill : MonoBehaviour
                         if (checkColumn < 0 || checkColumn > 5)
                             continue;
 
-                        //map.mapIndicatorArray[m_BossRow, checkColumn].GetComponent<MeshRenderer>().material.color = Color.red;
                         m_StageMgr.m_MapInfo[m_PlayerRow, checkColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
 
                         if (!m_CurrentBossSkill.SingleTile)
@@ -578,7 +491,6 @@ public class BossSkill : MonoBehaviour
                         }
                         else
                         {
-
                             if (checkColumn == m_PlayerColumn)
                             {
                                 m_StageMgr.m_MapInfo[m_PlayerRow, checkColumn].BossEffect = true;
@@ -589,17 +501,9 @@ public class BossSkill : MonoBehaviour
                                 m_StageMgr.m_MapInfo[m_PlayerRow, checkColumn].BossEffect = false;
                                 m_StageMgr.m_MapInfo[m_PlayerRow, checkColumn].EmptyEffect = true;
                             }
-
                         }
-
-                        
                     }
-
-
                 }
-
-                //Debug.Log($"{i+1}번째 SaveColumn={saveColumn}");
-
                 xRange -= 1.0f;
             }
         }
@@ -608,19 +512,12 @@ public class BossSkill : MonoBehaviour
             m_StageMgr.m_MapInfo[m_PlayerRow, m_PlayerColumn].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
             m_StageMgr.m_MapInfo[m_PlayerRow, m_PlayerColumn].BossEffect = true;
             m_StageMgr.m_MapInfo[m_PlayerRow, m_PlayerColumn].EmptyEffect = false;
-
         }
 
-
-        
         DelayAndLunchPrefabSet();
         Debug.Log("보스 스킬 범위 ");
         yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
         Destroy(TempLunch);
-
-
-
-
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
         {
@@ -631,7 +528,6 @@ public class BossSkill : MonoBehaviour
         }
 
         Debug.Log("이펙트 소환");
-
 
         yield return new WaitForSeconds(m_CurrentBossSkill.LifeTime);  //생존시간이 지나면 이펙트 지우기
 
@@ -656,10 +552,6 @@ public class BossSkill : MonoBehaviour
         this.gameObject.GetComponent<BossFSM>().behavior = false;
         Debug.Log("타겟 스킬 종료");
         StartCoroutine(AllTileOriginColor());
-        //AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
-
-
-       
 
         //연계스킬 처리
         if (m_CurrentBossSkill.SkillAdded != 0)
@@ -674,20 +566,14 @@ public class BossSkill : MonoBehaviour
             if (TargetLockOn)
                 TargetLockOn = false;
         }
-
-
         yield break;
-
     }
-
 
     //각도얻기 함수
     public float CalculateAngle(Vector3 from, Vector3 to)
     {
         return Quaternion.FromToRotation(Vector3.forward, to - from).eulerAngles.y;
     }
-
-
 
     IEnumerator SkillLineAction()
     {
@@ -698,33 +584,25 @@ public class BossSkill : MonoBehaviour
 
         if (TargetLockOn)
         {
-
             Row = m_TargetRow;
             Column = m_TargetColumn;
-            //Row = m_PlayerRow;
-            //Column = m_PlayerColumn;
         }
         else
         {
             Row = m_BossRow;
             Column = m_BossColumn;
         }
-
         Debug.Log("확산 스킬 시작");
 
-
         float range = m_CurrentBossSkill.SkillRange - 1.0f;
-        //float xRange = m_CurrentBossSkill.SkillRange + range;
 
         //플레이어와의 각도를 구함. 
         float tempAngle = CalculateAngle(this.gameObject.transform.position, LineSkillTarget.transform.position);
         int checkIndex = 0;
 
-
         //각도의 범위를 고정으로
         if (tempAngle > 0 && tempAngle <= 45)
         {
-            //tempAngle = 45;
             tempAngle = 30;
             checkIndex = 0;
         }
@@ -735,13 +613,11 @@ public class BossSkill : MonoBehaviour
         }
         else if (tempAngle > 90 && tempAngle <= 180)
         {
-            //tempAngle = 135;
             tempAngle = 150;
             checkIndex = 2;
         }
         else if (tempAngle > 180 && tempAngle <= 225)
         {
-            //tempAngle = 225;
             tempAngle = 210;
             checkIndex = 3;
         }
@@ -752,24 +628,16 @@ public class BossSkill : MonoBehaviour
         }
         else if (tempAngle > 270 && tempAngle <= 360)
         {
-            //tempAngle = 315;
             tempAngle = 330;
             checkIndex = 5;
         }
 
-       
-
         // 보스가 스킬을 사용할때 해당 각도로 돌려준다음
         this.gameObject.transform.rotation = Quaternion.Euler(0, tempAngle, 0);
-
-
-        
-
 
         // 해당 각도를 시작으로 시계방향으로 타일 방향체크후 증감값 셋팅. 
         for (int i = 0; i < OriginArr.Length; i++)
         {
-
             //Row
             if (i == 0 || i == 5)
             {
@@ -778,13 +646,10 @@ public class BossSkill : MonoBehaviour
             else if (i == 2 || i == 3)
             {
                 OriginArr[i].row = Row + 1;
-
-               
             }
 
             if (i == 1 || i == 4)
                 OriginArr[i].row = Row;
-
 
             //Column
             if (Row % 2 == 0)
@@ -806,11 +671,9 @@ public class BossSkill : MonoBehaviour
                 {
                     OriginArr[i].column = Column - 1;
                 }
-
             }
             else
             {
-
                 if (i == 0 || i == 2)
                 {
                     OriginArr[i].column = Column;
@@ -829,9 +692,7 @@ public class BossSkill : MonoBehaviour
                     OriginArr[i].column = Column - 1;
                 }
             }
-
         }
-
 
         List<ClockDirectionList> tempList = new List<ClockDirectionList>();
         tempList = OriginArr.ToList<ClockDirectionList>();
@@ -848,7 +709,6 @@ public class BossSkill : MonoBehaviour
                 tempList.RemoveAt(i);
                 tempList.Add(tempCDL);
                 i--;
-
             }
         }
 
@@ -880,9 +740,7 @@ public class BossSkill : MonoBehaviour
             tempCDLARR[5].effect = true;
         }
 
-
         //확산스킬은 무조건 거리가 2부터 시작.
-
         int checkRow = 0;
         int checkColumn = 0;
 
@@ -890,11 +748,9 @@ public class BossSkill : MonoBehaviour
         {
             if (i == 0)
             {
-
                 m_StageMgr.m_MapInfo[Row, Column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                 m_StageMgr.m_MapInfo[Row, Column].BossEffect = true;
                 m_StageMgr.m_MapInfo[Row, Column].EmptyEffect = false;
-
 
                 for (int j = 0; j < tempCDLARR.Length; j++)
                 {
@@ -903,8 +759,6 @@ public class BossSkill : MonoBehaviour
                         if ((tempCDLARR[j].column >= 0 && tempCDLARR[j].column < 6) && (tempCDLARR[j].row >= 0 && tempCDLARR[j].row < 5))
                         {
                             m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
-                           
-
 
                             if (!m_CurrentBossSkill.SingleTile)
                             {
@@ -916,11 +770,9 @@ public class BossSkill : MonoBehaviour
                                 m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].BossEffect = false;
                                 m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].EmptyEffect = true;
                             }
-                            
                         }
                     }
                 }
-
             }
             else
             {
@@ -931,7 +783,6 @@ public class BossSkill : MonoBehaviour
                         //Column
                         if (tempCDLARR[j].row % 2 == 0) //135라인.
                         {
-
                             if (tempCDLARR[j].check == 0 || tempCDLARR[j].check == 2)
                             {
                                 checkColumn = tempCDLARR[j].column + 1;
@@ -949,7 +800,6 @@ public class BossSkill : MonoBehaviour
                                 checkColumn = tempCDLARR[j].column - 1;
                                 tempCDLARR[j].column = checkColumn;
                             }
-
                         }
                         else
                         {
@@ -972,7 +822,6 @@ public class BossSkill : MonoBehaviour
                             }
                         }
 
-
                         //Row
                         checkRow = tempCDLARR[j].row - Row;
                         if (checkRow > 0)
@@ -984,12 +833,10 @@ public class BossSkill : MonoBehaviour
                             tempCDLARR[j].row--;
                         }
 
-
                         if ((tempCDLARR[j].column >= 0 && tempCDLARR[j].column < 6) && (tempCDLARR[j].row >= 0 && tempCDLARR[j].row < 5))
                         {
                             m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                            
-
                             if (!m_CurrentBossSkill.SingleTile)
                             {
                                 m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].BossEffect = true;
@@ -1000,24 +847,16 @@ public class BossSkill : MonoBehaviour
                                 m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].BossEffect = false;
                                 m_StageMgr.m_MapInfo[tempCDLARR[j].row, tempCDLARR[j].column].EmptyEffect = true;
                             }
-                           
                         }
-
                     }
                 }
-
             }
-
         }
-
-
-
        
         DelayAndLunchPrefabSet();
         Debug.Log("보스 스킬 범위 ");
         yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
         Destroy(TempLunch);
-
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
         {
@@ -1053,56 +892,41 @@ public class BossSkill : MonoBehaviour
         StartCoroutine(AllTileOriginColor());
         //AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
-
-      
-
         //연계스킬있는지 확인후 다시 스킬실행.
         if (m_CurrentBossSkill.SkillAdded != 0)
             BossSkillAction(m_CurrentBossSkill.SkillAdded);
         else
         {
-
             if (TargetLockOn)
             {
                 TargetLockOn = false;
                 m_TargetRow = 0;
                 m_TargetColumn = 0;
             }
-
             this.gameObject.GetComponent<BossFSM>().behavior = false;
         }
-
-
-
 
         yield break;
     }
 
-
     private void checkSettingEffect(int i,int j, float angle =0)
     {
-
         if (m_StageMgr.m_MapInfo[i, j].BossEffect)
         {
             Object.Destroy(m_StageMgr.m_MapInfo[i, j].BossDelayObject);
             m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
             GameObject effect = Instantiate(firePrefab);
 
-
-            //effect.transform.rotation += Quaternion.Euler(0, angle, 0);
-
             effect.transform.rotation = Quaternion.Euler(effect.transform.rotation.x, angle, effect.transform.rotation.z);
-
-
             effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
             effect.GetComponent<DamageCheck>().who = 2;
             effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
+
             //버프가 있다면 버프를 발동.
             if (m_CurrentBossSkill.BuffAdded != 0)
             {
                 effect.GetComponent<DamageCheck>().buffIndex = m_CurrentBossSkill.BuffAdded;
             }
-
             m_StageMgr.m_MapInfo[i, j].BossEffectObject = effect;
         }
         else if (m_StageMgr.m_MapInfo[i, j].EmptyEffect)
@@ -1112,6 +936,7 @@ public class BossSkill : MonoBehaviour
             effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
             effect.GetComponent<DamageCheck>().who = 2;
             effect.GetComponent<DamageCheck>().Dot = m_CurrentBossSkill.DoT;
+
             //버프가 있다면 버프를 발동.
             if (m_CurrentBossSkill.BuffAdded != 0)
             {
@@ -1121,13 +946,8 @@ public class BossSkill : MonoBehaviour
         }
     }
 
-
-
-
-
     IEnumerator SkillDiffusionAction()
     {
-
         int Row = 0;
         int Column = 0;
 
@@ -1141,7 +961,6 @@ public class BossSkill : MonoBehaviour
             Row = m_BossRow;
             Column = m_BossColumn;
         }
-
 
         Debug.Log("방출(도넛) 스킬 시작");
         float range = m_CurrentBossSkill.SkillRange - 1.0f;
@@ -1163,7 +982,6 @@ public class BossSkill : MonoBehaviour
             int checkRow_M;   //보스 기준 위쪽에 있는 Column값
             int checkColumn;  //현재 색을 바꿀 타일의 Column값
 
-
             if (m_CurrentBossSkill.SingleTile)
             {
                 m_StageMgr.m_MapInfo[Row, Column].BossEffect = true;
@@ -1180,7 +998,6 @@ public class BossSkill : MonoBehaviour
                 else
                     saveColumn_P--;
 
-
                 if (i != 0)
                 {
 
@@ -1188,10 +1005,8 @@ public class BossSkill : MonoBehaviour
                     {
                         if (saveColumn_M >= 0)
                         {
-                   
                             if (checkRow_M >= 0)
                             {
-                                
                                 m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                                 
                                 if(!m_CurrentBossSkill.SingleTile)
@@ -1204,7 +1019,6 @@ public class BossSkill : MonoBehaviour
                                     m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].BossEffect = false;
                                     m_StageMgr.m_MapInfo[checkRow_M, saveColumn_M].EmptyEffect = true;
                                 }
-                               
                             }
 
                             if(checkRow_P < 5)
@@ -1221,16 +1035,11 @@ public class BossSkill : MonoBehaviour
                                     m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].BossEffect = false;
                                     m_StageMgr.m_MapInfo[checkRow_P, saveColumn_M].EmptyEffect = true;
                                 }
-                               
                             }
-
-
                         }
 
                         if (saveColumn_P < 6)
                         {
-                       
-
                             if(checkRow_M >= 0)
                             {
                                 m_StageMgr.m_MapInfo[checkRow_M, saveColumn_P].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
@@ -1248,7 +1057,6 @@ public class BossSkill : MonoBehaviour
                                 
                             }
 
-
                             if(checkRow_P < 5)
                             {
                                 m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
@@ -1263,19 +1071,13 @@ public class BossSkill : MonoBehaviour
                                     m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].BossEffect = false;
                                     m_StageMgr.m_MapInfo[checkRow_P, saveColumn_P].EmptyEffect = true;
                                 }
-                                
                             }
-
-
-                         
                         }
-
                     }
                     else
                     {
                         for (float j = 0; j < xRange; j += 1.0f)
                         {
-
                             checkColumn = saveColumn_M + (int)j;
 
                             if (checkColumn < 0 || checkColumn > 5)
@@ -1295,9 +1097,6 @@ public class BossSkill : MonoBehaviour
                                     m_StageMgr.m_MapInfo[checkRow_P, checkColumn].BossEffect = false;
                                     m_StageMgr.m_MapInfo[checkRow_P, checkColumn].EmptyEffect = true;
                                 }
-                                
-                               
-                                
                             }
 
                             if (checkRow_M >= 0)
@@ -1314,13 +1113,9 @@ public class BossSkill : MonoBehaviour
                                     m_StageMgr.m_MapInfo[checkRow_M, checkColumn].BossEffect = false;
                                     m_StageMgr.m_MapInfo[checkRow_M, checkColumn].EmptyEffect = true;
                                 }
-                                
                             }
-
                         }
-
                     }
-
                 }
                 else
                 {
@@ -1329,10 +1124,8 @@ public class BossSkill : MonoBehaviour
                     saveColumn_M = Column_M;
                     saveColumn_P = Column_P;
 
-
                     if (Column_M >= 0)
                     {
-                       
                         m_StageMgr.m_MapInfo[Row, Column_M].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                         
                         if(!m_CurrentBossSkill.SingleTile)
@@ -1345,13 +1138,10 @@ public class BossSkill : MonoBehaviour
                             m_StageMgr.m_MapInfo[Row, Column_M].BossEffect = false;
                             m_StageMgr.m_MapInfo[Row, Column_M].EmptyEffect = true;
                         }
-
-                        
                     }
 
                     if (Column_P < 6)
                     {
-                        
                         m_StageMgr.m_MapInfo[Row, Column_P].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
                         
                         if(!m_CurrentBossSkill.SingleTile)
@@ -1364,13 +1154,7 @@ public class BossSkill : MonoBehaviour
                             m_StageMgr.m_MapInfo[Row, Column_P].BossEffect = false;
                             m_StageMgr.m_MapInfo[Row, Column_P].EmptyEffect = true;
                         }
-
-
                     }
-
-
-
-
                 }
                 xRange -= 1.0f;
             }
@@ -1380,17 +1164,12 @@ public class BossSkill : MonoBehaviour
             m_StageMgr.m_MapInfo[Row, Column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.red;
             m_StageMgr.m_MapInfo[Row, Column].BossEffect = true;
             m_StageMgr.m_MapInfo[Row, Column].EmptyEffect = false;
-            
         }
 
-
-      
         DelayAndLunchPrefabSet();
         Debug.Log("보스 스킬 범위 ");
         yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
         Destroy(TempLunch);
-
-
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
         {
@@ -1422,11 +1201,8 @@ public class BossSkill : MonoBehaviour
             }
         }
 
-
         Debug.Log("방출(도넛) 스킬 종료");
         StartCoroutine(AllTileOriginColor());
-        //AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
-
 
         //연계스킬있는지 확인후 다시 스킬실행.
         if (m_CurrentBossSkill.SkillAdded != 0)
@@ -1442,8 +1218,6 @@ public class BossSkill : MonoBehaviour
                 m_TargetColumn = 0;
             }
         }
-
-
         yield break;
     }
 
@@ -1482,7 +1256,6 @@ public class BossSkill : MonoBehaviour
 
         PlayerPosition = GameObject.FindGameObjectWithTag("Player").transform;
 
-
         Transform[] allChildren = GetComponentsInChildren<Transform>();
         foreach(Transform child in allChildren)
         {
@@ -1492,27 +1265,6 @@ public class BossSkill : MonoBehaviour
                 Debug.Log("보스스킬스크립트:" + PosAtk.name);
             }
         }
-
         m_BossFSM = GetComponent<BossFSM>();
-
-        //names[0].Name = "이세영"; names[0].Age = 102;
-        //names[1].Name = "권경민"; names[1].Age = 31;
-
     }
-
-    void Update()
-    {
-
-    }
-
-//#if UNITY_EDITOR
-//    //씬뷰에서 확인용
-//    private void OnDrawGizmos()
-//    {
-//        UnityEditor.Handles.color = isCollision ? _red : _blue;
-//        UnityEditor.Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, distance);
-//        UnityEditor.Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, distance);
-//    }
-//#endif
-
 }
