@@ -177,7 +177,7 @@ public class SpiritSkill : MonoBehaviour
 
     IEnumerator Spirit_Attack(SpiritSkill_TableExcel skill, GameObject spirit, int effect_num)
     {
-
+        SpiritSkillSoundPlay(skill);
         Debug.Log("정령 어택스킬 실행");
         // 정령이 소환된 후.
         GameObject findEnemy = null;
@@ -214,6 +214,7 @@ public class SpiritSkill : MonoBehaviour
 
     IEnumerator Spirit_Target(SpiritSkill_TableExcel skill, GameObject spirit, int effect_num)
     {
+        SpiritSkillSoundPlay(skill);
         Debug.Log("정령 타겟스킬 실행");
         // 정령이 소환된 후.
 
@@ -295,6 +296,7 @@ public class SpiritSkill : MonoBehaviour
 
     IEnumerator Spirit_Tile(SpiritSkill_TableExcel skill, int row, int column, int effect_number)
     {
+        SpiritSkillSoundPlay(skill);
         int Row = row;
         int Column = column;
 
@@ -446,6 +448,7 @@ public class SpiritSkill : MonoBehaviour
 
     IEnumerator SpeedField(SpiritSkill_TableExcel skill, int row, int column,int n)
     {
+        SpiritSkillSoundPlay(skill);
         int Row = row;
         int Column = column;
         int number = n;
@@ -629,6 +632,7 @@ public class SpiritSkill : MonoBehaviour
 
     IEnumerator IceField(SpiritSkill_TableExcel skill, int row, int column, int n)
     {
+        SpiritSkillSoundPlay(skill);
         int Row = row;
         int Column = column;
         int number = n;
@@ -785,6 +789,7 @@ public class SpiritSkill : MonoBehaviour
 
 	IEnumerator Heal(SpiritSkill_TableExcel skill, GameObject spirit, int n)
 	{
+        SpiritSkillSoundPlay(skill);
         Debug.Log("힐 실행");
         GameObject tempEffect = Instantiate(Fire_Prefabs[(int)SkillNumber.HEAL]);
         tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
@@ -873,6 +878,7 @@ public class SpiritSkill : MonoBehaviour
     //밀려나는 코드
 	IEnumerator Sanctity(SpiritSkill_TableExcel skill, GameObject spirit, int n)
 	{
+        SpiritSkillSoundPlay(skill);
         Debug.Log("신성지대 실행");
 		GameObject tempEffect = Instantiate(Fire_Prefabs[(int)SkillNumber.SANCTITY]);
         tempEffect.transform.position = spirit.transform.position;
@@ -934,6 +940,7 @@ public class SpiritSkill : MonoBehaviour
 
 	IEnumerator Invincibility(SpiritSkill_TableExcel skill, GameObject spirit, int n)
 	{
+        SpiritSkillSoundPlay(skill);
         Debug.Log("무적 실행");
         GameObject tempEffect = Instantiate(Fire_Prefabs[(int)SkillNumber.INVINCIBILITY]);
 		tempEffect.transform.position = spirit.transform.position;
@@ -1005,6 +1012,7 @@ public class SpiritSkill : MonoBehaviour
 	
 	IEnumerator PoisonCloud(SpiritSkill_TableExcel skill,GameObject spirit, int n)
 	{
+        SpiritSkillSoundPlay(skill);
         Debug.Log("독구름 실행");
         GameObject nearEnemy = FindNearbyEnemy(spirit.transform.position, skill.SkillRange);
 		GameObject tempEffect = null;
@@ -1270,6 +1278,7 @@ public class SpiritSkill : MonoBehaviour
     // 부채꼴 스킬
     IEnumerator SectorFormSkill(SpiritSkill_TableExcel skill, GameObject spirit, int prefabNum)
     {
+        SpiritSkillSoundPlay(skill);
         spirit.transform.rotation = Quaternion.Euler(0, -180f, 0);
         GameObject FindEnemys = FindNearbyEnemy(spirit.transform.position, skill.SkillRange);
 
@@ -1364,6 +1373,7 @@ public class SpiritSkill : MonoBehaviour
 
     IEnumerator RectangleSkill(SpiritSkill_TableExcel skill, GameObject spirit, int prefabNum)
     {
+        SpiritSkillSoundPlay(skill);
         spirit.transform.rotation = Quaternion.Euler(0, -180f, 0);
         GameObject FindEnemys = FindNearbyEnemy(spirit.transform.position, skill.SkillRange);
 
@@ -1421,5 +1431,54 @@ public class SpiritSkill : MonoBehaviour
             }
             yield return null;
         }
+    }
+
+    void SpiritSkillSoundPlay(SpiritSkill_TableExcel skill)
+    {
+        switch(skill.SpritSkillIndex)
+        {
+            case 170012:
+            case 170001:
+                SEManager.instance.PlaySE("Slasher");
+                break;
+            case 170011:
+            case 170002:
+                SEManager.instance.PlaySE("Throw");
+                break;
+            case 170003:
+                SEManager.instance.PlaySE("Holy");
+                break;
+            case 170004:
+                SEManager.instance.PlaySE("KnockBack");
+                break;
+            case 170005:
+                SEManager.instance.PlaySE("Heal1");
+                break;
+            case 170006:
+                SEManager.instance.PlaySE("SpeedUp");
+                break;
+            case 170007:
+                SEManager.instance.PlaySE("CutDown");
+                break;
+            case 170008:
+                SEManager.instance.PlaySE("FirePilar");
+                break;
+            case 170009:
+                SEManager.instance.PlaySE("Boom");
+                break;
+            case 170010:
+                SEManager.instance.PlaySE("Wind");
+                break;
+            case 170014:
+                SEManager.instance.PlaySE("Stun");
+                break;
+            case 170015:
+                SEManager.instance.PlaySE("Heal2");
+                break;
+            case 170016:
+                SEManager.instance.PlaySE("AttackField");
+                break;
+        }
+        
     }
 }

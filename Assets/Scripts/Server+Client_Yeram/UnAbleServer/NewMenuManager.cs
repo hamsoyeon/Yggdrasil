@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NewMenuManager : Singleton_Ver2.Singleton<NewMenuManager>
+//Singleton_Ver2.Singleton<NewMenuManager>
+
+public class NewMenuManager : MonoBehaviour
 {
     [SerializeField]
     GameObject m_MainMenu;
@@ -16,8 +18,11 @@ public class NewMenuManager : Singleton_Ver2.Singleton<NewMenuManager>
     bool m_IsTutorialClear = false;
     GameObject ui;
 
+    NewRoomManager m_roommanager;
+
     void Start()
     {
+        m_roommanager = GetComponent<NewRoomManager>();
         m_MainMenu.SetActive(true);
         m_Option.SetActive(false);
         m_Room.SetActive(false);
@@ -56,8 +61,17 @@ public class NewMenuManager : Singleton_Ver2.Singleton<NewMenuManager>
         m_Room.SetActive(false);
         m_MainMenu.SetActive(true);
     }
+
+    // ------------------------------------------- 수정사항 (승렬)
+
     public void OnClickStart()
     {
-        SceneManager.LoadScene("MainScene");
+        if (m_roommanager.m_MapNum == 0)
+            SceneManager.LoadScene("MainScene");
+
+        if (m_roommanager.m_MapNum == 1)
+            SceneManager.LoadScene("Stage2");
+
+        //SceneManager.LoadScene("MainScene");
     }
 }

@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 using TMPro;
 //using ECharacterType = NewCharacterInfo.ECharacterType;
 
-public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
+//Singleton_Ver2.Singleton < NewRoomManager >
+
+public class NewRoomManager : MonoBehaviour
 {
     public GameObject MapPannel;
 
@@ -27,8 +29,14 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
     private Image map_View;
     [SerializeField]
     private Image room_Map_View;
-    [SerializeField]
-    private int m_MapNum;
+
+    // ------------------------------------------ 변경한 내용 (승렬)
+
+    //[SerializeField]
+    [Header("선택 맵")]
+    public int m_MapNum;
+
+    // ------------------------------------------
 
     [SerializeField]
     private List<Button> m_SelectMap_Btn;

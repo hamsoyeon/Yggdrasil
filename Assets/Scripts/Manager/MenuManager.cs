@@ -68,6 +68,13 @@ public class MenuManager : MonoBehaviour
         if (WinPanel.activeSelf)
             return;
 
+        if (SceneManager.GetActiveScene().name == "MainScene")
+            SEManager.instance.StopSE("Stage1");
+        if (SceneManager.GetActiveScene().name == "Stage2")
+            SEManager.instance.StopSE("Stage2");
+
+        SEManager.instance.PlaySE("Lose");
+
         LosePanel.SetActive(true);  //패배했을때의 패널을 보여주고
 
 
@@ -95,7 +102,13 @@ public class MenuManager : MonoBehaviour
         if (LosePanel.activeSelf)
             return;
 
-        
+        if (SceneManager.GetActiveScene().name == "MainScene")
+            SEManager.instance.StopSE("Stage1");
+        if (SceneManager.GetActiveScene().name == "Stage2")
+            SEManager.instance.StopSE("Stage2");
+
+        SEManager.instance.PlaySE("Win");
+
         WinPanel.SetActive(true);
 
         rt = WinPanel.GetComponent<RectTransform>();
