@@ -57,7 +57,11 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
     // 스킬 버튼 리스트.
     public List<Button> m_skBtnList;
 
+    // 그냥 테두리
+    public Sprite m_originWindow;
 
+    // 선택된 테두리
+    public Sprite m_selectWindow;
 
     // 영상 들어갈 변수
     [SerializeField]
@@ -112,8 +116,6 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
             int a = i;
             m_skillButtons[i].interactable = false;
             m_skillButtons[i].onClick.AddListener(() => SetSkillBtn(a));
-            
-           
         }
 
         m_prevNumber = new int[6];
@@ -121,8 +123,6 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
         {
             m_prevNumber[i] = -1;
         }    
-
-
 
     }
 
@@ -190,12 +190,27 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
         // 버튼들 비활성화 처리.
         for (int i = 0; i < m_skillButtons.Count; i++)
             m_skillButtons[i].interactable = false;
+
+
+        m_skillButtons[m_selectNumber].transform.parent.GetComponent<Image>().sprite = m_originWindow;
+
     }
 
 
     // 현재 선택한 버튼 셋팅
     public void SetSkillBtn(int index)
     {
+        // 값이 들어온 것.
+        if(m_selectNumber < 0)
+        {
+            m_skillButtons[index].transform.parent.GetComponent<Image>().sprite = m_selectWindow;
+        }
+        else
+        {
+            m_skillButtons[m_selectNumber].transform.parent.GetComponent<Image>().sprite = m_originWindow;
+            m_skillButtons[index].transform.parent.GetComponent<Image>().sprite = m_selectWindow;
+        }
+       
         m_selectNumber = index;
         Debug.Log($"{index}번째 버튼 들어옴");
     }
