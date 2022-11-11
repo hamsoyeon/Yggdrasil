@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/00.Data/Excel/~$SpiritSkill.xlsx.meta
+guid: 5526314ac68a009468bb960c2fd1b15a
+========
 guid: 3172e495d03d53947a5b18a21bac8f52
+>>>>>>>> 16906f0cb5081f97a84430749b4a97dbd4dc6a6b:Assets/Scenes/Stage2.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

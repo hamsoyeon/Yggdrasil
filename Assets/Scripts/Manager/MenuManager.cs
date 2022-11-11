@@ -73,7 +73,7 @@ public class MenuManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Stage2")
             SEManager.instance.StopSE("Stage2");
 
-        SEManager.instance.PlaySE("Lose");
+        SEManager.instance.PlaySE("Fail");
 
         LosePanel.SetActive(true);  //패배했을때의 패널을 보여주고
 
@@ -107,7 +107,7 @@ public class MenuManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Stage2")
             SEManager.instance.StopSE("Stage2");
 
-        SEManager.instance.PlaySE("Win");
+        SEManager.instance.PlaySE("Victory");
 
         WinPanel.SetActive(true);
 
