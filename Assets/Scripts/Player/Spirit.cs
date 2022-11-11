@@ -7,7 +7,7 @@ public class Spirit : MonoBehaviour
 
 	enum SpiritType { Tile=1, NonTileNotMove, NonTileMove }
 
-	public GameObject SpiritPrefab;
+	//public GameObject SpiritPrefab;
 
 	
 	public SpiritSkill m_SpiritSkill;
@@ -108,15 +108,11 @@ public class Spirit : MonoBehaviour
         float spirit_time = 0f;
 		float attack_time = 0f;
 
-	
-
-       
 		while (true)
 		{
 			//지속시간 체크
 			spirit_time += Time.deltaTime;
 			attack_time += Time.deltaTime;
-
 
 
             if(spirit_time >= animation_length && !setIdle)
@@ -153,9 +149,9 @@ public class Spirit : MonoBehaviour
 		GameObject tempSpirit = Instantiate(PrefabLoader.Instance.PrefabDic[spiritInfo.Prefab]);
         tempSpirit.transform.rotation = Quaternion.Euler(0, 180, 0);
 
-
         SpiritMove moveCheck;
         moveCheck = tempSpirit.GetComponent<SpiritMove>();
+
         if (moveCheck == null)
         {
             tempSpirit.AddComponent<SpiritMove>();

@@ -51,15 +51,13 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
     private RawImage m_skVideo;
 
     // 스킬 아이콘 이미지를 받을 변수 (Resource에 있는 img폴더에 있는 리소스들을 가지고 옴)
-    private Spirit[] m_skImg;
+    private Sprite[] m_skImg;
 
     // 버튼 7개 생성 후(Room/Player_BackImg/Image~Image(5) => ShowButton(6) + HideButton(1)) -> 버튼을 클릭하면 설명 패널창이 나온다.
     public List<Button> m_skButtons;
 
     // 스킬 설명 및 선택 창이 켜져 있는지의 여부(켜져있으면 = TRUE)
     private bool m_isInfo = false;
-
-
 
     // ---------------------------------------------------------
 
@@ -70,6 +68,13 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
         MapPannel.SetActive(false);
         Init_Map();
         Select_Map_Btn();
+
+        //m_skImg = Resources.LoadAll<Sprite>("Prefabs/Icon"); // Prefabs/Icon폴더에리소스 가져오기.
+        
+
+
+
+
     }
 
     // Start is called before the first frame update
@@ -129,6 +134,15 @@ public class NewRoomManager : Singleton_Ver2.Singleton<NewRoomManager>
         m_skInfoPanel.SetActive(false);
     }
 
+    public void ShowSkillList()
+    {
+        for(int i=0; i< m_skImg.Length; i++)
+        {
+
+        }
+
+
+    }
 
     // ---------------------------------------------------------
 

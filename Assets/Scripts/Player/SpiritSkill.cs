@@ -140,7 +140,6 @@ public class SpiritSkill : MonoBehaviour
         switch ((SkillType)skillInfo.SkillType)
         {
             case SkillType.ATTACK:
-                
                 StartCoroutine(Spirit_Attack(skillInfo, tempSpirit, effectNumber));
                 break;
             case SkillType.WIDE_MOVE:
@@ -182,7 +181,7 @@ public class SpiritSkill : MonoBehaviour
 
         if (findEnemy == null) // 널이라면
         {
-            StopCoroutine("Spirit_Target");
+            StopCoroutine("Spirit_Attack");
         }
         else  // 널이 아니라면.
         {
@@ -195,8 +194,6 @@ public class SpiritSkill : MonoBehaviour
             spirit.GetComponent<SpiritMove>().moveSpeed = skill.BulletSpeed;
 
         }
-
-
 
         yield return null;
     }
@@ -290,12 +287,12 @@ public class SpiritSkill : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator Spirit_Tile(SpiritSkill_TableExcel skill, int row, int column, int n)
+
+    IEnumerator Spirit_Tile(SpiritSkill_TableExcel skill, int row, int column, int effect_number)
     {
 
         int Row = row;
         int Column = column;
-        int number = n;
 
         float spirit_time = 0f;
 
@@ -377,9 +374,9 @@ public class SpiritSkill : MonoBehaviour
 
         }
 
-        DelayAndLunchPrefabSet(number);
+        DelayAndLunchPrefabSet(effect_number);
         yield return new WaitForSeconds(2f);
-        Destroy(LunchObjects[number]);
+        Destroy(LunchObjects[effect_number]);
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
         {
@@ -389,16 +386,16 @@ public class SpiritSkill : MonoBehaviour
                 if (m_StageMgr.m_MapInfo[i, j].SpiritEffect1)
                 {
                     m_StageMgr.m_MapInfo[i, j].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
-                    GameObject effect = Instantiate(Fire_Prefabs[(int)SkillNumber.ICE]);
+                    GameObject effect = Instantiate(Fire_Prefabs[effect_number]);
 
                     effect.GetComponent<DamageCheck>().Dot = skill.DoT;
                     effect.GetComponent<DamageCheck>().who = 1;
-                    //버프 스킬이 있는지 확인후 스킬실행.
-                    if (skill.BuffAdded != 0)
-                    {
+                    ////버프 스킬이 있는지 확인후 스킬실행.
+                    //if (skill.BuffAdded != 0)
+                    //{
 
-                        effect.GetComponent<DamageCheck>().buffIndex = skill.BuffAdded;
-                    }
+                    //    effect.GetComponent<DamageCheck>().buffIndex = skill.BuffAdded;
+                    //}
 
                     effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
                     m_StageMgr.m_MapInfo[i, j].SpiritEffectObject1 = effect;
@@ -1284,7 +1281,9 @@ public class SpiritSkill : MonoBehaviour
     {
         spirit.transform.rotation = Quaternion.Euler(0, -180f, 0);
         GameObject FindEnemys = FindNearbyEnemy(spirit.transform.position, skill.SkillRange);
-        spirit.transform.LookAt(FindEnemys.transform);
+
+        if (FindEnemys == null)
+            yield break;
 
         GameObject tempEffect = null;
         Collider[] colls = null;
@@ -1298,6 +1297,7 @@ public class SpiritSkill : MonoBehaviour
 
         if (FindEnemys != null)
         {
+            spirit.transform.LookAt(FindEnemys.transform);
             tempEffect = Instantiate(Fire_Prefabs[prefabNum]);
             tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
             tempEffect.GetComponent<DamageCheck>().who = 1;
@@ -1353,7 +1353,9 @@ public class SpiritSkill : MonoBehaviour
     {
         spirit.transform.rotation = Quaternion.Euler(0, -180f, 0);
         GameObject FindEnemys = FindNearbyEnemy(spirit.transform.position, skill.SkillRange);
-        spirit.transform.LookAt(FindEnemys.transform);
+
+        if (FindEnemys == null)
+            yield break;
 
         GameObject tempEffect = null;
         Collider[] colls = null;
@@ -1367,6 +1369,7 @@ public class SpiritSkill : MonoBehaviour
 
         if (FindEnemys != null)
         {
+            spirit.transform.LookAt(FindEnemys.transform);
             tempEffect = Instantiate(Fire_Prefabs[prefabNum]);
             tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
             tempEffect.GetComponent<DamageCheck>().who = 1;
