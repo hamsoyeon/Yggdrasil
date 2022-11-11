@@ -273,6 +273,10 @@ public class NewRoomManager : MonoBehaviour
 
         }
 
+        // 동영상 설정도 해줘야한다.
+
+
+        // 텍스트 설정.
         Debug.Log(m_skImg[index].name);
         int dic_index = int.Parse(m_skImg[index].name);
         m_Information.text = m_skText[dic_index];

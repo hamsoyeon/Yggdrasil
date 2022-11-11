@@ -125,6 +125,13 @@ public class BossSkill : MonoBehaviour
         check2.dmg_check = true;
         check2.m_DamageEffect = PrefabLoader.Instance.PrefabDic[m_CurrentBossSkill.DamPrefb];    // 공백프리팹에 데미지 프리팹 넣어주기.
 
+        DebuffTileChk debuffCheck;
+        debuffCheck = DebuffTilePrefab.GetComponent<DebuffTileChk>();
+        if(debuffCheck == null)
+        {
+            DebuffTilePrefab.AddComponent<DebuffTileChk>();
+        }
+
         SkillAction();
     }
 
@@ -224,6 +231,8 @@ public class BossSkill : MonoBehaviour
     {
         int Row = 0;
         int Column = 0;
+
+        //DebuffTile = true;
 
         if (TargetLockOn)
         {
@@ -387,7 +396,7 @@ public class BossSkill : MonoBehaviour
         }
 
         Debug.Log("와이드 스킬 종료");
-
+        DebuffTile = false;
         StartCoroutine(AllTileOriginColor());
 
         //연계스킬있는지 확인후 다시 스킬실행.
@@ -410,6 +419,9 @@ public class BossSkill : MonoBehaviour
     {
         //타켓에서 연계스킬이 있는경우 광역,확산,도넛의 시작범위가 보스가 아니라 타겟된 대상을 기준으로 적용됨.
         Debug.Log("타겟 스킬 실행");
+
+        //DebuffTile = true;
+
         float range = m_CurrentBossSkill.SkillRange - 1.0f;
         float xRange = m_CurrentBossSkill.SkillRange + range;
 
@@ -556,6 +568,7 @@ public class BossSkill : MonoBehaviour
 
         this.gameObject.GetComponent<BossFSM>().behavior = false;
         Debug.Log("타겟 스킬 종료");
+        DebuffTile = false;
         StartCoroutine(AllTileOriginColor());
 
         //연계스킬 처리
@@ -583,6 +596,8 @@ public class BossSkill : MonoBehaviour
     IEnumerator SkillLineAction()
     {
         LineSkillTarget = GameObject.Find("Player").transform.GetChild(0).gameObject;
+
+        //DebuffTile = true;
 
         int Row = 0;
         int Column = 0;
@@ -894,6 +909,8 @@ public class BossSkill : MonoBehaviour
         }
 
         Debug.Log("확산 스킬 종료");
+
+        DebuffTile = false;
         StartCoroutine(AllTileOriginColor());
         //AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
@@ -935,6 +952,18 @@ public class BossSkill : MonoBehaviour
                 effect.GetComponent<DamageCheck>().buffIndex = m_CurrentBossSkill.BuffAdded;
             }
             m_StageMgr.m_MapInfo[i, j].BossEffectObject = effect;
+
+            if (DebuffTile)
+            {
+                GameObject DebuffTile = Instantiate(DebuffTilePrefab);
+                DebuffTile.GetComponent<DebuffTileChk>().debuffTile_chk = true;
+                DebuffTile.GetComponent<DebuffTileChk>().who = 1;  // 플레이어(1) -> 디버프 / 에너미(2) -> 버프
+                DebuffTile.GetComponent<DebuffTileChk>().Dot = 1f;  // 우선 1초로 고정 -> 가변형이면 데이터에 따라 변경.
+                DebuffTile.GetComponent<DebuffTileChk>().lifeTime = 7f;  // 우선 7초로 고정 -> 가변형이면 데이터에 따라 변경.
+                DebuffTile.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
+                m_StageMgr.m_MapInfo[i, j].BossDebuffTileObjcet = DebuffTile;
+            }
+
         }
         else if (m_StageMgr.m_MapInfo[i, j].EmptyEffect)
         {
@@ -950,21 +979,31 @@ public class BossSkill : MonoBehaviour
                 effect.GetComponent<DamageCheck>().buffIndex = m_CurrentBossSkill.BuffAdded;
             }
             m_StageMgr.m_MapInfo[i, j].BossEmptyObject = effect;
+
+            if (DebuffTile)
+            {
+                GameObject DebuffTile = Instantiate(DebuffTilePrefab);
+                DebuffTile.GetComponent<DebuffTileChk>().debuffTile_chk = true;
+                DebuffTile.GetComponent<DebuffTileChk>().who = 1;  // 플레이어(1) -> 디버프 / 에너미(2) -> 버프
+                DebuffTile.GetComponent<DebuffTileChk>().Dot = 1f;  // 우선 1초로 고정 -> 가변형이면 데이터에 따라 변경.
+                DebuffTile.GetComponent<DebuffTileChk>().lifeTime = 7f;  // 우선 7초로 고정 -> 가변형이면 데이터에 따라 변경.
+                DebuffTile.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
+                m_StageMgr.m_MapInfo[i, j].BossDebuffTileObjcet = DebuffTile;
+            }
+
+
         }
 
-        if (DebuffTile)
-        {
-            GameObject effect = Instantiate(DebuffTilePrefab);
-            effect.transform.rotation = Quaternion.Euler(effect.transform.rotation.x, angle, effect.transform.rotation.z);
-            effect.transform.position = m_StageMgr.m_MapInfo[i, j].MapPos + new Vector3(0, 5f, 0);
-            m_StageMgr.m_MapInfo[i, j].BossDebuffTileObjcet = effect;
-        }
+       
     }
+
 
     IEnumerator SkillDiffusionAction()
     {
         int Row = 0;
         int Column = 0;
+
+        DebuffTile = true;
 
         if (TargetLockOn)
         {
@@ -1235,6 +1274,10 @@ public class BossSkill : MonoBehaviour
         }
         yield break;
     }
+
+
+
+
 
     //디버프 타일 생성하는 스킬 함수
     IEnumerator CreateDebuffTile()

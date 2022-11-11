@@ -48,6 +48,7 @@ MonoBehaviour:
   debuffTile_chk: 0
   who: 0
   Dot: 0
+  lifeTime: 0
   EnemyClass: {fileID: 0}
 --- !u!1001 &4661644295021360011
 PrefabInstance:
@@ -56,9 +57,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4661644294783462158}
     m_Modifications:
+    - target: {fileID: 108462, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 163474, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
       propertyPath: m_Name
       value: Bear_Sumon_Star
+      objectReference: {fileID: 0}
+    - target: {fileID: 194066, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 473300, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
       propertyPath: m_RootOrder
@@ -104,28 +113,72 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 10852314, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: m_Color.g
+      value: 0.16470589
+      objectReference: {fileID: 0}
     - target: {fileID: 19800656, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
       propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800656, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800656, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800656, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19822286, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
       propertyPath: looping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19846720, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
       propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19846720, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19846720, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.7647059
+      objectReference: {fileID: 0}
+    - target: {fileID: 19846720, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.5137255
       objectReference: {fileID: 0}
     - target: {fileID: 19868000, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
       propertyPath: looping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19869168, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
       propertyPath: looping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19889422, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
       propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19889422, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19889422, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.38431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 19889422, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19955088, guid: 13896c59310b4f14cb517e612d959de5, type: 3}
+      propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

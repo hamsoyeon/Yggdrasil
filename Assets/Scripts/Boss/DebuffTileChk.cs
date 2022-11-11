@@ -9,9 +9,11 @@ public class DebuffTileChk : MonoBehaviour
     //1.Player에겐 디버프 2.Enemy에게 버프
     public int who;
     public float Dot;
+    public float lifeTime;
     private int p_debuffcount = 0; //플레이어 디버프 카운트 중첩이 안되게
     private int b_debuffcount = 0; //보스 디버프 카운트 중첩이 안되게
     private float time;
+    private float dotTime;
     public CharacterClass EnemyClass; //보스 
     private CharacterClass PlayerClass; //캐릭터 접근 가능
 
@@ -22,48 +24,84 @@ public class DebuffTileChk : MonoBehaviour
 
     void Update()
     {
+
+        time += Time.deltaTime;
+        dotTime += Time.deltaTime;
+
         if (debuffTile_chk)
         {
-            Collider[] cols = Physics.OverlapSphere(transform.position, 12f);
-            if(cols.Length > 0)
+            if(dotTime>=Dot)
             {
-                for(int i = 0; i < cols.Length; i++)
+                dotTime = 0f;
+                Collider[] cols = Physics.OverlapSphere(transform.position, 12f);
+                if (cols.Length > 0)
                 {
-                    switch (who)
+                    for (int i = 0; i < cols.Length; i++)
                     {
-                        case 1:
-                            if (cols[i].tag == "Boss")
-                            {
-                                Debug.Log("적군 디버프 타일 입장");
+                        // 타일에 들어온 플레이어와 에너미 모두에게 버프/디버프를 줄떄.
+                        //if (cols[i].tag == "Boss")
+                        //{
+                        //    EnemyClass = cols[i].GetComponent<CharacterClass>();
+                        //    if (cols[i].tag == "Boss" && b_debuffcount == 0)
+                        //    {
+                        //        Debug.Log("보스 데미지 증가");
+                        //        b_debuffcount++;
+                        //        EnemyClass.m_BossStatData.Atk += 10;
+                        //    }
+                        //}
+                        //else if (cols[i].tag == "Player")
+                        //{
+                        //    PlayerClass = GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>();
 
-                                EnemyClass = cols[i].GetComponent<CharacterClass>();
+                        //    if (cols[i].tag == "Player" && p_debuffcount == 0)
+                        //    {
+                        //        Debug.Log("플레이어 데미지 감소");
+                        //        p_debuffcount++;
+                        //        PlayerClass.m_CharacterStat.Atk -= 10;
+                        //    }
+                        //}
 
-                                if(cols[i].tag == "Boss" && b_debuffcount == 0)
+                        //선택적으로 버프와 디버프를 줄때
+                        switch (who)
+                        {
+                            case 1:
+                                if (cols[i].tag == "Boss")
                                 {
-                                    b_debuffcount++;
 
-                                    EnemyClass.m_BossStatData.Def += 10;
+
+                                    EnemyClass = cols[i].GetComponent<CharacterClass>();
+                                    if (cols[i].tag == "Boss" && b_debuffcount == 0)
+                                    {
+                                        Debug.Log("보스 데미지 증가");
+                                        b_debuffcount++;
+                                        EnemyClass.m_BossStatData.Atk += 10;
+                                    }
+
                                 }
-
-                            }
-                            break;
-                        case 2:
-                            if(cols[i].tag == "Player")
-                            {
-                                PlayerClass = GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>();
-
-                                if(cols[i].tag == "Player" && p_debuffcount == 0)
+                                break;
+                            case 2:
+                                if (cols[i].tag == "Player")
                                 {
-                                    p_debuffcount++;
+                                    PlayerClass = GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>();
 
-                                    PlayerClass.m_CharacterStat.Def -= 10;
+                                    if (cols[i].tag == "Player" && p_debuffcount == 0)
+                                    {
+                                        Debug.Log("플레이어 데미지 감소");
+                                        p_debuffcount++;
+                                        PlayerClass.m_CharacterStat.Atk -= 10;
+                                    }
                                 }
-                            }
-
-                            break;
+                                break;
+                        }
                     }
                 }
             }
+            
         }
+
+        if (time >= lifeTime)
+            Destroy(this.gameObject);
+
+
     }
 }

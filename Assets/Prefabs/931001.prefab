@@ -195,6 +195,7 @@ MonoBehaviour:
   bossStaminaSave: 0
   maxStamina: 0
   maxHp: 0
+  bossSpeed: 0
   behavior: 0
   m_BossClass: {fileID: 0}
   m_BossSkill:
@@ -205,8 +206,8 @@ MonoBehaviour:
     Target: 0
     Power: 0
     CoolTime: 0
-    SkillDistance: 0
     SkillRange: 0
+    SkillDistance: 0
     SkillType: 0
     UseStat: 0
     Direction1: 0
@@ -254,10 +255,12 @@ MonoBehaviour:
   LunchPrefab: {fileID: 0}
   DelayPrefab: {fileID: 0}
   EmptyPrefab: {fileID: 0}
+  DebuffTilePrefab: {fileID: 7175174837232618891, guid: a8cdb131c9f9fc440968d3e1f0597dad, type: 3}
   PosAtk: {fileID: 0}
   angleRange: 60
   distance: 5
   isCollision: 0
+  DelayTime: 10
   PlayerPosition: {fileID: 0}
   m_CurrentBossSkill:
     Name_KR: 
@@ -267,8 +270,8 @@ MonoBehaviour:
     Target: 0
     Power: 0
     CoolTime: 0
-    SkillDistance: 0
     SkillRange: 0
+    SkillDistance: 0
     SkillType: 0
     UseStat: 0
     Direction1: 0
@@ -309,8 +312,8 @@ MonoBehaviour:
     Target: 0
     Power: 0
     CoolTime: 0
-    SkillDistance: 0
     SkillRange: 0
+    SkillDistance: 0
     SkillType: 0
     UseStat: 0
     Direction1: 0
@@ -406,6 +409,18 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
+  m_SubMonsterData:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    SubMonsterIndex: 0
+    HP: 0
+    Defense: 0
+    Demege: 0
+    Speed: 0
+    Prefb: 0
+    Baseskill: 0
+    Epicskill: 0
   Invincibility: 1
 --- !u!114 &8498075457909129811
 MonoBehaviour:
@@ -447,37 +462,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb7ff2da3d5e67c4c86271b496646165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7291033910149383463
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 132660, guid: b67560e9372ff0243a6e2c9ea8e201ad, type: 3}
-  m_PrefabInstance: {fileID: 1206612802268624927}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7837054422548372171}
-  m_Layer: 0
-  m_Name: 'Bear_Arm (Missing Prefab with guid: b67560e9372ff0243a6e2c9ea8e201ad)'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7837054422548372171
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 456740, guid: b67560e9372ff0243a6e2c9ea8e201ad, type: 3}
-  m_PrefabInstance: {fileID: 1206612802268624927}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7291033910149383463}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7787545330142590684}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  stunEffect: {fileID: 0}
+  stunEffectTemp: {fileID: 0}
+  effectOffset: {x: 0, y: 10, z: 0}
 --- !u!1001 &1206612802268624927
 PrefabInstance:
   m_ObjectHideFlags: 0

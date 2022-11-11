@@ -395,7 +395,7 @@ public class BossFSM : MonoBehaviour
 
         BossRandomSkill = Random.Range(1, 5); // 1~4까지
 
-        BossRandomSkill = 1; // 몹소환 고정
+        BossRandomSkill = 3; // 몹소환 고정
 
         int CoolTimeindex = BossRandomSkill - 1;
 
