@@ -19,8 +19,8 @@ MonoBehaviour:
     StgConcept: 960001
     StgHorz: 1
     StgVert: 1
-    TileType: 2
-    TilePrefeb: 962001
+    TileType: 0
+    TilePrefeb: 0
     BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560001
@@ -28,10 +28,10 @@ MonoBehaviour:
     StgConcept: 960001
     StgHorz: 2
     StgVert: 1
-    TileType: 4
-    TilePrefeb: 964001
+    TileType: 2
+    TilePrefeb: 962001
     BossSummon: 0
-    BuffSummon: 301002
+    BuffSummon: 0
   - MapTableIndex: 560001
     StageName: Forest
     StgConcept: 960001
@@ -46,8 +46,8 @@ MonoBehaviour:
     StgConcept: 960001
     StgHorz: 4
     StgVert: 1
-    TileType: 0
-    TilePrefeb: 0
+    TileType: 1
+    TilePrefeb: 961001
     BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560001
@@ -55,8 +55,8 @@ MonoBehaviour:
     StgConcept: 960001
     StgHorz: 5
     StgVert: 1
-    TileType: 2
-    TilePrefeb: 964001
+    TileType: 0
+    TilePrefeb: 0
     BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560001
@@ -64,8 +64,8 @@ MonoBehaviour:
     StgConcept: 960001
     StgHorz: 6
     StgVert: 1
-    TileType: 1
-    TilePrefeb: 961001
+    TileType: 4
+    TilePrefeb: 964001
     BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560001
@@ -100,8 +100,8 @@ MonoBehaviour:
     StgConcept: 960001
     StgHorz: 4
     StgVert: 2
-    TileType: 1
-    TilePrefeb: 961001
+    TileType: 2
+    TilePrefeb: 962001
     BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560001
@@ -109,17 +109,17 @@ MonoBehaviour:
     StgConcept: 960001
     StgHorz: 5
     StgVert: 2
-    TileType: 4
-    TilePrefeb: 964001
+    TileType: 1
+    TilePrefeb: 961001
     BossSummon: 0
-    BuffSummon: 301002
+    BuffSummon: 0
   - MapTableIndex: 560001
     StageName: Forest
     StgConcept: 960001
     StgHorz: 6
     StgVert: 2
-    TileType: 1
-    TilePrefeb: 961001
+    TileType: 2
+    TilePrefeb: 962001
     BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560001
@@ -136,17 +136,17 @@ MonoBehaviour:
     StgConcept: 960001
     StgHorz: 2
     StgVert: 3
-    TileType: 4
-    TilePrefeb: 964001
+    TileType: 0
+    TilePrefeb: 0
     BossSummon: 0
-    BuffSummon: 301002
+    BuffSummon: 0
   - MapTableIndex: 560001
     StageName: Forest
     StgConcept: 960001
     StgHorz: 3
     StgVert: 3
-    TileType: 2
-    TilePrefeb: 962001
+    TileType: 4
+    TilePrefeb: 964001
     BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560001
@@ -154,8 +154,8 @@ MonoBehaviour:
     StgConcept: 960001
     StgHorz: 4
     StgVert: 3
-    TileType: 1
-    TilePrefeb: 961001
+    TileType: 4
+    TilePrefeb: 964001
     BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560001
@@ -163,8 +163,8 @@ MonoBehaviour:
     StgConcept: 960001
     StgHorz: 5
     StgVert: 3
-    TileType: 2
-    TilePrefeb: 962001
+    TileType: 0
+    TilePrefeb: 0
     BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560001
@@ -181,14 +181,23 @@ MonoBehaviour:
     StgConcept: 960001
     StgHorz: 1
     StgVert: 4
-    TileType: 0
-    TilePrefeb: 0
+    TileType: 1
+    TilePrefeb: 961001
     BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560001
     StageName: Forest
     StgConcept: 960001
     StgHorz: 2
+    StgVert: 4
+    TileType: 2
+    TilePrefeb: 962001
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
+    StgHorz: 3
     StgVert: 4
     TileType: 1
     TilePrefeb: 961001
@@ -197,19 +206,10 @@ MonoBehaviour:
   - MapTableIndex: 560001
     StageName: Forest
     StgConcept: 960001
-    StgHorz: 3
-    StgVert: 4
-    TileType: 0
-    TilePrefeb: 0
-    BossSummon: 0
-    BuffSummon: 0
-  - MapTableIndex: 560001
-    StageName: Forest
-    StgConcept: 960001
     StgHorz: 4
     StgVert: 4
-    TileType: 0
-    TilePrefeb: 0
+    TileType: 2
+    TilePrefeb: 962001
     BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560001
@@ -235,8 +235,8 @@ MonoBehaviour:
     StgConcept: 960001
     StgHorz: 1
     StgVert: 5
-    TileType: 2
-    TilePrefeb: 962001
+    TileType: 0
+    TilePrefeb: 0
     BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560001
@@ -247,20 +247,11 @@ MonoBehaviour:
     TileType: 4
     TilePrefeb: 964001
     BossSummon: 0
-    BuffSummon: 301002
-  - MapTableIndex: 560001
-    StageName: Forest
-    StgConcept: 960001
-    StgHorz: 3
-    StgVert: 5
-    TileType: 0
-    TilePrefeb: 0
-    BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560001
     StageName: Forest
     StgConcept: 960001
-    StgHorz: 4
+    StgHorz: 3
     StgVert: 5
     TileType: 1
     TilePrefeb: 961001
@@ -269,10 +260,19 @@ MonoBehaviour:
   - MapTableIndex: 560001
     StageName: Forest
     StgConcept: 960001
+    StgHorz: 4
+    StgVert: 5
+    TileType: 0
+    TilePrefeb: 0
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560001
+    StageName: Forest
+    StgConcept: 960001
     StgHorz: 5
     StgVert: 5
-    TileType: 2
-    TilePrefeb: 962001
+    TileType: 0
+    TilePrefeb: 0
     BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560001

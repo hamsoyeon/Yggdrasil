@@ -40,62 +40,121 @@ public class BoardBehaviour : MonoBehaviour
         int x = 0;
         int z = 0;
 
-        if(SceneManager.GetActiveScene().name == "MainScene")
-            parent = GameObject.Find("960001").transform;
-        if (SceneManager.GetActiveScene().name == "Stage2")
-            parent = GameObject.Find("960002").transform;
         index = new List<int>();
 
-        //각 맵 정보에 데이터 넣어주기.
-        foreach (var item in DataTableManager.Instance.GetDataTable<Map_TableExcelLoader>().DataList)
+        if (SceneManager.GetActiveScene().name == "MainScene")
         {
-            if (item.TilePrefeb.ToString() == TileAsset.m_prefab[0].TileObj.name)
-            {
-                index.Add(0);
-            }
-            else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[1].TileObj.name)
-            {
-                index.Add(1);
-            }
-            else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[2].TileObj.name)
-            {
-                index.Add(2);
-            }
-            else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[3].TileObj.name)
-            {
-                index.Add(3);
-            }
-            else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[4].TileObj.name)
-            {
-                index.Add(4);
-            }
+            parent = GameObject.Find("960001").transform;
 
-            MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData = item;
-            MainManager.Instance.GetStageManager().m_MapInfo[z, x].row = z;       //가로
-            MainManager.Instance.GetStageManager().m_MapInfo[z, x].column = x;    //세로
-
-            MainManager.Instance.GetStageManager().m_MapInfo[z, x].BossEffect = false;
-            MainManager.Instance.GetStageManager().m_MapInfo[z, x].IsUnWalkable = true;
-
-
-            //if (MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData.BossSummon != 0)
-            //{
-            //	BossObj.transform.position = mapGridPositions[z, x] + new Vector3(0, 2.3f, 0);
-            //	MainManager.Instance.GetStageManager().m_BossRow = z;
-            //	MainManager.Instance.GetStageManager().m_BossColumn = x;
-            //}
-
-            //디버그용
-            if (item.BossSummon != 0)
+            //각 맵 정보에 데이터 넣어주기.
+            foreach (var item in DataTableManager.Instance.GetDataTable<Map_TableExcelLoader>().DataList)
             {
-                MainManager.Instance.GetStageManager().m_BossRow = z;
-                MainManager.Instance.GetStageManager().m_BossColumn = x;
+                if (item.TilePrefeb.ToString() == TileAsset.m_prefab[0].TileObj.name)
+                {
+                    index.Add(0);
+                }
+                else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[1].TileObj.name)
+                {
+                    index.Add(1);
+                }
+                else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[2].TileObj.name)
+                {
+                    index.Add(2);
+                }
+                else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[3].TileObj.name)
+                {
+                    index.Add(3);
+                }
+                else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[4].TileObj.name)
+                {
+                    index.Add(4);
+                }
+
+                MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData = item;
+                MainManager.Instance.GetStageManager().m_MapInfo[z, x].row = z;       //가로
+                MainManager.Instance.GetStageManager().m_MapInfo[z, x].column = x;    //세로
+
+                MainManager.Instance.GetStageManager().m_MapInfo[z, x].BossEffect = false;
+                MainManager.Instance.GetStageManager().m_MapInfo[z, x].IsUnWalkable = true;
+
+
+                //if (MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData.BossSummon != 0)
+                //{
+                //	BossObj.transform.position = mapGridPositions[z, x] + new Vector3(0, 2.3f, 0);
+                //	MainManager.Instance.GetStageManager().m_BossRow = z;
+                //	MainManager.Instance.GetStageManager().m_BossColumn = x;
+                //}
+
+                //디버그용
+                if (item.BossSummon != 0)
+                {
+                    MainManager.Instance.GetStageManager().m_BossRow = z;
+                    MainManager.Instance.GetStageManager().m_BossColumn = x;
+                }
+                x++;
+                if (x == Width)
+                {
+                    z++;
+                    x = 0;
+                }
             }
-            x++;
-            if (x == Width)
+        }
+            
+        if (SceneManager.GetActiveScene().name == "Stage2")
+        {
+            parent = GameObject.Find("960002").transform;
+
+            //각 맵 정보에 데이터 넣어주기.
+            foreach (var item in DataTableManager.Instance.GetDataTable<Map_Table2ExcelLoader>().DataList)
             {
-                z++;
-                x = 0;
+                if (item.TilePrefeb.ToString() == TileAsset.m_prefab[0].TileObj.name)
+                {
+                    index.Add(0);
+                }
+                else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[1].TileObj.name)
+                {
+                    index.Add(1);
+                }
+                else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[2].TileObj.name)
+                {
+                    index.Add(2);
+                }
+                else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[3].TileObj.name)
+                {
+                    index.Add(3);
+                }
+                else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[4].TileObj.name)
+                {
+                    index.Add(4);
+                }
+
+                MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData2 = item;
+                MainManager.Instance.GetStageManager().m_MapInfo[z, x].row = z;       //가로
+                MainManager.Instance.GetStageManager().m_MapInfo[z, x].column = x;    //세로
+
+                MainManager.Instance.GetStageManager().m_MapInfo[z, x].BossEffect = false;
+                MainManager.Instance.GetStageManager().m_MapInfo[z, x].IsUnWalkable = true;
+
+
+                //if (MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData.BossSummon != 0)
+                //{
+                //	BossObj.transform.position = mapGridPositions[z, x] + new Vector3(0, 2.3f, 0);
+                //	MainManager.Instance.GetStageManager().m_BossRow = z;
+                //	MainManager.Instance.GetStageManager().m_BossColumn = x;
+                //}
+
+                //디버그용
+                if (item.BossSummon != 0)
+                {
+                    MainManager.Instance.GetStageManager().m_BossRow = z;
+                    MainManager.Instance.GetStageManager().m_BossColumn = x;
+                }
+                x++;
+                if (x == Width)
+                {
+                    z++;
+                    x = 0;
+                }
             }
         }
 

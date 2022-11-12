@@ -19,7 +19,8 @@ namespace MapInformation
         public GameObject SpiritEffectObject2;  // 타일형 스킬2
        
         
-        public Map_TableExcel MapData;     //맵에 엑셀 데이터
+        public Map_TableExcel MapData;     //스테이지 1 엑셀 데이터
+        public Map_Table2Excel MapData2; //스테이지 2 엑셀 데이터
         public Vector3 MapPos;             //맵에 위치
         public int row;
         public int column;
