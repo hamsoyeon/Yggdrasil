@@ -65,11 +65,27 @@ public class PlayerUIManager : MonoBehaviour
             // -------------------------- 추가한 내용(남진)
             // 유저가 고른 스킬의 이미지를 동적으로 받아와야한다.
 
-            string path = "Icon/" + DataManager.Instance.m_userSelectSkillIndex[i].ToString();
-            Debug.Log(path);
-            Sprite tempSprite = spritSkill_Img[i];
-            spritSkill_Img[i] = Resources.Load<Sprite>(path);
-            spirit_Buttons[i].GetComponent<Image>().sprite = spritSkill_Img[i];
+
+            // 메인씬에서 바로 시작할시 데이터매니저가 없기때문에 에러생김 -> 예외처리
+            if(DataManager.Instance == null)
+            {
+                spirit_Buttons[i].GetComponent<Image>().sprite = spritSkill_Img[i];
+            }
+            else
+            {
+                string path = "Icon/" + DataManager.Instance.m_userSelectSkillIndex[i].ToString();
+                Debug.Log(path);
+                Sprite tempSprite = Resources.Load<Sprite>(path);
+
+                if (tempSprite == null)
+                {
+                    spirit_Buttons[i].GetComponent<Image>().sprite = spritSkill_Img[i];
+                }
+                else
+                {
+                    spirit_Buttons[i].GetComponent<Image>().sprite = tempSprite;
+                }
+            }
             // ------------------------------------------
 
 
