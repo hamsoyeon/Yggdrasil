@@ -9,9 +9,10 @@ public class PrefabLoader : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> PrefabList;
-
     public Dictionary<int, GameObject> PrefabDic;
 
+
+    //public Sprite[] m_pSelectSkill;
 
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class PrefabLoader : MonoBehaviour
         {
             instance = this;
             PrefabDic = new Dictionary<int, GameObject>();
+            //m_pSelectSkill = new Sprite[6];
 
             DontDestroyOnLoad(this.gameObject);
 
@@ -51,15 +53,16 @@ public class PrefabLoader : MonoBehaviour
             PrefabDic.Add(int.Parse(item.name), item);
         }
 
+        
 
         //Debug.Log(PrefabDic[911001].name);
-        
+
 
         //foreach (var item in PrefabDic)
         //{
         //    Debug.Log($"[{item.Key}:{item.Value}]");
         //}
-       
+
 
 
 
