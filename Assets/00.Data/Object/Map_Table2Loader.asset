@@ -1,0 +1,286 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018d45d9f56b9f54bb1cc156b9446ac3, type: 3}
+  m_Name: Map_Table2Loader
+  m_EditorClassIdentifier: 
+  filepath: Assets\00.Data\Txt\Map_Table2.txt
+  DataList:
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 1
+    StgVert: 1
+    TileType: 1
+    TilePrefeb: 961002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 2
+    StgVert: 1
+    TileType: 0
+    TilePrefeb: 0
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 3
+    StgVert: 1
+    TileType: 2
+    TilePrefeb: 962002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 4
+    StgVert: 1
+    TileType: 4
+    TilePrefeb: 964002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 5
+    StgVert: 1
+    TileType: 1
+    TilePrefeb: 961002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 6
+    StgVert: 1
+    TileType: 1
+    TilePrefeb: 961002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 1
+    StgVert: 2
+    TileType: 0
+    TilePrefeb: 0
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 2
+    StgVert: 2
+    TileType: 4
+    TilePrefeb: 964002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 3
+    StgVert: 2
+    TileType: 1
+    TilePrefeb: 961002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 4
+    StgVert: 2
+    TileType: 2
+    TilePrefeb: 962002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 5
+    StgVert: 2
+    TileType: 0
+    TilePrefeb: 0
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 6
+    StgVert: 2
+    TileType: 1
+    TilePrefeb: 961002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 1
+    StgVert: 3
+    TileType: 5
+    TilePrefeb: 965002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 2
+    StgVert: 3
+    TileType: 2
+    TilePrefeb: 962002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 3
+    StgVert: 3
+    TileType: 0
+    TilePrefeb: 0
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 4
+    StgVert: 3
+    TileType: 1
+    TilePrefeb: 961002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 5
+    StgVert: 3
+    TileType: 4
+    TilePrefeb: 964002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 6
+    StgVert: 3
+    TileType: 3
+    TilePrefeb: 963002
+    BossSummon: 131002
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 1
+    StgVert: 4
+    TileType: 4
+    TilePrefeb: 964002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 2
+    StgVert: 4
+    TileType: 0
+    TilePrefeb: 0
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 3
+    StgVert: 4
+    TileType: 1
+    TilePrefeb: 961002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 4
+    StgVert: 4
+    TileType: 4
+    TilePrefeb: 964002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 5
+    StgVert: 4
+    TileType: 0
+    TilePrefeb: 0
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 6
+    StgVert: 4
+    TileType: 1
+    TilePrefeb: 961002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 1
+    StgVert: 5
+    TileType: 1
+    TilePrefeb: 961002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 2
+    StgVert: 5
+    TileType: 4
+    TilePrefeb: 964002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 3
+    StgVert: 5
+    TileType: 2
+    TilePrefeb: 962002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 4
+    StgVert: 5
+    TileType: 0
+    TilePrefeb: 0
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 5
+    StgVert: 5
+    TileType: 1
+    TilePrefeb: 961002
+    BossSummon: 0
+    BuffSummon: 0
+  - MapTableIndex: 560002
+    StageName: Dungen
+    StgConcept: 960002
+    StgHorz: 6
+    StgVert: 5
+    TileType: 1
+    TilePrefeb: 961002
+    BossSummon: 0
+    BuffSummon: 0
