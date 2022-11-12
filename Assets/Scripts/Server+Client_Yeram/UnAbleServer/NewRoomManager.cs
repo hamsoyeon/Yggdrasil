@@ -81,6 +81,9 @@ public class NewRoomManager : MonoBehaviour
     // 인덱스와 스킬설명 연결.
     private Dictionary<int, string> m_skText;
 
+    // 유저가 고른 스킬 인덱스  -> 게임 스타트 버튼 시 해당 정보로 유저 스킬창에 이미지를 셋팅해줘야함.
+    //private int[] m_skIndex;
+
     // ---------------------------------------------------------
 
     MapSlot m_curmap;
@@ -89,6 +92,8 @@ public class NewRoomManager : MonoBehaviour
         MapPannel.SetActive(false);
         Init_Map();
         Select_Map_Btn();
+
+        //m_skIndex = new int[6];  // 시작값 0으로 초기화.
 
         m_skText = new Dictionary<int, string>();
 
@@ -209,8 +214,12 @@ public class NewRoomManager : MonoBehaviour
         // 버튼들 비활성화 처리.
         for (int i = 0; i < m_skillButtons.Count; i++)
             m_skillButtons[i].interactable = false;
+           
 
         m_skillButtons[m_selectNumber].transform.parent.GetComponent<Image>().sprite = m_originWindow;
+
+
+        
 
     }
     // 현재 스킬 선택할 버튼 셋팅
@@ -281,8 +290,12 @@ public class NewRoomManager : MonoBehaviour
         int dic_index = int.Parse(m_skImg[index].name);
         m_Information.text = m_skText[dic_index];
 
+        // 값 설정
+        //m_skIndex[m_selectNumber] = dic_index;
 
-        // 선택된 
+        DataManager.Instance.m_userSelectSkillIndex[m_selectNumber] = dic_index;
+
+      // 선택된 
         Debug.Log($"IconPanel -> {index}번째 버튼 들어옴");
     }
 

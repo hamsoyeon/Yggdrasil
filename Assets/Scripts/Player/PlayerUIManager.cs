@@ -40,7 +40,7 @@ public class PlayerUIManager : MonoBehaviour
     {
         playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
         spritSkillPanel = GameObject.Find("SpritSkillPanel");
-        
+
         //minimap_2DIcon_Player.transform.position = GameObject.FindGameObjectWithTag("Player").transform.position;
 
         GameObject.FindGameObjectWithTag("Player").layer = 14;
@@ -61,11 +61,23 @@ public class PlayerUIManager : MonoBehaviour
             collTime_Text[i] = spirit_Buttons[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             spirit_Buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().fontSize = 18;
             spirit_Buttons[i].transform.GetChild(0).GetComponent<RectTransform>().position = new Vector3(-30, -30, 0);
+
+            // -------------------------- 추가한 내용(남진)
+            // 유저가 고른 스킬의 이미지를 동적으로 받아와야한다.
+
+            string path = "Icon/" + DataManager.Instance.m_userSelectSkillIndex[i].ToString();
+            Debug.Log(path);
+            Sprite tempSprite = spritSkill_Img[i];
+            spritSkill_Img[i] = Resources.Load<Sprite>(path);
             spirit_Buttons[i].GetComponent<Image>().sprite = spritSkill_Img[i];
+            // ------------------------------------------
+
+
+
             //(r, g, b, a) 기준 빨간색으로 normal Color 지정
             /*switch (i % 3)
             {
-                
+
                 case 0:
                     colorBlock.normalColor = new Color(m_ATK_Spirit.r, m_ATK_Spirit.g, m_ATK_Spirit.b);
                     colorBlock.highlightedColor = new Color(m_ATK_Spirit.r, m_ATK_Spirit.g, m_ATK_Spirit.b);

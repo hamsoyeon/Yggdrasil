@@ -30,7 +30,7 @@ public class MainManager : MonoBehaviour
             m_Animanager = new AnimationManager();
             m_BuffManager = new BuffManager();
             //m_Resource = new ResourceManager();
-          
+
 
             DontDestroyOnLoad(this.gameObject);
 
