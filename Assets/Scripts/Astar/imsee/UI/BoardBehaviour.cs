@@ -105,8 +105,25 @@ public class BoardBehaviour : MonoBehaviour
             parent = GameObject.Find("960002").transform;
 
             //각 맵 정보에 데이터 넣어주기.
-            foreach (var item in DataTableManager.Instance.GetDataTable<Map_Table2ExcelLoader>().DataList)
+
+            // var item in DataTableManager.Instance.GetDataTable<Map_TableExcelLoader>().DataList
+
+            // 다버깅용
+            //var temp = DataTableManager.Instance.GetMapDataTable<Map_Table2ExcelLoader>();
+            //Debug.Log("스테이지 2 리스트 Count-> " + temp.DataList.Count);
+
+            // 원래라면 Dictionary에 추가하고 데이터 구분이 _(언더바)를 기준으로 데이터를 나누었지만 Map 데이터가
+            // Map_ExcelLoader 와 Map_Excel2Loader 이렇게 되어있이서 _(언더바) 기준으로 Map이라는 데이터가 두개 있기 때문에 하나만 들어간것 (하나만 들어간 이유는 추가할 때 SingleOrDefault 값으로 추가하기 떄문에)
+            // 따라서 Map_ExcelLoader와 Map2_ExcelLoader로 이름을 바꾸면 이름이 다르기 때문에 데이터 구분이 가능해진다. -> 이건 기획자분들이 나중에 엑셀파일 이름 수정해서 재업로드 요청하고
+            // 지금은 임시로 GetMapDataTable -> 이거는 현재 들어있는 ScriptableObject의 List를 전부 순회해서 <T>와 맞는 타입의 Scriptable를 리턴해준다.(임시로 사용중)
+            
+            foreach (var item in DataTableManager.Instance.GetMapDataTable<Map_Table2ExcelLoader>().DataList)
             {
+
+                //Debug.Log("아이템 이름:" + item.TilePrefeb.ToString());
+                //Debug.Log("TileAsset 이름:" + TileAsset.m_prefab[0].TileObj.name);
+
+                // 962002   965002  964002   961002   963002   0번 까지 총 6개 사용
                 if (item.TilePrefeb.ToString() == TileAsset.m_prefab[0].TileObj.name)
                 {
                     index.Add(0);
@@ -126,6 +143,10 @@ public class BoardBehaviour : MonoBehaviour
                 else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[4].TileObj.name)
                 {
                     index.Add(4);
+                }
+                else if (item.TilePrefeb.ToString() == TileAsset.m_prefab[5].TileObj.name)
+                {
+                    index.Add(5);
                 }
 
                 MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData2 = item;
@@ -248,6 +269,15 @@ public class BoardBehaviour : MonoBehaviour
             {
                 //var tile = (GameObject)Instantiate(Tile);
                 var tile = Instantiate(TileAsset.m_prefab[index[cnt]].TileObj);
+
+                // ColiderChk가 없는거 예외처리.
+                ColiderChk temp = tile.GetComponent<ColiderChk>();
+                if(temp == null)
+                {
+                    tile.AddComponent<ColiderChk>();
+                }
+
+
                 tile.transform.parent = parent;
 
                 if (TileAsset.m_prefab[index[cnt]].TileObj.name == TileAsset.m_prefab[4].TileObj.name)
@@ -272,6 +302,13 @@ public class BoardBehaviour : MonoBehaviour
 
                 var cylinder = tileTransform.Find("Cylinder");
 
+                TileBehaviour temp2 = cylinder.GetComponent<TileBehaviour>();
+
+                // 타일 안붙어 있는거 예외처리
+                if(temp2 ==null)
+                {
+                    cylinder.gameObject.AddComponent<TileBehaviour>();
+                }
                 var tb = (TileBehaviour)cylinder.GetComponent("TileBehaviour");
 
                 tb.Tile = _game.GameBoard[x, y];
@@ -282,6 +319,7 @@ public class BoardBehaviour : MonoBehaviour
             }
         }
 
+        // 스테이지2는 내브메쉬 없어서 오류...
         parent.GetComponent<NavMeshCom>().TestBuild();
     }
 
