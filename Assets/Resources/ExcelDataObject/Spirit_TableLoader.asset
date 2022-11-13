@@ -27,7 +27,7 @@ MonoBehaviour:
     Crit_Dmg: 1.5
     ChaceTarget: 1
     Duration: 20
-    CoolTime: 5
+    CoolTime: 20
     Skill1Code: 170001
     Prefab: 921001
   - No: 2

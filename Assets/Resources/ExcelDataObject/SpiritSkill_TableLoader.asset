@@ -163,8 +163,8 @@ MonoBehaviour:
     Cshape2: 1
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 0
-    FirePrefb: 0
+    LunchPrefb: 921018
+    FirePrefb: 921017
     DamPrefb: 0
   - Name_KR: "\uC774\uD504\uB9AC\uD2B8 \uD3ED\uD30C"
     Name_EN: a
@@ -182,8 +182,8 @@ MonoBehaviour:
     Cshape2: 5
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 0
-    FirePrefb: 0
+    LunchPrefb: 921018
+    FirePrefb: 921019
     DamPrefb: 0
   - Name_KR: "\uC0AC\uD2F0\uB7EC \uC7A5\uD48D"
     Name_EN: a

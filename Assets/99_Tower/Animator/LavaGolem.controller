@@ -4,7 +4,8 @@
 AnimatorController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: LavaGolem
   serializedVersion: 5
   m_AnimatorParameters: []
@@ -23,10 +24,11 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
 --- !u!1102 &1102091649704950076
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Attack02
   m_Speed: 1
   m_CycleOffset: 0
@@ -48,10 +50,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102102220423954796
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Dash
   m_Speed: 1
   m_CycleOffset: 0
@@ -73,10 +76,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102116181130342018
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Idle02
   m_Speed: 1
   m_CycleOffset: 0
@@ -98,10 +102,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102133571977535624
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Skill01
   m_Speed: 1
   m_CycleOffset: 0
@@ -123,10 +128,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102189385161878552
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Attack01
   m_Speed: 1
   m_CycleOffset: 0
@@ -148,10 +154,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102284565391350178
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Skill03
   m_Speed: 1
   m_CycleOffset: 0
@@ -173,10 +180,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102403229733311074
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Damage
   m_Speed: 1
   m_CycleOffset: 0
@@ -198,10 +206,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102572765186851136
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Idle03
   m_Speed: 1
   m_CycleOffset: 0
@@ -223,10 +232,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102664796753422764
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Die
   m_Speed: 1
   m_CycleOffset: 0
@@ -248,10 +258,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102698942507251366
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Idle01
   m_Speed: 1
   m_CycleOffset: 0
@@ -273,10 +284,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102746387455829702
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Skill02
   m_Speed: 1
   m_CycleOffset: 0
@@ -298,10 +310,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102766983011590802
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Stun
   m_Speed: 1
   m_CycleOffset: 0
@@ -323,10 +336,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102848116031075126
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Run
   m_Speed: 1
   m_CycleOffset: 0
@@ -348,10 +362,11 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1107 &1107368883777008050
 AnimatorStateMachine:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
@@ -359,7 +374,7 @@ AnimatorStateMachine:
     m_Position: {x: 108, y: 384, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102091649704950076}
-    m_Position: {x: 60, y: 312, z: 0}
+    m_Position: {x: 60, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102403229733311074}
     m_Position: {x: 108, y: 432, z: 0}

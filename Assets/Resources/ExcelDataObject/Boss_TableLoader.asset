@@ -26,10 +26,10 @@ MonoBehaviour:
     MaxStamina: 100
     Speed: 24
     MoveStUsed: 25
-    Skill1: 231002
-    Skill2: 231001
+    Skill1: 231001
+    Skill2: 231002
     Skill3: 231003
-    Skill4: 231001
+    Skill4: 231006
     Prefeb: 931001
   - Name_KR: "\r\n\uD0C0\uCC9C\uC0AC"
     Name_EN: FallenAngel
@@ -43,8 +43,8 @@ MonoBehaviour:
     MaxStamina: 100
     Speed: 20
     MoveStUsed: 15
-    Skill1: 231005
-    Skill2: 231008
-    Skill3: 0
-    Skill4: 0
-    Prefeb: 0
+    Skill1: 231008
+    Skill2: 231012
+    Skill3: 231013
+    Skill4: 231011
+    Prefeb: 931002
