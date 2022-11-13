@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6350968356088224889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 250845338237545049}
+  m_Layer: 0
+  m_Name: 922005
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &250845338237545049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6350968356088224889}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.297, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4822728279712850988}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4827200697708463586
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 250845338237545049}
+    m_Modifications:
+    - target: {fileID: 1595252117517162, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: m_Name
+      value: Projectile_2 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623055400575438, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623055400575438, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623055400575438, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623055400575438, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623055400575438, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623055400575438, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623055400575438, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623055400575438, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623055400575438, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623055400575438, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623055400575438, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198207720701571386, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198316187487270594, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 198316187487270594, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 198619286141681048, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198619286141681048, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 198831507450239270, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+--- !u!4 &4822728279712850988 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4623055400575438, guid: 64d6a5c71b8b0b442acdc1ca42967909, type: 3}
+  m_PrefabInstance: {fileID: 4827200697708463586}
+  m_PrefabAsset: {fileID: 0}
