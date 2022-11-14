@@ -109,28 +109,27 @@ public class SpiritSkill : MonoBehaviour
 
 
         // 이건 스킬 고정형태..
-
-        //      switch (skillInfo.SpritSkillIndex)
-        //{
-        //	case 170001:  //얼음장판
-        //              StartCoroutine(IceField(skillInfo, Row, Column,effectNumber));
-        //              break;
-        //	case 170002:  //독구름
-        //              StartCoroutine(PoisonCloud(skillInfo, tempSpirit, effectNumber));
-        //              break;
-        //	case 170003:  //무적
-        //              StartCoroutine(Invincibility(skillInfo, tempSpirit, effectNumber));
-        //              break;
-        //	case 170004:  //신성지대
-        //              StartCoroutine(Sanctity(skillInfo, tempSpirit, effectNumber));
-        //              break;
-        //          case 170005: //힐
-        //              StartCoroutine(Heal(skillInfo, tempSpirit, effectNumber));
-        //              break;
-        //          case 170006: //이속증가
-        //              StartCoroutine(SpeedField(skillInfo, Row,Column, effectNumber));
-        //              break;
-        //      }
+        switch (skillInfo.SpritSkillIndex)
+        {
+            case 170001:  //얼음장판
+                StartCoroutine(IceField(skillInfo, Row, Column, effectNumber));
+                break;
+            case 170002:  //독구름
+                StartCoroutine(PoisonCloud(skillInfo, tempSpirit, effectNumber));
+                break;
+            case 170003:  //무적
+                StartCoroutine(Invincibility(skillInfo, tempSpirit, effectNumber));
+                break;
+            case 170004:  //신성지대
+                StartCoroutine(Sanctity(skillInfo, tempSpirit, effectNumber));
+                break;
+            case 170005: //힐
+                StartCoroutine(Heal(skillInfo, tempSpirit, effectNumber));
+                break;
+            case 170006: //이속증가
+                StartCoroutine(SpeedField(skillInfo, Row, Column, effectNumber));
+                break;
+        }
 
 
         // 엑셀데이터에서 불러와 만들어지는 가변행태로 만들기.
@@ -143,33 +142,35 @@ public class SpiritSkill : MonoBehaviour
         // 나중에 스킬셋형태로 보스가 1번 스킬을 사용할때(ex. 4개의 스킬을 들고있는 엑셀 데이터를 불러와서) 거기서 랜덤으로 스킬을 사용하는 ... 작업이 끝나면 추가 예정..
         // 모든 위치 추적 스킬은 보스를 가장 최우선으로 한다..
 
-        switch ((SkillType)skillInfo.SkillType)
-        {
-            case SkillType.ATTACK:
-                StartCoroutine(Spirit_Attack(skillInfo, tempSpirit, effectNumber));
-                StartCoroutine(Spirit_Attack(skillInfo, tempSpirit, effectNumber));
-                break;
-            case SkillType.WIDE_MOVE:
-                StartCoroutine(Spirit_Wide_Move(skillInfo));
-                break;
-            case SkillType.TARGET:
-                StartCoroutine(Spirit_Target(skillInfo, tempSpirit, effectNumber));
-                break;
-            case SkillType.WIDE_FIX:  
-                if (skillInfo.Shapeform == 1)
-                {
-                    StartCoroutine(SectorFormSkill(skillInfo, tempSpirit, effectNumber));
-                }
-                if (skillInfo.Shapeform == 2)
-                {
-                    StartCoroutine(RectangleSkill(skillInfo, tempSpirit, effectNumber));
-                }
-                break;
-                //StartCoroutine(Spirit_Wide_Fix(skillInfo));
-            case SkillType.TILE:
-                StartCoroutine(Spirit_Tile(skillInfo, Row, Column, effectNumber));
-                break;
-        }
+        //switch ((SkillType)skillInfo.SkillType)
+        //{
+        //    case SkillType.ATTACK:
+        //        StartCoroutine(Spirit_Attack(skillInfo, tempSpirit, effectNumber));
+        //        StartCoroutine(Spirit_Attack(skillInfo, tempSpirit, effectNumber));
+        //        break;
+        //    case SkillType.WIDE_MOVE:
+        //        StartCoroutine(Spirit_Wide_Move(skillInfo));
+        //        break;
+        //    case SkillType.TARGET:
+        //        StartCoroutine(Spirit_Target(skillInfo, tempSpirit, effectNumber));
+        //        break;
+        //    case SkillType.WIDE_FIX:  
+        //        if (skillInfo.Shapeform == 1)
+        //        {
+        //            StartCoroutine(SectorFormSkill(skillInfo, tempSpirit, effectNumber));
+        //        }
+        //        if (skillInfo.Shapeform == 2)
+        //        {
+        //            StartCoroutine(RectangleSkill(skillInfo, tempSpirit, effectNumber));
+        //        }
+        //        break;
+        //        //StartCoroutine(Spirit_Wide_Fix(skillInfo));
+        //    case SkillType.TILE:
+        //        StartCoroutine(Spirit_Tile(skillInfo, Row, Column, effectNumber));
+        //        break;
+        //}
+
+
 
     }
 
@@ -853,12 +854,23 @@ public class SpiritSkill : MonoBehaviour
 
                         if(heal >= 50)
                         {
-                            rangeCollider.GetComponent<CharacterClass>().m_CharacterStat.HP += 50f;
+                            rangeCollider.GetComponent<CharacterClass>().m_CharacterStat.HP += 200f;
                         }
                         else
                         {
                             rangeCollider.GetComponent<CharacterClass>().m_CharacterStat.HP += heal;
                         }
+
+                        Transform PosBody = null;
+                        Transform[] allChildren = rangeCollider.GetComponentsInChildren<Transform>();
+                        foreach (Transform child in allChildren)
+                        {
+                            if (child.name == "PosBody")
+                            {
+                                PosBody = child;
+                            }
+                        }
+                        Instantiate(Damage_Prefabs[effectNumber], PosBody);
 
                         Debug.Log("플레이어 회복중");
                     }
@@ -915,13 +927,26 @@ public class SpiritSkill : MonoBehaviour
 					//보스가 아니라면
 					if (rangeCollider.gameObject.name != "931001(Clone)")  //태그나 레이어로 바꿔야함   => 931001(Clone)는 보스
 					{
-                        Debug.Log(rangeCollider);
+
+                        Transform PosBody = null;
+                        Transform[] allChildren = rangeCollider.GetComponentsInChildren<Transform>();
+                        foreach (Transform child in allChildren)
+                        {
+                            if (child.name == "PosBody")
+                            {
+                                PosBody = child;
+                            }
+                        }
+                        Instantiate(Damage_Prefabs[effectNumber], PosBody);
+
                         //밀리는 물체와 밀리는 마지막 점과의 거리(힘)을 구하고
 
                         //정령과 밀리는 물체사이의 방향을 구해서
                         var heading = rangeCollider.transform.position - spirit.transform.position;
                         heading.y = 0f;
                         heading *= skill.SkillRange;
+
+
 
                         rangeCollider.gameObject.transform.position = Vector3.MoveTowards(rangeCollider.gameObject.transform.position, heading, 15f);
 						Debug.Log($"{rangeCollider.ToString()}을 범위 내에서 밀어냅니다.");
@@ -979,12 +1004,13 @@ public class SpiritSkill : MonoBehaviour
                 yield break;
             }
 
-            // 현재 무적이 안되는 버그가 있음..
-            //colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 11);  //11번째 레이어 = Player
+        
             colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 14);
+            Debug.Log("무적 인원 체크 =" + colls.Length);
 
             if (colls.Length > 0)
             {
+                //Debug.Log("무적 인원 체크 =" + colls.Length);
 
                 foreach(var p in colls)
                 {
@@ -993,10 +1019,22 @@ public class SpiritSkill : MonoBehaviour
                         continue;
                     else
                     {
+                        Transform PosBody =null;
+                        Transform[] allChildren = p.GetComponentsInChildren<Transform>();
+                        foreach (Transform child in allChildren)
+                        {
+                            if (child.name == "PosBody")
+                            {
+                                PosBody = child;
+                            }
+                        }
+                        Instantiate(Damage_Prefabs[effectNumber], PosBody);
+
+                        Debug.Log("접근안료 플레이어 무적실행");
                         player_characterclass = p.GetComponent<CharacterClass>();
                         player_characterclass.Invincibility = 0.0f;
-                        //Debug.Log("플레이어 무적 계수 :" + player_characterclass.Invincibility);
-                        //Debug.Log("플레이어 무적실행...");
+                     
+
                     }
                 }
             }
