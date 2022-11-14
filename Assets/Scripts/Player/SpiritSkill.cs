@@ -114,8 +114,9 @@ public class SpiritSkill : MonoBehaviour
             case 170001:  //얼음장판
                 StartCoroutine(IceField(skillInfo, Row, Column, effectNumber));
                 break;
-            case 170002:  //독구름
-                StartCoroutine(PoisonCloud(skillInfo, tempSpirit, effectNumber));
+            case 170002:  //독구름(투사체 고정)
+                //StartCoroutine(PoisonCloud(skillInfo, tempSpirit, effectNumber));
+                 StartCoroutine(Spirit_Target(skillInfo, tempSpirit, effectNumber));
                 break;
             case 170003:  //무적
                 StartCoroutine(Invincibility(skillInfo, tempSpirit, effectNumber));
@@ -154,7 +155,7 @@ public class SpiritSkill : MonoBehaviour
         //    case SkillType.TARGET:
         //        StartCoroutine(Spirit_Target(skillInfo, tempSpirit, effectNumber));
         //        break;
-        //    case SkillType.WIDE_FIX:  
+        //    case SkillType.WIDE_FIX:
         //        if (skillInfo.Shapeform == 1)
         //        {
         //            StartCoroutine(SectorFormSkill(skillInfo, tempSpirit, effectNumber));
@@ -164,7 +165,7 @@ public class SpiritSkill : MonoBehaviour
         //            StartCoroutine(RectangleSkill(skillInfo, tempSpirit, effectNumber));
         //        }
         //        break;
-        //        //StartCoroutine(Spirit_Wide_Fix(skillInfo));
+        //    //StartCoroutine(Spirit_Wide_Fix(skillInfo));
         //    case SkillType.TILE:
         //        StartCoroutine(Spirit_Tile(skillInfo, Row, Column, effectNumber));
         //        break;
