@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1345055444659042734}
   - component: {fileID: -2510495518281226725}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 962002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2113262376904514138}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,6 +103,10 @@ PrefabInstance:
     - target: {fileID: 1083443422507102, guid: c0118e0884914174999328275f825ded, type: 3}
       propertyPath: m_Name
       value: candelabra_008_unlit (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1083443422507102, guid: c0118e0884914174999328275f825ded, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4745961414750300, guid: c0118e0884914174999328275f825ded, type: 3}
       propertyPath: m_RootOrder
@@ -178,6 +182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: candle_01_unlit (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1614444163946840, guid: 83176ce8c03d6479d939a5cea5f35bd1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4384927127629748, guid: 83176ce8c03d6479d939a5cea5f35bd1, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -251,6 +259,10 @@ PrefabInstance:
     - target: {fileID: 1249850555880008, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
       propertyPath: m_Name
       value: candle_02_unlit (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249850555880008, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4989674220325864, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
       propertyPath: m_RootOrder
@@ -326,6 +338,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: candle_01_unlit (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1614444163946840, guid: 83176ce8c03d6479d939a5cea5f35bd1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4384927127629748, guid: 83176ce8c03d6479d939a5cea5f35bd1, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -399,6 +415,10 @@ PrefabInstance:
     - target: {fileID: 1249850555880008, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
       propertyPath: m_Name
       value: candle_02_unlit (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249850555880008, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4989674220325864, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
       propertyPath: m_RootOrder
@@ -474,6 +494,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: candle_02_unlit
       objectReference: {fileID: 0}
+    - target: {fileID: 1249850555880008, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4989674220325864, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -547,6 +571,10 @@ PrefabInstance:
     - target: {fileID: 1249850555880008, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
       propertyPath: m_Name
       value: candle_02_unlit (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249850555880008, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4989674220325864, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
       propertyPath: m_RootOrder
@@ -684,6 +712,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: candle_02_unlit (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1249850555880008, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4989674220325864, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -757,6 +789,10 @@ PrefabInstance:
     - target: {fileID: 1614444163946840, guid: 83176ce8c03d6479d939a5cea5f35bd1, type: 3}
       propertyPath: m_Name
       value: candle_01_unlit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1614444163946840, guid: 83176ce8c03d6479d939a5cea5f35bd1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4384927127629748, guid: 83176ce8c03d6479d939a5cea5f35bd1, type: 3}
       propertyPath: m_RootOrder
@@ -832,6 +868,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: candelabra_007_lit
       objectReference: {fileID: 0}
+    - target: {fileID: 1604910849730316, guid: 144ff193aa1edb74d95713f66d5a1868, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4700787386562152, guid: 144ff193aa1edb74d95713f66d5a1868, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -905,6 +945,10 @@ PrefabInstance:
     - target: {fileID: 1249850555880008, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
       propertyPath: m_Name
       value: candle_02_unlit (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249850555880008, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4989674220325864, guid: 2df50f6bf8fc2453baff1bdb4ec890ee, type: 3}
       propertyPath: m_RootOrder
@@ -980,6 +1024,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: candle_arrangement_01_01_lit
       objectReference: {fileID: 0}
+    - target: {fileID: 1704578568885974, guid: 683ccb7e25a0d450c8915e6f5d04befb, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4111708242713326, guid: 683ccb7e25a0d450c8915e6f5d04befb, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1053,6 +1101,10 @@ PrefabInstance:
     - target: {fileID: 1083443422507102, guid: c0118e0884914174999328275f825ded, type: 3}
       propertyPath: m_Name
       value: candelabra_008_unlit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1083443422507102, guid: c0118e0884914174999328275f825ded, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4745961414750300, guid: c0118e0884914174999328275f825ded, type: 3}
       propertyPath: m_RootOrder
@@ -1128,6 +1180,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: coffin_broken_mobile (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1184268143528716, guid: 84b213a86e6d5f747aafa1e4c9030c04, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778955378088204, guid: 84b213a86e6d5f747aafa1e4c9030c04, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4253100513509652, guid: 84b213a86e6d5f747aafa1e4c9030c04, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -1202,6 +1262,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: coffin_broken_mobile
       objectReference: {fileID: 0}
+    - target: {fileID: 1184268143528716, guid: 84b213a86e6d5f747aafa1e4c9030c04, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778955378088204, guid: 84b213a86e6d5f747aafa1e4c9030c04, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4253100513509652, guid: 84b213a86e6d5f747aafa1e4c9030c04, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1275,6 +1343,14 @@ PrefabInstance:
     - target: {fileID: 1184268143528716, guid: 84b213a86e6d5f747aafa1e4c9030c04, type: 3}
       propertyPath: m_Name
       value: coffin_broken_mobile (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184268143528716, guid: 84b213a86e6d5f747aafa1e4c9030c04, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778955378088204, guid: 84b213a86e6d5f747aafa1e4c9030c04, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4253100513509652, guid: 84b213a86e6d5f747aafa1e4c9030c04, type: 3}
       propertyPath: m_RootOrder

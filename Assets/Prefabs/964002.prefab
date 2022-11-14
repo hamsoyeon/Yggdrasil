@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 756544700173672910}
   - component: {fileID: 5033563950859467778}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 964002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1943075526182430530}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,9 +147,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 756544700173672910}
     m_Modifications:
+    - target: {fileID: 1105392979309840, guid: cf9f2c057d39287428421b297d3f3844, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849096969876672, guid: cf9f2c057d39287428421b297d3f3844, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940840013719872, guid: cf9f2c057d39287428421b297d3f3844, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1981090619266750, guid: cf9f2c057d39287428421b297d3f3844, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1999755409405400, guid: cf9f2c057d39287428421b297d3f3844, type: 3}
       propertyPath: m_Name
       value: MapSade
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999755409405400, guid: cf9f2c057d39287428421b297d3f3844, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4642130270893694, guid: cf9f2c057d39287428421b297d3f3844, type: 3}
       propertyPath: m_RootOrder

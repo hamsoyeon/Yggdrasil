@@ -246,9 +246,6 @@ public class BoardBehaviour : MonoBehaviour
         MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos = visualPiece.transform.position;
 
         Debug.Log($"플레이어 포지션 { MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos}");
-
-       
-
         
         var pb = (PieceBehaviour)visualPiece.GetComponent("PieceBehaviour");
 
@@ -260,7 +257,16 @@ public class BoardBehaviour : MonoBehaviour
     private void CreateBoard()
     {
         cnt = 0;
-        _game = new Game(Height, Width);
+
+        if(SceneManager.GetActiveScene().name == "MainScene")
+        {
+            _game = new Game(Height, Width, 1);
+        }
+        if(SceneManager.GetActiveScene().name == "Stage2")
+        {
+            _game = new Game(Height, Width, 2);
+        }
+        
         _gameBoard = new GameObject[Height, Width];   // 5 6
 
         for (var x = 0; x < Height; x++)

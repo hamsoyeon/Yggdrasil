@@ -14,17 +14,28 @@ namespace Model
         public int Width;
         public int Height;
 
+        public int StageNum;
+
         public bool IsUnWalkable = false;
 
-        public Game(int height, int width)
+        public Game(int height, int width, int stagenum)
         {
             Width = width;
             Height = height;
+            StageNum = stagenum;
 
             InitialiseGameBoard();
             //BlockOutTiles();
+            if(StageNum == 1)
+            {
+                InitialiseGamePieces();
+            }
+            if(StageNum == 2)
+            {
+                InitialiseGamePieces2();
 
-            InitialiseGamePieces();
+            }
+            
         }
 
         private void InitialiseGamePieces()
@@ -34,6 +45,18 @@ namespace Model
             {
                 new GamePiece(new Point(MainManager.Instance.GetStageManager().m_BossRow, MainManager.Instance.GetStageManager().m_BossColumn)),
                 new GamePiece(new Point(Width - 1, Height - 1))
+            };
+
+            GamePieces = gamePieces;
+        }
+
+        private void InitialiseGamePieces2()
+        {
+
+            var gamePieces = new List<GamePiece>
+            {
+                new GamePiece(new Point(MainManager.Instance.GetStageManager().m_BossRow, MainManager.Instance.GetStageManager().m_BossColumn - 1)),
+                new GamePiece(new Point(Width - 6, Height - 3))
             };
 
             GamePieces = gamePieces;
