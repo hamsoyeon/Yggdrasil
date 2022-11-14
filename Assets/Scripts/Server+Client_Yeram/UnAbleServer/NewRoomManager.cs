@@ -199,7 +199,7 @@ public class NewRoomManager : MonoBehaviour
             m_SelectMap_Btn.Add(Instantiate(p_MapBtn));
             m_SelectMap_Btn[i].transform.parent = selectMap_Content.transform;
             m_SelectMap_Btn[i].transform.GetChild(0).GetComponent<Image>().sprite = map_Sprit[i];
-            m_SelectMap_Btn[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = map_Sprit[i].name;
+            m_SelectMap_Btn[i].transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = map_Sprit[i].name;
             m_SelectMap_Btn[i].gameObject.AddComponent<MapSlot>().__Initialize(i);
         }
         Map_ViewChange(0);
