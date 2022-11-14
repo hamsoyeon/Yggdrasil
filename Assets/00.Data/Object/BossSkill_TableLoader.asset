@@ -21,8 +21,8 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 1
-    SkillDistance: 3
     SkillRange: 4
+    SkillDistance: 3
     SkillType: 3
     UseStat: 20
     Direction1: 1
@@ -50,8 +50,8 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 3
-    SkillDistance: 2
     SkillRange: 3
+    SkillDistance: 2
     SkillType: 1
     UseStat: 35
     Direction1: 1
@@ -79,8 +79,8 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 4
-    SkillDistance: 2
     SkillRange: 4
+    SkillDistance: 2
     SkillType: 1
     UseStat: 40
     Direction1: 1
@@ -108,8 +108,8 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 1
-    SkillDistance: 3
     SkillRange: 4
+    SkillDistance: 3
     SkillType: 4
     UseStat: 0
     Direction1: 1
@@ -137,8 +137,8 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 1
-    SkillDistance: 4
     SkillRange: 4
+    SkillDistance: 4
     SkillType: 4
     UseStat: 0
     Direction1: 1
@@ -166,9 +166,9 @@ MonoBehaviour:
     Target: 2
     Power: 0
     CoolTime: 8
-    SkillDistance: 10
     SkillRange: 1
-    SkillType: 1
+    SkillDistance: 10
+    SkillType: 5
     UseStat: 30
     Direction1: 1
     Direction2: 0
@@ -195,8 +195,8 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 1
-    SkillDistance: 3
     SkillRange: 2
+    SkillDistance: 3
     SkillType: 1
     UseStat: 20
     Direction1: 1
@@ -224,8 +224,8 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 4
-    SkillDistance: 10
     SkillRange: 2
+    SkillDistance: 10
     SkillType: 2
     UseStat: 30
     Direction1: 1
@@ -253,8 +253,8 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 1
-    SkillDistance: 10
     SkillRange: 2
+    SkillDistance: 10
     SkillType: 2
     UseStat: 0
     Direction1: 1
@@ -282,8 +282,8 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 1
-    SkillDistance: 10
     SkillRange: 2
+    SkillDistance: 10
     SkillType: 2
     UseStat: 0
     Direction1: 1
@@ -311,8 +311,8 @@ MonoBehaviour:
     Target: 2
     Power: 0
     CoolTime: 1
-    SkillDistance: 10
     SkillRange: 1
+    SkillDistance: 10
     SkillType: 1
     UseStat: 0
     Direction1: 1

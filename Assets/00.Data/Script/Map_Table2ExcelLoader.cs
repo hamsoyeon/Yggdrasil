@@ -29,7 +29,7 @@ public class Map_Table2ExcelLoader :ScriptableObject
 	{
 		line = line.TrimStart('\n');
 
-        Map_Table2Excel data = new Map_Table2Excel();
+		Map_Table2Excel data = new Map_Table2Excel();
 		int idx =0;
 		string[] strs= line.Split('`');
 
@@ -58,7 +58,7 @@ public class Map_Table2ExcelLoader :ScriptableObject
 		{
 			if(item.Length<2)
 				continue;
-            Map_Table2Excel data = Read(item);
+			Map_Table2Excel data = Read(item);
 			DataList.Add(data);
 		}
 	}

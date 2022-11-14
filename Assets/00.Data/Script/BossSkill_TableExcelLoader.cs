@@ -88,6 +88,7 @@ public class BossSkill_TableExcelLoader :ScriptableObject
 	[ContextMenu("파일 읽기")]
 	public void ReadAllFile()
 	{
+
 		DataList=new List<BossSkill_TableExcel>();
 
 		string currentpath = System.IO.Directory.GetCurrentDirectory();

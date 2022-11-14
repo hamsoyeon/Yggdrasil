@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Video;
 //using ECharacterType = NewCharacterInfo.ECharacterType;
 
 //Singleton_Ver2.Singleton < NewRoomManager >
@@ -63,9 +64,16 @@ public class NewRoomManager : MonoBehaviour
     public Sprite m_originWindow;
     // 선택된 테두리
     public Sprite m_selectWindow;
+
+
     // 영상 들어갈 변수
     [SerializeField]
     private RawImage m_skVideo;
+
+    // 영상 틀어줄 변수
+    [SerializeField]
+    private VideoPlayer m_VideoPlayer;
+
     [SerializeField]
     // 스킬 아이콘 이미지를 받을 변수 (Resource에 있는 img폴더에 있는 리소스들을 가지고 옴)
     private Sprite[] m_skImg;
@@ -74,15 +82,21 @@ public class NewRoomManager : MonoBehaviour
     private bool m_isInfo = false;
 
     // 현재 선택된 스킬 번호
-    private int m_selectNumber = -1; 
+    private int m_selectNumber = -1;
     // 전에 선택된 스킬 번호
     private int[] m_prevNumber;
 
     // 인덱스와 스킬설명 연결.
     private Dictionary<int, string> m_skText;
 
-    // 유저가 고른 스킬 인덱스  -> 게임 스타트 버튼 시 해당 정보로 유저 스킬창에 이미지를 셋팅해줘야함.
+    // 유저가 고른 스킬 인덱스  -> 게임 스타트 버튼 시 해당 정보로 유저 스킬창에 이미지를 셋팅해줘야함. (DataManager)
     //private int[] m_skIndex;
+
+    private VideoClip[] m_VideoArr;
+
+    private bool videoCheck = true;
+
+
 
     // ---------------------------------------------------------
 
@@ -113,7 +127,7 @@ public class NewRoomManager : MonoBehaviour
         m_skText.Add(170015, "광범위에 ~hp 회복장판을 펼친다.");
         m_skText.Add(170016, "타일 지정형, ~초동안 공격력을 증가 시킨다.");
         m_skText.Add(170017, "플레이어를 따라오며 3번 ~Hp회복 장판을 펼친다");
-        
+
 
 
         // 아이콘 패널 가져오기.
@@ -121,15 +135,16 @@ public class NewRoomManager : MonoBehaviour
 
         // 스프라이트 생성 및 할당.
         //m_skImg = new Sprite[16];
-        m_skImg = Resources.LoadAll<Sprite>("Icon"); // Icon폴더에리소스 가져오기.
-
-        for (int i=0; i<16; i++)
+        m_skImg = Resources.LoadAll<Sprite>("Icon"); // Icon폴더에 리소스 가져오기.
+        m_VideoArr = Resources.LoadAll<VideoClip>("Video");  // Video폴더에 리소스 가져오기. 
+        
+        for (int i = 0; i < 16; i++)
         {
             int a = i;
             m_skBtnList[i] = m_IconPanel.transform.GetChild(i).gameObject.GetComponent<Button>(); //버튼 할당.
             m_skBtnList[i].interactable = true;
             m_skBtnList[i].GetComponent<Image>().sprite = m_skImg[i];
-            m_skBtnList[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(-190f + (i%4)*120 , 230f - (i/4)*150, 0.0f);
+            m_skBtnList[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(-190f + (i % 4) * 120, 230f - (i / 4) * 150, 0.0f);
             m_skBtnList[i].onClick.AddListener(() => GetSkillInfo(a));
         }
 
@@ -142,12 +157,10 @@ public class NewRoomManager : MonoBehaviour
         }
 
         m_prevNumber = new int[6];
-        for(int i=0;i<m_prevNumber.Length;i++)
+        for (int i = 0; i < m_prevNumber.Length; i++)
         {
             m_prevNumber[i] = -1;
         }
-        
-
 
     }
 
@@ -205,7 +218,7 @@ public class NewRoomManager : MonoBehaviour
             m_skillButtons[i].interactable = true;
 
     }
-    
+
     public void HideInfoPanel()
     {
         m_isInfo = false;
@@ -214,19 +227,16 @@ public class NewRoomManager : MonoBehaviour
         // 버튼들 비활성화 처리.
         for (int i = 0; i < m_skillButtons.Count; i++)
             m_skillButtons[i].interactable = false;
-           
+
 
         m_skillButtons[m_selectNumber].transform.parent.GetComponent<Image>().sprite = m_originWindow;
-
-
-        
 
     }
     // 현재 스킬 선택할 버튼 셋팅
     public void SetSkillBtn(int index)
     {
         // 값이 들어온 것.
-        if(m_selectNumber < 0)
+        if (m_selectNumber < 0)
         {
             m_skillButtons[index].transform.parent.GetComponent<Image>().sprite = m_selectWindow;
         }
@@ -235,7 +245,7 @@ public class NewRoomManager : MonoBehaviour
             m_skillButtons[m_selectNumber].transform.parent.GetComponent<Image>().sprite = m_originWindow;
             m_skillButtons[index].transform.parent.GetComponent<Image>().sprite = m_selectWindow;
         }
-       
+
         m_selectNumber = index;
         Debug.Log($"{index}번째 버튼 들어옴");
     }
@@ -245,20 +255,20 @@ public class NewRoomManager : MonoBehaviour
     public void GetSkillInfo(int index)
     {
         // 예외처리 
-        if(m_selectNumber <0)
+        if (m_selectNumber < 0)
         {
             Debug.Log("버튼이 선택되지 않았습니다.");
             return;
         }
 
-        if(m_skBtnList[index].GetComponent<Image>().color.a != 1.0f)
+        if (m_skBtnList[index].GetComponent<Image>().color.a != 1.0f)
         {
             Debug.Log("이미 선택한 스킬입니다.");
             return;
         }
 
 
-        if(m_prevNumber[m_selectNumber] == -1)
+        if (m_prevNumber[m_selectNumber] == -1)
         {
             // 처음 선택하는 거라면...
             m_skillButtons[m_selectNumber].GetComponent<Image>().sprite = m_skBtnList[index].GetComponent<Image>().sprite;
@@ -279,27 +289,35 @@ public class NewRoomManager : MonoBehaviour
             color.a = 0.5f;
             m_skBtnList[index].GetComponent<Image>().color = color;
             m_prevNumber[m_selectNumber] = index;
-
         }
 
-        // 동영상 설정도 해줘야한다.
 
+
+        // 동영상 설정도 해줘야한다.
+        if (videoCheck)
+        {
+            m_VideoPlayer.clip = m_VideoArr[0];
+            videoCheck = false;
+        }
+        else
+        {
+            m_VideoPlayer.clip = m_VideoArr[1];
+            videoCheck = true;
+        }
 
         // 텍스트 설정.
         Debug.Log(m_skImg[index].name);
         int dic_index = int.Parse(m_skImg[index].name);
         m_Information.text = m_skText[dic_index];
 
-        // 값 설정
-        //m_skIndex[m_selectNumber] = dic_index;
 
         DataManager.Instance.m_userSelectSkillIndex[m_selectNumber] = dic_index;
 
-      // 선택된 
+        // 선택된 
         Debug.Log($"IconPanel -> {index}번째 버튼 들어옴");
     }
 
-   
+
 
     // ---------------------------------------------------------
 
