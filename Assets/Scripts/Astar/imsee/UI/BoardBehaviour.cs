@@ -289,6 +289,7 @@ public class BoardBehaviour : MonoBehaviour
 
                 if (TileAsset.m_prefab[index[cnt]].TileObj.name == TileAsset.m_prefab[4].TileObj.name)
                 {
+                    Debug.Log($"이동 불가능 타일 x={x}/y={y}");
                     _game.SetBlockOutTiles(x, y);
                 }
 
