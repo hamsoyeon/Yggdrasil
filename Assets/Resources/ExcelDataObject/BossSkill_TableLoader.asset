@@ -19,7 +19,7 @@ MonoBehaviour:
     BossSkillIndex: 231001
     TargetType: 2
     Target: 2
-    Power: 10
+    Power: 11
     CoolTime: 1
     SkillRange: 3
     SkillDistance: 3
@@ -48,8 +48,8 @@ MonoBehaviour:
     BossSkillIndex: 231002
     TargetType: 2
     Target: 2
-    Power: 10
-    CoolTime: 20
+    Power: 14
+    CoolTime: 15
     SkillRange: 2
     SkillDistance: 2
     SkillType: 1
@@ -77,8 +77,8 @@ MonoBehaviour:
     BossSkillIndex: 231003
     TargetType: 2
     Target: 2
-    Power: 10
-    CoolTime: 30
+    Power: 8
+    CoolTime: 22
     SkillRange: 1
     SkillDistance: 4
     SkillType: 1
@@ -106,7 +106,7 @@ MonoBehaviour:
     BossSkillIndex: 231004
     TargetType: 2
     Target: 2
-    Power: 10
+    Power: 8
     CoolTime: 1
     SkillRange: 2
     SkillDistance: 4
@@ -135,7 +135,7 @@ MonoBehaviour:
     BossSkillIndex: 231005
     TargetType: 2
     Target: 2
-    Power: 10
+    Power: 8
     CoolTime: 1
     SkillRange: 3
     SkillDistance: 4
@@ -180,7 +180,7 @@ MonoBehaviour:
     LifeTime: 1
     DoT: 1.1
     SkillAdded: 0
-    BuffAdded: 1
+    BuffAdded: 0
     SkillAnimation: 4
     SkillDelay: 1
     DelayPrefb: 970020
@@ -193,7 +193,7 @@ MonoBehaviour:
     BossSkillIndex: 231007
     TargetType: 2
     Target: 2
-    Power: 10
+    Power: 18
     CoolTime: 1
     SkillRange: 2
     SkillDistance: 3
@@ -216,14 +216,14 @@ MonoBehaviour:
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971020
-    DamPrefb: 921013
+    DamPrefb: 972002
   - Name_KR: "\uC2EC\uD310"
     Name_EN: Judegement
     BossSkillIndex: 231008
     TargetType: 2
     Target: 2
-    Power: 10
-    CoolTime: 4
+    Power: 9
+    CoolTime: 8
     SkillRange: 1
     SkillDistance: 10
     SkillType: 2
@@ -241,7 +241,7 @@ MonoBehaviour:
     BuffAdded: 0
     SkillAnimation: 2
     SkillDelay: 1
-    DelayPrefb: 971026
+    DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971022
@@ -251,7 +251,7 @@ MonoBehaviour:
     BossSkillIndex: 231009
     TargetType: 2
     Target: 2
-    Power: 10
+    Power: 9
     CoolTime: 1
     SkillRange: 1
     SkillDistance: 10
@@ -270,17 +270,17 @@ MonoBehaviour:
     BuffAdded: 0
     SkillAnimation: 0
     SkillDelay: 0.5
-    DelayPrefb: 971026
+    DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971022
-    DamPrefb: 0
+    DamPrefb: 972006
   - Name_KR: "\uC2EC\uD310 \uC5F0\uACC4 2"
     Name_EN: Judegement-2
     BossSkillIndex: 231010
     TargetType: 2
     Target: 2
-    Power: 10
+    Power: 9
     CoolTime: 1
     SkillRange: 1
     SkillDistance: 10
@@ -295,15 +295,15 @@ MonoBehaviour:
     "\uC815\uB839": 0
     LifeTime: 0.5
     DoT: 1.1
-    SkillAdded: 231011
+    SkillAdded: 0
     BuffAdded: 0
     SkillAnimation: 0
     SkillDelay: 0.5
-    DelayPrefb: 971026
+    DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971022
-    DamPrefb: 0
+    DamPrefb: 972006
   - Name_KR: "\uC774\uD504\uB9AC\uD2B8 \uC18C\uD658"
     Name_EN: SummonIfrit
     BossSkillIndex: 231011
@@ -325,14 +325,14 @@ MonoBehaviour:
     LifeTime: 1
     DoT: 1.1
     SkillAdded: 0
-    BuffAdded: 2
+    BuffAdded: 0
     SkillAnimation: 0
     SkillDelay: 1
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 0
     FirePrefb: 971022
-    DamPrefb: 0
+    DamPrefb: 972006
   - Name_KR: "\uCC38\uACA9"
     Name_EN: TheSlash
     BossSkillIndex: 231012
@@ -354,7 +354,7 @@ MonoBehaviour:
     LifeTime: 1
     DoT: 1.1
     SkillAdded: 0
-    BuffAdded: 3
+    BuffAdded: 0
     SkillAnimation: 4
     SkillDelay: 2
     DelayPrefb: 0
@@ -367,7 +367,7 @@ MonoBehaviour:
     BossSkillIndex: 231013
     TargetType: 2
     Target: 2
-    Power: 30
+    Power: 22
     CoolTime: 30
     SkillRange: 2
     SkillDistance: 4
@@ -389,8 +389,8 @@ MonoBehaviour:
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
-    FirePrefb: 971001
-    DamPrefb: 0
+    FirePrefb: 971025
+    DamPrefb: 972006
   - Name_KR: "\uCC98\uD615-1"
     Name_EN: Exicution-1
     BossSkillIndex: 231014
@@ -409,7 +409,7 @@ MonoBehaviour:
     Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
-    LifeTime: 1
+    LifeTime: 0.5
     DoT: 1.1
     SkillAdded: 231015
     BuffAdded: 0
@@ -425,7 +425,7 @@ MonoBehaviour:
     BossSkillIndex: 231015
     TargetType: 2
     Target: 2
-    Power: 20
+    Power: 7
     CoolTime: 1
     SkillRange: 2
     SkillDistance: 10
@@ -448,7 +448,7 @@ MonoBehaviour:
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971023
-    DamPrefb: 0
+    DamPrefb: 972005
   - Name_KR: "\uCC98\uD615-3"
     Name_EN: Exicution-3
     BossSkillIndex: 231016
@@ -467,7 +467,7 @@ MonoBehaviour:
     Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
-    LifeTime: 1
+    LifeTime: 0.5
     DoT: 1.1
     SkillAdded: 231017
     BuffAdded: 0
@@ -483,7 +483,7 @@ MonoBehaviour:
     BossSkillIndex: 231017
     TargetType: 2
     Target: 2
-    Power: 20
+    Power: 7
     CoolTime: 1
     SkillRange: 2
     SkillDistance: 10
@@ -506,7 +506,7 @@ MonoBehaviour:
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971023
-    DamPrefb: 0
+    DamPrefb: 972005
   - Name_KR: "\uCC98\uD615-5"
     Name_EN: Exicution-5
     BossSkillIndex: 231018
@@ -525,7 +525,7 @@ MonoBehaviour:
     Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
-    LifeTime: 1
+    LifeTime: 0.5
     DoT: 1.1
     SkillAdded: 231019
     BuffAdded: 0
@@ -541,7 +541,7 @@ MonoBehaviour:
     BossSkillIndex: 231019
     TargetType: 2
     Target: 2
-    Power: 20
+    Power: 7
     CoolTime: 1
     SkillRange: 2
     SkillDistance: 10
@@ -564,7 +564,7 @@ MonoBehaviour:
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971023
-    DamPrefb: 0
+    DamPrefb: 972005
   - Name_KR: "\uCC98\uD615-7"
     Name_EN: Exicution-7
     BossSkillIndex: 231020
@@ -583,7 +583,7 @@ MonoBehaviour:
     Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
-    LifeTime: 1
+    LifeTime: 0.5
     DoT: 1.1
     SkillAdded: 231021
     BuffAdded: 0
@@ -599,7 +599,7 @@ MonoBehaviour:
     BossSkillIndex: 231021
     TargetType: 2
     Target: 2
-    Power: 30
+    Power: 12
     CoolTime: 1
     SkillRange: 3
     SkillDistance: 10
@@ -644,7 +644,7 @@ MonoBehaviour:
     LifeTime: 1
     DoT: 1.1
     SkillAdded: 0
-    BuffAdded: 4
+    BuffAdded: 0
     SkillAnimation: 3
     SkillDelay: 2
     DelayPrefb: 0
@@ -673,7 +673,7 @@ MonoBehaviour:
     LifeTime: 0.5
     DoT: 1.1
     SkillAdded: 231024
-    BuffAdded: 5
+    BuffAdded: 0
     SkillAnimation: 4
     SkillDelay: 2
     DelayPrefb: 0

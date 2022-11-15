@@ -18,22 +18,22 @@ MonoBehaviour:
     Name_EN: Ice_Spike
     SpritSkillIndex: 170001
     Target: 2
-    Power: 10
+    Power: 2
     SkillRange: 1
     SkillType: 5
     BulletSpeed: 1
     TargetNum: 10
     LifeTime: 5
-    DoT: 1
+    DoT: 0.2
     Shapeform: 2
     Cshape1: 1
     Cshape2: 1
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 923004
+    LunchPrefb: 0
     FirePrefb: 921004
     DamPrefb: 921005
-  - Name_KR: "\uB3C5\uAD6C\uB984"
+  - Name_KR: "\r\n\uB3C5\uAD6C\uB984"
     Name_EN: Posion_Cloud
     SpritSkillIndex: 170002
     Target: 2
@@ -42,7 +42,7 @@ MonoBehaviour:
     SkillType: 3
     BulletSpeed: 1
     TargetNum: 10
-    LifeTime: 5
+    LifeTime: 2
     DoT: 1
     Shapeform: 1
     Cshape1: 15
@@ -52,45 +52,45 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 970018
     DamPrefb: 921003
-  - Name_KR: "\uBB34\uC801"
+  - Name_KR: "\r\n\uBB34\uC801"
     Name_EN: Invincibility
     SpritSkillIndex: 170003
     Target: 1
     Power: 0
     SkillRange: 1
-    SkillType: 5
+    SkillType: 4
     BulletSpeed: 1
     TargetNum: 3
-    LifeTime: 3
-    DoT: 1
+    LifeTime: 8
+    DoT: 0.5
     Shapeform: 2
-    Cshape1: 1
-    Cshape2: 1
+    Cshape1: 360
+    Cshape2: 15
     SkillAdded: 0
     BuffAdded: 0
     LunchPrefb: 0
     FirePrefb: 970005
     DamPrefb: 912008
-  - Name_KR: "\uC811\uADFC\uBD88\uAC00"
+  - Name_KR: "\r\n\uC811\uADFC\uBD88\uAC00"
     Name_EN: KeepAway
     SpritSkillIndex: 170004
     Target: 2
     Power: 0
     SkillRange: 1
-    SkillType: 5
+    SkillType: 4
     BulletSpeed: 1
-    TargetNum: 6
-    LifeTime: 3
-    DoT: 1
+    TargetNum: 10
+    LifeTime: 12
+    DoT: 0.5
     Shapeform: 2
-    Cshape1: 1
-    Cshape2: 1
+    Cshape1: 360
+    Cshape2: 10
     SkillAdded: 0
     BuffAdded: 0
     LunchPrefb: 0
-    FirePrefb: 922001
+    FirePrefb: 970017
     DamPrefb: 922006
-  - Name_KR: "\uD790"
+  - Name_KR: "\r\n\uD790"
     Name_EN: Heal
     SpritSkillIndex: 170005
     Target: 1
@@ -99,17 +99,17 @@ MonoBehaviour:
     SkillType: 4
     BulletSpeed: 1
     TargetNum: 3
-    LifeTime: 5
-    DoT: 1
+    LifeTime: 1
+    DoT: 0.9
     Shapeform: 2
-    Cshape1: 360
+    Cshape1: 630
     Cshape2: 15
     SkillAdded: 0
     BuffAdded: 0
     LunchPrefb: 923004
     FirePrefb: 923003
     DamPrefb: 923004
-  - Name_KR: "\uC774\uC18D \uC99D\uAC00"
+  - Name_KR: "\r\n\uC774\uC18D \uC99D\uAC00"
     Name_EN: Speedup
     SpritSkillIndex: 170006
     Target: 1
@@ -128,7 +128,7 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 923005
     DamPrefb: 923006
-  - Name_KR: "\uC5F0\uC18D \uCC38\uACA9"
+  - Name_KR: "\r\n\uC5F0\uC18D \uCC38\uACA9"
     Name_EN: a
     SpritSkillIndex: 170007
     Target: 2
@@ -147,7 +147,7 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
-  - Name_KR: "\uC774\uD504\uB9AC\uD2B8 \uAE30\uB465"
+  - Name_KR: "\r\n\uC774\uD504\uB9AC\uD2B8 \uAE30\uB465"
     Name_EN: a
     SpritSkillIndex: 170008
     Target: 2
@@ -166,7 +166,7 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
-  - Name_KR: "\uC774\uD504\uB9AC\uD2B8 \uD3ED\uD30C"
+  - Name_KR: "\r\n\uC774\uD504\uB9AC\uD2B8 \uD3ED\uD30C"
     Name_EN: a
     SpritSkillIndex: 170009
     Target: 2
@@ -185,7 +185,7 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
-  - Name_KR: "\uC0AC\uD2F0\uB7EC \uC7A5\uD48D"
+  - Name_KR: "\r\n\uC0AC\uD2F0\uB7EC \uC7A5\uD48D"
     Name_EN: a
     SpritSkillIndex: 170010
     Target: 2
@@ -204,7 +204,7 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
-  - Name_KR: "\uC0AC\uD2F0\uB7EC \uD22C\uC0AC\uCCB4"
+  - Name_KR: "\r\n\uC0AC\uD2F0\uB7EC \uD22C\uC0AC\uCCB4"
     Name_EN: a
     SpritSkillIndex: 170011
     Target: 2
@@ -223,7 +223,7 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
-  - Name_KR: "\uAE30\uC0AC \uBD80\uCCB4\uAF34 \uCC38\uACA9"
+  - Name_KR: "\r\n\uAE30\uC0AC \uBD80\uCCB4\uAF34 \uCC38\uACA9"
     Name_EN: a
     SpritSkillIndex: 170012
     Target: 2
@@ -242,7 +242,7 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
-  - Name_KR: "\uBD80\uCCB4\uAF34 \uB109\uBC31"
+  - Name_KR: "\r\n\uBD80\uCCB4\uAF34 \uB109\uBC31"
     Name_EN: a
     SpritSkillIndex: 170013
     Target: 2
@@ -261,7 +261,7 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
-  - Name_KR: "\uC2A4\uD134 \uD22C\uC0AC\uCCB4"
+  - Name_KR: "\r\n\uC2A4\uD134 \uD22C\uC0AC\uCCB4"
     Name_EN: a
     SpritSkillIndex: 170014
     Target: 2
@@ -280,7 +280,7 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
-  - Name_KR: "\uC0E4\uBA3C \uBC94\uC704 \uD790"
+  - Name_KR: "\r\n\uC0E4\uBA3C \uBC94\uC704 \uD790"
     Name_EN: a
     SpritSkillIndex: 170015
     Target: 1
@@ -299,7 +299,7 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
-  - Name_KR: "\uACF5\uACA9 \uC99D\uAC00 \uB9C8\uB140"
+  - Name_KR: "\r\n\uACF5\uACA9 \uC99D\uAC00 \uB9C8\uB140"
     Name_EN: a
     SpritSkillIndex: 170016
     Target: 1
@@ -318,7 +318,7 @@ MonoBehaviour:
     LunchPrefb: 0
     FirePrefb: 0
     DamPrefb: 0
-  - Name_KR: "\uBC1C\uD0A4\uB9AC 2\uD638 \uD790"
+  - Name_KR: "\r\n\uBC1C\uD0A4\uB9AC 2\uD638 \uD790"
     Name_EN: a
     SpritSkillIndex: 170017
     Target: 1

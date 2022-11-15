@@ -234,6 +234,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4516270383011202, guid: bb3aea7d6a1713d4e8b838c1ccded4e2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516270383011202, guid: bb3aea7d6a1713d4e8b838c1ccded4e2, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -296,6 +300,42 @@ PrefabInstance:
     - target: {fileID: 4571656957071120, guid: bb3aea7d6a1713d4e8b838c1ccded4e2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198291869967885146, guid: bb3aea7d6a1713d4e8b838c1ccded4e2, type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198291869967885146, guid: bb3aea7d6a1713d4e8b838c1ccded4e2, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198291869967885146, guid: bb3aea7d6a1713d4e8b838c1ccded4e2, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198756597343215664, guid: bb3aea7d6a1713d4e8b838c1ccded4e2, type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198756597343215664, guid: bb3aea7d6a1713d4e8b838c1ccded4e2, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198756597343215664, guid: bb3aea7d6a1713d4e8b838c1ccded4e2, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198881909537038026, guid: bb3aea7d6a1713d4e8b838c1ccded4e2, type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198881909537038026, guid: bb3aea7d6a1713d4e8b838c1ccded4e2, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198881909537038026, guid: bb3aea7d6a1713d4e8b838c1ccded4e2, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb3aea7d6a1713d4e8b838c1ccded4e2, type: 3}

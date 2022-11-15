@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LineSkillTarget: {fileID: 0}
-  MobPrefabs: {fileID: 4432052240651018959, guid: 119a356c0375164408f1ab62bd9a6fc4, type: 3}
+  MobPrefabs: {fileID: 662147311026700652, guid: 3e2a27921ec9a37469530bdc7b7aba3b, type: 3}
   DamagePrefab: {fileID: 0}
   firePrefab: {fileID: 0}
   LunchPrefab: {fileID: 0}

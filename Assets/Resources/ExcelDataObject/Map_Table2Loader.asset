@@ -19,8 +19,8 @@ MonoBehaviour:
     StgConcept: 960002
     StgHorz: 1
     StgVert: 1
-    TileType: 1
-    TilePrefeb: 961002
+    TileType: 0
+    TilePrefeb: 0
     BossSummon: 0
     BuffSummon: 0
   - MapTableIndex: 560002

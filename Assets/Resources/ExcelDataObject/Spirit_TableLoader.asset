@@ -15,7 +15,7 @@ MonoBehaviour:
   filepath: Assets\00.Data\Txt\Spirit_Table.txt
   DataList:
   - No: 1
-    Name_KR: "\uC5BC\uC74C \uC815\uB839"
+    Name_KR: q
     Name_EN: Ice_Spirit
     SpritTableIndex: 121001
     SpritClass: 3
@@ -26,12 +26,12 @@ MonoBehaviour:
     Crit_rate: 0.15
     Crit_Dmg: 1.5
     ChaceTarget: 2
-    Duration: 10
-    CoolTime: 5
+    Duration: 6
+    CoolTime: 20
     Skill1Code: 170001
     Prefab: 921001
   - No: 2
-    Name_KR: "\uB3C5 \uC815\uB839"
+    Name_KR: w
     Name_EN: Poison_Spirit
     SpritTableIndex: 121002
     SpritClass: 3
@@ -42,12 +42,12 @@ MonoBehaviour:
     Crit_rate: 0.15
     Crit_Dmg: 1.5
     ChaceTarget: 2
-    Duration: 10
-    CoolTime: 5
+    Duration: 2
+    CoolTime: 25
     Skill1Code: 170002
     Prefab: 921002
-  - No: 9
-    Name_KR: "\uD2B8\uB864 \uBB34\uC801"
+  - No: 3
+    Name_KR: e
     Name_EN: Invincibility_Spirit
     SpritTableIndex: 122001
     SpritClass: 1
@@ -59,11 +59,11 @@ MonoBehaviour:
     Crit_Dmg: 1.5
     ChaceTarget: 3
     Duration: 10
-    CoolTime: 5
+    CoolTime: 12
     Skill1Code: 170003
     Prefab: 922001
-  - No: 10
-    Name_KR: "\uC811\uADFC \uBD88\uAC00 \uC815\uB839"
+  - No: 4
+    Name_KR: a
     Name_EN: KeepAway_Spirit
     SpritTableIndex: 122002
     SpritClass: 1
@@ -74,12 +74,12 @@ MonoBehaviour:
     Crit_rate: 0.15
     Crit_Dmg: 1.5
     ChaceTarget: 3
-    Duration: 10
-    CoolTime: 5
+    Duration: 5
+    CoolTime: 15
     Skill1Code: 170004
     Prefab: 922002
-  - No: 13
-    Name_KR: "\uD790 \uC815\uB839"
+  - No: 5
+    Name_KR: s
     Name_EN: Heal_Spirit
     SpritTableIndex: 123001
     SpritClass: 2
@@ -90,12 +90,12 @@ MonoBehaviour:
     Crit_rate: 0.15
     Crit_Dmg: 1.5
     ChaceTarget: 2
-    Duration: 10
-    CoolTime: 5
+    Duration: 2
+    CoolTime: 3
     Skill1Code: 170005
     Prefab: 923001
-  - No: 14
-    Name_KR: "\uC774\uC18D \uC99D\uAC00 \uC815\uB839"
+  - No: 6
+    Name_KR: d
     Name_EN: Speedup_Spirit
     SpritTableIndex: 123002
     SpritClass: 2
@@ -106,7 +106,7 @@ MonoBehaviour:
     Crit_rate: 0.15
     Crit_Dmg: 1.5
     ChaceTarget: 3
-    Duration: 10
-    CoolTime: 5
+    Duration: 8
+    CoolTime: 30
     Skill1Code: 170006
     Prefab: 923002

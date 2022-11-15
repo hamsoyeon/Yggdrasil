@@ -38,8 +38,8 @@ MonoBehaviour:
     Name_EN: Me
     CharStatIndex: 10002
     position: 4
-    Atk: 22
-    Def: 15
+    Atk: 18
+    Def: 12
     HP: 500
     MoveSpeed: 20
     Skill1: 121001
