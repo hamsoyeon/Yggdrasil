@@ -258,6 +258,7 @@ public class BoardBehaviour : MonoBehaviour
     {
         cnt = 0;
 
+        //스테이지 구분하는 부분
         if(SceneManager.GetActiveScene().name == "MainScene")
         {
             _game = new Game(Height, Width, 1);
@@ -325,7 +326,7 @@ public class BoardBehaviour : MonoBehaviour
             }
         }
 
-        // 스테이지2는 내브메쉬 없어서 오류...
+        //수정완료
         parent.GetComponent<NavMeshCom>().TestBuild();
     }
 
