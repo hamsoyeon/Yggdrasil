@@ -853,7 +853,7 @@ public class SpiritSkill : MonoBehaviour
                     {
                         int heal = (int)(pm.GetMaxHp() - cc.m_CharacterStat.HP);
 
-                        if(heal >= 50)
+                        if(heal >= 200)
                         {
                             rangeCollider.GetComponent<CharacterClass>().m_CharacterStat.HP += 200f;
                         }
