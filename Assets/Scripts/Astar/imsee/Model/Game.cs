@@ -55,7 +55,7 @@ namespace Model
 
             var gamePieces = new List<GamePiece>
             {
-                new GamePiece(new Point(MainManager.Instance.GetStageManager().m_BossRow, MainManager.Instance.GetStageManager().m_BossColumn - 1)),
+                new GamePiece(new Point(MainManager.Instance.GetStageManager().m_BossColumn, MainManager.Instance.GetStageManager().m_BossRow)),
                 new GamePiece(new Point(Width - 6, Height - 3))
             };
 
