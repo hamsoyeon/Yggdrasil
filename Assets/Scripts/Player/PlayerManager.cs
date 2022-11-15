@@ -303,11 +303,14 @@ public class PlayerManager : MonoBehaviour
 
     public void TakeDamagePrint(int damage)
     {
+        if (damage >= 1)
+        {
+            GameObject hudText = Instantiate(hudDamageText);
+
+            hudText.transform.position = hudPos.position + (Vector3.up * 15);
+            hudText.GetComponent<DamageTxt>().damage = damage;
+        }
         
-        GameObject hudText = Instantiate(hudDamageText);
-        
-        hudText.transform.position = hudPos.position + (Vector3.up * 15);
-        hudText.GetComponent<DamageTxt>().damage = damage;
     }
 
     private void RearTimePerHP()
