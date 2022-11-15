@@ -21,7 +21,7 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 1
-    SkillRange: 4
+    SkillRange: 3
     SkillDistance: 3
     SkillType: 3
     UseStat: 20
@@ -36,21 +36,21 @@ MonoBehaviour:
     DoT: 1.1
     SkillAdded: 0
     BuffAdded: 0
-    SkillAnimation: 3
+    SkillAnimation: 1
     SkillDelay: 2
-    DelayPrefb: 0
-    LunchPrefb: 971017
+    DelayPrefb: 970020
+    LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971017
-    DamPrefb: 0
+    DamPrefb: 972002
   - Name_KR: "\uD3ED\uD30C"
     Name_EN: Explosion
     BossSkillIndex: 231002
     TargetType: 2
     Target: 2
     Power: 10
-    CoolTime: 3
-    SkillRange: 3
+    CoolTime: 20
+    SkillRange: 2
     SkillDistance: 2
     SkillType: 1
     UseStat: 35
@@ -67,20 +67,20 @@ MonoBehaviour:
     BuffAdded: 0
     SkillAnimation: 2
     SkillDelay: 2
-    DelayPrefb: 0
-    LunchPrefb: 971015
+    DelayPrefb: 970020
+    LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971015
-    DamPrefb: 0
+    DamPrefb: 972001
   - Name_KR: "\uB300\uC9C0\uC9C4"
     Name_EN: EarthQuake
     BossSkillIndex: 231003
     TargetType: 2
     Target: 2
     Power: 10
-    CoolTime: 4
-    SkillRange: 4
-    SkillDistance: 2
+    CoolTime: 30
+    SkillRange: 1
+    SkillDistance: 4
     SkillType: 1
     UseStat: 40
     Direction1: 1
@@ -90,17 +90,17 @@ MonoBehaviour:
     Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
-    LifeTime: 1
+    LifeTime: 0.5
     DoT: 1.1
     SkillAdded: 231004
     BuffAdded: 0
-    SkillAnimation: 1
-    SkillDelay: 2
-    DelayPrefb: 0
-    LunchPrefb: 971014
+    SkillAnimation: 3
+    SkillDelay: 1
+    DelayPrefb: 970020
+    LunchPrefb: 0
     SingleTile: 0
     FirePrefb: 971014
-    DamPrefb: 0
+    DamPrefb: 972003
   - Name_KR: "\uB300\uC9C0\uC9C4 \uC5F0\uACC4 1"
     Name_EN: EarthQuake-1
     BossSkillIndex: 231004
@@ -108,36 +108,7 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 1
-    SkillRange: 4
-    SkillDistance: 3
-    SkillType: 4
-    UseStat: 0
-    Direction1: 1
-    Direction2: 0
-    Direction3: 0
-    Direction4: 0
-    Direction5: 0
-    Direction6: 0
-    "\uC815\uB839": 0
-    LifeTime: 1
-    DoT: 1.1
-    SkillAdded: 231005
-    BuffAdded: 0
-    SkillAnimation: 1
-    SkillDelay: 0.5
-    DelayPrefb: 0
-    LunchPrefb: 971014
-    SingleTile: 0
-    FirePrefb: 971014
-    DamPrefb: 0
-  - Name_KR: "\uB300\uC9C0\uC9C4 \uC5F0\uACC4 2"
-    Name_EN: EarthQuake-2
-    BossSkillIndex: 231005
-    TargetType: 2
-    Target: 2
-    Power: 10
-    CoolTime: 1
-    SkillRange: 4
+    SkillRange: 2
     SkillDistance: 4
     SkillType: 4
     UseStat: 0
@@ -148,24 +119,53 @@ MonoBehaviour:
     Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
-    LifeTime: 1
+    LifeTime: 0.5
+    DoT: 1.1
+    SkillAdded: 231005
+    BuffAdded: 0
+    SkillAnimation: 3
+    SkillDelay: 0.2
+    DelayPrefb: 970020
+    LunchPrefb: 0
+    SingleTile: 0
+    FirePrefb: 971014
+    DamPrefb: 972003
+  - Name_KR: "\uB300\uC9C0\uC9C4 \uC5F0\uACC4 2"
+    Name_EN: EarthQuake-2
+    BossSkillIndex: 231005
+    TargetType: 2
+    Target: 2
+    Power: 10
+    CoolTime: 1
+    SkillRange: 3
+    SkillDistance: 4
+    SkillType: 4
+    UseStat: 0
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 0.5
     DoT: 1.1
     SkillAdded: 0
     BuffAdded: 0
-    SkillAnimation: 1
+    SkillAnimation: 3
     SkillDelay: 0.5
-    DelayPrefb: 0
-    LunchPrefb: 971014
+    DelayPrefb: 970020
+    LunchPrefb: 0
     SingleTile: 0
     FirePrefb: 971014
-    DamPrefb: 0
+    DamPrefb: 972003
   - Name_KR: "\uB291\uB300 \uC18C\uD658"
     Name_EN: SummonWolf
     BossSkillIndex: 231006
     TargetType: 2
     Target: 2
     Power: 0
-    CoolTime: 8
+    CoolTime: 50
     SkillRange: 1
     SkillDistance: 10
     SkillType: 5
@@ -182,12 +182,12 @@ MonoBehaviour:
     SkillAdded: 0
     BuffAdded: 1
     SkillAnimation: 4
-    SkillDelay: 0.5
-    DelayPrefb: 0
-    LunchPrefb: 971017
+    SkillDelay: 1
+    DelayPrefb: 970020
+    LunchPrefb: 0
     SingleTile: 0
-    FirePrefb: 971017
-    DamPrefb: 0
+    FirePrefb: 971016
+    DamPrefb: 972003
   - Name_KR: "\uD68C\uC624\uB9AC \uBC30\uAE30"
     Name_EN: WhileSlash
     BossSkillIndex: 231007
@@ -215,8 +215,8 @@ MonoBehaviour:
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
-    FirePrefb: 0
-    DamPrefb: 0
+    FirePrefb: 971020
+    DamPrefb: 921013
   - Name_KR: "\uC2EC\uD310"
     Name_EN: Judegement
     BossSkillIndex: 231008
@@ -224,7 +224,7 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 4
-    SkillRange: 2
+    SkillRange: 1
     SkillDistance: 10
     SkillType: 2
     UseStat: 30
@@ -235,16 +235,16 @@ MonoBehaviour:
     Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
-    LifeTime: 1
+    LifeTime: 0.5
     DoT: 1.1
     SkillAdded: 231009
     BuffAdded: 0
     SkillAnimation: 2
-    SkillDelay: 2
+    SkillDelay: 1
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
-    FirePrefb: 0
+    FirePrefb: 971022
     DamPrefb: 0
   - Name_KR: "\uC2EC\uD310 \uC5F0\uACC4 1"
     Name_EN: Judegement-1
@@ -253,7 +253,7 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 1
-    SkillRange: 2
+    SkillRange: 1
     SkillDistance: 10
     SkillType: 2
     UseStat: 0
@@ -264,16 +264,16 @@ MonoBehaviour:
     Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
-    LifeTime: 1
+    LifeTime: 0.5
     DoT: 1.1
     SkillAdded: 231010
     BuffAdded: 0
     SkillAnimation: 0
-    SkillDelay: 1
+    SkillDelay: 0.2
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
-    FirePrefb: 0
+    FirePrefb: 971022
     DamPrefb: 0
   - Name_KR: "\uC2EC\uD310 \uC5F0\uACC4 2"
     Name_EN: Judegement-2
@@ -282,7 +282,7 @@ MonoBehaviour:
     Target: 2
     Power: 10
     CoolTime: 1
-    SkillRange: 2
+    SkillRange: 1
     SkillDistance: 10
     SkillType: 2
     UseStat: 0
@@ -293,16 +293,16 @@ MonoBehaviour:
     Direction5: 0
     Direction6: 0
     "\uC815\uB839": 0
-    LifeTime: 1
+    LifeTime: 0.5
     DoT: 1.1
     SkillAdded: 231011
     BuffAdded: 0
     SkillAnimation: 0
-    SkillDelay: 1
+    SkillDelay: 0.5
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
-    FirePrefb: 0
+    FirePrefb: 971022
     DamPrefb: 0
   - Name_KR: "\uC774\uD504\uB9AC\uD2B8 \uC18C\uD658"
     Name_EN: SummonIfrit
@@ -313,7 +313,7 @@ MonoBehaviour:
     CoolTime: 1
     SkillRange: 1
     SkillDistance: 10
-    SkillType: 1
+    SkillType: 5
     UseStat: 0
     Direction1: 1
     Direction2: 0
@@ -331,5 +331,527 @@ MonoBehaviour:
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 0
+    FirePrefb: 971022
+    DamPrefb: 0
+  - Name_KR: "\uCC38\uACA9"
+    Name_EN: TheSlash
+    BossSkillIndex: 231012
+    TargetType: 2
+    Target: 2
+    Power: 10
+    CoolTime: 5
+    SkillRange: 3
+    SkillDistance: 4
+    SkillType: 3
+    UseStat: 25
+    Direction1: 1
+    Direction2: 1
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 1
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 0
+    BuffAdded: 3
+    SkillAnimation: 4
+    SkillDelay: 2
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 971021
+    DamPrefb: 0
+  - Name_KR: "\uCC98\uD615"
+    Name_EN: Exicution
+    BossSkillIndex: 231013
+    TargetType: 2
+    Target: 2
+    Power: 30
+    CoolTime: 7
+    SkillRange: 3
+    SkillDistance: 4
+    SkillType: 3
+    UseStat: 40
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 231014
+    BuffAdded: 0
+    SkillAnimation: 1
+    SkillDelay: 2
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 971001
+    DamPrefb: 0
+  - Name_KR: "\uCC98\uD615-1"
+    Name_EN: Exicution-1
+    BossSkillIndex: 231014
+    TargetType: 2
+    Target: 2
+    Power: 0
+    CoolTime: 1
+    SkillRange: 1
+    SkillDistance: 10
+    SkillType: 2
+    UseStat: 0
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 231015
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 0.1
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 971001
+    DamPrefb: 0
+  - Name_KR: "\uCC98\uD615-2"
+    Name_EN: Exicution-2
+    BossSkillIndex: 231015
+    TargetType: 2
+    Target: 2
+    Power: 20
+    CoolTime: 1
+    SkillRange: 3
+    SkillDistance: 10
+    SkillType: 3
+    UseStat: 0
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 1
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 231016
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 0.5
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 971001
+    DamPrefb: 0
+  - Name_KR: "\uCC98\uD615-3"
+    Name_EN: Exicution-3
+    BossSkillIndex: 231016
+    TargetType: 2
+    Target: 2
+    Power: 0
+    CoolTime: 1
+    SkillRange: 1
+    SkillDistance: 10
+    SkillType: 2
+    UseStat: 0
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 231017
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 0.1
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 971001
+    DamPrefb: 0
+  - Name_KR: "\uCC98\uD615-4"
+    Name_EN: Exicution-4
+    BossSkillIndex: 231017
+    TargetType: 2
+    Target: 2
+    Power: 20
+    CoolTime: 1
+    SkillRange: 3
+    SkillDistance: 10
+    SkillType: 3
+    UseStat: 0
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 1
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 231018
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 0.5
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 971001
+    DamPrefb: 0
+  - Name_KR: "\uCC98\uD615-5"
+    Name_EN: Exicution-5
+    BossSkillIndex: 231018
+    TargetType: 2
+    Target: 2
+    Power: 0
+    CoolTime: 1
+    SkillRange: 1
+    SkillDistance: 10
+    SkillType: 2
+    UseStat: 0
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 231019
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 0.1
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 971001
+    DamPrefb: 0
+  - Name_KR: "\uCC98\uD615-6"
+    Name_EN: Exicution-6
+    BossSkillIndex: 231019
+    TargetType: 2
+    Target: 2
+    Power: 20
+    CoolTime: 1
+    SkillRange: 3
+    SkillDistance: 10
+    SkillType: 3
+    UseStat: 0
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 1
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 231020
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 0.5
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 971001
+    DamPrefb: 0
+  - Name_KR: "\uCC98\uD615-7"
+    Name_EN: Exicution-7
+    BossSkillIndex: 231020
+    TargetType: 2
+    Target: 2
+    Power: 0
+    CoolTime: 1
+    SkillRange: 1
+    SkillDistance: 10
+    SkillType: 2
+    UseStat: 0
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 231021
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 0.1
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 971001
+    DamPrefb: 0
+  - Name_KR: "\uCC98\uD615-8"
+    Name_EN: Exicution-8
+    BossSkillIndex: 231021
+    TargetType: 2
+    Target: 2
+    Power: 30
+    CoolTime: 1
+    SkillRange: 4
+    SkillDistance: 10
+    SkillType: 3
+    UseStat: 0
+    Direction1: 1
+    Direction2: 1
+    Direction3: 1
+    Direction4: 1
+    Direction5: 1
+    Direction6: 1
+    "\uC815\uB839": 1
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 0
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 0.5
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 971001
+    DamPrefb: 0
+  - Name_KR: "\uB9AC\uBE59 \uB370\uB4DC"
+    Name_EN: LivingDead
+    BossSkillIndex: 231022
+    TargetType: 2
+    Target: 2
+    Power: 0
+    CoolTime: 3
+    SkillRange: 1
+    SkillDistance: 10
+    SkillType: 1
+    UseStat: 30
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 0
+    BuffAdded: 4
+    SkillAnimation: 3
+    SkillDelay: 2
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 0
+    DamPrefb: 0
+  - Name_KR: "\uD558\uC6B8"
+    Name_EN: Howl
+    BossSkillIndex: 231023
+    TargetType: 1
+    Target: 1
+    Power: 0
+    CoolTime: 1
+    SkillRange: 3
+    SkillDistance: 2
+    SkillType: 1
+    UseStat: 20
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 0.5
+    DoT: 1.1
+    SkillAdded: 231024
+    BuffAdded: 5
+    SkillAnimation: 4
+    SkillDelay: 2
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 0
+    FirePrefb: 0
+    DamPrefb: 0
+  - Name_KR: "\uD558\uC6B8 \uC5F0\uACC4 - 1"
+    Name_EN: Howl - 1
+    BossSkillIndex: 231024
+    TargetType: 2
+    Target: 2
+    Power: 10
+    CoolTime: 1
+    SkillRange: 3
+    SkillDistance: 2
+    SkillType: 1
+    UseStat: 0
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 0
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 0.1
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 0
+    FirePrefb: 0
+    DamPrefb: 0
+  - Name_KR: "\uBD84\uD654"
+    Name_EN: Eruption
+    BossSkillIndex: 231025
+    TargetType: 2
+    Target: 2
+    Power: 10
+    CoolTime: 3
+    SkillRange: 2
+    SkillDistance: 3
+    SkillType: 1
+    UseStat: 20
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 231025
+    BuffAdded: 0
+    SkillAnimation: 2
+    SkillDelay: 2
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 0
+    DamPrefb: 0
+  - Name_KR: "\uBD84\uD654 \uC5F0\uACC4 -1"
+    Name_EN: Eruption -1
+    BossSkillIndex: 231026
+    TargetType: 2
+    Target: 2
+    Power: 20
+    CoolTime: 1
+    SkillRange: 3
+    SkillDistance: 1
+    SkillType: 3
+    UseStat: 0
+    Direction1: 1
+    Direction2: 1
+    Direction3: 1
+    Direction4: 1
+    Direction5: 1
+    Direction6: 1
+    "\uC815\uB839": 1
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 0
+    BuffAdded: 0
+    SkillAnimation: 5
+    SkillDelay: 0.1
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 0
+    FirePrefb: 0
+    DamPrefb: 0
+  - Name_KR: "\uBE14\uB799\uD640"
+    Name_EN: BlackHole
+    BossSkillIndex: 231027
+    TargetType: 2
+    Target: 2
+    Power: 10
+    CoolTime: 4
+    SkillRange: 1
+    SkillDistance: 5
+    SkillType: 2
+    UseStat: 30
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 231028
+    BuffAdded: 0
+    SkillAnimation: 4
+    SkillDelay: 2
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 0
+    DamPrefb: 0
+  - Name_KR: "\uBE14\uB799\uD640 \uC5F0\uACC4 -1"
+    Name_EN: BlackHole - 1
+    BossSkillIndex: 231028
+    TargetType: 2
+    Target: 2
+    Power: 20
+    CoolTime: 1
+    SkillRange: 2
+    SkillDistance: 5
+    SkillType: 2
+    UseStat: 0
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 231029
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 1
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
+    FirePrefb: 0
+    DamPrefb: 0
+  - Name_KR: "\uBE14\uB799\uD640 \uC5F0\uACC4 -2"
+    Name_EN: BlackHole - 2
+    BossSkillIndex: 231029
+    TargetType: 2
+    Target: 2
+    Power: 30
+    CoolTime: 1
+    SkillRange: 3
+    SkillDistance: 5
+    SkillType: 2
+    UseStat: 0
+    Direction1: 1
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 1
+    DoT: 1.1
+    SkillAdded: 0
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 1
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 1
     FirePrefb: 0
     DamPrefb: 0
