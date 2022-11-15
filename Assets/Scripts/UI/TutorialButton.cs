@@ -5,23 +5,34 @@ using UnityEngine.SceneManagement;
 
 public class TutorialButton : MonoBehaviour
 {
-    public bool IsTutorialClear = false;
+    public bool TutorialTrigger = false;
+    public static TutorialButton instance = null;
+
     void Start()
     {
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+
         DontDestroyOnLoad(gameObject);
     }
 
-    void Update()
+    private void Update()
     {
-        if(SceneManager.GetActiveScene().name == "MainScene" || SceneManager.GetActiveScene().name == "Stage2")
-        {
-            IsTutorialClear = false;
-        }
+        if (SceneManager.GetActiveScene().name == "MainScene" || SceneManager.GetActiveScene().name == "Stage2")
+            TutorialTrigger = false;
     }
 
     public void BtnPress()
     {
-        IsTutorialClear = true;
+        TutorialTrigger = true;
         SceneManager.LoadScene("UIScene");
     }
+
 }

@@ -29,7 +29,7 @@ public class NewMenuManager : MonoBehaviour
         m_Option.SetActive(false);
         m_Room.SetActive(false);
         ui = GameObject.Find("UIController");
-        m_IsTutorialClear = ui.GetComponent<TutorialButton>().IsTutorialClear;
+        m_IsTutorialClear = ui.GetComponent<TutorialButton>().TutorialTrigger;
     }
 
     public void OnClickGameStart()
