@@ -341,11 +341,14 @@ public class BossFSM : MonoBehaviour
 
     public void TakeDamagePrint(int damage)
     {
+        if (damage >= 1)
+        {
+            GameObject hudText = Instantiate(hudDamageText);
 
-        GameObject hudText = Instantiate(hudDamageText);
-
-        hudText.transform.position = hudPos.position + (Vector3.up * 20);
-        hudText.GetComponent<DamageTxt>().damage = damage;
+            hudText.transform.position = hudPos.position + (Vector3.up * 20);
+            hudText.GetComponent<DamageTxt>().damage = damage;
+        }
+        
     }
     public float GetPerStamina()
     {

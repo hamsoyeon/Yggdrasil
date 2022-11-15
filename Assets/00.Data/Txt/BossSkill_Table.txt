@@ -10,7 +10,7 @@
 심판 연계 2`Judegement-2`231010`2`2`10`1`1`10`2`0`true `false `false `false `false `false `false `0.5`1.1`231011`0`0`0.5`971026`0`true `971022`0;
 이프리트 소환`SummonIfrit`231011`2`2`0`1`1`10`5`0`true `false `false `false `false `false `false `1`1.1`0`0`0`1`0`0`false `971022`0;
 참격`TheSlash`231012`2`2`10`5`3`4`3`25`true `true `false `false `false `true `false `1`1.1`0`0`4`2`0`0`true `971021`0;
-처형`Exicution`231013`2`2`30`30`2`4`1`40`true `false `false `false `false `false `false `1`1.1`231014`0`1`2`0`0`true `971001`0;
+처형`Exicution`231013`2`2`30`30`2`4`1`40`true `false `false `false `false `false `false `1`1.1`231014`0`1`2`0`0`true `971025`0;
 처형-1`Exicution-1`231014`2`2`0`1`1`10`2`0`true `false `false `false `false `false `false `0.5`1.1`231015`0`0`0.2`0`0`true `971029`0;
 처형-2`Exicution-2`231015`2`2`20`1`2`10`3`0`true `false `false `true `false `false `false `1`1.1`231016`0`0`0.5`0`0`true `971023`0;
 처형-3`Exicution-3`231016`2`2`0`1`1`10`2`0`true `false `false `false `false `false `false `0.5`1.1`231017`0`0`0.2`0`0`true `971029`0;
