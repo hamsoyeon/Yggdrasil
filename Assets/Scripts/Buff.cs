@@ -49,6 +49,18 @@ public class Buff : MonoBehaviour
         return target;
     }
 
+    public void StatBuff(int _index, int isBuff)//버프 인덱스 번호, 버프 디버프 여부 버프 일 경우 1, 디버프는 -1
+    {
+        switch(_index)
+        {
+            case 1://공격력
+
+                break;
+
+
+        }
+    }
+
 
     //target 0이면 플레이어 1이면 보스
     public void Stun(int target)
@@ -76,9 +88,6 @@ public class Buff : MonoBehaviour
             stunEffectTemp.transform.position = (isPlayerOrMonster(target).transform.position) + effectOffset;  //이펙트 위치 셋
 
 
-            //offset 따로 추가하기
-
-
             //공격력 0으로 만들기
 
 
@@ -88,9 +97,6 @@ public class Buff : MonoBehaviour
 
 
         anim.SetBool("isStunned", true);//스턴 애니 재생
-        //다른 애니 재생 될 때만 안 되는거임..왜??
-        //내가 다른데서도 애니메이션을 재생하는 스크립트를 짰으니까..
-        //그럼 어카지
 
         StartCoroutine(Normalization(durationTime, anim, 1, originSpeed));
 
