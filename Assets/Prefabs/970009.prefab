@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyClass: {fileID: 0}
   dmg_check: 1
-  DamageEffect: {fileID: 5902258153077817902, guid: c505b1771412d9a4394ebdef5345052a, type: 3}
+  m_DamageEffect: {fileID: 0}
   who: 0
   Dot: 0
   buffIndex: 0
@@ -66,6 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_lockOn: 0
   target: {fileID: 0}
+  m_DamPrefab: {fileID: 0}
   moveSpeed: 0
 --- !u!1001 &1547344285613751110
 PrefabInstance:
@@ -74,9 +75,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3665456370996495974}
     m_Modifications:
+    - target: {fileID: 1304853255759458, guid: a6ec7b9220605f5468c94619bc473e20, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682904326955056, guid: a6ec7b9220605f5468c94619bc473e20, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1943049586886934, guid: a6ec7b9220605f5468c94619bc473e20, type: 3}
       propertyPath: m_Name
       value: ProtonMissileBlue
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943049586886934, guid: a6ec7b9220605f5468c94619bc473e20, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4865487205730616, guid: a6ec7b9220605f5468c94619bc473e20, type: 3}
       propertyPath: m_RootOrder
@@ -121,6 +134,10 @@ PrefabInstance:
     - target: {fileID: 4865487205730616, guid: a6ec7b9220605f5468c94619bc473e20, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198303147000643042, guid: a6ec7b9220605f5468c94619bc473e20, type: 3}
+      propertyPath: InitialModule.size3D
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 199277680143593738, guid: a6ec7b9220605f5468c94619bc473e20, type: 3}
       propertyPath: m_Materials.Array.size
