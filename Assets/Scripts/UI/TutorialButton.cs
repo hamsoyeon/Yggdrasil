@@ -13,7 +13,10 @@ public class TutorialButton : MonoBehaviour
 
     void Update()
     {
-        
+        if(SceneManager.GetActiveScene().name == "MainScene" || SceneManager.GetActiveScene().name == "Stage2")
+        {
+            IsTutorialClear = false;
+        }
     }
 
     public void BtnPress()
