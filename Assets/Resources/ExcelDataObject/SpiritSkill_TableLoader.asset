@@ -18,46 +18,46 @@ MonoBehaviour:
     Name_EN: Ice_Spike
     SpritSkillIndex: 170001
     Target: 2
-    Power: 5
+    Power: 10
     SkillRange: 1
     SkillType: 5
     BulletSpeed: 1
     TargetNum: 10
-    LifeTime: 20
-    DoT: 0.2
+    LifeTime: 5
+    DoT: 1
     Shapeform: 2
     Cshape1: 1
     Cshape2: 1
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 923004
-    FirePrefb: 921004
-    DamPrefb: 921005
+    LunchPrefb: 970008
+    FirePrefb: 0
+    DamPrefb: 912001
   - Name_KR: "\uB3C5\uAD6C\uB984"
     Name_EN: Posion_Cloud
     SpritSkillIndex: 170002
     Target: 2
     Power: 10
-    SkillRange: 20
+    SkillRange: 15
     SkillType: 3
     BulletSpeed: 1
     TargetNum: 10
-    LifeTime: 1
-    DoT: 1.1
+    LifeTime: 5
+    DoT: 1
     Shapeform: 1
     Cshape1: 15
     Cshape2: 15
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 923004
-    FirePrefb: 970018
-    DamPrefb: 921003
+    LunchPrefb: 912005
+    FirePrefb: 0
+    DamPrefb: 912002
   - Name_KR: "\uBB34\uC801"
     Name_EN: Invincibility
     SpritSkillIndex: 170003
     Target: 1
     Power: 0
-    SkillRange: 15
+    SkillRange: 1
     SkillType: 5
     BulletSpeed: 1
     TargetNum: 3
@@ -163,8 +163,8 @@ MonoBehaviour:
     Cshape2: 1
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 921018
-    FirePrefb: 921017
+    LunchPrefb: 0
+    FirePrefb: 0
     DamPrefb: 0
   - Name_KR: "\uC774\uD504\uB9AC\uD2B8 \uD3ED\uD30C"
     Name_EN: a
@@ -182,8 +182,8 @@ MonoBehaviour:
     Cshape2: 5
     SkillAdded: 0
     BuffAdded: 0
-    LunchPrefb: 921018
-    FirePrefb: 921019
+    LunchPrefb: 0
+    FirePrefb: 0
     DamPrefb: 0
   - Name_KR: "\uC0AC\uD2F0\uB7EC \uC7A5\uD48D"
     Name_EN: a

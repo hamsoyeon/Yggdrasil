@@ -152,7 +152,7 @@ public class NewRoomManager : MonoBehaviour
         for (int i = 0; i < m_skillButtons.Count; i++)
         {
             int a = i;
-            m_skillButtons[i].interactable = false;
+            m_skillButtons[i].interactable = true;
             m_skillButtons[i].onClick.AddListener(() => SetSkillBtn(a));
         }
 
