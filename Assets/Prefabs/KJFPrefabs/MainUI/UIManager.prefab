@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6394683461695614674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6394683461695614672}
+  - component: {fileID: 6394683461695614675}
+  - component: {fileID: 6394683461695614673}
+  - component: {fileID: 6394683461695614686}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6394683461695614672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6394683461695614674}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1044.7797, y: 547.1271, z: -22.436417}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6394683461695614675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6394683461695614674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6c83b821d7bc84abb6d2f6ed6b0754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerManager: {fileID: 0}
+  spritSkillPanel: {fileID: 0}
+  hpBar: {fileID: 0}
+  hpText: {fileID: 0}
+  buttonTexture: {fileID: 21300000, guid: b95d168bf09e4e9469f46e238681fcc8, type: 3}
+  p_spiritSkillBtn: {fileID: 4668501934086259184, guid: 82480d5fa307e974581ad4e3c328924a, type: 3}
+  spirit_Buttons: []
+  is_CoolTime: []
+  collTime_Text: []
+  minimap_2DIcon_Player: {fileID: 0}
+  spritSkill_Img:
+  - {fileID: 21300000, guid: 28ac4679feabba9429ddb193e8540aac, type: 3}
+  - {fileID: 21300000, guid: 5bf7e8de24d28a144870e707801f2e79, type: 3}
+  - {fileID: 21300000, guid: 8e2d3cf46261a9f428a670faad9ef547, type: 3}
+  - {fileID: 21300000, guid: fee22fd27ed64e543a12f14080de0be2, type: 3}
+  - {fileID: 21300000, guid: 68a46bd35dcf7ef44ab61512d5d817e6, type: 3}
+  - {fileID: 21300000, guid: 15c0b839ff1b53f40a0894329794f0a9, type: 3}
+  m_SkillCount: 6
+--- !u!114 &6394683461695614673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6394683461695614674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce871e506ad17e44a3c736a68edbfdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: []
+  temp: {fileID: 0}
+  view_Value_y: 0
+  view_Value_z: 0
+  view_Angle_Value: 0
+--- !u!114 &6394683461695614686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6394683461695614674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d601ccf2cd88dbb418ea22b0321337d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossFsm: {fileID: 0}
+  minimap_2DIcon_Boss: {fileID: 0}
+  bossHp_Slider: {fileID: 0}
+  bossStamina_Slider: {fileID: 0}
+  bossHp_Text: {fileID: 0}
+  bossName_Text: {fileID: 0}
