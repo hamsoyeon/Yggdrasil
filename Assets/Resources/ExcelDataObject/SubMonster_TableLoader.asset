@@ -21,12 +21,12 @@ MonoBehaviour:
     HP: 100
     Defense: 10
     Demege: 10
-    Speed: 5
+    Speed: 18
     Prefb: 941001
     Baseskill: 241001
     Epicskill: 0
   - No: 2
-    Name_KR: "\uC5D8\uD504"
+    Name_KR: "\uC0AC\uC2E0"
     Name_EN: Elf
     SubMonsterIndex: 141002
     HP: 100

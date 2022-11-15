@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyClass: {fileID: 0}
   dmg_check: 1
-  DamageEffect: {fileID: 5006970940163314085, guid: b1806d82e1729834db45e2395dd40d12, type: 3}
+  m_DamageEffect: {fileID: 0}
   who: 0
   Dot: 0
   buffIndex: 0
@@ -67,6 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_lockOn: 0
   target: {fileID: 0}
+  m_DamPrefab: {fileID: 0}
   moveSpeed: 0
 --- !u!1001 &3755570722649386772
 PrefabInstance:
@@ -79,9 +80,25 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2672817431503268647, guid: f1c258cf02adb43438f97050c454c49b, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672817431503268647, guid: f1c258cf02adb43438f97050c454c49b, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5632088230561895807, guid: f1c258cf02adb43438f97050c454c49b, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598589685276872542, guid: f1c258cf02adb43438f97050c454c49b, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598589685276872542, guid: f1c258cf02adb43438f97050c454c49b, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.a
+      value: 0.39215687
       objectReference: {fileID: 0}
     - target: {fileID: 7235496322004475637, guid: f1c258cf02adb43438f97050c454c49b, type: 3}
       propertyPath: m_Name

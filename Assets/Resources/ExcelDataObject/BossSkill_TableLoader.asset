@@ -368,10 +368,10 @@ MonoBehaviour:
     TargetType: 2
     Target: 2
     Power: 30
-    CoolTime: 7
-    SkillRange: 3
+    CoolTime: 30
+    SkillRange: 2
     SkillDistance: 4
-    SkillType: 3
+    SkillType: 1
     UseStat: 40
     Direction1: 1
     Direction2: 0
@@ -389,7 +389,7 @@ MonoBehaviour:
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
-    FirePrefb: 971001
+    FirePrefb: 971025
     DamPrefb: 0
   - Name_KR: "\uCC98\uD615-1"
     Name_EN: Exicution-1
@@ -427,7 +427,7 @@ MonoBehaviour:
     Target: 2
     Power: 20
     CoolTime: 1
-    SkillRange: 3
+    SkillRange: 2
     SkillDistance: 10
     SkillType: 3
     UseStat: 0
@@ -447,7 +447,7 @@ MonoBehaviour:
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
-    FirePrefb: 971001
+    FirePrefb: 971023
     DamPrefb: 0
   - Name_KR: "\uCC98\uD615-3"
     Name_EN: Exicution-3
@@ -485,7 +485,7 @@ MonoBehaviour:
     Target: 2
     Power: 20
     CoolTime: 1
-    SkillRange: 3
+    SkillRange: 2
     SkillDistance: 10
     SkillType: 3
     UseStat: 0
@@ -505,7 +505,7 @@ MonoBehaviour:
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
-    FirePrefb: 971001
+    FirePrefb: 971023
     DamPrefb: 0
   - Name_KR: "\uCC98\uD615-5"
     Name_EN: Exicution-5
@@ -543,7 +543,7 @@ MonoBehaviour:
     Target: 2
     Power: 20
     CoolTime: 1
-    SkillRange: 3
+    SkillRange: 2
     SkillDistance: 10
     SkillType: 3
     UseStat: 0
@@ -563,7 +563,7 @@ MonoBehaviour:
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
-    FirePrefb: 971001
+    FirePrefb: 971023
     DamPrefb: 0
   - Name_KR: "\uCC98\uD615-7"
     Name_EN: Exicution-7
@@ -621,7 +621,7 @@ MonoBehaviour:
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
-    FirePrefb: 971001
+    FirePrefb: 971024
     DamPrefb: 0
   - Name_KR: "\uB9AC\uBE59 \uB370\uB4DC"
     Name_EN: LivingDead
