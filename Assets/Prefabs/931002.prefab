@@ -61,7 +61,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460082989184991406}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 20, y: 25, z: 20}
@@ -141,7 +141,7 @@ MonoBehaviour:
   LunchPrefab: {fileID: 0}
   DelayPrefab: {fileID: 0}
   EmptyPrefab: {fileID: 0}
-  DebuffTilePrefab: {fileID: 0}
+  DebuffTilePrefab: {fileID: 7175174837232618891, guid: a8cdb131c9f9fc440968d3e1f0597dad, type: 3}
   PosAtk: {fileID: 0}
   angleRange: 60
   distance: 5

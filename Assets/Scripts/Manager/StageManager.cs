@@ -90,6 +90,11 @@ public class StageManager : MonoBehaviour
         playerColumn = m_PlayerCoulmn;
     }
 
+    public void GetBossAndPlayerRowBuyColumn()
+    {
+        Debug.Log($"Boss{m_BossRow}/{m_BossColumn} , Player {m_PlayerRow}/{m_PlayerCoulmn}");
+    }
+
 
     public MapInfo GetPlayerMapInfo()
     {

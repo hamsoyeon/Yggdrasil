@@ -20,6 +20,10 @@ public class ColiderChk : MonoBehaviour
             Debug.Log($"Player (row:{m_row} / coulmn:{m_coulmn})");
                
             MainManager.Instance.GetStageManager().SetPlayerRowAndCoulmn(m_row, m_coulmn);
+
+
+            MainManager.Instance.GetStageManager().GetBossAndPlayerRowBuyColumn();
+
             coliderchk = true;
             //mat.color = new Color(1, 0, 0);
         }
@@ -41,7 +45,7 @@ public class ColiderChk : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             coliderchk = false;
-            //mat.color = new Color(1, 1, 1);
+            
         }
     }
 
