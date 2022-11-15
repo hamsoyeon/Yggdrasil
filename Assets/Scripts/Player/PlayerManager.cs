@@ -67,7 +67,6 @@ public class PlayerManager : MonoBehaviour
         // 0 -> q / 1 -> w / 2 -> e / 3 -> a / 4 -> s / 5 -> d
         if (Input.GetKeyDown(m_SpiritSkillKey[3]) && CanSkill[3]) //플레이어 A스킬
         {
-           
             CanSkill[3] = false;
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill1);
             Debug.Log($"스킬 A 는 {CanSkill[3]}");
