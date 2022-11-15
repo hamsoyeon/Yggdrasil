@@ -20,6 +20,8 @@ public class NewMenuManager : MonoBehaviour
 
     NewRoomManager m_roommanager;
 
+
+
     void Start()
     {
         m_roommanager = GetComponent<NewRoomManager>();
@@ -67,10 +69,18 @@ public class NewMenuManager : MonoBehaviour
     public void OnClickStart()
     {
         if (m_roommanager.m_MapNum == 0)
+        {
+           DataManager.Instance.m_userSelectStage = 0;
             SceneManager.LoadScene("MainScene");
+        }
+            
 
         if (m_roommanager.m_MapNum == 1)
+        {
+            DataManager.Instance.m_userSelectStage = 1;
             SceneManager.LoadScene("Stage2");
+        }
+            
 
         //SceneManager.LoadScene("MainScene");
     }

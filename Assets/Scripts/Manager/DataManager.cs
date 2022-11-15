@@ -7,6 +7,7 @@ public class DataManager : MonoBehaviour
     public static DataManager instance;
 
     public int[] m_userSelectSkillIndex;
+    public int m_userSelectStage;
 
     private void Awake()
     {
@@ -40,7 +41,7 @@ public class DataManager : MonoBehaviour
     void Start()
     {
         m_userSelectSkillIndex = new int[6];  // 초기값 0으로 셋팅됨
-
+        m_userSelectStage = 0;
 
     }
 

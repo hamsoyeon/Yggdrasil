@@ -74,7 +74,6 @@ public class PlayerUIManager : MonoBehaviour
             else
             {
                 string path = "Icon/" + DataManager.Instance.m_userSelectSkillIndex[i].ToString();
-                Debug.Log(path);
                 Sprite tempSprite = Resources.Load<Sprite>(path);
 
                 if (tempSprite == null)

@@ -111,7 +111,7 @@ public class BossFSM : MonoBehaviour
 
         m_BossClass = this.gameObject.GetComponent<CharacterClass>();
         m_CurrentBossSkill = this.gameObject.GetComponent<BossSkill>();
-        currentBossNumber = 0;   //스테이지에서 해당 스테이지에 맞는 보스 정보를 가져와야됨 지금은 임시로 1로 설정
+        currentBossNumber = DataManager.Instance.m_userSelectStage;   //스테이지에서 해당 스테이지에 맞는 보스 정보를 가져와야됨 지금은 임시로 1로 설정
 
         m_BossClass.m_BossStatData = DataTableManager.Instance.GetDataTable<Boss_TableExcelLoader>().DataList[currentBossNumber];
         m_BossClass.m_SkillMgr.m_BossSkill = m_CurrentBossSkill;

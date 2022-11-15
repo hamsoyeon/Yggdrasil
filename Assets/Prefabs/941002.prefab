@@ -9,6 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4131388442910102534}
+  - component: {fileID: 1316030616652634504}
+  - component: {fileID: 3852675922489443921}
+  - component: {fileID: 3140874475283475040}
+  - component: {fileID: 6477389528848246862}
+  - component: {fileID: 7584002793022004327}
+  - component: {fileID: 2183552316714601212}
   m_Layer: 0
   m_Name: 941002
   m_TagString: Untagged
@@ -33,6 +39,223 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!195 &1316030616652634504
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662147311026700652}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!65 &3852675922489443921
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662147311026700652}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!54 &3140874475283475040
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662147311026700652}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &6477389528848246862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662147311026700652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64136c781e8bd2743a5da9d287c90e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BossSkillData:
+    Name_KR: 
+    Name_EN: 
+    BossSkillIndex: 0
+    TargetType: 0
+    Target: 0
+    Power: 0
+    CoolTime: 0
+    SkillRange: 0
+    SkillDistance: 0
+    SkillType: 0
+    UseStat: 0
+    Direction1: 0
+    Direction2: 0
+    Direction3: 0
+    Direction4: 0
+    Direction5: 0
+    Direction6: 0
+    "\uC815\uB839": 0
+    LifeTime: 0
+    DoT: 0
+    SkillAdded: 0
+    BuffAdded: 0
+    SkillAnimation: 0
+    SkillDelay: 0
+    DelayPrefb: 0
+    LunchPrefb: 0
+    SingleTile: 0
+    FirePrefb: 0
+    DamPrefb: 0
+  m_BossStatData:
+    Name_KR: 
+    Name_EN: 
+    BossStatIndex: 0
+    Atk: 0
+    HP: 0
+    Def: 0
+    SRange: 0
+    CRange: 0
+    FRange: 0
+    MaxStamina: 0
+    Speed: 0
+    MoveStUsed: 0
+    Skill1: 0
+    Skill2: 0
+    Skill3: 0
+    Skill4: 0
+    Prefeb: 0
+  m_CharacterStat:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    CharStatIndex: 0
+    position: 0
+    Atk: 0
+    Def: 0
+    HP: 0
+    MoveSpeed: 0
+    Skill1: 0
+    Skill2: 0
+    Skill3: 0
+    Skill4: 0
+    Skill5: 0
+    Skill6: 0
+    Item1: 0
+    Item2: 0
+    Sight: 0
+    Prefeb: 0
+  m_SpiritData:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    SpritTableIndex: 0
+    SpritClass: 0
+    SpiritType: 0
+    Atk: 0
+    Atk_Speed: 0
+    Move_Speed: 0
+    Crit_rate: 0
+    Crit_Dmg: 0
+    ChaceTarget: 0
+    Duration: 0
+    CoolTime: 0
+    Skill1Code: 0
+    Prefab: 0
+  m_SpiritSkillData:
+    Name_KR: 
+    Name_EN: 
+    SpritSkillIndex: 0
+    Target: 0
+    Power: 0
+    SkillRange: 0
+    SkillType: 0
+    BulletSpeed: 0
+    TargetNum: 0
+    LifeTime: 0
+    DoT: 0
+    Shapeform: 0
+    Cshape1: 0
+    Cshape2: 0
+    SkillAdded: 0
+    BuffAdded: 0
+    LunchPrefb: 0
+    FirePrefb: 0
+    DamPrefb: 0
+  m_SubMonsterData:
+    No: 0
+    Name_KR: 
+    Name_EN: 
+    SubMonsterIndex: 0
+    HP: 0
+    Defense: 0
+    Demege: 0
+    Speed: 0
+    Prefb: 0
+    Baseskill: 0
+    Epicskill: 0
+  Invincibility: 1
+--- !u!114 &7584002793022004327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662147311026700652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8625db6727e52d04c99db7559b85b1fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 6
+  attackRate: 1
+  hudDamageText: {fileID: 0}
+  hudPos: {fileID: 0}
+--- !u!114 &2183552316714601212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662147311026700652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe0a00bcc30dce40a7889e45505c9b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SubMonsterClass: {fileID: 0}
+  onHPEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  runSpeed: 0
+  Atk: 0
+  Def: 0
+  maxHP: 0
 --- !u!1 &866681542580221429
 GameObject:
   m_ObjectHideFlags: 0

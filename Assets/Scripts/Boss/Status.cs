@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class HPEvent : UnityEngine.Events.UnityEvent<int, int> { }
@@ -8,7 +9,7 @@ public class HPEvent : UnityEngine.Events.UnityEvent<int, int> { }
 public class Status : MonoBehaviour
 {
     private SubMonster_TableExcel m_CurrentSubMonsterStat;
-    private const int m_CurrentIndex = 141001;
+    public int m_CurrentIndex;
 
     public CharacterClass SubMonsterClass;
 
@@ -40,6 +41,12 @@ public class Status : MonoBehaviour
 
     void Awake()
     {
+        if (SceneManager.GetActiveScene().name == "MainScene")
+            m_CurrentIndex = 141001;
+        if (SceneManager.GetActiveScene().name == "Stage2")
+            m_CurrentIndex = 141002;
+
+
         SubMonsterClass = this.gameObject.GetComponent<CharacterClass>();
 
         foreach (var item in DataTableManager.Instance.GetDataTable<SubMonster_TableExcelLoader>().DataList)

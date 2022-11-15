@@ -241,7 +241,7 @@ MonoBehaviour:
     BuffAdded: 0
     SkillAnimation: 2
     SkillDelay: 1
-    DelayPrefb: 0
+    DelayPrefb: 971026
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971022
@@ -269,8 +269,8 @@ MonoBehaviour:
     SkillAdded: 231010
     BuffAdded: 0
     SkillAnimation: 0
-    SkillDelay: 0.2
-    DelayPrefb: 0
+    SkillDelay: 0.5
+    DelayPrefb: 971026
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971022
@@ -299,7 +299,7 @@ MonoBehaviour:
     BuffAdded: 0
     SkillAnimation: 0
     SkillDelay: 0.5
-    DelayPrefb: 0
+    DelayPrefb: 971026
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971022
@@ -389,7 +389,7 @@ MonoBehaviour:
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
-    FirePrefb: 971025
+    FirePrefb: 971001
     DamPrefb: 0
   - Name_KR: "\uCC98\uD615-1"
     Name_EN: Exicution-1
@@ -414,7 +414,7 @@ MonoBehaviour:
     SkillAdded: 231015
     BuffAdded: 0
     SkillAnimation: 0
-    SkillDelay: 0.1
+    SkillDelay: 0.2
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
@@ -472,7 +472,7 @@ MonoBehaviour:
     SkillAdded: 231017
     BuffAdded: 0
     SkillAnimation: 0
-    SkillDelay: 0.1
+    SkillDelay: 0.2
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
@@ -530,7 +530,7 @@ MonoBehaviour:
     SkillAdded: 231019
     BuffAdded: 0
     SkillAnimation: 0
-    SkillDelay: 0.1
+    SkillDelay: 0.2
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
@@ -588,7 +588,7 @@ MonoBehaviour:
     SkillAdded: 231021
     BuffAdded: 0
     SkillAnimation: 0
-    SkillDelay: 0.1
+    SkillDelay: 0.2
     DelayPrefb: 0
     LunchPrefb: 0
     SingleTile: 1
@@ -601,7 +601,7 @@ MonoBehaviour:
     Target: 2
     Power: 30
     CoolTime: 1
-    SkillRange: 4
+    SkillRange: 3
     SkillDistance: 10
     SkillType: 3
     UseStat: 0
