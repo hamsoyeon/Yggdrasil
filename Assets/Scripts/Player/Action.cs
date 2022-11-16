@@ -63,7 +63,6 @@ public class Action : MonoBehaviour
 
 		if (colls.Length == 0)
 		{
-			Debug.Log("범위에 적이 없습니다.");
 			DestroyObject(findStartObject);
 			return null;
 		}
@@ -129,13 +128,6 @@ public class Action : MonoBehaviour
 					{
 						//범위내의 플레이어를 찾아서 
 						colls = Physics.OverlapSphere(spirit.transform.position, range, 1 << 8);  //8번째 레이어 = Player
-						foreach (var rangeCollider in colls)
-						{
-							//범위내에서 적용시킬 버프 내용
-
-							//디버깅
-							Debug.Log($"{rangeCollider.name}의 입는 피해가 70% 감소합니다.");
-						}
 					}
 					break;
 

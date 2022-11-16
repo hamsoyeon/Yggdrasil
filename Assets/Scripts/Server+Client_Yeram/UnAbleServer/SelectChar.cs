@@ -40,7 +40,6 @@ public class SelectChar : MonoBehaviour
             if (i == target)
             {
                 select_Img[i].color = new Color(125 / 255f, 125 / 255f, 125 / 255f, 255 / 255f);
-                Debug.Log("change");
             }
             else
             {

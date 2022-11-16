@@ -35,7 +35,6 @@ public class Enemy : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = status.SubMonsterClass.m_SubMonsterData.Speed;
         target = GameObject.Find("Player").transform.GetChild(0).gameObject;
-        Debug.Log($"현재 타겟 : {target.transform.position}");
         hudDamageText = Resources.Load<GameObject>("DamageText");
         hudPos = this.gameObject.transform;
 
@@ -98,7 +97,6 @@ public class Enemy : MonoBehaviour
 
     private void CalculateDistacveToTargetAndSelectState()
     {
-        //Debug.Log($"거리 차이 : {distance}");
         if (target == null)
             return;
 
@@ -124,9 +122,7 @@ public class Enemy : MonoBehaviour
                     target.GetComponent<PlayerManager>().TakeDamage(status.SubMonsterClass.m_SubMonsterData.Demege);
                     lastAttackTime = Time.time;
                 }
-
             }
-
         }
         else
         {
@@ -163,7 +159,6 @@ public class Enemy : MonoBehaviour
     //쫄몹 데미지 받는 함수
     public void TakeDamage(int damage)
     {
-        Debug.Log("데미지 받는다.");
         isDie = status.DecreaseHP(damage);
         TakeDamagePrint(damage);
     }
@@ -171,7 +166,6 @@ public class Enemy : MonoBehaviour
     IEnumerator IsDie()
     {
         //죽었을때의 행동 개설
-        Debug.Log("죽었다.");
         anim.SetBool("IsDie", isDie);
         AnimationManager.GetInstance().PlayAnimation(anim, "Die");
         //AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
@@ -190,7 +184,6 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamagePrint(int damage)
     {
-
         GameObject hudText = Instantiate(hudDamageText);
 
         hudText.transform.position = hudPos.position + (Vector3.up * 20);

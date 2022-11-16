@@ -198,10 +198,7 @@ public class LobbyManager : Singleton_Ver2.Singleton<LobbyManager>
     }
     public void LobbyResult(Net.RecvPacket _recvpacket, Net.Protocol _protocol)
     {
-#if UNITY_EDITOR
-        Debug.Log("로비 입장");
-#endif
-        
+
     }
     public void CreateRoomResult(Net.RecvPacket _recvpacket, Net.Protocol _protocol)
     {

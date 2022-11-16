@@ -16,7 +16,7 @@ public class DamageCheck : MonoBehaviour
 
 	private float minDamage;
 	private float resultDamage;
-    private float power;
+    public float power;
 
 	//1.Player 2.Enemy
 	public int who; 
@@ -43,12 +43,6 @@ public class DamageCheck : MonoBehaviour
                         case 1:
                             if (cols[i].tag == "Boss" || cols[i].tag == "Mob")
                             {
-
-                                Debug.Log("적 이펙트 충돌");
-
-                                //BuffClass = cols[i].GetComponent<Buff>();
-                                //BuffClass.AddBuff(buffIndex);  //버프 추가.
-
                                 EnemyClass = cols[i].GetComponent<CharacterClass>();
                                 //PlayerClass = GameObject.Find("Player").GetComponent<CharacterClass>();
                                 PlayerClass = GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>();
@@ -61,7 +55,7 @@ public class DamageCheck : MonoBehaviour
                                     if (minDamage <= 0)
                                         minDamage = 1;
 
-                                    power = (int)GameObject.Find("Player").transform.GetChild(0).GetComponent<PlayerManager>().m_Spirit.m_SpiritClass.m_SpiritSkillData.Power;
+                                    //power = (int)GameObject.Find("Player").transform.GetChild(0).GetComponent<PlayerManager>().m_Spirit.m_SpiritClass.m_SpiritSkillData.Power;
 
                                     resultDamage = (minDamage * power) * EnemyClass.Invincibility;
 
@@ -82,7 +76,6 @@ public class DamageCheck : MonoBehaviour
                                 }
                                 if (cols[i].CompareTag("Mob"))
                                 {
-                                    Debug.Log("아 왜이리 빠른가요");
                                     minDamage = (int)PlayerClass.m_CharacterStat.Atk - EnemyClass.m_SubMonsterData.Defense;
 
                                     //최소 데미지 보정.
@@ -101,10 +94,6 @@ public class DamageCheck : MonoBehaviour
                         case 2:
                             if (cols[i].tag == "Player")
                             {
-                                Debug.Log("플레이어 이펙트 충돌");
-                                //BuffClass = cols[i].GetComponent<Buff>(); //맞은 대상의 Buff를 가지고 와서 지금 가지고있는 버프 목록을 리스트에 추가.
-                                //BuffClass.AddBuff(buffIndex);  //버프 추가.
-
                                 PlayerClass = cols[i].GetComponent<CharacterClass>();
                                 EnemyClass = GameObject.FindWithTag("Boss").GetComponent<CharacterClass>();
 
@@ -122,7 +111,6 @@ public class DamageCheck : MonoBehaviour
 
                                 //해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
                                 cols[i].GetComponent<PlayerManager>().Damage((int)resultDamage);
-                                //cols[i].GetComponent<PlayerManager>().PlayerDamageTxt
 
                                 Transform[] allChildren = cols[i].GetComponentsInChildren<Transform>();
                                 foreach (Transform child in allChildren)
@@ -144,7 +132,6 @@ public class DamageCheck : MonoBehaviour
             }
             else
             {
-                Debug.Log("범위내 오브젝트 없음.");
             }
         }
 	}
@@ -168,7 +155,6 @@ public class DamageCheck : MonoBehaviour
                             case 1:
                                 if (cols[i].tag == "Boss" || cols[i].tag == "Mob")
                                 {
-                                    Debug.Log("적 이펙트 충돌");
 
                                     if (cols[i].tag == "Boss")
                                     {
@@ -197,7 +183,6 @@ public class DamageCheck : MonoBehaviour
                                     }
                                     if (cols[i].CompareTag("Mob"))
                                     {
-                                        Debug.Log("아 왜이리 빠른가요");
                                         minDamage = (int)PlayerClass.m_CharacterStat.Atk - EnemyClass.m_SubMonsterData.Defense;
 
                                         //최소 데미지 보정.
@@ -215,8 +200,6 @@ public class DamageCheck : MonoBehaviour
                             case 2:
                                 if (cols[i].tag == "Player")
                                 {
-                                    Debug.Log("플레이어 이펙트 충돌");
-
                                     minDamage = EnemyClass.m_BossStatData.Atk - PlayerClass.m_CharacterStat.Def;
 
                                     //최소 데미지 보정.
@@ -245,7 +228,6 @@ public class DamageCheck : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("범위내 오브젝트 없음.");
                 }
             }
         }

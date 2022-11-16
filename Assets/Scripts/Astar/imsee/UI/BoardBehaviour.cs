@@ -77,15 +77,6 @@ public class BoardBehaviour : MonoBehaviour
                 MainManager.Instance.GetStageManager().m_MapInfo[z, x].BossEffect = false;
                 MainManager.Instance.GetStageManager().m_MapInfo[z, x].IsUnWalkable = true;
 
-
-                //if (MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData.BossSummon != 0)
-                //{
-                //	BossObj.transform.position = mapGridPositions[z, x] + new Vector3(0, 2.3f, 0);
-                //	MainManager.Instance.GetStageManager().m_BossRow = z;
-                //	MainManager.Instance.GetStageManager().m_BossColumn = x;
-                //}
-
-                //디버그용
                 if (item.BossSummon != 0)
                 {
                     MainManager.Instance.GetStageManager().m_BossRow = z;
@@ -104,25 +95,8 @@ public class BoardBehaviour : MonoBehaviour
         {
             parent = GameObject.Find("960002").transform;
 
-            //각 맵 정보에 데이터 넣어주기.
-
-            // var item in DataTableManager.Instance.GetDataTable<Map_TableExcelLoader>().DataList
-
-            // 다버깅용
-            //var temp = DataTableManager.Instance.GetMapDataTable<Map_Table2ExcelLoader>();
-            //Debug.Log("스테이지 2 리스트 Count-> " + temp.DataList.Count);
-
-            // 원래라면 Dictionary에 추가하고 데이터 구분이 _(언더바)를 기준으로 데이터를 나누었지만 Map 데이터가
-            // Map_ExcelLoader 와 Map_Excel2Loader 이렇게 되어있이서 _(언더바) 기준으로 Map이라는 데이터가 두개 있기 때문에 하나만 들어간것 (하나만 들어간 이유는 추가할 때 SingleOrDefault 값으로 추가하기 떄문에)
-            // 따라서 Map_ExcelLoader와 Map2_ExcelLoader로 이름을 바꾸면 이름이 다르기 때문에 데이터 구분이 가능해진다. -> 이건 기획자분들이 나중에 엑셀파일 이름 수정해서 재업로드 요청하고
-            // 지금은 임시로 GetMapDataTable -> 이거는 현재 들어있는 ScriptableObject의 List를 전부 순회해서 <T>와 맞는 타입의 Scriptable를 리턴해준다.(임시로 사용중)
-            
             foreach (var item in DataTableManager.Instance.GetMapDataTable<Map_Table2ExcelLoader>().DataList)
             {
-
-                //Debug.Log("아이템 이름:" + item.TilePrefeb.ToString());
-                //Debug.Log("TileAsset 이름:" + TileAsset.m_prefab[0].TileObj.name);
-
                 // 962002   965002  964002   961002   963002   0번 까지 총 6개 사용
                 if (item.TilePrefeb.ToString() == TileAsset.m_prefab[0].TileObj.name)
                 {
@@ -155,14 +129,6 @@ public class BoardBehaviour : MonoBehaviour
 
                 MainManager.Instance.GetStageManager().m_MapInfo[z, x].BossEffect = false;
                 MainManager.Instance.GetStageManager().m_MapInfo[z, x].IsUnWalkable = true;
-
-
-                //if (MainManager.Instance.GetStageManager().m_MapInfo[z, x].MapData.BossSummon != 0)
-                //{
-                //	BossObj.transform.position = mapGridPositions[z, x] + new Vector3(0, 2.3f, 0);
-                //	MainManager.Instance.GetStageManager().m_BossRow = z;
-                //	MainManager.Instance.GetStageManager().m_BossColumn = x;
-                //}
 
                 //디버그용
                 if (item.BossSummon != 0)
@@ -217,7 +183,6 @@ public class BoardBehaviour : MonoBehaviour
         visualPiece.transform.position = GetWorldCoordinates(piece.X, piece.Y, .7f);
 
         MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.bossPos = visualPiece.transform.position;
-        Debug.Log($"보스 포지션 { MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.bossPos}");
 
         visualPiece.transform.parent = BossGameObject.transform;
 
@@ -245,8 +210,6 @@ public class BoardBehaviour : MonoBehaviour
 
         MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos = visualPiece.transform.position;
 
-        Debug.Log($"플레이어 포지션 { MainManager.Instance.GetStageManager().m_GetWorldPosByObjects.PlayerPos}");
-        
         var pb = (PieceBehaviour)visualPiece.GetComponent("PieceBehaviour");
 
         pb.Piece = piece;
@@ -274,7 +237,6 @@ public class BoardBehaviour : MonoBehaviour
         {
             for (var y = 0; y < Width; y++)
             {
-                //var tile = (GameObject)Instantiate(Tile);
                 var tile = Instantiate(TileAsset.m_prefab[index[cnt]].TileObj);
 
                 // ColiderChk가 없는거 예외처리.
@@ -289,7 +251,6 @@ public class BoardBehaviour : MonoBehaviour
 
                 if (TileAsset.m_prefab[index[cnt]].TileObj.name == TileAsset.m_prefab[4].TileObj.name)
                 {
-                    Debug.Log($"이동 불가능 타일 x={x}/y={y}");
                     _game.SetBlockOutTiles(x, y);
                 }
 
@@ -344,6 +305,5 @@ public class BoardBehaviour : MonoBehaviour
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(3.0f);
-        
     }
 }

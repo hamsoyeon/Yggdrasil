@@ -184,7 +184,6 @@ public class LobbyGUIManager : Singleton_Ver2.Singleton<LobbyGUIManager>
 
     public void ClearChat()
     {
-        Debug.Log("DeleteChat");
         int childCount = m_Content.childCount;
         for (int i = 0; i < childCount; ++i)
         {

@@ -45,33 +45,14 @@ public class PrefabLoader : MonoBehaviour
 
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         foreach(var item in PrefabList)
         {
             PrefabDic.Add(int.Parse(item.name), item);
         }
-
-        
-
-        //Debug.Log(PrefabDic[911001].name);
-
-
-        //foreach (var item in PrefabDic)
-        //{
-        //    Debug.Log($"[{item.Key}:{item.Value}]");
-        //}
-
-
-
-
-
-
-
     }
 
-    // Update is called once per frame
     void Update()
     {
         

@@ -60,8 +60,6 @@ namespace test_client_unity
 
         public void Click_SendChatMsg()
         {
-            Debug.Log(this.transform.parent.name);
-
             uint protocol = 0;
 
             if (this.transform.parent.name == "stage window")

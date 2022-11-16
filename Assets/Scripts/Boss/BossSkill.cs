@@ -76,8 +76,6 @@ public class BossSkill : MonoBehaviour
 
     public void BossSkillAction(int skillIndex)
     {
-        Debug.Log("스킬진입");
-
         foreach (var item in DataTableManager.Instance.GetDataTable<BossSkill_TableExcelLoader>().DataList)
         {
             if (item.BossSkillIndex == skillIndex)
@@ -170,7 +168,6 @@ public class BossSkill : MonoBehaviour
         m_StageMgr.m_MapInfo[Row, column].BossEffect = true; //현재 타일의 보스 이펙트를 true로 설정
         PlayerPosition = GameObject.Find("Player").transform;
 
-        Debug.Log("보스 스킬 범위 ");
         yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
 
         m_StageMgr.m_MapInfo[Row, column].MapObject.transform.Find("indicator hexa").GetComponent<MeshRenderer>().material.color = Color.white;
@@ -245,7 +242,6 @@ public class BossSkill : MonoBehaviour
             Column = m_BossColumn;
         }
 
-        Debug.Log("와이드 스킬 실행");
         float range = m_CurrentBossSkill.SkillRange - 1.0f;
         float xRange = m_CurrentBossSkill.SkillRange + range;
 
@@ -361,7 +357,6 @@ public class BossSkill : MonoBehaviour
 
         //경고시간동안 딜레이 프리팹 생성한 것을 지우고 타일 빨간색을 다시 원래색깔로 돌린후 그 범위에 이펙트 출현하고 데미지 로직 처리.
         DelayAndLunchPrefabSet();
-        Debug.Log("보스 스킬 범위 ");
         yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
         Destroy(TempLunch);
 
@@ -372,8 +367,6 @@ public class BossSkill : MonoBehaviour
                 checkSettingEffect(i, j);
             }
         }
-
-        Debug.Log("이펙트 소환");
 
         yield return new WaitForSeconds(m_CurrentBossSkill.LifeTime);  //생존시간이 지나면 이펙트 지우기
 
@@ -395,8 +388,6 @@ public class BossSkill : MonoBehaviour
             }
         }
 
-        Debug.Log("와이드 스킬 종료");
-        //DebuffTile = false;
         StartCoroutine(AllTileOriginColor());
 
         //연계스킬있는지 확인후 다시 스킬실행.
@@ -418,10 +409,6 @@ public class BossSkill : MonoBehaviour
     IEnumerator SkillTargetAction()
     {
         //타켓에서 연계스킬이 있는경우 광역,확산,도넛의 시작범위가 보스가 아니라 타겟된 대상을 기준으로 적용됨.
-        Debug.Log("타겟 스킬 실행");
-
-        //DebuffTile = true;
-
         float range = m_CurrentBossSkill.SkillRange - 1.0f;
         float xRange = m_CurrentBossSkill.SkillRange + range;
 
@@ -532,7 +519,6 @@ public class BossSkill : MonoBehaviour
         }
 
         DelayAndLunchPrefabSet();
-        Debug.Log("보스 스킬 범위 ");
         yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
         Destroy(TempLunch);
 
@@ -543,8 +529,6 @@ public class BossSkill : MonoBehaviour
                 checkSettingEffect(i, j);
             }
         }
-
-        Debug.Log("이펙트 소환");
 
         yield return new WaitForSeconds(m_CurrentBossSkill.LifeTime);  //생존시간이 지나면 이펙트 지우기
 
@@ -567,8 +551,6 @@ public class BossSkill : MonoBehaviour
         }
 
         this.gameObject.GetComponent<BossFSM>().behavior = false;
-        Debug.Log("타겟 스킬 종료");
-        //DebuffTile = false;
         StartCoroutine(AllTileOriginColor());
 
         //연계스킬 처리
@@ -612,7 +594,6 @@ public class BossSkill : MonoBehaviour
             Row = m_BossRow;
             Column = m_BossColumn;
         }
-        Debug.Log("확산 스킬 시작");
 
         float range = m_CurrentBossSkill.SkillRange - 1.0f;
 
@@ -874,7 +855,6 @@ public class BossSkill : MonoBehaviour
         }
        
         DelayAndLunchPrefabSet();
-        Debug.Log("보스 스킬 범위 ");
         yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
         Destroy(TempLunch);
 
@@ -885,8 +865,6 @@ public class BossSkill : MonoBehaviour
                 checkSettingEffect(i, j,tempAngle);
             }
         }
-
-        Debug.Log("이펙트 소환");
         //이쪽 에서 데미지 처리.
         yield return new WaitForSeconds(m_CurrentBossSkill.LifeTime);  //생존시간이 지나면 이펙트 지우기
 
@@ -908,9 +886,6 @@ public class BossSkill : MonoBehaviour
             }
         }
 
-        Debug.Log("확산 스킬 종료");
-
-        //DebuffTile = false;
         StartCoroutine(AllTileOriginColor());
         //AnimationManager.GetInstance().PlayAnimation(anim, "Idle01");
 
@@ -1015,8 +990,6 @@ public class BossSkill : MonoBehaviour
             Row = m_BossRow;
             Column = m_BossColumn;
         }
-
-        Debug.Log("방출(도넛) 스킬 시작");
         float range = m_CurrentBossSkill.SkillRange - 1.0f;
         float xRange = m_CurrentBossSkill.SkillRange + range;
 
@@ -1221,7 +1194,6 @@ public class BossSkill : MonoBehaviour
         }
 
         DelayAndLunchPrefabSet();
-        Debug.Log("보스 스킬 범위 ");
         yield return new WaitForSeconds(m_CurrentBossSkill.SkillDelay);
         Destroy(TempLunch);
 
@@ -1232,8 +1204,6 @@ public class BossSkill : MonoBehaviour
                 checkSettingEffect(i, j);
             }
         }
-
-        Debug.Log("이펙트 소환");
         //이쪽 에서 데미지 처리.
         yield return new WaitForSeconds(m_CurrentBossSkill.LifeTime);  //생존시간이 지나면 이펙트 지우기
 
@@ -1254,8 +1224,6 @@ public class BossSkill : MonoBehaviour
                 }
             }
         }
-
-        Debug.Log("방출(도넛) 스킬 종료");
         StartCoroutine(AllTileOriginColor());
 
         //연계스킬있는지 확인후 다시 스킬실행.
@@ -1318,7 +1286,6 @@ public class BossSkill : MonoBehaviour
             if(child.name =="PosAtk")
             {
                 PosAtk = child;
-                Debug.Log("보스스킬스크립트:" + PosAtk.name);
             }
         }
         m_BossFSM = GetComponent<BossFSM>();

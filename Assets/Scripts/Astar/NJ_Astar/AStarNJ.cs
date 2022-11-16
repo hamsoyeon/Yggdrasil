@@ -27,7 +27,6 @@ public static class AStarNJ
 
             while (current != null)
             {
-                //Debug.Log($"Current:{current.x}/{current.y}");
                 // 주변 블럭 가져오기
                 var aroundBlocks = board.GetAroundBlocks(current);
 

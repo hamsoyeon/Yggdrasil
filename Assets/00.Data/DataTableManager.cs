@@ -47,10 +47,6 @@ public class DataTableManager : Singleton_Ver1.Singleton<DataTableManager>
     {
         for(int i=0; i< m_DataTableList.Count; ++i)
         {
-            // 디버깅용...
-            //Debug.Log("type은 =="+typeof(T).ToString());
-            //Debug.Log("Listsms ==" + m_DataTableList[i].GetType().ToString());
-
             // 리스트 전부 순회하면서 타입 맞는거 나올때까지 계속 굴림 O(N) ->  안좋다 어서 Map2로 이름을 바꾸자...
             if (typeof(T).ToString() == m_DataTableList[i].GetType().ToString())
                 return m_DataTableList[i] as T;

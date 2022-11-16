@@ -69,7 +69,7 @@ MonoBehaviour:
     SkillDelay: 2
     DelayPrefb: 970020
     LunchPrefb: 0
-    SingleTile: 1
+    SingleTile: 0
     FirePrefb: 971015
     DamPrefb: 972001
   - Name_KR: "\uB300\uC9C0\uC9C4"
@@ -212,7 +212,7 @@ MonoBehaviour:
     BuffAdded: 0
     SkillAnimation: 1
     SkillDelay: 2
-    DelayPrefb: 0
+    DelayPrefb: 971027
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971020
@@ -241,7 +241,7 @@ MonoBehaviour:
     BuffAdded: 0
     SkillAnimation: 2
     SkillDelay: 1
-    DelayPrefb: 0
+    DelayPrefb: 971026
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971022
@@ -270,7 +270,7 @@ MonoBehaviour:
     BuffAdded: 0
     SkillAnimation: 0
     SkillDelay: 0.5
-    DelayPrefb: 0
+    DelayPrefb: 971026
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971022
@@ -295,11 +295,11 @@ MonoBehaviour:
     "\uC815\uB839": 0
     LifeTime: 0.5
     DoT: 1.1
-    SkillAdded: 0
+    SkillAdded: 231011
     BuffAdded: 0
     SkillAnimation: 0
     SkillDelay: 0.5
-    DelayPrefb: 0
+    DelayPrefb: 971026
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971022
@@ -357,7 +357,7 @@ MonoBehaviour:
     BuffAdded: 0
     SkillAnimation: 4
     SkillDelay: 2
-    DelayPrefb: 0
+    DelayPrefb: 971028
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971021
@@ -386,7 +386,7 @@ MonoBehaviour:
     BuffAdded: 0
     SkillAnimation: 1
     SkillDelay: 2
-    DelayPrefb: 0
+    DelayPrefb: 971028
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971025
@@ -622,7 +622,7 @@ MonoBehaviour:
     LunchPrefb: 0
     SingleTile: 1
     FirePrefb: 971024
-    DamPrefb: 0
+    DamPrefb: 972007
   - Name_KR: "\uB9AC\uBE59 \uB370\uB4DC"
     Name_EN: LivingDead
     BossSkillIndex: 231022

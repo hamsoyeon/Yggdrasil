@@ -13,7 +13,6 @@ namespace test_client_unity
             if (this.transform.Find("login panel").gameObject.active == true)
                 return;
 
-            Debug.Log("screen click");
             WindowMgr.Instance.m_state_dic.TryGetValue(WindowMgr.WINDOW_TYPE.INTRO, out GameObject intro);
             intro.transform.Find("login panel").gameObject.SetActive(true);
         }

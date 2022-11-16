@@ -43,8 +43,8 @@ MonoBehaviour:
     MaxStamina: 60
     Speed: 16
     MoveStUsed: 19
-    Skill1: 231008
+    Skill1: 231007
     Skill2: 231008
-    Skill3: 231008
-    Skill4: 231008
+    Skill3: 231012
+    Skill4: 231013
     Prefeb: 931002

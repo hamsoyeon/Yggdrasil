@@ -94,6 +94,8 @@ public class SpiritSkill : MonoBehaviour
             check = Fire_Prefabs[effectNumber].GetComponent<DamageCheck>();
         }
 
+        check.power = skillInfo.Power;
+
         // 데미지 프리팹 셋팅 및 데미지 체크 가능하게
         check.dmg_check = true;
         check.m_DamageEffect = Damage_Prefabs[effectNumber];
@@ -180,7 +182,6 @@ public class SpiritSkill : MonoBehaviour
     IEnumerator Spirit_Attack(SpiritSkill_TableExcel skill, GameObject spirit, int effect_num)
     {
         SpiritSkillSoundPlay(skill);
-        Debug.Log("정령 어택스킬 실행");
         // 정령이 소환된 후.
         GameObject findEnemy = null;
         // 근처에 가장 가까운 적을 찾는다.
@@ -217,7 +218,6 @@ public class SpiritSkill : MonoBehaviour
     IEnumerator Spirit_Target(SpiritSkill_TableExcel skill, GameObject spirit, int effect_num)
     {
         SpiritSkillSoundPlay(skill);
-        Debug.Log("정령 타겟스킬 실행");
         // 정령이 소환된 후.
 
         int number = (int)skill.TargetNum;
@@ -304,7 +304,6 @@ public class SpiritSkill : MonoBehaviour
 
         float spirit_time = 0f;
 
-        Debug.Log("타일형 스킬 실행");
         float range = skill.SkillRange - 1.0f;
         float xRange = skill.SkillRange + range;
 
@@ -403,8 +402,6 @@ public class SpiritSkill : MonoBehaviour
             }
         }
 
-        Debug.Log("이펙트 소환");
-
         while (true)
         {
             //지속시간 체크
@@ -456,7 +453,6 @@ public class SpiritSkill : MonoBehaviour
         int number = n;
         float spirit_time = 0f;
 
-        Debug.Log("스피드 필드 실행");
         float range = skill.SkillRange - 1.0f;
         float xRange = skill.SkillRange + range;
 
@@ -641,7 +637,6 @@ public class SpiritSkill : MonoBehaviour
 
         float spirit_time = 0f;
 
-        Debug.Log("아이스 필드 실행");
         float range = skill.SkillRange - 1.0f;
         float xRange = skill.SkillRange + range;
 
@@ -749,10 +744,6 @@ public class SpiritSkill : MonoBehaviour
             }
         }
 
-        Debug.Log("이펙트 소환");
-
-
-
         while(true)
         {
             //지속시간 체크
@@ -792,7 +783,6 @@ public class SpiritSkill : MonoBehaviour
 	IEnumerator Heal(SpiritSkill_TableExcel skill, GameObject spirit, int n)
 	{
         SpiritSkillSoundPlay(skill);
-        Debug.Log("힐 실행");
         GameObject tempEffect = Instantiate(Fire_Prefabs[(int)SkillNumber.HEAL]);
         tempEffect.GetComponent<DamageCheck>().Dot = skill.DoT;
         tempEffect.GetComponent<DamageCheck>().who = 1;
@@ -872,12 +862,10 @@ public class SpiritSkill : MonoBehaviour
                             }
                         }
                         Instantiate(Damage_Prefabs[effectNumber], PosBody);
-
-                        Debug.Log("플레이어 회복중");
                     }
                     else
                     {
-                        Debug.Log("플레이어의 HP가 MAX 입니다.");
+
                     }
 
                 }
@@ -892,8 +880,10 @@ public class SpiritSkill : MonoBehaviour
 	IEnumerator Sanctity(SpiritSkill_TableExcel skill, GameObject spirit, int n)
 	{
         SpiritSkillSoundPlay(skill);
-        Debug.Log("신성지대 실행");
 		GameObject tempEffect = Instantiate(Fire_Prefabs[(int)SkillNumber.SANCTITY]);
+
+        tempEffect.GetComponent<DamageCheck>().dmg_check = false;
+
         tempEffect.transform.position = spirit.transform.position;
 		Collider[] colls = null;
 
@@ -918,15 +908,14 @@ public class SpiritSkill : MonoBehaviour
 
             colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 9);  //9번째 레이어 = Enemy  //콜라이더가 없어서 OverlapSphere가 안됨. 잡몹한테 콜라이더 부착.
             
-           
-
             if (colls != null)
 			{
+               
 				foreach (var rangeCollider in colls)
 				{
-
-					//보스가 아니라면
-					if (rangeCollider.gameObject.name != "931001(Clone)")  //태그나 레이어로 바꿔야함   => 931001(Clone)는 보스
+                    
+                    //보스가 아니라면
+                    if (!rangeCollider.CompareTag("Boss"))  //태그나 레이어로 바꿔야함   => 931001(Clone)는 보스
 					{
 
                         Transform PosBody = null;
@@ -947,10 +936,7 @@ public class SpiritSkill : MonoBehaviour
                         heading.y = 0f;
                         heading *= skill.SkillRange;
 
-
-
                         rangeCollider.gameObject.transform.position = Vector3.MoveTowards(rangeCollider.gameObject.transform.position, heading, 15f);
-						Debug.Log($"{rangeCollider.ToString()}을 범위 내에서 밀어냅니다.");
 					}
 				}
 			}
@@ -967,7 +953,6 @@ public class SpiritSkill : MonoBehaviour
 	IEnumerator Invincibility(SpiritSkill_TableExcel skill, GameObject spirit, int n)
 	{
         SpiritSkillSoundPlay(skill);
-        Debug.Log("무적 실행");
         GameObject tempEffect = Instantiate(Fire_Prefabs[(int)SkillNumber.INVINCIBILITY]);
 		tempEffect.transform.position = spirit.transform.position;
 
@@ -1005,13 +990,10 @@ public class SpiritSkill : MonoBehaviour
                 yield break;
             }
 
-        
             colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 14);
-            Debug.Log("무적 인원 체크 =" + colls.Length);
 
             if (colls.Length > 0)
             {
-                //Debug.Log("무적 인원 체크 =" + colls.Length);
 
                 foreach(var p in colls)
                 {
@@ -1031,7 +1013,6 @@ public class SpiritSkill : MonoBehaviour
                         }
                         Instantiate(Damage_Prefabs[effectNumber], PosBody);
 
-                        Debug.Log("접근안료 플레이어 무적실행");
                         player_characterclass = p.GetComponent<CharacterClass>();
                         player_characterclass.Invincibility = 0.0f;
                      
@@ -1041,7 +1022,7 @@ public class SpiritSkill : MonoBehaviour
             }
             else
             {
-                Debug.Log("주위의 플레이어가 없습니다");
+
             }
 
             yield return null;
@@ -1052,7 +1033,6 @@ public class SpiritSkill : MonoBehaviour
 	IEnumerator PoisonCloud(SpiritSkill_TableExcel skill,GameObject spirit, int n)
 	{
         SpiritSkillSoundPlay(skill);
-        Debug.Log("독구름 실행");
         GameObject nearEnemy = FindNearbyEnemy(spirit.transform.position, skill.SkillRange);
 		GameObject tempEffect = null;
 
@@ -1123,7 +1103,6 @@ public class SpiritSkill : MonoBehaviour
 		Collider[] colls = Physics.OverlapSphere(findStartObject.transform.position, distance, 1 << 8);  //8번째 레이어 = Player
 		if (colls.Length == 0)
 		{
-			Debug.Log("범위에 플레이어가 없습니다.");
 			return null;
 		}
 		else
@@ -1166,7 +1145,6 @@ public class SpiritSkill : MonoBehaviour
 
 		if (colls.Length == 0)
 		{
-			Debug.Log("범위에 적이 없습니다.");
 			return null;
 		}
 		else
@@ -1219,7 +1197,6 @@ public class SpiritSkill : MonoBehaviour
         // 범위에 적이없을경우
         if (colls.Length <= 0)
         {
-            Debug.Log("범위에 적이 없습니다.");
             return null;
         }
         else  // 적이 있다면 그 적들 중에
@@ -1243,20 +1220,17 @@ public class SpiritSkill : MonoBehaviour
                     
                     findEnemyList.Add(colls[i].gameObject);
                     EnemyNearList.Add(Dist);
-                    Debug.Log("i < targetNum" + i + "번째 Object추가하기");
                 }
                 else // i >= targetNum    // 범위내의 찾은 적이 설정한 목표보다 초과했을 때 
                 {
                    
                     if(findEnemyList.Count < targetNum) // 보스때문에 i가 증가할 수 도 있음...
                     {
-                        Debug.Log("i >= targetNum"+i + "번째 Object추가하기");
                         findEnemyList.Add(colls[i].gameObject);
                         EnemyNearList.Add(Dist);
                     }
                     else // 그게 아니라면
                     {
-                        Debug.Log(i + "번째 Object추가하기 및 요소 삭제하기.");
                         for (int j= findEnemyList.Count -1; j>0; j--)   // 현재 저장된 리스트 순회.(역for문으로 해야 오류가 안남) 정방향으로 하면 인덱스가 삭제될시 당겨지기 때문에.
                         {
                             // 그 거리가 작다면 거리를 저장하고 해당 오브젝트를 저장
@@ -1284,19 +1258,15 @@ public class SpiritSkill : MonoBehaviour
 
                 if(findEnemyList.Count < targetNum)
                 {
-                    //Debug.Log("TargetNum보다 작음");
                     findEnemyList.Add(findBoss);
                 }
                 else
                 {
-                    //Debug.Log("TargetNum보다 같거나 크다");
                     int count = findEnemyList.Count-1;
                     findEnemyList.RemoveAt(count);
                     findEnemyList.Insert(count,findBoss);
                 }
             }
-
-            Debug.Log("적을 찾은 수" + findEnemyList.Count);
             return findEnemyList;
         }
     }

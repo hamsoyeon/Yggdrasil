@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LockOn : MonoBehaviour
 {
-
     public bool m_lockOn=false;
     public GameObject target;
     public GameObject m_DamPrefab;
@@ -13,48 +12,32 @@ public class LockOn : MonoBehaviour
     private float m_dist;
     private Vector3 m_targetPos;
 
-    // Start is called before the first frame update
     void Start()
     {
         if(m_lockOn)
         {
             this.transform.LookAt(target.transform.position);      // 목표의 방향 설정.
             m_targetPos = target.transform.position;
-
         }
-
     }
 
-    // Update is called once per frame
     void Update()
     {
 
         if (m_lockOn)
         {
-            //ballrigid.velocity = transform.forward * ballVelocity;
-            //var ballTargetRotation = Quaternion.LookRotation(target.position + new Vector3(0, 0.8f) - transform.position);
-            //ballrigid.MoveRotation(Quaternion.RotateTowards(transform.rotation, ballTargetRotation, turn));
-
             m_dist = Vector3.Distance(transform.position, target.transform.position);
-
-            //Debug.Log("Dist:" + m_dist);
-
             if (target == null )
             {
                 Destroy(this.gameObject);
             }
             else if(m_dist < 1f)
             {
-
-                //Debug.Log("위치도착 데미지 처리 및 오브젝트 제거");
-
                 if (target.tag == "Boss")
                 {
 
                     CharacterClass EnemyClass = target.GetComponent<CharacterClass>();
                     CharacterClass PlayerClass = GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>();
-
-
                     float minDamage = PlayerClass.m_CharacterStat.Atk - EnemyClass.m_BossStatData.Def;
 
                     //최소 데미지 보정.
@@ -108,11 +91,8 @@ public class LockOn : MonoBehaviour
                             PosBody = child;
                         }
                     }
-
                     Instantiate(m_DamPrefab, PosBody);
-
                 }
-
 
                 Destroy(this.gameObject);
             }
@@ -120,13 +100,6 @@ public class LockOn : MonoBehaviour
             {
                 this.transform.position = Vector3.MoveTowards(transform.position, target.transform.position, moveSpeed);
             }
-
-           
-
-           
-
         }
-        
-
     }
 }

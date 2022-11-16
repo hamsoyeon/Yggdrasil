@@ -42,10 +42,8 @@ public class Buff : MonoBehaviour
         }
         else if (isWho == 1) //보스면
         {
-            Debug.Log("tartget = " + target.name);
             return target;  //처음에 보스로 할당했으니까 그대로 반환.
         }
-        Debug.Log("tartget = " + target.name);   //대상 오브젝트 이름 출력
         return target;
     }
 
@@ -56,11 +54,8 @@ public class Buff : MonoBehaviour
             case 1://공격력
 
                 break;
-
-
         }
     }
-
 
     //target 0이면 플레이어 1이면 보스
     public void Stun(int target)
@@ -72,13 +67,6 @@ public class Buff : MonoBehaviour
 
         anim = isPlayerOrMonster(target).GetComponentInChildren<Animator>();//플레이어나 보스 오브젝트의 애니메이터 받아옴
 
-        if (anim == null)//애니메이터 할당되었는지 확인
-        {
-            Debug.Log("anim 비어있음");
-        }
-        else
-            Debug.Log(anim.name);
-
         if (target == 1) //boss면
         {
             originSpeed = isPlayerOrMonster(target).GetComponent<BossFSM>().bossSpeed;  //기존 이속 저장
@@ -86,27 +74,18 @@ public class Buff : MonoBehaviour
             //스턴 이펙트 생성
             stunEffectTemp = Instantiate(stunEffect);
             stunEffectTemp.transform.position = (isPlayerOrMonster(target).transform.position) + effectOffset;  //이펙트 위치 셋
-
-
             //공격력 0으로 만들기
-
-
         }
 
         //애니 도저히 안 되면 그냥 이펙트만 넣기
-
-
         anim.SetBool("isStunned", true);//스턴 애니 재생
 
         StartCoroutine(Normalization(durationTime, anim, 1, originSpeed));
-
     }
-
 
     IEnumerator Normalization(float duration, Animator _anim, int target, float originSpeed)   //지연시간, 애니메이터, 타겟(1이면보스)
     {
         yield return new WaitForSeconds(duration);
-
 
         //지연후 값 정상화
         _anim.SetBool("isStunned", false);
@@ -122,29 +101,9 @@ public class Buff : MonoBehaviour
         {
             //현재 버프 리스트에 있는 버프인지 확인하고 없는 버프이면 추가 있는 버프면 업데이트.
             BuffList.Add(m_CurrentBuff);
-
         }
-
-
     }
 
-    void AddDeBuff()
-    {
-
-    }
-
-    void UpdateBuff()
-    {
-
-    }
-
-    void UpdateDeBuff()
-    {
-
-    }
-
-
-    // Start is called before the first frame update
     void Start()
     {
         BuffList = new List<BuffTableExcel>();
@@ -152,13 +111,11 @@ public class Buff : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         //테스트용
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("스페이스바 눌림");
             Stun(1);
         }
     }

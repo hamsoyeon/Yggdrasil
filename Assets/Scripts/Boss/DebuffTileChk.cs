@@ -38,45 +38,18 @@ public class DebuffTileChk : MonoBehaviour
                 {
                     for (int i = 0; i < cols.Length; i++)
                     {
-                        // 타일에 들어온 플레이어와 에너미 모두에게 버프/디버프를 줄떄.
-                        //if (cols[i].tag == "Boss")
-                        //{
-                        //    EnemyClass = cols[i].GetComponent<CharacterClass>();
-                        //    if (cols[i].tag == "Boss" && b_debuffcount == 0)
-                        //    {
-                        //        Debug.Log("보스 데미지 증가");
-                        //        b_debuffcount++;
-                        //        EnemyClass.m_BossStatData.Atk += 10;
-                        //    }
-                        //}
-                        //else if (cols[i].tag == "Player")
-                        //{
-                        //    PlayerClass = GameObject.Find("Player").transform.GetChild(0).gameObject.GetComponent<CharacterClass>();
-
-                        //    if (cols[i].tag == "Player" && p_debuffcount == 0)
-                        //    {
-                        //        Debug.Log("플레이어 데미지 감소");
-                        //        p_debuffcount++;
-                        //        PlayerClass.m_CharacterStat.Atk -= 10;
-                        //    }
-                        //}
-
                         //선택적으로 버프와 디버프를 줄때
                         switch (who)
                         {
                             case 1:
                                 if (cols[i].tag == "Boss")
                                 {
-
-
                                     EnemyClass = cols[i].GetComponent<CharacterClass>();
                                     if (cols[i].tag == "Boss" && b_debuffcount == 0)
                                     {
-                                        Debug.Log("보스 데미지 증가");
                                         b_debuffcount++;
                                         EnemyClass.m_BossStatData.Atk += 10;
                                     }
-
                                 }
                                 break;
                             case 2:
@@ -86,7 +59,6 @@ public class DebuffTileChk : MonoBehaviour
 
                                     if (cols[i].tag == "Player" && p_debuffcount == 0)
                                     {
-                                        Debug.Log("플레이어 데미지 감소");
                                         p_debuffcount++;
                                         PlayerClass.m_CharacterStat.Atk -= 10;
                                     }
@@ -96,12 +68,9 @@ public class DebuffTileChk : MonoBehaviour
                     }
                 }
             }
-            
         }
 
         if (time >= lifeTime)
             Destroy(this.gameObject);
-
-
     }
 }

@@ -13,31 +13,21 @@ public class ColiderChk : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       
         if (other.gameObject.CompareTag("Player"))
         {
-
-            Debug.Log($"Player (row:{m_row} / coulmn:{m_coulmn})");
-               
             MainManager.Instance.GetStageManager().SetPlayerRowAndCoulmn(m_row, m_coulmn);
-
-
             MainManager.Instance.GetStageManager().GetBossAndPlayerRowBuyColumn();
 
             coliderchk = true;
-            //mat.color = new Color(1, 0, 0);
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-
         if (other.gameObject.CompareTag("Player"))
         {
             MainManager.Instance.GetStageManager().SetPlayerRowAndCoulmn(m_row, m_coulmn);
-
         }
-       
     }
 
     private void OnTriggerExit(Collider other)
@@ -45,20 +35,11 @@ public class ColiderChk : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             coliderchk = false;
-            
         }
     }
-
-
 
     void Start()
     {
         mesh = GetComponent<MeshRenderer>();
-        //mat = mesh.material;
-    }
-
-    void Update()
-    {
-
     }
 }
