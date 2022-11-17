@@ -69,7 +69,6 @@ public class PlayerManager : MonoBehaviour
         {
             CanSkill[3] = false;
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill1);
-            Debug.Log($"스킬 A 는 {CanSkill[3]}");
             // 쿨타임 코루틴 작동
             StartCoroutine(CoolTime(SkillCollTime[3], 3, m_BuffCoolDown));
         }
@@ -78,7 +77,6 @@ public class PlayerManager : MonoBehaviour
         {
             CanSkill[4] = false;
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill2);
-            Debug.Log($"스킬 S 는 {CanSkill[4]}");
             // 쿨타임 코루틴 작동
             StartCoroutine(CoolTime(SkillCollTime[4], 4, m_BuffCoolDown));
         }
@@ -87,7 +85,6 @@ public class PlayerManager : MonoBehaviour
         {
             CanSkill[5] = false;
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill3);
-            Debug.Log($"스킬 D 는 {CanSkill[5]}");
             // 쿨타임 코루틴 작동
             StartCoroutine(CoolTime(SkillCollTime[5], 5, m_BuffCoolDown));
         }
@@ -96,7 +93,6 @@ public class PlayerManager : MonoBehaviour
         {
             CanSkill[0] = false;
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill4);
-            Debug.Log($"스킬 Q 는 {CanSkill[0]}");
             // 쿨타임 코루틴 작동
             StartCoroutine(CoolTime(SkillCollTime[0], 0, m_BuffCoolDown));
         }
@@ -105,7 +101,6 @@ public class PlayerManager : MonoBehaviour
         {
             CanSkill[1] = false;
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill5);
-            Debug.Log($"스킬 W 는 {CanSkill[1]}");
             // 쿨타임 코루틴 작동
             StartCoroutine(CoolTime(SkillCollTime[1], 1, m_BuffCoolDown));
         }
@@ -114,7 +109,6 @@ public class PlayerManager : MonoBehaviour
         {
             CanSkill[2] = false;
             m_Spirit.SpiritSummon(PlayerClass.m_CharacterStat.Skill6);
-            Debug.Log($"스킬 E 는 {CanSkill[2]}");
             // 쿨타임 코루틴 작동
             StartCoroutine(CoolTime(SkillCollTime[2], 2, m_BuffCoolDown));
         }
@@ -255,7 +249,6 @@ public class PlayerManager : MonoBehaviour
 
         if(PlayerClass.m_CharacterStat.HP <=0)
         {
-
             if(!boss_Invin)
             {
                 //GameObject.Find("931001(Clone)").transform.GetChild(0).gameObject.GetComponent<CharacterClass>().Invincibility = 0.0f;  //보스를 무적으로 만들고.
@@ -286,13 +279,11 @@ public class PlayerManager : MonoBehaviour
 
     public void Damage(int _damage)
     {
-        Debug.Log("현재 플레이어의 체력:" + PlayerClass.m_CharacterStat.HP);
         TakeDamagePrint(_damage);
     }
 
     public void TakeDamage(float _damage)
     {
-        Debug.Log("쫄몹이 플레이어에게 데미지 주는 함수 호출 완료");
         PlayerClass.m_CharacterStat.HP -= _damage;
         if(PlayerClass.m_CharacterStat.HP <= 0)
         {
@@ -316,8 +307,6 @@ public class PlayerManager : MonoBehaviour
     private void RearTimePerHP()
     {
         m_PerHp = PlayerClass.m_CharacterStat.HP / m_MaxHp;
-        //Debug.Log(m_CurrentCharStat.HP);
-       
     }
     public float GetPlayerPerHp()
     {
@@ -334,13 +323,6 @@ public class PlayerManager : MonoBehaviour
 
     IEnumerator CoolTime(float cool, int index, float Buff)
     {
-        Debug.Log($"{index} 스킬의 쿨타임 시작");
-
-        //if (cool > 1.0f)
-        //{
-        //    //img_Skill.fillAmount = (1.0f / cool); // 이미지 ui 에 차오르는 ui 구현
-        //    yield return new WaitForFixedUpdate();
-        //}
         StartCoroutine(Activation(index));
         yield return new WaitForSeconds(cool - Buff);
         CanSkill[index] = true;

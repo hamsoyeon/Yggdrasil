@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     private Animator anim;
 
     //쫄몹이 죽었는지 확인할 변수
-    bool isDie;
+    public bool isDie;
 
     //플레이어와 쫄몹간의 차이를 계산할 변수
     float distance;

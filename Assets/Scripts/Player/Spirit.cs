@@ -49,7 +49,7 @@ public class Spirit : MonoBehaviour
 			case SpiritType.Tile:
 				m_PlayerRow = MainManager.Instance.GetStageManager().m_PlayerRow;
 				m_PlayerColumn = MainManager.Instance.GetStageManager().m_PlayerCoulmn;
-				if(MainManager.Instance.GetStageManager().m_MapInfo[m_PlayerRow, m_PlayerColumn].Spirit)
+				if(MainManager.Instance.GetStageManager().m_MapInfo[m_PlayerRow, m_PlayerColumn].Spirit && !MainManager.Instance.GetStageManager().m_MapInfo[m_PlayerRow, m_PlayerColumn].IsUnWalkable)
 				{
 					Debug.Log("해당 타일에는 이미 정령이 소환되어 있어서 타일형 정령을 소환할 수 없음.");
 				}

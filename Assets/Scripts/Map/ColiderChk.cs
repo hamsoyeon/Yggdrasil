@@ -20,6 +20,11 @@ public class ColiderChk : MonoBehaviour
 
             coliderchk = true;
         }
+
+        if(other.gameObject.CompareTag("Mob") && !MainManager.Instance.GetStageManager().m_MapInfo[m_row, m_coulmn].IsUnWalkable)
+        {
+            other.GetComponent<Enemy>().isDie = true;
+        }
     }
 
     private void OnTriggerStay(Collider other)

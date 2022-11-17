@@ -55,6 +55,7 @@ public class SpiritSkill : MonoBehaviour
         
         GameObject tempSpirit = Spirit;
 
+        // 0 -> q / 1 -> w / 2 -> e / 3 -> a / 4 -> s / 5 -> d
         effectNumber = skillInfo.SpritSkillIndex - 170001;
 
        
@@ -277,6 +278,7 @@ public class SpiritSkill : MonoBehaviour
                     {
                         Destroy(effect);
                         Destroy(LunchObjects[effect_num]);
+                        isLunch[effect_num] = false;
                         yield break;
                     }
                    
@@ -371,7 +373,9 @@ public class SpiritSkill : MonoBehaviour
 
         DelayAndLunchPrefabSet(effect_number);
         yield return new WaitForSeconds(2f);
+        
         Destroy(LunchObjects[effect_number]);
+        
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
         {
@@ -427,17 +431,34 @@ public class SpiritSkill : MonoBehaviour
                 {
 
                 }
+
+                isLunch[effect_number] = false;
                 yield break;
             }
+
+
             yield return null;
         }
+
+        
+
     }
 
+
+
+    private bool[] isLunch;
 
 
     private void DelayAndLunchPrefabSet(int number)
     {
 
+        if (isLunch[number])
+            return;
+
+        
+        isLunch[number] = true;
+
+        Debug.Log("런치 는 점심");
         LunchObjects[number] = Instantiate(Lunch_Prefabs[number]);
         LunchObjects[number].transform.SetParent(PosAtk[number]);
         LunchObjects[number].transform.position = PosAtk[number].position;
@@ -536,6 +557,7 @@ public class SpiritSkill : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
+        isLunch[number] = false;
         Destroy(LunchObjects[number]);
 
 
@@ -716,6 +738,7 @@ public class SpiritSkill : MonoBehaviour
 
         DelayAndLunchPrefabSet(number);
         yield return new WaitForSeconds(2f);
+        
         Destroy(LunchObjects[number]);
 
         for (int i = 0; i < m_StageMgr.mapZ; i++)
@@ -771,6 +794,8 @@ public class SpiritSkill : MonoBehaviour
                 {
 
                 }
+
+                isLunch[number] = false;
                 yield break;
             }
 
@@ -821,6 +846,7 @@ public class SpiritSkill : MonoBehaviour
 				//정령 파괴후 코루틴 종료
 				Object.Destroy(tempEffect);
                 Destroy(LunchObjects[number]);
+                isLunch[number] = false;
                 yield break;
 			}
 
@@ -903,6 +929,7 @@ public class SpiritSkill : MonoBehaviour
 				//정령 파괴후 코루틴 종료
 				Object.Destroy(tempEffect);
                 Destroy(LunchObjects[number]);
+                isLunch[number] = false;
                 yield break;
 			}
 
@@ -957,6 +984,7 @@ public class SpiritSkill : MonoBehaviour
 		tempEffect.transform.position = spirit.transform.position;
 
         int number = n;
+        tempEffect.GetComponent<DamageCheck>().dmg_check = false;
 
         //All 
         Collider[] colls = null;
@@ -981,6 +1009,7 @@ public class SpiritSkill : MonoBehaviour
                 //정령 파괴후 코루틴 종료
                 Object.Destroy(tempEffect);
                 Destroy(LunchObjects[number]);
+                isLunch[number] = false;
 
                 if (player_characterclass != null)
                 {
@@ -1011,7 +1040,12 @@ public class SpiritSkill : MonoBehaviour
                                 PosBody = child;
                             }
                         }
+
+                        if (PosBody.parent.name == "911001(Clone)")
+                            Debug.Log("앙 김모치");
                         Instantiate(Damage_Prefabs[effectNumber], PosBody);
+
+
 
                         player_characterclass = p.GetComponent<CharacterClass>();
                         player_characterclass.Invincibility = 0.0f;
@@ -1281,6 +1315,14 @@ public class SpiritSkill : MonoBehaviour
 
         PosAtk = new Transform[6];
         LunchObjects = new GameObject[6];
+
+        isLunch = new bool[6];
+        isLunch[0] = false;
+        isLunch[1] = false;
+        isLunch[2] = false;
+        isLunch[3] = false;
+        isLunch[4] = false;
+        isLunch[5] = false;
     }
 
 

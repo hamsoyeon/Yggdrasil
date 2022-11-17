@@ -38,11 +38,11 @@ MonoBehaviour:
     SpritSkillIndex: 170002
     Target: 2
     Power: 10
-    SkillRange: 15
+    SkillRange: 20
     SkillType: 3
     BulletSpeed: 1
     TargetNum: 10
-    LifeTime: 2
+    LifeTime: 3
     DoT: 1
     Shapeform: 1
     Cshape1: 15
@@ -57,7 +57,7 @@ MonoBehaviour:
     SpritSkillIndex: 170003
     Target: 1
     Power: 0
-    SkillRange: 1
+    SkillRange: 20
     SkillType: 4
     BulletSpeed: 1
     TargetNum: 3
@@ -76,7 +76,7 @@ MonoBehaviour:
     SpritSkillIndex: 170004
     Target: 2
     Power: 0
-    SkillRange: 15
+    SkillRange: 20
     SkillType: 4
     BulletSpeed: 1
     TargetNum: 10
@@ -95,11 +95,11 @@ MonoBehaviour:
     SpritSkillIndex: 170005
     Target: 1
     Power: 0
-    SkillRange: 10
+    SkillRange: 20
     SkillType: 4
     BulletSpeed: 1
     TargetNum: 3
-    LifeTime: 1
+    LifeTime: 1.7
     DoT: 0.9
     Shapeform: 2
     Cshape1: 630

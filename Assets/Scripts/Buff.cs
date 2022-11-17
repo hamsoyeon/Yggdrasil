@@ -110,13 +110,4 @@ public class Buff : MonoBehaviour
 
 
     }
-
-    void Update()
-    {
-        //테스트용
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Stun(1);
-        }
-    }
 }

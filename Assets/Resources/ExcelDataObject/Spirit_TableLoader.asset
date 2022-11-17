@@ -90,7 +90,7 @@ MonoBehaviour:
     Crit_rate: 0.15
     Crit_Dmg: 1.5
     ChaceTarget: 2
-    Duration: 2
+    Duration: 1.7
     CoolTime: 3
     Skill1Code: 170005
     Prefab: 923001
