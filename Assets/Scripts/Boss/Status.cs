@@ -77,6 +77,7 @@ public class Status : MonoBehaviour
 
         if (currentHP <= 0)
         {
+            Debug.Log("체력 0");
             return true;
         }
 

@@ -295,7 +295,7 @@ MonoBehaviour:
     "\uC815\uB839": 0
     LifeTime: 0.5
     DoT: 1.1
-    SkillAdded: 231011
+    SkillAdded: 0
     BuffAdded: 0
     SkillAnimation: 0
     SkillDelay: 0.5

@@ -41,7 +41,7 @@ MonoBehaviour:
     Atk: 18
     Def: 12
     HP: 500
-    MoveSpeed: 20
+    MoveSpeed: 23
     Skill1: 121001
     Skill2: 121002
     Skill3: 122001
