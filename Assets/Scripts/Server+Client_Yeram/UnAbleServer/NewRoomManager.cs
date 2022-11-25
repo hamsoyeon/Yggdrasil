@@ -74,6 +74,8 @@ public class NewRoomManager : MonoBehaviour
     [SerializeField]
     private VideoPlayer m_VideoPlayer;
 
+    public List<GameObject> m_SkillExplain;
+
     [SerializeField]
     // 스킬 아이콘 이미지를 받을 변수 (Resource에 있는 img폴더에 있는 리소스들을 가지고 옴)
     private Sprite[] m_skImg;
@@ -248,8 +250,14 @@ public class NewRoomManager : MonoBehaviour
 
         m_selectNumber = index;
         Debug.Log($"{index}번째 버튼 들어옴");
+        //index 값으로 스킬 설명 panel setactive false true 로 전환해주면 설명은 만들 수 있을 것 같다
+        m_SkillExplain[index].SetActive(true);
     }
 
+    public void ExitSkillPanel()
+    {
+        m_SkillExplain[m_selectNumber].SetActive(false);
+    }
 
     // ButtonEvent -> 스킬 클릭시 해당 스킬 슬롯에 등록.
     public void GetSkillInfo(int index)
@@ -257,13 +265,11 @@ public class NewRoomManager : MonoBehaviour
         // 예외처리 
         if (m_selectNumber < 0)
         {
-            Debug.Log("버튼이 선택되지 않았습니다.");
             return;
         }
 
         if (m_skBtnList[index].GetComponent<Image>().color.a != 1.0f)
         {
-            Debug.Log("이미 선택한 스킬입니다.");
             return;
         }
 
