@@ -7,24 +7,15 @@ using UnityEditor;
 
 public class SpiritSkill : MonoBehaviour
 {
-
     enum SkillNumber { ICE=0, POISON ,INVINCIBILITY ,SANCTITY, HEAL ,SPEED }
-
     enum SkillType { ATTACK=1, WIDE_MOVE, TARGET, WIDE_FIX, TILE  }
-
 	public GameObject[] Lunch_Prefabs;  //정령의 PosAtk에서 나오는 것.
     public GameObject[] Fire_Prefabs;
     public GameObject[] Damage_Prefabs;
-
     public Transform[] PosAtk;
-
     public GameObject[] LunchObjects;
-
     private int effectNumber = 0;
-
 	private StageManager m_StageMgr;
-
-
     private int Row;
     private int Column;
 
@@ -57,7 +48,6 @@ public class SpiritSkill : MonoBehaviour
 
         // 0 -> q / 1 -> w / 2 -> e / 3 -> a / 4 -> s / 5 -> d
         effectNumber = skillInfo.SpritSkillIndex - 170001;
-
        
         if(PosAtk[effectNumber] == null)
         {
@@ -75,7 +65,6 @@ public class SpiritSkill : MonoBehaviour
         Lunch_Prefabs[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.LunchPrefb];
         Fire_Prefabs[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.FirePrefb];
         Damage_Prefabs[effectNumber] = PrefabLoader.Instance.PrefabDic[skillInfo.DamPrefb];
-
 
         LockOn LockCheck;
         LockCheck = Fire_Prefabs[effectNumber].GetComponent<LockOn>();  
@@ -109,8 +98,6 @@ public class SpiritSkill : MonoBehaviour
             Damage_Prefabs[effectNumber].AddComponent<DamageEffect>();
         }
 
-
-
         // 이건 스킬 고정형태..
         switch (skillInfo.SpritSkillIndex)
         {
@@ -134,7 +121,6 @@ public class SpiritSkill : MonoBehaviour
                 StartCoroutine(SpeedField(skillInfo, Row, Column, effectNumber));
                 break;
         }
-
 
         // 엑셀데이터에서 불러와 만들어지는 가변행태로 만들기.
         // skillInfo.SkillType  // 1-> 근접공격(파이어 프리팹 안씀,대미지 프리팹만 대상에게 출력)
@@ -173,12 +159,7 @@ public class SpiritSkill : MonoBehaviour
         //        StartCoroutine(Spirit_Tile(skillInfo, Row, Column, effectNumber));
         //        break;
         //}
-
-
-
     }
-
-
 
     IEnumerator Spirit_Attack(SpiritSkill_TableExcel skill, GameObject spirit, int effect_num)
     {
@@ -201,20 +182,15 @@ public class SpiritSkill : MonoBehaviour
             spirit.GetComponent<SpiritMove>().TargetEnemy = findEnemy; // 근처에 가장 가까운적 넣어주기.
             spirit.GetComponent<SpiritMove>().DamPrefab = Damage_Prefabs[effect_num]; // 데미지 프리팹 넣어주기.
             spirit.GetComponent<SpiritMove>().moveSpeed = skill.BulletSpeed;
-
         }
-
         yield return null;
     }
-
 
     IEnumerator Spirit_Wide_Move(SpiritSkill_TableExcel skill)
     {
-       
 
         yield return null;
     }
-
 
     IEnumerator Spirit_Target(SpiritSkill_TableExcel skill, GameObject spirit, int effect_num)
     {
@@ -227,22 +203,19 @@ public class SpiritSkill : MonoBehaviour
 
         // 근처에 가장 가까운 적을 찾는다.
         findEnemys = FindNearbyEnemys(spirit.transform.position, skill.SkillRange, number);
-        
-        
+
         if (findEnemys == null) // 널이라면
         {
             StopCoroutine("Spirit_Target");
         }
         else  // 널이 아니라면.
         {
-
             if(findEnemys.Count <= 0) //적을 발견하지 못했을 경우..
             {
                 StopCoroutine("Spirit_Target");
             }
             else
             {
-
                 spirit.transform.LookAt(findEnemys[0].transform);
 
                 GameObject effect = null;
@@ -261,8 +234,6 @@ public class SpiritSkill : MonoBehaviour
                     // 타겟이 2(적군)일 경우에 데미지 셋팅을 해줌.
                     if (skill.Target == 2)
                         effect.GetComponent<DamageCheck>().dmg_check = false;
-
-                    
                 }
 
                 // 딜레이 및 LunchPrefab셋팅
@@ -292,11 +263,8 @@ public class SpiritSkill : MonoBehaviour
 
     IEnumerator Spirit_Wide_Fix(SpiritSkill_TableExcel skill)
     {
-
-
         yield return null;
     }
-
 
     IEnumerator Spirit_Tile(SpiritSkill_TableExcel skill, int row, int column, int effect_number)
     {
@@ -435,36 +403,21 @@ public class SpiritSkill : MonoBehaviour
                 isLunch[effect_number] = false;
                 yield break;
             }
-
-
             yield return null;
         }
-
-        
-
     }
-
-
-
     private bool[] isLunch;
-
-
     private void DelayAndLunchPrefabSet(int number)
     {
-
         if (isLunch[number])
             return;
 
-        
         isLunch[number] = true;
 
-        Debug.Log("런치 는 점심");
         LunchObjects[number] = Instantiate(Lunch_Prefabs[number]);
         LunchObjects[number].transform.SetParent(PosAtk[number]);
         LunchObjects[number].transform.position = PosAtk[number].position;
-
     }
-
 
     IEnumerator SpeedField(SpiritSkill_TableExcel skill, int row, int column,int n)
     {
@@ -967,14 +920,8 @@ public class SpiritSkill : MonoBehaviour
 					}
 				}
 			}
-
-		
-
 			yield return null;
 		}
-
-		
-
 	}
 
 	IEnumerator Invincibility(SpiritSkill_TableExcel skill, GameObject spirit, int n)
@@ -991,10 +938,7 @@ public class SpiritSkill : MonoBehaviour
 
         //8번째 레이어 = Player
         //무적버프 
-
         float spirit_time = 0f;
-
-        
 
         DelayAndLunchPrefabSet(number);
 
@@ -1045,12 +989,8 @@ public class SpiritSkill : MonoBehaviour
                             Debug.Log("앙 김모치");
                         Instantiate(Damage_Prefabs[effectNumber], PosBody);
 
-
-
                         player_characterclass = p.GetComponent<CharacterClass>();
                         player_characterclass.Invincibility = 0.0f;
-                     
-
                     }
                 }
             }
@@ -1089,8 +1029,6 @@ public class SpiritSkill : MonoBehaviour
             tempEffect.transform.position = nearEnemy.transform.position + new Vector3(0, 5f, 0);
 		}
 
-
-
 		float spirit_time = 0f;
 		float attack_time = 0f;
 
@@ -1125,7 +1063,6 @@ public class SpiritSkill : MonoBehaviour
 		}
 
 	}
-
 
 	GameObject FindNearbyPlayer(GameObject findStartObject, float distance)
 	{
@@ -1530,6 +1467,5 @@ public class SpiritSkill : MonoBehaviour
                 SEManager.instance.PlaySE("AttackField");
                 break;
         }
-        
     }
 }
