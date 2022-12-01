@@ -939,6 +939,7 @@ public class SpiritSkill : MonoBehaviour
         //8번째 레이어 = Player
         //무적버프 
         float spirit_time = 0f;
+        float skill_time = 0f;
 
         DelayAndLunchPrefabSet(number);
 
@@ -946,6 +947,8 @@ public class SpiritSkill : MonoBehaviour
         {
             //지속시간 체크
             spirit_time += Time.deltaTime;
+            skill_time += Time.deltaTime;
+
 
             //정령 지속시간이 경과시 
             if (spirit_time >= skill.LifeTime)
@@ -963,40 +966,39 @@ public class SpiritSkill : MonoBehaviour
                 yield break;
             }
 
-            colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 14);
 
-            if (colls.Length > 0)
+            if(skill_time >= skill.DoT)
             {
+                colls = Physics.OverlapSphere(spirit.transform.position, skill.SkillRange, 1 << 14);
 
-                foreach(var p in colls)
+                if (colls.Length > 0)
                 {
 
-                    if (p.name != "911001(Clone)")
-                        continue;
-                    else
+                    foreach (var p in colls)
                     {
-                        Transform PosBody =null;
-                        Transform[] allChildren = p.GetComponentsInChildren<Transform>();
-                        foreach (Transform child in allChildren)
+
+                        if (p.name != "911001(Clone)")
+                            continue;
+                        else
                         {
-                            if (child.name == "PosBody")
+                            Transform PosBody = null;
+                            Transform[] allChildren = p.GetComponentsInChildren<Transform>();
+                            foreach (Transform child in allChildren)
                             {
-                                PosBody = child;
+                                if (child.name == "PosBody")
+                                {
+                                    PosBody = child;
+                                }
                             }
+
+
+                            Instantiate(Damage_Prefabs[number], PosBody);
+
+                            player_characterclass = p.GetComponent<CharacterClass>();
+                            player_characterclass.Invincibility = 0.0f;
                         }
-
-                        if (PosBody.parent.name == "911001(Clone)")
-                            Debug.Log("앙 김모치");
-                        Instantiate(Damage_Prefabs[effectNumber], PosBody);
-
-                        player_characterclass = p.GetComponent<CharacterClass>();
-                        player_characterclass.Invincibility = 0.0f;
                     }
                 }
-            }
-            else
-            {
-
             }
 
             yield return null;
