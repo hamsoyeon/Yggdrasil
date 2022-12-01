@@ -59,6 +59,10 @@ public class PlayerManager : MonoBehaviour
 
     bool boss_Invin = false;
 
+    [SerializeField]
+    private Image imageBloodScreen; //플레이어가 공격받았을 때 화면에 표시되는 image
+    [SerializeField]
+    private AnimationCurve cureveBloodScreen;
 
     private float deathTime =0f;
 
@@ -115,14 +119,11 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-
-
     public void Move()
     {
         h = Input.GetAxis("Horizontal"); //프로젝트 셋팅으로 wasd 값 날려놓음 방향키만 적용이 될겁니다.
         v = Input.GetAxis("Vertical");
 
-        //Character_stat -> MoveSpeed = 30이여서 개빠름 15정도로 깍아야 함
         Vector3 MoveForce = new Vector3(h * (PlayerClass.m_CharacterStat.MoveSpeed + addSpeed), 0, v * PlayerClass.m_CharacterStat.MoveSpeed);
 
         if(h != 0 || v != 0) //이동중일때 런 애니메이션 실행
@@ -139,7 +140,6 @@ public class PlayerManager : MonoBehaviour
         characterController.Move(MoveForce * Time.deltaTime);
     }
 
-
     // Manager -> 관리자 Player 전부 3인용
     // Movement -> Rotation, Move - PlayerController
     public void ChangePlayerDirection()
@@ -147,7 +147,6 @@ public class PlayerManager : MonoBehaviour
         float h, v;
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
-        //방향키 입력 말고 플레이어 이동 값을 받아와야겠다..
 
         Vector3 dir = new Vector3(h, 0, v);
 
@@ -173,15 +172,11 @@ public class PlayerManager : MonoBehaviour
         m_SpiritSkillKey[5] = KeyCode.D;
         #endregion
         hudDamageText = Resources.Load<GameObject>("DamageText");
-
-        
     }
 
-    
-
-    // Start is called before the first frame update
     void Start()
     {
+        imageBloodScreen = GameObject.Find("PlayerDamageImage").GetComponent<Image>();
         SkillCollTime = new float[6];
         //스피릿에서 넣은 쿨타임 배열 받아오기
         SkillCollTime = (float[])GetComponent<Spirit>().CoolTimeArr.Clone();
@@ -228,7 +223,6 @@ public class PlayerManager : MonoBehaviour
         m_MenuManager = GameObject.Find("MenuManager");
 
     }
-
 
     void Update()
     {
@@ -339,5 +333,21 @@ public class PlayerManager : MonoBehaviour
         }
         currenCollTime[index] = SkillCollTime[index];
         StopCoroutine("Activation");
+    }
+
+    private IEnumerator OnBloodScreen()
+    {
+        float percent = 0;
+
+        while (percent < 1)
+        {
+            percent += Time.deltaTime;
+
+            Color color = imageBloodScreen.color;
+            color.a = Mathf.Lerp(1, 0, cureveBloodScreen.Evaluate(percent));
+            imageBloodScreen.color = color;
+
+            yield return null;
+        }
     }
 }
