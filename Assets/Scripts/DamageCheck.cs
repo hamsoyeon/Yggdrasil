@@ -111,6 +111,7 @@ public class DamageCheck : MonoBehaviour
 
                                 //해당 플레이어의 UI에 접근해서 데미지 표시 외적으로 띄어주기.
                                 cols[i].GetComponent<PlayerManager>().Damage((int)resultDamage);
+                                cols[i].GetComponent<PlayerManager>().BloodImage();
 
                                 Transform[] allChildren = cols[i].GetComponentsInChildren<Transform>();
                                 foreach (Transform child in allChildren)

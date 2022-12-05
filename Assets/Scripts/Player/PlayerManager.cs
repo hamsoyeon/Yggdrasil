@@ -276,6 +276,11 @@ public class PlayerManager : MonoBehaviour
         TakeDamagePrint(_damage);
     }
 
+    public void BloodImage()
+    {
+        StartCoroutine(OnBloodScreen());
+    }
+
     public void TakeDamage(float _damage)
     {
         PlayerClass.m_CharacterStat.HP -= _damage;
@@ -283,6 +288,7 @@ public class PlayerManager : MonoBehaviour
         {
             PlayerClass.m_CharacterStat.HP = 0;
         }
+        StartCoroutine(OnBloodScreen());
         TakeDamagePrint((int)_damage);
     }
 
@@ -335,7 +341,7 @@ public class PlayerManager : MonoBehaviour
         StopCoroutine("Activation");
     }
 
-    private IEnumerator OnBloodScreen()
+    public IEnumerator OnBloodScreen()
     {
         float percent = 0;
 
