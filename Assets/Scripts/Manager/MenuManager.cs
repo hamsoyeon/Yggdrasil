@@ -76,7 +76,7 @@ public class MenuManager : MonoBehaviour
 
         img = LosePanel.GetComponent<CanvasGroup>();//.alpha;
         img.DOFade(1, 2f)
-            //.SetUpdate(true);   // Unity TimeScale에 영향받지않고 Dotween 내부적으로 체크할수있게 설정을 변경하는 기능... 이렇게 사용하면 위에서 Time.timeScale이 0이 되어도 Dotween이 돌아간다!!!   
+            .SetUpdate(true)   // Unity TimeScale에 영향받지않고 Dotween 내부적으로 체크할수있게 설정을 변경하는 기능... 이렇게 사용하면 위에서 Time.timeScale이 0이 되어도 Dotween이 돌아간다!!!   
             .OnComplete(TimeStop);  //위에 DOFade가 완료되면 실행될 함수. 
 
         MinimapPanel.SetActive(false);//미니맵 끄기

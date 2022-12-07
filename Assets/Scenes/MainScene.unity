@@ -1664,6 +1664,7 @@ GameObject:
   - component: {fileID: 631010162}
   - component: {fileID: 631010164}
   - component: {fileID: 631010163}
+  - component: {fileID: 631010165}
   m_Layer: 5
   m_Name: Failed_Image
   m_TagString: Untagged
@@ -1680,7 +1681,7 @@ RectTransform:
   m_GameObject: {fileID: 631010161}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 557635593}
@@ -1731,6 +1732,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 631010161}
   m_CullTransparentMesh: 1
+--- !u!225 &631010165
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631010161}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &718074948
 GameObject:
   m_ObjectHideFlags: 0
@@ -3342,6 +3355,7 @@ GameObject:
   - component: {fileID: 1216233132}
   - component: {fileID: 1216233134}
   - component: {fileID: 1216233133}
+  - component: {fileID: 1216233135}
   m_Layer: 5
   m_Name: Victory_Image
   m_TagString: Untagged
@@ -3358,7 +3372,7 @@ RectTransform:
   m_GameObject: {fileID: 1216233131}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8333322}
@@ -3409,6 +3423,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216233131}
   m_CullTransparentMesh: 1
+--- !u!225 &1216233135
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216233131}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1245427806
 GameObject:
   m_ObjectHideFlags: 0
