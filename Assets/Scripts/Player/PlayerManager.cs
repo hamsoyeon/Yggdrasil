@@ -278,7 +278,10 @@ public class PlayerManager : MonoBehaviour
 
     public void BloodImage()
     {
-        StartCoroutine(OnBloodScreen());
+        if (PlayerClass.m_CharacterStat.HP > 0)
+        {
+            StartCoroutine(OnBloodScreen());
+        }
     }
 
     public void TakeDamage(float _damage)
@@ -288,8 +291,12 @@ public class PlayerManager : MonoBehaviour
         {
             PlayerClass.m_CharacterStat.HP = 0;
         }
-        StartCoroutine(OnBloodScreen());
-        TakeDamagePrint((int)_damage);
+
+        if(PlayerClass.m_CharacterStat.HP > 0)
+        {
+            StartCoroutine(OnBloodScreen());
+            TakeDamagePrint((int)_damage);
+        }
     }
 
     public void TakeDamagePrint(int damage)

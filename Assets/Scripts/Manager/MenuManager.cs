@@ -23,7 +23,6 @@ public class MenuManager : MonoBehaviour
 
     GameObject blank;
 
-    // Start is called before the first frame update
     void Start()
     {
         thisScene = SceneManager.GetActiveScene().name; //현재 씬 이름을 가져옴
@@ -46,22 +45,16 @@ public class MenuManager : MonoBehaviour
         blank.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             // 메뉴버튼을 보여준다.
         }
-
     }
-
 
     CanvasGroup img;
     RectTransform rt;
-
-
 
     public void ShowLoseMenu()
     {
